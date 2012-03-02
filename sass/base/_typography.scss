@@ -34,6 +34,7 @@ body {
 h1 {
   font-size: 2.2em;
   line-height: 1.2em;
+  margin-bottom: 2.2em;
 }
 
 @media only screen and (min-width: 992px) {
@@ -62,10 +63,13 @@ h5, section h4, section section h3 {
 h6, section h5, section section h4, section section section h3 {
   font-size: .8em;
 }
+
 p, blockquote, ul, ol { margin-bottom: 1.5em; }
 
 ul { list-style-type: disc;
+     list-style-position: inside;
   ul { list-style-type: circle; margin-bottom: 0px;
+       list-style-position: inside;
     ul { list-style-type: square; margin-bottom: 0px; }}}
 
 ol { list-style-type: decimal;
