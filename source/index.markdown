@@ -5,9 +5,7 @@ comments: false
 sharing: true
 footer: true
 ---
-
-# Matt Gauger
-
+<p></p>
 I'm a software developer at [Bendyworks](http://bendyworks.com).
 
 I like to use the following things: Ruby, CoffeeScript, Ruby, Git, vim, Unix.
