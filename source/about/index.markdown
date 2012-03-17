@@ -1,16 +1,15 @@
 ---
-layout: default
-title: "main"
-comments: false
+layout: page
+title: "About"
+date: 2012-03-16 21:06
+comments: true
 sharing: true
 footer: true
----
-<p></p>
+--- 
+
 I'm a software developer at [Bendyworks](http://bendyworks.com).
 
 I like to use the following things: Ruby, CoffeeScript, Ruby, Git, vim, Unix.
-
-I blog at [blog.mattgauger.com](http://blog.mattgauger.com)
 
 My open source code is online at [github.com/mathias](https://github.com/mathias)
 
@@ -30,4 +29,3 @@ I want to help teach the world to code. And build lots of robots.
 * a Ruby gem to interface with Madison's SMS My Bus API: [github.com/mathias/sms_my_bus](https://github.com/mathias/sms_my_bus)
 * and a rate-anything-you-want mobile app / open source startup called Peculiarity: [github.com/mathias/peculiarity](https://github.com/mathias/peculiarity)
 
-<p></p>
