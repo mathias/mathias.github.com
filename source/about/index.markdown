@@ -3,7 +3,6 @@ layout: page
 title: "About"
 date: 2012-03-16 21:06
 comments: true
-sharing: true
 footer: true
 --- 
 
