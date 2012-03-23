@@ -1,1 +1,8 @@
-{% include custom/navigation.html %}
+<ul class="nav">
+  <li><a href="{{ root_url }}/about">About</a></li>
+  <li><a href="{{ root_url }}/blog/archives">Blog Archives</a></li>
+  {% if site.subscribe_rss %}
+  <li class="divider-vertical"></li>
+  <li><a class="rss" href="{{ site.subscribe_rss }}" title="RSS">RSS</a></li>
+  {% endif %}
+</ul>
