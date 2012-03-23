@@ -1,0 +1,96 @@
+---
+layout: post
+title: In which Batman tells Robin to learn Rails 3
+published: true
+---
+<p>(This blog post is one of three in a series that accompanies 3 talks I gave in December, 2010. The other two presentations are <a href="http://blog.mattgauger.com/git-github-a-beginners-guide">Git &amp; Github: A Beginner's Guide</a> and <a href="http://blog.mattgauger.com/presentation-lamp-vs-the-world-milwaukee-php">LAMP vs. The World</a>. The talk I was booked to give at the MKE Ruby Users Group was called&nbsp;<a href="http://www.meetup.com/RubyMKE/calendar/15149551/">What's New and Great in Rails 3</a>. But just listing a bunch of changes wasn't compelling. I wanted to tell a story. This is the story.)</p>
+<p>While&nbsp;<a href="http://blog.mattgauger.com/git-github-a-beginners-guide">Git &amp; Github: A Beginner's Guide</a>&nbsp;was written about a fictional user encountering <a href="https://github.com">Github</a> for the first time, this blog post is different. It assumes some basic knowledge of Ruby and Rails, but I've tried to write it in a way that a beginner can follow along.</p>
+<p>Let me introduce you to Robin.</p>
+<p>[[posterous-content:DqfezmrdlAzlmGDhnFqk]]</p>
+<p>When I met Robin, the <a href="http://www.flickr.com/photos/geirarne/43102913/">photo description on Flickr</a> read:&nbsp;&ldquo;Robin would very much like to be a kick-ass web developer, but has a hard time keeping up with the buzzwords."</p>
+<p>So, we've got Robin, and he's a web developer. He uses Rails 2.3 at his job, where they make state-of-the-art TODO list web apps (and fight crime.)</p>
+<p>His boss, Batman&nbsp;[[posterous-content:ooBkfEhpIgdvcEIBEDAg]]</p>
+<p>wants his team to learn Rails 3. Batman has heard that Rails 3 is the new hotness, and he tries to keep up on this "web stuff." Batman thinks that his team should be using the latest thing he heard about, so he tasks Robin with learning Rails 3. Batman's too busy putting together a shopping list in their state-of-the-art todo list, so no real direction other than that given.&nbsp;</p>
+<p>Robin is already fairly familiar with Rails 2.x, and remembers vaguely the transition from Rails 1 to Rails 2 and all the changes (read: pain and suffering) that brought. In this case, Robin is going to start fresh, because this is just an application to learn from, not eventually make it to production some day. Similarly, he's not going to go into using BDD/TDD for this app, as he just wants to figure out all the changes that Rails 3 brings as fast as possible. Learning a new testing framework (or <a href="http://pragprog.com/titles/achbd/the-rspec-book">an entire BDD/TDD stack at once</a>) can come later.</p>
+<p>Now, Robin keeps up with a few Ruby and Rails blogs as best he can. Like a lot of us, he's really busy with his job, so he can't read <em>everything</em> that gets blogged about. But he is aware that everyone has started using <a href="http://rvm.beginrescueend.com/">rvm</a>. In a nutshell, rvm is a way to install and use different versions of Ruby on the same machine.</p>
+<p>Robin uses a Mac, like a lot of web developers today. The rest of this blog post will therefore assume a Mac, but Linux development is very similar. He also uses the Homebrew package management system, so he types:</p>
+<div class="CodeRay">
+  <div class="code"><pre>$ brew install rvm</pre></div>
+</div>
+
+<p><strong>Sidenote:</strong></p>
+<p>My recommendation for Mac developers at this point would be to start with a meta-installer called <a href="https://github.com/atmos/cinderella">Cinderella</a><a></a>. It uses brew, but installs a huge list of dev tools and databases, including:</p>
+<ul>
+<li>mysql, postgres, redis, memcached and mongodb</li>
+<li>ruby (1.8.7) with rails and sinatra via rvm gemsets. (and you can install Ruby 1.9 with rvm)</li>
+<li>python (2.7) with pip.</li>
+<li>node.js (0.2.0) with npm.</li>
+<li>erlang (R13B04) environment.</li>
+<li>the brew command</li>
+</ul>
+<p>And probably more software than that by the time this is published. The interesting thing is that Cinderella puts all these packages in your home directory under a new Developer dir. This makes sure you always know where things are, and can always just go remove the folder if you really needed to. It also means all the config files for these tools and databases are in one convenient place. I highly recommend it. Get the one-line install command at <a href="https://github.com/atmos/cinderella">https://github.com/atmos/cinderella</a> under "Installing."</p>
+<p>Back to Robin. He's installed rvm and now needs to get Ruby 1.9.2. Sure, Rails 3 will work on Ruby 1.87, but a lot of performance gains come from Ruby 1.9.x, and it's what we'll all be using soon anyways. With rvm, Robin can do this:</p>
+<div class="CodeRay">
+  <div class="code"><pre># Get and use Ruby 1.9.2:
+$ rvm install 1.9.2
+$ rvm use 1.9.2
+
+# Check to see what is installed now:
+$ rvm list
+
+rvm rubies
+
+   ruby-1.8.7-p248 [ x86_64 ]
+=&gt; ruby-1.9.2-p0 [ x86_64 ]
+
+# Check which version of Ruby our commandline sees:
+$ ruby -v
+ruby 1.9.2p0 (2010-08-18 revision 29036) [x86_64-darwin10.4.1]</pre></div>
+</div>
+
+<p>So now Robin is rolling on Ruby 1.9.2 and he can install some gems. An important difference to the way Robin used to work is that rvm can manage gemsets.&nbsp;A gemset is a collection of gems, in this case that we&rsquo;re associating with a project. You can have as many gemsets as you want and switch between them as easily as we switched the version of Ruby we're using above. Robin types:</p>
+<div class="CodeRay">
+  <div class="code"><pre>$ rvm gemset create totodo  </pre></div>
+</div>
+
+<div class="CodeRay">
+  <div class="code"><pre>$ rvm ruby-1.9.2-p0@totodo</pre></div>
+</div>
+
+<p>Now any gems that Robin installs can be kept with this particular gemset. Next up, Robin installs Rails 3.0.3 and the <a href="http://heroku.com/">Heroku</a> gem:&nbsp;</p>
+<div class="CodeRay">
+  <div class="code"><pre>$ gem install rails -v 3.0.3
+$ gem install heroku</pre></div>
+</div>
+
+<p>He creates a new Rails application called totodo (it's a todo-list app, unsurprisingly)</p>
+<div class="CodeRay">
+  <div class="code"><pre>$ rails new totodo &amp;&amp; cd %_</pre></div>
+</div>
+
+<div class="CodeRay">
+  <div class="code"><pre>$ pwd</pre></div>
+</div>
+
+<div class="CodeRay">
+  <div class="code"><pre>/home/robin/totodo</pre></div>
+</div>
+
+<p>&nbsp;</p>
+<p><strong>Media used:</strong></p>
+<ul>
+<li><a href="http://www.flickr.com/photos/geirarne/43102913/">http://www.flickr.com/photos/geirarne/43102913/</a>&nbsp;&nbsp;(CC Attribution-NonCommercial-ShareAlike 2.0)</li>
+<li><a href="http://www.flickr.com/photos/redraspus/2883658175">http://www.flickr.com/photos/redraspus/2883658175</a>&nbsp;&nbsp;(CC Attribution-NonCommercial-ShareAlike 2.0)</li>
+<li><a href="http://www.flickr.com/photos/patolucas/2862975260/">http://www.flickr.com/photos/patolucas/2862975260/</a>&nbsp;&nbsp;(CC Attribution-ShareAlike 2.0 Generic)</li>
+</ul>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>Further reading and documentation:</strong></p>
+<ul>
+<li><a href="https://github.com/atmos/cinderella">https://github.com/atmos/cinderella</a></li>
+<li><a href="http://rvm.beginrescueend.com">http://rvm.beginrescueend.com</a>/</li>
+<li><a href="http://yehudakatz.com/2008/12/23/rails-and-merb-merge/">http://yehudakatz.com/2008/12/23/rails-and-merb-merge/</a></li>
+<li><a href="http://railsforzombies.org">http://railsforzombies.org</a></li>
+<li><a href="http://railstutorial.org/">http://railstutorial.org/</a></li>
+</ul>
+<p>&nbsp;</p>
