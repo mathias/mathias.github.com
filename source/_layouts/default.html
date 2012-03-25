@@ -5,6 +5,7 @@
   <header class="inner">{% include header.html %}</header>
   <div class="container bottom-left-rounded-corner bottom-right-rounded-corner" id="page-container">
     {{ content | expand_urls: root_url }}
+    <hr />
 	  <footer class="footer">{% include footer.html %}</footer>
   </div>
 	{% include after_footer.html %}

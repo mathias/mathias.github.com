@@ -9,27 +9,24 @@ body {
 }
 
 #page-container {
-  background-color: #FFF;
+  background-color: $white;
   margin-bottom: $baseLineHeight * 4;
   padding-top: $baseLineHeight;
 }
 
 .footer {
-  margin-top: $baseLineHeight * 3;
-  padding: 15px 20px;
-  border-top: 1px solid #E5E5E5;
-  p {
-    margin-bottom: 0;
-  }
+  margin-top: $baseLineHeight;
+  padding: 15px $baseLineHeight;
 }
 
 h1.title {
-  margin-bottom: 20px;
+  margin-bottom: $baseLineHeight;
 }
 
 .archive {
+  margin-bottom: $baseLineHeight;
   h1.title {
-    margin-bottom: 0;
+    margin-bottom: $baseLineHeight / 2;
   }
 }
 
