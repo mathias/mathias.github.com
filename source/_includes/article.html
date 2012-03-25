@@ -14,7 +14,7 @@
     <h1 class="title">{% if site.titlecase %}{{ page.title | titlecase }}{% else %}{{ page.title }}{% endif %}</h1>
     <div class="entry">{{ content }}</div>
     <div class="meta">
-        <div class="author">{% include post/author.html %}</div>
+        <div class="author">{% include post/author.html %}.</div>
         <div class="date">{% include post/date.html %}{{ time }}.</div>
         <div class="tags">{% include post/categories.html %}</div>
     </div>

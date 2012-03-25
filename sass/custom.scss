@@ -1,3 +1,5 @@
+@import "variables";
+
 body {
   background-image: url(/images/webcam-glitch-003.jpg);
 }
@@ -8,12 +10,12 @@ body {
 
 #page-container {
   background-color: #FFF;
-  margin-bottom: 60px;
-  padding-top: 18px;
+  margin-bottom: $baseLineHeight * 4;
+  padding-top: $baseLineHeight;
 }
 
 .footer {
-  margin-top: 35px;
+  margin-top: $baseLineHeight * 3;
   padding: 15px 20px;
   border-top: 1px solid #E5E5E5;
   p {
@@ -29,6 +31,10 @@ h1.title {
   h1.title {
     margin-bottom: 0;
   }
+}
+
+article.post {
+  margin-bottom: $baseLineHeight * 4;
 }
 
 // Rounded corner junk.
