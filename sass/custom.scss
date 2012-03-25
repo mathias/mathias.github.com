@@ -2,10 +2,14 @@ body {
   background-image: url(/images/webcam-glitch-003.jpg);
 }
 
+.navbar {
+  margin-bottom: 0;
+}
+
 #page-container {
-  padding-top: 60px;
-  margin-bottom: 60px;
   background-color: #FFF;
+  margin-bottom: 60px;
+  padding-top: 18px;
 }
 
 .footer {
