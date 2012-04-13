@@ -2,7 +2,7 @@
 layout: default
 ---
 <div class="row">
-  <section class="span10 offset1 archive">
+  <section class="span8 offset2 archive">
     {% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}
     {% unless year == this_year %}
     {% assign year = this_year %}
