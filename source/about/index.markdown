@@ -21,10 +21,21 @@ You can view slides of my presentations at [slideshare.net/mathiasx](http://www.
 I want to help teach the world to code. And build lots of robots.
 <p></p>
 
-### Open Source Projects
+### My Open Source Projects
 <p></p>
 
 * a game written in CoffeeScript + HTML5: [github.com/mathias/tinybountyhunters](https://github.com/mathias/tinybountyhunters)
 * a Ruby gem to interface with Madison's SMS My Bus API: [github.com/mathias/sms_my_bus](https://github.com/mathias/sms_my_bus)
 * and a rate-anything-you-want mobile app / open source startup called Peculiarity: [github.com/mathias/peculiarity](https://github.com/mathias/peculiarity)
 
+### Open Source Contributions
+<p></p>
+
+The [Hackety Hack](http://hackety.com) project and its website:
+
+* [https://github.com/hacketyhack/hacketyhack](https://github.com/hacketyhack/hacketyhack)
+* [https://github.com/hacketyhack/hackety-hack.com](https://github.com/hacketyhack/hackety-hack.com)
+
+Errbit: [https://github.com/errbit/errbit](https://github.com/errbit/errbit)
+
+Bendyworks' project, IDKFA: [https://github.com/bendyworks/idkfa](https://github.com/bendyworks/idkfa)
