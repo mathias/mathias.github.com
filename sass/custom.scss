@@ -16,7 +16,10 @@ body {
 
 .footer {
   margin-top: $baseLineHeight;
-  padding: 15px $baseLineHeight;
+  padding: $baseLineHeight 0;
+  .nav-header {
+    padding: 0px $baseLineHeight;
+  }
 }
 
 h1.title {
