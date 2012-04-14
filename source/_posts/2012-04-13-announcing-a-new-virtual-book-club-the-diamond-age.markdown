@@ -15,3 +15,10 @@ So I'm trying an experiment. I am proposing to hold a book club, online, so that
 If you're interested, please indicate that interest by signing up below. I'll use the sign ups to plan and gauge when to start.
 
 ### [Sign up form](https://docs.google.com/spreadsheet/viewform?formkey=dFBBNUJZcUZuX1Q3Uk5VbGRVRVNsQ3c6MQ#gid=0)
+
+<p></p>
+
+Get The Diamond Age: (non-affiliate links)
+
+* [Paperback](http://www.amazon.com/The-Diamond-Age-Illustrated-Spectra/dp/0553380966/)
+* [Kindle Edition](http://www.amazon.com/Diamond-Bantam-Spectra-Book-ebook/dp/B000FBJCKI/)
