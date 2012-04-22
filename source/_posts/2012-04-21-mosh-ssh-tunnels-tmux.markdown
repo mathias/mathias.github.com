@@ -33,7 +33,7 @@ Fix that by starting up a tmux session on the local server first, then detaching
 
 Now the tmux session will happily keep that SSH shell open on the local server and you can reverse tunnel back over it.
 
-My final solution involves [Mosh](http://mosh.mit.edu), which I've been using quite a bit since it exploded on Hacker News and other news sites. Simply put, Mosh is like SSH, but it uses UDP packets to make itself more reliable. "More reliable without TCP?" you say? Well, Mosh is doing a little more work to buffer the connection to the other machine (including instant response to typing when there'd otherwise be lag) and maintains that connection: even if you change IPs, hop on a train, etc. It's pretty amazing, and so far I've been loving it. Click through to the Mosh site to read up more on it. It really is awesome.
+My solution involves [Mosh](http://mosh.mit.edu), which I've been using quite a bit since it exploded on Hacker News and other news sites. Simply put, Mosh is like SSH, but it uses UDP packets to make itself more reliable. "More reliable without TCP?" you say? Well, Mosh is doing a little more work to buffer the connection to the other machine (including instant response to typing when there'd otherwise be lag) and maintains that connection: even if you change IPs, hop on a train, etc. It's pretty amazing, and so far I've been loving it. Click through to the Mosh site to read up more on it. It really is awesome.
 
 With Mosh, we add another layer to the puzzle, so that my final setup looked like this:
 
