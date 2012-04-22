@@ -8,7 +8,7 @@ categories:
 
 I'm currently preparing for RailsConf. One of the things I wanted to do before I left was figure out a way to monitor a process on a Linux server running on my LAN. The process frequently crashes and needs some prodding to restart.
 
-One solution might be to set up DynDNS and configure the router point the some random port to the SSH port on the Linux machine running on the LAN. That idea didn't strike my fancy, as it just isn't terribly secure to open up a port to the entire world, and it seems that DynDNS costs money to use since 2008. I'm sure there are free alternatives, but I couldn't be bothered to find them, much less configure them.
+One solution might be to set up DynDNS and configure the router to point from some random port to the SSH port on the Linux machine running on the LAN. That idea didn't strike my fancy, as it just isn't terribly secure to open up a port to the entire world, and it seems that DynDNS costs money to use since 2008. I'm sure there are free alternatives, but I couldn't be bothered to find them, much less configure them.
 
 A much better solution would be an SSH tunnel up to my Linode, and a reverse tunnel back down to the Linux server on my LAN. If you haven't used reverse SSH tunneling before, it is really neat. Here's an example:
 
