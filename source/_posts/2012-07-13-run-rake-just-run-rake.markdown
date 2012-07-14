@@ -22,7 +22,7 @@ And indeed, it did tell us what to do. I've called this test-based configuration
 
 I had to silence my pair's grumbling at this process, because at first it seems like you're going to be waiting a lot for rake, and that it might be easier just to remember all the steps necessary to set up a project.
 
-In order, rake showed us all the steps we needed to do to get the project running. A full log of what this looks like setting up a simple Rails app can be seen [in this gist](https://gist.github.com/3112558).
+It turns out rake showed us all the steps we needed to do to get the project running. A full log of what this looks like setting up a simple Rails app can be seen [in this gist](https://gist.github.com/3112558).
 
 ### Why?
 
