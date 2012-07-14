@@ -6,23 +6,25 @@ footer: true
 ---
 
 {% assign index = true %}
+
 {% for post in paginator.posts %}
 {% assign content = post.content %}
-    <article class="post">{% include article.html %}</article>
+  <article class="post">{% include article.html %}</article>
 {% endfor %}
+
 <ul class="pager">
   {% if paginator.previous_page %}
-  <li>
+    <li>
     <a href="{{paginator.previous_page}}" class="prev">Prev</a>
-  </li>
+    </li>
   {% endif %}
   {% if paginator.next_page %}
-  <li>
+    <li>
     <a href="{{paginator.next_page}}" class="next">Next</a>
-  </li>
+    </li>
   {% endif %}
-
 </ul>
+
 <a href="{{ root_url }}/blog/archives" class="center">
   <i class="icon-th-list"></i> 
   Blog Archives
