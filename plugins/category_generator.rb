@@ -124,7 +124,7 @@ module Jekyll
     priority :low
 
     def generate(site)
-      site.write_category_indexes
+      #site.write_category_indexes
     end
 
   end
