@@ -4,7 +4,7 @@
   <title><![CDATA[mathias.github.com]]></title>
   <link href="http://mathias.github.com/atom.xml" rel="self"/>
   <link href="http://mathias.github.com/"/>
-  <updated>2012-07-25T12:42:39-05:00</updated>
+  <updated>2013-02-25T12:04:07-06:00</updated>
   <id>http://mathias.github.com/</id>
   <author>
     <name><![CDATA[Matt Gauger]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Revisiting Old Repos: Birdsong]]></title>
+    <link href="http://mathias.github.com/blog/2013/02/23/revisiting-old-repos-birdsong/"/>
+    <updated>2013-02-23T13:43:00-06:00</updated>
+    <id>http://mathias.github.com/blog/2013/02/23/revisiting-old-repos-birdsong</id>
+    <content type="html"><![CDATA[<p>The things that we leave behind or neglect can often be very interesting. They can also be a big source of embarassment; I know that I felt that way about the numerous empty repos and unfinished projects on <a href="https://github.com/mathias">my Github profile</a>. Repos can be left behind for many different reasons: I might have a good idea but no time to execute on it, or I might lose interest and find something new to work on, or perhaps I don&#8217;t have the tools or skills to tackle an ambitious idea right now. I&#8217;m calling attention to my</p>
+
+<p>Joe
+1up
+Shipping code
+&#8220;Real artists ship&#8221;
+&#8220;Good developers ship iterations&#8221; - Joe&#8217;s never said this, but I see it in his actions.
+Ambitious projects usually can be broken down into smaller, achievable chunks.
+If we don&#8217;t have the skills now, maybe we will some day. Or maybe we can build a piece of it.</p>
+
+<p>I was recently inspired by my coworker <a href="http://blog.begriffs.com/">Joe Nelson</a> and his <a href="http://1up.begriffs.com/">1up Project</a> to try and ship a project that I had let fall idle. <a href="http://bendyworks.com">Bendyworks</a> has Growth Days on Friday in which everyone can work on whatever project they&#8217;d like, in an effort to allow for personal growth and Bendyworks&#8217; growth.</p>
+
+<p>So, scrolling to the bottom of my Github, I found one of the first repos that I had created on Github way back in 2008. No code had been pushed to it &#8211; it simply had the instructions for how a new repo.</p>
+
+<p>The repo, Birdsong, was intended to be a collection of scripts for pulling down your user data from the APIs of various web services I was using at the time. Notably, Twitter and Last.fm data seemed like interesting things to grab.</p>
+
+<p>I spent part of my Friday putting together a very simple script to dump out my last.fm data through their API. For whatever reason, I&#8217;d never accomplished this in the past &#8211; either the last.fm API was not as easy to use back then, or</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Run rake. Just run rake.]]></title>
@@ -1208,31 +1233,6 @@ ruby    74716 mathiasx    5u  IPv4 0x073562a4      0t0  TCP *:tram (LISTEN)</pre
     <link href="http://mathias.github.com/blog/2010/09/28/importing-old-content/"/>
     <updated>2010-09-28T00:00:00-05:00</updated>
     <id>http://mathias.github.com/blog/2010/09/28/importing-old-content</id>
-    <content type="html"><![CDATA[<p>I&#8217;ve got text archives of my blog posts going back to about 2008 2007,
-so I&#8217;m going to start importing those old blog posts into
-<a href="http://posterous.com">posterous</a> &#8211; <strong>Note: As of April 15th, 2012,
-I&#8217;ve imported these all into a new blog on Github Pages running
-Octopress/Jekyll</strong> &#8211; and backdating them. Well, the blog posts worth
-pulling in. I haven&#8217;t really ensured that the links contained in the
-posts work, and the link at the top of each to the original post may
-eventually stop working.</p>
-
-<p>Hopefully this mass import doesn&#8217;t screw things up. Apologies if it
-does.</p>
-
-<p>Of course, I&#8217;m not pulling in any of the comments, like this comment on
-<a href="bytecodex.wordpress.com">my old wordpress.com blog</a> from <a href="gilesbowkett.blogspot.com">Giles
-Bowkett</a> way back in 2007:</p>
-
-<p><img src="http://files.droplr.com/files/787975/CFjD.Screen%20shot%202010-09-28%20at%2019%3A29%3A52.png" alt="" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Importing old content]]></title>
-    <link href="http://mathias.github.com/blog/2010/09/28/importing-old-content/"/>
-    <updated>2010-09-28T00:00:00-05:00</updated>
-    <id>http://mathias.github.com/blog/2010/09/28/importing-old-content</id>
     <content type="html"><![CDATA[I&#8217;ve got text archives of my blog posts going back to about 2008 2007,
 so I&#8217;m going to start importing those old blog posts into
 [posterous](http://posterous.com) &#8211; **Note: As of April 15th, 2012,
@@ -1254,28 +1254,36 @@ Bowkett](gilesbowkett.blogspot.com) way back in 2007:
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[Importing old content]]></title>
+    <link href="http://mathias.github.com/blog/2010/09/28/importing-old-content/"/>
+    <updated>2010-09-28T00:00:00-05:00</updated>
+    <id>http://mathias.github.com/blog/2010/09/28/importing-old-content</id>
+    <content type="html"><![CDATA[<p>I&#8217;ve got text archives of my blog posts going back to about 2008 2007,
+so I&#8217;m going to start importing those old blog posts into
+<a href="http://posterous.com">posterous</a> &#8211; <strong>Note: As of April 15th, 2012,
+I&#8217;ve imported these all into a new blog on Github Pages running
+Octopress/Jekyll</strong> &#8211; and backdating them. Well, the blog posts worth
+pulling in. I haven&#8217;t really ensured that the links contained in the
+posts work, and the link at the top of each to the original post may
+eventually stop working.</p>
+
+<p>Hopefully this mass import doesn&#8217;t screw things up. Apologies if it
+does.</p>
+
+<p>Of course, I&#8217;m not pulling in any of the comments, like this comment on
+<a href="bytecodex.wordpress.com">my old wordpress.com blog</a> from <a href="gilesbowkett.blogspot.com">Giles
+Bowkett</a> way back in 2007:</p>
+
+<p><img src="http://files.droplr.com/files/787975/CFjD.Screen%20shot%202010-09-28%20at%2019%3A29%3A52.png" alt="" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Currently Reading: Clean Code by Robert C. Martin]]></title>
     <link href="http://mathias.github.com/blog/2010/09/28/currently-reading-clean-code-by-robert-c-martin/"/>
     <updated>2010-09-28T00:00:00-05:00</updated>
     <id>http://mathias.github.com/blog/2010/09/28/currently-reading-clean-code-by-robert-c-martin</id>
     <content type="html"><![CDATA[While it comes off as a little repetitive after The Pragmatic Programmer and Code Complete, &quot;Uncle Bob&quot; has a few interesting things to say. I&#39;ll write another post with my notes after I&#39;ve finished the book. The introductory on naming is dated, as most Pragmatic Programmers are no longer naming things with Hungarian notation or individual characters. Given the number of poor naming conventions I&#39;ve seen in production and open source code though, I often wonder whether the made-up statistic about programmers not reading books holds true.
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Continuous Integration for the Lone Programmer]]></title>
-    <link href="http://mathias.github.com/blog/2010/01/30/continuous-integration-for-the-lone-programmer/"/>
-    <updated>2010-01-30T00:00:00-06:00</updated>
-    <id>http://mathias.github.com/blog/2010/01/30/continuous-integration-for-the-lone-programmer</id>
-    <content type="html"><![CDATA[<p><span style="color: #424037; font-size: 12px; line-height: 21px;">(This post is part of my blog archiving project. This post appeared on&nbsp;<a href="http://blog.mattgauger.com/2010/01/30/continuous-integration/">blog.mattgauger.com</a>&nbsp;on January 30, 2010.)</span></p>
-<p><span style="color: #424037; font-size: 12px; line-height: 21px;"><span style="color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-size: 14px; line-height: 19px;">
-<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 1em; margin-left: 0px; font-size: 14px; vertical-align: baseline; background-color: transparent; color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-weight: 400; line-height: 1.4em; letter-spacing: 0px; text-align: left; padding: 0px;">There&rsquo;s a laundry list of tools and practices in my head that I consider part of modern software engineering (version control, unit testing, code reviews, etc.) These aren&rsquo;t necessarily required on every project. Continuous integration seems to be a practice that many prominent developers are using. But continuous integration servers aren&rsquo;t very glamorous, and therefore don&rsquo;t get a lot of discussion.</p>
-<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 1em; margin-left: 0px; font-size: 14px; vertical-align: baseline; background-color: transparent; color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-weight: 400; line-height: 1.4em; letter-spacing: 0px; text-align: left; padding: 0px;">If you&rsquo;re working alone on a project, committing it to version control, and using unit testing, what does it matter whether you run the tests yourself or have a continuous integration server running them? True, there&rsquo;s a level of immediate feedback with running the tests yourself. But unless you&rsquo;re building all the various unit testing and integration testing frameworks into one rake task, you may forget to run them all. In the case where you do have a rake task, your CI server could be running that for you on every commit. A continuous integration server ensures that the tests get run, whether you remember or not.</p>
-<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 1em; margin-left: 0px; font-size: 14px; vertical-align: baseline; background-color: transparent; color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-weight: 400; line-height: 1.4em; letter-spacing: 0px; text-align: left; padding: 0px;">The other plus to this setup is that you can choose how and when the CI server interrupts you. You may be in a flow state and not want to be bothered by stopping to run the unit tests every five minutes when you know you&rsquo;re not breaking them. That could be dangerous, though. If you zone out for a half day and come back to find all the tests failing, you&rsquo;ll need to go back through the builds to see when and what commit first broke it. Luckily, the CI server should tell you that.</p>
-<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 1em; margin-left: 0px; font-size: 14px; vertical-align: baseline; background-color: transparent; color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-weight: 400; line-height: 1.4em; letter-spacing: 0px; text-align: left; padding: 0px;">I set up&nbsp;<a href="http://integrityapp.com/" style="font-size: 14px; vertical-align: baseline; background-color: transparent; color: #47353b; padding: 0px; margin: 0px;">Integrity</a>&nbsp;locally to run as my continuous integration system. Technically, Integrity could be hacked to build and test just about anything that gives a Unix return code, but I&rsquo;m using it in its most common purpose: building Ruby projects that are hosted in&nbsp;<a href="http://git-scm.org/" style="font-size: 14px; vertical-align: baseline; background-color: transparent; color: #47353b; padding: 0px; margin: 0px;">git</a>&nbsp;repos. While many developers are using&nbsp;<a href="http://github.com/" style="font-size: 14px; vertical-align: baseline; background-color: transparent; color: #47353b; padding: 0px; margin: 0px;">GitHub</a>, I&rsquo;ve pointed Integrity at local git repos.</p>
-<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 1em; margin-left: 0px; font-size: 14px; vertical-align: baseline; background-color: transparent; color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-weight: 400; line-height: 1.4em; letter-spacing: 0px; text-align: left; padding: 0px;">I did consider setting up a Campfire chat room to receive build status messages in, but it seemed overkill to sit alone in a chatroom to be updated by Integrity. So, I enabled the email functionality, and now Integrity is configured to email me with build status. If I keep a Firefox tab open to the Integrity server and choose whether to look at my email or not, I have a fairly effective barrier to decide when to let myself be interrupted. Meanwhile, the builds continue.</p>
-<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 1em; margin-left: 0px; font-size: 14px; vertical-align: baseline; background-color: transparent; color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-weight: 400; line-height: 1.4em; letter-spacing: 0px; text-align: left; padding: 0px;">I&rsquo;m hoping to optimize this and integrate it fully into my workflow, as TDD/BDD is a new thing to me and Integrity is already serving to reinforce writing good tests.</p>
-</span></span></p>
 ]]></content>
   </entry>
   
