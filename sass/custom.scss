@@ -36,9 +36,13 @@ header {
   }
 }
 
-h1.title {
-  font-family: $headerFontFamily;
-  margin-bottom: $baseLineHeight;
+article.post {
+  h1.title {
+    margin-bottom: $baseLineHeight;
+  }
+  h1, h2, h3, h4 {
+    font-family: $headerFontFamily;
+  }
 }
 
 .archive {
