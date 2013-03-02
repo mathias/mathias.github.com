@@ -20,7 +20,7 @@ The promise, then, of Google Glass is to constantly be connected to that informa
 
 ## The buzz
 
-I was initially quite excited about Google Glass, because it is the first real promise of wearing computing for the masses at a price point that we will probably be able to afford. For nearly a year, the product has been announced but no real details have surfaced. With the announcement of the Google Glass Explorer contest, more information has been leaking out of the Googleplex. After the [Youtube video showing real Glass in use](http://www.youtube.com/watch?v=9c6W4CCU9M4) was posted, I quickly realized that Google Glass was not intended for me in the way that I was hoping.
+I was initially quite excited about Google Glass, because it is the first real promise of wearable computing for the masses at a price point that we will probably be able to afford. For nearly a year, the product has been announced but no real details have surfaced. With the announcement of the Google Glass Explorer contest, more information has been leaking out of the Googleplex. After the [Youtube video showing real Glass in use](http://www.youtube.com/watch?v=9c6W4CCU9M4) was posted, I quickly realized that Google Glass was not intended for me in the way that I was hoping.
 
 Simply put, Glass is going to do the things that consumers now want to do quickly with their smartphones: receive and send texts & email, take pictures, take videos, and post that content up to things like Facebook, Youtube, and Google+. Another valid use is quickly searching Google for something, which could be useful for everything from trivia night to trying to remember what goes in your favorite korma.
 
