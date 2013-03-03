@@ -42,3 +42,7 @@ I want to help teach the world to code. And build lots of robots.
   * [https://github.com/hacketyhack/hackety-hack.com](https://github.com/hacketyhack/hackety-hack.com)
 * Errbit: [https://github.com/errbit/errbit](https://github.com/errbit/errbit)
 * bendyworks/idkfa: [https://github.com/bendyworks/idkfa](https://github.com/bendyworks/idkfa)
+
+### Blog comments
+
+I've chosen not to put commenting on my blog. If you'd like to get in touch, please use Twitter, where I am [@mathiasx](https://www.twitter.com/mathiasx).

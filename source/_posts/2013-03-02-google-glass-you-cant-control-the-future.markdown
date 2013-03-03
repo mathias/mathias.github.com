@@ -6,7 +6,7 @@ comments: true
 categories: 
 ---
 
-There's been quite a bit of backlash surrounding the new Google Glass product. As someone who has wanted wearable computing for awhile, I'd like to talk about it a bit. My only real qualifications on this subject come from the fact that I've read a lot of scifi<sup>[1](#accelerando-note)</sup> and that I'm an open source developer that would like to build software for wearable computing that makes people's lives better.
+There's been quite a bit of backlash surrounding the new Google Glass product. As someone who has wanted wearable computing for awhile, I'd like to talk about it a bit. My only real qualifications on this subject come from the fact that I've read a lot of scifi<sup><a href="#accelerando-note" name="accelerando-note-return">1</a></sup> and that I'm an open source developer that would like to build software for wearable computing that makes people's lives better.
 
 When I'm talking about wearable computing glasses in general rather than just the Google Glass product, I will call them smart glasses. There doesn't seem to be a consistent name yet, and the phrase [eyetap](http://en.wikipedia.org/wiki/EyeTap) only refers to a very specific type of smart glasses.
 
@@ -75,4 +75,7 @@ So don't try to shout down a fledgling technology just because it could be used 
 
 ---
 
-<a name="accelerando-note">**1**</a>: In particular, [Accelerando](static/fiction/accelerando/accelerando.html) features a main character with smart glasses. I think this book helps to to illustrate how a person might interact with the world while being constantly plugged in to a wearable computer.
+<a name="accelerando-note"></a>
+
+**1**: In particular, [Accelerando](static/fiction/accelerando/accelerando.html) features a main character with smart glasses. It's an interesting portrait of how a well-connected digital savant might use this wearable technology while still interacting with people and places.
+<a href="#accelerando-note-return">&#8617;</a>
