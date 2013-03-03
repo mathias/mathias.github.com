@@ -41,4 +41,4 @@ I want to help teach the world to code. And build lots of robots.
   * [https://github.com/hacketyhack/hacketyhack](https://github.com/hacketyhack/hacketyhack)
   * [https://github.com/hacketyhack/hackety-hack.com](https://github.com/hacketyhack/hackety-hack.com)
 * Errbit: [https://github.com/errbit/errbit](https://github.com/errbit/errbit)
-* Bendyworks' project, IDKFA: [https://github.com/bendyworks/idkfa](https://github.com/bendyworks/idkfa)
+* bendyworks/idkfa: [https://github.com/bendyworks/idkfa](https://github.com/bendyworks/idkfa)
