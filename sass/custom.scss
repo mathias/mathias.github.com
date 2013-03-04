@@ -36,7 +36,7 @@ header {
   }
 }
 
-article.post {
+article.post, article.archive, article.page {
   h1.title {
     margin-bottom: $baseLineHeight;
   }
