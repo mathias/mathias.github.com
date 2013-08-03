@@ -75,7 +75,7 @@ On Linux, there is a project called [mxk](http://welz.org.za/projects/mxk). `mxk
 
 `mxk` even indicated that it had support for two different kinds of chording: braille keyboard chording and a simpler chord-matching function.
 
-After banging my head against its confusing configuration syntax for nearly a week, I determined that `mxk` just couldn't do what I wanted. Two issues cropped up: in the braille chording function, only one row of keys was supported and two hands were assumed. (Basically, it wanted ASDF and JKL; keys to form chords, and didn't support anything else.)
+After banging my head against its confusing configuration syntax for about 2 weeks, I determined that `mxk` just couldn't do what I wanted. Two issues cropped up: in the braille chording function, only one row of keys was supported and two hands were assumed. (Basically, it wanted ASDF and JKL; keys to form chords, and didn't support anything else.)
 
 The regular chording functionality seemed like it might work, until I ran into a huge, glaring issue: A key used in one chord couldn't be used in another. For example, let's say I'm mapping keys for the left hand on a QWERTY keyboard to be used in a chord. So I might have a chord like RE which maps to 'a' and another chord like FE that maps to 'k'. The E used in both chords didn't work in MXK. It simply couldn't support it and could only watch for unique chords. This limits the key map for a chording keyboard made of a 12-key grid from some 495 combinations to 12, gaining us nothing since individual key presses are just as efficient.
 
