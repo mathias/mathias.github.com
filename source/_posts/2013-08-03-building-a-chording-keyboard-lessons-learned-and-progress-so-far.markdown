@@ -104,7 +104,7 @@ The basic process for programming and using the Teensy is this:
 * You program it in the Arduino IDE like other Arduino boards
 * Anything you "println" will be sent as if someone had typed it on a USB keyboard.
 * Additionally, there is a Mouse class that you can use to send mouse movement, click, and scroll wheel information.
-* When you upload your code to the Teensy, it reboots, and immediately starts being like a USB HID device as far as the operating system is concerned.
+* When you upload your code to the Teensy, it reboots, and immediately starts behaving like a USB HID device as far as the operating system is concerned.
 
 For the `concert_cam`, it was easy enough to have a big arcade-style button send the keyboard event of "p" (for press) to the Raspberry Pi that the Teensy was attached to. A script on the Raspberry Pi watched for this keyboard input and told the camera to take a picture. It was very quick to get that working.
 
