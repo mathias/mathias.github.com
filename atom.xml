@@ -4,7 +4,7 @@
   <title><![CDATA[blog.mattgauger.com]]></title>
   <link href="http://blog.mattgauger.com/atom.xml" rel="self"/>
   <link href="http://blog.mattgauger.com/"/>
-  <updated>2013-08-03T13:46:30-05:00</updated>
+  <updated>2013-08-03T13:48:28-05:00</updated>
   <id>http://blog.mattgauger.com/</id>
   <author>
     <name><![CDATA[Matt Gauger]]></name>
@@ -124,7 +124,7 @@
 <li>You program it in the Arduino IDE like other Arduino boards</li>
 <li>Anything you &#8220;println&#8221; will be sent as if someone had typed it on a USB keyboard.</li>
 <li>Additionally, there is a Mouse class that you can use to send mouse movement, click, and scroll wheel information.</li>
-<li>When you upload your code to the Teensy, it reboots, and immediately starts being like a USB HID device as far as the operating system is concerned.</li>
+<li>When you upload your code to the Teensy, it reboots, and immediately starts behaving like a USB HID device as far as the operating system is concerned.</li>
 </ul>
 
 
