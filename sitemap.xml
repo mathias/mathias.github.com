@@ -192,7 +192,13 @@
     </url>
     <url>
         <loc>http://mathias.github.com/blog/2013/03/17/by-augmenting-human-intellect/</loc>
-        <lastmod>2013-03-17T22:51:22-05:00</lastmod>
+        <lastmod>2013-08-03T09:25:10-05:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://mathias.github.com/blog/2013/08/03/building-a-chording-keyboard-lessons-learned-and-progress-so-far/
+        </loc>
+        <lastmod>2013-08-03T12:47:44-05:00</lastmod>
     </url>
     <url>
         <loc>http://mathias.github.com/about/</loc>
@@ -200,10 +206,10 @@
     </url>
     <url>
         <loc>http://mathias.github.com/blog/archives/</loc>
-        <lastmod>2013-03-17T22:51:22-05:00</lastmod>
+        <lastmod>2013-08-03T12:47:44-05:00</lastmod>
     </url>
     <url>
         <loc>http://mathias.github.com/</loc>
-        <lastmod>2013-03-17T22:51:22-05:00</lastmod>
+        <lastmod>2013-08-03T12:47:44-05:00</lastmod>
     </url>
 </urlset>

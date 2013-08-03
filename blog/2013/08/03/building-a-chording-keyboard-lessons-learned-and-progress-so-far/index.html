@@ -1,0 +1,333 @@
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Building a chording keyboard: progress so far - mathias.github.com</title>
+    <meta name="author" content="Matt Gauger">
+
+    
+    <meta name="description" content="Building a Chording Keyboard: Progress So Far Chording keyboards have been a computing peripheral for a long time. They&#8217;ve been in use at &hellip;">
+    
+
+    <link href="/atom.xml" rel="alternate" title="mathias.github.com" type="application/atom+xml">
+    <link rel="canonical" href="">
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+
+</head>
+
+
+<body>
+  <header class="inner"><div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+      </a>
+
+      <a href="/" class="brand">mathias.github.com</a>
+
+      <div class="nav-collapse">
+        <nav class="menu left"><ul class="nav">
+  <li><a href="/about">About</a></li>
+  <li><a href="/blog/archives">Blog Archives</a></li>
+  
+  <li class="divider-vertical"></li>
+  <li><a class="rss" href="/atom.xml" title="RSS">RSS</a></li>
+  
+</ul>
+</nav>
+        <div class="right">
+          <form class="navbar-search pull-right" action="http://google.com/search" method="get">
+            <input class="input-medium search-query span2" type="text" name="q" results="0" placeholder="Search">
+            <input type="hidden" name="q" value="site:mathias.github.com">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+  <div class="container bottom-left-rounded-corner bottom-right-rounded-corner" id="page-container">
+    <div class="row">
+  <div class="span8 offset2" id="content">
+    <article class="post">
+    <h1 class="title">Building a Chording Keyboard: Progress So Far</h1>
+    <div class="entry"><p>Chording keyboards have been a computing peripheral for a long time. They&#8217;ve been in use at least since Douglas Engelbart gave what is known as <a href="http://www.youtube.com/watch?v=yJDv-zdhzMY">The Mother of all Demos</a> in 1968. Rather than try to sum up the history and potential of the device here, I recommend you read the excellent essay <a href="http://www.loper-os.org/?p=861">Engelbart&#8217;s Violin</a> by Stanislav Datskovskiy on loper-os.org</p>
+
+<p><img src="/images/engelkey.jpg" alt="Engelbart's chording keyboard in use" /></p>
+
+<p><cite>Image via <a href="http://research.microsoft.com/en-us/um/people/bibuxton/buxtoncollection/detail.aspx?id=7">http://research.microsoft.com/en-us/um/people/bibuxton/buxtoncollection/detail.aspx?id=7</a></cite></p>
+
+<p>I&#8217;ve always had an interest in building hardware. When I was younger, I dreamed of building robots some day that I could interact with, play games with, or maybe go to space with. Someday I hope that I&#8217;ll get that chance. But in the meantime, I&#8217;ve built all sorts of hardware, and I&#8217;ve always been interested in the low-level side of computing.</p>
+
+<p>At <a href="http://bendyworks.com">Bendyworks</a> right now, we have flurry of activity and interest focusing on low-level computing, digital logic, and hardware. We&#8217;ve had several discussions in off-hours about learning computing from first principles: digital logic, circuit design, and taking that knowledge to the point of designing and building CPUs and then computers around those novel CPUs. There&#8217;s interest in the <a href="http://arduino.cc/en/">Arduino</a> and in people are taking the so-called <code>nand2tetris</code> course: <a href="http://www.nand2tetris.org/">Building a Modern Computer from First Principles</a>.</p>
+
+<p>We recently built a project at Bendyworks that we call <a href="https://github.com/bendyworks/concert_cam">concert_cam</a>, which takes pictures at the <a href="http://www.liveonkingstreet.com/">Live on King Street concerts</a> outside our office. You can see a <a href="https://www.facebook.com/media/set/?set=a.180416672130576.1073741826.180178628821047&amp;type=3">gallery the pictures taken at the most recent concert</a> on Facebook. At some point I&#8217;ll blog about the <code>concert_cam</code> project and provide some lessons learned.</p>
+
+<p>But for now, I&#8217;d like to talk about a project I&#8217;ve been working on for awhile: a chording keyboard. I don&#8217;t have a clever name for it, so the code currently lives at <a href="https://github.com/mathias/chording">github.com/mathias/chording</a> and represents only some of the attempts I&#8217;ve made at getting it to work. (Code from several other attempts to code a chording keyboard died in a VMware Linux VM that ate its own disk image, and sadly I didn&#8217;t commit any of that code. Luckily, that code was mostly things I&#8217;d ruled out as possible solutions.)</p>
+
+<p>Building a chording keyboard in software is not trivial, so I have moved on to building one purely in hardware.</p>
+
+<div id="background-section"></div>
+
+
+<h2>Background information</h2>
+
+<p>USB devices like mice and keyboards that we use for input implement something called USB HID, for Human Interface Device. Linux, Mac OSX and other operating systems have supported USB HID for a long time.</p>
+
+<p>To build a chording keyboard that can work on any computer without special software installed, the device will have to implement USB HID and send the correct key events for a given chord.</p>
+
+<p>There are lots of chording keyboard projects and commercial products out there. To name just a few:</p>
+
+<ul>
+<li>The <a href="http://en.wikipedia.org/wiki/Microwriter">Microwriter</a>, which loper-os.org discusses in the essay <a href="http://www.loper-os.org/?p=861">Engelbart&#8217;s Violin</a>, and also <a href="http://www.loper-os.org/?p=1066">covered reverse-engineering</a>.</li>
+<li>The <a href="http://www.handykey.com/">twiddler</a>, which is commercially available. I have used my coworker <a href="http://sencjw.com/">Chris</a>&#8217;s twiddler quite a bit, but couldn&#8217;t get over the TV-remote-control ergonomics</li>
+<li>The <a href="http://rhodesmill.org/brandon/projects/tabspace-guide.pdf">tabspace layout for the twidder</a> (PDF link), which is an optimized key map layout for Twiddler.</li>
+<li>The <a href="http://wearcam.org/septambic/">septambic keyer</a> by Steve Mann</li>
+<li>The <a href="http://chordite.com/">chordite</a> keyboard</li>
+<li>The <a href="http://symlink.dk/projects/spiffchorder/">spaceman spiff layout / spiffchorder project</a></li>
+<li>The <a href="http://gkos.com/gkos/index-gkos-com.html">gkos</a> project to create a software chording keyboard for smartphones</li>
+</ul>
+
+
+<p>Ultimately, none of these projects or products really fit what I had in mind for a chording keyboard.</p>
+
+<p>Why a chording keyboard, you might ask?</p>
+
+<p>Well, I spend most of my work day editing text. While I am quite proficient at vim and slowly getting better at emacs, the kinds of key combos that a professional programmer uses daily are quite complex. There is a constant risk of RSI or carpal tunnel (which plagued me in my teens, but luckily I have been free of for over a decade.)</p>
+
+<p>With a chording keyboard, one could take a common key combo that you use all the time and put it under a much easier-to-type chord. This becomes especially attractive to me in replacing some of the key-combos required for operating emacs (especially those that use alt.)</p>
+
+<p>I dreamed of a way of being able to record programming language keywords and idioms as macros, as well as a way to type faster. Since I haven&#8217;t found any way to train myself to type QWERTY faster, I started to look at alternatives. Learning Dvorak or Colemak might help, but it still doesn&#8217;t get me away from the legacy typewriter keyboard. And, learning those alternative layouts doesn&#8217;t get me to the point where I can type out an entire block of code at once. For example, I might want to map a key to output something I frequently type, such as a Javascript anonymous function and leave the cursor in the function body, ready to be filled in: (where the underscore is the cursor position)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>function() {
+</span><span class='line'>_
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And lastly, I wanted to build a chording keyboard because it&#8217;s cool, it&#8217;s different, and because we frequently accept the paradigms handed to us in computing without really thinking about how we might improve or replace them.</p>
+
+<p>To understand chording keyboards best, it is worth noting that while regular keyboards detect the initial key being pressed down, a chording keyboard must detect when all of the keys in a chord are released simultaneously. Due to how fact electronics really are, no human could actually release all of the keys at exactly the same moment. For that reason, we need to implement chording in a way that takes time into account and looks to see if any chord pattern matches in the past n milliseconds.</p>
+
+<h2>Brief project history</h2>
+
+<p>After reviewing possible hardware to use to build a chording keyboard, I stumbled upon the Razer Nostromo (and its earlier incarnations from Belkin.) These gaming pads are popular with PC gamers because it puts the WASD keys under your left hand and frees your right hand up for the mouse.</p>
+
+<p><img src="/images/razer_nostromo.jpg" alt="Razer Nostromo" /></p>
+
+<p>Other features the Nostromo had over other devices were supporting <a href="http://en.wikipedia.org/wiki/Rollover_(key)#n-key_rollover">N-key rollover</a> &mdash; basically, the ability for the keyboard to know that multiple keys are being pressed at once, and send all of those keys to the computer &mdash; as well as a little 4-way directional pad, and blue lights (always a plus!) The Nostromo also comes with a piece of software that you can install and remap the key mappings with. The device can operate without the software, and store many different &#8216;modes&#8217; of key mappings and macros. The current mode is indicated by three LEDs near the thumb, which count up in binary, yielding 8 key maps.</p>
+
+<p>Sadly, while the Nostromo software can record macros of key press events (one key event on the Nostromo presses a sequence of buttons for you, for example, to macro a complicated action in a game), it did not support detecting a chord (multiple key presses simultaneously) into a single key event. So with that limitation in mind, I set about trying to write code to detect chords and turn them into key presses in software rather than at the hardware layer.</p>
+
+<h3>mxk</h3>
+
+<p>On Linux, there is a project called <a href="http://welz.org.za/projects/mxk">mxk</a>. <code>mxk</code> is basically a USB HID swiss army knife and HID event remixer, able to take input from any USB device, run it through various rules, and then output new USB HID events to the USB bus with a &#8220;virtual&#8221; USB HID device. Many example configuration scripts are provided, and one of the most common use seems to be to create a key press turns a QWERTY keyboard into a DVORAK keyboard and back again, without having to change the Linux system settings. It seemed promising.</p>
+
+<p><code>mxk</code> even indicated that it had support for two different kinds of chording: braille keyboard chording and a simpler chord-matching function.</p>
+
+<p>After banging my head against its confusing configuration syntax for nearly a week, I determined that <code>mxk</code> just couldn&#8217;t do what I wanted. Two issues cropped up: in the braille chording function, only one row of keys was supported and two hands were assumed. (Basically, it wanted ASDF and JKL; keys to form chords, and didn&#8217;t support anything else.)</p>
+
+<p>The regular chording functionality seemed like it might work, until I ran into a huge, glaring issue: A key used in one chord couldn&#8217;t be used in another. For example, let&#8217;s say I&#8217;m mapping keys for the left hand on a QWERTY keyboard to be used in a chord. So I might have a chord like RE which maps to &#8216;a&#8217; and another chord like FE that maps to &#8216;k&#8217;. The E used in both chords didn&#8217;t work in MXK. It simply couldn&#8217;t support it and could only watch for unique chords. This limits the key map for a chording keyboard made of a 12-key grid from some 495 combinations to 12, gaining us nothing since individual key presses are just as efficient.</p>
+
+<p>With these limitations discovered, I tried to hack the code for <code>mxk</code> to support my use case better. But, I don&#8217;t have much in the way of C chops when it comes to device drivers and pointers, and implementing code against Linux&#8217;s libHID is kind of a pain. Further, the mxk source isn&#8217;t very well documented outside of very few comments littered around the code, and I found libHID&#8217;s docs unapproachable.</p>
+
+<p>I realized that I was <strong>working at the wrong abstraction level</strong>, like so many projects that had frustrated me before. So I decided to move up to something a little higher level, with the hope that someone else had figured out the headaches of low-level libHID implementation. There are many high level libraries built on libHID, but since there isn&#8217;t a whole lot of need for that, they tend to be abandoned, very old, simplistic, or all of the above. I also was frustrated that my attempts so far would lock me into only using a Linux machine, as my normal work environment at Bendyworks is Mac OSX, and we pair all of the time, so I would not be able to use my chording keyboard for work.</p>
+
+<h3>Plover</h3>
+
+<p>Another project that I found that seemed promising was <a href="https://github.com/plover/plover">Plover</a>. At first glance, Plover doesn&#8217;t seem to be the right kind of software at all. it is an open source stenographer program that allows transcriptionists and court stenographers to turn a regular QWERTY keybord with n-key rollover into a high-end steno tool. The specialized hardware that court stenographers use can cost thousands of dollars, so an open source project that implements it for free on a $100 keyboard is a great win for those in that field.</p>
+
+<p>Despite coming mapped for stenography and transcription &mdash; a system which I find very confusing &mdash; at its heart, Plover is a cross-platform Python GUI app that supports turning chords into words or phrases. This seemed like exactly what I needed. Going through the source code, I noticed that different keyboards got different configuration classes, and set about trying to create a class to map the keys on the Nostromo to the key events that Plover was expecting.</p>
+
+<p>Now Plover comes with a huge dictionary of words that chords map to. And those chords are made up of certain key events, but not the ones we&#8217;re used to. (Some idea of how they look can be found <a href="https://github.com/plover/plover/blob/master/plover/machine/sidewinder.py#L14-L51">here</a> on Github.) How those special events combine and whether they come at the beginning or end of the chord seems to be the most important part of understanding this system. I struggled to understand the mappings, but it was pretty complicated. Plover comes with a giant, 124,000+ line JSON dictionary. I threw that out and started trying to write my own JSON dictionary; a humbler one that simply mapped chords to key events and a few Ruby &amp; JavaScript programming idioms.</p>
+
+<p>I struggled with understanding the key event names and how they combined (since I don&#8217;t have a background in stenography) and eventually, lost the work due to the VMware Linux VM crash mentioned above. Taking it as a sign that I should not continue down the route of using Plover, I put aside the chording keyboard project for many months.</p>
+
+<h3>Teensy and a return to hardware</h3>
+
+<p>Originally I had tried to avoid hacking hardware so that I could focus on what I do day-to-day: write software. But in the end, I felt like I had exhausted my ability to get this project off the ground by only writing software.</p>
+
+<p>When we built the <code>concert_cam</code> project at Bendyworks, the first version of the button pedestal we built utilized a <a href="http://www.pjrc.com/teensy/">Teensy board</a> &mdash; basically, a small Arduino-like microcontroller. The huge feature that the Teensy provides over other Atmel boards is that it comes out-of-the-box with a firmware that sets it up as a USB HID device.</p>
+
+<p>The basic process for programming and using the Teensy is this:</p>
+
+<ul>
+<li>You program it in the Arduino IDE like other Arduino boards</li>
+<li>Anything you &#8220;println&#8221; will be sent as if someone had typed it on a USB keyboard.</li>
+<li>Additionally, there is a Mouse class that you can use to send mouse movement, click, and scroll wheel information.</li>
+<li>When you upload your code to the Teensy, it reboots, and immediately starts being like a USB HID device as far as the operating system is concerned.</li>
+</ul>
+
+
+<p>For the <code>concert_cam</code>, it was easy enough to have a big arcade-style button send the keyboard event of &#8220;p&#8221; (for press) to the Raspberry Pi that the Teensy was attached to. A script on the Raspberry Pi watched for this keyboard input and told the camera to take a picture. It was very quick to get that working.</p>
+
+<p>Here&#8217;s the <code>concert_cam</code> button pedestal with Teensy and Raspberry Pi getting wired in:</p>
+
+<p><a href="http://www.flickr.com/photos/mattgauger/9427820477/" title="IMG_1817 by Matt Gauger, on Flickr"><img src="http://farm8.staticflickr.com/7395/9427820477_a8b4630519_z.jpg" width="480" height="640" alt="IMG_1817"></a></p>
+
+<p>Confident by my success with using the Teensy in the <code>concert_cam</code>, I decided to put a Teensy in my Nostromo, replacing the normal USB board inside it and translating keyboard chords into key press events at the hardware level.</p>
+
+<p>The first step is to open up the Nostromo. This is pretty easy; just unscrew all the visible screws, and find &amp; unscrew the other screws underneath the rubber feet of the gamepad. The Nostromo comes apart into three pieces, and looks like this inside:</p>
+
+<p><a href="http://www.flickr.com/photos/mattgauger/9427844525/" title="iPhoto by Matt Gauger, on Flickr"><img src="http://farm4.staticflickr.com/3784/9427844525_4b59fa4bc3_b.jpg" width="581" height="733" alt="iPhoto"></a></p>
+
+<p>The first problem encountered is those little grey ribbons - they&#8217;re ZIF surface mount stuff, and everything else inside is surface mount here, too. For an electronics hobbyist, surface mount components can represent a big source of frustration. For me, I just didn&#8217;t want to deal with them. I can&#8217;t really solder to the cables with any precision and the spacing of the connectors was so small that there was no hope of attaching wires there. Further, the circuit boards had traces running inside but didn&#8217;t really have any pins that I could solder to. A real bummer.</p>
+
+<p>I thought that maybe I could get more of the plastic cable connectors (the little white and black connectors on the main circuit board), but with a regular pin spacing, not surface mount. All attempts to find such a part were unsuccessful. So I had to get creative.</p>
+
+<p>The Nostromo uses membrane keys, which most laptop and PC keyboards nowadays do. A long time ago, almost all keyboards used &#8220;mechanical&#8221; key switches &#8211; switches that had springs or other tension devices and sent a keypress when continuity was made between two contacts. The loud, much-loved IBM Model M keyboard counts as a mechanical keyboard. Gaming keyboards and a few hardcore programmers (like many of us at Bendyworks) are holdouts for using mechanical keyboards, and few companies still make them. For mechanical key switches, the current winner is the Cherry MX line. (To learn more about mechanical keyboards and Cherry MX switches, I recommend <a href="http://www.wasdkeyboards.com/mechanical-keyboard-guide">this guide</a>.)</p>
+
+<p>Cherry MX key switches are not all that expensive, and I&#8217;d only need 15 to convert the Nostromo. I figured I could get away with using the keycaps for a number pad, which are also cheap.</p>
+
+<p>However, by replacing the key switches, I was getting into a realm of hardware hacking that I was trying to avoid: fabbing physical things from scratch. For this project, I wanted the keyboard to be sturdy and reliable; I didn&#8217;t want it to fall apart or move under my hand or rattle. Making a mounting plate that they keys snap into is the typical way that hobbyists build their own mechanical keyboards. And lots of people do, over on sites like <a href="http://deskthority.net/">deskthority.net/</a> and <a href="http://geekhack.org/">geekhack.org</a>, but without a really well stocked workshop or a Makerspace membership, I didn&#8217;t want to go down that road.</p>
+
+<p>Luckily, some quick googling turned up a <a href="http://www.xim3.com/community/index.php?PHPSESSID=98v9639t6etse5msjbupuogp24&amp;topic=8122.0">forum post in which the author replaces Nostromo key switches with Cherry MX keys</a>. The mounting plate for the membrane keys in the Nostromo requires only a little dremeling to convert. Since I was also throwing out the existing USB circuit board for the Nostromo, I can get away with removing the membrane switch PCB and soldering a cable directly to the Teensy&#8217;s pin headers, getting rid of those pesky ZIF cables.</p>
+
+<p>Currently, I&#8217;m waiting for the key switches to arrive so that I can cut down the white mounting plate for each switch. My plan is to wire up each key to an IO line on the Teensy. Typically, keyboards use multiplexing in a grid to let the computer know which key was pressed: essentially, rows of keys are connected to one set of pins and columns of keys are connected to another set of pins, and when a pin for a row and a column goes HIGH, you know which key was pressed based on it being the intersect of that row and column. The issue you run into here is, again, complicated by chording. While the microcontroller can figure out reasonably well individual keys, there are issues on some keyboards with &#8220;ghosting&#8221; other keys when chording.</p>
+
+<p>Since I only have about 15 keys and maybe another 4 or 5 input/outputs that I need, I can get away with using separate IO lines on the Teensy 2.0. The Teensy++ 2.0 has are even more IO lines, which would make it better suited to projects with more IO lines needed.</p>
+
+<h3>Scroll wheel</h3>
+
+<p>While waiting for the key switches to arrive, I began work on the one non-surface-mount component in the Nostromo that I could solder to: the scroll wheel. On the scroll wheel&#8217;s PCB, there is a mechanical encoder, a button (the click when you press down on a mouse scroll wheel) and an LED.</p>
+
+<p><a href="http://www.flickr.com/photos/mattgauger/9430775972/" title="skitched-20130803-121011 by Matt Gauger, on Flickr"><img src="http://farm8.staticflickr.com/7453/9430775972_991c8e8a8d_c.jpg" width="600" height="800" alt="skitched-20130803-121011"></a></p>
+
+<p>Here&#8217;s a quick link for reading up on how mechanical encoders work in mice, and particularly, how to interface one with an Arduino: <a href="http://forum.arduino.cc/index.php/topic,15336.0.html">Mouse Scroll Wheel Sensor and Arduino</a>. There&#8217;s also some source code in that thread that will probably prove useful later. Note in the picture that the middle leg of the encoder is ground, and the two ends correspond to the signals sent when you rotate it &mdash; you&#8217;ll have to figure out whether the scroll direction matches their location yourself by experimenting.</p>
+
+<p>I used part of my Friday Growth Day at Bendyworks to start wiring up and coding the firmware for the Nostromo&#8217;s scroll wheel. The basic idea is that the mechanical encoder has two outputs. You monitor both lines on separate IO pins on the Teensy, and whichever IO line goes HIGH first is the direction of the scroll. With the Teensy&#8217;s convenient Mouse class, you can then just send a scroll event to the OS. In a matter of minutes, I had my scroll wheel scrolling web pages. Not bad.</p>
+
+<p>I&#8217;ll be implementing a variation on the sliding buffer for key events, so I will probably also use that code for holding scrolls (over a much shorter, separate buffer.)</p>
+
+<p>Since I was trying to understand the mechanical encoder and could only really connect alligator clips to one pin at a time, I wrote up a quick Arduino script to detect only one direction of scrolling. Here&#8217;s that code:</p>
+
+<script src="https://gist.github.com/mathias/6147169.js"></script>
+
+
+<p>In my repo on Github: <a href="https://github.com/mathias/chording/blob/master/teensy/scroll_wheel/scroll_wheel.ino">scroll_wheel.ino</a></p>
+
+<p>Note that this does not implement a sliding buffer or direction detection.</p>
+
+<p>Eventually, I&#8217;d like to break my scroll wheel code out into an Arduino library that takes the two input pin numbers and a velocity as parameters to the constructor, and implements the scroll direction detection and sending the scroll event for you. But that will have to come later.</p>
+
+<h3>Future work</h3>
+
+<p>I&#8217;m going to be getting the key switches in the next week and beginning the hardware hacking to install them.</p>
+
+<p>On the software end, I&#8217;d like to write a script (probably in Ruby) that takes a standardized keyboard mapping file and converts it into a C++ header file that the Arduino can utilize for its chord mappings. That way, I don&#8217;t have to maintain the header file manually or know what C++ constants map to what, I will simply edit my simple key mappings file and regenerate the code.</p>
+
+<p>The <a href="https://github.com/mathias/chording/blob/master/twiddler_keymap.txt">twiddler_keymap.txt</a> file in the repo represents the current plan for my keymap. It is based on the <a href="">Tabspace layout</a> mentioned above in the <a href="#background-section">Background</a> section. I haven&#8217;t found any reason to not use the Tabspace layout, as it seems sensible and leaves plenty of room in the unmapped chords for me to implement key combos, programming language idioms, and text editor movement.</p>
+
+<p>One last decision I need to make is whether to replace the Nostromo&#8217;s thumb directional pad. The current thumbpad uses membrane switches similar to the keys, and is all surface mount with very little access to its signals. One thought is to replace the 4-way pad with a Playstation-controller style <a href="https://www.sparkfun.com/products/9032">joystick</a> from Sparkfun.</p>
+
+<p><a href="https://www.sparkfun.com/products/9032">
+<img src="/images/sparkfun_joystick.jpg" alt="Sparkfun thumb joystick" />
+</a></p>
+
+<p>With this joystick, I&#8217;d be able to implement either mouse movements or arrow key movements, and could probably toggle which it behaves like with the small button located above the directional pad. However, securely mounting the joystick into the Nostromo case so that it is durable might prove an issue, so I&#8217;ve put off making this decision until I have successfully hacked the mechanical switches in.</p>
+
+<p>I&#8217;ll be blogging about each step of finishing this chording keyboard as I go. Stay tuned for the next post about installing up the key switches and wiring them to the Teensy.</p>
+
+<h3>Final thoughts</h3>
+
+<p>I&#8217;ve got a lot of projects, and I put them down regularly to focus on something else. That list of projects continues to grow and grow. So I don&#8217;t feel very guilty that I&#8217;ve put down this project for awhile and am just now picking it up again. I&#8217;m making good progress, and find it interesting rather than frustrating, so I will continue work on it.</p>
+
+<p>In truth, this project doesn&#8217;t really represent much value outside of the things I&#8217;m learning as I go. I have no ambitions of turning this into a project, and while some people might find my notes here useful, I&#8217;m not trying to make a repeatable project here. Is it worth it? Definitely. Is it for everyone? Probably not.</p>
+
+<p>One thing I&#8217;d like to do after completing this device is begin work on a custom computer. Specifically, I want to learn enough digital logic concepts to design a whole computer in a language like Verilog or vHDL, and then burn it into a FPGA board.</p>
+
+<p>Such a computer would <strong>not</strong> be intended to compete with your Core i7 quad core &#8211; I&#8217;m thinking of implementing a unique architecture with the overall processing capability of something like an early 80&#8217;s microcomputer. It would be interesting, but not entirely useful for day-to-day computing.</p>
+
+<p>When the computer is built, I&#8217;d begin implement an operating system on top of that computer in Lisp, along the lines of what the author of <a href="http://loper-os.org">loper-os.org</a> has been working towards for many years.</p>
+
+<p>Such a project may take a decade or more to realize, though, and so is not undertaken lightly or easily accomplished.</p>
+
+<hr />
+
+<p>If you have any questions, comments, or your own chording keyboard project, I&#8217;d love to hear about it over on Twitter, where I am <a href="https://twitter.com/mathiasx">@mathiasx</a>.</p>
+</div>
+
+    <div class="meta">
+        <div class="author">
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
+</div>
+        <div class="date">
+
+
+
+
+
+
+
+
+
+
+
+
+<time datetime="2013-08-03T08:21:00-05:00" pubdate  data-updated="true" >Aug 3<span>rd</span>, 2013</time>.</div>
+        <div class="tags">
+
+</div>
+    </div>
+</article>
+  </div>
+</div>
+
+    <hr />
+	  <footer class="footer"><div class="row">
+  <div class="offset2 span2">
+    <img src="/images/mathiasx.jpg" alt="portrait">
+  </div>
+  <div class="span3">
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/StillImage" property="dct:title" rel="dct:type">mathias.github.com</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://mathias.github.com" property="cc:attributionName" rel="cc:attributionURL">Matt Gauger</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.<br />
+
+  </div>
+  <div class="offset1 span3">
+    <ul class="nav nav-list">
+      <li><a href="https://twitter.com/mathiasx">Twitter</a></li>
+      <li><a href="https://github.com/mathias">Github</a></li>
+      <li><a href="http://www.slideshare.net/mathiasx">Talks</a></li>
+      <li><a href="http://hackz0r.tumblr.com">Tumblog</a></li>
+      <li><a href="/atom.xml">Atom feed</a></li>
+    </ul>
+  </div>
+</div>
+</footer>
+  </div>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script src="/javascripts/bootstrap-alert.js"></script>
+<script src="/javascripts/bootstrap-button.js"></script>
+<script src="/javascripts/bootstrap-collapse.js"></script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-38944731-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>

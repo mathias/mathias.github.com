@@ -7,8 +7,7 @@
     <meta name="author" content="Matt Gauger">
 
     
-    <meta name="description" content="Importing Old Content I&#8217;ve got text archives of my blog posts going back to about 2008 2007,
-so I&#8217;m going to start importing those old &hellip;">
+    <meta name="description" content="/Library/Ruby/Gems/1.8/gems/eventmachine-0.12.10/lib/eventmachine.rb:572: In `start_tcp_server&#8217;: No Acceptor (RuntimeError) Seeing this error &hellip;">
     
 
     <link href="/atom.xml" rel="alternate" title="mathias.github.com" type="application/atom+xml">
@@ -67,25 +66,73 @@ so I&#8217;m going to start importing those old &hellip;">
 
   <article class="post">
     
+    <h1 class="title"><a href="/blog/2010/10/13/-library-ruby-gems-1-8-gems-eventmachine-0-12-10-lib-eventmachine-rb-572-in-start-tcp-server-no-acceptor-runtimeerror-/">/Library/Ruby/Gems/1.8/gems/eventmachine-0.12.10/lib/eventmachine.rb:572: In `start_tcp_server&#8217;: No Acceptor (RuntimeError)</a></h1>
+    <div class="entry">
+        <p>Seeing this error when trying to run your Rack or Sinatra webapp?</p>
+<p>It&#8217;s probably because you&#8217;re already running something on the port you&#8217;re trying to use. This happens quite a bit if you&#8217;re using daemonized Rack apps that go off on their own after you close the controlling shell.</p>
+<p>Use this command to see what&#8217;s happening on a port:</p>
+<div class="CodeRay">
+  <div class="code"><pre>$ lsof -i :4567
+COMMAND   PID     USER   FD   TYPE     DEVICE SIZE/OFF NODE NAME
+ruby    74716 mathiasx    5u  IPv4 0x073562a4      0t0  TCP *:tram (LISTEN)</pre></div>
+</div>
+
+<div>It&#8217;ll help you see the PID of the process that&#8217;s hogging that port. Just be careful not to kill anything that <strong>should</strong> be on that port!</div>
+<p>&nbsp;</p>
+
+        
+        
+    </div>
+
+    <div class="meta">
+        <div class="author">
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
+</div>
+        <div class="date">
+
+
+
+
+
+
+
+
+
+
+
+
+<time datetime="2010-10-13T00:00:00-05:00" pubdate  data-updated="true" >Oct 13<span>th</span>, 2010</time>.</div>
+        <div class="tags">
+
+</div>
+    </div>
+
+  </article>
+
+
+  <article class="post">
+    
     <h1 class="title"><a href="/blog/2010/09/28/importing-old-content/">Importing Old Content</a></h1>
     <div class="entry">
-        I&#8217;ve got text archives of my blog posts going back to about 2008 2007,
+        <p>I&#8217;ve got text archives of my blog posts going back to about 2008 2007,
 so I&#8217;m going to start importing those old blog posts into
-[posterous](http://posterous.com) &#8211; **Note: As of April 15th, 2012,
+<a href="http://posterous.com">posterous</a> &#8211; <strong>Note: As of April 15th, 2012,
 I&#8217;ve imported these all into a new blog on Github Pages running
-Octopress/Jekyll** &#8211; and backdating them. Well, the blog posts worth
+Octopress/Jekyll</strong> &#8211; and backdating them. Well, the blog posts worth
 pulling in. I haven&#8217;t really ensured that the links contained in the
 posts work, and the link at the top of each to the original post may
-eventually stop working.
+eventually stop working.</p>
 
-Hopefully this mass import doesn&#8217;t screw things up. Apologies if it
-does.
+<p>Hopefully this mass import doesn&#8217;t screw things up. Apologies if it
+does.</p>
 
-Of course, I&#8217;m not pulling in any of the comments, like this comment on
-[my old wordpress.com blog](bytecodex.wordpress.com) from [Giles
-Bowkett](gilesbowkett.blogspot.com) way back in 2007:
+<p>Of course, I&#8217;m not pulling in any of the comments, like this comment on
+<a href="bytecodex.wordpress.com">my old wordpress.com blog</a> from <a href="gilesbowkett.blogspot.com">Giles
+Bowkett</a> way back in 2007:</p>
 
-![](http://files.droplr.com/files/787975/CFjD.Screen%20shot%202010-09-28%20at%2019%3A29%3A52.png)
+<p><img src="http://files.droplr.com/files/787975/CFjD.Screen%20shot%202010-09-28%20at%2019%3A29%3A52.png" alt="" /></p>
 
         
         
@@ -123,23 +170,23 @@ Bowkett](gilesbowkett.blogspot.com) way back in 2007:
     
     <h1 class="title"><a href="/blog/2010/09/28/importing-old-content/">Importing Old Content</a></h1>
     <div class="entry">
-        <p>I&#8217;ve got text archives of my blog posts going back to about 2008 2007,
+        I&#8217;ve got text archives of my blog posts going back to about 2008 2007,
 so I&#8217;m going to start importing those old blog posts into
-<a href="http://posterous.com">posterous</a> &#8211; <strong>Note: As of April 15th, 2012,
+[posterous](http://posterous.com) &#8211; **Note: As of April 15th, 2012,
 I&#8217;ve imported these all into a new blog on Github Pages running
-Octopress/Jekyll</strong> &#8211; and backdating them. Well, the blog posts worth
+Octopress/Jekyll** &#8211; and backdating them. Well, the blog posts worth
 pulling in. I haven&#8217;t really ensured that the links contained in the
 posts work, and the link at the top of each to the original post may
-eventually stop working.</p>
+eventually stop working.
 
-<p>Hopefully this mass import doesn&#8217;t screw things up. Apologies if it
-does.</p>
+Hopefully this mass import doesn&#8217;t screw things up. Apologies if it
+does.
 
-<p>Of course, I&#8217;m not pulling in any of the comments, like this comment on
-<a href="bytecodex.wordpress.com">my old wordpress.com blog</a> from <a href="gilesbowkett.blogspot.com">Giles
-Bowkett</a> way back in 2007:</p>
+Of course, I&#8217;m not pulling in any of the comments, like this comment on
+[my old wordpress.com blog](bytecodex.wordpress.com) from [Giles
+Bowkett](gilesbowkett.blogspot.com) way back in 2007:
 
-<p><img src="http://files.droplr.com/files/787975/CFjD.Screen%20shot%202010-09-28%20at%2019%3A29%3A52.png" alt="" /></p>
+![](http://files.droplr.com/files/787975/CFjD.Screen%20shot%202010-09-28%20at%2019%3A29%3A52.png)
 
         
         
@@ -249,49 +296,6 @@ Bowkett</a> way back in 2007:</p>
 
 
 <time datetime="2010-01-30T00:00:00-06:00" pubdate  data-updated="true" >Jan 30<span>th</span>, 2010</time>.</div>
-        <div class="tags">
-
-</div>
-    </div>
-
-  </article>
-
-
-  <article class="post">
-    
-    <h1 class="title"><a href="/blog/2010/01/25/how-does-wisconsin-get-the-job-done-/">How Does Wisconsin Get the Job Done?</a></h1>
-    <div class="entry">
-        <p><span style="color: #424037; font-size: 12px; line-height: 21px;">(This post is part of my blog archiving project. This post appeared on&nbsp;<a href="http://blog.mattgauger.com/2010/01/25/how-does-wisconsin/">blog.mattgauger.com</a>&nbsp;on January 25, 2010.)</span></p>
-<p><span style="color: #424037; font-size: 12px; line-height: 21px;"><span style="color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-size: 14px; line-height: 19px;">
-<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 1em; margin-left: 0px; font-size: 14px; vertical-align: baseline; background-color: transparent; color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-weight: 400; line-height: 1.4em; letter-spacing: 0px; text-align: left; padding: 0px;">The title is the question I asked myself after reading through the latest interview at&nbsp;<a href="http://usesthis.com/" style="font-size: 14px; vertical-align: baseline; background-color: transparent; color: #47353b; padding: 0px; margin: 0px;">UsesThis.com</a>. I&rsquo;d thought about using the Creative Commons-licensed stylesheets of Usesthis.com (aka TheSetup) for a nicer&nbsp;<a href="http://blog.mattgauger.com/about" style="font-size: 14px; vertical-align: baseline; background-color: transparent; color: #47353b; padding: 0px; margin: 0px;">About Me</a>&nbsp;page than I currently had on this blog. After tweaking the template a little, I realized I could use Jekyll and apply this template to any content I wanted.</p>
-<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 1em; margin-left: 0px; font-size: 14px; vertical-align: baseline; background-color: transparent; color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-weight: 400; line-height: 1.4em; letter-spacing: 0px; text-align: left; padding: 0px;">Instead of just post my own answers, why not interview everyone I know in the tech community here in Wisconsin? So that&rsquo;s exactly what I&rsquo;m doing. In the first round of interviews, we hear from&nbsp;<a href="http://blog.mattgauger.com/thesetup/philgerbyshak" style="font-size: 14px; vertical-align: baseline; background-color: transparent; color: #47353b; padding: 0px; margin: 0px;">Phil Gerbyshak</a>,&nbsp;<a href="http://blog.mattgauger.com/thesetup/ashedryden" style="font-size: 14px; vertical-align: baseline; background-color: transparent; color: #47353b; padding: 0px; margin: 0px;">Ashe Dryden</a>, and&nbsp;<a href="http://blog.mattgauger.com/thesetup/mattgauger" style="font-size: 14px; vertical-align: baseline; background-color: transparent; color: #47353b; padding: 0px; margin: 0px;">myself</a>. The interviews can currently be viewed at&nbsp;<a href="http://blog.mattgauger.com/thesetup/" style="font-size: 14px; vertical-align: baseline; background-color: transparent; color: #47353b; padding: 0px; margin: 0px;">http://blog.mattgauger.com/thesetup/</a></p>
-<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 1em; margin-left: 0px; font-size: 14px; vertical-align: baseline; background-color: transparent; color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-weight: 400; line-height: 1.4em; letter-spacing: 0px; text-align: left; padding: 0px;">There&rsquo;s more on the way, and I&rsquo;ll be announcing new posts through&nbsp;<a href="http://twitter.com/mathiasx" style="font-size: 14px; vertical-align: baseline; background-color: transparent; color: #47353b; padding: 0px; margin: 0px;">my Twitter</a>&nbsp;and on this blog. Oh, and please feel free to comment using the new Disqus commenting system!</p>
-</span></span></p>
-
-        
-        
-    </div>
-
-    <div class="meta">
-        <div class="author">
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
-</div>
-        <div class="date">
-
-
-
-
-
-
-
-
-
-
-
-
-<time datetime="2010-01-25T00:00:00-06:00" pubdate  data-updated="true" >Jan 25<span>th</span>, 2010</time>.</div>
         <div class="tags">
 
 </div>
