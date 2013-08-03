@@ -4,7 +4,7 @@
   <title><![CDATA[blog.mattgauger.com]]></title>
   <link href="http://blog.mattgauger.com/atom.xml" rel="self"/>
   <link href="http://blog.mattgauger.com/"/>
-  <updated>2013-08-03T13:34:24-05:00</updated>
+  <updated>2013-08-03T13:41:25-05:00</updated>
   <id>http://blog.mattgauger.com/</id>
   <author>
     <name><![CDATA[Matt Gauger]]></name>
@@ -26,7 +26,7 @@
 
 <p>I&#8217;ve always had an interest in building hardware. When I was younger, I dreamed of building robots some day that I could interact with, play games with, or maybe go to space with. Someday I hope that I&#8217;ll get that chance. But in the meantime, I&#8217;ve built all sorts of hardware, and I&#8217;ve always been interested in the low-level side of computing.</p>
 
-<p>At <a href="http://bendyworks.com">Bendyworks</a> right now, we have flurry of activity and interest focusing on low-level computing, digital logic, and hardware. We&#8217;ve had several discussions in off-hours about learning computing from first principles: digital logic, circuit design, and taking that knowledge to the point of designing and building CPUs and then computers around those novel CPUs. There&#8217;s interest in the <a href="http://arduino.cc/en/">Arduino</a> and in people are taking the so-called <code>nand2tetris</code> course: <a href="http://www.nand2tetris.org/">Building a Modern Computer from First Principles</a>.</p>
+<p>At <a href="http://bendyworks.com">Bendyworks</a> right now, we have flurry of activity and interest focusing on low-level computing, digital logic, and hardware. We&#8217;ve had several discussions in off-hours about learning computing from first principles: digital logic, circuit design, and taking that knowledge to the point of designing and building CPUs and then computers around those novel CPUs. There&#8217;s interest in the <a href="http://arduino.cc/en/">Arduino</a> and some of my coworkers are taking the so-called <code>nand2tetris</code> course: <a href="http://www.nand2tetris.org/">Building a Modern Computer from First Principles</a>.</p>
 
 <p>We recently built a project at Bendyworks that we call <a href="https://github.com/bendyworks/concert_cam">concert_cam</a>, which takes pictures at the <a href="http://www.liveonkingstreet.com/">Live on King Street concerts</a> outside our office. You can see a <a href="https://www.facebook.com/media/set/?set=a.180416672130576.1073741826.180178628821047&amp;type=3">gallery the pictures taken at the most recent concert</a> on Facebook. At some point I&#8217;ll blog about the <code>concert_cam</code> project and provide some lessons learned.</p>
 
