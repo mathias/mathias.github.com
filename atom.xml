@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[mathias.github.com]]></title>
-  <link href="http://mathias.github.com/atom.xml" rel="self"/>
-  <link href="http://mathias.github.com/"/>
-  <updated>2013-08-03T12:59:19-05:00</updated>
-  <id>http://mathias.github.com/</id>
+  <title><![CDATA[blog.mattgauger.com]]></title>
+  <link href="http://blog.mattgauger.com/atom.xml" rel="self"/>
+  <link href="http://blog.mattgauger.com/"/>
+  <updated>2013-08-03T13:34:24-05:00</updated>
+  <id>http://blog.mattgauger.com/</id>
   <author>
     <name><![CDATA[Matt Gauger]]></name>
     
@@ -15,12 +15,12 @@
   
   <entry>
     <title type="html"><![CDATA[Building a chording keyboard: progress so far]]></title>
-    <link href="http://mathias.github.com/blog/2013/08/03/building-a-chording-keyboard-lessons-learned-and-progress-so-far/"/>
+    <link href="http://blog.mattgauger.com/blog/2013/08/03/building-a-chording-keyboard-lessons-learned-and-progress-so-far/"/>
     <updated>2013-08-03T08:21:00-05:00</updated>
-    <id>http://mathias.github.com/blog/2013/08/03/building-a-chording-keyboard-lessons-learned-and-progress-so-far</id>
+    <id>http://blog.mattgauger.com/blog/2013/08/03/building-a-chording-keyboard-lessons-learned-and-progress-so-far</id>
     <content type="html"><![CDATA[<p>Chording keyboards have been a computing peripheral for a long time. They&#8217;ve been in use at least since Douglas Engelbart gave what is known as <a href="http://www.youtube.com/watch?v=yJDv-zdhzMY">The Mother of all Demos</a> in 1968. Rather than try to sum up the history and potential of the device here, I recommend you read the excellent essay <a href="http://www.loper-os.org/?p=861">Engelbart&#8217;s Violin</a> by Stanislav Datskovskiy on loper-os.org</p>
 
-<p><img src="http://mathias.github.com/images/engelkey.jpg" alt="Engelbart's chording keyboard in use" /></p>
+<p><img src="http://blog.mattgauger.com/images/engelkey.jpg" alt="Engelbart's chording keyboard in use" /></p>
 
 <p><cite>Image via <a href="http://research.microsoft.com/en-us/um/people/bibuxton/buxtoncollection/detail.aspx?id=7">http://research.microsoft.com/en-us/um/people/bibuxton/buxtoncollection/detail.aspx?id=7</a></cite></p>
 
@@ -82,7 +82,7 @@
 
 <p>After reviewing possible hardware to use to build a chording keyboard, I stumbled upon the Razer Nostromo (and its earlier incarnations from Belkin.) These gaming pads are popular with PC gamers because it puts the WASD keys under your left hand and frees your right hand up for the mouse.</p>
 
-<p><img src="http://mathias.github.com/images/razer_nostromo.jpg" alt="Razer Nostromo" /></p>
+<p><img src="http://blog.mattgauger.com/images/razer_nostromo.jpg" alt="Razer Nostromo" /></p>
 
 <p>Other features the Nostromo had over other devices were supporting <a href="http://en.wikipedia.org/wiki/Rollover_(key)#n-key_rollover">N-key rollover</a> &mdash; basically, the ability for the keyboard to know that multiple keys are being pressed at once, and send all of those keys to the computer &mdash; as well as a little 4-way directional pad, and blue lights (always a plus!) The Nostromo also comes with a piece of software that you can install and remap the key mappings with. The device can operate without the software, and store many different &#8216;modes&#8217; of key mappings and macros. The current mode is indicated by three LEDs near the thumb, which count up in binary, yielding 8 key maps.</p>
 
@@ -190,7 +190,7 @@
 <p>One last decision I need to make is whether to replace the Nostromo&#8217;s thumb directional pad. The current thumbpad uses membrane switches similar to the keys, and is all surface mount with very little access to its signals. One thought is to replace the 4-way pad with a Playstation-controller style <a href="https://www.sparkfun.com/products/9032">joystick</a> from Sparkfun.</p>
 
 <p><a href="https://www.sparkfun.com/products/9032">
-<img src="http://mathias.github.com/images/sparkfun_joystick.jpg" alt="Sparkfun thumb joystick" />
+<img src="http://blog.mattgauger.com/images/sparkfun_joystick.jpg" alt="Sparkfun thumb joystick" />
 </a></p>
 
 <p>With this joystick, I&#8217;d be able to implement either mouse movements or arrow key movements, and could probably toggle which it behaves like with the small button located above the directional pad. However, securely mounting the joystick into the Nostromo case so that it is durable might prove an issue, so I&#8217;ve put off making this decision until I have successfully hacked the mechanical switches in.</p>
@@ -219,9 +219,9 @@
   
   <entry>
     <title type="html"><![CDATA[By augmenting human intellect, we mean]]></title>
-    <link href="http://mathias.github.com/blog/2013/03/17/by-augmenting-human-intellect/"/>
+    <link href="http://blog.mattgauger.com/blog/2013/03/17/by-augmenting-human-intellect/"/>
     <updated>2013-03-17T22:44:00-05:00</updated>
-    <id>http://mathias.github.com/blog/2013/03/17/by-augmenting-human-intellect</id>
+    <id>http://blog.mattgauger.com/blog/2013/03/17/by-augmenting-human-intellect</id>
     <content type="html"><![CDATA[<blockquote>
 By &#8220;augmenting human intellect&#8221; we mean increasing the capability of a man to approach a complex problem situation, to gain comprehension to suit his particular needs, and to derive solutions to problems. Increased capability in this respect is taken to mean a mixture of the following: more-rapid comprehension, better comprehension, the possibility of gaining a useful degree of comprehension in a situation that previously was too complex, speedier solutions, better solutions, and the possibility of finding solutions to problems that before seemed insoluble. And by &#8220;complex situations&#8221; we include the professional problems of diplomats, executives, social scientists, life scientists, physical scientists, attorneys, designers&#8211;whether the problem situation exists for twenty minutes or twenty years. We do not speak of isolated clever tricks that help in particular situations. We refer to a way of life in an integrated domain where hunches, cut-and-try, intangibles, and the human &#8220;feel for a situation&#8221; usefully co-exist with powerful concepts, streamlined terminology and notation, sophisticated methods, and high-powered electronic aids.
 <footer>
@@ -235,9 +235,9 @@ By &#8220;augmenting human intellect&#8221; we mean increasing the capability of
   
   <entry>
     <title type="html"><![CDATA[Filter or Be Filtered]]></title>
-    <link href="http://mathias.github.com/blog/2013/03/07/filter-or-be-filtered/"/>
+    <link href="http://blog.mattgauger.com/blog/2013/03/07/filter-or-be-filtered/"/>
     <updated>2013-03-07T22:09:00-06:00</updated>
-    <id>http://mathias.github.com/blog/2013/03/07/filter-or-be-filtered</id>
+    <id>http://blog.mattgauger.com/blog/2013/03/07/filter-or-be-filtered</id>
     <content type="html"><![CDATA[<p>Eli Pariser&#8217;s talk, <a href="http://www.ted.com/talks/eli_pariser_beware_online_filter_bubbles.html">Beware online &#8220;filter bubbles&#8221;</a> recently hit the front page of the TED Talks website. I found it interesting because it discusses some of what I&#8217;ve seen happening online, and some of my fears for how we search and consume content. Watch the video if you haven&#8217;t to see just how much is already being filtered on the web for you.</p>
 
 <p>Right after I saw the video, of course, <a href="http://washingtonpost.com/business/technology/facebook-to-change-news-feed-to-a-personalized-newspaper/2013/03/07/b294f61e-8751-11e2-98a3-b3db6b9ac586_story.html">Facebook announced</a> that they&#8217;ll be rolling out a new version of the the news feed. They are quoted as making it more like a &#8220;personal newspaper&#8221; &mdash; a filter, essentially, for the things Facebook thinks you want to see. As the video above pointed out, they&#8217;ve already been filtering <em>out</em> the things they think you don&#8217;t want for awhile.</p>
@@ -256,7 +256,7 @@ By &#8220;augmenting human intellect&#8221; we mean increasing the capability of
 
 <p>For a long time it has bothered me that <a href="https://www.google.com/reader">Google Reader</a> stopped receiving new features, and the features that existed only went so far. To be fair, Google Reader has been a rock solid web service for many, many years for me. It allows me to read my feeds quickly, reliably, and has parsed feeds well &mdash; all problems I&#8217;ve had with other feed readers. It&#8217;s always had some neat features like showing me analytics of what I read.</p>
 
-<p><img src="http://mathias.github.com/images/google_reader_trends.png" alt="Google Reader Trends" /></p>
+<p><img src="http://blog.mattgauger.com/images/google_reader_trends.png" alt="Google Reader Trends" /></p>
 
 <p>But as far as discovering new content and helping me to eliminate content I don&#8217;t read or don&#8217;t want to read, Google Reader is not so great. Reader is terrible at suggesting new feeds to read to me; it constantly suggests Dilbert and Lifehacker, and has for the past 5 years or so. I have no interest in either of those. It has never analyzed my reading patterns to such a degree that it suggested something new that blew me away. I am looking for those kinds of interesting suggestions: not just for feeds that match what I already read, but things that are outside of my normal bubble but would be interesting to me.</p>
 
@@ -280,9 +280,9 @@ By &#8220;augmenting human intellect&#8221; we mean increasing the capability of
   
   <entry>
     <title type="html"><![CDATA[Insanely powerful widgets, brought to you by Moore's Law]]></title>
-    <link href="http://mathias.github.com/blog/2013/03/03/insanely-powerful-widgets-brought-to-you-by-moores-law/"/>
+    <link href="http://blog.mattgauger.com/blog/2013/03/03/insanely-powerful-widgets-brought-to-you-by-moores-law/"/>
     <updated>2013-03-03T11:10:00-06:00</updated>
-    <id>http://mathias.github.com/blog/2013/03/03/insanely-powerful-widgets-brought-to-you-by-moores-law</id>
+    <id>http://blog.mattgauger.com/blog/2013/03/03/insanely-powerful-widgets-brought-to-you-by-moores-law</id>
     <content type="html"><![CDATA[<p>I&#8217;ve been teaching my downstairs neighbor basic electronics and how to solder. He&#8217;s a musician and has been working his way through several kits from <a href="http://bleeplabs.com/">Bleep Labs</a>.</p>
 
 <p>As I explained each component: the resistor, the capacitor, the diode, etc., I eventually got to the transistor. I told my neighbor how transistors are rarely used on their own now. The transistors in the kit were there mainly because they were easy to solder, but usually a circuit designer would opt not to use them.</p>
@@ -301,7 +301,7 @@ And I explained how the form factor of the components we were using was obsolete
 <blockquote class="twitter-tweet" align="center"><p>Crazy future; my MBA doesn&#8217;t sweat when running Linux-in-VMware, Chrome, Emacs, LightTable, other apps, terminals &amp; 4 REPLs all at once.</p>&mdash; mathiasx (@mathiasx) <a href="https://twitter.com/mathiasx/status/307668858985140225">March 2, 2013</a></blockquote>
 
 
-<script async src="http://mathias.github.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="http://blog.mattgauger.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>And in truth, I was running more software than I could fit into that tweet, because I was listening to music, had a few PDFs in the background, and was managing my ebook collection at the same time. But those notorious CPU hogs listed in the tweet should be enough to illustrate just how much is going on without really pushing the processing cores of the Macbook Air.</p>
@@ -356,9 +356,9 @@ And I explained how the form factor of the components we were using was obsolete
   
   <entry>
     <title type="html"><![CDATA[Google Glass: You can't control the future]]></title>
-    <link href="http://mathias.github.com/blog/2013/03/02/google-glass-you-cant-control-the-future/"/>
+    <link href="http://blog.mattgauger.com/blog/2013/03/02/google-glass-you-cant-control-the-future/"/>
     <updated>2013-03-02T15:09:00-06:00</updated>
-    <id>http://mathias.github.com/blog/2013/03/02/google-glass-you-cant-control-the-future</id>
+    <id>http://blog.mattgauger.com/blog/2013/03/02/google-glass-you-cant-control-the-future</id>
     <content type="html"><![CDATA[<p>There&#8217;s been quite a bit of backlash surrounding the new Google Glass product. As someone who has wanted wearable computing for awhile, I&#8217;d like to talk about it a bit. My only real qualifications on this subject come from the fact that I&#8217;ve read a lot of scifi<sup><a href="#accelerando-note" name="accelerando-note-return">1</a></sup> and that I&#8217;m an open source developer that would like to build software for wearable computing that makes people&#8217;s lives better.</p>
 
 <p>When I&#8217;m talking about wearable computing glasses in general rather than just the Google Glass product, I will call them smart glasses. There doesn&#8217;t seem to be a consistent name yet, and the phrase <a href="http://en.wikipedia.org/wiki/EyeTap">eyetap</a> only refers to a very specific type of smart glasses.</p>
@@ -440,9 +440,9 @@ And I explained how the form factor of the components we were using was obsolete
   
   <entry>
     <title type="html"><![CDATA[Run rake. Just run rake.]]></title>
-    <link href="http://mathias.github.com/blog/2012/07/13/run-rake-just-run-rake/"/>
+    <link href="http://blog.mattgauger.com/blog/2012/07/13/run-rake-just-run-rake/"/>
     <updated>2012-07-13T14:59:00-05:00</updated>
-    <id>http://mathias.github.com/blog/2012/07/13/run-rake-just-run-rake</id>
+    <id>http://blog.mattgauger.com/blog/2012/07/13/run-rake-just-run-rake</id>
     <content type="html"><![CDATA[<p>Recently, I was setting up my laptop for an existing Rails project with the help of a pair. My pair was pivot on this project, which means that he&#8217;d been on it longer and so was bringing his experience and knowledge to the table, while I was seeing the project with fresh eyes.</p>
 
 <p>&#8220;This is going to take forever to set up,&#8221; he grumbled. &#8220;The documentation&#8217;s out of date, and I remember there&#8217;s a bunch of gotchas to setting this project up. We&#8217;ll need to compile this, then do that, then you get an API key for..&#8221;</p>
@@ -473,9 +473,9 @@ And I explained how the form factor of the components we were using was obsolete
   
   <entry>
     <title type="html"><![CDATA[Mosh, SSH Tunnels, and Tmux]]></title>
-    <link href="http://mathias.github.com/blog/2012/04/21/mosh-ssh-tunnels-tmux/"/>
+    <link href="http://blog.mattgauger.com/blog/2012/04/21/mosh-ssh-tunnels-tmux/"/>
     <updated>2012-04-21T21:14:00-05:00</updated>
-    <id>http://mathias.github.com/blog/2012/04/21/mosh-ssh-tunnels-tmux</id>
+    <id>http://blog.mattgauger.com/blog/2012/04/21/mosh-ssh-tunnels-tmux</id>
     <content type="html"><![CDATA[<p>I&#8217;m currently preparing for RailsConf. One of the things I wanted to do before I left was figure out a way to monitor a process on a Linux server running on my LAN. The process frequently crashes and needs some prodding to restart.</p>
 
 <p>One solution might be to set up DynDNS and configure the router to point from some random port to the SSH port on the Linux machine running on the LAN. That idea didn&#8217;t strike my fancy, as it just isn&#8217;t terribly secure to open up a port to the entire world, and it seems that DynDNS costs money to use since 2008. I&#8217;m sure there are free alternatives, but I couldn&#8217;t be bothered to find them, much less configure them.</p>
@@ -533,10 +533,10 @@ matt@someserver.local$ &lt;monitor the process I'm concerned with&gt;
   
   <entry>
     <title type="html"><![CDATA[Announcing a virtual book club: The Diamond Age]]></title>
-    <link href="http://mathias.github.com/blog/2012/04/13/announcing-a-new-virtual-book-club-the-diamond-age/"/>
+    <link href="http://blog.mattgauger.com/blog/2012/04/13/announcing-a-new-virtual-book-club-the-diamond-age/"/>
     <updated>2012-04-13T15:29:00-05:00</updated>
-    <id>http://mathias.github.com/blog/2012/04/13/announcing-a-new-virtual-book-club-the-diamond-age</id>
-    <content type="html"><![CDATA[<p><img src="http://mathias.github.com/images/The_Diamond_Age.jpg" alt="The Diamond Age book cover" /></p>
+    <id>http://blog.mattgauger.com/blog/2012/04/13/announcing-a-new-virtual-book-club-the-diamond-age</id>
+    <content type="html"><![CDATA[<p><img src="http://blog.mattgauger.com/images/The_Diamond_Age.jpg" alt="The Diamond Age book cover" /></p>
 
 <p>Recently I decided that it&#8217;s time to re-read The Diamond Age by Neal Stephenson. But, without external motivators, the list of books that I&#8217;d like to read grows and grows, and reading books actual takes me a lot longer than it should. (Because, well, the internet is so damn interesting, and I haven&#8217;t finished reading that.)</p>
 
@@ -561,9 +561,9 @@ matt@someserver.local$ &lt;monitor the process I'm concerned with&gt;
   
   <entry>
     <title type="html"><![CDATA[New site on Octopress and Twitter Bootstrap]]></title>
-    <link href="http://mathias.github.com/blog/2012/03/25/new-site-on-octopress-and-twitter-bootstrap/"/>
+    <link href="http://blog.mattgauger.com/blog/2012/03/25/new-site-on-octopress-and-twitter-bootstrap/"/>
     <updated>2012-03-25T13:52:00-05:00</updated>
-    <id>http://mathias.github.com/blog/2012/03/25/new-site-on-octopress-and-twitter-bootstrap</id>
+    <id>http://blog.mattgauger.com/blog/2012/03/25/new-site-on-octopress-and-twitter-bootstrap</id>
     <content type="html"><![CDATA[<p>Hi there. As you may have noticed, my blog is moving over to Github pages. I&#8217;ve used Octopress as a starting point, and ported a <a href="https://github.com/jlong/sass-twitter-bootstrap">SASS version of Twitter Bootstrap</a> to use for building the layout.</p>
 
 <p>Some people called out the fact that I&#8217;m using Twitter Bootstrap on Twitter. When Twitter Bootstrap first came out, I was appalled to see so many sites turning into Twitter through Bootstrap, but I&#8217;m over it now. Bootstrap provides a GREAT grid system and makes it very fast to get a responsive layout up. Plus, I liked my <a href="https://twitter.com/mathiasx">Twitter profile background</a> so much that I made this site look like it. So just deal with it.</p>
@@ -576,9 +576,9 @@ matt@someserver.local$ &lt;monitor the process I'm concerned with&gt;
   
   <entry>
     <title type="html"><![CDATA[MadJS February 2012 - How CoffeeScript & Jasmine Made Me a Better JavaScript Developer]]></title>
-    <link href="http://mathias.github.com/blog/2012/02/17/madjs-february-2012-how-coffeescript-jasmine-made-me-a-better-javascript-developer/"/>
+    <link href="http://blog.mattgauger.com/blog/2012/02/17/madjs-february-2012-how-coffeescript-jasmine-made-me-a-better-javascript-developer/"/>
     <updated>2012-02-17T00:00:00-06:00</updated>
-    <id>http://mathias.github.com/blog/2012/02/17/madjs-february-2012-how-coffeescript-jasmine-made-me-a-better-javascript-developer</id>
+    <id>http://blog.mattgauger.com/blog/2012/02/17/madjs-february-2012-how-coffeescript-jasmine-made-me-a-better-javascript-developer</id>
     <content type="html"><![CDATA[<p>Recently, I spoke at the MadJS group about CoffeeScript &amp; Jasmine. My slides appear below. Since Slideshare doesn&#8217;t show my notes, you can either download the keynote file above, or you can read the notes below, which I&#8217;ve pulled out of the slides. I feel that the notes are necessary to know what I&#8217;m talking about, and I hate reading slide decks where there&#8217;s no context or notes. This isn&#8217;t going to be as helpful as having seen my talk in person, but hopefully you get some value out of my talk and the notes together:</p>
 <div style=""><strong style="display: block; margin: 12px 0 4px;"><a href="http://www.slideshare.net/mathiasx/coffeescript-jasmine-madjs-february-2012" title="CoffeeScript &amp; Jasmine - MadJS February 2012" target="_blank">CoffeeScript &amp; Jasmine - MadJS February 2012</a></strong> <iframe marginheight="0" scrolling="no" src="http://www.slideshare.net/slideshow/embed_code/11637009" marginwidth="0" frameborder="0" height="355" width="425"></iframe>
 <div style="padding: 5px 0 12px;">View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/mathiasx" target="_blank">Matt Gauger</a></div>
@@ -867,9 +867,9 @@ You&rsquo;ve got a working test around this bug.
   
   <entry>
     <title type="html"><![CDATA[Invalid gemspec in [.rvm/gems/ruby-1.9.2-p180@gemset/specifications/actionmailer-3.2.0.gemspec]: Illformed requirement ["# 3.2.0"] ]]></title>
-    <link href="http://mathias.github.com/blog/2012/01/21/invalid-gemspec-in-rvm-gems-ruby-1-9-2-p180-gemset-specifications-actionmailer-3-2-0-gemspec-illformed-requirement-3-2-0-/"/>
+    <link href="http://blog.mattgauger.com/blog/2012/01/21/invalid-gemspec-in-rvm-gems-ruby-1-9-2-p180-gemset-specifications-actionmailer-3-2-0-gemspec-illformed-requirement-3-2-0-/"/>
     <updated>2012-01-21T00:00:00-06:00</updated>
-    <id>http://mathias.github.com/blog/2012/01/21/invalid-gemspec-in-rvm-gems-ruby-1-9-2-p180-gemset-specifications-actionmailer-3-2-0-gemspec-illformed-requirement-3-2-0-</id>
+    <id>http://blog.mattgauger.com/blog/2012/01/21/invalid-gemspec-in-rvm-gems-ruby-1-9-2-p180-gemset-specifications-actionmailer-3-2-0-gemspec-illformed-requirement-3-2-0-</id>
     <content type="html"><![CDATA[<p>Recently while trying to create a new Rails 3.2 project, I ran into this error after creating a new RVM gemset in Ruby 1.9.2-p180 and a Gemfile requiring only Rails 3.2.0:</p>
 <div class="CodeRay">
   <div class="code"><pre>$ bundle
@@ -983,9 +983,9 @@ Your bundle is complete! Use `bundle show [gemname]` to see where a bundled gem 
   
   <entry>
     <title type="html"><![CDATA[Getting MongoDB and Devise to play well on Rails 3]]></title>
-    <link href="http://mathias.github.com/blog/2011/01/03/getting-mongodb-and-devise-to-play-well-on-rails-3/"/>
+    <link href="http://blog.mattgauger.com/blog/2011/01/03/getting-mongodb-and-devise-to-play-well-on-rails-3/"/>
     <updated>2011-01-03T00:00:00-06:00</updated>
-    <id>http://mathias.github.com/blog/2011/01/03/getting-mongodb-and-devise-to-play-well-on-rails-3</id>
+    <id>http://blog.mattgauger.com/blog/2011/01/03/getting-mongodb-and-devise-to-play-well-on-rails-3</id>
     <content type="html"><![CDATA[<p>While there&#8217;s a <a href="http://www.mongodb.org/display/DOCS/Rails+3+-+Getting+Started">good guide</a> on the MongoDB site about getting mongo_mapper to work in Rails 3, I ran into some additional issues getting the popular <a href="https://github.com/plataformatec/devise">devise</a>&nbsp;<span style="font-family: helvetica, arial, freesans, clean, sans-serif; line-height: 20px;">authentication engine for Rails to work with Mongo. This documents how to create a Rails app from scratch that uses both MongoDB and Devise. So if you don&#8217;t want to reinvent the wheel on authentication (read: Users, login, logout, etc) and want to run your app on MongoDB, this should be useful.</span></p>
 <p><span style="font-family: helvetica, arial, freesans, clean, sans-serif; line-height: 20px;">First of all, you&#8217;ll need Rails 3. I&#8217;m on Rails 3.0.3. I created a new gemset for this app, just to keep things clean. Run the rails new command with the&nbsp;</span><span style="font-family: Courier New, Courier, monospace; line-height: 16px;">&#8211;skip-active-record </span>switch.</p>
 <div class="CodeRay">
@@ -1166,9 +1166,9 @@ switched to db awesome-app-development</pre></div>
   
   <entry>
     <title type="html"><![CDATA[What's new and great in Rails 3 - Milwaukee Ruby Users Group - December 2010]]></title>
-    <link href="http://mathias.github.com/blog/2010/12/31/what-s-new-and-great-in-rails-3-milwaukee-ruby-users-group-december-2010/"/>
+    <link href="http://blog.mattgauger.com/blog/2010/12/31/what-s-new-and-great-in-rails-3-milwaukee-ruby-users-group-december-2010/"/>
     <updated>2010-12-31T00:00:00-06:00</updated>
-    <id>http://mathias.github.com/blog/2010/12/31/what-s-new-and-great-in-rails-3-milwaukee-ruby-users-group-december-2010</id>
+    <id>http://blog.mattgauger.com/blog/2010/12/31/what-s-new-and-great-in-rails-3-milwaukee-ruby-users-group-december-2010</id>
     <content type="html"><![CDATA[<p>While I was going to write a whole blog post (essentially what I said during the talk) I think these slides stand on their own pretty well.</p>
 <div style="">
 <object height="355" width="425">
@@ -1184,9 +1184,9 @@ switched to db awesome-app-development</pre></div>
   
   <entry>
     <title type="html"><![CDATA[Techniques for learning a new skill]]></title>
-    <link href="http://mathias.github.com/blog/2010/12/26/techniques-for-learning-a-new-skill/"/>
+    <link href="http://blog.mattgauger.com/blog/2010/12/26/techniques-for-learning-a-new-skill/"/>
     <updated>2010-12-26T00:00:00-06:00</updated>
-    <id>http://mathias.github.com/blog/2010/12/26/techniques-for-learning-a-new-skill</id>
+    <id>http://blog.mattgauger.com/blog/2010/12/26/techniques-for-learning-a-new-skill</id>
     <content type="html"><![CDATA[<p>I just found these notes in an old notebook and figured they deserved a blog post . This isn&#8217;t self-help type stuff, it&#8217;s just practical. I&#8217;m blogging this so that some day I find it when reading my old blog posts, just as I found the list in an old notebook.</p>
 <p>Techniques helpful in learning any skill:</p>
 <ul>
@@ -1202,9 +1202,9 @@ switched to db awesome-app-development</pre></div>
   
   <entry>
     <title type="html"><![CDATA[Presentation: LAMP vs. The World]]></title>
-    <link href="http://mathias.github.com/blog/2010/12/14/presentation-lamp-vs-the-world/"/>
+    <link href="http://blog.mattgauger.com/blog/2010/12/14/presentation-lamp-vs-the-world/"/>
     <updated>2010-12-14T00:00:00-06:00</updated>
-    <id>http://mathias.github.com/blog/2010/12/14/presentation-lamp-vs-the-world</id>
+    <id>http://blog.mattgauger.com/blog/2010/12/14/presentation-lamp-vs-the-world</id>
     <content type="html"><![CDATA[<strong style="display: block; margin: 12px 0 4px;"><a href="http://www.slideshare.net/mathiasx/matt-gauger-lamp-vs-the-world-mke-php-users-group-december-14-2010" title="Matt Gauger - Lamp vs. the world - MKE PHP Users Group - December 14, 2010 ">Matt Gauger - Lamp vs. the world - MKE PHP Users Group - December 14, 2010 </a></strong> 
 <object height="355" width="425">
 <param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=lampvs-theworld-101214192052-phpapp01&amp;stripped_title=matt-gauger-lamp-vs-the-world-mke-php-users-group-december-14-2010&amp;userName=mathiasx" />
@@ -1219,9 +1219,9 @@ switched to db awesome-app-development</pre></div>
   
   <entry>
     <title type="html"><![CDATA[Open URL from Terminal.app and the 'open' command]]></title>
-    <link href="http://mathias.github.com/blog/2010/12/12/open-url-from-terminal-app-and-the-open-command/"/>
+    <link href="http://blog.mattgauger.com/blog/2010/12/12/open-url-from-terminal-app-and-the-open-command/"/>
     <updated>2010-12-12T00:00:00-06:00</updated>
-    <id>http://mathias.github.com/blog/2010/12/12/open-url-from-terminal-app-and-the-open-command</id>
+    <id>http://blog.mattgauger.com/blog/2010/12/12/open-url-from-terminal-app-and-the-open-command</id>
     <content type="html"><![CDATA[<p>More and more as I blog, I find I like to post little tips, and beginners thank me for showing them something new, More advanced users may have simply overlooked whatever I&#8217;m sharing, so they can find it useful, too. So in that vein, I just reminded myself of a little Mac OSX Terminal.app trick I use all the time, and wanted to post it here.</p>
 <p>When you have a URL in Terminal.app, say in a README file you&#8217;re reading, or coming back from a dig/whois command, you can just right-click (option-click) on the URL and click Open URL. It&#8217;s fast, it works, and it saves me a few milliseconds of copy/pasting it. Awesomest trick ever? Not really. Useful? Definitely.</p>
 <p>[[posterous-content:GhDhggrykxnlvvnjjkAp]]</p>
@@ -1238,9 +1238,9 @@ banshee:diaspora mathiasx$ open /Applications/Google\ Chrome.app/</pre></div>
   
   <entry>
     <title type="html"><![CDATA[Git & Github: A Beginner's Guide]]></title>
-    <link href="http://mathias.github.com/blog/2010/12/10/git-github-a-beginner-s-guide/"/>
+    <link href="http://blog.mattgauger.com/blog/2010/12/10/git-github-a-beginner-s-guide/"/>
     <updated>2010-12-10T00:00:00-06:00</updated>
-    <id>http://mathias.github.com/blog/2010/12/10/git-github-a-beginner-s-guide</id>
+    <id>http://blog.mattgauger.com/blog/2010/12/10/git-github-a-beginner-s-guide</id>
     <content type="html"><![CDATA[<p>&nbsp;Let me start off by saying that this blog post isn&#8217;t going to introduce you to the&nbsp;intricacies&nbsp;of git. There is certainly a lot to be learned and a lot that I could write about branching, managing git servers, and any number of the git commands and ways to use them. I&#8217;ve linked to more resources where you can learn all of that at the bottom of this post.</p>
 <p>Instead, I&#8217;m going to focus on the beginner user, maybe someone that has never contributed to open source but wants to learn and wants to help out. They&#8217;re not interested in learning the in&#8217;s and out&#8217;s of every single command. They just want to <em>get stuff done</em>.</p>
 <p>It&#8217;s likely that a person would run into git for the first time by visiting <a href="https://github.com">Github</a>. There are a lot of big, popular open source projects hosted there. Too many to list here, in fact, but here&#8217;s a quick teaser: jQuery, scriptaculous, yui3, prototype, and mootools are all on Github. So are Ruby on Rails, Symfony, Django, web.py, and many other web app frameworks. The list goes on and on.</p>
@@ -1475,9 +1475,9 @@ $ git checkout HEAD init.php</pre></div>
   
   <entry>
     <title type="html"><![CDATA[What I'm doing in December]]></title>
-    <link href="http://mathias.github.com/blog/2010/12/01/what-i-m-doing-in-december/"/>
+    <link href="http://blog.mattgauger.com/blog/2010/12/01/what-i-m-doing-in-december/"/>
     <updated>2010-12-01T00:00:00-06:00</updated>
-    <id>http://mathias.github.com/blog/2010/12/01/what-i-m-doing-in-december</id>
+    <id>http://blog.mattgauger.com/blog/2010/12/01/what-i-m-doing-in-december</id>
     <content type="html"><![CDATA[<p>Aside from being really busy at work, I&#8217;ll be giving three talks at users groups in December. How did I end up agreeing to give three talks in one month? People heard me talking about some topic and they asked me to talk to their group on it. If asked, I&#8217;ll usually agree. I&#8217;m trying to tie them together thematically to make it a three-parter (and encourage people to come to all three meetups) so I&#8217;m calling the series:&nbsp;&#8216;Tis the Season to Write Web Apps, A Three Part Adventure.</p>
 <p>&nbsp;</p>
 <p><span style="font-size: large;">Development Tools: Git and Github (aka, &#8216;Tis the Season to Write Web Apps Part 1)</span></p>
@@ -1508,9 +1508,9 @@ $ git checkout HEAD init.php</pre></div>
   
   <entry>
     <title type="html"><![CDATA[/Library/Ruby/Site/1.8/rubygems.rb:779:in `report_activate_error': Could not find RubyGem railties (>= 0) (Gem::LoadError) ]]></title>
-    <link href="http://mathias.github.com/blog/2010/10/31/-library-ruby-site-1-8-rubygems-rb-779-in-report-activate-error-could-not-find-rubygem-railties-0-gem-loaderror-/"/>
+    <link href="http://blog.mattgauger.com/blog/2010/10/31/-library-ruby-site-1-8-rubygems-rb-779-in-report-activate-error-could-not-find-rubygem-railties-0-gem-loaderror-/"/>
     <updated>2010-10-31T00:00:00-05:00</updated>
-    <id>http://mathias.github.com/blog/2010/10/31/-library-ruby-site-1-8-rubygems-rb-779-in-report-activate-error-could-not-find-rubygem-railties-0-gem-loaderror-</id>
+    <id>http://blog.mattgauger.com/blog/2010/10/31/-library-ruby-site-1-8-rubygems-rb-779-in-report-activate-error-could-not-find-rubygem-railties-0-gem-loaderror-</id>
     <content type="html"><![CDATA[<p>I tend to blog things that I want to remember, but couldn&#8217;t find in one quick Google search.</p>
 <p>This is an error I got while starting the <a href="http://railstutorial.org/book">Rails Tutorial</a>, because I was using an old system (I counted about 160 gems installed) and starting to use <a href="http://rvm.beginrescueend.com/">rvm</a> for managing my Ruby installs, because the Rails Tutorial recommends it. I haven&#8217;t had this kind of issue before, because rails, gem, and ruby commands have all just worked out-of-the-box for me since Mac OS X 10.5 was released.</p>
 <p>When I tried to create a new Rails app, I got the error in the title of the blog post:</p>
@@ -1597,9 +1597,9 @@ minimite:railstutorial.org mathiasx$ rails new first_app
   
   <entry>
     <title type="html"><![CDATA[The Master's Word]]></title>
-    <link href="http://mathias.github.com/blog/2010/10/16/the-master-s-word/"/>
+    <link href="http://blog.mattgauger.com/blog/2010/10/16/the-master-s-word/"/>
     <updated>2010-10-16T00:00:00-05:00</updated>
-    <id>http://mathias.github.com/blog/2010/10/16/the-master-s-word</id>
+    <id>http://blog.mattgauger.com/blog/2010/10/16/the-master-s-word</id>
     <content type="html"><![CDATA[<p>Last night, at the opening of <a href="http://www.sector67.org/">Sector67</a>&nbsp;and during a discussion about human language, expression, and the limits thereof, I told a story I&#8217;ve read somewhere, but I cannot remember the source. My details on the story are quite fuzzy; I am quite sure it comes from an eastern oral tradition, but googling couldn&#8217;t help me. Further, I embellished the details to fit in with a story about kung fu, but this story could equally be a Buddhist Koan or something else. Any tips to where it came from would be highly helpful. Without further ado, here&#8217;s my version of the story:</p>
 <p>The Master had studied kung fu his entire life, and was widely regarded in the land as the best in the known world. He practiced alone in his mountaintop sanctuary for years, uninterrupted.</p>
 <p>A Challenger came, a young upstart who had defeated monks and warriors across the land with his kung fu. He was eager to defeat The Master and take his place as the world&#8217;s best. As he was undefeated, The Challenger prepared on his own, studying defenses against every form and developing his own offensive technique that he believed could not be countered.</p>
