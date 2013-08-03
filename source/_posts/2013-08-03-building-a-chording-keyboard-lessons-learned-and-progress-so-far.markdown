@@ -71,7 +71,7 @@ Sadly, while the Nostromo software can record macros of key press events (one ke
 
 ### mxk
 
-On Linux, there is a project called [mxk](http://welz.org.za/projects/mxk). `mxk` is basically a USB HID swiss army knife and HID event remixer, able to take input from any USB device, run it through various rules, and then output new USB HID events to the USB bus with a "virtual" USB HID device. Many example configuration scripts are provided, and one of the most common use seems to be to create a key press turns a QWERTY keyboard into a DVORAK keyboard and back again, without having to change the Linux system settings. It seemed promising.
+On Linux, there is a project called [mxk](http://welz.org.za/projects/mxk). `mxk` is basically a USB HID swiss army knife and HID event remixer, able to take input from any USB device, run it through various rules, and then output new USB HID events to the USB bus with a "virtual" USB HID device. Many example configuration scripts are provided, and one of the most common use seems to be to create a key press that turns a QWERTY keyboard into a DVORAK keyboard and back again, without having to change the Linux system settings. It seemed promising.
 
 `mxk` even indicated that it had support for two different kinds of chording: braille keyboard chording and a simpler chord-matching function.
 
