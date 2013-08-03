@@ -4,7 +4,7 @@
   <title><![CDATA[blog.mattgauger.com]]></title>
   <link href="http://blog.mattgauger.com/atom.xml" rel="self"/>
   <link href="http://blog.mattgauger.com/"/>
-  <updated>2013-08-03T13:41:25-05:00</updated>
+  <updated>2013-08-03T13:43:59-05:00</updated>
   <id>http://blog.mattgauger.com/</id>
   <author>
     <name><![CDATA[Matt Gauger]]></name>
@@ -90,7 +90,7 @@
 
 <h3>mxk</h3>
 
-<p>On Linux, there is a project called <a href="http://welz.org.za/projects/mxk">mxk</a>. <code>mxk</code> is basically a USB HID swiss army knife and HID event remixer, able to take input from any USB device, run it through various rules, and then output new USB HID events to the USB bus with a &#8220;virtual&#8221; USB HID device. Many example configuration scripts are provided, and one of the most common use seems to be to create a key press turns a QWERTY keyboard into a DVORAK keyboard and back again, without having to change the Linux system settings. It seemed promising.</p>
+<p>On Linux, there is a project called <a href="http://welz.org.za/projects/mxk">mxk</a>. <code>mxk</code> is basically a USB HID swiss army knife and HID event remixer, able to take input from any USB device, run it through various rules, and then output new USB HID events to the USB bus with a &#8220;virtual&#8221; USB HID device. Many example configuration scripts are provided, and one of the most common use seems to be to create a key press that turns a QWERTY keyboard into a DVORAK keyboard and back again, without having to change the Linux system settings. It seemed promising.</p>
 
 <p><code>mxk</code> even indicated that it had support for two different kinds of chording: braille keyboard chording and a simpler chord-matching function.</p>
 
