@@ -210,7 +210,7 @@
 
 <p>I used part of my Friday Growth Day at Bendyworks to start wiring up and coding the firmware for the Nostromo&#8217;s scroll wheel. The basic idea is that the mechanical encoder has two outputs. You monitor both lines on separate IO pins on the Teensy, and whichever IO line goes HIGH first is the direction of the scroll. With the Teensy&#8217;s convenient Mouse class, you can then just send a scroll event to the OS. In a matter of minutes, I had my scroll wheel scrolling web pages. Not bad.</p>
 
-<p>I&#8217;ll be implementing a variation on the sliding buffer for key events, so I will probably also use that code for holding scrolls (over a much shorter, separate buffer.)</p>
+<p>I&#8217;ll be implementing a variation on the sliding buffer for key events, so I will probably also use that code for handling scrolls (over a much shorter, separate buffer.)</p>
 
 <p>Since I was trying to understand the mechanical encoder and could only really connect alligator clips to one pin at a time, I wrote up a quick Arduino script to detect only one direction of scrolling. Here&#8217;s that code:</p>
 
@@ -221,7 +221,7 @@
 
 <p>Note that this does not implement a sliding buffer or direction detection.</p>
 
-<p>Eventually, I&#8217;d like to break my scroll wheel code out into an Arduino library that takes the two input pin numbers and a velocity as parameters to the constructor, and implements the scroll direction detection and sending the scroll event for you. But that will have to come later.</p>
+<p>Eventually, I&#8217;d like to break my scroll wheel code out into an Arduino library that takes the two input pin numbers and a velocity as parameters to the constructor, and implements the scroll direction detection. The library would send the scroll event for you based on the velocity you passed in. But that will have to come later.</p>
 
 <h3>Future work</h3>
 
