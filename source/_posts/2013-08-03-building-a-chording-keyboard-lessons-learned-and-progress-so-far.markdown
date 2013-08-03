@@ -177,7 +177,7 @@ I'll be blogging about each step of finishing this chording keyboard as I go. St
 
 I've got a lot of projects, and I put them down regularly to focus on something else. That list of projects continues to grow and grow. So I don't feel very guilty that I've put down this project for awhile and am just now picking it up again. I'm making good progress, and find it interesting rather than frustrating, so I will continue work on it.
 
-In truth, this project doesn't really represent much value outside of the things I'm learning as I go. I have no ambitions of turning this into a project, and while some people might find my notes here useful, I'm not trying to make a repeatable project here. Is it worth it? Definitely. Is it for everyone? Probably not.
+In truth, this project doesn't really represent much value outside of the things I'm learning as I go. I have no ambitions of turning this into a commercial product, and while some people might find my notes here useful, I'm not trying to make a repeatable project here. Is it worth it? Definitely. Is it for everyone? Probably not.
 
 One thing I'd like to do after completing this device is begin work on a custom computer. Specifically, I want to learn enough digital logic concepts to design a whole computer in a language like Verilog or vHDL, and then burn it into a FPGA board.
 
