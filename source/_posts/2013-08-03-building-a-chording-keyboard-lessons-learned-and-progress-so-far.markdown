@@ -57,7 +57,7 @@ _
 
 And lastly, I wanted to build a chording keyboard because it's cool, it's different, and because we frequently accept the paradigms handed to us in computing without really thinking about how we might improve or replace them.
 
-To understand chording keyboards best, it is worth noting that while regular keyboards detect the initial key being pressed down, a chording keyboard must detect when all of the keys in a chord are released simultaneously. Due to how fact electronics really are, no human could actually release all of the keys at exactly the same moment. For that reason, we need to implement chording in a way that takes time into account and looks to see if any chord pattern matches in the past n milliseconds.
+To understand chording keyboards best, it is worth noting that while regular keyboards detect the initial key being pressed down, a chording keyboard must detect when all of the keys in a chord are released simultaneously. Due to how fast electronics really are, no human could actually release all of the keys at exactly the same moment. For that reason, we need to implement chording in a way that takes time into account and looks to see if any chord pattern matches in the past n milliseconds.
 
 ## Brief project history
 
