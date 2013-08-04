@@ -4,7 +4,7 @@
   <title><![CDATA[blog.mattgauger.com]]></title>
   <link href="http://blog.mattgauger.com/atom.xml" rel="self"/>
   <link href="http://blog.mattgauger.com/"/>
-  <updated>2013-08-03T14:00:28-05:00</updated>
+  <updated>2013-08-03T19:29:40-05:00</updated>
   <id>http://blog.mattgauger.com/</id>
   <author>
     <name><![CDATA[Matt Gauger]]></name>
@@ -30,7 +30,7 @@
 
 <p>We recently built a project at Bendyworks that we call <a href="https://github.com/bendyworks/concert_cam">concert_cam</a>, which takes pictures at the <a href="http://www.liveonkingstreet.com/">Live on King Street concerts</a> outside our office. You can see a <a href="https://www.facebook.com/media/set/?set=a.180416672130576.1073741826.180178628821047&amp;type=3">gallery the pictures taken at the most recent concert</a> on Facebook. At some point I&#8217;ll blog about the <code>concert_cam</code> project and provide some lessons learned.</p>
 
-<p>But for now, I&#8217;d like to talk about a project I&#8217;ve been working on for awhile: a chording keyboard. I don&#8217;t have a clever name for it, so the code currently lives at <a href="https://github.com/mathias/chording">github.com/mathias/chording</a> and represents only some of the attempts I&#8217;ve made at getting it to work. (Code from several other attempts to code a chording keyboard died in a VMware Linux VM that ate its own disk image, and sadly I didn&#8217;t commit any of that code. Luckily, that code was mostly things I&#8217;d ruled out as possible solutions.)</p>
+<p>But for now, I&#8217;d like to talk about a project I&#8217;ve been working on for awhile: a chording keyboard. I don&#8217;t have a clever name for it, so the code currently lives at <a href="https://github.com/mathias/chording">github.com/mathias/chording</a>. The repo represents only some of the attempts I&#8217;ve made at getting it to work. (Code from several other attempts to code a chording keyboard died in a VMware Linux VM that ate its own disk image, and I didn&#8217;t commit any of that code. Luckily, that code was mostly things I&#8217;d ruled out as possible solutions.)</p>
 
 <p>Building a chording keyboard in software is not trivial, so I have moved on to building one purely in hardware.</p>
 
@@ -39,20 +39,20 @@
 
 <h2>Background information</h2>
 
-<p>USB devices like mice and keyboards that we use for input implement something called USB HID, for Human Interface Device. Linux, Mac OSX and other operating systems have supported USB HID for a long time.</p>
+<p>USB devices that we use for input, like mice and keyboards, implement something called USB HID, for Human Interface Device. Linux, Mac OSX and other operating systems have supported USB HID for a long time.</p>
 
 <p>To build a chording keyboard that can work on any computer without special software installed, the device will have to implement USB HID and send the correct key events for a given chord.</p>
 
 <p>There are lots of chording keyboard projects and commercial products out there. To name just a few:</p>
 
 <ul>
-<li>The <a href="http://en.wikipedia.org/wiki/Microwriter">Microwriter</a>, which loper-os.org discusses in the essay <a href="http://www.loper-os.org/?p=861">Engelbart&#8217;s Violin</a>, and also <a href="http://www.loper-os.org/?p=1066">covered reverse-engineering</a>.</li>
-<li>The <a href="http://www.handykey.com/">twiddler</a>, which is commercially available. I have used my coworker <a href="http://sencjw.com/">Chris</a>&#8217;s twiddler quite a bit, but couldn&#8217;t get over the TV-remote-control ergonomics</li>
+<li>The <a href="http://en.wikipedia.org/wiki/Microwriter">Microwriter</a>, which the author of loper-os.org discusses in the essay <a href="http://www.loper-os.org/?p=861">Engelbart&#8217;s Violin</a>, and also <a href="http://www.loper-os.org/?p=1066">covered reverse-engineering</a>.</li>
+<li>The <a href="http://www.handykey.com/">twiddler</a>, which is commercially available. I have used my coworker <a href="http://sencjw.com/">Chris</a>&#8217;s twiddler quite a bit, but couldn&#8217;t get over the TV-remote-control ergonomics.</li>
 <li>The <a href="http://rhodesmill.org/brandon/projects/tabspace-guide.pdf">tabspace layout for the twidder</a> (PDF link), which is an optimized key map layout for Twiddler.</li>
-<li>The <a href="http://wearcam.org/septambic/">septambic keyer</a> by Steve Mann</li>
-<li>The <a href="http://chordite.com/">chordite</a> keyboard</li>
-<li>The <a href="http://symlink.dk/projects/spiffchorder/">spaceman spiff layout / spiffchorder project</a></li>
-<li>The <a href="http://gkos.com/gkos/index-gkos-com.html">gkos</a> project to create a software chording keyboard for smartphones</li>
+<li>The <a href="http://wearcam.org/septambic/">septambic keyer</a> by Steve Mann.</li>
+<li>The <a href="http://chordite.com/">chordite</a> keyboard.</li>
+<li>The <a href="http://symlink.dk/projects/spiffchorder/">spaceman spiff layout / spiffchorder project</a>.</li>
+<li>The <a href="http://gkos.com/gkos/index-gkos-com.html">gkos</a> project to create a software chording keyboard for smartphones.</li>
 </ul>
 
 
@@ -60,21 +60,27 @@
 
 <p>Why a chording keyboard, you might ask?</p>
 
-<p>Well, I spend most of my work day editing text. While I am quite proficient at vim and slowly getting better at emacs, the kinds of key combos that a professional programmer uses daily are quite complex. There is a constant risk of RSI or carpal tunnel (which plagued me in my teens, but luckily I have been free of for over a decade.)</p>
+<p>Well, I spend most of my work day editing text. While I am quite proficient at vim and slowly getting better at emacs, the kinds of key combos that a professional programmer uses daily are quite complex. There is a constant risk of RSI or carpal tunnel (which plagued me in my teens, but I have been free of for over a decade.)</p>
 
 <p>With a chording keyboard, one could take a common key combo that you use all the time and put it under a much easier-to-type chord. This becomes especially attractive to me in replacing some of the key-combos required for operating emacs (especially those that use alt.)</p>
 
-<p>I dreamed of a way of being able to record programming language keywords and idioms as macros, as well as a way to type faster. Since I haven&#8217;t found any way to train myself to type QWERTY faster, I started to look at alternatives. Learning Dvorak or Colemak might help, but it still doesn&#8217;t get me away from the legacy typewriter keyboard. And, learning those alternative layouts doesn&#8217;t get me to the point where I can type out an entire block of code at once. For example, I might want to map a key to output something I frequently type, such as a Javascript anonymous function and leave the cursor in the function body, ready to be filled in: (where the underscore is the cursor position)</p>
+<p>Of course, such a device isn&#8217;t designed to completely replace having a keyboard on the desk. Even with a lot of practice, the reality is that I&#8217;ll probably continue to be faster at typing words on QWERTY. But having a chording keyboard off the left side, and a mouse on the right, seems to make sense. I am, after all, a software craftsman, and if I feel like I need to build a particular tool (even a physical piece of hardware) to augment my current toolbox, then it makes sense to do it.</p>
+
+<p>For a long time, I have dreamed of a way of being able to record programming language keywords and idioms as macros, as well as methods to type faster. Since I haven&#8217;t found any way to train myself to type QWERTY faster, I started to look at alternatives. Learning Dvorak or Colemak might help, but it still doesn&#8217;t get me away from the legacy typewriter keyboard design.</p>
+
+<p>And still, those alternative layouts doesn&#8217;t get me to the point where I can type out an entire block of code at once. For example, I might want to map a key to output something I frequently type, such as a Javascript anonymous function. Knowing which editor I&#8217;m in, I could have the keyboard leave the cursor in the function body, ready to be filled in:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>function() {
-</span><span class='line'>_
+</span><span class='line'>  _
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
-<p>And lastly, I wanted to build a chording keyboard because it&#8217;s cool, it&#8217;s different, and because we frequently accept the paradigms handed to us in computing without really thinking about how we might improve or replace them.</p>
+<p>(where the underscore shown is the cursor position)</p>
+
+<p>And lastly, I wanted to build a chording keyboard because it&#8217;s cool, it&#8217;s different, and because <strong>we frequently accept the paradigms handed to us in computing without really thinking about how we might improve or replace them.</strong></p>
 
 <p>To understand chording keyboards best, it is worth noting that while regular keyboards detect the initial key being pressed down, a chording keyboard must detect when all of the keys in a chord are released simultaneously. Due to how fast electronics really are, no human could actually release all of the keys at exactly the same moment. For that reason, we need to implement chording in a way that takes time into account and looks to see if any chord pattern matches in the past n milliseconds.</p>
 
@@ -84,9 +90,11 @@
 
 <p><img src="http://blog.mattgauger.com/images/razer_nostromo.jpg" alt="Razer Nostromo" /></p>
 
-<p>Other features the Nostromo had over other devices were supporting <a href="http://en.wikipedia.org/wiki/Rollover_(key)#n-key_rollover">N-key rollover</a> &mdash; basically, the ability for the keyboard to know that multiple keys are being pressed at once, and send all of those keys to the computer &mdash; as well as a little 4-way directional pad, and blue lights (always a plus!) The Nostromo also comes with a piece of software that you can install and remap the key mappings with. The device can operate without the software, and store many different &#8216;modes&#8217; of key mappings and macros. The current mode is indicated by three LEDs near the thumb, which count up in binary, yielding 8 key maps.</p>
+<p>Other features the Nostromo had over other devices were supporting <a href="http://en.wikipedia.org/wiki/Rollover_(key)#n-key_rollover">N-key rollover</a> &mdash; basically, the ability for the keyboard to know that multiple keys are being pressed at once, and send all of those keys to the computer &mdash; as well as a little 4-way directional pad, and blue lights (always a plus!)</p>
 
-<p>Sadly, while the Nostromo software can record macros of key press events (one key event on the Nostromo presses a sequence of buttons for you, for example, to macro a complicated action in a game), it did not support detecting a chord (multiple key presses simultaneously) into a single key event. So with that limitation in mind, I set about trying to write code to detect chords and turn them into key presses in software rather than at the hardware layer.</p>
+<p>The Nostromo also comes with a piece of software that you can install and remap the key mappings with. The key mappings get saved onto the device, meaning the device can operate without the software. The current mode is indicated by three LEDs near the thumb, which count up in binary, yielding 8 key maps. Additionally, any of the keys can trigger a pre-recorded macro of many key events.</p>
+
+<p>Sadly, while the Nostromo software can have one key press trigger a sequence of buttons for you, for example, to macro a complicated action in a game, it did not support detecting a chord (multiple key presses simultaneously) into a single key event. So with that limitation in mind, I set about trying to write code to detect chords and turn them into key presses in software rather than at the hardware layer.</p>
 
 <h3>mxk</h3>
 
@@ -96,11 +104,11 @@
 
 <p>After banging my head against its confusing configuration syntax for about 2 weeks, I determined that <code>mxk</code> just couldn&#8217;t do what I wanted. Two issues cropped up: in the braille chording function, only one row of keys was supported and two hands were assumed. (Basically, it wanted ASDF and JKL; keys to form chords, and didn&#8217;t support anything else.)</p>
 
-<p>The regular chording functionality seemed like it might work, until I ran into a huge, glaring issue: A key used in one chord couldn&#8217;t be used in another. For example, let&#8217;s say I&#8217;m mapping keys for the left hand on a QWERTY keyboard to be used in a chord. So I might have a chord like RE which maps to &#8216;a&#8217; and another chord like FE that maps to &#8216;k&#8217;. The E used in both chords didn&#8217;t work in MXK. It simply couldn&#8217;t support it and could only watch for unique chords. This limits the key map for a chording keyboard made of a 12-key grid from some 495 combinations to 12, gaining us nothing since individual key presses are just as efficient.</p>
+<p>The regular chording functionality seemed like it might work, until I ran into a huge, glaring issue: A key used in one chord couldn&#8217;t be used in another. For example, let&#8217;s say I&#8217;m mapping keys for the left hand on a QWERTY keyboard to be used in a chord. So I might have a chord like RE which maps to &#8216;a&#8217; and another chord like FE that maps to &#8216;k&#8217;. The E used in both chords didn&#8217;t work in <code>mxk</code>. It simply couldn&#8217;t support it; it could only watch for unique chords. This limits the key map for a chording keyboard made of a 12-key grid from some 495 combinations to 12, gaining us nothing since individual key presses are just as efficient.</p>
 
-<p>With these limitations discovered, I tried to hack the code for <code>mxk</code> to support my use case better. But, I don&#8217;t have much in the way of C chops when it comes to device drivers and pointers, and implementing code against Linux&#8217;s libHID is kind of a pain. Further, the mxk source isn&#8217;t very well documented outside of very few comments littered around the code, and I found libHID&#8217;s docs unapproachable.</p>
+<p>With these limitations discovered, I tried to hack the code for <code>mxk</code> to support my use case better. But, I don&#8217;t have much in the way of C chops when it comes to device drivers and pointers, and implementing code against Linux&#8217;s libHID is kind of a pain. Further, the <code>mxk</code> source isn&#8217;t very well documented, outside of very few comments littered around the code. Additionally, I found libHID&#8217;s docs unapproachable.</p>
 
-<p>I realized that I was <strong>working at the wrong abstraction level</strong>, like so many projects that had frustrated me before. So I decided to move up to something a little higher level, with the hope that someone else had figured out the headaches of low-level libHID implementation. There are many high level libraries built on libHID, but since there isn&#8217;t a whole lot of need for that, they tend to be abandoned, very old, simplistic, or all of the above. I also was frustrated that my attempts so far would lock me into only using a Linux machine, as my normal work environment at Bendyworks is Mac OSX, and we pair all of the time, so I would not be able to use my chording keyboard for work.</p>
+<p>I realized that I was <strong>working at the wrong abstraction level</strong>, like so many projects that had frustrated me before. So I decided to move up to something at a higher level, with the hope that someone else had figured out the headaches of low-level libHID implementation. There are many high level libraries built on libHID. But since there isn&#8217;t a whole lot of need for them in most computing, they tend to be abandoned, very old, simplistic, or all of the above. I also was frustrated that my attempts so far would lock me into only using a Linux machine, as my normal work environment at Bendyworks is Mac OSX. We pair all of the time, so I would not be able to use my chording keyboard whenenver I paired with someone else.</p>
 
 <h3>Plover</h3>
 
@@ -193,7 +201,7 @@
 <img src="http://blog.mattgauger.com/images/sparkfun_joystick.jpg" alt="Sparkfun thumb joystick" />
 </a></p>
 
-<p>With this joystick, I&#8217;d be able to implement either mouse movements or arrow key movements, and could probably toggle which it behaves like with the small button located above the directional pad. However, securely mounting the joystick into the Nostromo case so that it is durable might prove an issue, so I&#8217;ve put off making this decision until I have successfully hacked the mechanical switches in.</p>
+<p>With this joystick, I&#8217;d be able to implement either mouse movements or arrow key movements, and could probably toggle which it behaves like with the small button located above the directional pad. However, securely mounting the joystick into the Nostromo case so that it is durable might prove an issue. I&#8217;ve put off making this decision until I have successfully hacked the mechanical switches in.</p>
 
 <p>I&#8217;ll be blogging about each step of finishing this chording keyboard as I go. Stay tuned for the next post about installing up the key switches and wiring them to the Teensy.</p>
 
@@ -201,9 +209,9 @@
 
 <p>I&#8217;ve got a lot of projects, and I put them down regularly to focus on something else. That list of projects continues to grow and grow. So I don&#8217;t feel very guilty that I&#8217;ve put down this project for awhile and am just now picking it up again. I&#8217;m making good progress, and find it interesting rather than frustrating, so I will continue work on it.</p>
 
-<p>In truth, this project doesn&#8217;t really represent much value outside of the things I&#8217;m learning as I go. I have no ambitions of turning this into a commercial product, and while some people might find my notes here useful, I&#8217;m not trying to make a repeatable project here. Is it worth it? Definitely. Is it for everyone? Probably not.</p>
+<p>In truth, this project doesn&#8217;t really represent much value outside of the things I&#8217;m learning as I go. I have no ambitions of turning this into a commercial product, and while some people might find my notes here useful, I&#8217;m not trying to make a repeatable project that others can build part-for-part. Is it worth it? Definitely. Is it for everyone? Probably not.</p>
 
-<p>One thing I&#8217;d like to do after completing this device is begin work on a custom computer. Specifically, I want to learn enough digital logic concepts to design a whole computer in a language like Verilog or vHDL, and then burn it into a FPGA board.</p>
+<p>One thing I&#8217;d like to do after completing this device is begin work on a custom computer. Specifically, I want to learn enough digital logic concepts to design a whole computer in a language like Verilog or VHDL, and then burn the design into a FPGA board.</p>
 
 <p>Such a computer would <strong>not</strong> be intended to compete with your Core i7 quad core &#8211; I&#8217;m thinking of implementing a unique architecture with the overall processing capability of something like an early 80&#8217;s microcomputer. It would be interesting, but not entirely useful for day-to-day computing.</p>
 
