@@ -1,0 +1,221 @@
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>A simple text editor foot pedal - blog.mattgauger.com</title>
+    <meta name="author" content="Matt Gauger">
+
+    
+    <meta name="description" content="A Simple Text Editor Foot Pedal When I first starting talking about building a chording keyboard, both in person and online, people began to ask me &hellip;">
+    
+
+    <link href="/atom.xml" rel="alternate" title="blog.mattgauger.com" type="application/atom+xml">
+    <link rel="canonical" href="">
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+
+</head>
+
+
+<body>
+  <header class="inner"><div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+      </a>
+
+      <a href="/" class="brand">blog.mattgauger.com</a>
+
+      <div class="nav-collapse">
+        <nav class="menu left"><ul class="nav">
+  <li><a href="/about">About</a></li>
+  <li><a href="/blog/archives">Blog Archives</a></li>
+  
+  <li class="divider-vertical"></li>
+  <li><a class="rss" href="/atom.xml" title="RSS">RSS</a></li>
+  
+</ul>
+</nav>
+        <div class="right">
+          <form class="navbar-search pull-right" action="http://google.com/search" method="get">
+            <input class="input-medium search-query span2" type="text" name="q" results="0" placeholder="Search">
+            <input type="hidden" name="q" value="site:blog.mattgauger.com">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+  <div class="container bottom-left-rounded-corner bottom-right-rounded-corner" id="page-container">
+    <div class="row">
+  <div class="span8 offset2" id="content">
+    <article class="post">
+    <h1 class="title">A Simple Text Editor Foot Pedal</h1>
+    <div class="entry"><p>When I first starting talking about <a href="/blog/2013/08/03/building-a-chording-keyboard-lessons-learned-and-progress-so-far/">building a chording keyboard</a>, both in person and online, people began to ask me about the possibility of building a computer foot pedal. With the Teensy microcontroller, a foot pedal would only need to watch a single digital input and output a few characters to the OS; much simpler than my chording keyboard project.</p>
+
+<h2>Commercial products</h2>
+
+<p>There are quite a few commercial products you can buy. They come with their own caveats:</p>
+
+<ul>
+<li><a href="http://www.kinesis-ergo.com/fs-savant-elite.htm">Kinesis</a> makes several, but they <a href="http://www.kinesis-ergo.com/fs-elite-single-compatibility.htm">can only be programmed on Windows</a>. They are also very expensive.</li>
+<li>The <a href="http://www.xkeys.com/xkeys/xkfoot.php">Xkeys Foot Pedals</a> look good, but they are also expensive.</li>
+<li>The DealExtreme <a href="http://dx.com/p/usb-triple-action-foot-switch-keyboard-control-foot-pedal-56508">Triple Action Foot Pedal</a> provides three buttons and is relatively cheap; however, the reviews I&#8217;ve read say the reliably is poor. This product can only be programmed on Windows.</li>
+</ul>
+
+
+<h2>Building the foot pedal</h2>
+
+<p>My first idea for a foot pedal was to use DIY guitar pedal hardware. Such guitar pedals have nice, sturdy aluminum project boxes, robust foot switches, and look pretty good. But the ergonomics of such a pedal worried me: while a guitarist momentarily stomps on guitar pedals to turn them on or off while standing, a programmer would likely be tapping and/or holding a foot pedal for long periods of time, most likely from a seated position.</p>
+
+<p><img src="/images/guitar_pedal_true_bypass_looper.JPG" alt="true bypass looper" style="display: block; margin: 0 auto;" /></p>
+
+<p>Such a pedal would look something like the above, but with a USB cable coming out of it.  If you wish to use guitar pedal hardware, I suggest checking out <a href="http://www.mammothelectronics.com/">Mammoth Electronics</a>. (I receive no compensation for mentioning them; I have been a happy customer for several years.) For a two-to-three switch foot pedal, I suggest the 1590BB enclosures, and Mammoth can drill them in several ways for you.</p>
+
+<p>My coworker <a href="http://sencjw.com/">Chris Wilson</a> suggested that I try a digital piano foot switch. These are relatively cheap and extremely sturdy. I picked up an <a href="http://www.amazon.com/M-Audio-Sustain-Pedal-Action-Keyboards/dp/B00063678K/">M-Audio Sustain Pedal</a> from Amazon for about $17.</p>
+
+<p>The sustain pedal is designed to plug into a digital piano, so it has a 1/4&#8221; audio plug on its cable. In the past, I&#8217;ve built a lot of guitar effects pedals and some amps, and so I have a lot of 1/4&#8221; jacks around.</p>
+
+<p>The wiring is simple: The Teensy (and most Arduinos) can do input pullup resistors for us. I mocked up the circuit with a little breadboard (ignore the weird angle of the Teensy here; it was required to get the pins into this small breadboard.) I downloaded some example button code to the Teensy and verified that it was working.</p>
+
+<p><a href="http://www.flickr.com/photos/mattgauger/9454682228/" title="IMG_1897 by Matt Gauger, on Flickr"><img src="http://farm4.staticflickr.com/3725/9454682228_4bb073ea47_z.jpg" width="480" height="640" alt="IMG_1897" style="display: block; margin: 0 auto;" /></a></p>
+
+<p>To assemble, we simply solder a digital IO pin to one side of the 1/4&#8221; jack, and the other wire gets soldered to ground pin. My button is going to be connected on pin 9.</p>
+
+<p>I had a small project box, much bigger than the Teensy really needed, but suitable for the job. I used my Dremel to cut a round hole for the 1/4&#8221; jack, and a rectangular slightly bigger than the mini-USB cable plug for our USB cable.</p>
+
+<p><a href="http://www.flickr.com/photos/mattgauger/9451903305/" title="IMG_1898 by Matt Gauger, on Flickr"><img src="http://farm4.staticflickr.com/3789/9451903305_4c6a3e0c35_z.jpg" width="480" height="640" alt="IMG_1898" style="display: block; margin: 0 auto;" /></a></p>
+
+<p>Test fitting the Teensy in the project box:</p>
+
+<p><a href="http://www.flickr.com/photos/mattgauger/9451906889/" title="IMG_1900 by Matt Gauger, on Flickr"><img src="http://farm4.staticflickr.com/3718/9451906889_8e5624fa7d_z.jpg" width="640" height="480" alt="IMG_1900" style="display: block; margin: 0 auto;" /></a></p>
+
+<p>Lastly, I used some velcro inside to attach the Teensy to the project box. All done with assembly!</p>
+
+<p><a href="http://www.flickr.com/photos/mattgauger/9451907469/" title="IMG_1902 by Matt Gauger, on Flickr"><img src="http://farm8.staticflickr.com/7451/9451907469_e6e6fc661f_z.jpg" width="480" height="640" alt="IMG_1902" style="display: block; margin: 0 auto;" /></a></p>
+
+<p>The next step is to program the Teensy to send the key events we want. In this case, my coworker <a href="https://twitter.com/inyourdom">Josh</a> suggested a vim clutch that enters insert mode when you press down on the pedal, and leaves insert mode when you release it. Since the Teensy&#8217;s Button class detects both button press and button release events, we can write code to do that.</p>
+
+<p>Here&#8217;s what the code looks like:</p>
+
+<script src="https://gist.github.com/mathias/6168386.js"></script>
+
+
+<p>(You can find the code in my chording keyboard repo on Github <a href="https://github.com/mathias/chording/blob/master/teensy/foot_pedal/foot_pedal.ino">here</a>.)</p>
+
+<p>There are, of course, a few gotchas that I ran into:</p>
+
+<p>The <code>KEY_ESC</code> constant that is referenced by the <a href="http://arduino.cc/en/Reference/KeyboardModifiers">Arduino documentation</a> didn&#8217;t work. Similarly, sending the hex value and character code didn&#8217;t work. I couldn&#8217;t find anything online that suggested that the Mac has some different ASCII character for the Escape key, so I had to find another way to leave insert mode.</p>
+
+<p>With the Arduino&#8217;s Keyboard class, we can build up a key combo by calling <code>Keyboard.press</code> for each character in the combo, and then finally calling <code>Keyboard.releaseAll</code> when we&#8217;re ready to send the key combo to the computer. Since vim also has <code>Ctrl-[</code> as a way of leaving insert mode, I created that key combo on lines 34-36.</p>
+
+<p>Of course, this code could be made to be even more robust by guarding against, say, inserting an <code>i</code> character when you are already in insert mode. Most likely, you&#8217;d send Ctrl-[ (and move building the key combo to a function we can reuse) and then send vim the command <code>:startinsert</code>.  I&#8217;ll leave implementing the more robust solution as an exercise for the reader.</p>
+
+<h2>Final thoughts</h2>
+
+<p>Does it work? I used it while writing this blog post, but I must admit, I have a strong natural reflex to hit ESC to leave insert as soon as I finish typing a word or sentence. However, when consciously trying, it is quite natural to use the foot pedal to enter/leave insert mode. One downside I found was that the Ctrl-[ combo seems to back up the cursor one character, which can be annoying.</p>
+
+<p>For my personal use, I am thinking about mapping the key it sends to <code>Left-Alt</code> so that I can use the footpedal while in emacs&#8217; Org Mode and not have to move my left hand down to hit Alt with my ring finger every time I want to adjust a heading or start a new heading.</p>
+
+<p>Overall, this pedal is much cheaper than the high-end pedals mentioned above. The total cost came to around $37, because I had some of the parts on hand. Further, you can upload new code to the Teensy on all operating systems, a big win over the Windows-only pedals above.</p>
+
+<p>However, this pedal only has one foot switch. You could easily add more M-Audio sustain pedals to the design, and keep adding 1/4&#8221; jacks to a project box. The Teensy has plenty more IO lines to use! Or you could go for it all in one enclosure with the guitar pedal hardware.</p>
+
+<p><a href="http://www.flickr.com/photos/mattgauger/9451908041/" title="IMG_1903 by Matt Gauger, on Flickr"><img src="http://farm4.staticflickr.com/3780/9451908041_c8446aa3e7_z.jpg" width="480" height="640" alt="IMG_1903" style="display: block; margin: 0 auto;" /></a></p>
+
+<hr />
+
+<p>If you have any questions or comments, I&#8217;d love to hear about it over on Twitter, where I am <a href="https://twitter.com/mathiasx">@mathiasx</a>.</p>
+
+<h3>Research:</h3>
+
+<ul>
+<li><a href="http://hackaday.com/2012/06/21/building-a-clutch-for-vim/">Hackaday: Building a clutch for vim</a></li>
+<li><a href="http://arduino.cc/en/Reference/KeyboardModifiers">Arduino Keyboard modifiers</a></li>
+<li><a href="http://www.emacswiki.org/emacs/FootSwitches">Emacs Wiki: Foot Swtiches</a></li>
+</ul>
+
+</div>
+
+    <div class="meta">
+        <div class="author">
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
+</div>
+        <div class="date">
+
+
+
+
+
+
+
+
+
+
+
+
+<time datetime="2013-08-06T15:06:00-05:00" pubdate  data-updated="true" >Aug 6<span>th</span>, 2013</time>.</div>
+        <div class="tags">
+
+</div>
+    </div>
+</article>
+  </div>
+</div>
+
+    <hr />
+	  <footer class="footer"><div class="row">
+  <div class="offset2 span2">
+    <img src="/images/mathiasx.jpg" alt="portrait">
+  </div>
+  <div class="span3">
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/StillImage" property="dct:title" rel="dct:type">mathias.github.com</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://mathias.github.com" property="cc:attributionName" rel="cc:attributionURL">Matt Gauger</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.<br />
+
+  </div>
+  <div class="offset1 span3">
+    <ul class="nav nav-list">
+      <li><a href="https://twitter.com/mathiasx">Twitter</a></li>
+      <li><a href="https://github.com/mathias">Github</a></li>
+      <li><a href="http://www.slideshare.net/mathiasx">Talks</a></li>
+      <li><a href="http://hackz0r.tumblr.com">Tumblog</a></li>
+      <li><a href="/atom.xml">Atom feed</a></li>
+    </ul>
+  </div>
+</div>
+</footer>
+  </div>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script src="/javascripts/bootstrap-alert.js"></script>
+<script src="/javascripts/bootstrap-button.js"></script>
+<script src="/javascripts/bootstrap-collapse.js"></script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-38944731-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>
