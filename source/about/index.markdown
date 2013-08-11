@@ -2,9 +2,7 @@
 layout: page
 title: "About"
 date: 2012-03-16 21:06
-comments: true
-footer: true
---- 
+---
 
 I'm a software developer at [Bendyworks](http://bendyworks.com).
 
