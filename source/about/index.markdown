@@ -8,7 +8,7 @@ I'm a software developer at [Bendyworks](http://bendyworks.com) located in Madis
 
 I like to use the following things: Ruby, CoffeeScript, Rails, Git, vim, and *nix.
 
-I am learning: Clojure, Common Lisp, emacs, and guitar.
+I am learning: ClojureScript, Clojure, Common Lisp, emacs, and guitar.
 
 My open source code is online at [github.com/mathias](https://github.com/mathias)
 
@@ -21,11 +21,12 @@ I want to help teach the world to code. And build lots of robots.
 
 ### My Open Source Projects
 
+* [hum](https://github.com/mathias/hum): A Web Audio API wrapper for ClojureScript.
+* [ecstatic](https://github.com/mathias/ecstatic): a static site generator with modern Ruby tooling. Finally released!
 * [mathias/dotfiles](https://github.com/mathias/dotfiles): My dotfiles collection. Reasonable defaults that I prefer.
 * [mathias/chording](https://github.com/mathias/chording): My chording keyboard project. Firmware and plans.
 * [riffraffle](https://github.com/mathias/riffraffle) A simple Rails-based Ember app for running conference raffles. Extracted from [snow_mobile_raffle](https://github.com/mathias/snow_mobile_raffle)
 * [sms_my_bus](https://github.com/mathias/sms_my_bus): a Ruby gem to interface with Madison's SMS My Bus API.
-* [ecstatic](https://github.com/mathias/ecstatic): a still incomplete static site generator with modern Ruby tooling.
 * [gates_of_moria](https://github.com/mathias/gates_of_moria): A simple adventure game to teach the player basic Ruby.
 * [zoo_pass](https://github.com/mathias/zoo_pass): a cute little phrase generator for non-secure things.
 
