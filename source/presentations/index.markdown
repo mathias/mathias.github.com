@@ -4,6 +4,7 @@ title: "Presentations"
 date: 2013-08-11 16:12
 ---
 
+* [Apprenticeship: Software Craftsmanship's Missing Link](http://blog.mattgauger.com/apprenticeship/) - September 2013 for [Nickel City Ruby](http://nickelcityruby.com/) - ([Talk Video](http://confreaks.com/videos/2690-nickelcityruby2013-software-craftsmanship-s-missing-link-apprenticeship))
 * [Consulting is hard: Part 1](http://blog.mattgauger.com/consulting_is_hard_part_1/) - July 2013 for Bendyworks (internal)
 * [ember-rails hands-on intro](http://blog.mattgauger.com/madrailers-ember-rails) - May 2013 for Mad Railers
 * [JavaScript Basic Syntax](https://github.com/mathias/madjs_talk_2013_04_08) - April 2013 for MadJS (just JavaScript files)
