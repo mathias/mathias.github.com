@@ -32,6 +32,8 @@ I want to help teach the world to code. And build lots of robots.
 
 ### Open Source Contributions
 
+* emacs-live: [https://github.com/overtone/emacs-live](https://github.com/overtone/emacs-live)
+* rm-hull / monet: [https://github.com/rm-hull/monet](https://github.com/rm-hull/monet)
 * styleguide_rails: [https://github.com/begriffs/styleguide_rails](https://github.com/begriffs/styleguide_rails)
 * rylnd's pair script: [https://github.com/rylnd/dotfiles](https://github.com/rylnd/dotfiles)
 * The Sapling Events conferences websites: [https://github.com/SaplingEvents](https://github.com/SaplingEvents)
