@@ -108,85 +108,6 @@
 
   <article class="post">
     
-    <h1 class="title"><a href="/blog/2013/08/12/unit-testing-the-arduino-with-greatest/">Unit Testing the Arduino With Greatest</a></h1>
-    <div class="entry">
-        <p>When I write code for work, we often write unit tests and other types of tests first for a small piece of functionality, then implement that functionality, making the tests pass. And then we iterate. This is known as test-driven development. Tests can be written after the fact, too, and they are just as valuable. A suite of tests helps to ensure that behavior doesn&#8217;t change when unrelated code changes, and that we don&#8217;t introduce regressions in behavior by trying to add new functionality to our existing code.</p>
-
-<p>Unit tests test specific functionality of code, in something of a vacuum. That is, with unit tests, we don&#8217;t want to test the code&#8217;s integration with other pieces of code, but merely its own behavior. Its inputs and outputs, and how it handles those inputs and outputs. One way to think about it is that we&#8217;re going to perform an experiment. Our hypothesis is that this small piece of code, usually a single function or method, behaves the way we believe it does. To confirm or deny that hypothesis, we put the piece of code under a test that holds all variables fairly constant and allow one independent variable for the functionality we&#8217;re testing. Whether or not that one factor behaves as we expected is the unit test.</p>
-
-<p>When we write code for the Arduino, it is usually very simple. Let&#8217;s look at Blink example code that ships on most Arduinos:</p>
-
-<script src="https://gist.github.com/mathias/6217579.js"></script>
-
-
-<p>As you can see, there&#8217;s three pieces to an Arduino program: creating globals like the <code>ledPin</code> variable, the <code>setup</code> function, and the <code>loop</code> function. And that&#8217;s all there is to most Arduino programs. Notice that the <code>loop</code> function in particular is quite imperative: it&#8217;s going to loop forever, and we specify one thing, then the next, etc. that will be run.</p>
-
-<p>This style of programming Arduinos seems comfortable to a lot of people, and for simple functionality, it is acceptable. To test it, simply upload the code to the Arduino and observe the results. Since all this does is blink an LED, it is fairly easy to verify.</p>
-
-<p>As complexity of an Arduino program grows, however, I like to split out the steps that go into each tick of the <code>loop</code> function into separate functions, and often, split out functions from <code>setup</code> as well for each piece of hardware.</p>
-
-<p>An imaginary Arduino program for a robot might look something like:</p>
-
-<script src="https://gist.github.com/mathias/6217621.js"></script>
-
-
-<p>Assuming all of the functions like <code>setup_sonars()</code>, <code>check_sonar()</code>, <code>choose_direction()</code> and <code>move()</code> were all defined and worked the way we expected, then this is an improvement in showing the intent of the code. We can glance at the <code>setup</code> and <code>loop</code> part of the code and understand how the robot is supposed to behave. There&#8217;s some implicit state that is being used behind the scenes here to allow the decision made in <code>choose_direction</code> to influence <code>move</code>, but we can get to that later. Of course, the bulk of the Arduino sketch above would still be in there, it would just be encapsulated in those functions that get called.</p>
-
-<p>So what happens when we our Arduino sketch gets complex enough that we cannot easily verify that everything we have written behaves as expected? Not all code that you might want to run on an Arduino is suited to the verify, upload, and then manually test pattern that one does with simple Arduino sketches.</p>
-
-<p>I turned to unit testing because that is one of the best tools in my toolbox. By introducing an unit testing flow to the development of Arduino sketches, I can verify more logic before uploading code to the Arduino, and verify that existing functionality continues to function after I begin adding more features.</p>
-
-<p>On <a href="http://blog.mattgauger.com/blog/2013/08/03/building-a-chording-keyboard-lessons-learned-and-progress-so-far/">my chording keyboard project</a>, the code is quickly growing beyond what can reasonably be written in a simple Arduino <code>loop()</code> function. The scroll wheel alone has 3 pins for input, 1 for output (an LED), and sends mouse signals to the host OS. And, it must do this while the rest of the keyboard deals with a sliding buffer for matching chord patterns and while different modes come into play that affect other parts of the keyboard&#8217;s behavior. Suffice to say, I want to extract and simplify the scroll wheel&#8217;s code and verify that it works. Then, I can move on to other pieces and be reasonably sure that the scroll wheel will continue to function.</p>
-
-<p>But the whole scroll wheel might be a little too big for this blog post. So let&#8217;s just focus on the pushbutton and the LED, and let&#8217;s say that when the pushbutton is pressed, we want to send the middle-click signal to the OS, as well as flash the LED on and off quickly. Not overly complex behavior, but it is enough for us to work with for the purposes of this blog post. Here&#8217;s what that sketch looks like, with all the distractions of the rest of the keyboard removed:</p>
-
-<script src="https://gist.github.com/mathias/6217894.js"></script>
-
-
-<p>Let&#8217;s do a quick refactoring to extract our setup and functionality into functions:</p>
-
-<script src="https://gist.github.com/mathias/6217926.js"></script>
-
-
-<p>The next step is to extract our functionality out into what Arduino calls a <a href="http://arduino.cc/en/Hacking/LibraryTutorial">library</a>. Remember, Arduino code is just C++, so what we&#8217;re really going to do is extract this functionality out into a <strong>class</strong>. Following the libraries guide from that link, we extract our code out into a new header file:</p>
-
-<script src="https://gist.github.com/mathias/6217939.js"></script>
-
-
-        
-        
-    </div>
-
-    <div class="meta">
-        <div class="author">
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
-</div>
-        <div class="date">
-
-
-
-
-
-
-
-
-
-
-
-
-<time datetime="2013-08-12T22:04:00-05:00" pubdate  data-updated="true" >Aug 12<span>th</span>, 2013</time>.</div>
-        <div class="tags">
-
-</div>
-    </div>
-
-  </article>
-
-
-  <article class="post">
-    
     <h1 class="title"><a href="/blog/2013/08/06/a-simple-text-editor-foot-pedal/">A Simple Text Editor Foot Pedal</a></h1>
     <div class="entry">
         <p>When I first starting talking about <a href="/blog/2013/08/03/building-a-chording-keyboard-lessons-learned-and-progress-so-far/">building a chording keyboard</a>, both in person and online, people began to ask me about the possibility of building a computer foot pedal. With the Teensy microcontroller, a foot pedal would only need to watch a single digital input and output a few characters to the OS; much simpler than my chording keyboard project.</p>
@@ -584,6 +505,80 @@ By &#8220;augmenting human intellect&#8221; we mean increasing the capability of
 
 
 <time datetime="2013-03-17T22:44:00-05:00" pubdate  data-updated="true" >Mar 17<span>th</span>, 2013</time>.</div>
+        <div class="tags">
+
+</div>
+    </div>
+
+  </article>
+
+
+  <article class="post">
+    
+    <h1 class="title"><a href="/blog/2013/03/07/filter-or-be-filtered/">Filter or Be Filtered</a></h1>
+    <div class="entry">
+        <p>Eli Pariser&#8217;s talk, <a href="http://www.ted.com/talks/eli_pariser_beware_online_filter_bubbles.html">Beware online &#8220;filter bubbles&#8221;</a> recently hit the front page of the TED Talks website. I found it interesting because it discusses some of what I&#8217;ve seen happening online, and some of my fears for how we search and consume content. Watch the video if you haven&#8217;t to see just how much is already being filtered on the web for you.</p>
+
+<p>Right after I saw the video, of course, <a href="http://washingtonpost.com/business/technology/facebook-to-change-news-feed-to-a-personalized-newspaper/2013/03/07/b294f61e-8751-11e2-98a3-b3db6b9ac586_story.html">Facebook announced</a> that they&#8217;ll be rolling out a new version of the the news feed. They are quoted as making it more like a &#8220;personal newspaper&#8221; &mdash; a filter, essentially, for the things Facebook thinks you want to see. As the video above pointed out, they&#8217;ve already been filtering <em>out</em> the things they think you don&#8217;t want for awhile.</p>
+
+<p>No doubt there will be some backlash as people adjust to changes on Facebook, but very few will abandon it. And if you are the kind of person that would abandon Facebook over filtering, or privacy, or concerns about owning your own data, you don&#8217;t have a lot of choices of where to go.</p>
+
+<p>Sure, you can specifically seek out services that aren&#8217;t going to give you a filtered world view &mdash; <a href="https://duckduckgo.com/">DuckDuckGo</a> comes to mind. But that&#8217;s not always possible. The problem is bigger than just the search engine you use and whether or not you&#8217;re logged into Facebook. Just about every site is run by someone else, and they are analyzing you constantly. They are in a brutal battle to keep you as their consumer and keep you from going to other sites. But are the things that they think you want to see what you really want or need to see?</p>
+
+<p>As a developer, I&#8217;m capable of taking matters into my own hands, to some degree. Most of the sites that I use on a daily basis have an API and allow me to export or scrape my personal data. But the cost of switching off of the nice service, the well-designed UI/UX of an official mobile app, and so on has kept me from taking the plunge to export my data and go set up shop on my own version of various web services.</p>
+
+<p>Recently I revamped a very old, empty repo that I had on Github. The point of this repo was code a way to export all of my data from <a href="https://www.last.fm/">Last.fm</a>. But for whatever reason the repo has been empty for something like 4 years now. So the other week, I sat down, checked the <a href="http://www.last.fm/api">Last.fm API docs</a>, and wrote a very simple Ruby script to dump out all the JSON it could about my top tracks, artists, and albums over the past 7 years. That script is available as my <a href="https://github.com/mathias/birdsong">birdsong</a> repo on Github.</p>
+
+<p>So far, I don&#8217;t have a real use for the data. I could try to use some visualization tools on it to make cool graphs or maps. Or I could try and get analytics out of it: genres listened to, how they&#8217;ve changed over the years. But for now, I am content to just have the JSON data.</p>
+
+<p>All in all, it&#8217;s around 30 megabytes of JSON data, which is really just plain text with no compression, so it is really quite a lot of data. There&#8217;s more I can do, though. I plan to do to start taking control, to both aggregate my own data and filter it.</p>
+
+<p>For a long time it has bothered me that <a href="https://www.google.com/reader">Google Reader</a> stopped receiving new features, and the features that existed only went so far. To be fair, Google Reader has been a rock solid web service for many, many years for me. It allows me to read my feeds quickly, reliably, and has parsed feeds well &mdash; all problems I&#8217;ve had with other feed readers. It&#8217;s always had some neat features like showing me analytics of what I read.</p>
+
+<p><img src="/images/google_reader_trends.png" alt="Google Reader Trends" /></p>
+
+<p>But as far as discovering new content and helping me to eliminate content I don&#8217;t read or don&#8217;t want to read, Google Reader is not so great. Reader is terrible at suggesting new feeds to read to me; it constantly suggests Dilbert and Lifehacker, and has for the past 5 years or so. I have no interest in either of those. It has never analyzed my reading patterns to such a degree that it suggested something new that blew me away. I am looking for those kinds of interesting suggestions: not just for feeds that match what I already read, but things that are outside of my normal bubble but would be interesting to me.</p>
+
+<p>Luckily, Google Reader has an API, and rather than just exporting my data and building a new service, I can start to build off of it. I get to keep a lot of the features I enjoy while extending it with my own code.</p>
+
+<p>In Pariser&#8217;s talk, he talks about encoding algorithms of filtering and recommendation with a sense of civic duty. To some degree, this means having some journalistic integrity. Such an algorithm needs to present both sides of the story. One issue of many feed readers and other content online is that, well, it only shows one view. The view of the article you&#8217;re on.</p>
+
+<p>But imagine a feed reader that was more like the front page of Google News. It would not only show you the blog post you&#8217;re reading, but all recent blog posts from other authors about similar topics. Maybe, if they&#8217;re responding to a news event or writing about a known fact, the reader could do the work to track down the original source. To take it even further, without even really needing to be aware of motive, politics, and other factors, a dumb feed reader with good suggestions could probably present both sides of the story. Both sides of an argument. Both liberal and conservative takes on the same bill.</p>
+
+<p>Dreaming up features like this can be a deep rabbit hole. Start considering the consequences of pulling up all past articles you&#8217;ve read about similar keywords or tags. Or performing searches for academic papers on the topic. Pulling in data from Wikipedia. Looking up books you&#8217;ve read or are planning to read on Goodreads that are related to the blog post you&#8217;re reading. Or any other number of ways to slice and dice content. And it doesn&#8217;t have to stop with Google Reader.</p>
+
+<p>Opportunities to make better tools and more intelligently consume information are all around us. At the same time, consumer-consuming corporations on the web try to trap us into filter bubbles. They try to provide us with what they think we want, but can they ever really know? In the end, it&#8217;s control-your-own-filters or be filtered<a href="#filter-or-be-filtered-note" name="filter-or-be-filtered-note-return"><sup>1</sup></a>.</p>
+
+<hr />
+
+<p><a name="filter-or-be-filtered-note"></a></p>
+
+<p><strong>1</strong> The name of this article was lifted from Daniel Rushkoff&#8217;s <a href="http://www.goodreads.com/book/show/9408311-program-or-be-programmed">Program or be Programmed</a>, a book which I didn&#8217;t really enjoy. It was not what I thought it would be about: why we should learn to program so that we can control the complex technical systems around us rather than be controlled by them, or how programming&#8217;s problem solving skills can be applied elsewhere. Instead, I found the book to be some technology-fear-mongering and a bunch of diatribes about how things online or in computers are &#8220;less real.&#8221; Suffice to say, I did not enjoy it. <a href="#filter-or-be-filtered-note-return">&#8617;</a></p>
+
+        
+        
+    </div>
+
+    <div class="meta">
+        <div class="author">
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
+</div>
+        <div class="date">
+
+
+
+
+
+
+
+
+
+
+
+
+<time datetime="2013-03-07T22:09:00-06:00" pubdate  data-updated="true" >Mar 7<span>th</span>, 2013</time>.</div>
         <div class="tags">
 
 </div>

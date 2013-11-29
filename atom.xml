@@ -4,7 +4,7 @@
   <title><![CDATA[blog.mattgauger.com]]></title>
   <link href="http://blog.mattgauger.com/atom.xml" rel="self"/>
   <link href="http://blog.mattgauger.com/"/>
-  <updated>2013-11-15T10:32:44-06:00</updated>
+  <updated>2013-11-29T13:08:36-06:00</updated>
   <id>http://blog.mattgauger.com/</id>
   <author>
     <name><![CDATA[Matt Gauger]]></name>
@@ -21,56 +21,6 @@
     <content type="html"><![CDATA[<p>Back in September, I had a blast speaking at <a href="http://nickelcityruby.com/">Nickel City Ruby</a>. My talk was entitled &#8220;Apprenticeship: Software Craftsmanship&#8217;s Missing Link&#8221; and included a lot of slides of sasquatches. The video has been posted to Confreaks, so I&#8217;m embedding it here. Also note that I have posted my notes and a few resources over on the microsite I created for this talk, <a href="http://blog.mattgauger.com/apprenticeship/">http://blog.mattgauger.com/apprenticeship/</a></p>
 
 <iframe width="640" height="360" src="http://blog.mattgauger.com//www.youtube.com/embed/zuL7rAwmwCY" frameborder="0" allowfullscreen></iframe>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Unit testing the Arduino with Greatest]]></title>
-    <link href="http://blog.mattgauger.com/blog/2013/08/12/unit-testing-the-arduino-with-greatest/"/>
-    <updated>2013-08-12T22:04:00-05:00</updated>
-    <id>http://blog.mattgauger.com/blog/2013/08/12/unit-testing-the-arduino-with-greatest</id>
-    <content type="html"><![CDATA[<p>When I write code for work, we often write unit tests and other types of tests first for a small piece of functionality, then implement that functionality, making the tests pass. And then we iterate. This is known as test-driven development. Tests can be written after the fact, too, and they are just as valuable. A suite of tests helps to ensure that behavior doesn&#8217;t change when unrelated code changes, and that we don&#8217;t introduce regressions in behavior by trying to add new functionality to our existing code.</p>
-
-<p>Unit tests test specific functionality of code, in something of a vacuum. That is, with unit tests, we don&#8217;t want to test the code&#8217;s integration with other pieces of code, but merely its own behavior. Its inputs and outputs, and how it handles those inputs and outputs. One way to think about it is that we&#8217;re going to perform an experiment. Our hypothesis is that this small piece of code, usually a single function or method, behaves the way we believe it does. To confirm or deny that hypothesis, we put the piece of code under a test that holds all variables fairly constant and allow one independent variable for the functionality we&#8217;re testing. Whether or not that one factor behaves as we expected is the unit test.</p>
-
-<p>When we write code for the Arduino, it is usually very simple. Let&#8217;s look at Blink example code that ships on most Arduinos:</p>
-
-<script src="https://gist.github.com/mathias/6217579.js"></script>
-
-
-<p>As you can see, there&#8217;s three pieces to an Arduino program: creating globals like the <code>ledPin</code> variable, the <code>setup</code> function, and the <code>loop</code> function. And that&#8217;s all there is to most Arduino programs. Notice that the <code>loop</code> function in particular is quite imperative: it&#8217;s going to loop forever, and we specify one thing, then the next, etc. that will be run.</p>
-
-<p>This style of programming Arduinos seems comfortable to a lot of people, and for simple functionality, it is acceptable. To test it, simply upload the code to the Arduino and observe the results. Since all this does is blink an LED, it is fairly easy to verify.</p>
-
-<p>As complexity of an Arduino program grows, however, I like to split out the steps that go into each tick of the <code>loop</code> function into separate functions, and often, split out functions from <code>setup</code> as well for each piece of hardware.</p>
-
-<p>An imaginary Arduino program for a robot might look something like:</p>
-
-<script src="https://gist.github.com/mathias/6217621.js"></script>
-
-
-<p>Assuming all of the functions like <code>setup_sonars()</code>, <code>check_sonar()</code>, <code>choose_direction()</code> and <code>move()</code> were all defined and worked the way we expected, then this is an improvement in showing the intent of the code. We can glance at the <code>setup</code> and <code>loop</code> part of the code and understand how the robot is supposed to behave. There&#8217;s some implicit state that is being used behind the scenes here to allow the decision made in <code>choose_direction</code> to influence <code>move</code>, but we can get to that later. Of course, the bulk of the Arduino sketch above would still be in there, it would just be encapsulated in those functions that get called.</p>
-
-<p>So what happens when we our Arduino sketch gets complex enough that we cannot easily verify that everything we have written behaves as expected? Not all code that you might want to run on an Arduino is suited to the verify, upload, and then manually test pattern that one does with simple Arduino sketches.</p>
-
-<p>I turned to unit testing because that is one of the best tools in my toolbox. By introducing an unit testing flow to the development of Arduino sketches, I can verify more logic before uploading code to the Arduino, and verify that existing functionality continues to function after I begin adding more features.</p>
-
-<p>On <a href="http://blog.mattgauger.com/blog/2013/08/03/building-a-chording-keyboard-lessons-learned-and-progress-so-far/">my chording keyboard project</a>, the code is quickly growing beyond what can reasonably be written in a simple Arduino <code>loop()</code> function. The scroll wheel alone has 3 pins for input, 1 for output (an LED), and sends mouse signals to the host OS. And, it must do this while the rest of the keyboard deals with a sliding buffer for matching chord patterns and while different modes come into play that affect other parts of the keyboard&#8217;s behavior. Suffice to say, I want to extract and simplify the scroll wheel&#8217;s code and verify that it works. Then, I can move on to other pieces and be reasonably sure that the scroll wheel will continue to function.</p>
-
-<p>But the whole scroll wheel might be a little too big for this blog post. So let&#8217;s just focus on the pushbutton and the LED, and let&#8217;s say that when the pushbutton is pressed, we want to send the middle-click signal to the OS, as well as flash the LED on and off quickly. Not overly complex behavior, but it is enough for us to work with for the purposes of this blog post. Here&#8217;s what that sketch looks like, with all the distractions of the rest of the keyboard removed:</p>
-
-<script src="https://gist.github.com/mathias/6217894.js"></script>
-
-
-<p>Let&#8217;s do a quick refactoring to extract our setup and functionality into functions:</p>
-
-<script src="https://gist.github.com/mathias/6217926.js"></script>
-
-
-<p>The next step is to extract our functionality out into what Arduino calls a <a href="http://arduino.cc/en/Hacking/LibraryTutorial">library</a>. Remember, Arduino code is just C++, so what we&#8217;re really going to do is extract this functionality out into a <strong>class</strong>. Following the libraries guide from that link, we extract our code out into a new header file:</p>
-
-<script src="https://gist.github.com/mathias/6217939.js"></script>
 
 ]]></content>
   </entry>
@@ -1632,6 +1582,39 @@ $ git checkout HEAD init.php</pre></div>
 
 
 
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[What I'm doing in December]]></title>
+    <link href="http://blog.mattgauger.com/blog/2010/12/01/what-i-m-doing-in-december/"/>
+    <updated>2010-12-01T00:00:00-06:00</updated>
+    <id>http://blog.mattgauger.com/blog/2010/12/01/what-i-m-doing-in-december</id>
+    <content type="html"><![CDATA[<p>Aside from being really busy at work, I&#8217;ll be giving three talks at users groups in December. How did I end up agreeing to give three talks in one month? People heard me talking about some topic and they asked me to talk to their group on it. If asked, I&#8217;ll usually agree. I&#8217;m trying to tie them together thematically to make it a three-parter (and encourage people to come to all three meetups) so I&#8217;m calling the series:&nbsp;&#8216;Tis the Season to Write Web Apps, A Three Part Adventure.</p>
+<p>&nbsp;</p>
+<p><span style="font-size: large;">Development Tools: Git and Github (aka, &#8216;Tis the Season to Write Web Apps Part 1)</span></p>
+<p><span style="font-size: small;"><a href="http://web414.com/node/1008">Web414</a></span></p>
+<p>7PM, December 9th, 2010 @ <a href="http://bucketworks.org/">Bucketworks</a></p>
+<p>I&#8217;ve been asked to talk about Git and Github and give a basic intro on how to use it. I&#8217;ll also talk about my developer workflow and technical team collaboration. I&#8217;d also like to point out that&nbsp;<a href="http://twitter.com/ralphholzmann">Ralph Holzmann</a>&nbsp;will be&nbsp;talking about LABjs and yepnope.js after my talk. It should be a great night with lots of technical content!</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-size: large;">PHP vs Rails (aka,&nbsp;</span><span style="font-size: large;">&#8216;Tis the Season to Write Web Apps</span><span style="font-size: large;">&nbsp;Part 2)</span></p>
+<p><span style="font-size: small;"><a href="http://www.mkepug.org/calendar/15421909/">Milwaukee PHP Users Group</a></span></p>
+<p>6PM, December 14th, 2010 @ <a href="http://bucketworks.org/">Bucketworks</a></p>
+<p>This talk started as the idea of comparing how traditional LAMP servers differ from how application servers behave. I&#8217;ll be covering Apache and phpmod, some information about nginx, and compare performance. A very basic web app will be used as an example and I&#8217;ll introduce some tools used for benchmarking web applications. Note that the topic has seemingly mutated from &#8220;LAMP servers versus Application Servers&#8221; to PHP vs. Rails, possibly to draw out more folks by using good keywords ;)</p>
+<p>&nbsp;</p>
+<p><span style="font-size: large;">What&#8217;s new and great in Rails 3! (aka,&nbsp;</span><span style="font-size: large;">&#8216;Tis the Season to Write Web Apps&nbsp;</span><span style="font-size: large;">Part 3!)</span></p>
+<p><span style="font-size: large;"><span style="font-size: small;"><a href="http://www.meetup.com/RubyMKE/calendar/15149551/">RubyMKE</a></span></span></p>
+<p>7PM, December 20th, 2010 @ <a href="http://bucketworks.org/">Bucketworks</a></p>
+<p>I&#8217;ll be talking about what&#8217;s different in Rails 3 and what stays the same. A perfect follow-up to those that want to know about writing for an application server after the MKE PUG talk. I&#8217;ll have a ported version of the basic web app from the MKEPUG talk.</p>
+<p>&nbsp;</p>
+<p>All code and slides will be available here and on <a href="http://github.com/mathias">my Github</a> after the talks. I&#8217;ll hopefully have time to put together summary blog posts afterwards, too.</p>
+<p>Also: Be sure to join us at&nbsp;<a href="http://web414.com/node/990">MilwaukeeDevHouse5</a>&nbsp;on December 3rd, 2010, 5PM-midnight. The description from Web414:</p>
+<p style="padding-left: 30px;">&nbsp;</p>
+<p style="padding-left: 30px;">This will be the first MilwaukeeDevHouse with a purpose&#8230; In the past we just called it a &#8220;party with laptops&#8221; and invited you to come and work on whatever you wanted to. You can still do that, but we&#8217;re also going to focus on ways to make BarCampMilwaukee (and Bucketworks) better.&nbsp;Call it &#8220;Hack the BarCamp!&#8221; or maybe &#8220;Hack the Bucket!&#8221;</p>
+<p>&nbsp;</p>
+<p style="padding-left: 30px;">&nbsp;</p>
+<p>See you there!</p>
 ]]></content>
   </entry>
   
