@@ -4,7 +4,7 @@
   <title><![CDATA[blog.mattgauger.com]]></title>
   <link href="http://blog.mattgauger.com/atom.xml" rel="self"/>
   <link href="http://blog.mattgauger.com/"/>
-  <updated>2013-11-29T13:08:36-06:00</updated>
+  <updated>2013-12-16T23:54:43-06:00</updated>
   <id>http://blog.mattgauger.com/</id>
   <author>
     <name><![CDATA[Matt Gauger]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[In the year 2100]]></title>
+    <link href="http://blog.mattgauger.com/blog/2013/12/16/in-the-year-2100/"/>
+    <updated>2013-12-16T23:41:00-06:00</updated>
+    <id>http://blog.mattgauger.com/blog/2013/12/16/in-the-year-2100</id>
+    <content type="html"><![CDATA[<p>Recently I was asked by a coworker to write up some ideas for where our company would be in the future. Not just next year, or in 5 years, but where we saw the company in the year 2100. For my other coworkers, the year 2100 probably represents far enough out to ensure they stop thinking in the constraints of right now. But for someone who has read as much science fiction as I have, I saw a wide gulf of time.</p>
+
+<p>So I hit up Wolfram Alpha, asking myself what technology might look like in the year 2100.</p>
+
+<p>If Moore&#8217;s Law holds, then processors could contain 3.5 x 10<sup>22</sup> transistors &mdash; roughly 350 times more transistors than the number of grains of sands on the planet. (Thanks, Wolfram Alpha!) This also represents roughly 2.9x10<sup>18</sup> MIPS per chip, which is roughly a factor of ten more processing power in each chip than all 7 million brains of humans on the planet, combined. That kind of computing power is almost unimaginable to me now.</p>
+
+<p>While I don&#8217;t have a religious belief in the Singularity, I <strong>do</strong> think that we can&#8217;t really predict what it&#8217;ll mean to have so much computing power available to us. Or what technology, society, or people will look like by then. Of course, someone&#8217;s gotta write the software to make that hardware useful…</p>
+
+<hr />
+
+<p><small>
+Note: It could be that I messed up these numbers a bit; I went off the current transistor count and MIPS for the Intel i7-4770k processor, since I recently started putting together a server with one. And the numbers are extrapolated out quite a bit. If you&#8217;ve got corrections to these numbers, hit me up on <a href="https://twitter.com/mathiasx">Twitter</a> to let me know!
+</small></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Apprentice Talk Video &amp; Notes]]></title>
@@ -1582,39 +1603,6 @@ $ git checkout HEAD init.php</pre></div>
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[What I'm doing in December]]></title>
-    <link href="http://blog.mattgauger.com/blog/2010/12/01/what-i-m-doing-in-december/"/>
-    <updated>2010-12-01T00:00:00-06:00</updated>
-    <id>http://blog.mattgauger.com/blog/2010/12/01/what-i-m-doing-in-december</id>
-    <content type="html"><![CDATA[<p>Aside from being really busy at work, I&#8217;ll be giving three talks at users groups in December. How did I end up agreeing to give three talks in one month? People heard me talking about some topic and they asked me to talk to their group on it. If asked, I&#8217;ll usually agree. I&#8217;m trying to tie them together thematically to make it a three-parter (and encourage people to come to all three meetups) so I&#8217;m calling the series:&nbsp;&#8216;Tis the Season to Write Web Apps, A Three Part Adventure.</p>
-<p>&nbsp;</p>
-<p><span style="font-size: large;">Development Tools: Git and Github (aka, &#8216;Tis the Season to Write Web Apps Part 1)</span></p>
-<p><span style="font-size: small;"><a href="http://web414.com/node/1008">Web414</a></span></p>
-<p>7PM, December 9th, 2010 @ <a href="http://bucketworks.org/">Bucketworks</a></p>
-<p>I&#8217;ve been asked to talk about Git and Github and give a basic intro on how to use it. I&#8217;ll also talk about my developer workflow and technical team collaboration. I&#8217;d also like to point out that&nbsp;<a href="http://twitter.com/ralphholzmann">Ralph Holzmann</a>&nbsp;will be&nbsp;talking about LABjs and yepnope.js after my talk. It should be a great night with lots of technical content!</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p><span style="font-size: large;">PHP vs Rails (aka,&nbsp;</span><span style="font-size: large;">&#8216;Tis the Season to Write Web Apps</span><span style="font-size: large;">&nbsp;Part 2)</span></p>
-<p><span style="font-size: small;"><a href="http://www.mkepug.org/calendar/15421909/">Milwaukee PHP Users Group</a></span></p>
-<p>6PM, December 14th, 2010 @ <a href="http://bucketworks.org/">Bucketworks</a></p>
-<p>This talk started as the idea of comparing how traditional LAMP servers differ from how application servers behave. I&#8217;ll be covering Apache and phpmod, some information about nginx, and compare performance. A very basic web app will be used as an example and I&#8217;ll introduce some tools used for benchmarking web applications. Note that the topic has seemingly mutated from &#8220;LAMP servers versus Application Servers&#8221; to PHP vs. Rails, possibly to draw out more folks by using good keywords ;)</p>
-<p>&nbsp;</p>
-<p><span style="font-size: large;">What&#8217;s new and great in Rails 3! (aka,&nbsp;</span><span style="font-size: large;">&#8216;Tis the Season to Write Web Apps&nbsp;</span><span style="font-size: large;">Part 3!)</span></p>
-<p><span style="font-size: large;"><span style="font-size: small;"><a href="http://www.meetup.com/RubyMKE/calendar/15149551/">RubyMKE</a></span></span></p>
-<p>7PM, December 20th, 2010 @ <a href="http://bucketworks.org/">Bucketworks</a></p>
-<p>I&#8217;ll be talking about what&#8217;s different in Rails 3 and what stays the same. A perfect follow-up to those that want to know about writing for an application server after the MKE PUG talk. I&#8217;ll have a ported version of the basic web app from the MKEPUG talk.</p>
-<p>&nbsp;</p>
-<p>All code and slides will be available here and on <a href="http://github.com/mathias">my Github</a> after the talks. I&#8217;ll hopefully have time to put together summary blog posts afterwards, too.</p>
-<p>Also: Be sure to join us at&nbsp;<a href="http://web414.com/node/990">MilwaukeeDevHouse5</a>&nbsp;on December 3rd, 2010, 5PM-midnight. The description from Web414:</p>
-<p style="padding-left: 30px;">&nbsp;</p>
-<p style="padding-left: 30px;">This will be the first MilwaukeeDevHouse with a purpose&#8230; In the past we just called it a &#8220;party with laptops&#8221; and invited you to come and work on whatever you wanted to. You can still do that, but we&#8217;re also going to focus on ways to make BarCampMilwaukee (and Bucketworks) better.&nbsp;Call it &#8220;Hack the BarCamp!&#8221; or maybe &#8220;Hack the Bucket!&#8221;</p>
-<p>&nbsp;</p>
-<p style="padding-left: 30px;">&nbsp;</p>
-<p>See you there!</p>
 ]]></content>
   </entry>
   
