@@ -1,0 +1,21 @@
+---
+layout: post
+title: "In the year 2100"
+date: 2013-12-16 23:41
+comments: true
+categories: 
+---
+
+Recently I was asked by a coworker to write up some ideas for where our company would be in the future. Not just next year, or in 5 years, but where we saw the company in the year 2100. For my other coworkers, the year 2100 probably represents far enough out to ensure they stop thinking in the constraints of right now. But for someone who has read as much science fiction as I have, I saw a wide gulf of time.
+
+So I hit up Wolfram Alpha, asking myself what technology might look like in the year 2100.
+
+If Moore's Law holds, then processors could contain 3.5 x 10^22 transistors &mdash; roughly 350 times more transistors than the number of grains of sands on the planet. (Thanks, Wolfram Alpha!) This also represents roughly 2.9x10^18 MIPS per chip, which is roughly a factor of ten more processing power in each chip than all 7 million brains of humans on the planet, combined. That kind of computing power is almost unimaginable to me now.
+
+While I don't have a religious belief in the Singularity, I **do** think that we can't really predict what it'll mean to have so much computing power available to us. Or what technology, society, or people will look like by then. Of course, someone's gotta write the software to make that hardware useful…
+
+---
+
+<small>
+Note: It could be that I messed up these numbers a bit; I went off the current transistor count and MIPS for the Intel i7-4770k processor, since I recently started putting together a server with one. And the numbers are extrapolated out quite a bit. If you've got corrections to these numbers, hit me up on [Twitter](https://twitter.com/mathiasx) to let me know!
+</small>
