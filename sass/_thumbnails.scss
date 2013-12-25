@@ -32,4 +32,8 @@ a.thumbnail:hover {
 }
 .thumbnail .caption {
   padding: 9px;
+  text-align: center;
+}
+.thumbnail.space-after {
+  margin-bottom: 2em;
 }
