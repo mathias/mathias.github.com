@@ -17,6 +17,9 @@
   border: 1px solid #ddd;
   @include border-radius(4px);
   @include box-shadow(0 1px 1px rgba(0,0,0,.075));
+  &.space-after {
+    margin-bottom: 2em;
+  }
 }
 // Add a hover state for linked versions only
 a.thumbnail:hover {
@@ -33,7 +36,4 @@ a.thumbnail:hover {
 .thumbnail .caption {
   padding: 9px;
   text-align: center;
-}
-.thumbnail.space-after {
-  margin-bottom: 2em;
 }
