@@ -1,0 +1,272 @@
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>blog.mattgauger.com</title>
+    <meta name="author" content="Matt Gauger">
+
+    
+    <meta name="description" content="Jogging the Memory With Shoes (This post is part of my blog archiving project. This post appeared on
+http://bytecodex.wordpress.com/ on November 29 &hellip;">
+    
+
+    <link href="/atom.xml" rel="alternate" title="blog.mattgauger.com" type="application/atom+xml">
+    <link rel="canonical" href="">
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+
+</head>
+
+
+<body>
+  <header class="inner"><div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+
+      <a href="/" class="brand">blog.mattgauger.com</a>
+
+      <div class="nav-collapse">
+        <nav class="menu left"><ul class="nav">
+  <li><a href="/about">About</a></li>
+  <li><a href="/blog/archives">Blog Archives</a></li>
+  <li><a href="/presentations">Presentations</a></li>
+  
+  <li class="divider-vertical"></li>
+  <li><a class="rss" href="/atom.xml" title="RSS">RSS</a></li>
+  
+</ul>
+</nav>
+        <div class="right">
+          <form class="navbar-search pull-right" action="http://google.com/search" method="get">
+            <input class="input-medium search-query span2" type="text" name="q" results="0" placeholder="Search">
+            <input type="hidden" name="q" value="site:blog.mattgauger.com">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+  <div class="container bottom-left-rounded-corner bottom-right-rounded-corner" id="page-container">
+    <div class="row">
+  <article class="page span8 offset2">
+    
+    
+
+
+  <article class="post">
+    
+    <h1 class="title"><a href="/blog/2007/11/29/jogging-the-memory-with-shoes/">Jogging the Memory With Shoes</a></h1>
+    <div class="entry">
+        <p>(This post is part of my blog archiving project. This post appeared on
+<a href="http://bytecodex.wordpress.com/2007/11/29/jogging-the-memory-with-shoes/">http://bytecodex.wordpress.com/</a> on November 29, 2007.)</p>
+
+<p>Today, I wanted to share my latest little one-night coding project. But
+first, a little back story. I’ve been looking for a new Mac OS X GUI
+text editor for the past couple of days because TextMate has once again
+passed its free 30 day period for me. I don’t mind editing text purely
+with keyboard commands in a terminal window, but sometimes it’s nice to
+have a mouse and menus when you’re working with chunks of code. I’ve
+read studies from Apple that while using only keyboard shortcuts seems
+faster, in truth the mouse is quicker at the same task.</p>
+
+<p>On the command line, I’m more likely to use vi than emacs, although I
+know my way around both. So when I found <a href="http://code.google.com/p/macvim/">MacVim</a>, an “experimental”
+Cocoa interface to vim, I knew I’d found my new editor on the Mac. I’ve
+already tried all the free editors that worked on Mac OS X in the past,
+including jEdit (too slow), Eclipse (really an IDE, and even slower),
+Komodo/Smultron/etc., and even most of the for-pay editors (BBEdit,
+aforementioned TextMate, and SubEthaEdit). MacVim really takes the cake,
+as the vim core understands far more languages &amp; markups than TextMate’s
+bundles; it’s as fast as one can perceive a program to be; and it adds a
+GUI (gooey!) layer of goodness on top, including tabs, mouse-based
+copy/paste/cursor positioning, and a full-screen editing mode to
+eliminate distractions.</p>
+
+<p>I’ve also been playing with <a href="http://code.whytheluckystiff.net/shoes/">Shoes</a>, a framework for making GUI apps
+in Ruby. Shoes is the brainchild of Ruby super-hacker WhyTheLuckyStiff,
+and I wouldn’t have heard about it without <a href="http://philcrissman.com/">Phil Crissman</a>‘s
+<a href="http://twitter.com/philcrissman">twittering</a> about his interest in using it.</p>
+
+<p>The super simple syntax in Shoes lets you lay out GUI components like
+elements in a web page, and graphics/animations are easily added. Most
+apps are as simple as:</p>
+
+<pre><code>Shoes.app do
+     stack :margin =&gt; 10 do
+          para "Chunky Bacon!"
+      end
+end
+</code></pre>
+
+<p>But the real frustration is in the lack of documentation. There are a
+handle of sample apps on the project’s SVN web repo and roughly 4
+tutorials. The full documentation is currently being printed up as a
+real-deal book by WhyTheLuckyStiff, and I didn’t feel coughing up the
+$8+shipping to get a copy. (&amp; knowing Why, I wouldn’t understand
+anything in it anyways). So, I’ve been playing around and doing a lot of
+trial and error based on the sample apps to figure out functionality.
+Luckily, Quicksilver makes the run-test-repeat loop very tight. (For the
+interested, CMD-Space into QS, type “Shoes” TAB TAB, first three letters
+of my Shoes’ script’s filename, ENTER &amp; it’s running. Having to launch
+the .app rather than calling from the CLI is a problem unique to the OSX
+version of Shoes. On Linux it’d be $ ./shoes App.rb )</p>
+
+<p>My first little app was nothing more than adding file saving and opening
+functionality to the sample edit.rb script, added color and formatting,
+buttons, etc. and then modified it to catch a few more commands given
+via keypress. Nothing too fancy, but it was a good way to figure out the
+majority of Shoes’ internals. While it was a fun idea to entertain,
+Shoes is not the ideal platform to develop a text editor in. Luckily, I
+don’t have to, as I’ve got MacVim.</p>
+
+<p>But maybe I could use a little tool to help me remember all the various
+vi commands?</p>
+
+<p><img src="http://bytecodex.files.wordpress.com/2007/11/shoes1.png?w=510-" alt="Shoes cheatsheet widget" /></p>
+
+<p>Introducing my cheatsheet widget for vim in Ruby Shoes. It’s based off
+the heavy cardstock “vi Quick Reference” sheet that everyone in my
+vi-specific CSCI classes was issued (I imagine there’s an emacs
+equivalent for classes where emacs is encouraged). Believe it or not,
+the longest part of creating this app in Shoes was typing in all the
+command hints off the physical copy &amp; thinking up multiple ways to implement
+classes containing the data in Ruby. The reinforcement of forgotten vi command
+skills in developing this widget in MacVim should be obvious.</p>
+
+<p></p>
+Using the drop-down allows you to access such diverse topics as:</p>
+
+<p><img src="http://bytecodex.files.wordpress.com/2007/11/shoes2.jpg?w=510" alt="shoes2.jpg" /></p>
+
+<p>It really does make a nice little app to have running off to the side,
+and I’d argue that it was far simpler to create than an Adobe AIR app or
+Apple Dashboard widget would have been with the same functionality.</p>
+
+<p>Tomorrow, if suitably motivated I may extend it to read in any number of
+.yml files containing ‘cheat sheet’ definitions, and add definitions
+from any number of the PDF cheatsheets I’ve accumulated over the years
+and never bothered to print out (glancing in my PDF dir, I spy PHP,
+MySQL, sqlite3, microformats, and even, yes, Ruby &amp; Ruby on Rails
+cheatsheets in there). Using graphics I’ll implement a simple ‘tab’
+interface across the top and clean it up so it looks slick. (Red
+background when you click on the Rails tab? With little Ruby icon
+hovering there? Yes!)</p>
+
+<p><img src="http://bytecodex.files.wordpress.com/2007/11/shoes3-1.jpg?w=510" alt="shoes3-1.jpg" /></p>
+
+<p>Coding in Ruby is so much fun, it makes trivial things like this
+interesting, and Shoes follows in that tradition.</p>
+
+<p>Until next time, happy hacking.</p>
+
+        
+        
+    </div>
+
+    <div class="meta">
+        <div class="author">
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
+</div>
+        <div class="date">
+
+
+
+
+
+
+
+
+
+
+
+
+<time datetime="2007-11-29T12:09:00-06:00" pubdate  data-updated="true" >Nov 29<span>th</span>, 2007</time>.</div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/blog/categories/blog-archive-project/'>blog_archive_project</a>
+  
+</div>
+
+</div>
+    </div>
+
+  </article>
+
+
+<ul class="pager">
+  
+    <li>
+    <a href="/blog/page/9/" class="prev">Prev</a>
+    </li>
+  
+  
+</ul>
+
+<a href="/blog/archives" class="center">
+  <i class="icon-th-list"></i> 
+  Blog Archives
+</a>
+
+  </article>
+</div>
+
+    <hr />
+	  <footer class="footer"><div class="row">
+  <div class="offset2 span2">
+    <img src="/images/mathiasx.jpg" alt="portrait">
+  </div>
+  <div class="span3">
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/StillImage" property="dct:title" rel="dct:type">mathias.github.com</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://mathias.github.com" property="cc:attributionName" rel="cc:attributionURL">Matt Gauger</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.<br />
+
+  </div>
+  <div class="offset1 span3">
+    <ul class="nav nav-list">
+      <li><a href="https://twitter.com/mathiasx">Twitter</a></li>
+      <li><a href="https://github.com/mathias">Github</a></li>
+      <li><a href="/presentations">Presentations</a></li>
+      <li><a href="http://hackz0r.tumblr.com">hackz0r links (tumblog)</a></li>
+      <li><a href="/atom.xml">Atom feed</a></li>
+    </ul>
+  </div>
+</div>
+</footer>
+  </div>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script src="/javascripts/bootstrap-alert.js"></script>
+<script src="/javascripts/bootstrap-button.js"></script>
+<script src="/javascripts/bootstrap-collapse.js"></script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-38944731-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>

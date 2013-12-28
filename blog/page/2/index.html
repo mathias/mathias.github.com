@@ -7,7 +7,7 @@
     <meta name="author" content="Matt Gauger">
 
     
-    <meta name="description" content="Filter or Be Filtered Eli Pariser&#8217;s talk, Beware online &#8220;filter bubbles&#8221; recently hit the front page of the TED Talks website. I &hellip;">
+    <meta name="description" content="By Augmenting Human Intellect, We Mean By &#8220;augmenting human intellect&#8221; we mean increasing the capability of a man to approach a complex &hellip;">
     
 
     <link href="/atom.xml" rel="alternate" title="blog.mattgauger.com" type="application/atom+xml">
@@ -63,6 +63,51 @@
   <article class="page span8 offset2">
     
     
+
+
+  <article class="post">
+    
+    <h1 class="title"><a href="/blog/2013/03/17/by-augmenting-human-intellect/">By Augmenting Human Intellect, We Mean</a></h1>
+    <div class="entry">
+        <blockquote>
+By &#8220;augmenting human intellect&#8221; we mean increasing the capability of a man to approach a complex problem situation, to gain comprehension to suit his particular needs, and to derive solutions to problems. Increased capability in this respect is taken to mean a mixture of the following: more-rapid comprehension, better comprehension, the possibility of gaining a useful degree of comprehension in a situation that previously was too complex, speedier solutions, better solutions, and the possibility of finding solutions to problems that before seemed insoluble. And by &#8220;complex situations&#8221; we include the professional problems of diplomats, executives, social scientists, life scientists, physical scientists, attorneys, designers&#8211;whether the problem situation exists for twenty minutes or twenty years. We do not speak of isolated clever tricks that help in particular situations. We refer to a way of life in an integrated domain where hunches, cut-and-try, intangibles, and the human &#8220;feel for a situation&#8221; usefully co-exist with powerful concepts, streamlined terminology and notation, sophisticated methods, and high-powered electronic aids.
+<footer>
+<strong>Douglas C. Engelbart</strong>
+&ndash;
+<cite><a href="http://www.dougengelbart.org/pubs/augment-3906.html">Augmenting Human Intellect: A Conceptual Framework </a></cite>
+</blockquote>
+
+
+        
+        
+    </div>
+
+    <div class="meta">
+        <div class="author">
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
+</div>
+        <div class="date">
+
+
+
+
+
+
+
+
+
+
+
+
+<time datetime="2013-03-17T22:44:00-05:00" pubdate  data-updated="true" >Mar 17<span>th</span>, 2013</time>.</div>
+        <div class="tags">
+
+</div>
+    </div>
+
+  </article>
 
 
   <article class="post">
@@ -411,95 +456,6 @@ And I explained how the form factor of the components we were using was obsolete
 
 
 <time datetime="2012-07-13T14:59:00-05:00" pubdate  data-updated="true" >Jul 13<span>th</span>, 2012</time>.</div>
-        <div class="tags">
-
-</div>
-    </div>
-
-  </article>
-
-
-  <article class="post">
-    
-    <h1 class="title"><a href="/blog/2012/04/21/mosh-ssh-tunnels-tmux/">Mosh, SSH Tunnels, and Tmux</a></h1>
-    <div class="entry">
-        <p>I&#8217;m currently preparing for RailsConf. One of the things I wanted to do before I left was figure out a way to monitor a process on a Linux server running on my LAN. The process frequently crashes and needs some prodding to restart.</p>
-
-<p>One solution might be to set up DynDNS and configure the router to point from some random port to the SSH port on the Linux machine running on the LAN. That idea didn&#8217;t strike my fancy, as it just isn&#8217;t terribly secure to open up a port to the entire world, and it seems that DynDNS costs money to use since 2008. I&#8217;m sure there are free alternatives, but I couldn&#8217;t be bothered to find them, much less configure them.</p>
-
-<p>A much better solution would be an SSH tunnel up to my Linode, and a reverse tunnel back down to the Linux server on my LAN. If you haven&#8217;t used reverse SSH tunneling before, it is really neat. Here&#8217;s an example:</p>
-
-<p>From the local server:</p>
-
-<pre><code>ssh -R 2048:localhost:22 username@example.com
-</code></pre>
-
-<p>From the server out in the Internet (aka example.com in this example)</p>
-
-<pre><code>ssh -p 2048 other_username@localhost
-</code></pre>
-
-<p>Note that the &#8216;localhost&#8217; in the second example refers to your local server, not the one out in the internet. So <code>other_username</code> should be the username on your local server (not the remote server.) Confused yet? Good.</p>
-
-<p>Now, this setup will get you pretty far: You&#8217;re now able to run commands on the local server from the Linode out in the cloud. But you may notice a problem fairly quickly: if you kill that SSH shell on the local server, the connection up to the server on the internet dies, and so does the reverse tunnel that was inside that.</p>
-
-<p>Fix that by starting up a tmux session on the local server first, then detaching it.</p>
-
-<pre><code>tmux new -s ssh-tunnel
-ssh -R 2048:localhost:22 username@example.com
-&lt;leader-d&gt;
-</code></pre>
-
-<p>Now the tmux session will happily keep that SSH shell open on the local server and you can reverse tunnel back over it.</p>
-
-<p>My solution involves <a href="http://mosh.mit.edu">Mosh</a>, which I&#8217;ve been using quite a bit since it exploded on Hacker News and other news sites. Simply put, Mosh is like SSH, but it uses UDP packets to make itself more reliable. &#8220;More reliable without TCP?&#8221; you say? Well, Mosh is doing a little more work to buffer the connection to the other machine (including instant response to typing when there&#8217;d otherwise be lag) and maintains that connection: even if you change IPs, hop on a train, etc. It&#8217;s pretty amazing, and so far I&#8217;ve been loving it. Click through to the Mosh site to read up more on it. It really is awesome.</p>
-
-<p>With Mosh, we add another layer to the puzzle, so that my final setup looked like this:</p>
-
-<pre><code>matts_laptop$ mosh matt@someserver.local
-matt@someserver.local$ tmux new -s ssh-tunnel
-&lt;tmux session starts&gt;
-matt@someserver.local$ ssh -R 2048:localhost:22 username@example.com
-&lt;leader-d&gt;
-</code></pre>
-
-<p>Pop open another window in my local tmux session (are you beginning to see a pattern?) and then connect with mosh up to my Linode:</p>
-
-<pre><code>matts_laptop$ mosh me@mattgauger.com
-me@mattgauger.com$ tmux new -s server-monitor
-&lt;tmux session starts&gt;
-me@mattgauger.com$ ssh -p 2048 matt@localhost # Note: this is the matt@someserver.local account!
-matt@someserver.local$ &lt;monitor the process I'm concerned with&gt;
-</code></pre>
-
-<p>Now I&#8217;ve got this mostly-persistent (thanks to mosh and tmux) session that I can detach from if I really need to, but I&#8217;ll still be able to connect back up to my Linode and check on the server on my LAN from RailsConf.</p>
-
-<p>Pretty cool, huh?</p>
-
-        
-        
-    </div>
-
-    <div class="meta">
-        <div class="author">
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
-</div>
-        <div class="date">
-
-
-
-
-
-
-
-
-
-
-
-
-<time datetime="2012-04-21T21:14:00-05:00" pubdate  data-updated="true" >Apr 21<span>st</span>, 2012</time>.</div>
         <div class="tags">
 
 </div>
