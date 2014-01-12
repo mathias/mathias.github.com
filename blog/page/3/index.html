@@ -7,7 +7,7 @@
     <meta name="author" content="Matt Gauger">
 
     
-    <meta name="description" content="Mosh, SSH Tunnels, and Tmux I&#8217;m currently preparing for RailsConf. One of the things I wanted to do before I left was figure out a way to &hellip;">
+    <meta name="description" content="Run Rake. Just Run Rake. Recently, I was setting up my laptop for an existing Rails project with the help of a pair. My pair was pivot on this &hellip;">
     
 
     <link href="/atom.xml" rel="alternate" title="blog.mattgauger.com" type="application/atom+xml">
@@ -63,6 +63,68 @@
   <article class="page span8 offset2">
     
     
+
+
+  <article class="post">
+    
+    <h1 class="title"><a href="/blog/2012/07/13/run-rake-just-run-rake/">Run Rake. Just Run Rake.</a></h1>
+    <div class="entry">
+        <p>Recently, I was setting up my laptop for an existing Rails project with the help of a pair. My pair was pivot on this project, which means that he&#8217;d been on it longer and so was bringing his experience and knowledge to the table, while I was seeing the project with fresh eyes.</p>
+
+<p>&#8220;This is going to take forever to set up,&#8221; he grumbled. &#8220;The documentation&#8217;s out of date, and I remember there&#8217;s a bunch of gotchas to setting this project up. We&#8217;ll need to compile this, then do that, then you get an API key for..&#8221;</p>
+
+<p>I went to Github and cloned the repo to my laptop.</p>
+
+<p>&#8220;Just run rake,&#8221; I replied.</p>
+
+<p>&#8220;What?&#8221;</p>
+
+<p>&#8220;Just run rake. It will tell us what to do next.&#8221;</p>
+
+<p>And indeed, it did tell us what to do. I&#8217;ve called this test-based configuration, or other funny things in the past, but you can just think of it as trying to get to a known good state - a state where all the tests run. If it prevents the tests from running, then it&#8217;s the next thing you need.</p>
+
+<p>I had to silence my pair&#8217;s grumbling at this process, because at first it seems like you&#8217;re going to be waiting a lot for rake, and that it might be easier just to remember all the steps necessary to set up a project.</p>
+
+<p>It turns out rake showed us all the steps we needed to do to get the project running. A full log of what this looks like setting up a simple Rails app can be seen <a href="https://gist.github.com/3112558">in this gist</a>.</p>
+
+<h3>Why?</h3>
+
+<p>The point of software craftsmanship is to be pragmatic, not to seek perfection. I could have memorized the steps necessary to set up the average Rails project, but those steps wouldn&#8217;t have applied here. And indeed, my pair could have memorized them, since he had been on the project. But those steps would go out the window as soon as my pair was on another project. It is far more pragmatic to know the behavior of our tools (like knowing that rake will tell us about each thing necessary to get to a state where the tests pass) and rely on that behavior rather than to seek perfection on this one project.</p>
+
+<p>Note: we could have used our experience with Rails and software craftsmen to avoid some of the steps you see me running in the gist: for example, you probably know that if the databases aren&#8217;t created, that you can run <code>rake db:create:all db:migrate db:test:prepare</code> all at once, without running rake inbetween every single rake task. That&#8217;d be far more pragmatic, as you&#8217;re saving yourself time and effort by knowing the toolset. But I wanted to demonstrate that running rake between every single step told us what to do next.</p>
+
+<p>Now, ask yourself: How can you &#8220;just run rake&#8221; with your projects?</p>
+
+        
+        
+    </div>
+
+    <div class="meta">
+        <div class="author">
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
+</div>
+        <div class="date">
+
+
+
+
+
+
+
+
+
+
+
+
+<time datetime="2012-07-13T14:59:00-05:00" pubdate  data-updated="true" >Jul 13<span>th</span>, 2012</time>.</div>
+        <div class="tags">
+
+</div>
+    </div>
+
+  </article>
 
 
   <article class="post">
@@ -567,151 +629,6 @@ You&rsquo;ve got a working test around this bug.
 
 
 <time datetime="2012-02-17T00:00:00-06:00" pubdate  data-updated="true" >Feb 17<span>th</span>, 2012</time>.</div>
-        <div class="tags">
-
-</div>
-    </div>
-
-  </article>
-
-
-  <article class="post">
-    
-    <h1 class="title"><a href="/blog/2012/01/21/invalid-gemspec-in-rvm-gems-ruby-1-9-2-p180-gemset-specifications-actionmailer-3-2-0-gemspec-illformed-requirement-3-2-0-/">Invalid Gemspec in [.rvm/gems/ruby-1.9.2-p180@gemset/specifications/actionmailer-3.2.0.gemspec]: Illformed Requirement [&#8220;# 3.2.0&#8221;]</a></h1>
-    <div class="entry">
-        <p>Recently while trying to create a new Rails 3.2 project, I ran into this error after creating a new RVM gemset in Ruby 1.9.2-p180 and a Gemfile requiring only Rails 3.2.0:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ bundle
-Fetching source index for http://rubygems.org/
-Installing rake (0.9.2.2) 
-Installing i18n (0.6.0) 
-Installing multi_json (1.0.4) 
-Installing activesupport (3.2.0) 
-Installing builder (3.0.0) 
-Installing activemodel (3.2.0)
-Invalid gemspec in [/Users/mathiasx/Developer/.rvm/gems/ruby-1.9.2-p180@big_fan/specifications/activemodel-3.2.0.gemspec]: Illformed requirement [&quot;# 3.2.0&quot;]
-... These Illformed requirement errors continue for every package Rails wants ...</pre></div>
-</div>
-
-<p>I thought that I might be able to continue on and ignore these errors, but I hadn&#8217;t seen anything like them anymore.</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ rails new .
-Invalid gemspec in [/Users/mathiasx/Developer/.rvm/gems/ruby-1.9.2-p180@big_fan/specifications/actionmailer-3.2.0.gemspec]: Illformed requirement [&quot;# 3.2.0&quot;]
-... again, it throws this error many times ...</pre></div>
-</div>
-
-<p>That didn&#8217;t generate a new Rails project in my current directory, so something was clearly wrong. But what does <strong>Illformed request: Syck:DefaultKey</strong> mean? Well, it turns out that the gemspecs of requirements in Rails 3.2.0 are using a new format that older Rubygems can&#8217;t parse. The first indicator was that my version of Rubygems was out of date:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ gem -v
-Invalid gemspec in [/Users/mathiasx/Developer/.rvm/gems/ruby-1.9.2-p180@big_fan/specifications/actionmailer-3.2.0.gemspec]: Illformed requirement [&quot;# 3.2.0&quot;]
-... I've cut out a bunch of the output from the invalid gemspecs here ...
-1.8.8</pre></div>
-</div>
-
-<p>We&#8217;d like to be on Rubygems 1.8.13 or newer, but I also don&#8217;t want to see those invalid gemspec warnings anymore, so I clear out my gemset with:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ rvm gemset empty
-WARN: Are you SURE you wish to remove the installed gemset for gemset 'ruby-1.9.2-p180@big_fan' (/Users/mathiasx/Developer/.rvm/gems/ruby-1.9.2-p180@big_fan)?
-(anything other than 'yes' will cancel) &gt; yes
-$ cd ..
-$ cd project/
-Using /Users/mathiasx/Developer/.rvm/gems/ruby-1.9.2-p180 with gemset big_fan</pre></div>
-</div>
-
-<p>Note that I have my rvmrc file like this so that it created and trusted the gemset upon encountering it:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ cat .rvmrc
-rvm use 1.9.2@big_fan --create</pre></div>
-</div>
-
-<h2>Getting everything working again:</h2>
-<p>Upgrade your Rubygems (this will only apply to this version of Ruby in RVM, not all versions of Ruby)</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ gem update --system
-== 1.8.15 / 2012-01-06
-
-* 1 bug fix:
-
-  * Don't eager load yaml, it creates a bad loop. Fixes #256
-
-
-------------------------------------------------------------------------------
-
-RubyGems installed the following executables:
-        /Users/mathiasx/Developer/.rvm/rubies/ruby-1.9.2-p180/bin/gem
-
-RubyGems system software updated</pre></div>
-</div>
-
-<p>Then just to be safe, make sure the gems we have are pristine (According to the manpage, gem pristine: &#8220;Restores installed gems to pristine condition from files located in the gem cache.&#8221;)</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ gem pristine --all</pre></div>
-</div>
-
-<p>And it is safe to now bundle:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ bundle
-Fetching source index for http://rubygems.org/
-Installing rake (0.9.2.2) 
-Installing i18n (0.6.0) 
-Installing multi_json (1.0.4) 
-Installing activesupport (3.2.0) 
-Installing builder (3.0.0) 
-Installing activemodel (3.2.0) 
-Installing erubis (2.7.0) 
-Installing journey (1.0.0) 
-Installing rack (1.4.0) 
-Installing rack-cache (1.1) 
-Installing rack-test (0.6.1) 
-Installing hike (1.2.1) 
-Installing tilt (1.3.3) 
-Installing sprockets (2.1.2) 
-Installing actionpack (3.2.0) 
-Installing mime-types (1.17.2) 
-Installing polyglot (0.3.3) 
-Installing treetop (1.4.10) 
-Installing mail (2.4.1) 
-Installing actionmailer (3.2.0) 
-Installing arel (3.0.0) 
-Installing tzinfo (0.3.31) 
-Installing activerecord (3.2.0) 
-Installing activeresource (3.2.0) 
-Using bundler (1.0.18) 
-Installing json (1.6.5) with native extensions 
-Installing rack-ssl (1.3.2) 
-Installing rdoc (3.12) 
-Installing thor (0.14.6) 
-Installing railties (3.2.0) 
-Installing rails (3.2.0) 
-Your bundle is complete! Use `bundle show [gemname]` to see where a bundled gem is installed.</pre></div>
-</div>
-
-<p>Now we should have a happy gemset and the error will be gone. Let me know if you have any questions. Happy hacking!</p>
-
-        
-        
-    </div>
-
-    <div class="meta">
-        <div class="author">
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
-</div>
-        <div class="date">
-
-
-
-
-
-
-
-
-
-
-
-
-<time datetime="2012-01-21T00:00:00-06:00" pubdate  data-updated="true" >Jan 21<span>st</span>, 2012</time>.</div>
         <div class="tags">
 
 </div>
