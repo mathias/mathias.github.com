@@ -3,7 +3,7 @@ layout: post
 title: "An (unscientific) study in behavior change with software"
 date: 2013-12-28 08:54
 comments: false
-categories: 
+categories:
 ---
 
 Forming habits is hard. There's been tons of research on what practices help form new habits successfully. And there has been research on what software can do to help form new habits. It's not enough to simply send daily reminders or keep track of the goals in a visible place. For software to help us form new habits successfully, we must look to the current research for clues as to how habits are formed.
@@ -26,7 +26,7 @@ But there's another factor in play here that I think determines the **right** ta
 
 ## Easy to do
 
-One reason we want a simple target behavior is so that it is easy for us to add to our schedule. You may have a goal of exercising more. But "exercising more" doesn't have a binary action associated with it; for example: what is "more"? Instead, you might say, "I want to exercise 45 minutes per day." And that would be a much better goal. But if exercising means you have to drive to the gym, and the gym is out of your way each day, it might be very unlikely that you will do it. This is not a simple target behavior. 
+One reason we want a simple target behavior is so that it is easy for us to add to our schedule. You may have a goal of exercising more. But "exercising more" doesn't have a binary action associated with it; for example: what is "more"? Instead, you might say, "I want to exercise 45 minutes per day." And that would be a much better goal. But if exercising means you have to drive to the gym, and the gym is out of your way each day, it might be very unlikely that you will do it. This is not a simple target behavior.
 
 If you do have some goal that may not be simple to implement at first &mdash; say, the example of having to drive out of your way to the gym &mdash; instead try to find a simpler version of the habit that you can adopt first. You may decide instead to just do some bodyweight exercises before you leave for work each morning. Decide on the exercises and write them down. Either you did them or you didn't. Later on, you can modify this existing habit to be more exercise, but for now, focus on what you can reasonably adopt as a simple habit.
 
