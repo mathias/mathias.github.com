@@ -1,4 +1,4 @@
-# mathias.github.com
+# blog.mattgauger.com
 
 This *was* an Octopress-based blog, but I've hacked it quite a bit at this point.
 
