@@ -16,7 +16,7 @@ The book centers around the use of [Hadoop](http://hadoop.apache.org/). In turn,
 
 Hadoop is patterned after Google's [MapReduce paper](http://static.googleusercontent.com/media/research.google.com/en/us/archive/mapreduce-osdi04.pdf). Google had large clusters of computers and large data sets that it wanted to process on those clusters. What they came up with was a simple idea: Write a single program that would specify a `map` function to run across tuples of all the input data. Add a `reduce` function that compiles that output down into the expected format. MapReduce coordinates deploying the program to each worker machine, divvying up the input data across the different machines, gathering up the results, and handling things like restarts after failures. This was a huge success inside Google, and Hadoop implements that architecture with improvements.
 
-It should be noted that this MapReduce architecture is essentially batch-processing for large amounts of data. The same system it would have a hard time with streams of data.
+It should be noted that this MapReduce architecture is essentially batch-processing for large amounts of data. The same system would have a hard time with continuous streams of data.
 
 Hadoop is, unfortunately, my first stumbling block with learning to process big data.
 
