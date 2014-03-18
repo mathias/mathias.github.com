@@ -14,9 +14,27 @@ This power made me think of a type of project that clients of every project seem
 
 So now that we've decided to build an app dashboard, let's take a look at our data. I have a small webapp that provides two JSON endpoints that look like this:
 
+`GET /api/stats`
+
 <script src="https://gist.github.com/mathias/9599072.js"></script>
 
+`GET /api/health`
 
+<script src="https://gist.github.com/mathias/9610523.js"></script>
 
+And these are just some little endpoints that I'd added to a webapp that are only for authed admin and are meant to be used to keep an eye on things. Nothing really that special here, other than that we can depend on them to serve this data.
 
 We start off by creating our project. You'll need boot, so follow the [installation instructions](https://github.com/tailrecursion/boot#getting-started) in their Getting Started guide.
+
+First, create the project directory, cd into it and start tracking with git:
+
+<script src="https://gist.github.com/mathias/9610932.js"></script>
+
+Then run this to create a basic `build.boot` file:
+
+<script src="https://gist.github.com/mathias/9610989.js"></script>
+
+If you take a look at that file, you'll notice it is mostly empty. Boot scripts are like shell scripts; they set the interpreter env and then the rest of the file is in that language.
+
+Since we want to use both Hoplon and Castra together, the quickest way to get started is to pattern our `build.boot` file after a project that is already set up to use those projects together. In the [hoplon-demos](https://github.com/tailrecursion/hoplon-demos/) repo on Github, there is a sample chat app that uses Hoplon and Castra. Take a look at its [build.boot](https://github.com/tailrecursion/hoplon-demos/blob/master/castra-chat/build.boot) file, and notice how it both sets up Hoplon compile task and a dev ring server task, then composes them together for the `chat-demo` task. I've taken that `build.boot` file and added in some deps inline, so that it looks like this:
+
