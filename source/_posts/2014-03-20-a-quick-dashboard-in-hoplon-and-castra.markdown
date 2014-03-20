@@ -58,7 +58,7 @@ To get to this point, you can do a `git reset --hard f19325`
 
 ## Talking to a remote service.
 
-The last step here is left as an exercise for the reader. You can imagine replacing the `articles function in `src/castra/gleam/api/gleam.clj` with something that polls a remote JSON API for data. Or you could look at my social news app [gnar](http://github.com/mathias/gnar) for inspiration on using a Postgres database for data.
+The last step here is left as an exercise for the reader. You can imagine replacing the `articles` function in `src/castra/gleam/api/gleam.clj` with something that polls a remote JSON API for data. Or you could look at my social news app [gnar](http://github.com/mathias/gnar) for inspiration on using a Postgres database for data.
 
 I hope to finish up a post with full explanations soon. Castra is relatively new, and it's worth explaining how some of the pieces fit together. My explanation should include more complicated interaction. like user authentication. I will be publishing that blog post after I get back from [ClojureWest](http://clojurewest.org) next week!
 
