@@ -4,7 +4,7 @@
   <title><![CDATA[blog.mattgauger.com]]></title>
   <link href="http://blog.mattgauger.com/atom.xml" rel="self"/>
   <link href="http://blog.mattgauger.com/"/>
-  <updated>2014-03-20T14:27:15-05:00</updated>
+  <updated>2014-03-20T14:28:45-05:00</updated>
   <id>http://blog.mattgauger.com/</id>
   <author>
     <name><![CDATA[Matt Gauger]]></name>
@@ -78,7 +78,7 @@
 
 <h2>Talking to a remote service.</h2>
 
-<p>The last step here is left as an exercise for the reader. You can imagine replacing the <code>articles function in</code>src/castra/gleam/api/gleam.clj` with something that polls a remote JSON API for data. Or you could look at my social news app <a href="http://github.com/mathias/gnar">gnar</a> for inspiration on using a Postgres database for data.</p>
+<p>The last step here is left as an exercise for the reader. You can imagine replacing the <code>articles</code> function in <code>src/castra/gleam/api/gleam.clj</code> with something that polls a remote JSON API for data. Or you could look at my social news app <a href="http://github.com/mathias/gnar">gnar</a> for inspiration on using a Postgres database for data.</p>
 
 <p>I hope to finish up a post with full explanations soon. Castra is relatively new, and it&#8217;s worth explaining how some of the pieces fit together. My explanation should include more complicated interaction. like user authentication. I will be publishing that blog post after I get back from <a href="http://clojurewest.org">ClojureWest</a> next week!</p>
 
