@@ -7,7 +7,7 @@
     <meta name="author" content="Matt Gauger">
 
     
-    <meta name="description" content="Agile Data Science: Review and Thoughts Recently, I read the book Agile Data Science by Russell Jurney. The book covers data science and how the &hellip;">
+    <meta name="description" content="A Quick Dashboard in Hoplon &amp; Castra Note: I began writing a much longer blog post that went into a ton of detail about how to build an app &hellip;">
     
 
     <link href="/atom.xml" rel="alternate" title="blog.mattgauger.com" type="application/atom+xml">
@@ -63,6 +63,106 @@
   <article class="page span8 offset2">
     
     
+
+
+  <article class="post">
+    
+    <h1 class="title"><a href="/blog/2014/03/20/a-quick-dashboard-in-hoplon-and-castra/">A Quick Dashboard in Hoplon &amp; Castra</a></h1>
+    <div class="entry">
+        <p><em>Note:</em> I began writing a much longer blog post that went into a ton of detail about how to build an app dashboard that used Hoplon and Castra. The kind of dashboard that just consumes JSON API endpoints from another app or other data sources. Such dashboards updates on the fly in the browser. Many apps these days need a dashboard like this to monitor stats: worker job queues, database size, average response times, etc.</p>
+
+<p>Rather than that long blog post, I wanted to simply show the steps I would take to build such a dashboard with <a href="http://hoplon.io">Hoplon</a> and <a href="https://github.com/tailrecursion/castra">Castra</a>. I won&#8217;t go into detail here or explain either Hoplon or Castra &mdash; go read on your own first, and also look into <a href="https://github.com/tailrecusion/boot">boot</a>, the build tool this uses.</p>
+
+<p>If you want to follow along, I&#8217;ve provided a <a href="https://github.com/mathias/gleam">repo</a>. The <a href="https://github.com/mathias/gleam/blob/30b4976b313c950c6cc97e64c65036eb21d75378/README.md">README</a> has instructions for getting setup. Assuming you have boot installed, you can just run <code>boot gleam-app</code> to get started.</p>
+
+<p>So here&#8217;s how I&#8217;d build up a dashboard, in several iterations:</p>
+
+<h2>Static data in the browser:</h2>
+
+<p>First, we get some data into the HTML using Hoplon cells:</p>
+
+<script src="https://gist.github.com/mathias/9670739.js"></script>
+
+
+<p>You&#8217;ll want to <code>git reset --hard 69b070</code> to get to this point.</p>
+
+<h2>Move the data to ClojureScript:</h2>
+
+<p>In <code>src/cljs/gleam/rpc.cljs</code>:</p>
+
+<script src="https://gist.github.com/mathias/9635157.js"></script>
+
+
+<p>And take out the <code>(def articles…)</code> from <code>index.html.hl</code>. After boot recompiles everything, you should still see the data in the page.</p>
+
+<p>To get to this point, you can run <code>git reset --hard d63f299</code>.</p>
+
+<h2>Move the data to the server side</h2>
+
+<p>Change <code>src/cljs/gleam/rpc.cljs</code> again, this time to make a remote call for data:</p>
+
+<script src="https://gist.github.com/mathias/9671172.js"></script>
+
+
+<p>On the backend, we need something like this in <code>src/castra/gleam/api/gleam.clj</code>:</p>
+
+<script src="https://gist.github.com/mathias/9671200.js"></script>
+
+
+<p>The Hoplon HTML file changes in the script tag at the top to use the new ClojureScript remote call and start up the polling:</p>
+
+<script src="https://gist.github.com/mathias/9671220.js"></script>
+
+
+<p>To get to this point in the example repo, you can do <code>git reset --hard 0bad1e5</code>.</p>
+
+<h2>Real time data</h2>
+
+<p>The last step that I will show is to verify that we are in fact getting regular updates of data from the back end.</p>
+
+<p>Change your Castra Clojure file to look like this:</p>
+
+<script src="https://gist.github.com/mathias/9671661.js"></script>
+
+
+<h2>Talking to a remote service.</h2>
+
+<p>The last step here is left as an exercise for the reader. You can imagine replacing the <code>articles function in</code>src/castra/gleam/api/gleam.clj` with something that polls a remote JSON API for data. Or you could look at my social news app <a href="http://github.com/mathias/gnar">gnar</a> for inspiration on using a Postgres database for data.</p>
+
+<p>I hope to finish up a post with full explanations soon. Castra is relatively new, and it&#8217;s worth explaining how some of the pieces fit together. My explanation should include more complicated interaction. like user authentication. I will be publishing that blog post after I get back from <a href="http://clojurewest.org">ClojureWest</a> next week!</p>
+
+<p>Let me know what you thought of this post by shooting me an <a href="mailto:contact@mattgauger.com">email</a>. I&#8217;d love to hear from you.</p>
+
+        
+        
+    </div>
+
+    <div class="meta">
+        <div class="author">
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
+</div>
+        <div class="date">
+
+
+
+
+
+
+
+
+
+
+
+
+<time datetime="2014-03-20T13:29:00-05:00" pubdate  data-updated="true" >Mar 20<span>th</span>, 2014</time>.</div>
+        <div class="tags">
+
+</div>
+    </div>
+
+  </article>
 
 
   <article class="post">
@@ -410,47 +510,6 @@ Note: It could be that I messed up these numbers a bit; I went off the current t
 
 
 <time datetime="2013-12-16T23:41:00-06:00" pubdate  data-updated="true" >Dec 16<span>th</span>, 2013</time>.</div>
-        <div class="tags">
-
-</div>
-    </div>
-
-  </article>
-
-
-  <article class="post">
-    
-    <h1 class="title"><a href="/blog/2013/11/11/apprentice-talk-video-and-notes/">Apprentice Talk Video &amp; Notes</a></h1>
-    <div class="entry">
-        <p>Back in September, I had a blast speaking at <a href="http://nickelcityruby.com/">Nickel City Ruby</a>. My talk was entitled &#8220;Apprenticeship: Software Craftsmanship&#8217;s Missing Link&#8221; and included a lot of slides of sasquatches. The video has been posted to Confreaks, so I&#8217;m embedding it here. Also note that I have posted my notes and a few resources over on the microsite I created for this talk, <a href="http://blog.mattgauger.com/apprenticeship/">http://blog.mattgauger.com/apprenticeship/</a></p>
-
-<iframe width="640" height="360" src="//www.youtube.com/embed/zuL7rAwmwCY" frameborder="0" allowfullscreen></iframe>
-
-
-        
-        
-    </div>
-
-    <div class="meta">
-        <div class="author">
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
-</div>
-        <div class="date">
-
-
-
-
-
-
-
-
-
-
-
-
-<time datetime="2013-11-11T19:22:00-06:00" pubdate  data-updated="true" >Nov 11<span>th</span>, 2013</time>.</div>
         <div class="tags">
 
 </div>

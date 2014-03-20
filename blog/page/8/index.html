@@ -7,7 +7,7 @@
     <meta name="author" content="Matt Gauger">
 
     
-    <meta name="description" content="Purpose (This post is part of my blog archiving project. This post appeared on&nbsp;http://blog.mattgauger.com/2009/12/28/purpose/ on December 28, &hellip;">
+    <meta name="description" content="Feedback Loops and Emergent Behavior (This post is part of my blog archiving project. This post appeared on&nbsp;blog.mattgauger.com&nbsp;on January &hellip;">
     
 
     <link href="/atom.xml" rel="alternate" title="blog.mattgauger.com" type="application/atom+xml">
@@ -63,6 +63,62 @@
   <article class="page span8 offset2">
     
     
+
+
+  <article class="post">
+    
+    <h1 class="title"><a href="/blog/2010/01/05/feedback-loops-and-emergent-behavior/">Feedback Loops and Emergent Behavior</a></h1>
+    <div class="entry">
+        <p style="margin-top: 0px; margin-right: 0px; margin-bottom: 1em; margin-left: 0px; font-size: 14px; vertical-align: baseline; background-color: transparent; color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-weight: 400; line-height: 1.4em; letter-spacing: 0px; text-align: left; padding: 0px;"><span style="color: #424037; font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 21px;">(This post is part of my blog archiving project. This post appeared on&nbsp;<a href="http://blog.mattgauger.com/2010/01/05/emergent-behavior/">blog.mattgauger.com</a>&nbsp;on January 5, 2010.)</span></p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 1em; margin-left: 0px; font-size: 14px; vertical-align: baseline; background-color: transparent; color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-weight: 400; line-height: 1.4em; letter-spacing: 0px; text-align: left; padding: 0px;">This post started out as a review of two books. My friend&nbsp;<a href="http://www.youtube.com/watch?v=vO_O4AD1MhI">Zac Witte</a>&nbsp;introduced me to the work of Jeff Hawkins, previously of Palm and now working at a company called&nbsp;<a href="http://numenta.com/">Numenta</a>, which is working on a method of creating artificial intelligence. Hawkins wrote a book called&nbsp;<a href="http://www.amazon.com/gp/product/0805078533?ie=UTF8&amp;tag=httpmattgauco-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0805078533">On Intelligence</a>&nbsp;in 2005 detailing his research into artificial intelligence up to that point. Zac recommended the book while we were hacking on code at a coffee shop here in Milwaukee.</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 1em; margin-left: 0px; font-size: 14px; vertical-align: baseline; background-color: transparent; color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-weight: 400; line-height: 1.4em; letter-spacing: 0px; text-align: left; padding: 0px;">I countered by recommending the work of Steve Grand, who is responsible for one of my childhood videogame addictions:&nbsp;<a href="http://en.wikipedia.org/wiki/Creatures_%28artificial_life_program%29" title=" link to Wikipedia entry">Creatures</a>. Creatures was an artificial life simulator that was deceptively simple and childlike. Yet behind the scenes, complex biological processes were being simulated and multi-lobed brains were allowing the Norns, the Creatures of the game, to think. At least, think in a rudimentary, simulated way.</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 1em; margin-left: 0px; font-size: 14px; vertical-align: baseline; background-color: transparent; color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-weight: 400; line-height: 1.4em; letter-spacing: 0px; text-align: left; padding: 0px;">Steve Grand wrote a book called&nbsp;<a href="http://www.amazon.com/gp/product/0674011139?ie=UTF8&amp;tag=httpmattgauco-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0674011139">Creation: Life and How to Make It</a>&nbsp;detailing his experience in coding the game. It quickly runs through several thought experiments in how one might simulate physics, matter, and chemical reactions. (And indeed, what these simulations say about the real world.) Grand likes to link various disciplines together, and the book easily jumps from transistors and electrical engineering to neurons to chemical reactions and on to more abstract concepts. Grand&rsquo;s work can be said to be of the field of artificial life, or A-life, and not necessarily artificial intelligence.</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 1em; margin-left: 0px; font-size: 14px; vertical-align: baseline; background-color: transparent; color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-weight: 400; line-height: 1.4em; letter-spacing: 0px; text-align: left; padding: 0px;">Emergent behavior theory suggests that complex behavior emerges from simple behavior. Or rather, that the whole is smarter than the sum of its parts. Think of an ant hill, which does not really have a leader yet manages to survive and adapt through simple actions of the ants. Emergent behavior found its popularity among the MIT Mobile Robot Lab, among other places. Simple behaviors telling a robot how to react to stimuli, for example, to back up its right wheel when the front left bumper is pressed or vice-versa, can produce seemingly intelligent behavior.</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 1em; margin-left: 0px; font-size: 14px; vertical-align: baseline; background-color: transparent; color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-weight: 400; line-height: 1.4em; letter-spacing: 0px; text-align: left; padding: 0px;">Jeff Hawkins began to study AI by reading as many scientific articles as possible. But, he was frustrated by the seeming lack of progress and unwillingness of the AI field to study real neuroscience. Hawkins wanted to study the human brain and use that for inspiration into how to create a general artificial intelligence. Traditional academic approaches to artificial intelligence at that point completely ignored neuroscience. Hawkins does not want to fully simulate the brain at some chemical level, either. Instead, Hawkins studied the neocortex, in his view the most important key to understanding the human brain. His research led him to an architecture he calls Hierarchical Temporal Memory, or HTM, based on how the brain processes patterns and fragments across time rather than whole memories instantaneously.</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 1em; margin-left: 0px; font-size: 14px; vertical-align: baseline; background-color: transparent; color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-weight: 400; line-height: 1.4em; letter-spacing: 0px; text-align: left; padding: 0px;">Hawkins discusses some of the shortcomings of traditional neural network research. Most neural networks, from the 70&rsquo;s to the present, were simply three stages of neurons: an input stage, a &ldquo;black box&rdquo; stage, and an output stage. Neural networks were trained with sample data, in which connections between neurons could strengthen or weaken. But after training, the neurons&rsquo; connections are &ldquo;locked&rdquo; and no further training occurs. Hawkins likens three stage neural network research to reverse engineering the transistors in a modern computer and being able to build simple amplifier circuits, or perhaps transistor radios. There is interesting behavior in an amplifier circuit, but it will never be a digital computer.</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 1em; margin-left: 0px; font-size: 14px; vertical-align: baseline; background-color: transparent; color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-weight: 400; line-height: 1.4em; letter-spacing: 0px; text-align: left; padding: 0px;">So why are these two books together in one review? Grand is an artifical life video game creator, and not at all interested in the same kind of artificial intelligence that Hawkins hopes to create. Their research seems to be opposed, or at least completely different.</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 1em; margin-left: 0px; font-size: 14px; vertical-align: baseline; background-color: transparent; color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-weight: 400; line-height: 1.4em; letter-spacing: 0px; text-align: left; padding: 0px;">The concept that these two differing authors agree on is the importance of&nbsp;<strong>feedback loops</strong>. Those traditional three stage neural networks rarely included simulating feedback loops in the neural connection, while the human brain&rsquo;s neocortex is largely feedback loops. Further, the number of connections coming in from the senses to the brain is far outweighed by the number of connections going back out to the sensory organs, in a nearly 10-to-1 ratio. This is extraordinary if you think that the brain simply processes incoming data passively. It is actively responding and anticipating sensory data.</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 1em; margin-left: 0px; font-size: 14px; vertical-align: baseline; background-color: transparent; color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-weight: 400; line-height: 1.4em; letter-spacing: 0px; text-align: left; padding: 0px;">You remember music in bits and and fragments rather than whole songs. There is a time element to these memories. You can&rsquo;t remember the whole song all at once, or hear every note at the same time. The same can be said for all memories. Hawkins points out that being able to predict the world led to the brain being organized this way. After all, prediction is a powerful survival skill.</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 1em; margin-left: 0px; font-size: 14px; vertical-align: baseline; background-color: transparent; color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-weight: 400; line-height: 1.4em; letter-spacing: 0px; text-align: left; padding: 0px;">Grand writes:</p>
+<blockquote>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 1em; margin-left: 0px; font-size: 14px; vertical-align: baseline; background-color: transparent; color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-weight: 400; line-height: 1.4em; letter-spacing: 0px; text-align: left; padding: 0px;">Living beings are high-order persistent phenomena, which endure through intelligent interaction with their environment. This intelligence is a product of multiple layers of feedback. An organism is therefore a localized network of feedback loops that ensures its own continuation.</p>
+</blockquote>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 1em; margin-left: 0px; font-size: 14px; vertical-align: baseline; background-color: transparent; color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-weight: 400; line-height: 1.4em; letter-spacing: 0px; text-align: left; padding: 0px;">We can find feedback loops around us everywhere in nature. One of my favorite examples comes from the book&nbsp;<a href="http://www.amazon.com/gp/product/0786887214?ie=UTF8&amp;tag=httpmattgauco-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0786887214">Sync</a>. Fireflies in Thailand will swarm in tall grass, flashing randomly. But they synchronize with each flash, until the whole swarm flashes in unison. How do they do it? There is no leader or conductor telling the fireflies when to flash. They change the rate of their flashing slightly, faster or slower, until they all match and the flashing syncs. Surprising complexity and cooperation can therefore occur from simple, basic behavior.</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 1em; margin-left: 0px; font-size: 14px; vertical-align: baseline; background-color: transparent; color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-weight: 400; line-height: 1.4em; letter-spacing: 0px; text-align: left; padding: 0px;">One of the places where a feedback loop exists in technology is in the TCP/IP protocol. In a simplified view, one could say that the rate of packets being sent is regulated based on signal loss. The machines at both ends of a network connection don&rsquo;t know anything about the connection between them or how good it is. They simply use the degradation of the signal - whether packets make it through and are responded to - to modulate whether to send more packets or the same packet over. This feedback loop has a speed regulating effect. The feedback loop ensures that the message will get delivered, even over a bad connection.</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 1em; margin-left: 0px; font-size: 14px; vertical-align: baseline; background-color: transparent; color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-weight: 400; line-height: 1.4em; letter-spacing: 0px; text-align: left; padding: 0px;">Feedback loops and emergent behavior are both fields of research that I&rsquo;m actively interested in learning more about. These books have fueled my thoughts for further exploration of both concepts. While feedback loops and emergent behavior may not have applications in all endeavors, they can be powerful solutions to the right problem.</p>
+<p style="margin-top: 0px; margin-right: 0px; margin-bottom: 1em; margin-left: 0px; font-size: 14px; vertical-align: baseline; background-color: transparent; color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-weight: 400; line-height: 1.4em; letter-spacing: 0px; text-align: left; padding: 0px;">The research of both authors is interesting and their books are highly readable. They both provide interesting thinking on the brain and the natural world, and I&rsquo;d like to follow up with more books in these areas. Both books are relatively short are definitely recommended reads. Too many &lsquo;pop science&rsquo; books seem to fall to the side of including too little real science, or paraphrasing studies that don&rsquo;t really have a neuroscience background. I&rsquo;ve had that issue with recent books on the human brain and learning marketed towards computer programmers: much of it was based on nonscientific surveys or speculation, which was highly disappointing.</p>
+<p>&nbsp;</p>
+
+        
+        
+    </div>
+
+    <div class="meta">
+        <div class="author">
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
+</div>
+        <div class="date">
+
+
+
+
+
+
+
+
+
+
+
+
+<time datetime="2010-01-05T00:00:00-06:00" pubdate  data-updated="true" >Jan 5<span>th</span>, 2010</time>.</div>
+        <div class="tags">
+
+</div>
+    </div>
+
+  </article>
 
 
   <article class="post">
@@ -297,49 +353,6 @@
 
 
 <time datetime="2009-12-26T00:00:00-06:00" pubdate  data-updated="true" >Dec 26<span>th</span>, 2009</time>.</div>
-        <div class="tags">
-
-</div>
-    </div>
-
-  </article>
-
-
-  <article class="post">
-    
-    <h1 class="title"><a href="/blog/2008/08/01/barcamp-madison-2-a-recap/">BarCamp Madison 2: A Recap</a></h1>
-    <div class="entry">
-        <p><span style="font-family: Lucida Grande, Lucida Sans Unicode, Arial, sans-serif; font-size: 12px;">
-<p style="margin-top: 1em; margin-right: 0px; margin-bottom: 1em; margin-left: 0px;"><span style="color: #424037; font-family: Arial, Helvetica, sans-serif; line-height: 21px;">(This post is part of my blog archiving project. This post appeared on&nbsp;<a href="http://bytecodex.wordpress.com/2008/08/01/barcamp-madison-2-a-recap/">bytecodex.wordpress.com</a>&nbsp;on August 1st, 2008.)</span></p>
-<p style="margin-top: 1em; margin-right: 0px; margin-bottom: 1em; margin-left: 0px;"><img class="alignnone" src="http://farm4.static.flickr.com/3182/2708457808_fdbf41e503.jpg?v=0" height="375" alt="" width="500" /><br />Had a blog post that I was writing&nbsp;<em>at&nbsp;</em>BarCampMadison2 as the weekend progressed, and forgot to put it under source control. Now it&rsquo;s gone!</p>
-<p style="margin-top: 1em; margin-right: 0px; margin-bottom: 1em; margin-left: 0px;">Instead I&rsquo;ll say that it was a great weekend, I really enjoyed it, and the folks who did the planning really pulled it off! Excellent location, excellent food, excellent people!</p>
-<p style="margin-top: 1em; margin-right: 0px; margin-bottom: 1em; margin-left: 0px;">My photos from the event are on&nbsp;<a href="http://www.flickr.com/photos/mattgauger/sets/72157606407926557/" style="color: #515151; text-decoration: none; border-bottom-width: 1px; border-bottom-style: dotted; border-bottom-color: silver;">my flickr</a></p>
-</span></p>
-
-        
-        
-    </div>
-
-    <div class="meta">
-        <div class="author">
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
-</div>
-        <div class="date">
-
-
-
-
-
-
-
-
-
-
-
-
-<time datetime="2008-08-01T00:00:00-05:00" pubdate  data-updated="true" >Aug 1<span>st</span>, 2008</time>.</div>
         <div class="tags">
 
 </div>

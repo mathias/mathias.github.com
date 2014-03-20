@@ -4,7 +4,7 @@
   <title><![CDATA[blog.mattgauger.com]]></title>
   <link href="http://blog.mattgauger.com/atom.xml" rel="self"/>
   <link href="http://blog.mattgauger.com/"/>
-  <updated>2014-03-16T08:34:02-05:00</updated>
+  <updated>2014-03-20T14:21:40-05:00</updated>
   <id>http://blog.mattgauger.com/</id>
   <author>
     <name><![CDATA[Matt Gauger]]></name>
@@ -12,6 +12,77 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A quick dashboard in Hoplon &amp; Castra]]></title>
+    <link href="http://blog.mattgauger.com/blog/2014/03/20/a-quick-dashboard-in-hoplon-and-castra/"/>
+    <updated>2014-03-20T13:29:00-05:00</updated>
+    <id>http://blog.mattgauger.com/blog/2014/03/20/a-quick-dashboard-in-hoplon-and-castra</id>
+    <content type="html"><![CDATA[<p><em>Note:</em> I began writing a much longer blog post that went into a ton of detail about how to build an app dashboard that used Hoplon and Castra. The kind of dashboard that just consumes JSON API endpoints from another app or other data sources. Such dashboards updates on the fly in the browser. Many apps these days need a dashboard like this to monitor stats: worker job queues, database size, average response times, etc.</p>
+
+<p>Rather than that long blog post, I wanted to simply show the steps I would take to build such a dashboard with <a href="http://hoplon.io">Hoplon</a> and <a href="https://github.com/tailrecursion/castra">Castra</a>. I won&#8217;t go into detail here or explain either Hoplon or Castra &mdash; go read on your own first, and also look into <a href="https://github.com/tailrecusion/boot">boot</a>, the build tool this uses.</p>
+
+<p>If you want to follow along, I&#8217;ve provided a <a href="https://github.com/mathias/gleam">repo</a>. The <a href="https://github.com/mathias/gleam/blob/30b4976b313c950c6cc97e64c65036eb21d75378/README.md">README</a> has instructions for getting setup. Assuming you have boot installed, you can just run <code>boot gleam-app</code> to get started.</p>
+
+<p>So here&#8217;s how I&#8217;d build up a dashboard, in several iterations:</p>
+
+<h2>Static data in the browser:</h2>
+
+<p>First, we get some data into the HTML using Hoplon cells:</p>
+
+<script src="https://gist.github.com/mathias/9670739.js"></script>
+
+
+<p>You&#8217;ll want to <code>git reset --hard 69b070</code> to get to this point.</p>
+
+<h2>Move the data to ClojureScript:</h2>
+
+<p>In <code>src/cljs/gleam/rpc.cljs</code>:</p>
+
+<script src="https://gist.github.com/mathias/9635157.js"></script>
+
+
+<p>And take out the <code>(def articles…)</code> from <code>index.html.hl</code>. After boot recompiles everything, you should still see the data in the page.</p>
+
+<p>To get to this point, you can run <code>git reset --hard d63f299</code>.</p>
+
+<h2>Move the data to the server side</h2>
+
+<p>Change <code>src/cljs/gleam/rpc.cljs</code> again, this time to make a remote call for data:</p>
+
+<script src="https://gist.github.com/mathias/9671172.js"></script>
+
+
+<p>On the backend, we need something like this in <code>src/castra/gleam/api/gleam.clj</code>:</p>
+
+<script src="https://gist.github.com/mathias/9671200.js"></script>
+
+
+<p>The Hoplon HTML file changes in the script tag at the top to use the new ClojureScript remote call and start up the polling:</p>
+
+<script src="https://gist.github.com/mathias/9671220.js"></script>
+
+
+<p>To get to this point in the example repo, you can do <code>git reset --hard 0bad1e5</code>.</p>
+
+<h2>Real time data</h2>
+
+<p>The last step that I will show is to verify that we are in fact getting regular updates of data from the back end.</p>
+
+<p>Change your Castra Clojure file to look like this:</p>
+
+<script src="https://gist.github.com/mathias/9671661.js"></script>
+
+
+<h2>Talking to a remote service.</h2>
+
+<p>The last step here is left as an exercise for the reader. You can imagine replacing the <code>articles function in</code>src/castra/gleam/api/gleam.clj` with something that polls a remote JSON API for data. Or you could look at my social news app <a href="http://github.com/mathias/gnar">gnar</a> for inspiration on using a Postgres database for data.</p>
+
+<p>I hope to finish up a post with full explanations soon. Castra is relatively new, and it&#8217;s worth explaining how some of the pieces fit together. My explanation should include more complicated interaction. like user authentication. I will be publishing that blog post after I get back from <a href="http://clojurewest.org">ClojureWest</a> next week!</p>
+
+<p>Let me know what you thought of this post by shooting me an <a href="mailto:contact@mattgauger.com">email</a>. I&#8217;d love to hear from you.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Agile Data Science: Review and Thoughts]]></title>
@@ -1528,24 +1599,6 @@ switched to db awesome-app-development</pre></div>
 <div style="padding: 5px 0 12px;">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/mathiasx">mathiasx</a>.</div>
 </div>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Techniques for learning a new skill]]></title>
-    <link href="http://blog.mattgauger.com/blog/2010/12/26/techniques-for-learning-a-new-skill/"/>
-    <updated>2010-12-26T00:00:00-06:00</updated>
-    <id>http://blog.mattgauger.com/blog/2010/12/26/techniques-for-learning-a-new-skill</id>
-    <content type="html"><![CDATA[<p>I just found these notes in an old notebook and figured they deserved a blog post . This isn&#8217;t self-help type stuff, it&#8217;s just practical. I&#8217;m blogging this so that some day I find it when reading my old blog posts, just as I found the list in an old notebook.</p>
-<p>Techniques helpful in learning any skill:</p>
-<ul>
-<li>Know your starting point (measure it, somehow) =&gt; &#8220;You can&#8217;t manage what you can&#8217;t measure.&#8221;</li>
-<li>Set objectives.</li>
-<li>Have techniques for improvement available.</li>
-<li>Assess your progress after a reasonable period.</li>
-<li>Have strategies for continuing improvement and maintaining the skill.</li>
-</ul>
-<p>I&#8217;d add in there to have a good way to record your progress. Something like <a href="http://www.daytum.com/">Daytum</a> will probably work if you want a web-based tool. Excel spreadsheets and notebooks work great, too.</p>
 ]]></content>
   </entry>
   
