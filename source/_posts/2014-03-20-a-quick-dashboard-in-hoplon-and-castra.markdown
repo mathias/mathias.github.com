@@ -54,6 +54,8 @@ Change your Castra Clojure file to look like this:
 
 <script src="https://gist.github.com/mathias/9671661.js"></script>
 
+To get to this point, you can do a `git reset --hard f19325`
+
 ## Talking to a remote service.
 
 The last step here is left as an exercise for the reader. You can imagine replacing the `articles function in `src/castra/gleam/api/gleam.clj` with something that polls a remote JSON API for data. Or you could look at my social news app [gnar](http://github.com/mathias/gnar) for inspiration on using a Postgres database for data.
