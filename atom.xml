@@ -4,7 +4,7 @@
   <title><![CDATA[blog.mattgauger.com]]></title>
   <link href="http://blog.mattgauger.com/atom.xml" rel="self"/>
   <link href="http://blog.mattgauger.com/"/>
-  <updated>2014-03-20T14:24:07-05:00</updated>
+  <updated>2014-03-20T14:27:15-05:00</updated>
   <id>http://blog.mattgauger.com/</id>
   <author>
     <name><![CDATA[Matt Gauger]]></name>
@@ -18,7 +18,7 @@
     <link href="http://blog.mattgauger.com/blog/2014/03/20/a-quick-dashboard-in-hoplon-and-castra/"/>
     <updated>2014-03-20T13:29:00-05:00</updated>
     <id>http://blog.mattgauger.com/blog/2014/03/20/a-quick-dashboard-in-hoplon-and-castra</id>
-    <content type="html"><![CDATA[<p><em>Note:</em> I began writing a much longer blog post that went into a ton of detail about how to build an app dashboard that used Hoplon and Castra. The kind of dashboard that just consumes JSON API endpoints from another app or other data sources. Such dashboards updates on the fly in the browser. Many apps these days need a dashboard like this to monitor stats: worker job queues, database size, average response times, etc.</p>
+    <content type="html"><![CDATA[<p><em>Note:</em> I began writing a much longer blog post that went into a ton of detail about how to build an app dashboard that used Hoplon and Castra. The kind of dashboard that just consumes JSON API endpoints from another app or other data sources. Such dashboards update on the fly in the browser. Many apps these days need a dashboard like this to monitor stats: worker job queues, database size, average response times, etc.</p>
 
 <p>Rather than that long blog post, I wanted to simply show the steps I would take to build such a dashboard with <a href="http://hoplon.io">Hoplon</a> and <a href="https://github.com/tailrecursion/castra">Castra</a>. I won&#8217;t go into detail here or explain either Hoplon or Castra &mdash; go read on your own first, and also look into <a href="https://github.com/tailrecusion/boot">boot</a>, the build tool this uses.</p>
 
