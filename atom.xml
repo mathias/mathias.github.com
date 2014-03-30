@@ -4,7 +4,7 @@
   <title><![CDATA[blog.mattgauger.com]]></title>
   <link href="http://blog.mattgauger.com/atom.xml" rel="self"/>
   <link href="http://blog.mattgauger.com/"/>
-  <updated>2014-03-30T16:02:41-05:00</updated>
+  <updated>2014-03-30T16:07:47-05:00</updated>
   <id>http://blog.mattgauger.com/</id>
   <author>
     <name><![CDATA[Matt Gauger]]></name>
@@ -40,7 +40,7 @@
 
 <p>So what is our goal for this blog post? Well, we want to fetch all emails from our Gmail inbox. We want to get metadata for each email, including things like who sent it and when it was sent. Then, we want to save the messages into a database so we can do further processing in later posts.</p>
 
-<p>Starting off, make a new basic Clojure project with lein. I&#8217;ve named my project <a href="https://github.com/mathias/autodjinn">autodjinn</a> after <a href="http://en.wikipedia.org/wiki/Email#Origin">AUTODIN</a>, one of the first email networks. You can use the <a href="https://github.com/mathias/autodjinn">repo</a> to refer to and to clone to follow along. I&#8217;ll provide some waypoints in this tutorial that you can reset the code to. Feel free to name your project whatever you want; just be sure to pay attention to the changes in filenames and namespaces as we go along!</p>
+<p>Starting off, make a new basic Clojure project with lein. I&#8217;ve named my project <a href="https://github.com/mathias/autodjinn">autodjinn</a> after <a href="http://en.wikipedia.org/wiki/Email#Origin">AUTODIN</a>, one of the first email networks. You can use the <a href="https://github.com/mathias/autodjinn">repo</a> to refer to and to clone to follow along. At the beginning of each subsequent post, I&#8217;ll provide a SHA that you can reset the code to. Feel free to name your project whatever you want; just be sure to pay attention to the changes in filenames and namespaces as we go along!</p>
 
 <p>Create the project and enter it:</p>
 
