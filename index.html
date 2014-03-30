@@ -7,7 +7,7 @@
     <meta name="author" content="Matt Gauger">
 
     
-    <meta name="description" content="A Quick Dashboard in Hoplon &amp; Castra Note: I began writing a much longer blog post that went into a ton of detail about how to build an app &hellip;">
+    <meta name="description" content="Clojure Data Science: Ingesting Your Gmail Inbox This is Part 1 of a series of blog posts inspired by the exercises from Agile Data Science with &hellip;">
     
 
     <link href="/atom.xml" rel="alternate" title="blog.mattgauger.com" type="application/atom+xml">
@@ -63,6 +63,369 @@
   <article class="page span8 offset2">
     
     
+
+
+  <article class="post">
+    
+    <h1 class="title"><a href="/blog/2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/">Clojure Data Science: Ingesting Your Gmail Inbox</a></h1>
+    <div class="entry">
+        <hr />
+
+<p>This is Part 1 of a series of blog posts inspired by the exercises from <a href="http://shop.oreilly.com/product/0636920025054.do">Agile Data Science</a> with Clojure. You may be interested in my <a href="http://blog.mattgauger.com/blog/2014/03/14/agile-data-science-review-and-thoughts/">review</a> of the book.</p>
+
+<hr />
+
+<p>For this blog post series, we are going to use your Gmail inbox as a dataset for an exploration of data science practices. Namely, we will use your email for machine learning and natural language processing applications. Email makes interesting data to process:</p>
+
+<ul>
+<li>it has lots of metadata that we can use as features <a href="#cds-gmail-footnote-1" name="cds-gmail-footnote-1-return">[1]</a></li>
+<li>we can model the relationships of senders and receivers as a graph</li>
+<li>each message has a body of text associated with it that we can analyze</li>
+<li>gaining insights from our personal communication is far more interesting than using an open data set!</li>
+</ul>
+
+
+<p><strong>Note:</strong> This is not an intro-to-Clojure blog post. If you need a tutorial that starts with the basics, I recommend the <a href="http://aphyr.com/tags/Clojure-from-the-ground-up">Clojure from the ground up</a> blog post series by <a href="https://twitter.com/aphyr">Aphyr</a>. It does an excellent job at introducing concepts in Clojure.</p>
+
+<p>In this post, I follow my typical Clojure workflow: I open a REPL and begin exploring the problem space. I look at individual pieces of data and start transforming them. When I write some functionality that I like for one piece of data, I try to extract it into the source code as a function that can work for any data our project may see. In this way, we can build up the project to contain the functions that are necessary to get to our goal.</p>
+
+<p>So what is our goal for this blog post? Well, we want to fetch all emails from our Gmail inbox. We want to get metadata for each email, including things like who sent it and when it was sent. Then, we want to save the messages into a database so we can do further processing in later posts.</p>
+
+<p>Starting off, make a new basic Clojure project with lein. I&#8217;ve named my project <a href="https://github.com/mathias/autodjinn">autodjinn</a> after <a href="http://en.wikipedia.org/wiki/Email#Origin">AUTODIN</a>, one of the first email networks. You can use the <a href="https://github.com/mathias/autodjinn">repo</a> to refer to and to clone to follow along. I&#8217;ll provide some waypoints in this tutorial that you can reset the code to. Feel free to name your project whatever you want; just be sure to pay attention to the changes in filenames and namespaces as we go along!</p>
+
+<p>Create the project and enter it:</p>
+
+<script src="https://gist.github.com/mathias/9861772.js"></script>
+
+
+<p>To import our Gmail data, we will use a Clojure library called <a href="https://github.com/owainlewis/clojure-mail">clojure-mail</a>. Clojure-mail is still under active development and is likely to change. For this blog post, we&#8217;ll be using version <code>0.1.6</code> to ensure compatibility between the code in this post and the library.</p>
+
+<p>Edit <code>project.clj</code> to contain your information and add the <code>[clojure-mail "0.1.6"]</code> dependency:</p>
+
+<script src="https://gist.github.com/mathias/9861804.js"></script>
+
+
+<p>We&#8217;ll start by working in <code>src/autodjinn/core.clj</code> and later move the functionality out into a script for our email import task. Open up the file in your favorite editor and launch a REPL.</p>
+
+<p>In your REPL, <code>(use 'autodjinn.core)</code> and verify it worked by running <code>(foo "MYNAME")</code>. You should see &#8220;MYNAME Hello, World!&#8221; printed out. Feel free to remove the <code>(defn foo…)</code> in <code>core.clj</code> now. We will not need it.</p>
+
+<p>You may want to use something like Emacs&#8217; <a href="https://github.com/clojure-emacs/cider">cider</a> or LightTable&#8217;s InstaREPL as your REPL environment. But you can use the regular Clojure REPL to build this project, as well. If you are not working with a REPL integrated to your editor, you will need to run <code>(use 'autodjinn.core :reload)</code> to force a reload of the code each time you save.</p>
+
+<h2>Connecting to Gmail</h2>
+
+<p>Our first goal is to connect to our inbox and verify that we can read email from it. To do that, we&#8217;re going to need to use our Gmail address and password &mdash; which we don&#8217;t want to put into our source files. <strong>It&#8217;s bad practice to put a password or a private key into a source file or check it into our repo! Just don&#8217;t do it!</strong></p>
+
+<p>Instead, we will use a nice library called <a href="https://github.com/james-henderson/nomad">nomad</a> to load a config file containing our email address and password. We will add the config file to <code>.gitignore</code> so that it is never saved into our code.</p>
+
+<p>Add the line <code>[jarohen/nomad "0.6.3"]</code> to your <code>project.clj</code> dependencies before moving on, and run <code>lein deps</code> in a console to pull in the dependency.</p>
+
+<p>Back in our <code>core.clj</code> add the require statements for <code>clojure-mail</code> and <code>nomad</code> to your ns macro like this:</p>
+
+<script src="https://gist.github.com/mathias/9863912.js"></script>
+
+
+<p>Then create a new file in <code>resources/config/autodjinn-config.edn</code>. It should look like this, with your email address and password filled in:</p>
+
+<script src="https://gist.github.com/mathias/9864315.js"></script>
+
+
+<p>Now open up your <code>.gitignore</code> file and add the following line to it:</p>
+
+<script src="https://gist.github.com/mathias/9866473.js"></script>
+
+
+<p>Following <a href="https://github.com/james-henderson/nomad#hello-world">nomad&#8217;s README</a>, we need to load our config file and pull out our <code>gmail-username</code> and <code>gmail-password</code> keys. We add to the following to <code>core.clj</code> after the <code>ns</code> macro:</p>
+
+<script src="https://gist.github.com/mathias/8c0849fc0e137f1bd611.js"></script>
+
+
+<p>Using the <code>get</code> function here is a safe lookup for maps that returns <code>nil</code> if nothing is found for the key. Back in our REPL, we can see this in action with some quick experimentation:</p>
+
+<script src="https://gist.github.com/mathias/9864411.js"></script>
+
+
+<p>We could also use the shorter <code>(:keyname mymap)</code> syntax here, since symbols are an invocable function that looks up a key in a map. But the <code>get</code> function reads better than <code>(:gmail-username (autodjinn-config))</code> in my opinion.</p>
+
+<p>In your REPL, you should now be able to get the values for <code>gmail-username</code> and <code>gmail-password</code>:</p>
+
+<script src="https://gist.github.com/mathias/9864585.js"></script>
+
+
+<p>Note that since I&#8217;m in the <code>user</code> namespace here, I had to qualify the vars with their <code>autodjinn.core</code> namespace. If this is confusing, you might want to read up on <a href="http://clojure-doc.org/articles/language/namespaces.html">namespaces in Clojure</a> before moving on. (See also: the &#8216;Namespaces&#8217; section in <a href="http://aphyr.com/posts/311-clojure-from-the-ground-up-logistics">Clojure from the ground up: logistics</a>.)</p>
+
+<p><code>clojure-mail</code> requires us to open a connection to Gmail with the <code>gen-store</code> function (<a href="https://github.com/owainlewis/clojure-mail/blob/c3aad67b42aad96405d4c329ca48e29b7960d412/src/clojure_mail/core.clj#L80-L83">src</a>). We then pass that connection around to various functions to interact with our inbox. Define a var called <code>my-store</code> in your <code>core.clj</code> that does this with our email address and password:</p>
+
+<script src="https://gist.github.com/mathias/9865909.js"></script>
+
+
+<p>Make sure the <code>(def my-store…</code> above has been run in your REPL and then take a look at our open connection:</p>
+
+<script src="https://gist.github.com/mathias/9865937.js"></script>
+
+
+<p>The type of <code>my-store</code> should be an <code>IMAPSSLStore</code> as above. If it didn&#8217;t work, you&#8217;ll see a string error message when you try to define <code>my-store</code>.</p>
+
+<h2>Your inbox as a list</h2>
+
+<p>Now we&#8217;ll use our REPL to build up a function that will eventually import all of our email. To start, we can use the <code>inbox</code> function (<a href="https://github.com/owainlewis/clojure-mail/blob/c3aad67b42aad96405d4c329ca48e29b7960d412/src/clojure_mail/core.clj#L198-L201">src</a>) from <code>clojure-mail</code> to get a seq of messages in our inbox. Note that since it is a seq and inboxes can be very large, we limit it with the <code>take</code> function.</p>
+
+<script src="https://gist.github.com/mathias/9866030.js"></script>
+
+
+<p>If everything is working, you should see a list of of the <code>IMAPMessage</code>s returned by the last line in your REPL.</p>
+
+<p>What if, instead, we wanted to loop over many messages and print out their subjects? We can pull in the <code>message</code> namespace (<a href="https://github.com/owainlewis/clojure-mail/blob/master/src/clojure_mail/message.clj">src</a>) from <code>clojure-mail</code>, which gives us convenience functions for getting at message data.</p>
+
+<p>You&#8217;ll have to be careful running this next line &mdash; on a large inbox it&#8217;ll print out the subject of everything in your inbox! If you have a lot of messages, consider wrapping the call to <code>inbox</code> in a <code>take</code> as above.</p>
+
+<script src="https://gist.github.com/mathias/9866059.js"></script>
+
+
+<p>Those are the subject lines of the 4 messages in the inbox of my test account, so I know that this is working. Save our <code>doseq</code> line into a function called <code>ingest-inbox</code>; we&#8217;ll come back to it later:</p>
+
+<script src="https://gist.github.com/mathias/9866289.js"></script>
+
+
+<h2>Examining messages</h2>
+
+<p>Before we move on, let&#8217;s take a look at an individual message and what we can get out of it from the <code>message</code> namespace.</p>
+
+<script src="https://gist.github.com/mathias/9866195.js"></script>
+
+
+<p>From this, we can see a few things:</p>
+
+<ul>
+<li>The ID returned by <code>message/id</code> looks like a good candidate to get good unique IDs for each message when we store the messages. But we might want to strip off those angle brackets first.</li>
+<li>The <code>message/message-body</code> function doesn&#8217;t return a string of the body. Instead, it returns a list of maps which contains the <code>text/plain</code> form of the body and the <code>text/html</code> form. We will have to extract each from the map so that we can use the plaintext version for things like language processing. We&#8217;ll also keep the HTML version in case we need it later.</li>
+<li>If you started digging in to the <code>message</code> namespace&#8217;s source you may have noticed that we don&#8217;t have functions for getting date sent or date received for a message. Nor can we get a list of addresses CCed or BCCed for the message. We&#8217;ll have to write those functions ourselves.</li>
+</ul>
+
+
+<h2>Cleaning up the IDs</h2>
+
+<p>Let&#8217;s focus on writing a function to clean up the ID returned by the <code>message/id</code> function. Recall that such IDs look like <code>&lt;CAJiAYR90LbbN6k8tVXuhQc8f6bZoK647ycdc7mxF5mVEaoLKHw@mail.gmail.com&gt;</code></p>
+
+<p>The <code>clojure.string</code> namespace provides a <code>replace</code> function which does simple replacement on a string. We can use it like this:</p>
+
+<script src="https://gist.github.com/mathias/9866344.js"></script>
+
+
+<p>That worked for replacing the angle brackets for the original string. But remember that data structures are immutable in Clojure, including strings. Replacing the first angle bracket didn&#8217;t change the original string when we tried to replace the other angle bracket. We need something that allows us to build up an intermediate value and pass it to the next function. For that, we will use the <a href="http://clojure.github.io/clojure/clojure.core-api.html#clojure.core/-%3e">thread-first</a> macro: <code>-&gt;</code>. It is easiest if I show the macro in use with some comments showing what the intermediate values would be at each step:</p>
+
+<script src="https://gist.github.com/mathias/9866380.js"></script>
+
+
+<p>It is called the <strong>thread-first</strong> macro because it threads through the first argument to each function. In this case, <code>clojure.string/replace</code>&#8217;s first argument is the string to replace on. So the each successively returned value gets passed to the next function above.</p>
+
+<p>Now that we&#8217;ve figured out how to clean up that ID, we will create a function to clean up any ID we pass it:</p>
+
+<script src="https://gist.github.com/mathias/9866436.js"></script>
+
+
+<h2>Extracting the message bodies</h2>
+
+<p>Recall the <code>message/message-body</code> call above:</p>
+
+<script src="https://gist.github.com/mathias/9866777.js"></script>
+
+
+<p>Ideally, we want to write a function that can get the <code>text/plain</code> body out of this value, and another function that can get the <code>text/html</code> body out. Notice that the <code>:content-type</code> values aren&#8217;t quite so simple as just selecting the item in the list where the string <code>text/plain</code> appears. We will need our function to ignore the additional information in the <code>:content-type</code> value, which includes things like string encodings.</p>
+
+<p>Let&#8217;s look at just the first map in the list returned by <code>message/message-body</code>:</p>
+
+<script src="https://gist.github.com/mathias/9866861.js"></script>
+
+
+<p>If we build a predicate function that can detect when the <code>:content-type</code> key is the type we want, we can use it in a <code>filter</code> function to choose the correct type of body in our functions.</p>
+
+<p>Notice that <code>TEXT/PLAIN</code> and <code>TEXT/HTML</code> are always separated from the rest of the content-type by a semicolon, and it always appears first. You&#8217;d have to look at a few messages from your inbox to arrive at the same conclusion, but I&#8217;ve already done the work and can assure you that the previous statement is true.</p>
+
+<p>Then, an easy to to get at the part of the content-type we want would be to split on the semicolon and take the first element returned:</p>
+
+<script src="https://gist.github.com/mathias/9867049.js"></script>
+
+
+<p>This leads us to a function to first clean up the content-type string, and then our predicate function to detect if it is the one we want:</p>
+
+<script src="https://gist.github.com/mathias/9867072.js"></script>
+
+
+<p>To finish off our work on the message bodies, we want to filter the list returned by <code>message/message-body</code>:</p>
+
+<script src="https://gist.github.com/mathias/9867356.js"></script>
+
+
+<p>And turn it into a function that works for any message bodies list:</p>
+
+<script src="https://gist.github.com/mathias/9867382.js"></script>
+
+
+<p>Note that we&#8217;ve also used this function to create two convenience functions, one for extracting plaintext bodies and one for extracting HTML bodies. By keeping functions simple and small, we can build up useful functions for our project rather than try to plan it all out ahead of time.</p>
+
+<h2>Getting more information out of the IMAPMessages</h2>
+
+<p>As noted above, we will need to write a few more functions to get the fields of the <code>IMAPMessage</code>s that we cannot get through this version of <code>clojure-mail</code>. Recall that we want to get CC list, BCC list, date sent, and date received values. To do that, we will use Java interop functionality. It&#8217;s really not as bad as it sounds. Remember that the <code>IMAPMessage</code>s we see are Java instances of the <code>IMAPMessage</code> class. Calling a method on an instance is accomplished by using a dot before the method name, with the method in the function position, such as: <code>(.javaMethod some-java-instance)</code></p>
+
+<p>To start, we can look at <code>clojure-mail</code>&#8217;s <a href="https://github.com/owainlewis/clojure-mail/blob/c3aad67b42aad96405d4c329ca48e29b7960d412/project.clj">project.clj</a> and see that it depends on <code>javax.mail</code>. The next step is to find the documentation for the Java implementation of <code>javax.mail.Message</code>, which <a href="http://docs.oracle.com/javaee/6/api/javax/mail/Message.html">lives here</a>.</p>
+
+<p>In the REPL, we can try some of the Java interop on our <code>my-msg</code>:</p>
+
+<script src="https://gist.github.com/mathias/9876540.js"></script>
+
+
+<p>The datetimes for each message are automatically turned into Clojure instants for us, which is convenient. If we dig into how the <code>clojure-mail.message/to</code> function [<a href="https://github.com/owainlewis/clojure-mail/blob/c3aad67b42aad96405d4c329ca48e29b7960d412/src/clojure_mail/message.clj#L16-L20">src</a>] works, we see that it is using the <code>.getRecipients</code> method. <code>.getRecipients</code> takes the message and a constant of a <code>RecipientType</code>. For our purposes, we want the <code>javax.mail.Message$RecipientType/CC</code> and <code>javax.mail.Message$RecipientType/BCC</code> recipients:</p>
+
+<script src="https://gist.github.com/mathias/9876632.js"></script>
+
+
+<p>The last line maps the <code>str</code> function across each element returned, so that we get the string representation of the email addresses. That way, our database can just store the strings.</p>
+
+<p>As before, now that we know how to use these methods in the REPL, we write functions in <code>core.clj</code> to take advantage of our newfound knowledge:</p>
+
+<script src="https://gist.github.com/mathias/9876737.js"></script>
+
+
+<p>In the REPL, it should now be possible to get a nice map representation of all the fields on the message we care about:</p>
+
+<script src="https://gist.github.com/mathias/9876884.js"></script>
+
+
+<p>Congrats on making it this far. We&#8217;ve used quite a few neat little features of Clojure and the libraries we&#8217;re building this project with to get here.</p>
+
+<p>The last step we&#8217;ll go through in this post is to get these messages into a database.</p>
+
+<h2>Enter Datomic, the immutable datastore</h2>
+
+<p><a href="http://www.datomic.com/">Datomic</a> is a great database layer built on Clojure that gives us a database value representing immutable data. New transactions on the database create new database values. It fits very well with Clojure&#8217;s own concept of <a href="http://clojure.org/state">state and identity</a> because it was designed by the same folks as Clojure. Plus, Datomic is meant to grow and scale in modern environments like AWS, with many backend datastore options to run it on.</p>
+
+<p>There&#8217;s some important reasons why you might choose Datomic as your database for a data science / machine learning application:</p>
+
+<ul>
+<li>There are various storage backends, so you can grow from tens of thousands of rows in PostgreSQL on a developer&#8217;s laptop to millions of records (or more) in Riak or DynamoDB on AWS. That is, it has a good migration path from small datasets to big data through the Datomic import/export process</li>
+<li>The concept of time associated with each value in Datomic means that we can query for historical data to compare against</li>
+<li>Datomic has a lightweight schema compared to a relational database like PostgreSQL. Schemas are just data! When we begin computing new values from our dataset, we can add new types of entities easily at the same time.</li>
+<li>Datomic&#8217;s schemas allow us to treat it as a key-value store, relational database, or even build a graph store on top of it, if we need to</li>
+</ul>
+
+
+<p><strong>Note</strong>: I won&#8217;t go through setting up an entire Datomic installation here. It&#8217;s worth reading up on the <a href="http://docs.datomic.com/">docs</a> and the <a href="http://www.datomic.com/rationale.html">rationale</a> behind Datomic&#8217;s design.</p>
+
+<p>You can get the <a href="https://my.datomic.com/downloads/free">Datomic free build</a> if you like, but you will be limited to in-memory stores. It is unlikely that your Gmail inbox will fit into memory on your dev machine. Instead, I recommend signing up for the free <a href="http://www.datomic.com/get-datomic.html">Datomic Pro Starter Edition</a>. (The free Starter Edition is fine because you will not be using this project in a commercial capacity.) Once you have Datomic Pro downloaded and installed in your local Maven, I recommend using the PostgreSQL storage adapter locally with memcached. Follow the guides for configuring storage on the <a href="http://docs.datomic.com/storage.html">Datomic Storage</a> page.</p>
+
+<p>Add the correct line to your <code>project.clj</code> dependencies for the version of Datomic you&#8217;ll be using (mine was <code>[com.datomic/datomic-pro "0.9.4384"]</code> which might be a bit out of date and likely won&#8217;t match yours.) Now we can start using Datomic in our <code>core.clj</code> and our REPL.</p>
+
+<p>The first thing we need is the URI where the Datomic database lives. When we start up the Datomic transactor, you will see a DB URI that looks something like <code>datomic:sql://DBNAMEHERE?jdbc:postgresql://localhost:5432/datomic?user=datomic&amp;password=datomic</code> in the output. Grab that URI and add it to our <code>resources/config/autodjinn-config.edn</code>:</p>
+
+<script src="https://gist.github.com/mathias/9877346.js"></script>
+
+
+<p>Back at the top of <code>core.clj</code>, save that value to a var as we did with <code>gmail-username</code> and <code>gmail-password</code>:</p>
+
+<script src="https://gist.github.com/mathias/9877374.js"></script>
+
+
+<p>And then in the REPL:</p>
+
+<script src="https://gist.github.com/mathias/9879199.js"></script>
+
+
+<p>Note that according to the <a href="http://docs.datomic.com/clojure/index.html#datomic.api/create-database">datomic clojure docs for the create-database function</a>, it returns true if the database was created, and false if it already exists. So running <code>create-database</code> every time we run our script is safe, since it won&#8217;t destroy data.</p>
+
+<p>If the above work in the REPL doesn&#8217;t work, it is likely your code is unable to talk to your running Datomic, or your Datomic transactor is not configured correctly. Diagnose it with Googling and reading the docs until you get it to work, then move on.</p>
+
+<p>Calling <code>(d/db db-connection)</code> gives us the current value of our database. In most cases, we want to just get the most current value. So, we can write a convenience function <code>new-db-val</code> to always get us the current (and possibly different) database value. But there are cases where we want to coordinate several queries and use the same database values for each. In those cases, we won&#8217;t use the function get the latest database value, but rather pass this database value to the queries so that all query against the same state.</p>
+
+<p>In our <code>core.clj</code>, we can add the code we need to create the database, get our connection, and the convenience <code>new-db-val</code> function:</p>
+
+<script src="https://gist.github.com/mathias/9879246.js"></script>
+
+
+<p>Next, we need to tell Datomic about the schema of our data. Schemas are just data that you run as a transaction on the database. Reading up on the <a href="http://docs.datomic.com/schema.html">Schema</a> page of the Datomic docs might be helpful to understand what&#8217;s going on here. The short version is that we define each attribute of an email and set up its properties. The collection of all attributes together will constitute a <code>mail</code> entity, so we namespace all the attributes under the <code>:mail/</code> namespace.</p>
+
+<script src="https://gist.github.com/mathias/9879323.js"></script>
+
+
+<p>We add that var def to our <code>core.clj</code> because it is, after all, just data. We may choose later to move it to its own <code>edn</code> file, but for now, it can live in our source code. Next, we want to apply this schema to our database with a transaction. That looks like this:</p>
+
+<script src="https://gist.github.com/mathias/9879355.js"></script>
+
+
+<p>Now we put that transaction in a convenience function in <code>core.clj</code> that we&#8217;ll run every time we run this file. The function will ensure that our database is &#8216;converged&#8217; to this schema. Running a transaction will create a new database value. But it will not blow away any data that we had in the database by running this transaction many times. It will simply try to update the existing attributes, and nothing in the attributes themselves need change. It is far more work to retract (delete) data in Datomic than it is to add or update it. This leads to much more safety around working with data without worrying that we will destroy data, and it encourages a REPL-based exploration of the data and its history.</p>
+
+<script src="https://gist.github.com/mathias/9879424.js"></script>
+
+
+<p>Now that our <code>mail</code> entities are defined in Datomic, we can try a query to find all the entity-IDs where any <code>:mail/uid</code> value is present. Read up on the <a href="http://docs.datomic.com/query.html">Query</a> page of the Datomic docs to dig into querying deeper. You might also be interested in the excellent <a href="http://www.learndatalogtoday.org/">Learn Datalog Today</a> website to learn more about querying Datomic with Datalog.</p>
+
+<script src="https://gist.github.com/mathias/9879491.js"></script>
+
+
+<p>Since we have no <code>mail</code> entities in our database, Datomic returns an empty set. So now we reach the end of task: We can ingest some emails and save them in our database! Return to the <code>ingest-inbox</code> function that we left before. Here&#8217;s what the updated version will look like:</p>
+
+<script src="https://gist.github.com/mathias/9879494.js"></script>
+
+
+<p>We use the <code>@</code>-sign before the <code>(d/transact…)</code> call because Datomic normally returns a promise of the completed transaction. However, we want to force Datomic to complete each transaction before moving on by deref-ing it with the <code>@</code>-sign. Per the Clojure docs: &#8220;Calls to deref/@ prior to delivery will block.&#8221;</p>
+
+<p>If you run this function in your REPL, you should see it start to ingest your email from Gmail!</p>
+
+<script src="https://gist.github.com/mathias/9879552.js"></script>
+
+
+<p>Note that this could a take a <strong>long time</strong> if you&#8217;ve chosen to import a really large Gmail inbox! You might want to stop the import at some point; in most REPLs <code>Ctrl-c</code> will stop the running function.</p>
+
+<p>If we query for our entity-IDs again, as above, we should see some values returned!</p>
+
+<p>What does one of those database entities look like when we run it through Datomic&#8217;s <a href="http://docs.datomic.com/clojure/index.html#datomic.api/entity">entity</a> and <a href="http://docs.datomic.com/clojure/index.html#datomic.api/touch">touch</a> functions to instantiate all its attributes?</p>
+
+<script src="https://gist.github.com/mathias/9879636.js"></script>
+
+
+<h2>Wrapping up</h2>
+
+<p>That&#8217;s it for this blog post. It took a little setup, but we were able to build up a working Gmail import tool with help from our REPL and some nice Clojure libraries.</p>
+
+<p>Next time, we&#8217;ll be looking at doing some basic querying of the data, including getting a count of the number of times each email address has sent you an email.</p>
+
+<p>Comments? Questions? Feel free to contact me at <a href="mailto:contact@mattgauger.com">contact@mattgauger.com</a>. I&#8217;d love to hear from you.</p>
+
+<hr />
+
+<p><a name="cds-gmail-footnote-1"></a>
+<strong>1</strong> In this case, machine learning <em>features</em>, which are the input variables for our learning tasks. Not software features that we a client might ask us to implement. See: <a href="https://en.wikipedia.org/wiki/Feature_learning">Feature learning - Wikipedia, the free encyclopedia</a>.
+<a href="#cds-gmail-footnote-1-return">↩</a></p>
+
+        
+        
+    </div>
+
+    <div class="meta">
+        <div class="author">
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
+</div>
+        <div class="date">
+
+
+
+
+
+
+
+
+
+
+
+
+<time datetime="2014-03-30T14:44:00-05:00" pubdate  data-updated="true" >Mar 30<span>th</span>, 2014</time>.</div>
+        <div class="tags">
+
+</div>
+    </div>
+
+  </article>
 
 
   <article class="post">
@@ -462,56 +825,6 @@ By &#8220;augmenting human intellect&#8221; we mean increasing the capability of
 
 
 <time datetime="2013-12-28T08:54:00-06:00" pubdate  data-updated="true" >Dec 28<span>th</span>, 2013</time>.</div>
-        <div class="tags">
-
-</div>
-    </div>
-
-  </article>
-
-
-  <article class="post">
-    
-    <h1 class="title"><a href="/blog/2013/12/16/in-the-year-2100/">In the Year 2100</a></h1>
-    <div class="entry">
-        <p>Recently I was asked by a coworker to write up some ideas for where our company would be in the future. Not just next year, or in 5 years, but where we saw the company in the year 2100. For my other coworkers, the year 2100 probably represents far enough out to ensure they stop thinking in the constraints of right now. But for someone who has read as much science fiction as I have, I saw a wide gulf of time.</p>
-
-<p>So I hit up Wolfram Alpha, asking myself what technology might look like in the year 2100.</p>
-
-<p>If Moore&#8217;s Law holds, then processors could contain 3.5 x 10<sup>22</sup> transistors &mdash; roughly 350 times more transistors than the number of grains of sands on the planet. (Thanks, Wolfram Alpha!) This also represents roughly 2.9x10<sup>18</sup> MIPS per chip, which is roughly a factor of ten more processing power in each chip than all 7 billion brains of humans on the planet, combined. That kind of computing power is almost unimaginable to me now.</p>
-
-<p>While I don&#8217;t have a religious belief in the Singularity, I <strong>do</strong> think that we can&#8217;t really predict what it&#8217;ll mean to have so much computing power available to us. Or what technology, society, or people will look like by then. Of course, someone&#8217;s gotta write the software to make that hardware useful…</p>
-
-<hr />
-
-<p><small>
-Note: It could be that I messed up these numbers a bit; I went off the current transistor count and MIPS for the Intel i7-4770k processor, since I recently started putting together a server with one. And the numbers are extrapolated out quite a bit. If you&#8217;ve got corrections to these numbers, hit me up on <a href="https://twitter.com/mathiasx">Twitter</a> to let me know!
-</small></p>
-
-        
-        
-    </div>
-
-    <div class="meta">
-        <div class="author">
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
-</div>
-        <div class="date">
-
-
-
-
-
-
-
-
-
-
-
-
-<time datetime="2013-12-16T23:41:00-06:00" pubdate  data-updated="true" >Dec 16<span>th</span>, 2013</time>.</div>
         <div class="tags">
 
 </div>
