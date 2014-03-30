@@ -256,7 +256,9 @@ Since we have no `mail` entities in our database, Datomic returns an empty set. 
 
 <script src="https://gist.github.com/mathias/9879494.js"></script>
 
-We use the `@`-sign before the `(d/transact…)` call because Datomic normally returns a promise of the completed transaction. However, we want to force Datomic to complete each transaction before moving on. If you run this function in your REPL, you should see it start to ingest your email from Gmail!
+We use the `@`-sign before the `(d/transact…)` call because Datomic normally returns a promise of the completed transaction. However, we want to force Datomic to complete each transaction before moving on by deref-ing it with the `@`-sign. Per the Clojure docs: "Calls to deref/@ prior to delivery will block."
+
+If you run this function in your REPL, you should see it start to ingest your email from Gmail!
 
 <script src="https://gist.github.com/mathias/9879552.js"></script>
 
