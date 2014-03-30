@@ -23,7 +23,7 @@ In this post, I follow my typical Clojure workflow: I open a REPL and begin expl
 
 So what is our goal for this blog post? Well, we want to fetch all emails from our Gmail inbox. We want to get metadata for each email, including things like who sent it and when it was sent. Then, we want to save the messages into a database so we can do further processing in later posts.
 
-Starting off, make a new basic Clojure project with lein. I've named my project [autodjinn](https://github.com/mathias/autodjinn) after [AUTODIN](http://en.wikipedia.org/wiki/Email#Origin), one of the first email networks. You can use the [repo](https://github.com/mathias/autodjinn) to refer to and to clone to follow along. I'll provide some waypoints in this tutorial that you can reset the code to. Feel free to name your project whatever you want; just be sure to pay attention to the changes in filenames and namespaces as we go along!
+Starting off, make a new basic Clojure project with lein. I've named my project [autodjinn](https://github.com/mathias/autodjinn) after [AUTODIN](http://en.wikipedia.org/wiki/Email#Origin), one of the first email networks. You can use the [repo](https://github.com/mathias/autodjinn) to refer to and to clone to follow along. At the beginning of each subsequent post, I'll provide a SHA that you can reset the code to. Feel free to name your project whatever you want; just be sure to pay attention to the changes in filenames and namespaces as we go along!
 
 Create the project and enter it:
 
