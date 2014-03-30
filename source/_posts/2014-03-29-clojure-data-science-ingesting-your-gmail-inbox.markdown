@@ -169,6 +169,59 @@ And turn it into a function that works for any message bodies list:
 
 Note that we've also used this function to create two convenience functions, one for extracting plaintext bodies and one for extracting HTML bodies. By keeping functions simple and small, we can build up useful functions for our project rather than try to plan it all out ahead of time.
 
+## Getting more information out of the IMAPMessages
+
+As noted above, we will need to write a few more functions to get the fields of the `IMAPMessage`s that we cannot get through this version of `clojure-mail`. Recall that we want to get CC list, BCC list, date sent, and date received values. To do that, we will use Java interop functionality. It's really not as bad as it sounds. Remember that the `IMAPMessage`s we see are Java instances of the `IMAPMessage` class. Calling a method on an instance is accomplished by using a dot before the method name, with the method in the function position, such as: `(.javaMethod some-java-instance)`
+
+To start, we can look at `clojure-mail`'s [project.clj](https://github.com/owainlewis/clojure-mail/blob/c3aad67b42aad96405d4c329ca48e29b7960d412/project.clj) and see that it depends on `javax.mail`. The next step is to find the documentation for the Java implementation of `javax.mail.Message`, which [lives here](http://docs.oracle.com/javaee/6/api/javax/mail/Message.html).
+
+In the REPL, we can try some of the Java interop on our `my-msg`:
+
+<script src="https://gist.github.com/mathias/9876540.js"></script>
+
+The datetimes for each message are automatically turned into Clojure instants for us, which is convenient. If we dig into how the `clojure-mail.message/to` function [[src](https://github.com/owainlewis/clojure-mail/blob/c3aad67b42aad96405d4c329ca48e29b7960d412/src/clojure_mail/message.clj#L16-L20)] works, we see that it is using the `.getRecipients` method. `.getRecipients` takes the message and a constant of a `RecipientType`. For our purposes, we want the `javax.mail.Message$RecipientType/CC` and `javax.mail.Message$RecipientType/BCC` recipients:
+
+<script src="https://gist.github.com/mathias/9876632.js"></script>
+
+The last line maps the `str` function across each element returned, so that we get the string representation of the email addresses. That way, our database can just store the strings.
+
+As before, now that we know how to use these methods in the REPL, we write functions in `core.clj` to take advantage of our newfound knowledge:
+
+<script src="https://gist.github.com/mathias/9876737.js"></script>
+
+In the REPL, it should now be possible to get a nice map representation of all the fields on the message we care about:
+
+<script src="https://gist.github.com/mathias/9876884.js"></script>
+
+Congrats on making it this far. We've used quite a few neat little features of Clojure and the libraries we're building this project with to get here.
+
+The last step we'll go through in this post is to get these messages into a database.
+
+## Enter Datomic, the immutable datastore
+
+[Datomic](http://www.datomic.com/) is a great database layer built on Clojure that gives us a database value representing immutable data. New transactions on the database create new database values. It fits very well with Clojure's own concept of [state and identity](http://clojure.org/state) because it was designed by the same folks as Clojure. Plus, Datomic is meant to grow and scale in modern environments like AWS, with many backend datastore options to run it on.
+
+There's some important reasons why you might choose Datomic as your database for a data science / machine learning application:
+
+* There are various storage backends, so you can grow from tens of thousands of rows in PostgreSQL on a developer's laptop to millions of records (or more) in Riak or DynamoDB on AWS. That is, it has a good migration path from small datasets to big data through the Datomic import/export process
+* The concept of time associated with each value in Datomic means that we can query for historical data to compare against
+* Datomic has a lightweight schema compared to a relational database like PostgreSQL. Schemas are just data! When we begin computing new values from our dataset, we can add new types of entities easily at the same time.
+* Datomic's schemas allow us to treat it as a key-value store, relational database, or even build a graph store on top of it, if we need to
+
+**Note**: I won't go through setting up an entire Datomic installation here. It's worth reading up on the [docs](http://docs.datomic.com/) and the [rationale](http://www.datomic.com/rationale.html) behind Datomic's design.
+
+You can get the [Datomic free build](https://my.datomic.com/downloads/free) if you like, but you will be limited to in-memory stores. It is unlikely that your Gmail inbox will fit into memory on your dev machine. Instead, I recommend signing up for the free [Datomic Pro Starter Edition](http://www.datomic.com/get-datomic.html). (The free Starter Edition is fine because you will not be using this project in a commercial capacity.) Once you have Datomic Pro downloaded and installed in your local Maven, I recommend using the PostgreSQL storage adapter locally with memcached. Follow the guides for configuring storage on the [Datomic Storage](http://docs.datomic.com/storage.html) page.
+
+Add the correct line to your `project.clj` dependencies for the version of Datomic you'll be using (mine was `[com.datomic/datomic-pro "0.9.4384"]` which might be a bit out of date and likely won't match yours.) Now we can start using Datomic in our `core.clj` and our REPL.
+
+The first thing we need is the URI where the Datomic database lives. When we start up the Datomic transactor, you will see a DB URI that looks something like `datomic:sql://DBNAMEHERE?jdbc:postgresql://localhost:5432/datomic?user=datomic&password=datomic` in the output. Grab that URI and add it to our `resources/config/autodjinn-config.edn`:
+
+<script src="https://gist.github.com/mathias/9877346.js"></script>
+
+Back at the top of `core.clj`, save that value to a var as we did with `gmail-username` and `gmail-password`:
+
+<script src="https://gist.github.com/mathias/9877374.js"></script>
+
 ---
 
 <a name="cds-gmail-footnote-1"></a>
