@@ -222,6 +222,60 @@ Back at the top of `core.clj`, save that value to a var as we did with `gmail-us
 
 <script src="https://gist.github.com/mathias/9877374.js"></script>
 
+And then in the REPL:
+
+<script src="https://gist.github.com/mathias/9879199.js"></script>
+
+Note that according to the [datomic clojure docs for the create-database function](http://docs.datomic.com/clojure/index.html#datomic.api/create-database), it returns true if the database was created, and false if it already exists. So running `create-database` every time we run our script is safe, since it won't destroy data.
+
+If the above work in the REPL doesn't work, it is likely your code is unable to talk to your running Datomic, or your Datomic transactor is not configured correctly. Diagnose it with Googling and reading the docs until you get it to work, then move on.
+
+Calling `(d/db db-connection)` gives us the current value of our database. In most cases, we want to just get the most current value. So, we can write a convenience function `new-db-val` to always get us the current (and possibly different) database value. But there are cases where we want to coordinate several queries and use the same database values for each. In those cases, we won't use the function get the latest database value, but rather pass this database value to the queries so that all query against the same state.
+
+In our `core.clj`, we can add the code we need to create the database, get our connection, and the convenience `new-db-val` function:
+
+<script src="https://gist.github.com/mathias/9879246.js"></script>
+
+Next, we need to tell Datomic about the schema of our data. Schemas are just data that you run as a transaction on the database. Reading up on the [Schema](http://docs.datomic.com/schema.html) page of the Datomic docs might be helpful to understand what's going on here. The short version is that we define each attribute of an email and set up its properties. The collection of all attributes together will constitute a `mail` entity, so we namespace all the attributes under the `:mail/` namespace.
+
+<script src="https://gist.github.com/mathias/9879323.js"></script>
+
+We add that var def to our `core.clj` because it is, after all, just data. We may choose later to move it to its own `edn` file, but for now, it can live in our source code. Next, we want to apply this schema to our database with a transaction. That looks like this:
+
+<script src="https://gist.github.com/mathias/9879355.js"></script>
+
+Now we put that transaction in a convenience function in `core.clj` that we'll run every time we run this file. The function will ensure that our database is 'converged' to this schema. Running a transaction will create a new database value. But it will not blow away any data that we had in the database by running this transaction many times. It will simply try to update the existing attributes, and nothing in the attributes themselves need change. It is far more work to retract (delete) data in Datomic than it is to add or update it. This leads to much more safety around working with data without worrying that we will destroy data, and it encourages a REPL-based exploration of the data and its history.
+
+<script src="https://gist.github.com/mathias/9879424.js"></script>
+
+Now that our `mail` entities are defined in Datomic, we can try a query to find all the entity-IDs where any `:mail/uid` value is present. Read up on the [Query](http://docs.datomic.com/query.html) page of the Datomic docs to dig into querying deeper. You might also be interested in the excellent [Learn Datalog Today](http://www.learndatalogtoday.org/) website to learn more about querying Datomic with Datalog.
+
+<script src="https://gist.github.com/mathias/9879491.js"></script>
+
+Since we have no `mail` entities in our database, Datomic returns an empty set. So now we reach the end of task: We can ingest some emails and save them in our database! Return to the `ingest-inbox` function that we left before. Here's what the updated version will look like:
+
+<script src="https://gist.github.com/mathias/9879494.js"></script>
+
+We use the `@`-sign before the `(d/transact…)` call because Datomic normally returns a promise of the completed transaction. However, we want to force Datomic to complete each transaction before moving on. If you run this function in your REPL, you should see it start to ingest your email from Gmail!
+
+<script src="https://gist.github.com/mathias/9879552.js"></script>
+
+Note that this could a take a **long time** if you've chosen to import a really large Gmail inbox! You might want to stop the import at some point; in most REPLs `Ctrl-c` will stop the running function.
+
+If we query for our entity-IDs again, as above, we should see some values returned!
+
+What does one of those database entities look like when we run it through Datomic's [entity](http://docs.datomic.com/clojure/index.html#datomic.api/entity) and [touch](http://docs.datomic.com/clojure/index.html#datomic.api/touch) functions to instantiate all its attributes?
+
+<script src="https://gist.github.com/mathias/9879636.js"></script>
+
+## Wrapping up
+
+That's it for this blog post. It took a little setup, but we were able to build up a working Gmail import tool with help from our REPL and some nice Clojure libraries.
+
+Next time, we'll be looking at doing some basic querying of the data, including getting a count of the number of times each email address has sent you an email.
+
+Comments? Questions? Feel free to contact me at [contact@mattgauger.com](mailto:contact@mattgauger.com). I'd love to hear from you.
+
 ---
 
 <a name="cds-gmail-footnote-1"></a>
