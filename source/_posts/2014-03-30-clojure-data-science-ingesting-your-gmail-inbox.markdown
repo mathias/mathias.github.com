@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Clojure Data Science: Ingesting Your Gmail Inbox"
-date: 2014-03-29 14:44
+date: 2014-03-30 14:44
 ---
 
 ---
