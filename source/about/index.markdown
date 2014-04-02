@@ -6,9 +6,7 @@ date: 2012-03-16 21:06
 
 I'm a software developer at [Bendyworks](http://bendyworks.com) located in Madison, WI.
 
-I like to use the following things: Clojure, ClojureScript, vim, and emacs.
-
-I consider myself pretty good at (and get paid to do): Ruby, Rails, JavaScript, CoffeeScript, and git.
+I consider myself pretty good at (and get paid to do): Clojure, ClojureScript, Ruby, Rails, JavaScript, vim, emacs, and git.
 
 I am learning: (more) Clojure & ClojureScript, (more) emacs, [machine learning](https://www.coursera.org/course/ml), Apache Storm, Datomic, [Android: Netrunner](http://www.fantasyflightgames.com/edge_minisite.asp?eidm=207), guitar, and ukulele.
 
