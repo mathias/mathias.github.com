@@ -4,7 +4,7 @@
   <title><![CDATA[blog.mattgauger.com]]></title>
   <link href="http://blog.mattgauger.com/atom.xml" rel="self"/>
   <link href="http://blog.mattgauger.com/"/>
-  <updated>2014-04-13T17:29:45-05:00</updated>
+  <updated>2014-04-13T17:32:24-05:00</updated>
   <id>http://blog.mattgauger.com/</id>
   <author>
     <name><![CDATA[Matt Gauger]]></name>
@@ -89,7 +89,9 @@
 
 <p>Running <code>lein run -m autodjinn.gmail-ingestion</code> one more time, we should see that our changes did not break the system. The config is now only loaded once, and we use it everything.</p>
 
-<p>Now we&#8217;re ready to move on to implementing new functionality. If you want to compare what you&#8217;ve done with my version, you can run <code>git diff v0.1.1</code> on the <a href="https://github.com/mathias/autodjinn">autodjinn repo</a>.</p>
+<p>That&#8217;s it! We&#8217;ve taken care of some low-hanging fruit and are ready to implement some new functionality. If you want to compare what you&#8217;ve done with my version, you can run <code>git diff v0.1.1</code> on the <a href="https://github.com/mathias/autodjinn">autodjinn repo</a>.</p>
+
+<p>Please let me know what you think of these posts by sending me an email at <a href="mailto:contact@mattgauger.com">contact@mattgauger.com</a>. I&#8217;d love to hear from you!</p>
 ]]></content>
   </entry>
   
