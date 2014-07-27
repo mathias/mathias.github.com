@@ -7,7 +7,7 @@
     <meta name="author" content="Matt Gauger">
 
     
-    <meta name="description" content="Minsky&#8217;s Circle Algorithm in Shoes.rb / Hackety Hack (This post is part of my blog archiving project. This post appeared on Coderwall on July &hellip;">
+    <meta name="description" content="Git Fml (This post is part of my blog archiving project. This post appeared on Coderwall on September 3, 2013.) For when you need to go back to a &hellip;">
     
 
     <link href="/atom.xml" rel="alternate" title="blog.mattgauger.com" type="application/atom+xml">
@@ -61,6 +61,418 @@
   <article class="page span8 offset2">
     
     
+
+
+  <article class="post">
+    
+    <h1 class="title"><a href="/blog/2013/09/03/git-fml/">Git Fml</a></h1>
+    <div class="entry">
+        <hr />
+
+<p><em>(This post is part of my blog archiving project. This post appeared on <a href="https://coderwall.com/p/ypsd8w">Coderwall</a> on September 3, 2013.)</em></p>
+
+<hr />
+
+<p>For when you need to go back to a clean slate and declare FML, add this to your <code>~/.gitconfig</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[alias]
+</span><span class='line'>  fml = !"git fetch && git reset --hard origin/master"</span></code></pre></td></tr></table></div></figure>
+
+
+        
+        
+    </div>
+
+    <div class="meta">
+        <div class="author">
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
+</div>
+        <div class="date">
+
+
+
+
+
+
+
+
+
+
+
+
+<time datetime="2013-09-03T11:32:00-05:00" pubdate  data-updated="true" >Sep 3<span>rd</span>, 2013</time>.</div>
+        <div class="tags">
+
+</div>
+    </div>
+
+  </article>
+
+
+  <article class="post">
+    
+    <h1 class="title"><a href="/blog/2013/08/06/a-simple-text-editor-foot-pedal/">A Simple Text Editor Foot Pedal</a></h1>
+    <div class="entry">
+        <p>When I first starting talking about <a href="/blog/2013/08/03/building-a-chording-keyboard-lessons-learned-and-progress-so-far/">building a chording keyboard</a>, both in person and online, people began to ask me about the possibility of building a computer foot pedal. With the Teensy microcontroller, a foot pedal would only need to watch a single digital input and output a few characters to the OS; much simpler than my chording keyboard project.</p>
+
+<h2>Commercial products</h2>
+
+<p>There are quite a few commercial products you can buy. They come with their own caveats:</p>
+
+<ul>
+<li><a href="http://www.kinesis-ergo.com/fs-savant-elite.htm">Kinesis</a> makes several, but they <a href="http://www.kinesis-ergo.com/fs-elite-single-compatibility.htm">can only be programmed on Windows</a>. They are also very expensive.</li>
+<li>The <a href="http://www.xkeys.com/xkeys/xkfoot.php">Xkeys Foot Pedals</a> look good, but they are also expensive.</li>
+<li>The DealExtreme <a href="http://dx.com/p/usb-triple-action-foot-switch-keyboard-control-foot-pedal-56508">Triple Action Foot Pedal</a> provides three buttons and is relatively cheap; however, the reviews I&#8217;ve read say the reliably is poor. This product can only be programmed on Windows.</li>
+</ul>
+
+
+<h2>Building the foot pedal</h2>
+
+<p>My first idea for a foot pedal was to use DIY guitar pedal hardware. Such guitar pedals have nice, sturdy aluminum project boxes, robust foot switches, and look pretty good. But the ergonomics of such a pedal worried me: while a guitarist momentarily stomps on guitar pedals to turn them on or off while standing, a programmer would likely be tapping and/or holding a foot pedal for long periods of time, most likely from a seated position.</p>
+
+<p><img src="/images/guitar_pedal_true_bypass_looper.JPG" alt="true bypass looper" style="display: block; margin: 0 auto;" /></p>
+
+<p>Such a pedal would look something like the above, but with a USB cable coming out of it.  If you wish to use guitar pedal hardware, I suggest checking out <a href="http://www.mammothelectronics.com/">Mammoth Electronics</a>. (I receive no compensation for mentioning them; I have been a happy customer for several years.) For a two-to-three switch foot pedal, I suggest the 1590BB enclosures, and Mammoth can drill them in several ways for you.</p>
+
+<p>My coworker <a href="http://sencjw.com/">Chris Wilson</a> suggested that I try a digital piano foot switch. These are relatively cheap and extremely sturdy. I picked up an <a href="http://www.amazon.com/M-Audio-Sustain-Pedal-Action-Keyboards/dp/B00063678K/">M-Audio Sustain Pedal</a> from Amazon for about $17.</p>
+
+<p>The sustain pedal is designed to plug into a digital piano, so it has a 1/4&#8221; audio plug on its cable. In the past, I&#8217;ve built a lot of guitar effects pedals and some amps, and so I have a lot of 1/4&#8221; jacks around.</p>
+
+<p>The wiring is simple: The Teensy (and most Arduinos) can do input pullup resistors for us. I mocked up the circuit with a little breadboard (ignore the weird angle of the Teensy here; it was required to get the pins into this small breadboard.) I downloaded some example button code to the Teensy and verified that it was working.</p>
+
+<p><a href="http://www.flickr.com/photos/mattgauger/9454682228/" title="IMG_1897 by Matt Gauger, on Flickr"><img src="http://farm4.staticflickr.com/3725/9454682228_4bb073ea47_z.jpg" width="480" height="640" alt="IMG_1897" style="display: block; margin: 0 auto;" /></a></p>
+
+<p>To assemble, we simply solder a digital IO pin to one side of the 1/4&#8221; jack, and the other wire gets soldered to ground pin. My button is going to be connected on pin 9.</p>
+
+<p>I had a small project box, much bigger than the Teensy really needed, but suitable for the job. I used my Dremel to cut a round hole for the 1/4&#8221; jack, and a rectangular slightly bigger than the mini-USB cable plug for our USB cable.</p>
+
+<p><a href="http://www.flickr.com/photos/mattgauger/9451903305/" title="IMG_1898 by Matt Gauger, on Flickr"><img src="http://farm4.staticflickr.com/3789/9451903305_4c6a3e0c35_z.jpg" width="480" height="640" alt="IMG_1898" style="display: block; margin: 0 auto;" /></a></p>
+
+<p>Test fitting the Teensy in the project box:</p>
+
+<p><a href="http://www.flickr.com/photos/mattgauger/9451906889/" title="IMG_1900 by Matt Gauger, on Flickr"><img src="http://farm4.staticflickr.com/3718/9451906889_8e5624fa7d_z.jpg" width="640" height="480" alt="IMG_1900" style="display: block; margin: 0 auto;" /></a></p>
+
+<p>Lastly, I used some velcro inside to attach the Teensy to the project box. All done with assembly!</p>
+
+<p><a href="http://www.flickr.com/photos/mattgauger/9451907469/" title="IMG_1902 by Matt Gauger, on Flickr"><img src="http://farm8.staticflickr.com/7451/9451907469_e6e6fc661f_z.jpg" width="480" height="640" alt="IMG_1902" style="display: block; margin: 0 auto;" /></a></p>
+
+<p>The next step is to program the Teensy to send the key events we want. In this case, my coworker <a href="https://twitter.com/inyourdom">Josh</a> suggested a vim clutch that enters insert mode when you press down on the pedal, and leaves insert mode when you release it. Since the Teensy&#8217;s Button class detects both button press and button release events, we can write code to do that.</p>
+
+<p>Here&#8217;s what the code looks like:</p>
+
+<script src="https://gist.github.com/mathias/6168386.js"></script>
+
+
+<p>(You can find the code in my chording keyboard repo on Github <a href="https://github.com/mathias/chording/blob/master/teensy/foot_pedal/foot_pedal.ino">here</a>.)</p>
+
+<p>There are, of course, a few gotchas that I ran into:</p>
+
+<p>The <code>KEY_ESC</code> constant that is referenced by the <a href="http://arduino.cc/en/Reference/KeyboardModifiers">Arduino documentation</a> didn&#8217;t work. Similarly, sending the hex value and character code didn&#8217;t work. I couldn&#8217;t find anything online that suggested that the Mac has some different ASCII character for the Escape key, so I had to find another way to leave insert mode.</p>
+
+<p>With the Arduino&#8217;s Keyboard class, we can build up a key combo by calling <code>Keyboard.press</code> for each character in the combo, and then finally calling <code>Keyboard.releaseAll</code> when we&#8217;re ready to send the key combo to the computer. Since vim also has <code>Ctrl-[</code> as a way of leaving insert mode, I created that key combo on lines 34-36.</p>
+
+<p>Of course, this code could be made to be even more robust by guarding against, say, inserting an <code>i</code> character when you are already in insert mode. Most likely, you&#8217;d send Ctrl-[ (and move building the key combo to a function we can reuse) and then send vim the command <code>:startinsert</code>.  I&#8217;ll leave implementing the more robust solution as an exercise for the reader.</p>
+
+<h2>Final thoughts</h2>
+
+<p>Does it work? I used it while writing this blog post, but I must admit, I have a strong natural reflex to hit ESC to leave insert as soon as I finish typing a word or sentence. However, when consciously trying, it is quite natural to use the foot pedal to enter/leave insert mode. One downside I found was that the Ctrl-[ combo seems to back up the cursor one character, which can be annoying.</p>
+
+<p>For my personal use, I am thinking about mapping the key it sends to <code>Left-Alt</code> so that I can use the footpedal while in emacs&#8217; Org Mode and not have to move my left hand down to hit Alt with my ring finger every time I want to adjust a heading or start a new heading.</p>
+
+<p>Overall, this pedal is much cheaper than the high-end pedals mentioned above. The total cost came to around $37, because I had some of the parts on hand. Further, you can upload new code to the Teensy on all operating systems, a big win over the Windows-only pedals above.</p>
+
+<p>However, this pedal only has one foot switch. You could easily add more M-Audio sustain pedals to the design, and keep adding 1/4&#8221; jacks to a project box. The Teensy has plenty more IO lines to use! Or you could go for it all in one enclosure with the guitar pedal hardware.</p>
+
+<p><a href="http://www.flickr.com/photos/mattgauger/9451908041/" title="IMG_1903 by Matt Gauger, on Flickr"><img src="http://farm4.staticflickr.com/3780/9451908041_c8446aa3e7_z.jpg" width="480" height="640" alt="IMG_1903" style="display: block; margin: 0 auto;" /></a></p>
+
+<hr />
+
+<p>If you have any questions or comments, I&#8217;d love to hear about it over on Twitter, where I am <a href="https://twitter.com/mathiasx">@mathiasx</a>.</p>
+
+<h3>Research:</h3>
+
+<ul>
+<li><a href="http://hackaday.com/2012/06/21/building-a-clutch-for-vim/">Hackaday: Building a clutch for vim</a></li>
+<li><a href="http://arduino.cc/en/Reference/KeyboardModifiers">Arduino Keyboard modifiers</a></li>
+<li><a href="http://www.emacswiki.org/emacs/FootSwitches">Emacs Wiki: Foot Swtiches</a></li>
+</ul>
+
+
+        
+        
+    </div>
+
+    <div class="meta">
+        <div class="author">
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
+</div>
+        <div class="date">
+
+
+
+
+
+
+
+
+
+
+
+
+<time datetime="2013-08-06T15:06:00-05:00" pubdate  data-updated="true" >Aug 6<span>th</span>, 2013</time>.</div>
+        <div class="tags">
+
+</div>
+    </div>
+
+  </article>
+
+
+  <article class="post">
+    
+    <h1 class="title"><a href="/blog/2013/08/03/building-a-chording-keyboard-lessons-learned-and-progress-so-far/">Building a Chording Keyboard: Progress So Far</a></h1>
+    <div class="entry">
+        <p>Chording keyboards have been a computing peripheral for a long time. They&#8217;ve been in use at least since Douglas Engelbart gave what is known as <a href="http://www.youtube.com/watch?v=yJDv-zdhzMY">The Mother of all Demos</a> in 1968. Rather than try to sum up the history and potential of the device here, I recommend you read the excellent essay <a href="http://www.loper-os.org/?p=861">Engelbart&#8217;s Violin</a> by Stanislav Datskovskiy on loper-os.org</p>
+
+<p><img src="/images/engelkey.jpg" alt="Engelbart's chording keyboard in use" /></p>
+
+<p><cite>Image via <a href="http://research.microsoft.com/en-us/um/people/bibuxton/buxtoncollection/detail.aspx?id=7">http://research.microsoft.com/en-us/um/people/bibuxton/buxtoncollection/detail.aspx?id=7</a></cite></p>
+
+<p>I&#8217;ve always had an interest in building hardware. When I was younger, I dreamed of building robots some day that I could interact with, play games with, or maybe go to space with. Someday I hope that I&#8217;ll get that chance. But in the meantime, I&#8217;ve built all sorts of hardware, and I&#8217;ve always been interested in the low-level side of computing.</p>
+
+<p>At <a href="http://bendyworks.com">Bendyworks</a> right now, we have flurry of activity and interest focusing on low-level computing, digital logic, and hardware. We&#8217;ve had several discussions in off-hours about learning computing from first principles: digital logic, circuit design, and taking that knowledge to the point of designing and building CPUs and then computers around those novel CPUs. There&#8217;s interest in the <a href="http://arduino.cc/en/">Arduino</a> and some of my coworkers are taking the so-called <code>nand2tetris</code> course: <a href="http://www.nand2tetris.org/">Building a Modern Computer from First Principles</a>.</p>
+
+<p>We recently built a project at Bendyworks that we call <a href="https://github.com/bendyworks/concert_cam">concert_cam</a>, which takes pictures at the <a href="http://www.liveonkingstreet.com/">Live on King Street concerts</a> outside our office. You can see a <a href="https://www.facebook.com/media/set/?set=a.180416672130576.1073741826.180178628821047&amp;type=3">gallery the pictures taken at the most recent concert</a> on Facebook. At some point I&#8217;ll blog about the <code>concert_cam</code> project and provide some lessons learned.</p>
+
+<p>But for now, I&#8217;d like to talk about a project I&#8217;ve been working on for awhile: a chording keyboard. I don&#8217;t have a clever name for it, so the code currently lives at <a href="https://github.com/mathias/chording">github.com/mathias/chording</a>. The repo represents only some of the attempts I&#8217;ve made at getting it to work. (Code from several other attempts to code a chording keyboard died in a VMware Linux VM that ate its own disk image, and I didn&#8217;t commit any of that code. Luckily, that code was mostly things I&#8217;d ruled out as possible solutions.)</p>
+
+<p>Building a chording keyboard in software is not trivial, so I have moved on to building one purely in hardware.</p>
+
+<div id="background-section"></div>
+
+
+<h2>Background information</h2>
+
+<p>USB devices that we use for input, like mice and keyboards, implement something called USB HID, for Human Interface Device. Linux, Mac OSX and other operating systems have supported USB HID for a long time.</p>
+
+<p>To build a chording keyboard that can work on any computer without special software installed, the device will have to implement USB HID and send the correct key events for a given chord.</p>
+
+<p>There are lots of chording keyboard projects and commercial products out there. To name just a few:</p>
+
+<ul>
+<li>The <a href="http://en.wikipedia.org/wiki/Microwriter">Microwriter</a>, which the author of loper-os.org discusses in the essay <a href="http://www.loper-os.org/?p=861">Engelbart&#8217;s Violin</a>, and also <a href="http://www.loper-os.org/?p=1066">covered reverse-engineering</a>.</li>
+<li>The <a href="http://www.handykey.com/">twiddler</a>, which is commercially available. I have used my coworker <a href="http://sencjw.com/">Chris</a>&#8217;s twiddler quite a bit, but couldn&#8217;t get over the TV-remote-control ergonomics.</li>
+<li>The <a href="http://rhodesmill.org/brandon/projects/tabspace-guide.pdf">tabspace layout for the twidder</a> (PDF link), which is an optimized key map layout for Twiddler.</li>
+<li>The <a href="http://wearcam.org/septambic/">septambic keyer</a> by Steve Mann.</li>
+<li>The <a href="http://chordite.com/">chordite</a> keyboard.</li>
+<li>The <a href="http://symlink.dk/projects/spiffchorder/">spaceman spiff layout / spiffchorder project</a>.</li>
+<li>The <a href="http://gkos.com/gkos/index-gkos-com.html">gkos</a> project to create a software chording keyboard for smartphones.</li>
+</ul>
+
+
+<p>Ultimately, none of these projects or products really fit what I had in mind for a chording keyboard.</p>
+
+<p>Why a chording keyboard, you might ask?</p>
+
+<p>Well, I spend most of my work day editing text. While I am quite proficient at vim and slowly getting better at emacs, the kinds of key combos that a professional programmer uses daily are quite complex. There is a constant risk of RSI or carpal tunnel (which plagued me in my teens, but I have been free of for over a decade.)</p>
+
+<p>With a chording keyboard, one could take a common key combo that you use all the time and put it under a much easier-to-type chord. This becomes especially attractive to me in replacing some of the key-combos required for operating emacs (especially those that use alt.)</p>
+
+<p>Of course, such a device isn&#8217;t designed to completely replace having a keyboard on the desk. Even with a lot of practice, the reality is that I&#8217;ll probably continue to be faster at typing words on QWERTY. But having a chording keyboard off the left side, and a mouse on the right, seems to make sense. I am, after all, a software craftsman, and if I feel like I need to build a particular tool (even a physical piece of hardware) to augment my current toolbox, then it makes sense to do it.</p>
+
+<p>For a long time, I have dreamed of a way of being able to record programming language keywords and idioms as macros, as well as methods to type faster. Since I haven&#8217;t found any way to train myself to type QWERTY faster, I started to look at alternatives. Learning Dvorak or Colemak might help, but it still doesn&#8217;t get me away from the legacy typewriter keyboard design.</p>
+
+<p>And still, those alternative layouts doesn&#8217;t get me to the point where I can type out an entire block of code at once. For example, I might want to map a key to output something I frequently type, such as a Javascript anonymous function. Knowing which editor I&#8217;m in, I could have the keyboard leave the cursor in the function body, ready to be filled in:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>function() {
+</span><span class='line'>  _
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>(where the underscore shown is the cursor position)</p>
+
+<p>And lastly, I wanted to build a chording keyboard because it&#8217;s cool, it&#8217;s different, and because <strong>we frequently accept the paradigms handed to us in computing without really thinking about how we might improve or replace them.</strong></p>
+
+<p>To understand chording keyboards best, it is worth noting that while regular keyboards detect the initial key being pressed down, a chording keyboard must detect when all of the keys in a chord are released simultaneously. Due to how fast electronics really are, no human could actually release all of the keys at exactly the same moment. For that reason, we need to implement chording in a way that takes time into account and looks to see if any chord pattern matches in the past n milliseconds.</p>
+
+<h2>Brief project history</h2>
+
+<p>After reviewing possible hardware to use to build a chording keyboard, I stumbled upon the Razer Nostromo (and its earlier incarnations from Belkin.) These gaming pads are popular with PC gamers because it puts the WASD keys under your left hand and frees your right hand up for the mouse.</p>
+
+<p><img src="/images/razer_nostromo.jpg" alt="Razer Nostromo" /></p>
+
+<p>Other features the Nostromo had over other devices were supporting <a href="http://en.wikipedia.org/wiki/Rollover_(key)#n-key_rollover">N-key rollover</a> &mdash; basically, the ability for the keyboard to know that multiple keys are being pressed at once, and send all of those keys to the computer &mdash; as well as a little 4-way directional pad, and blue lights (always a plus!)</p>
+
+<p>The Nostromo also comes with a piece of software that you can install and remap the key mappings with. The key mappings get saved onto the device, meaning the device can operate without the software. The current mode is indicated by three LEDs near the thumb, which count up in binary, yielding 8 key maps. Additionally, any of the keys can trigger a pre-recorded macro of many key events.</p>
+
+<p>Sadly, while the Nostromo software can have one key press trigger a sequence of buttons for you, for example, to macro a complicated action in a game, it did not support detecting a chord (multiple key presses simultaneously) into a single key event. So with that limitation in mind, I set about trying to write code to detect chords and turn them into key presses in software rather than at the hardware layer.</p>
+
+<h3>mxk</h3>
+
+<p>On Linux, there is a project called <a href="http://welz.org.za/projects/mxk">mxk</a>. <code>mxk</code> is basically a USB HID swiss army knife and HID event remixer, able to take input from any USB device, run it through various rules, and then output new USB HID events to the USB bus with a &#8220;virtual&#8221; USB HID device. Many example configuration scripts are provided, and one of the most common use seems to be to create a key press that turns a QWERTY keyboard into a DVORAK keyboard and back again, without having to change the Linux system settings. It seemed promising.</p>
+
+<p><code>mxk</code> even indicated that it had support for two different kinds of chording: braille keyboard chording and a simpler chord-matching function.</p>
+
+<p>After banging my head against its confusing configuration syntax for about 2 weeks, I determined that <code>mxk</code> just couldn&#8217;t do what I wanted. Two issues cropped up: in the braille chording function, only one row of keys was supported and two hands were assumed. (Basically, it wanted ASDF and JKL; keys to form chords, and didn&#8217;t support anything else.)</p>
+
+<p>The regular chording functionality seemed like it might work, until I ran into a huge, glaring issue: A key used in one chord couldn&#8217;t be used in another. For example, let&#8217;s say I&#8217;m mapping keys for the left hand on a QWERTY keyboard to be used in a chord. So I might have a chord like RE which maps to &#8216;a&#8217; and another chord like FE that maps to &#8216;k&#8217;. The E used in both chords didn&#8217;t work in <code>mxk</code>. It simply couldn&#8217;t support it; it could only watch for unique chords. This limits the key map for a chording keyboard made of a 12-key grid from some 495 combinations to 12, gaining us nothing since individual key presses are just as efficient.</p>
+
+<p>With these limitations discovered, I tried to hack the code for <code>mxk</code> to support my use case better. But, I don&#8217;t have much in the way of C chops when it comes to device drivers and pointers, and implementing code against Linux&#8217;s libHID is kind of a pain. Further, the <code>mxk</code> source isn&#8217;t very well documented, outside of very few comments littered around the code. Additionally, I found libHID&#8217;s docs unapproachable.</p>
+
+<p>I realized that I was <strong>working at the wrong abstraction level</strong>, like so many projects that had frustrated me before. So I decided to move up to something at a higher level, with the hope that someone else had figured out the headaches of low-level libHID implementation. There are many high level libraries built on libHID. But since there isn&#8217;t a whole lot of need for them in most computing, they tend to be abandoned, very old, simplistic, or all of the above. I also was frustrated that my attempts so far would lock me into only using a Linux machine, as my normal work environment at Bendyworks is Mac OSX. We pair all of the time, so I would not be able to use my chording keyboard whenenver I paired with someone else.</p>
+
+<h3>Plover</h3>
+
+<p>Another project that I found that seemed promising was <a href="https://github.com/plover/plover">Plover</a>. At first glance, Plover doesn&#8217;t seem to be the right kind of software at all. It is an open source stenographer program that allows transcriptionists and court stenographers to turn a regular QWERTY keybord with n-key rollover into a high-end steno tool. The specialized hardware that court stenographers use can cost thousands of dollars, so an open source project that implements it for free on a $100 keyboard is a great win for those in that field.</p>
+
+<p>Despite coming mapped for stenography and transcription &mdash; a system which I find very confusing &mdash; at its heart, Plover is a cross-platform Python GUI app that supports turning chords into words or phrases. This seemed like exactly what I needed. Going through the source code, I noticed that different keyboards got different configuration classes, and set about trying to create a class to map the keys on the Nostromo to the key events that Plover was expecting.</p>
+
+<p>Now Plover comes with a huge dictionary of words that chords map to. And those chords are made up of certain key events, but not the ones we&#8217;re used to. (Some idea of how they look can be found <a href="https://github.com/plover/plover/blob/master/plover/machine/sidewinder.py#L14-L51">here</a> on Github.) How those special events combine and whether they come at the beginning or end of the chord seems to be the most important part of understanding this system. I struggled to understand the mappings, but it was pretty complicated. Plover comes with a giant, 124,000+ line JSON dictionary. I threw that out and started trying to write my own JSON dictionary; a humbler one that simply mapped chords to key events and a few Ruby &amp; JavaScript programming idioms.</p>
+
+<p>I struggled with understanding the key event names and how they combined (since I don&#8217;t have a background in stenography) and eventually, lost the work due to the VMware Linux VM crash mentioned above. Taking it as a sign that I should not continue down the route of using Plover, I put aside the chording keyboard project for many months.</p>
+
+<h3>Teensy and a return to hardware</h3>
+
+<p>Originally I had tried to avoid hacking hardware so that I could focus on what I do day-to-day: write software. But in the end, I felt like I had exhausted my ability to get this project off the ground by only writing software.</p>
+
+<p>When we built the <code>concert_cam</code> project at Bendyworks, the first version of the button pedestal we built utilized a <a href="http://www.pjrc.com/teensy/">Teensy board</a> &mdash; basically, a small Arduino-like microcontroller. The huge feature that the Teensy provides over other Atmel boards is that it comes out-of-the-box with a firmware that sets it up as a USB HID device.</p>
+
+<p>The basic process for programming and using the Teensy is this:</p>
+
+<ul>
+<li>You program it in the Arduino IDE like other Arduino boards</li>
+<li>Anything you &#8220;println&#8221; will be sent as if someone had typed it on a USB keyboard.</li>
+<li>Additionally, there is a Mouse class that you can use to send mouse movement, click, and scroll wheel information.</li>
+<li>When you upload your code to the Teensy, it reboots, and immediately starts behaving like a USB HID device as far as the operating system is concerned.</li>
+</ul>
+
+
+<p>For the <code>concert_cam</code>, it was easy enough to have a big arcade-style button send the keyboard event of &#8220;p&#8221; (for press) to the Raspberry Pi that the Teensy was attached to. A script on the Raspberry Pi watched for this keyboard input and told the camera to take a picture. It was very quick to get that working.</p>
+
+<p>Here&#8217;s the <code>concert_cam</code> button pedestal with Teensy and Raspberry Pi getting wired in:</p>
+
+<p><a href="http://www.flickr.com/photos/mattgauger/9427820477/" title="IMG_1817 by Matt Gauger, on Flickr"><img src="http://farm8.staticflickr.com/7395/9427820477_a8b4630519_z.jpg" width="480" height="640" alt="IMG_1817"></a></p>
+
+<p>Confident by my success with using the Teensy in the <code>concert_cam</code>, I decided to put a Teensy in my Nostromo, replacing the normal USB board inside it and translating keyboard chords into key press events at the hardware level.</p>
+
+<p>The first step is to open up the Nostromo. This is pretty easy; just unscrew all the visible screws, and find &amp; unscrew the other screws underneath the rubber feet of the gamepad. The Nostromo comes apart into three pieces, and looks like this inside:</p>
+
+<p><a href="http://www.flickr.com/photos/mattgauger/9427844525/" title="iPhoto by Matt Gauger, on Flickr"><img src="http://farm4.staticflickr.com/3784/9427844525_4b59fa4bc3_b.jpg" width="581" height="733" alt="iPhoto"></a></p>
+
+<p>The first problem encountered is those little grey ribbons - they&#8217;re ZIF surface mount stuff, and everything else inside is surface mount here, too. For an electronics hobbyist, surface mount components can represent a big source of frustration. For me, I just didn&#8217;t want to deal with them. I can&#8217;t really solder to the cables with any precision and the spacing of the connectors was so small that there was no hope of attaching wires there. Further, the circuit boards had traces running inside but didn&#8217;t really have any pins that I could solder to. A real bummer.</p>
+
+<p>I thought that maybe I could get more of the plastic cable connectors (the little white and black connectors on the main circuit board), but with a regular pin spacing, not surface mount. All attempts to find such a part were unsuccessful. So I had to get creative.</p>
+
+<p>The Nostromo uses membrane keys, which most laptop and PC keyboards nowadays do. A long time ago, almost all keyboards used &#8220;mechanical&#8221; key switches &#8211; switches that had springs or other tension devices and sent a keypress when continuity was made between two contacts. The loud, much-loved IBM Model M keyboard counts as a mechanical keyboard. Gaming keyboards and a few hardcore programmers (like many of us at Bendyworks) are holdouts for using mechanical keyboards, and a few companies still make them. For mechanical key switches, the current winner is the Cherry MX line. (To learn more about mechanical keyboards and Cherry MX switches, I recommend <a href="http://www.wasdkeyboards.com/mechanical-keyboard-guide">this guide</a>.)</p>
+
+<p>Cherry MX key switches are not all that expensive, and I&#8217;d only need 15 to convert the Nostromo. I put in an order for the Cherry MX browns from <a href="http://www.wasdkeyboards.com/">wasdkeyboards.com</a> and they shipped them out fast. I figured I could get away with using the keycaps from a number pad, which are also cheap, and so I threw those into the order as well.</p>
+
+<p>However, by replacing the key switches, I was getting into a realm of hardware hacking that I was trying to avoid: fabbing physical things from scratch. For this project, I wanted the keyboard to be sturdy and reliable; I didn&#8217;t want it to fall apart or move under my hand or rattle. Making a mounting plate that they keys snap into is the typical way that hobbyists build their own mechanical keyboards. And lots of people do, over on sites like <a href="http://deskthority.net/">deskthority.net</a> and <a href="http://geekhack.org/">geekhack.org</a>, but without a really well stocked workshop or a Makerspace membership, I didn&#8217;t want to go down that road.</p>
+
+<p>Luckily, some quick googling turned up a <a href="http://www.xim3.com/community/index.php?PHPSESSID=98v9639t6etse5msjbupuogp24&amp;topic=8122.0">forum post in which the author replaces Nostromo key switches with Cherry MX keys</a>. The mounting plate for the membrane keys in the Nostromo requires only a little dremeling to convert. Since I was also throwing out the existing USB circuit board for the Nostromo, I can get away with removing the membrane switch PCB and soldering a cable directly to the Teensy&#8217;s pin headers, getting rid of those pesky ZIF cables.</p>
+
+<p>Currently, I&#8217;m waiting for the key switches to arrive so that I can cut down the white mounting plate for each switch. My plan is to wire up each key to an IO line on the Teensy. Typically, keyboards use multiplexing in a grid to let the computer know which key was pressed: essentially, rows of keys are connected to one set of pins and columns of keys are connected to another set of pins, and when a pin for a row and a column goes HIGH, you know which key was pressed based on it being the intersect of that row and column. The issue you run into here is, again, complicated by chording. While the microcontroller can figure out reasonably well individual keys, there are issues on some keyboards with &#8221;<a href="http://www.microsoft.com/appliedsciences/antighostingexplained.mspx">ghosting</a>&#8221; other keys when chording.</p>
+
+<p>Since I only have about 15 keys and maybe another 4 or 5 input/outputs that I need, I can get away with using separate IO lines on the Teensy 2.0. The Teensy++ 2.0 has are even more IO lines, which would make it better suited to projects with more IO lines needed. Not needing diodes to ground, not having to wire up a matrix, and not having to detect two pins makes both the hardware and software here much simpler.</p>
+
+<h3>Scroll wheel</h3>
+
+<p>While waiting for the key switches to arrive, I began work on the one non-surface-mount component in the Nostromo that I could solder to: the scroll wheel. On the scroll wheel&#8217;s PCB, there is a mechanical encoder, a button (the click when you press down on a mouse scroll wheel) and an LED.</p>
+
+<p><a href="http://www.flickr.com/photos/mattgauger/9430775972/" title="skitched-20130803-121011 by Matt Gauger, on Flickr"><img src="http://farm8.staticflickr.com/7453/9430775972_991c8e8a8d_c.jpg" width="600" height="800" alt="skitched-20130803-121011"></a></p>
+
+<p>Here&#8217;s a quick link for reading up on how mechanical encoders work in mice, and particularly, how to interface one with an Arduino: <a href="http://forum.arduino.cc/index.php/topic,15336.0.html">Mouse Scroll Wheel Sensor and Arduino</a>. There&#8217;s also some source code in that thread that will probably prove useful later. Note in the picture that the middle leg of the encoder is ground, and the two ends correspond to the signals sent when you rotate it &mdash; you&#8217;ll have to figure out whether the scroll direction matches their location yourself by experimenting.</p>
+
+<p>I used part of my Friday Growth Day at Bendyworks to start wiring up and coding the firmware for the Nostromo&#8217;s scroll wheel. The basic idea is that the mechanical encoder has two outputs. You monitor both lines on separate IO pins on the Teensy, and whichever IO line goes HIGH first is the direction of the scroll. With the Teensy&#8217;s convenient Mouse class, you can then just send a scroll event to the OS. In a matter of minutes, I had my scroll wheel scrolling web pages. Not bad.</p>
+
+<p>I&#8217;ll be implementing a variation on the sliding buffer for key events, so I will probably also use that code for handling scrolls (over a much shorter, separate buffer.)</p>
+
+<p>Since I was trying to understand the mechanical encoder and could only really connect alligator clips to one pin at a time, I wrote up a quick Arduino script to detect only one direction of scrolling. Here&#8217;s that code:</p>
+
+<script src="https://gist.github.com/mathias/6147169.js"></script>
+
+
+<p>In my repo on Github: <a href="https://github.com/mathias/chording/blob/master/teensy/scroll_wheel/scroll_wheel.ino">scroll_wheel.ino</a></p>
+
+<p>Note that this does not implement a sliding buffer or direction detection.</p>
+
+<p>Eventually, I&#8217;d like to break my scroll wheel code out into an Arduino library that takes the two input pin numbers and a velocity as parameters to the constructor, and implements the scroll direction detection. The library would send the scroll event for you based on the velocity you passed in. But that will have to come later.</p>
+
+<h3>Future work</h3>
+
+<p>I&#8217;m going to be getting the key switches in the next week and beginning the hardware hacking to install them.</p>
+
+<p>On the software end, I&#8217;d like to write a script (probably in Ruby) that takes a standardized keyboard mapping file and converts it into a C++ header file that the Arduino can utilize for its chord mappings. That way, I don&#8217;t have to maintain the header file manually or know what C++ constants map to what, I will simply edit my simple key mappings file and regenerate the code.</p>
+
+<p>The <a href="https://github.com/mathias/chording/blob/master/twiddler_keymap.txt">twiddler_keymap.txt</a> file in the repo represents the current plan for my keymap. It is based on the <a href="">Tabspace layout</a> mentioned above in the <a href="#background-section">Background</a> section. I haven&#8217;t found any reason to not use the Tabspace layout, as it seems sensible and leaves plenty of room in the unmapped chords for me to implement key combos, programming language idioms, and text editor movement.</p>
+
+<p>One last decision I need to make is whether to replace the Nostromo&#8217;s thumb directional pad. The current thumbpad uses membrane switches similar to the keys, and is all surface mount with very little access to its signals. One thought is to replace the 4-way pad with a Playstation-controller style <a href="https://www.sparkfun.com/products/9032">joystick</a> from Sparkfun.</p>
+
+<p><a href="https://www.sparkfun.com/products/9032">
+<img src="/images/sparkfun_joystick.jpg" alt="Sparkfun thumb joystick" />
+</a></p>
+
+<p>With this joystick, I&#8217;d be able to implement either mouse movements or arrow key movements, and could probably toggle which it behaves like with the small button located above the directional pad. However, securely mounting the joystick into the Nostromo case so that it is durable might prove an issue. I&#8217;ve put off making this decision until I have successfully hacked the mechanical switches in.</p>
+
+<p>I&#8217;ll be blogging about each step of finishing this chording keyboard as I go. Stay tuned for the next post about installing up the key switches and wiring them to the Teensy.</p>
+
+<h3>Final thoughts</h3>
+
+<p>I&#8217;ve got a lot of projects, and I put them down regularly to focus on something else. That list of projects continues to grow and grow. So I don&#8217;t feel very guilty that I&#8217;ve put down this project for awhile and am just now picking it up again. I&#8217;m making good progress, and find it interesting rather than frustrating, so I will continue work on it.</p>
+
+<p>In truth, this project doesn&#8217;t really represent much value outside of the things I&#8217;m learning as I go. I have no ambitions of turning this into a commercial product, and while some people might find my notes here useful, I&#8217;m not trying to make a repeatable project that others can build part-for-part. Is it worth it? Definitely. Is it for everyone? Probably not.</p>
+
+<p>One thing I&#8217;d like to do after completing this device is begin work on a custom computer. Specifically, I want to learn enough digital logic concepts to design a whole computer in a language like Verilog or VHDL, and then burn the design into a FPGA board.</p>
+
+<p>Such a computer would <strong>not</strong> be intended to compete with your Core i7 quad core &#8211; I&#8217;m thinking of implementing a unique architecture with the overall processing capability of something like an early 80&#8217;s microcomputer. It would be interesting, but not entirely useful for day-to-day computing.</p>
+
+<p>When the computer is built, I&#8217;d begin implement an operating system on top of that computer in Lisp, along the lines of what the author of <a href="http://loper-os.org">loper-os.org</a> has been working towards for many years.</p>
+
+<p>Such a project may take a decade or more to realize, though, and so is not undertaken lightly or easily accomplished.</p>
+
+<hr />
+
+<p>If you have any questions, comments, or your own chording keyboard project, I&#8217;d love to hear about it over on Twitter, where I am <a href="https://twitter.com/mathiasx">@mathiasx</a>.</p>
+
+        
+        
+    </div>
+
+    <div class="meta">
+        <div class="author">
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
+</div>
+        <div class="date">
+
+
+
+
+
+
+
+
+
+
+
+
+<time datetime="2013-08-03T08:21:00-05:00" pubdate  data-updated="true" >Aug 3<span>rd</span>, 2013</time>.</div>
+        <div class="tags">
+
+</div>
+    </div>
+
+  </article>
 
 
   <article class="post">
@@ -185,195 +597,37 @@
 
   <article class="post">
     
-    <h1 class="title"><a href="/blog/2013/03/17/by-augmenting-human-intellect/">By Augmenting Human Intellect, We Mean</a></h1>
+    <h1 class="title"><a href="/blog/2013/05/23/warning-nokogiri-was-built-against-libxml-version-x-dot-x-x/">WARNING: Nokogiri Was Built Against LibXML Version x.x.x</a></h1>
     <div class="entry">
-        <blockquote>
-By &#8220;augmenting human intellect&#8221; we mean increasing the capability of a man to approach a complex problem situation, to gain comprehension to suit his particular needs, and to derive solutions to problems. Increased capability in this respect is taken to mean a mixture of the following: more-rapid comprehension, better comprehension, the possibility of gaining a useful degree of comprehension in a situation that previously was too complex, speedier solutions, better solutions, and the possibility of finding solutions to problems that before seemed insoluble. And by &#8220;complex situations&#8221; we include the professional problems of diplomats, executives, social scientists, life scientists, physical scientists, attorneys, designers&#8211;whether the problem situation exists for twenty minutes or twenty years. We do not speak of isolated clever tricks that help in particular situations. We refer to a way of life in an integrated domain where hunches, cut-and-try, intangibles, and the human &#8220;feel for a situation&#8221; usefully co-exist with powerful concepts, streamlined terminology and notation, sophisticated methods, and high-powered electronic aids.
-<footer>
-<strong>Douglas C. Engelbart</strong>
-&ndash;
-<cite><a href="http://www.dougengelbart.org/pubs/augment-3906.html">Augmenting Human Intellect: A Conceptual Framework </a></cite>
-</blockquote>
+        <hr />
 
-
-        
-        
-    </div>
-
-    <div class="meta">
-        <div class="author">
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
-</div>
-        <div class="date">
-
-
-
-
-
-
-
-
-
-
-
-
-<time datetime="2013-03-17T22:44:00-05:00" pubdate  data-updated="true" >Mar 17<span>th</span>, 2013</time>.</div>
-        <div class="tags">
-
-</div>
-    </div>
-
-  </article>
-
-
-  <article class="post">
-    
-    <h1 class="title"><a href="/blog/2013/03/07/filter-or-be-filtered/">Filter or Be Filtered</a></h1>
-    <div class="entry">
-        <p>Eli Pariser&#8217;s talk, <a href="http://www.ted.com/talks/eli_pariser_beware_online_filter_bubbles.html">Beware online &#8220;filter bubbles&#8221;</a> recently hit the front page of the TED Talks website. I found it interesting because it discusses some of what I&#8217;ve seen happening online, and some of my fears for how we search and consume content. Watch the video if you haven&#8217;t to see just how much is already being filtered on the web for you.</p>
-
-<p>Right after I saw the video, of course, <a href="http://washingtonpost.com/business/technology/facebook-to-change-news-feed-to-a-personalized-newspaper/2013/03/07/b294f61e-8751-11e2-98a3-b3db6b9ac586_story.html">Facebook announced</a> that they&#8217;ll be rolling out a new version of the the news feed. They are quoted as making it more like a &#8220;personal newspaper&#8221; &mdash; a filter, essentially, for the things Facebook thinks you want to see. As the video above pointed out, they&#8217;ve already been filtering <em>out</em> the things they think you don&#8217;t want for awhile.</p>
-
-<p>No doubt there will be some backlash as people adjust to changes on Facebook, but very few will abandon it. And if you are the kind of person that would abandon Facebook over filtering, or privacy, or concerns about owning your own data, you don&#8217;t have a lot of choices of where to go.</p>
-
-<p>Sure, you can specifically seek out services that aren&#8217;t going to give you a filtered world view &mdash; <a href="https://duckduckgo.com/">DuckDuckGo</a> comes to mind. But that&#8217;s not always possible. The problem is bigger than just the search engine you use and whether or not you&#8217;re logged into Facebook. Just about every site is run by someone else, and they are analyzing you constantly. They are in a brutal battle to keep you as their consumer and keep you from going to other sites. But are the things that they think you want to see what you really want or need to see?</p>
-
-<p>As a developer, I&#8217;m capable of taking matters into my own hands, to some degree. Most of the sites that I use on a daily basis have an API and allow me to export or scrape my personal data. But the cost of switching off of the nice service, the well-designed UI/UX of an official mobile app, and so on has kept me from taking the plunge to export my data and go set up shop on my own version of various web services.</p>
-
-<p>Recently I revamped a very old, empty repo that I had on Github. The point of this repo was code a way to export all of my data from <a href="https://www.last.fm/">Last.fm</a>. But for whatever reason the repo has been empty for something like 4 years now. So the other week, I sat down, checked the <a href="http://www.last.fm/api">Last.fm API docs</a>, and wrote a very simple Ruby script to dump out all the JSON it could about my top tracks, artists, and albums over the past 7 years. That script is available as my <a href="https://github.com/mathias/birdsong">birdsong</a> repo on Github.</p>
-
-<p>So far, I don&#8217;t have a real use for the data. I could try to use some visualization tools on it to make cool graphs or maps. Or I could try and get analytics out of it: genres listened to, how they&#8217;ve changed over the years. But for now, I am content to just have the JSON data.</p>
-
-<p>All in all, it&#8217;s around 30 megabytes of JSON data, which is really just plain text with no compression, so it is really quite a lot of data. There&#8217;s more I can do, though. I plan to do to start taking control, to both aggregate my own data and filter it.</p>
-
-<p>For a long time it has bothered me that <a href="https://www.google.com/reader">Google Reader</a> stopped receiving new features, and the features that existed only went so far. To be fair, Google Reader has been a rock solid web service for many, many years for me. It allows me to read my feeds quickly, reliably, and has parsed feeds well &mdash; all problems I&#8217;ve had with other feed readers. It&#8217;s always had some neat features like showing me analytics of what I read.</p>
-
-<p><img src="/images/google_reader_trends.png" alt="Google Reader Trends" /></p>
-
-<p>But as far as discovering new content and helping me to eliminate content I don&#8217;t read or don&#8217;t want to read, Google Reader is not so great. Reader is terrible at suggesting new feeds to read to me; it constantly suggests Dilbert and Lifehacker, and has for the past 5 years or so. I have no interest in either of those. It has never analyzed my reading patterns to such a degree that it suggested something new that blew me away. I am looking for those kinds of interesting suggestions: not just for feeds that match what I already read, but things that are outside of my normal bubble but would be interesting to me.</p>
-
-<p>Luckily, Google Reader has an API, and rather than just exporting my data and building a new service, I can start to build off of it. I get to keep a lot of the features I enjoy while extending it with my own code.</p>
-
-<p>In Pariser&#8217;s talk, he talks about encoding algorithms of filtering and recommendation with a sense of civic duty. To some degree, this means having some journalistic integrity. Such an algorithm needs to present both sides of the story. One issue of many feed readers and other content online is that, well, it only shows one view. The view of the article you&#8217;re on.</p>
-
-<p>But imagine a feed reader that was more like the front page of Google News. It would not only show you the blog post you&#8217;re reading, but all recent blog posts from other authors about similar topics. Maybe, if they&#8217;re responding to a news event or writing about a known fact, the reader could do the work to track down the original source. To take it even further, without even really needing to be aware of motive, politics, and other factors, a dumb feed reader with good suggestions could probably present both sides of the story. Both sides of an argument. Both liberal and conservative takes on the same bill.</p>
-
-<p>Dreaming up features like this can be a deep rabbit hole. Start considering the consequences of pulling up all past articles you&#8217;ve read about similar keywords or tags. Or performing searches for academic papers on the topic. Pulling in data from Wikipedia. Looking up books you&#8217;ve read or are planning to read on Goodreads that are related to the blog post you&#8217;re reading. Or any other number of ways to slice and dice content. And it doesn&#8217;t have to stop with Google Reader.</p>
-
-<p>Opportunities to make better tools and more intelligently consume information are all around us. At the same time, consumer-consuming corporations on the web try to trap us into filter bubbles. They try to provide us with what they think we want, but can they ever really know? In the end, it&#8217;s control-your-own-filters or be filtered<a href="#filter-or-be-filtered-note" name="filter-or-be-filtered-note-return"><sup>1</sup></a>.</p>
+<p><em>(This post is part of my blog archiving project. This post appeared on <a href="https://coderwall.com/p/kia38w">Coderwall</a> on May 23, 2013.)</em></p>
 
 <hr />
 
-<p><a name="filter-or-be-filtered-note"></a></p>
+<p>When you run tests or rake, if you see:</p>
 
-<p><strong>1</strong> The name of this article was lifted from Daniel Rushkoff&#8217;s <a href="http://www.goodreads.com/book/show/9408311-program-or-be-programmed">Program or be Programmed</a>, a book which I didn&#8217;t really enjoy. It was not what I thought it would be about: why we should learn to program so that we can control the complex technical systems around us rather than be controlled by them, or how programming&#8217;s problem solving skills can be applied elsewhere. Instead, I found the book to be some technology-fear-mongering and a bunch of diatribes about how things online or in computers are &#8220;less real.&#8221; Suffice to say, I did not enjoy it. <a href="#filter-or-be-filtered-note-return">&#8617;</a></p>
+<pre><code>WARNING: Nokogiri was built against LibXML version 2.9.0, but has dynamically loaded 2.7.8
+</code></pre>
 
-        
-        
-    </div>
+<p>Then do the following:</p>
 
-    <div class="meta">
-        <div class="author">
-  
+<pre><code> gem uninstall nokogiri libxml-ruby
 
-<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
-</div>
-        <div class="date">
+brew update
 
+brew uninstall libxml2
+brew install libxml2 --with-xml2-config
 
+brew uninstall libxslt
+brew install libxslt
+brew unlink libxslt
 
+bundle config build.nokogiri -- --with-xml2-dir=/usr --with-xslt-dir=/usr --with-iconv-dir=/usr
+bundle
+</code></pre>
 
-
-
-
-
-
-
-
-
-<time datetime="2013-03-07T22:09:00-06:00" pubdate  data-updated="true" >Mar 7<span>th</span>, 2013</time>.</div>
-        <div class="tags">
-
-</div>
-    </div>
-
-  </article>
-
-
-  <article class="post">
-    
-    <h1 class="title"><a href="/blog/2013/03/03/insanely-powerful-widgets-brought-to-you-by-moores-law/">Insanely Powerful Widgets, Brought to You by Moore&#8217;s Law</a></h1>
-    <div class="entry">
-        <p>I&#8217;ve been teaching my downstairs neighbor basic electronics and how to solder. He&#8217;s a musician and has been working his way through several kits from <a href="http://bleeplabs.com/">Bleep Labs</a>.</p>
-
-<p>As I explained each component: the resistor, the capacitor, the diode, etc., I eventually got to the transistor. I told my neighbor how transistors are rarely used on their own now. The transistors in the kit were there mainly because they were easy to solder, but usually a circuit designer would opt not to use them.</p>
-
-<p>On its own, a single transistor can&#8217;t do much, and takes up some amount of space, which is actually quite large relative to the circuits we build now. I scored bags of hundreds of transistors that were about to be thrown out at the <a href="http://milwaukeemakerspace.org/">Milwaukee Makerspace</a> when we were putting together the electronics lab &mdash; not because they didn&#8217;t work but because that many transistors simply wouldn&#8217;t get used. &#8220;Nowadays, you might as well throw an Arduino in a project,&#8221; was one of the reasons. No one wants to work at the abstraction level of single transistors anymore.</p>
-
-<p>It turned out that the <a href="http://bleeplabs.com/store/the-bleep-drum/">drum machine kit</a> that we were putting together contained an Atmel AVR microprocessor - the main chip of the Arduino. In an effort to save space and complexity, the designers had used a microprocessor instead of discrete transistors. The chip in the Arduino and the Bleep Drum is the ATmega328, which has something like 600,000 transistors inside it.
-And I explained how the form factor of the components we were using was obsolete. Even the tight-packed pins of a typical integrated circuit (a computer chip, in common parlance), spaced at 0.1&#8221;, just isn&#8217;t dense enough for modern circuits. The parts we were using were all designed to be soldered to the circuit board by human hands. Slow, error-prone human hands. The vast majority of circuit boards produced today are <a href="http://en.m.wikipedia.org/wiki/Surface-mount_technology">surface mount</a>: parts placed by robots and soldered all in one go by another machine.</p>
-
-<p>&#8220;It&#8217;s really neat that you know all this stuff,&#8221; my neighbor remarked. But I shrugged it off. This knowledge, especially of how analog circuits work and how audio signals are modified by analog components, is mostly obsolete. Better to just use some analog-to-digital converters and put a microprocessor on it. Or better yet, something way more powerful than a simple microprocessor.</p>
-
-<p>We keep putting more and more transistors on a single die, or chip, every day. This trend was first spotted by Intel co-founder Gordon E. Moore, and so we call it <a href="http://en.wikipedia.org/wiki/Moore's_law">Moore&#8217;s law</a>. So far, Moore&#8217;s prediction that the number of transistors on integrated circuits would double every 2 years has been quite accurate. It has led us from the simplest integrated circuit in 1958 to the Core i7 processor in my Macbook Air today.</p>
-
-<p>The other day I tweeted about the crazy processing power that we get today under Moore&#8217;s Law.</p>
-
-<blockquote class="twitter-tweet" align="center"><p>Crazy future; my MBA doesn&#8217;t sweat when running Linux-in-VMware, Chrome, Emacs, LightTable, other apps, terminals &amp; 4 REPLs all at once.</p>&mdash; mathiasx (@mathiasx) <a href="https://twitter.com/mathiasx/status/307668858985140225">March 2, 2013</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>And in truth, I was running more software than I could fit into that tweet, because I was listening to music, had a few PDFs in the background, and was managing my ebook collection at the same time. But those notorious CPU hogs listed in the tweet should be enough to illustrate just how much is going on without really pushing the processing cores of the Macbook Air.</p>
-
-<p>Remember, my 13&#8221; Macbook Air only weighs 2.96 pounds. In 2005, I had a 12&#8221; Powerbook G4 that weighed 4.6 pounds and had, by my back-of-the-envelope calculations on Geekbench scores <sup><a href="#geekbench-notes" name="geekbench-notes-return">1</a></sup>, my Macbook Air is almost 9 times as powerful as the Powerbook G4 was.</p>
-
-<p>Where is this progress taking us? Well, my iPhone is already pretty powerful. It&#8217;s hard to get a raw number of FLOPS (floating-point operations per second) for the processor in an iPhone 4S, but we can get a Geekbench score for it. It is weighed against the same scale as the Macbook Air is measured on. On that scale, my iPhone measures<sup><a href="#geekbench-iphone-notes" name="geekbench-iphone-notes-return">2</a></sup> very close to the Powerbook G4 I had 8 years ago, but the iPhone has the advantage of having two cores.</p>
-
-<p>Some people incorrectly read Moore&#8217;s Law as &#8220;processor <em>speed</em> doubling every 2 years,&#8221; which it is not. We&#8217;ve found that there&#8217;s more to processing power than just gigahertz, though. The number of cores in a processor, and therefore the number of simultaneous things that a computer can do, is increasing. While there&#8217;s some issues as we grow into this new paradigm where everything has multiple cores and we have to ensure consistency between them, this is overall a net win for those of us seeking more powerful computers.</p>
-
-<p>To be honest, I don&#8217;t really even notice my computer as physical hardware anymore. It is just the stage for software to run on: quiet, fast, lightweight, and very infrequently does the hardware bog down to make me wait. Only a few short years ago, we would have to wait for the computer to do something &#8211; usually shown as the hourglass on Windows and the spinning beachball on Macs. Even things like copying a file between two directories could stop a system in its tracks, and the computer would simply stop accepting any input from the user. Now, processors, RAM, and SSDs are so fast that I rarely have to wait for them. And if I do have to wait, say, for some piece of software to be installed, the fact that the computer is multicore means that I can go and browse the internet in another window without noticing.</p>
-
-<p>It&#8217;s likely that, just like the example of VMware running Linux running on my Macbook Air in the my tweet, eventually we will get to the point of having so much computing power embedded around us that we will virtualize everything. It&#8217;s possible that we will take not just files or even processes between computing devices but the whole environment, a whole virtualized machine and operating system. As a thought experiment, imagine pausing a VMware virtual machine while it is performing some CPU-intensive task on your laptop. Now copy that paused VM over to another machine, and start it back up. The software will continue to chug along on the CPU-intensive task like nothing happened<sup><a href="#vm-notes" name="vm-notes-return">3</a></sup>. Advances in processing power, storage speed, and wireless networking speed will continue to progress until this process could be seamless to the user.</p>
-
-<p>In some regards, sending the whole VM across the wire and starting it back up on another processor is simpler than trying to marshal a raw process between two machines, and ensure that the process can still run in the other machine&#8217;s environment. It doesn&#8217;t solve the problem of running one process on many machines at once, but it could be used in cases where we can spin up one copy of a process that we want to parallelize, and then copy that VM to many different machines with chunks of the dataset to process. In fact, that&#8217;s basically how many large distributed processing projects like BOINC (the software that SETI@Home runs on) work.</p>
-
-<p>And so it&#8217;s likely that, for reasons of ease of use, sandboxing for security and safety, and simply because we have so much processing power, in the future our phones and our wearable computers will simply be running a virtual machine. Then we don&#8217;t need to worry about what software is running on our desktop PCs when we get home and have access to a larger display; we just move our processing over to the desktop computer, which ever is more convenient. (Even more likely is that we just have a display that acts like an accessory that we can &#8220;throw&#8221; the video onto, rather than having a separate desktop computer.)</p>
-
-<p>The things around us are getting progressively more powerful by way of cheap, small processors. Where before I was saying that electronics hobbyists would rather use an Arduino into a project than deal with many transistors, industry would rather throw a small ARM processor into everything around us and write software than design a custom piece of hardware.</p>
-
-<p>Case in point, over on the Panic blog, the case of <a href="http://www.panic.com/blog/2013/03/the-lightning-digital-av-adapter-surprise/">The Lightning Digital AV Adapter Surprise</a>. After wondering why the new Lightning AV adapter for the iPad mini took a few moments to boot up, and seemed to display a scaled version of the video, they cracked open the Lightning AV cable to find: an ARM processor! As far as they can tell, the iPad mini sends a bit of software to the processor in the Lightning cable every time it is connected, essentially booting the cable up, and sets an Airplay stream down the cable to the other end, where the ARM processor decodes it, upscales it to HD, and sends it to the TV. This makes the Lightning AV cable, in essence, the world&#8217;s smallest AppleTV. And we thought the new AppleTV was small when it was debuted.</p>
-
-<p>When I go to a concert now, the room is full of smartphones being pointed at the stage taking video or pictures. And while most people might think, &#8220;That&#8217;s a lot of pictures and video that will be uploaded to Facebook,&#8221; I think about the fact that the people in the room with me are holding more processing power in their hands than we had in most of the computer labs in my schools and in college. Those phones will just keep getting more powerful, and soon they&#8217;ll match the performance of the Macbook Air I&#8217;ve got in my backpack. Even the mundane things will have plenty of processing power because it will be cheap and simpler to put a cheap processor in it. But those cheap processors are getting more powerful every day, and that is exciting.</p>
-
-<p>So while I may have learned digital logic in college and can help you build up a simple adder from NAND gates, and as a hobbyist I&#8217;ve learned to build <a href="http://www.geofex.com/article_folders/fuzzface/fffram.htm">guitar fuzz pedals from a few transistors</a>, that knowledge is increasingly obsolete in the face of rapid progress. We will soon be packing powerful processors into everything around us, sometimes in surprisingly ways, simply because it is easier and cheaper than designing a custom piece of hardware. But the future is exciting, and that knowledge isn&#8217;t completely useless, as long as I can share it with a few more people to show us just how far we&#8217;ve come.</p>
-
-<hr />
-
-<p><a name="geekbench-notes"></a></p>
-
-<p><strong>1.</strong></p>
-
-<p>&#8220;Geekbench scores are calibrated against a baseline score of 1,000 (which is the score of a single-processor Power Mac G5 @ 1.6GHz). Higher scores are better, with double the score indicating double the performance.&#8221;</p>
-
-<p>Scores:</p>
-
-<ul>
-<li><a href="http://browser.primatelabs.com/geekbench2/1713385">MacBook Air (13-inch Mid 2012)</a>: 7675</li>
-<li><a href="http://browser.primatelabs.com/geekbench2/1545796">PowerBook G4 (12-inch 1.5 GHz)</a>: 861</li>
-</ul>
-
-
-<p><a href="#geekbench-notes-return">&#8617;</a></p>
-
-<p><a name="geekbench-iphone-notes"></a>
-<strong>2.</strong> Geekbench score for <a href="http://browser.primatelabs.com/ios-benchmarks">iPhone 4S</a>: 651 <a href="#geekbench-iphone-notes-return">&#8617;</a></p>
-
-<p><a name="vm-notes"></a>
-<strong>3.</strong> Of course, there&#8217;s some issues with this. Anything that was happening synchronously would probably failed, as well as anything that depends on a network connection in progress. But for the purposes of the thought experiment, let&#8217;s ignore those problems. <a href="#vm-notes-return">&#8617;</a></p>
+<p>Nokogiri should now be compiled against the right version!</p>
 
         
         
@@ -398,120 +652,7 @@ And I explained how the form factor of the components we were using was obsolete
 
 
 
-<time datetime="2013-03-03T11:10:00-06:00" pubdate  data-updated="true" >Mar 3<span>rd</span>, 2013</time>.</div>
-        <div class="tags">
-
-</div>
-    </div>
-
-  </article>
-
-
-  <article class="post">
-    
-    <h1 class="title"><a href="/blog/2013/03/02/google-glass-you-cant-control-the-future/">Google Glass: You Can&#8217;t Control the Future</a></h1>
-    <div class="entry">
-        <p>There&#8217;s been quite a bit of backlash surrounding the new Google Glass product. As someone who has wanted wearable computing for awhile, I&#8217;d like to talk about it a bit. My only real qualifications on this subject come from the fact that I&#8217;ve read a lot of scifi<sup><a href="#accelerando-note" name="accelerando-note-return">1</a></sup> and that I&#8217;m an open source developer that would like to build software for wearable computing that makes people&#8217;s lives better.</p>
-
-<p>When I&#8217;m talking about wearable computing glasses in general rather than just the Google Glass product, I will call them smart glasses. There doesn&#8217;t seem to be a consistent name yet, and the phrase <a href="http://en.wikipedia.org/wiki/EyeTap">eyetap</a> only refers to a very specific type of smart glasses.</p>
-
-<h2>The promise</h2>
-
-<p>As Amber Case explains in this TED Talk, <a href="http://www.ted.com/talks/amber_case_we_are_all_cyborgs_now.html">we are all cyborgs now</a>. As soon as man started using tools, we were augmenting what evolution gave us to become something more. A cyborg. When you drive a car, you are a cyborg because your legs could not carry you that fast. Welcome to the future, human.</p>
-
-<p>That progress marches on constantly, much faster than evolution could ever provide us with enhancements. Computers, the internet, and smartphones are some of the latest and greatest in the enhancements that we add to our bodies to be something more. We&#8217;re already using smartphones to constantly be connected to a wider world than just what we can see and hear in the room. We&#8217;re extending our brains by using things like Google Search and Wikipedia to find and remember far more than our meatbrains could do on their own. And we&#8217;re connected to others to a degree that no other form of communication has matched. When scifi authors write about this kind of brain enhanced by technology, they sometimes refer to it as the exocortex. I&#8217;d argue that we already have exocortexes: our digital selves, the software and websites we use, the tools like Twitter and Facebook that we communicate over, are all part of those exocortexes. Without them, we are less than the whole. And while not everyone feels it yet, I certainly feel a little limited when cut off from my exocortex.</p>
-
-<p>The promise, then, of Google Glass is to constantly be connected to that information source and communications tools. Not to interrupt your daily life, but to simply be better integrated into it. Some people want to point out that Glass is going to be a distraction from &#8220;real life&#8221;, but your real life already includes these &#8220;distractions&#8221; to a degree that you&#8217;re probably not thinking about. How often do you check your email during your work day? Twitter? What apps do you use on your smartphone to find the next bar to go to or figure out a restaurant that everyone can eat at? Does using any of those constitute putting real life on hold while you spend some quality time with something fake? No, they&#8217;re just part of life.</p>
-
-<h2>The buzz</h2>
-
-<p>I was initially quite excited about Google Glass, because it is the first real promise of wearable computing for the masses at a price point that we will probably be able to afford. For nearly a year, the product has been announced but no real details have surfaced. With the announcement of the Google Glass Explorer contest, more information has been leaking out of the Googleplex. After the <a href="http://www.youtube.com/watch?v=9c6W4CCU9M4">Youtube video showing real Glass in use</a> was posted, I quickly realized that Google Glass was not intended for me in the way that I was hoping.</p>
-
-<p>Simply put, Glass is going to do the things that consumers now want to do quickly with their smartphones: receive and send texts &amp; email, take pictures, take videos, and post that content up to things like Facebook, Youtube, and Google+. Another valid use is quickly searching Google for something, which could be useful for everything from trivia night to trying to remember what goes in your favorite korma.</p>
-
-<p>But the things I&#8217;m interested in? Coding while walking around (twiddling fingers in the air, no doubt), augmenting my poor social skills by having my wearable remember faces and previous conversations, providing heads-up documentation while I am doing some task, reading full ebooks in a sitting with some sort of speed-reading app, etc. And some of these, like coding and reading, are quite focused activities that would benefit from having full-screen display of information rather than just a hovering box in the corner of one eye. Since the Glass only really shows notifications and thumbnails of photos and videos, it isn&#8217;t going to provide that focused experience. At least until Google or some other company builds binocular, full-vision smart glasses.</p>
-
-<p>Then again, building a device that most consumers will want to use is exactly what Google should be doing. I&#8217;m a relatively tiny market, and it&#8217;d make no sense for Google to prioritize my features over the average consumer. I&#8217;m well aware of that. But all that said, I still plan on being an early-adopter, at least after the price drops a little.</p>
-
-<h2>The marketing bullshit</h2>
-
-<p>You may have heard that <a href="http://www.independent.co.uk/news/world/americas/google-cofounder-sergey-brin-feels-emasculated-by-smartphones-8514748.html">Sergey Brin said</a> that smartphones are &#8220;emasculating.&#8221; I&#8217;m not going to linger on this topic too long, but whether he thought this up on the fly or a marketing team came up with it, it makes him sound like an idiot. And in case you forgot, Google makes smartphones. Is it &#8220;emasculating&#8221; to open a refrigerator? What about when you ride the bus rather than drive a car in to work? What does this tell female smartphone users when you say this? I believe the correct usage of the word &#8220;emasculating&#8221; is to &#8220;deprive (a man) of his male role or identity. Ex: he feels emasculated because he cannot control his sons&#8217; behavior.&#8221; What does that have to do with a smartphone? It&#8217;s just a poor choice of words all around. Sorry Sergey, but I&#8217;m calling bullshit on your statement.</p>
-
-<h2>The wearable device Cambrian explosion</h2>
-
-<p>We can only hope that as soon as Google Glass comes out, two things start to happen: hackers figure out how to root (or jailbreak, or whatever we&#8217;re going to call it) Glass and install Linux on it. This will ensure that open source software can start being developed for it for all sorts of niche users (like me) and not just the average consumer mentioned above. It also will help to combat some of the security and privacy concerns outlined below. Maybe in the long run, Linux isn&#8217;t the best OS to run on such a device, but that doesn&#8217;t matter initially. As soon as open source hackers figure it out, anything and everything can run on it. We&#8217;ll see a Cambrian explosion of wearable computing apps.</p>
-
-<p>I think we&#8217;ll also see hardware manufacturers, especially the OEMs that typically make keyboards, mice, and cheap Android phones, start to produce similar glasses to the Google Glass devices. They&#8217;ll likely run Android or some flavor of whatever Microsoft is calling a mobile OS, but will probably be a lot easier to hack than the Google Glass device. And they&#8217;ll get cheaper. The best part about all of this is that by leading the way, Google is practically ensuring that we&#8217;re going to have lots of manufacturers building these devices, and they&#8217;re going to get cheaper. The demand for wearable displays in the past were limited to applications in military and some industry jobs, along with academic research, and so wearable displays tended towards the expensive and impractical in the past. Eventually, smart glasses will probably be as common as smartphones, and around the same price point. Don&#8217;t be surprised if, in a few years, it makes a lot more sense for someone to wear smart glasses than to carry around a smartphone in their pocket.</p>
-
-<p>By being first to market, Google is also giving us a good model for what interactions with smart glasses can look like. The early, proto-smartphones like the Blackberry were arguably very poor in terms of user experience &amp; interaction design. It wasn&#8217;t until the Apple iPhone came along that we started to get good UX on mobile devices. Now, even free, low-end Android phones come with some UX heritage imprinted from Apple&#8217;s iOS. While it remains to be seen whether Glass&#8217;s UX is great and not just as good as the Youtube video makes it out to be, I hope that it helps imprint some good UX concepts onto all future devices.</p>
-
-<h2>The &#8220;dorky&#8221; backlash</h2>
-
-<p>I&#8217;ve seen a few blogs, perhaps in an attempt to stir up trouble and get pageviews, call out Google Glass for being dorky. You&#8217;ll see phrases like &#8220;But why would anyone want to wear something so dorky?&#8221; The authors of these pieces of trying to enforce the status quo the same way that kids in school make fun of the clothes that others wear. Why are they doing that? They may have valid fears of the technology&#8217;s privacy implications. But more likely, they&#8217;re responding to what, in literature, we&#8217;d call &#8220;the fear of the other.&#8221; The Google Glass device is new and unknown. People who would break from the tribe and wear it are weird; possibly nonhuman. They are the other.</p>
-
-<p>There&#8217;s a fear mentioned in some blog posts about Glass that someone might pay more attention to their Glass display than to the other person in a social situation. I imagine that the way it works out in reality is that common courtesy comes into play here, and that you wouldn&#8217;t ignore someone in favor of your glass any more than you&#8217;d walk away from someone you were talking to to look at Twitter on your phone. That said, some people have done that to me, and I expect that it is really just a fault of people rather than the technology.</p>
-
-<p>Some of this backlash, too, is the fear that someone else with that easy access to information and search results (perhaps even more discreetly than the voice searching we&#8217;ve seen so far) is going to give others an unfair advantage. Suddenly everyone will remember everything and be experts on trivia, or last quarter&#8217;s financials, or any other things that smart glasses will make easy. But again, as I discussed before, this is all part of the wearer&#8217;s exocortex. It is as much as part of them as using a hammer or using a calendar on the wall to remember something.</p>
-
-<p>By being a part of the cyborg human, the device is a prosthetic that the wearer uses to enable their exocortex. But rather than compensating for some handicap, it helps to enhance the wearer. Would you deny someone their hearing aids because they might be able to hear more than you? I think the feelings and popular opinion on these topics will change as more people start wearing smart glasses and other wearable technology. It&#8217;s already perfectly acceptable to use your smartphone to play Angry Birds while sitting in a waiting room, and I&#8217;m pretty sure that the activities that the Google Glass will lend itself to will soon become socially acceptable, too.</p>
-
-<h2>The fear</h2>
-
-<p>The biggest, and most valid in my mind, issue with Google Glass is what it will mean for everyone to suddenly have an always-on, always-available camera and microphone on their face. I&#8217;d suggest you go read Mark Hurst&#8217;s article on Creative Good, <a href="http://creativegood.com/blog/the-google-glass-feature-no-one-is-talking-about/">The Google Glass feature no one is talking about</a> if you haven&#8217;t yet, to get up to speed on this debate.</p>
-
-<p>While I believe in privacy and support organizations like the <a href="https://eff.org">EFF</a>, I think it is a little short-sighted and silly to react so strongly to the fact that the Google Glass device will have a camera on it. The two fears outlined in that article are:</p>
-
-<ul>
-<li>That anyone, at any time, could be taking photos or video of you without your consent. And you wouldn&#8217;t know.</li>
-<li>That Google will now be able to index and otherwise process any audio, video, and images you send to them, along with the other data the Glass will send along: date and time, Google user account, etc.</li>
-</ul>
-
-
-<p>This seems to happen with every technology. And you may not realize it, but if you are advocating against the Google Glass for the above reasons, then you have far more reasons to be vocal about banning smartphones and even cheap digital cameras. I think it&#8217;s easy for someone to exclaim &#8220;But they could be taking videos of me in a public place, possibly something embarrassing!&#8221; and not realize that there already exists a whole bunch of terrible usage of existing technology out there to exploit women by taking pictures and video of them without their consent. No one seems up in arms, marching to ban the cheap digital camera on behalf of exploited women. The same technology is used by parents to take pictures and videos of their kids. Here, the technology itself is not so much to blame as the people who would use it to exploit others.</p>
-
-<p>There have been attempts to try and regulate digital cameras and smart phones in the past, usually to force them to emit some kind of loud shutter noise when a picture is taken or a video is started. But just about everything comes with a camera now; are you really going to regulate all of that? Part of my point here is that you can&#8217;t regulate the future and try to lock down technology, because the companies that want to sell you the technology will just find a way around it. Let&#8217;s be honest here, governments are too slow to out-maneuver technology.</p>
-
-<p>The fact of the matter is that in public, you&#8217;re probably being monitored by far more than just someone&#8217;s glasses, and that&#8217;s far more worrying than worrying about this new technology that Google is building. Security cameras abound. Your movements online are tracked by any number of ISPs, advertisement platforms, and governments. Have you been up in arms all this time about that and only now adding Google Glass to the list of technologies to worry about? I&#8217;m just pointing out the absurdity of singling out Google Glass here.</p>
-
-<p>Now, what about the fear that, simply put, you won&#8217;t know if someone with Google Glass glasses on could be taking a video and you wouldn&#8217;t know it? Isn&#8217;t that true that they could already be doing this every time you&#8217;re standing around someone with a smartphone in their hand? The fact is that the majority of people are probably going to be polite and follow the same kinds of social expectations you&#8217;d have around that. Just like you&#8217;re already doing whenever you take out your smartphone. Do people take videos of people on the bus because they think they&#8217;re funny? Sure, but that&#8217;s not the only use for a camera on a smartphone.</p>
-
-<p>Lastly, there&#8217;s the concern that all of the data from Glass will be going into Google, to be indexed and searched, and could be subpoenaed by the government. This problem does not really point at the technology as the source of that concern. <strong>If you&#8217;re really worried about what kinds of things a corporation or government could do with all that information, especially a corrupt government, then the problem lies with the governments and corporations.</strong> You&#8217;ve been contributing to the constant stream of information into Google and Facebook&#8217;s datacenters for years. Twitter will give up your information to the government if pressured; yet we communicate over Twitter all of the time. The government has been installing taps into data exchanges for years to monitor online communications. So think about it. It might make a lot more sense for you to focus on fixing those organizations, or weakening their growing Big Brother powers, rather than chasing after perceived rights lost when someone wears a camera on their face in public.</p>
-
-<p>Open source, again, provides a way out here: It&#8217;s likely that an open source OS like Linux will put more control about what information it leaks into the hands of users. At the same time, the open source software probably won&#8217;t see widespread usage by the average consumer, and so we should continue to question and call out this kind of abuse of information by corporations and governments. And, we can do what Mozilla is doing with <a href="http://www.mozilla.org/en-US/firefox/partners/">Firefox OS</a> and provide software that encodes some of our ideals about freedom and privacy right into the software, while making it attractive for manufacturers to use by making it free.</p>
-
-<p>So don&#8217;t try to shout down a fledgling technology just because it could be used to limit your freedoms or privacy. Lots of technologies <em>could</em> be used to limit those things. You can&#8217;t regulate the technology, because cheap clones are on the way and a lot of people are going to want them. Instead, the real menace here is those that would use technology to limit your privacy. Those are what you should fear when you feel uneasy about the future. I&#8217;d like to see a lot more discussion on that topic, but the latest gadget fad pays the bills (with advertising, at least) better, I suppose. And I guess I&#8217;d like to see more writing on the <strong>potential</strong> of new technologies to improve the human condition and make us better cyborgs, rather than just whether or not it will be the killer Facebook app. But we can all dream, right?</p>
-
-<hr />
-
-<p><a name="accelerando-note"></a></p>
-
-<p><strong>1</strong>: In particular, <a href="static/fiction/accelerando/accelerando.html">Accelerando</a> features a main character with smart glasses. It&#8217;s an interesting portrait of how a well-connected digital savant might use this wearable technology while still interacting with people and places.
-<a href="#accelerando-note-return">&#8617;</a></p>
-
-        
-        
-    </div>
-
-    <div class="meta">
-        <div class="author">
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
-</div>
-        <div class="date">
-
-
-
-
-
-
-
-
-
-
-
-
-<time datetime="2013-03-02T15:09:00-06:00" pubdate  data-updated="true" >Mar 2<span>nd</span>, 2013</time>.</div>
+<time datetime="2013-05-23T11:46:00-05:00" pubdate  data-updated="true" >May 23<span>rd</span>, 2013</time>.</div>
         <div class="tags">
 
 </div>

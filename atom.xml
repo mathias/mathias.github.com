@@ -4,7 +4,7 @@
   <title><![CDATA[blog.mattgauger.com]]></title>
   <link href="http://blog.mattgauger.com/atom.xml" rel="self"/>
   <link href="http://blog.mattgauger.com/"/>
-  <updated>2014-07-27T11:42:12-05:00</updated>
+  <updated>2014-07-27T12:06:21-05:00</updated>
   <id>http://blog.mattgauger.com/</id>
   <author>
     <name><![CDATA[Matt Gauger]]></name>
@@ -12,6 +12,20 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Housekeeping: Imported Coderwall protips]]></title>
+    <link href="http://blog.mattgauger.com/blog/2014/07/27/housekeeping-imported-coderwall-protips/"/>
+    <updated>2014-07-27T12:05:00-05:00</updated>
+    <id>http://blog.mattgauger.com/blog/2014/07/27/housekeeping-imported-coderwall-protips</id>
+    <content type="html"><![CDATA[<p>As part of my continuing effort to archive all content I&#8217;ve created online in blog-like format to this blog, I&#8217;ve migrated all <a href="">my Coderwall protips</a> to this blog. Here&#8217;s a quick list of the posts:</p>
+
+<ul>
+<li></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Clojure Data Science: Refactoring and Cleanup]]></title>
@@ -740,6 +754,44 @@ Note: It could be that I messed up these numbers a bit; I went off the current t
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[Indent and colorize HTML strings in pry]]></title>
+    <link href="http://blog.mattgauger.com/blog/2013/11/14/indent-and-colorize-html-strings-in-pry/"/>
+    <updated>2013-11-14T11:32:00-06:00</updated>
+    <id>http://blog.mattgauger.com/blog/2013/11/14/indent-and-colorize-html-strings-in-pry</id>
+    <content type="html"><![CDATA[<hr />
+
+<p><em>(This post is part of my blog archiving project. This post appeared on <a href="https://coderwall.com/p/hlbana">Coderwall</a> on November 14, 2013.)</em></p>
+
+<p><em>Note: I have converted the inline code to Gists for better readabililty.</em></p>
+
+<hr />
+
+<p>An issue I run into frequently while testing with tools like <a href="https://github.com/jnicklas/capybara">capybara</a> by dropping into <a href="http://pryrepl.org/">pry</a> is that the last response for a page is a single string, containing the HTML that was rendered. But those string have lost indentation and generally make it really hard to see the content of the page, or whatever you care about.</p>
+
+<p>For example, a simple login page might look like:</p>
+
+<script src="https://gist.github.com/mathias/2007dab63a9fe77d7182.js"></script>
+
+
+<p>Wouldn&#8217;t it be great if Pry could re-indent and colorize that string of HTML for you? Well, I put together a quick little Pry command that does. Throw this into your <code>~/.pryrc</code>:</p>
+
+<script src="https://gist.github.com/mathias/21a971d0bdb3620a8909.js"></script>
+
+
+<p>Originally, I had tried to use the html5 fork of the <code>tidy</code> command: <a href="https://github.com/w3c/tidy-html5">https://github.com/w3c/tidy-html5</a> but that tool <em>changes</em> the HTML as it parses it, and spits out a bunch of warnings. So instead, I have this pry command use <code>nokogiri</code> when it is available. The command should warn you if you try to use it without <code>nokogiri</code> available. What is output should be very close to the original rendered HTML, just cleaned up and re-indented.</p>
+
+<p>So what does it look like in action?</p>
+
+<script src="https://gist.github.com/mathias/4065f861db4cd9e280ad.js"></script>
+
+
+<p>(imagine that pry has colorized this output, too, through the excellent CodeRay tool.)</p>
+
+<p>I&#8217;d love to hear from you if you find this useful! Or even if you don&#8217;t find it useful, but have some suggestions to improve it. Thanks!</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Apprentice Talk Video &amp; Notes]]></title>
     <link href="http://blog.mattgauger.com/blog/2013/11/11/apprentice-talk-video-and-notes/"/>
     <updated>2013-11-11T19:22:00-06:00</updated>
@@ -747,6 +799,27 @@ Note: It could be that I messed up these numbers a bit; I went off the current t
     <content type="html"><![CDATA[<p>Back in September, I had a blast speaking at <a href="http://nickelcityruby.com/">Nickel City Ruby</a>. My talk was entitled &#8220;Apprenticeship: Software Craftsmanship&#8217;s Missing Link&#8221; and included a lot of slides of sasquatches. The video has been posted to Confreaks, so I&#8217;m embedding it here. Also note that I have posted my notes and a few resources over on the microsite I created for this talk, <a href="http://blog.mattgauger.com/apprenticeship/">http://blog.mattgauger.com/apprenticeship/</a></p>
 
 <iframe width="640" height="360" src="http://blog.mattgauger.com//www.youtube.com/embed/zuL7rAwmwCY" frameborder="0" allowfullscreen></iframe>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[git fml]]></title>
+    <link href="http://blog.mattgauger.com/blog/2013/09/03/git-fml/"/>
+    <updated>2013-09-03T11:32:00-05:00</updated>
+    <id>http://blog.mattgauger.com/blog/2013/09/03/git-fml</id>
+    <content type="html"><![CDATA[<hr />
+
+<p><em>(This post is part of my blog archiving project. This post appeared on <a href="https://coderwall.com/p/ypsd8w">Coderwall</a> on September 3, 2013.)</em></p>
+
+<hr />
+
+<p>For when you need to go back to a clean slate and declare FML, add this to your <code>~/.gitconfig</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[alias]
+</span><span class='line'>  fml = !"git fetch && git reset --hard origin/master"</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>
@@ -1147,6 +1220,82 @@ Note: It could be that I messed up these numbers a bit; I went off the current t
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[WARNING: Nokogiri was built against LibXML version x.x.x]]></title>
+    <link href="http://blog.mattgauger.com/blog/2013/05/23/warning-nokogiri-was-built-against-libxml-version-x-dot-x-x/"/>
+    <updated>2013-05-23T11:46:00-05:00</updated>
+    <id>http://blog.mattgauger.com/blog/2013/05/23/warning-nokogiri-was-built-against-libxml-version-x-dot-x-x</id>
+    <content type="html"><![CDATA[<hr />
+
+<p><em>(This post is part of my blog archiving project. This post appeared on <a href="https://coderwall.com/p/kia38w">Coderwall</a> on May 23, 2013.)</em></p>
+
+<hr />
+
+<p>When you run tests or rake, if you see:</p>
+
+<pre><code>WARNING: Nokogiri was built against LibXML version 2.9.0, but has dynamically loaded 2.7.8
+</code></pre>
+
+<p>Then do the following:</p>
+
+<pre><code> gem uninstall nokogiri libxml-ruby
+
+brew update
+
+brew uninstall libxml2
+brew install libxml2 --with-xml2-config
+
+brew uninstall libxslt
+brew install libxslt
+brew unlink libxslt
+
+bundle config build.nokogiri -- --with-xml2-dir=/usr --with-xslt-dir=/usr --with-iconv-dir=/usr
+bundle
+</code></pre>
+
+<p>Nokogiri should now be compiled against the right version!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Reset a lost password on an Ubuntu VM]]></title>
+    <link href="http://blog.mattgauger.com/blog/2013/04/24/reset-a-lost-password-on-an-ubuntu-vm/"/>
+    <updated>2013-04-24T11:46:00-05:00</updated>
+    <id>http://blog.mattgauger.com/blog/2013/04/24/reset-a-lost-password-on-an-ubuntu-vm</id>
+    <content type="html"><![CDATA[<hr />
+
+<p><em>(This post is part of my blog archiving project. This post appeared on <a href="https://coderwall.com/p/vibura">Coderwall</a> on April 24, 2013.)</em></p>
+
+<hr />
+
+<p>You may be like me and keep a couple virtual machines around on your laptop for development, testing, and gaming. I had an Ubuntu VM in VMWare that I&#8217;d lost the password to, and I wanted to reset it so that I could get back to coding.</p>
+
+<p>Typically, with a desktop computer or a server, you hold down some key while the computer is booting to get into the Grub boot manager and then boot into something called &#8220;single user mode&#8221;, where you&#8217;re able to change passwords, fix configs, repair disks, etc.</p>
+
+<p>Unfortunately, the boot screen just flies right by in Ubuntu under VMWare. So the first thing you&#8217;ll need to do is shut down the VM, and then get ready to start it up. <strong>But before you start the VM</strong>: get ready to hit <code>Shift</code> because that&#8217;s what will get you into Grub. Ready? Ok. Boot it and hit <code>Shift</code>.</p>
+
+<p>Now you should be in Grub. If you don&#8217;t get it, don&#8217;t worry, just shut down and try again.</p>
+
+<p>Choose the &#8216;Advanced Options&#8217; and then any of the &#8220;recovery&#8221; lines from the Grub menu for Ubuntu.</p>
+
+<p>You&#8217;ll get dropped into another menu system. Choose <code>root</code>: this is the single-user mode where you are root.</p>
+
+<p>Your / filesystem may be mounted as read-only at this point. Type this to mount it as read-write:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mount -rw -o remount /</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now you can reset passwords, etc, like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>passwd myuser</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Good luck!</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[By augmenting human intellect, we mean]]></title>
     <link href="http://blog.mattgauger.com/blog/2013/03/17/by-augmenting-human-intellect/"/>
     <updated>2013-03-17T22:44:00-05:00</updated>
@@ -1364,433 +1513,6 @@ And I explained how the form factor of the components we were using was obsolete
 
 <p><strong>1</strong>: In particular, <a href="static/fiction/accelerando/accelerando.html">Accelerando</a> features a main character with smart glasses. It&#8217;s an interesting portrait of how a well-connected digital savant might use this wearable technology while still interacting with people and places.
 <a href="#accelerando-note-return">&#8617;</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Run rake. Just run rake.]]></title>
-    <link href="http://blog.mattgauger.com/blog/2012/07/13/run-rake-just-run-rake/"/>
-    <updated>2012-07-13T14:59:00-05:00</updated>
-    <id>http://blog.mattgauger.com/blog/2012/07/13/run-rake-just-run-rake</id>
-    <content type="html"><![CDATA[<p>Recently, I was setting up my laptop for an existing Rails project with the help of a pair. My pair was pivot on this project, which means that he&#8217;d been on it longer and so was bringing his experience and knowledge to the table, while I was seeing the project with fresh eyes.</p>
-
-<p>&#8220;This is going to take forever to set up,&#8221; he grumbled. &#8220;The documentation&#8217;s out of date, and I remember there&#8217;s a bunch of gotchas to setting this project up. We&#8217;ll need to compile this, then do that, then you get an API key for..&#8221;</p>
-
-<p>I went to Github and cloned the repo to my laptop.</p>
-
-<p>&#8220;Just run rake,&#8221; I replied.</p>
-
-<p>&#8220;What?&#8221;</p>
-
-<p>&#8220;Just run rake. It will tell us what to do next.&#8221;</p>
-
-<p>And indeed, it did tell us what to do. I&#8217;ve called this test-based configuration, or other funny things in the past, but you can just think of it as trying to get to a known good state - a state where all the tests run. If it prevents the tests from running, then it&#8217;s the next thing you need.</p>
-
-<p>I had to silence my pair&#8217;s grumbling at this process, because at first it seems like you&#8217;re going to be waiting a lot for rake, and that it might be easier just to remember all the steps necessary to set up a project.</p>
-
-<p>It turns out rake showed us all the steps we needed to do to get the project running. A full log of what this looks like setting up a simple Rails app can be seen <a href="https://gist.github.com/3112558">in this gist</a>.</p>
-
-<h3>Why?</h3>
-
-<p>The point of software craftsmanship is to be pragmatic, not to seek perfection. I could have memorized the steps necessary to set up the average Rails project, but those steps wouldn&#8217;t have applied here. And indeed, my pair could have memorized them, since he had been on the project. But those steps would go out the window as soon as my pair was on another project. It is far more pragmatic to know the behavior of our tools (like knowing that rake will tell us about each thing necessary to get to a state where the tests pass) and rely on that behavior rather than to seek perfection on this one project.</p>
-
-<p>Note: we could have used our experience with Rails and software craftsmen to avoid some of the steps you see me running in the gist: for example, you probably know that if the databases aren&#8217;t created, that you can run <code>rake db:create:all db:migrate db:test:prepare</code> all at once, without running rake inbetween every single rake task. That&#8217;d be far more pragmatic, as you&#8217;re saving yourself time and effort by knowing the toolset. But I wanted to demonstrate that running rake between every single step told us what to do next.</p>
-
-<p>Now, ask yourself: How can you &#8220;just run rake&#8221; with your projects?</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mosh, SSH Tunnels, and Tmux]]></title>
-    <link href="http://blog.mattgauger.com/blog/2012/04/21/mosh-ssh-tunnels-tmux/"/>
-    <updated>2012-04-21T21:14:00-05:00</updated>
-    <id>http://blog.mattgauger.com/blog/2012/04/21/mosh-ssh-tunnels-tmux</id>
-    <content type="html"><![CDATA[<p>I&#8217;m currently preparing for RailsConf. One of the things I wanted to do before I left was figure out a way to monitor a process on a Linux server running on my LAN. The process frequently crashes and needs some prodding to restart.</p>
-
-<p>One solution might be to set up DynDNS and configure the router to point from some random port to the SSH port on the Linux machine running on the LAN. That idea didn&#8217;t strike my fancy, as it just isn&#8217;t terribly secure to open up a port to the entire world, and it seems that DynDNS costs money to use since 2008. I&#8217;m sure there are free alternatives, but I couldn&#8217;t be bothered to find them, much less configure them.</p>
-
-<p>A much better solution would be an SSH tunnel up to my Linode, and a reverse tunnel back down to the Linux server on my LAN. If you haven&#8217;t used reverse SSH tunneling before, it is really neat. Here&#8217;s an example:</p>
-
-<p>From the local server:</p>
-
-<pre><code>ssh -R 2048:localhost:22 username@example.com
-</code></pre>
-
-<p>From the server out in the Internet (aka example.com in this example)</p>
-
-<pre><code>ssh -p 2048 other_username@localhost
-</code></pre>
-
-<p>Note that the &#8216;localhost&#8217; in the second example refers to your local server, not the one out in the internet. So <code>other_username</code> should be the username on your local server (not the remote server.) Confused yet? Good.</p>
-
-<p>Now, this setup will get you pretty far: You&#8217;re now able to run commands on the local server from the Linode out in the cloud. But you may notice a problem fairly quickly: if you kill that SSH shell on the local server, the connection up to the server on the internet dies, and so does the reverse tunnel that was inside that.</p>
-
-<p>Fix that by starting up a tmux session on the local server first, then detaching it.</p>
-
-<pre><code>tmux new -s ssh-tunnel
-ssh -R 2048:localhost:22 username@example.com
-&lt;leader-d&gt;
-</code></pre>
-
-<p>Now the tmux session will happily keep that SSH shell open on the local server and you can reverse tunnel back over it.</p>
-
-<p>My solution involves <a href="http://mosh.mit.edu">Mosh</a>, which I&#8217;ve been using quite a bit since it exploded on Hacker News and other news sites. Simply put, Mosh is like SSH, but it uses UDP packets to make itself more reliable. &#8220;More reliable without TCP?&#8221; you say? Well, Mosh is doing a little more work to buffer the connection to the other machine (including instant response to typing when there&#8217;d otherwise be lag) and maintains that connection: even if you change IPs, hop on a train, etc. It&#8217;s pretty amazing, and so far I&#8217;ve been loving it. Click through to the Mosh site to read up more on it. It really is awesome.</p>
-
-<p>With Mosh, we add another layer to the puzzle, so that my final setup looked like this:</p>
-
-<pre><code>matts_laptop$ mosh matt@someserver.local
-matt@someserver.local$ tmux new -s ssh-tunnel
-&lt;tmux session starts&gt;
-matt@someserver.local$ ssh -R 2048:localhost:22 username@example.com
-&lt;leader-d&gt;
-</code></pre>
-
-<p>Pop open another window in my local tmux session (are you beginning to see a pattern?) and then connect with mosh up to my Linode:</p>
-
-<pre><code>matts_laptop$ mosh me@mattgauger.com
-me@mattgauger.com$ tmux new -s server-monitor
-&lt;tmux session starts&gt;
-me@mattgauger.com$ ssh -p 2048 matt@localhost # Note: this is the matt@someserver.local account!
-matt@someserver.local$ &lt;monitor the process I'm concerned with&gt;
-</code></pre>
-
-<p>Now I&#8217;ve got this mostly-persistent (thanks to mosh and tmux) session that I can detach from if I really need to, but I&#8217;ll still be able to connect back up to my Linode and check on the server on my LAN from RailsConf.</p>
-
-<p>Pretty cool, huh?</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Announcing a virtual book club: The Diamond Age]]></title>
-    <link href="http://blog.mattgauger.com/blog/2012/04/13/announcing-a-new-virtual-book-club-the-diamond-age/"/>
-    <updated>2012-04-13T15:29:00-05:00</updated>
-    <id>http://blog.mattgauger.com/blog/2012/04/13/announcing-a-new-virtual-book-club-the-diamond-age</id>
-    <content type="html"><![CDATA[<p><img src="http://blog.mattgauger.com/images/The_Diamond_Age.jpg" alt="The Diamond Age book cover" /></p>
-
-<p>Recently I decided that it&#8217;s time to re-read The Diamond Age by Neal Stephenson. But, without external motivators, the list of books that I&#8217;d like to read grows and grows, and reading books actual takes me a lot longer than it should. (Because, well, the internet is so damn interesting, and I haven&#8217;t finished reading that.)</p>
-
-<p>So I&#8217;m trying an experiment. I am proposing to hold a book club, online, so that I will read The Diamond Age again. My current plan is to use Google Plus Hangouts and hold weekly online meetings to discuss progress in the book. I&#8217;ve never really run a book club on my own before, so we&#8217;ll see where this goes.</p>
-
-<p>If you&#8217;re interested, please indicate that interest by signing up below. I&#8217;ll use the sign ups to plan and gauge when to start.</p>
-
-<h3><a href="https://docs.google.com/spreadsheet/viewform?formkey=dFBBNUJZcUZuX1Q3Uk5VbGRVRVNsQ3c6MQ#gid=0">Sign up form</a></h3>
-
-<p></p>
-
-
-<p>Get The Diamond Age: (non-affiliate links)</p>
-
-<ul>
-<li><a href="http://www.amazon.com/The-Diamond-Age-Illustrated-Spectra/dp/0553380966/">Paperback</a></li>
-<li><a href="http://www.amazon.com/Diamond-Bantam-Spectra-Book-ebook/dp/B000FBJCKI/">Kindle Edition</a></li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[New site on Octopress and Twitter Bootstrap]]></title>
-    <link href="http://blog.mattgauger.com/blog/2012/03/25/new-site-on-octopress-and-twitter-bootstrap/"/>
-    <updated>2012-03-25T13:52:00-05:00</updated>
-    <id>http://blog.mattgauger.com/blog/2012/03/25/new-site-on-octopress-and-twitter-bootstrap</id>
-    <content type="html"><![CDATA[<p>Hi there. As you may have noticed, my blog is moving over to Github pages. I&#8217;ve used Octopress as a starting point, and ported a <a href="https://github.com/jlong/sass-twitter-bootstrap">SASS version of Twitter Bootstrap</a> to use for building the layout.</p>
-
-<p>Some people called out the fact that I&#8217;m using Twitter Bootstrap on Twitter. When Twitter Bootstrap first came out, I was appalled to see so many sites turning into Twitter through Bootstrap, but I&#8217;m over it now. Bootstrap provides a GREAT grid system and makes it very fast to get a responsive layout up. Plus, I liked my <a href="https://twitter.com/mathiasx">Twitter profile background</a> so much that I made this site look like it. So just deal with it.</p>
-
-<p>I still have a bit of work to do to copy over my blog posts from Posterous. Jekyll provides an exporter script that I&#8217;ve tried, but it resulted in a lot of data loss. I have to decide whether I&#8217;m going to finish writing <a href="https://github.com/mathias/posterous-exporter">my own script</a> or just export the blog posts manually, since they require a lot of HTML cleanup. (I used the Posterous WYSIWYG editor to write quite a few of those blog posts, which resulted in a ton of inline styles and weird paragraph / block elements being inserted.)</p>
-
-<p>You can subscribe to the Atom feed above to receive updates in the future.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[MadJS February 2012 - How CoffeeScript & Jasmine Made Me a Better JavaScript Developer]]></title>
-    <link href="http://blog.mattgauger.com/blog/2012/02/17/madjs-february-2012-how-coffeescript-jasmine-made-me-a-better-javascript-developer/"/>
-    <updated>2012-02-17T00:00:00-06:00</updated>
-    <id>http://blog.mattgauger.com/blog/2012/02/17/madjs-february-2012-how-coffeescript-jasmine-made-me-a-better-javascript-developer</id>
-    <content type="html"><![CDATA[<p>Recently, I spoke at the MadJS group about CoffeeScript &amp; Jasmine. My slides appear below. Since Slideshare doesn&#8217;t show my notes, you can either download the keynote file above, or you can read the notes below, which I&#8217;ve pulled out of the slides. I feel that the notes are necessary to know what I&#8217;m talking about, and I hate reading slide decks where there&#8217;s no context or notes. This isn&#8217;t going to be as helpful as having seen my talk in person, but hopefully you get some value out of my talk and the notes together:</p>
-<div style=""><strong style="display: block; margin: 12px 0 4px;"><a href="http://www.slideshare.net/mathiasx/coffeescript-jasmine-madjs-february-2012" title="CoffeeScript &amp; Jasmine - MadJS February 2012" target="_blank">CoffeeScript &amp; Jasmine - MadJS February 2012</a></strong> <iframe marginheight="0" scrolling="no" src="http://www.slideshare.net/slideshow/embed_code/11637009" marginwidth="0" frameborder="0" height="355" width="425"></iframe>
-<div style="padding: 5px 0 12px;">View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/mathiasx" target="_blank">Matt Gauger</a></div>
-</div>
-<h2>How CoffeeScript &amp; Jasmine made me a better JS developer</h2>
-<h3>First, an introduction:</h3>
-<ul>
-<li>I&rsquo;m Matt Gauger</li>
-<li>@mathiasx on twitter</li>
-</ul>
-<h3>I work at <a href="http://bendyworks.com">Bendyworks</a></h3>
-<ul>
-<li>We primarily do Ruby on Rails work, with iOS now.</li>
-<li>We care very deeply about software craftsmanship and honing our agile practices.</li>
-</ul>
-<h3>Which leads me to my dilemma</h3>
-<ul>
-<li>Are you familiar with impostor syndrome?</li>
-<li>It&#8217;s the idea that even very skilled practitioners may sometimes feel like an impostor due to over-emphasizing their weaknesses.</li>
-<li>Further, it&rsquo;s the inability to internalize your own accomplishments.</li>
-</ul>
-<h3>I felt like an impostor when it came to JavaScript.</h3>
-<ul>
-<li>Of course, I could read and write the syntax, pull in jQuery, manipulate the DOM, etc.</li>
-<li>I had several projects under my belt at this time that used AJAX and were fairly complex</li>
-<li>I&#8217;d even read JavaScript: The Good Parts several times, taken notes, etc.</li>
-</ul>
-<h3>So, what does this have to do with CoffeeScript?</h3>
-<ul>
-<li>My thesis: How CoffeeScript &amp; Jasmine made me a better JS developer (and how it can help you, too)</li>
-<li>But before that: Let me warn you that I&#8217;m not going to go over every piece of syntax here.</li>
-<li>I&#8217;m not going to be able to teach you all of CoffeeScript or Jasmine in this talk.</li>
-<li>For that, see the resources &amp; books at the end of the talk.</li>
-</ul>
-<h3>CoffeeScript History</h3>
-<ul>
-<li>2010 I learn about CoffeeScript, and it sort of looks like Ruby and Python.</li>
-<li>It grabs my interest.</li>
-<li>But at that point it&#8217;s still a novelty: The compiler is in Ruby, no one uses it for real dev yet.</li>
-<li>It was a *toy*</li>
-</ul>
-<h3>Today</h3>
-<ul>
-<li>Flash-forward to today, and everyone is extolling CoffeeScript. </li>
-<li>It comes with Rails 3 by default now and gets compiled on the fly into JS for your app.</li>
-<li>I&rsquo;ve been using CoffeeScript for about a year now.</li>
-</ul>
-<h3>CoffeeScript has Good Parts?</h3>
-<p>So why use CoffeeScript? What are its good parts?</p>
-<ul>
-<li>It restricts you to a subset of JS you&rsquo;d recognize from JS: The Good Parts.</li>
-<li>It puts JSLint &amp; a compiler between me and the half dozen browsers I need to support</li>
-<li>It warns me when I do something wrong</li>
-</ul>
-<p>This might be the most important part of the talk, and reason to use CoffeeScript</p>
-<ul>
-<li>If you&rsquo;re like me, you&rsquo;ll put the compiled JS up next to the CoffeeScript</li>
-<li>By reading the output of the compiler, you&rsquo;re learning what good JS looks like.</li>
-</ul>
-<h3>Criticisms of CoffeeScript:</h3>
-<ul>
-<li>It&#8217;s not what runs in the browser.</li>
-<li>Difficult to debug =&gt; Finding bugs (Names are the same between CoffeeScript &amp; JS; its readable)</li>
-<li>May feel like you&rsquo;re learning a whole different language (It&rsquo;s not, it&rsquo;s less verbose JS)</li>
-</ul>
-<h3>That isn&#8217;t to say that CoffeeScript eliminates all bugs</h3>
-<ul>
-<li>At this point we may want to differentiate between bugs that are caused by poor syntax and mistakes (mistake bugs), and bugs that come from the interaction between complicated data &amp; edge cases (ie computer is in a state you didn&#8217;t predict when you wrote the code)</li>
-<li>CoffeeScript can help cut down on a lot of the former.</li>
-</ul>
-<h3>Some examples of CoffeeScript helping you with bugs:</h3>
-<p>Coercing the wrong types</p>
-<ul>
-<li>This will print it&rsquo;s true happily.</li>
-<li>That&rsquo;s not quite what you expect when the data is more complicated than 1 and the string 1.</li>
-<li>Type coercion is the number 1 reason for <a href="http://wtfjs.com/">WTFJS</a></li>
-<li>Ok, so that&rsquo;s a very simple example.</li>
-<li>But how often are you going to get bitten by more complicated versions of that same bug?</li>
-<li>And are you always going to remember to use triple equals? === I am now.</li>
-</ul>
-<h3>Scope</h3>
-<ul>
-<li>CoffeeScript scope is essentially the same as in JS</li>
-<li>JS and CoffeeScript have &ldquo;lexical scope&rdquo;</li>
-<li>1. <span> </span>Every function creates a scope, and the only way to create a scope is to define a function.</li>
-<li>2. A variable lives in the outermost scope in which an assignment has been made to that variable.</li>
-<li>3.<span> </span> Outside of its scope, a variable is invisible.</li>
-<li>The neat thing is that CoffeeScript&rsquo;s compiler places the vars for each scope at the top of that scope</li>
-<li>Define a variable at a specific scope by giving it a sensible initial value</li>
-<li>Hopefully this is better than &lsquo;null&rsquo;, but you could do worse and just not initialize it at all.</li>
-<li>JavaScript won&rsquo;t force you to initialize it, but doing so can help you to figure out scope issues.</li>
-</ul>
-<h3>a ?= b</h3>
-<ul>
-<li>the ?= is syntactic sugar, the ? is called the existential operator in CoffeeScript</li>
-<li>Combined with =, the existential operator means &ldquo;a equals b unless a?&rdquo; or     
-<ul>
-<li>&ldquo;Let b be the default value for a.&rdquo;</li>
-</ul>
-</li>
-</ul>
-<h3>Lastly, wrapping up your code.</h3>
-<ul>
-<li>CoffeeScript can wrap each compiled file into a scope</li>
-<li>This may be the default, depending on the version of coffeescript you&rsquo;re using - you might need to pass an option now to either wrap or not wrap your code in a scope.</li>
-<li>This is actually pretty cool &#8211; if you&rsquo;re including a lot of JavaScripts on a website, you can&rsquo;t mix scope there &#8211; no accidental leakage into the global scope space.</li>
-<li>Compiled CoffeeScript Example: </li>
-</ul>
-<div class="CodeRay">
-  <div class="code"><pre>(function() {
-  console.log &quot;hello world!&quot;;
-}).call(this);</pre></div>
-</div>
-
-<h3>Simpler Looping</h3>
-<ul>
-<li>You write list comprehensions rather than for loops in CoffeeScript</li>
-<li>Comprehensions are expressions, and can be returned and assigned</li>
-</ul>
-<h3>Jeremy Ashkenas&rsquo;s Example</h3>
-<ul>
-<li>Loop over every item in a list, in CoffeeScript:</li>
-</ul>
-<div class="CodeRay">
-  <div class="code"><pre>for item in list
-  process item</pre></div>
-</div>
-
-<h3>Intention gets obscured by managing the loop, in JS:</h3>
-<div class="CodeRay">
-  <div class="code"><pre>for (var i = 0, l = list.length; i &lt; l; i++) {
-  var item = list[i];
-  process(item);
-}</pre></div>
-</div>
-
-<li>CoffeeScript allows &ldquo;reasonably solid&rdquo; JavaScript developers to accomplish the latter by simply writing the former.</li>
-<h3>In Review:&nbsp;CoffeeScript will help you:</h3>
-<ul>
-<li>Write OO, Prototype-based code</li>
-<li>Avoid bugs in comparisons</li>
-<li>Stop using ==, only use ===</li>
-<li>Manage scope and avoid state through scope creep</li>
-<li>Reduce off-by-one errors in looping, and generally write better loops than you were writing before</li>
-</ul>
-<h3>Jasmine</h3>
-<p>(My) History (with Jasmine)</p>
-<ul>
-<li>I started using Jasmine last summer on a client project.</li>
-<li>It&rsquo;s enough like the BDD tool we use in Rails, Cucumber, that I consider it a BDD tool.</li>
-<li>It makes the most sense to me of the BDD/TDD tools in JS I&rsquo;ve used</li>
-</ul>
-<h3>Why Jasmine?</h3>
-<ul>
-<li>All code should be tested =&gt; that&rsquo;s what I believe.</li>
-<li>You can spend some up-front time testing your code, or you can spend a lot of time bug fixing later</li>
-<li>I realize that not all legacy codebases are going to have full test coverage overnight.</li>
-</ul>
-<h3>The example on the Jasmine site:</h3>
-<div class="CodeRay">
-  <div class="code"><pre>describe(&quot;Jasmine&quot;, function() {
-  it(&quot;makes testing awesome!&quot;, function() {
-    expect(yourCode).toBeLotsBetter();
-  });
-});</pre></div>
-</div>
-
-<ul>
-<li>This example sucks!</li>
-<li>A better example:</li>
-</ul>
-<div class="CodeRay">
-  <div class="code"><pre>describe ('addition', function() {
-  it('adds two numbers', function() {
-    expect(1 + 2).toEqual(3);
-  });
-});</pre></div>
-</div>
-
-<ul>
-<li>Better? Not really. But we can see what the syntax is doing here and I&rsquo;m using a real assertion!</li>
-</ul>
-<h3>How should we test JS?</h3>
-<ul>
-<li>Functions should not depend on the DOM</li>
-<li>Our Logic needs to be in separate pieces     
-<ul>
-<li>to make it easier to test the logic, things like AJAX calls, etc</li>
-<li>without interacting with the DOM</li>
-</ul>
-</li>
-</ul>
-<h3>Easier to test = better code</h3>
-<ul>
-<li>it just so turns out, that the abstraction for testing is a better abstraction overall</li>
-<li>I&#8217;ve heard &#8220;The first implementation of your code is the unit tests&#8221; so it may not be DRY, but tests should show how to implement your code!</li>
-</ul>
-<h3>Follow TDD/BDD:</h3>
-<h3>red, green, refactor</h3>
-<ul>
-<li>You can still do this in Jasmine, in fact, I find it kind of natural.</li>
-</ul>
-<h3>Jasmine is designed to be standalone</h3>
-<ul>
-<li>This means you don&rsquo;t need jQuery and you don&rsquo;t need to run it in a real browser (but you can)</li>
-</ul>
-<h3>Some really cool features of Jasmine:</h3>
-<p>Matchers:</p>
-<ul>
-<li>.toBe()</li>
-<li>.toBeNull()</li>
-<li>.toBeTruthy()</li>
-<li>.toBeDefined()</li>
-<li>.toBeUndefined()</li>
-</ul>
-<h3>Setup and teardown:</h3>
-<div class="CodeRay">
-  <div class="code"><pre>beforeEach()
-afterEach()</pre></div>
-</div>
-
-<ul>
-<li class="li1">You can use after Each to run a teardown function after each successful test</li>
-<li class="li1">If you need a teardown function after a test whether it passed or failed, use after()</li>
-</ul>
-<h3>Spies: built-in mocking &amp; stubbing</h3>
-<ul>
-<li>In Ruby, we&rsquo;ve been doing mocking and stubbing for awhile.</li>
-<li>Jasmine&rsquo;s spies make it easy!</li>
-<li>These let you do things like watch to see if a method was called</li>
-<li>Or to stub out other methods so you don&rsquo;t do real AJAX calls, etc.</li>
-</ul>
-<h3>But what about legacy codebases?</h3>
-<ul>
-<li>So you&rsquo;re thinking, &#8220;CoffeeScript and Jasmine sound great, but I have a legacy codebase.&#8221;</li>
-<li>Or, &#8220;I&rsquo;ll never get to use either; and they don&rsquo;t help my big legacy codebase.&#8221;</li>
-<li>Well, we&rsquo;ve run into this and I have a plan.</li>
-</ul>
-<h3>Start simple.</h3>
-<ul>
-<li>First, get your tools lined up.</li>
-<li>Get the CoffeeScript compiler in your tool chain</li>
-<li>Get Jasmine set up and passing a dummy test.</li>
-<li>You still haven&rsquo;t done anything with your legacy code at this point.</li>
-</ul>
-<h3>Fix one bug.<br />(red, green, refactor)</h3>
-<ul>
-<li>It all starts with one bug. Or one feature, if you&rsquo;re feeling adventurous.&nbsp;</li>
-<li>You might not be able to pull out an entire feature and rewrite it. I understand that. Don&#8217;t give in to this temptation yet!</li>
-<li>The way to start this is to write a test around the bug and see it fail. (this might be hard -&gt; depending on how tied your code is to the DOM &#8211; see Jasmine-JQuery for DOM Fixtures)</li>
-<li>Then fix the bug in regular old JavaScript. See the Jasmine test pass.</li>
-</ul>
-<h3>Rewrite the affected code in CoffeeScript.</h3>
-<ul>
-You&rsquo;ve got a working test around this bug.
-<li>(You know the test works because you saw it red then green.)</li>
-<li>Now&rsquo;s your chance to rewrite it in CoffeeScript. It may only be one function at this point. That&rsquo;s ok.</li>
-</ul>
-<h3>Start grouping in files / modules.</h3>
-<ul>
-<li>We found that even with a legacy codebase of a lot of JavaScript, we were able to figure out logical chunks that should live together in CoffeeScript files.</li>
-</ul>
-<h3>Keep improving the codebase.</h3>
-<ul>
-<li>This is the hardest part.</li>
-<li>The temptation is there to just give up and fix bugs only in JS, not to write unit tests, etc.</li>
-<li>The other temptation is the one you usually can&rsquo;t give into, which is to try to rewrite everything all at once -&gt; this rarely is accomplishable, it&rsquo;s better to stage the changes.</li>
-<li>The big rewrite doesn&#8217;t work!</li>
-</ul>
-<h3>Lessons Learned:</h3>
-<ul>
-<li>&nbsp;These tools can help you learn JS better.</li>
-<li>Legacy codebases can slowly grow better through using CoffeeScript &amp; Jasmine.</li>
-<li>Taking advantage of these is up to you! </li>
-</ul>
-<h3>Thanks!</h3>
-<h3>Resources to learn more:</h3>
-<ul>
-<li><span class="s2"><a href="http://jashkenas.github.com/coffee-script/">http://jashkenas.github.com/coffee-script/</a></span></li>
-<li><span class="s2"><a href="http://pivotal.github.com/jasmine/">http://pivotal.github.com/jasmine/</a></span></li>
-<li><span class="s2"><a href="http://pragprog.com/book/tbcoffee/coffeescript">http://pragprog.com/book/tbcoffee/coffeescript</a></span></li>
-<li><a href="http://js2coffee.org"><span class="s2">http://js2coffee.org</span></a>/</li>
-</ul>
 ]]></content>
   </entry>
   

@@ -7,7 +7,7 @@
     <meta name="author" content="Matt Gauger">
 
     
-    <meta name="description" content="Open URL From Terminal.app and the &#8216;Open&#8217; Command More and more as I blog, I find I like to post little tips, and beginners thank me for &hellip;">
+    <meta name="description" content="New Site on Octopress and Twitter Bootstrap Hi there. As you may have noticed, my blog is moving over to Github pages. I&#8217;ve used Octopress as &hellip;">
     
 
     <link href="/atom.xml" rel="alternate" title="blog.mattgauger.com" type="application/atom+xml">
@@ -65,19 +65,15 @@
 
   <article class="post">
     
-    <h1 class="title"><a href="/blog/2010/12/12/open-url-from-terminal-app-and-the-open-command/">Open URL From Terminal.app and the &#8216;Open&#8217; Command</a></h1>
+    <h1 class="title"><a href="/blog/2012/03/25/new-site-on-octopress-and-twitter-bootstrap/">New Site on Octopress and Twitter Bootstrap</a></h1>
     <div class="entry">
-        <p>More and more as I blog, I find I like to post little tips, and beginners thank me for showing them something new, More advanced users may have simply overlooked whatever I&#8217;m sharing, so they can find it useful, too. So in that vein, I just reminded myself of a little Mac OSX Terminal.app trick I use all the time, and wanted to post it here.</p>
-<p>When you have a URL in Terminal.app, say in a README file you&#8217;re reading, or coming back from a dig/whois command, you can just right-click (option-click) on the URL and click Open URL. It&#8217;s fast, it works, and it saves me a few milliseconds of copy/pasting it. Awesomest trick ever? Not really. Useful? Definitely.</p>
-<p>[[posterous-content:GhDhggrykxnlvvnjjkAp]]</p>
-<div>An alternative form of this is to use the Mac OSX &#8220;open&#8221; command on any number of things: Files, applications, URLs. Here&#8217;s how it looks:&nbsp;</div>
-<div class="CodeRay">
-  <div class="code"><pre>banshee:diaspora mathiasx$ open http://joindiaspora.com
-banshee:diaspora mathiasx$ open README.md 
-banshee:diaspora mathiasx$ open /Applications/Google\ Chrome.app/</pre></div>
-</div>
+        <p>Hi there. As you may have noticed, my blog is moving over to Github pages. I&#8217;ve used Octopress as a starting point, and ported a <a href="https://github.com/jlong/sass-twitter-bootstrap">SASS version of Twitter Bootstrap</a> to use for building the layout.</p>
 
-<p>That will open the <a href="https://joindiaspora.com/">joindiaspora.com</a> site in your default browser, a file called README.md in whatever your default text editor is, and the final command will open Google Chrome if it isn&#8217;t open, otherwise it will simply switch focus to it.</p>
+<p>Some people called out the fact that I&#8217;m using Twitter Bootstrap on Twitter. When Twitter Bootstrap first came out, I was appalled to see so many sites turning into Twitter through Bootstrap, but I&#8217;m over it now. Bootstrap provides a GREAT grid system and makes it very fast to get a responsive layout up. Plus, I liked my <a href="https://twitter.com/mathiasx">Twitter profile background</a> so much that I made this site look like it. So just deal with it.</p>
+
+<p>I still have a bit of work to do to copy over my blog posts from Posterous. Jekyll provides an exporter script that I&#8217;ve tried, but it resulted in a lot of data loss. I have to decide whether I&#8217;m going to finish writing <a href="https://github.com/mathias/posterous-exporter">my own script</a> or just export the blog posts manually, since they require a lot of HTML cleanup. (I used the Posterous WYSIWYG editor to write quite a few of those blog posts, which resulted in a ton of inline styles and weird paragraph / block elements being inserted.)</p>
+
+<p>You can subscribe to the Atom feed above to receive updates in the future.</p>
 
         
         
@@ -102,7 +98,7 @@ banshee:diaspora mathiasx$ open /Applications/Google\ Chrome.app/</pre></div>
 
 
 
-<time datetime="2010-12-12T00:00:00-06:00" pubdate  data-updated="true" >Dec 12<span>th</span>, 2010</time>.</div>
+<time datetime="2012-03-25T13:52:00-05:00" pubdate  data-updated="true" >Mar 25<span>th</span>, 2012</time>.</div>
         <div class="tags">
 
 </div>
@@ -113,236 +109,694 @@ banshee:diaspora mathiasx$ open /Applications/Google\ Chrome.app/</pre></div>
 
   <article class="post">
     
-    <h1 class="title"><a href="/blog/2010/12/10/git-github-a-beginner-s-guide/">Git & Github: A Beginner&#8217;s Guide</a></h1>
+    <h1 class="title"><a href="/blog/2012/02/17/madjs-february-2012-how-coffeescript-jasmine-made-me-a-better-javascript-developer/">MadJS February 2012 - How CoffeeScript & Jasmine Made Me a Better JavaScript Developer</a></h1>
     <div class="entry">
-        <p>&nbsp;Let me start off by saying that this blog post isn&#8217;t going to introduce you to the&nbsp;intricacies&nbsp;of git. There is certainly a lot to be learned and a lot that I could write about branching, managing git servers, and any number of the git commands and ways to use them. I&#8217;ve linked to more resources where you can learn all of that at the bottom of this post.</p>
-<p>Instead, I&#8217;m going to focus on the beginner user, maybe someone that has never contributed to open source but wants to learn and wants to help out. They&#8217;re not interested in learning the in&#8217;s and out&#8217;s of every single command. They just want to <em>get stuff done</em>.</p>
-<p>It&#8217;s likely that a person would run into git for the first time by visiting <a href="https://github.com">Github</a>. There are a lot of big, popular open source projects hosted there. Too many to list here, in fact, but here&#8217;s a quick teaser: jQuery, scriptaculous, yui3, prototype, and mootools are all on Github. So are Ruby on Rails, Symfony, Django, web.py, and many other web app frameworks. The list goes on and on.</p>
-<p>But why is Github so popular? It certainly has a nice design. But design alone doesn&#8217;t necessarily attract developers by the hundreds; most of them still use the arcane commandline with bitmapped fonts, after all.</p>
-<p>I&#8217;ll put forward that <strong>Github is popular with developers because it optimizes for the things they need to do</strong>, without getting in the way. And because it&#8217;s <strong>fun</strong>. There&#8217;s very little barrier of entry for a developer to contribute back to open source, or upload new code, or even find projects that are interesting to them. It takes all the best features of git (which we&#8217;ll get to in a minute) and smooths out all the rough, annoying edges of setting up a server, handling SSH key authentication, and tracking URLs to reference.</p>
-<p>Let&#8217;s assume our beginner has stumbled upon&nbsp;<span style="font-family: helvetica, arial, freesans, clean, sans-serif; font-size: 12px; line-height: 16px;"><a href="http://rasterweb.net/raster/">Pete Prodoehl</a></span>&#8217;s Heard project, which lets you mirror your <a href="http://last.fm">Last.fm</a> scrobbles and host it in a decent way outside of Last.fm. The user wants to use it to back up their Last.fm, too. They likely came across Heard in&nbsp;<a href="http://rasterweb.net/raster/2010/07/22/heard-a-last-fm-mirror/">Pete&#8217;s blog</a>. The blog post contains a link to the <a href="https://github.com/raster/Heard">Heard Github repo</a>, which looks like this:</p>
-<p>[[posterous-content:wlyupAezrharIbblnfDC]]</p>
-<p>This is the first time the user has been to Github, so they don&#8217;t quite know how it works. If the user hovers over the Watch or Fork buttons, they will be instructed to sign in. They might just click the big Download button and never come back, but let&#8217;s assume this person wants to contribute back.&nbsp;They know they want to add a feature to Heard so that it draws <a href="http://g.raphaeljs.com/">gRapha&euml;l graphs</a> of their listening history, because they think graphs are pretty cool and gRapha&euml;l draws very beautiful graphs:</p>
-<p>[[posterous-content:HuewxbzIBspFfcnIsAfr]]</p>
-<p>The user then creates an account on Github, since they don&#8217;t have one and it&#8217;s required to click those Watch or Fork buttons. They go back to Pete&#8217;s Heard project on Github and click Watch. The text changes from Watch to Unwatch but they don&#8217;t notice anything immediately. Watch is a way to subscribe to repo changes in the Dashboard of Github, but our user doesn&#8217;t know that yet. Looking for more immediate satisfaction from clicking buttons, our user clicks Fork. And then something magical happens. (Parents please make your children leave the room during this part of the program.)</p>
-<p>[[posterous-content:HjHDIprhgsEfninDvrnF]]</p>
-<p>The user is now in their own copy of Heard. Github has forked the open source project, a task which once took Herculean strength and immense popularity to pull off in the dark days of <a href="http://sourceforge.net/">Sourceforge</a>! The user realizes this forked project is their very own kingdom to do with as they please. And the user, motivated by their hunger for pretty graphs and encouraged by the fact that Github is hosting their fork for free, is ready to jump into coding. (All open source projects get free hosting on Github, and open source does not count against your paid account&#8217;s number of repositories.)</p>
-<p>The first step Github gives after setting up your account is to install git. We&#8217;ll leave it up the to the reader to track down and install the latest version of git (at the time of this writing,&nbsp;v1.7.3.3) from&nbsp;<a href="http://git-scm.com/">http://git-scm.com/</a>&nbsp;for their particular operating system.Once our daring, brave fictional hero gets git compiled and installed, Github instructs them to generate an SSH key and enter it into their <a href="https://github.com/account">Account Settings</a> on Github:</p>
-<p>[[posterous-content:drFhqwsfJugEwfolbIpD]]</p>
+        <p>Recently, I spoke at the MadJS group about CoffeeScript &amp; Jasmine. My slides appear below. Since Slideshare doesn&#8217;t show my notes, you can either download the keynote file above, or you can read the notes below, which I&#8217;ve pulled out of the slides. I feel that the notes are necessary to know what I&#8217;m talking about, and I hate reading slide decks where there&#8217;s no context or notes. This isn&#8217;t going to be as helpful as having seen my talk in person, but hopefully you get some value out of my talk and the notes together:</p>
+<div style=""><strong style="display: block; margin: 12px 0 4px;"><a href="http://www.slideshare.net/mathiasx/coffeescript-jasmine-madjs-february-2012" title="CoffeeScript &amp; Jasmine - MadJS February 2012" target="_blank">CoffeeScript &amp; Jasmine - MadJS February 2012</a></strong> <iframe marginheight="0" scrolling="no" src="http://www.slideshare.net/slideshow/embed_code/11637009" marginwidth="0" frameborder="0" height="355" width="425"></iframe>
+<div style="padding: 5px 0 12px;">View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/mathiasx" target="_blank">Matt Gauger</a></div>
+</div>
+<h2>How CoffeeScript &amp; Jasmine made me a better JS developer</h2>
+<h3>First, an introduction:</h3>
+<ul>
+<li>I&rsquo;m Matt Gauger</li>
+<li>@mathiasx on twitter</li>
+</ul>
+<h3>I work at <a href="http://bendyworks.com">Bendyworks</a></h3>
+<ul>
+<li>We primarily do Ruby on Rails work, with iOS now.</li>
+<li>We care very deeply about software craftsmanship and honing our agile practices.</li>
+</ul>
+<h3>Which leads me to my dilemma</h3>
+<ul>
+<li>Are you familiar with impostor syndrome?</li>
+<li>It&#8217;s the idea that even very skilled practitioners may sometimes feel like an impostor due to over-emphasizing their weaknesses.</li>
+<li>Further, it&rsquo;s the inability to internalize your own accomplishments.</li>
+</ul>
+<h3>I felt like an impostor when it came to JavaScript.</h3>
+<ul>
+<li>Of course, I could read and write the syntax, pull in jQuery, manipulate the DOM, etc.</li>
+<li>I had several projects under my belt at this time that used AJAX and were fairly complex</li>
+<li>I&#8217;d even read JavaScript: The Good Parts several times, taken notes, etc.</li>
+</ul>
+<h3>So, what does this have to do with CoffeeScript?</h3>
+<ul>
+<li>My thesis: How CoffeeScript &amp; Jasmine made me a better JS developer (and how it can help you, too)</li>
+<li>But before that: Let me warn you that I&#8217;m not going to go over every piece of syntax here.</li>
+<li>I&#8217;m not going to be able to teach you all of CoffeeScript or Jasmine in this talk.</li>
+<li>For that, see the resources &amp; books at the end of the talk.</li>
+</ul>
+<h3>CoffeeScript History</h3>
+<ul>
+<li>2010 I learn about CoffeeScript, and it sort of looks like Ruby and Python.</li>
+<li>It grabs my interest.</li>
+<li>But at that point it&#8217;s still a novelty: The compiler is in Ruby, no one uses it for real dev yet.</li>
+<li>It was a *toy*</li>
+</ul>
+<h3>Today</h3>
+<ul>
+<li>Flash-forward to today, and everyone is extolling CoffeeScript. </li>
+<li>It comes with Rails 3 by default now and gets compiled on the fly into JS for your app.</li>
+<li>I&rsquo;ve been using CoffeeScript for about a year now.</li>
+</ul>
+<h3>CoffeeScript has Good Parts?</h3>
+<p>So why use CoffeeScript? What are its good parts?</p>
+<ul>
+<li>It restricts you to a subset of JS you&rsquo;d recognize from JS: The Good Parts.</li>
+<li>It puts JSLint &amp; a compiler between me and the half dozen browsers I need to support</li>
+<li>It warns me when I do something wrong</li>
+</ul>
+<p>This might be the most important part of the talk, and reason to use CoffeeScript</p>
+<ul>
+<li>If you&rsquo;re like me, you&rsquo;ll put the compiled JS up next to the CoffeeScript</li>
+<li>By reading the output of the compiler, you&rsquo;re learning what good JS looks like.</li>
+</ul>
+<h3>Criticisms of CoffeeScript:</h3>
+<ul>
+<li>It&#8217;s not what runs in the browser.</li>
+<li>Difficult to debug =&gt; Finding bugs (Names are the same between CoffeeScript &amp; JS; its readable)</li>
+<li>May feel like you&rsquo;re learning a whole different language (It&rsquo;s not, it&rsquo;s less verbose JS)</li>
+</ul>
+<h3>That isn&#8217;t to say that CoffeeScript eliminates all bugs</h3>
+<ul>
+<li>At this point we may want to differentiate between bugs that are caused by poor syntax and mistakes (mistake bugs), and bugs that come from the interaction between complicated data &amp; edge cases (ie computer is in a state you didn&#8217;t predict when you wrote the code)</li>
+<li>CoffeeScript can help cut down on a lot of the former.</li>
+</ul>
+<h3>Some examples of CoffeeScript helping you with bugs:</h3>
+<p>Coercing the wrong types</p>
+<ul>
+<li>This will print it&rsquo;s true happily.</li>
+<li>That&rsquo;s not quite what you expect when the data is more complicated than 1 and the string 1.</li>
+<li>Type coercion is the number 1 reason for <a href="http://wtfjs.com/">WTFJS</a></li>
+<li>Ok, so that&rsquo;s a very simple example.</li>
+<li>But how often are you going to get bitten by more complicated versions of that same bug?</li>
+<li>And are you always going to remember to use triple equals? === I am now.</li>
+</ul>
+<h3>Scope</h3>
+<ul>
+<li>CoffeeScript scope is essentially the same as in JS</li>
+<li>JS and CoffeeScript have &ldquo;lexical scope&rdquo;</li>
+<li>1. <span> </span>Every function creates a scope, and the only way to create a scope is to define a function.</li>
+<li>2. A variable lives in the outermost scope in which an assignment has been made to that variable.</li>
+<li>3.<span> </span> Outside of its scope, a variable is invisible.</li>
+<li>The neat thing is that CoffeeScript&rsquo;s compiler places the vars for each scope at the top of that scope</li>
+<li>Define a variable at a specific scope by giving it a sensible initial value</li>
+<li>Hopefully this is better than &lsquo;null&rsquo;, but you could do worse and just not initialize it at all.</li>
+<li>JavaScript won&rsquo;t force you to initialize it, but doing so can help you to figure out scope issues.</li>
+</ul>
+<h3>a ?= b</h3>
+<ul>
+<li>the ?= is syntactic sugar, the ? is called the existential operator in CoffeeScript</li>
+<li>Combined with =, the existential operator means &ldquo;a equals b unless a?&rdquo; or     
+<ul>
+<li>&ldquo;Let b be the default value for a.&rdquo;</li>
+</ul>
+</li>
+</ul>
+<h3>Lastly, wrapping up your code.</h3>
+<ul>
+<li>CoffeeScript can wrap each compiled file into a scope</li>
+<li>This may be the default, depending on the version of coffeescript you&rsquo;re using - you might need to pass an option now to either wrap or not wrap your code in a scope.</li>
+<li>This is actually pretty cool &#8211; if you&rsquo;re including a lot of JavaScripts on a website, you can&rsquo;t mix scope there &#8211; no accidental leakage into the global scope space.</li>
+<li>Compiled CoffeeScript Example: </li>
+</ul>
+<div class="CodeRay">
+  <div class="code"><pre>(function() {
+  console.log &quot;hello world!&quot;;
+}).call(this);</pre></div>
+</div>
+
+<h3>Simpler Looping</h3>
+<ul>
+<li>You write list comprehensions rather than for loops in CoffeeScript</li>
+<li>Comprehensions are expressions, and can be returned and assigned</li>
+</ul>
+<h3>Jeremy Ashkenas&rsquo;s Example</h3>
+<ul>
+<li>Loop over every item in a list, in CoffeeScript:</li>
+</ul>
+<div class="CodeRay">
+  <div class="code"><pre>for item in list
+  process item</pre></div>
+</div>
+
+<h3>Intention gets obscured by managing the loop, in JS:</h3>
+<div class="CodeRay">
+  <div class="code"><pre>for (var i = 0, l = list.length; i &lt; l; i++) {
+  var item = list[i];
+  process(item);
+}</pre></div>
+</div>
+
+<li>CoffeeScript allows &ldquo;reasonably solid&rdquo; JavaScript developers to accomplish the latter by simply writing the former.</li>
+<h3>In Review:&nbsp;CoffeeScript will help you:</h3>
+<ul>
+<li>Write OO, Prototype-based code</li>
+<li>Avoid bugs in comparisons</li>
+<li>Stop using ==, only use ===</li>
+<li>Manage scope and avoid state through scope creep</li>
+<li>Reduce off-by-one errors in looping, and generally write better loops than you were writing before</li>
+</ul>
+<h3>Jasmine</h3>
+<p>(My) History (with Jasmine)</p>
+<ul>
+<li>I started using Jasmine last summer on a client project.</li>
+<li>It&rsquo;s enough like the BDD tool we use in Rails, Cucumber, that I consider it a BDD tool.</li>
+<li>It makes the most sense to me of the BDD/TDD tools in JS I&rsquo;ve used</li>
+</ul>
+<h3>Why Jasmine?</h3>
+<ul>
+<li>All code should be tested =&gt; that&rsquo;s what I believe.</li>
+<li>You can spend some up-front time testing your code, or you can spend a lot of time bug fixing later</li>
+<li>I realize that not all legacy codebases are going to have full test coverage overnight.</li>
+</ul>
+<h3>The example on the Jasmine site:</h3>
+<div class="CodeRay">
+  <div class="code"><pre>describe(&quot;Jasmine&quot;, function() {
+  it(&quot;makes testing awesome!&quot;, function() {
+    expect(yourCode).toBeLotsBetter();
+  });
+});</pre></div>
+</div>
+
+<ul>
+<li>This example sucks!</li>
+<li>A better example:</li>
+</ul>
+<div class="CodeRay">
+  <div class="code"><pre>describe ('addition', function() {
+  it('adds two numbers', function() {
+    expect(1 + 2).toEqual(3);
+  });
+});</pre></div>
+</div>
+
+<ul>
+<li>Better? Not really. But we can see what the syntax is doing here and I&rsquo;m using a real assertion!</li>
+</ul>
+<h3>How should we test JS?</h3>
+<ul>
+<li>Functions should not depend on the DOM</li>
+<li>Our Logic needs to be in separate pieces     
+<ul>
+<li>to make it easier to test the logic, things like AJAX calls, etc</li>
+<li>without interacting with the DOM</li>
+</ul>
+</li>
+</ul>
+<h3>Easier to test = better code</h3>
+<ul>
+<li>it just so turns out, that the abstraction for testing is a better abstraction overall</li>
+<li>I&#8217;ve heard &#8220;The first implementation of your code is the unit tests&#8221; so it may not be DRY, but tests should show how to implement your code!</li>
+</ul>
+<h3>Follow TDD/BDD:</h3>
+<h3>red, green, refactor</h3>
+<ul>
+<li>You can still do this in Jasmine, in fact, I find it kind of natural.</li>
+</ul>
+<h3>Jasmine is designed to be standalone</h3>
+<ul>
+<li>This means you don&rsquo;t need jQuery and you don&rsquo;t need to run it in a real browser (but you can)</li>
+</ul>
+<h3>Some really cool features of Jasmine:</h3>
+<p>Matchers:</p>
+<ul>
+<li>.toBe()</li>
+<li>.toBeNull()</li>
+<li>.toBeTruthy()</li>
+<li>.toBeDefined()</li>
+<li>.toBeUndefined()</li>
+</ul>
+<h3>Setup and teardown:</h3>
+<div class="CodeRay">
+  <div class="code"><pre>beforeEach()
+afterEach()</pre></div>
+</div>
+
+<ul>
+<li class="li1">You can use after Each to run a teardown function after each successful test</li>
+<li class="li1">If you need a teardown function after a test whether it passed or failed, use after()</li>
+</ul>
+<h3>Spies: built-in mocking &amp; stubbing</h3>
+<ul>
+<li>In Ruby, we&rsquo;ve been doing mocking and stubbing for awhile.</li>
+<li>Jasmine&rsquo;s spies make it easy!</li>
+<li>These let you do things like watch to see if a method was called</li>
+<li>Or to stub out other methods so you don&rsquo;t do real AJAX calls, etc.</li>
+</ul>
+<h3>But what about legacy codebases?</h3>
+<ul>
+<li>So you&rsquo;re thinking, &#8220;CoffeeScript and Jasmine sound great, but I have a legacy codebase.&#8221;</li>
+<li>Or, &#8220;I&rsquo;ll never get to use either; and they don&rsquo;t help my big legacy codebase.&#8221;</li>
+<li>Well, we&rsquo;ve run into this and I have a plan.</li>
+</ul>
+<h3>Start simple.</h3>
+<ul>
+<li>First, get your tools lined up.</li>
+<li>Get the CoffeeScript compiler in your tool chain</li>
+<li>Get Jasmine set up and passing a dummy test.</li>
+<li>You still haven&rsquo;t done anything with your legacy code at this point.</li>
+</ul>
+<h3>Fix one bug.<br />(red, green, refactor)</h3>
+<ul>
+<li>It all starts with one bug. Or one feature, if you&rsquo;re feeling adventurous.&nbsp;</li>
+<li>You might not be able to pull out an entire feature and rewrite it. I understand that. Don&#8217;t give in to this temptation yet!</li>
+<li>The way to start this is to write a test around the bug and see it fail. (this might be hard -&gt; depending on how tied your code is to the DOM &#8211; see Jasmine-JQuery for DOM Fixtures)</li>
+<li>Then fix the bug in regular old JavaScript. See the Jasmine test pass.</li>
+</ul>
+<h3>Rewrite the affected code in CoffeeScript.</h3>
+<ul>
+You&rsquo;ve got a working test around this bug.
+<li>(You know the test works because you saw it red then green.)</li>
+<li>Now&rsquo;s your chance to rewrite it in CoffeeScript. It may only be one function at this point. That&rsquo;s ok.</li>
+</ul>
+<h3>Start grouping in files / modules.</h3>
+<ul>
+<li>We found that even with a legacy codebase of a lot of JavaScript, we were able to figure out logical chunks that should live together in CoffeeScript files.</li>
+</ul>
+<h3>Keep improving the codebase.</h3>
+<ul>
+<li>This is the hardest part.</li>
+<li>The temptation is there to just give up and fix bugs only in JS, not to write unit tests, etc.</li>
+<li>The other temptation is the one you usually can&rsquo;t give into, which is to try to rewrite everything all at once -&gt; this rarely is accomplishable, it&rsquo;s better to stage the changes.</li>
+<li>The big rewrite doesn&#8217;t work!</li>
+</ul>
+<h3>Lessons Learned:</h3>
+<ul>
+<li>&nbsp;These tools can help you learn JS better.</li>
+<li>Legacy codebases can slowly grow better through using CoffeeScript &amp; Jasmine.</li>
+<li>Taking advantage of these is up to you! </li>
+</ul>
+<h3>Thanks!</h3>
+<h3>Resources to learn more:</h3>
+<ul>
+<li><span class="s2"><a href="http://jashkenas.github.com/coffee-script/">http://jashkenas.github.com/coffee-script/</a></span></li>
+<li><span class="s2"><a href="http://pivotal.github.com/jasmine/">http://pivotal.github.com/jasmine/</a></span></li>
+<li><span class="s2"><a href="http://pragprog.com/book/tbcoffee/coffeescript">http://pragprog.com/book/tbcoffee/coffeescript</a></span></li>
+<li><a href="http://js2coffee.org"><span class="s2">http://js2coffee.org</span></a>/</li>
+</ul>
+
+        
+        
+    </div>
+
+    <div class="meta">
+        <div class="author">
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
+</div>
+        <div class="date">
+
+
+
+
+
+
+
+
+
+
+
+
+<time datetime="2012-02-17T00:00:00-06:00" pubdate  data-updated="true" >Feb 17<span>th</span>, 2012</time>.</div>
+        <div class="tags">
+
+</div>
+    </div>
+
+  </article>
+
+
+  <article class="post">
+    
+    <h1 class="title"><a href="/blog/2012/01/21/invalid-gemspec-in-rvm-gems-ruby-1-9-2-p180-gemset-specifications-actionmailer-3-2-0-gemspec-illformed-requirement-3-2-0-/">Invalid Gemspec in [.rvm/gems/ruby-1.9.2-p180@gemset/specifications/actionmailer-3.2.0.gemspec]: Illformed Requirement [&#8220;# 3.2.0&#8221;]</a></h1>
+    <div class="entry">
+        <p>Recently while trying to create a new Rails 3.2 project, I ran into this error after creating a new RVM gemset in Ruby 1.9.2-p180 and a Gemfile requiring only Rails 3.2.0:</p>
+<div class="CodeRay">
+  <div class="code"><pre>$ bundle
+Fetching source index for http://rubygems.org/
+Installing rake (0.9.2.2) 
+Installing i18n (0.6.0) 
+Installing multi_json (1.0.4) 
+Installing activesupport (3.2.0) 
+Installing builder (3.0.0) 
+Installing activemodel (3.2.0)
+Invalid gemspec in [/Users/mathiasx/Developer/.rvm/gems/ruby-1.9.2-p180@big_fan/specifications/activemodel-3.2.0.gemspec]: Illformed requirement [&quot;# 3.2.0&quot;]
+... These Illformed requirement errors continue for every package Rails wants ...</pre></div>
+</div>
+
+<p>I thought that I might be able to continue on and ignore these errors, but I hadn&#8217;t seen anything like them anymore.</p>
+<div class="CodeRay">
+  <div class="code"><pre>$ rails new .
+Invalid gemspec in [/Users/mathiasx/Developer/.rvm/gems/ruby-1.9.2-p180@big_fan/specifications/actionmailer-3.2.0.gemspec]: Illformed requirement [&quot;# 3.2.0&quot;]
+... again, it throws this error many times ...</pre></div>
+</div>
+
+<p>That didn&#8217;t generate a new Rails project in my current directory, so something was clearly wrong. But what does <strong>Illformed request: Syck:DefaultKey</strong> mean? Well, it turns out that the gemspecs of requirements in Rails 3.2.0 are using a new format that older Rubygems can&#8217;t parse. The first indicator was that my version of Rubygems was out of date:</p>
+<div class="CodeRay">
+  <div class="code"><pre>$ gem -v
+Invalid gemspec in [/Users/mathiasx/Developer/.rvm/gems/ruby-1.9.2-p180@big_fan/specifications/actionmailer-3.2.0.gemspec]: Illformed requirement [&quot;# 3.2.0&quot;]
+... I've cut out a bunch of the output from the invalid gemspecs here ...
+1.8.8</pre></div>
+</div>
+
+<p>We&#8217;d like to be on Rubygems 1.8.13 or newer, but I also don&#8217;t want to see those invalid gemspec warnings anymore, so I clear out my gemset with:</p>
+<div class="CodeRay">
+  <div class="code"><pre>$ rvm gemset empty
+WARN: Are you SURE you wish to remove the installed gemset for gemset 'ruby-1.9.2-p180@big_fan' (/Users/mathiasx/Developer/.rvm/gems/ruby-1.9.2-p180@big_fan)?
+(anything other than 'yes' will cancel) &gt; yes
+$ cd ..
+$ cd project/
+Using /Users/mathiasx/Developer/.rvm/gems/ruby-1.9.2-p180 with gemset big_fan</pre></div>
+</div>
+
+<p>Note that I have my rvmrc file like this so that it created and trusted the gemset upon encountering it:</p>
+<div class="CodeRay">
+  <div class="code"><pre>$ cat .rvmrc
+rvm use 1.9.2@big_fan --create</pre></div>
+</div>
+
+<h2>Getting everything working again:</h2>
+<p>Upgrade your Rubygems (this will only apply to this version of Ruby in RVM, not all versions of Ruby)</p>
+<div class="CodeRay">
+  <div class="code"><pre>$ gem update --system
+== 1.8.15 / 2012-01-06
+
+* 1 bug fix:
+
+  * Don't eager load yaml, it creates a bad loop. Fixes #256
+
+
+------------------------------------------------------------------------------
+
+RubyGems installed the following executables:
+        /Users/mathiasx/Developer/.rvm/rubies/ruby-1.9.2-p180/bin/gem
+
+RubyGems system software updated</pre></div>
+</div>
+
+<p>Then just to be safe, make sure the gems we have are pristine (According to the manpage, gem pristine: &#8220;Restores installed gems to pristine condition from files located in the gem cache.&#8221;)</p>
+<div class="CodeRay">
+  <div class="code"><pre>$ gem pristine --all</pre></div>
+</div>
+
+<p>And it is safe to now bundle:</p>
+<div class="CodeRay">
+  <div class="code"><pre>$ bundle
+Fetching source index for http://rubygems.org/
+Installing rake (0.9.2.2) 
+Installing i18n (0.6.0) 
+Installing multi_json (1.0.4) 
+Installing activesupport (3.2.0) 
+Installing builder (3.0.0) 
+Installing activemodel (3.2.0) 
+Installing erubis (2.7.0) 
+Installing journey (1.0.0) 
+Installing rack (1.4.0) 
+Installing rack-cache (1.1) 
+Installing rack-test (0.6.1) 
+Installing hike (1.2.1) 
+Installing tilt (1.3.3) 
+Installing sprockets (2.1.2) 
+Installing actionpack (3.2.0) 
+Installing mime-types (1.17.2) 
+Installing polyglot (0.3.3) 
+Installing treetop (1.4.10) 
+Installing mail (2.4.1) 
+Installing actionmailer (3.2.0) 
+Installing arel (3.0.0) 
+Installing tzinfo (0.3.31) 
+Installing activerecord (3.2.0) 
+Installing activeresource (3.2.0) 
+Using bundler (1.0.18) 
+Installing json (1.6.5) with native extensions 
+Installing rack-ssl (1.3.2) 
+Installing rdoc (3.12) 
+Installing thor (0.14.6) 
+Installing railties (3.2.0) 
+Installing rails (3.2.0) 
+Your bundle is complete! Use `bundle show [gemname]` to see where a bundled gem is installed.</pre></div>
+</div>
+
+<p>Now we should have a happy gemset and the error will be gone. Let me know if you have any questions. Happy hacking!</p>
+
+        
+        
+    </div>
+
+    <div class="meta">
+        <div class="author">
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
+</div>
+        <div class="date">
+
+
+
+
+
+
+
+
+
+
+
+
+<time datetime="2012-01-21T00:00:00-06:00" pubdate  data-updated="true" >Jan 21<span>st</span>, 2012</time>.</div>
+        <div class="tags">
+
+</div>
+    </div>
+
+  </article>
+
+
+  <article class="post">
+    
+    <h1 class="title"><a href="/blog/2011/01/03/getting-mongodb-and-devise-to-play-well-on-rails-3/">Getting MongoDB and Devise to Play Well on Rails 3</a></h1>
+    <div class="entry">
+        <p>While there&#8217;s a <a href="http://www.mongodb.org/display/DOCS/Rails+3+-+Getting+Started">good guide</a> on the MongoDB site about getting mongo_mapper to work in Rails 3, I ran into some additional issues getting the popular <a href="https://github.com/plataformatec/devise">devise</a>&nbsp;<span style="font-family: helvetica, arial, freesans, clean, sans-serif; line-height: 20px;">authentication engine for Rails to work with Mongo. This documents how to create a Rails app from scratch that uses both MongoDB and Devise. So if you don&#8217;t want to reinvent the wheel on authentication (read: Users, login, logout, etc) and want to run your app on MongoDB, this should be useful.</span></p>
+<p><span style="font-family: helvetica, arial, freesans, clean, sans-serif; line-height: 20px;">First of all, you&#8217;ll need Rails 3. I&#8217;m on Rails 3.0.3. I created a new gemset for this app, just to keep things clean. Run the rails new command with the&nbsp;</span><span style="font-family: Courier New, Courier, monospace; line-height: 16px;">&#8211;skip-active-record </span>switch.</p>
+<div class="CodeRay">
+  <div class="code"><pre>$ rails new awesome_app --skip-active-record</pre></div>
+</div>
+
+<p>Open up the Gemfile of the new app. It&#8217;s going to be pretty empty to start. This is what I ended up with, after reading the Mongo guide mentioned at the beginning of the post:</p>
+<div class="CodeRay">
+  <div class="code"><pre>require 'rubygems'
+require 'mongo'
+
+source :rubygems
+
+gem 'mongo_mapper'
+gem 'rails', '3.0.3'
+gem 'devise', '1.1.3'
+gem 'devise-mongo_mapper',
+  :git    =&gt; 'git://github.com/collectiveidea/devise-mongo_mapper'
+
+group :test, :development do
+  [whatever testing gems you want in here]
+end</pre></div>
+</div>
+
+<p>You&#8217;ll notice the devise-mongo_mapper gem in there. That&#8217;s the secret sauce that lets us use mongo_mapper as the ORM for Devise. As I haven&#8217;t really played with the mongoid gem (and therefore don&#8217;t have any experience with it) I didn&#8217;t try to get mongoid to work.</p>
+<p>Go ahead and run a bundle install:</p>
+<div class="CodeRay">
+  <div class="code"><pre>$ bundle install</pre></div>
+</div>
+
+<p>Then run this to install devise files into the Rails app:</p>
+<div class="CodeRay">
+  <div class="code"><pre>$ rails generate devise:install</pre></div>
+</div>
+
+<p>There&#8217;s two initializer files we&#8217;ll need. We add the one for mongo, which I put in config/initializers/mongo.rb:</p>
+<div class="CodeRay">
+  <div class="code"><pre>MongoMapper.connection = Mongo::Connection.new('localhost', 27017)
+MongoMapper.database = &quot;awesome-app-#{Rails.env}&quot;
+
+if defined?(PhusionPassenger)
+   PhusionPassenger.on_event(:starting_worker_process) do |forked|
+     MongoMapper.connection.connect_to_master if forked
+   end
+end</pre></div>
+</div>
+
+<p>And one for devise, which you&#8217;ll find created for you in config/initializers/devise.rb. Change the ORM Configuration settings to this:</p>
+<div class="CodeRay">
+  <div class="code"><pre># ==&gt;; ORM configuration
+# Load and configure the ORM. Supports :active_record (default) and
+# :mongoid (bson_ext recommended) by default. Other ORMs may be
+# available as additional gems.
+  require 'devise/orm/mongo_mapper'</pre></div>
+</div>
+
+<p>Be sure to add this line to config/application.rb and edit in the appropriate address. This will keep Devise from complaining later:</p>
+<div class="CodeRay">
+  <div class="code"><pre>config.action_mailer.default_url_options = { :host =&gt; &quot;yourdomain.com&quot; }</pre></div>
+</div>
+
+<p>The last step is to create an User model and tell Devise and mongo_mapper to do their thing. Tell Devise to make a Users model and then install the Devise Views to our app so that we can modify them later, if we wish:</p>
+<div class="CodeRay">
+  <div class="code"><pre>$ rails generate devise users
+$ rails generate devise:views</pre></div>
+</div>
+
+<p>In app/models/user.rb:</p>
+<div class="CodeRay">
+  <div class="code"><pre>class User
+  include MongoMapper::Document         
+  plugin MongoMapper::Devise
+
+  devise :database_authenticatable, :confirmable, :lockable, 
+         :recoverable, :rememberable, :registerable, :trackable, 
+         :timeoutable, :validatable, :token_authenticatable
+
+  attr_accessible :email, :password, :password_confirmation
+   
+end</pre></div>
+</div>
+
+<p>You can, of course, choose which of those Devise options to enable for your user model. Refer to the <a href="http://rubydoc.info/github/plataformatec/devise/master/Devise/Models">devise documentation</a> for more information.</p>
+<p>In app/controllers/application_controller.rb:</p>
+<div class="CodeRay">
+  <div class="code"><pre>class ApplicationController &lt; ActionController::Base
+  protect_from_forgery
+  
+  filter_parameter_logging :password, :password_confirmation
+  
+  def after_sign_out_path_for(resource_or_scope)
+    new_user_session_path
+  end
+end</pre></div>
+</div>
+
+<p>In config/routes.rb add these lines:</p>
+<div class="CodeRay">
+  <div class="code"><pre>devise_for :users, :admin
+resource :user</pre></div>
+</div>
+
+<p>At this point, you should probably check your app by running a quick `rails server` and seeing it if spits out any errors to your terminal. If it&#8217;s all good, then you are probably thinking you&#8217;ll want to actually use this authentication system now. Let&#8217;s add a very basic &#8220;Home&#8221; controller:</p>
+<div class="CodeRay">
+  <div class="code"><pre>$ rails generate controller Home index token</pre></div>
+</div>
+
+<p>In app/controllers/home_controller.rb, add the following before_filter line to the beginning of the class so that it looks like this:</p>
+<div class="CodeRay">
+  <div class="code"><pre>class HomeController &lt; ApplicationController
+  before_filter :authenticate_user!, :only =&gt; :token
+  
+  def index
+  end
+
+  def token
+  end
+
+end</pre></div>
+</div>
+
+<p>In app/views/home/index.haml (I&#8217;m using HAML, but I&#8217;ve also included an ERb example after this:</p>
+<div class="CodeRay">
+  <div class="code"><pre>- if user_signed_in?
+  %ul
+    %li= current_user.email
+    %li= link_to 'My info', edit_user_path
+    %li= link_to 'Sign out', destroy_user_session_path
+- else
+  %ul
+    %li= link_to 'Sign in', new_user_session_path
+    %li= link_to 'Sign up', new_user_path</pre></div>
+</div>
+
+<div class="CodeRay">
+  <div class="code"><pre># ERb version of app/views/home/index.html.erb:
+&lt;% if user_signed_in? -%&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;%= current_user.email %&gt;&lt;/li&gt;
+    &lt;li&gt; link_to 'My info', edit_user_registration_path %&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;%= link_to 'Sign out', destroy_user_session_path %&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;% else -%&gt;
+  &lt;/code&gt;&lt;ul&gt;&lt;code&gt;
+    &lt;li&gt;&lt;%= link_to 'Sign in', new_user_session_path %&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;%= link_to 'Sign up', new_user_path %&gt;&lt;/li&gt;
+&lt;% end -%&gt;</pre></div>
+</div>
+
+<p>This will enable very basic login / logouts using the Devise views that we installed earlier. If you run rails server again, you&#8217;ll be able to create an account. But, if your system isn&#8217;t set up to send mail (like mine) then you may get an error, or simply won&#8217;t get a confirmation code, so you won&#8217;t be able to login with that user. Here&#8217;s a quick solution. Drop into the mongo shell:</p>
+<div class="CodeRay">
+  <div class="code"><pre>$ mongo
+MongoDB shell version: 1.6.4</pre></div>
+</div>
+
+<p>Use your database, which you set above in config/initializers/mongo.rb. In this case, it&#8217;s awesome-app-development:</p>
+<div class="CodeRay">
+  <div class="code"><pre>&gt; use awesome-app-development
+switched to db awesome-app-development</pre></div>
+</div>
+
+<p>Find all the entries in the Users document:</p>
+<div class="CodeRay">
+  <div class="code"><pre>&gt; db.users.find();
+{ &quot;_id&quot; : ObjectId(&quot;4d216ae217cacc289c000005&quot;), &quot;email&quot; : &quot;matt.gauger@gmail.com&quot;, &quot;encrypted_password&quot; : &quot;$2aasdf&quot;, &quot;password_salt&quot; : &quot;$2aasdf&quot;, &quot;authentication_token&quot; : null, &quot;remember_token&quot; : null, &quot;remember_created_at&quot; : null, &quot;reset_password_token&quot; : null, &quot;confirmation_token&quot; : &quot;YsFg8CFBwNIm5kof7xC9&quot;, &quot;confirmed_at&quot; : null, &quot;confirmation_sent_at&quot; : &quot;Mon Jan 03 2011 00:21:22 GMT-0600 (CST)&quot;, &quot;failed_attempts&quot; : 0, &quot;unlock_token&quot; : null, &quot;locked_at&quot; : null, &quot;sign_in_count&quot; : 0, &quot;current_sign_in_at&quot; : null, &quot;last_sign_in_at&quot; : null, &quot;current_sign_in_ip&quot; : null, &quot;last_sign_in_ip&quot; : null }</pre></div>
+</div>
+
+<p>The bit we need is the confirmation_token: &#8220;YsFg8CFBwNIm5kof7xC9&#8221;. Copy the token and go to the following in your browser:</p>
+<div class="CodeRay">
+  <div class="code"><pre>http://localhost:3000/users/confirmation?confirmation_token=YsFg8CFBwNIm5kof7xC9</pre></div>
+</div>
+
+<p>Remember to replace your token with the one in that URL. You could alternatively make it so your app can send mail, or just turn off :confirmable in your Users model. This was a quick little solution that I found and wanted to share.</p>
 <p>&nbsp;</p>
-<p><strong>Sidenote: What are SSH keys and why do I need them?</strong></p>
-<p>SSH is a secure communications method that uses public/private key encryption. Explaining public/private key encryption with Bob, Alice and the gang is beyond the scope of this blog post, but in short, it works like this: You generate two keys, a public and a private key. A key is just a bunch of characters in a text file, but it&#8217;s used as a very strong <a href="http://en.wikipedia.org/w/index.php?title=Key_(cryptography)">cryptographic key</a>.The public and private key are linked in such a way that you can mathematically prove data came from the person holding the private key.</p>
-<p>The private key must be kept private! No one but you should ever possess it! When you cryptography &#8220;sign&#8221; a file, text, or other data with your private key, another party can verify that you (and only you) could have sent that data, by using your public key. You can also guarantee the identity of a server you&#8217;re communicating with, because their public key allows you to verify data was signed by their private key. Make sense?</p>
-<p>So when you put your public key into Github, it can verify that any data sent to it claiming to be you is actually from you (and signed by your private key). It&#8217;s much more complicated than this, but that&#8217;s the idea.</p>
-<p>For more information on OpenSSH, SSH keys, and the like, refer to the <a href="http://openssh.com/faq.html">OpenSSH FAQ</a>.</p>
-<p><strong>Back to Github:</strong></p>
-<p>Our user runs the</p>
-<div class="CodeRay">
-  <div class="code"><pre>ssh-keygen</pre></div>
+<p>Hopefully this gets you going with Mongo and Devise quickly and without any snags.&nbsp;There&#8217;s a lot more to Devise, so I&#8217;d recommend you start looking at some of the <a href="https://github.com/plataformatec/devise/wiki/Example-Applications">Example applications</a>&nbsp;and the <a href="https://github.com/plataformatec/devise/wiki">documentation</a>.</p>
+
+        
+        
+    </div>
+
+    <div class="meta">
+        <div class="author">
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
 </div>
+        <div class="date">
 
-<p>command in their shell, hits enter for the defaults, and generates some files that live in /home/[username]/.ssh in Linux/BSD or /Users/[username]/.ssh if you&#8217;re on Mac OSX. If you&#8217;re still on Windows, it&#8217;ll be in Cygwin somewhere, likely. Sorry. Can&#8217;t help you there.</p>
-<p>One file is called id_rsa and the other is id_rsa.pub. The file with the .pub extension is, naturally, the public key. That&#8217;s the one that you want to copy into Github&#8217;s Account Settings page.&nbsp;Once you enter a public key (again, make sure it isn&#8217;t the private key!) into Github, it will know who you are when you communicate with Github using the git commands. The great thing about this is, every time we communicate with the server, we don&#8217;t have to type a password. Isn&#8217;t that cool?</p>
-<p>At this point our beginner hasn&#8217;t actually gotten any files, made any changes, or asked Pete nicely to accept his changes. That may seem like all this effort was a waste, but in practice it is fairly quick and once you&#8217;ve done it once (and setup a Github account) you&#8217;re well on your way to doing all those things. Git also prefers to have your name and email address to identify changes as coming from you, and Github helpfully provides the commands for those when setting up a new account.</p>
-<p>The user is ready to work. At the top of their fork of the Heard project, Github gives the user a link says it is read+write. Which probably means that by using it somehow, we can write our changes back to Github and get one step closer to getting those changes back to Pete. Github even helpfully offers to copy the link for you.</p>
-<p>[[posterous-content:vqeEoheHkmJyIdlrCnlF]]</p>
-<div>&nbsp;Our user dives into the <a href="http://gitref.org/">gitref.org</a> page and discovers what they are supposed to do with this URL ending in .git: They must use the git clone command to clone it from Github down to wherever they are in the shell, like so:</div>
-<div class="CodeRay">
-  <div class="code"><pre>$ git clone git@github.com:mathias-presentation/Heard.git
-Cloning into Heard...
-remote: Counting objects: 22, done.
-remote: Compressing objects: 100% (22/22), done.
-remote: Total 22 (delta 7), reused 0 (delta 0)
-Unpacking objects: 100% (22/22), done.</pre></div>
+
+
+
+
+
+
+
+
+
+
+
+<time datetime="2011-01-03T00:00:00-06:00" pubdate  data-updated="true" >Jan 3<span>rd</span>, 2011</time>.</div>
+        <div class="tags">
+
 </div>
+    </div>
 
-<p>If the user&#8217;s SSH key was right, this will work. If not, they&#8217;ll have to go back and fix it. Looks like it worked, though, so we&#8217;ll move on.</p>
-<p>The git clone command has created a directory named Heard in the user&#8217;s home directory. There&#8217;s also a hidden .git directory in there, but that&#8217;s where git keeps its affairs in order, and for the purposes of this post, it can be ignored. The nice thing about git is that the .git/ directory is the only place it adds something to your project, unlike Subversion, which puts a .svn directory in every directory.</p>
-<p>The user is now ready to use git, with an eye towards contributing his changes back to Pete as fast as possible.</p>
-<p><strong>Git Basics</strong></p>
-<p>Our user makes some basic changes to the PHP files in their local Heard directory. They reason that if git keeps tracks of versions of files, it will need to create a new version containing these changes. Git tracks changes on an object level, not a file or project/directory level. That means it is really smart about where you changed something. See some of the reference material for a full explanation of how git understands changes. For our purposes, the beginner finds the</p>
-<div class="CodeRay">
-  <div class="code"><pre>git commit</pre></div>
-</div>
+  </article>
 
-<p>command. The documentation says that the commit command is used to take a snapshot of the code in the current state. That sounds perfect. But typing the command yields:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ git commit
-# On branch master
-# Changed but not updated:
-#   (use &quot;git add ...&quot; to update what will be committed)
-#   (use &quot;git checkout -- ...&quot; to discard changes in working directory)
-#
-#        modified:   config.php
-#        modified:   init.php
-#        modified:   tracks.php
-#
-no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)</pre></div>
-</div>
 
-<p>Nothing happened, as indicated by the message &#8220;no changes added to commit.&#8221; Git has helpfully suggested some ways to commit at the bottom there. The first is to use the</p>
-<div class="CodeRay">
-  <div class="code"><pre>git add</pre></div>
-</div>
-
-<p>command, which sounds like a way to add files to a commit. The other is to pass in the -a argument to git commit, like this:</p>
-<div class="CodeRay">
-  <div class="code"><pre>git commit -a</pre></div>
-</div>
-
-<p>The -a is for all, so when we tell git to git commit -a, we&#8217;re telling it to commit everything that changed, all at once. The user types that in and is dropped into.. a text editor?</p>
-<p>This step can be a little confusing for new users. In fact, that this is default behavior is, in my opinion, a huge roadblock to people to get up and running with git. On Mac OSX or Linux, this is likely to be vim, which is not the most user-friendly to new users.</p>
-<p>What is the text editor for? Git is asking for the user to write a commit message, that is, a description of what changed for the official history of this project. For something more user-friendly to write this commit message in, I suggest you type this arcane incantation from the wizards of old:</p>
-<div class="CodeRay">
-  <div class="code"><pre>git config core.editor &quot;nano&quot;</pre></div>
-</div>
-
-<p>The meaning of this spell is lost to the ages, but the nice thing is, it will drop you into the much more user-friendly nano editor, which list the CTRL- characters to save, quit, etc. along the bottom of the terminal.</p>
-<p>A good commit message will help later when trying to find what changed over the course of time. Git is already tracking which files changed and what changed in them, so the message is usually written at a more abstract level that says <strong>what</strong> the user was doing and thinking. There&#8217;s plenty of good resources out there on the web about writing good commit messages, and even more about opinions about what should and shouldn&#8217;t be in a commit message.</p>
-<p>This is where I want to break the narrative a little to explain the rest of the commands that our fictional beginner will need to contribute back to Pete&#8217;s Heard project. Think of it as a <a href="http://www.youtube.com/watch?v=JU9Uwhjlog8">blog post montage</a> of lots of coding getting done.</p>
-<p>The first is simply another argument to add to the git commit command so that we don&#8217;t get dropped into a text editor to write our commit message. Usually, commit messages are only one line, so it makes sense to write the commit message right there on the command line:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ git commit -am &quot;Added the gRaphael library to be loaded, but haven't integrated it yet.&quot;
-[master 1a4014f] Added the gRaphael library to be loaded, but haven't integrated it yet.
- 3 files changed, 3 insertions(+), 3 deletions(-)</pre></div>
-</div>
-
-<p>As you can see, that worked, and it accepted our commit message right there on the command line. Notice that the commit message is wrapped in double quotes: &#8221; &#8221; This is because the shell will try to interpret words on their own as commands, and we don&#8217;t want that. So, to be safe, we wrap the whole thing in double quotes, so that the shell knows that this is a string to pass into the git command and not something to try and execute.</p>
-<p>What else does the output from git commit tell us? Well, we committed all three files at once. In other version control systems, you must commit all changes to files at once. This can get annoying. In git, you can choose which files you want to add to any given commit, and leave out anything else that changed. To do that, we use the git add command.</p>
-<div class="CodeRay">
-  <div class="code"><pre>[do some work]
-$ git add config.php
-$ git add init.php</pre></div>
-</div>
-
-<p>You&#8217;ll notice there&#8217;s no output from these commands. That&#8217;s because nothing has changed yet. Those changes still need to be committed. It would probably be helpful at this point to have a look at what changed and what didn&#8217;t. For that, we use the git status command.</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ git status
-# On branch master
-# Your branch is ahead of 'origin/master' by 1 commit.
-#
-# Changes to be committed:
-#   (use &quot;git reset HEAD ...&quot; to unstage)
-#
-#        modified:   config.php
-#        modified:   init.php
-#
-# Changed but not updated:
-#   (use &quot;git add ...&quot; to update what will be committed)
-#   (use &quot;git checkout -- ...&quot; to discard changes in working directory)
-#
-#        modified:   tracks.php
-#</pre></div>
-</div>
-
-<p>As you can probably see, we&#8217;re not going to commit all the changes like we did in the first commit. We&#8217;re only going to commit the changes in  the config.php and init.php files this time around, while tracks.php will be left out of the commit. Git status is a very useful command, and you will probably use it a lot to figure out the current state of your project and to see what should and shouldn&#8217;t be in a commit. Since we don&#8217;t want to commit all changes this time, we leave off the -a argument but keep the -m so we can specify a commit message:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ git commit -m &quot;A little refactoring.&quot;
-[master 6dd5c59] A little refactoring.
- 2 files changed, 2 insertions(+), 2 deletions(-)
-$ git status
-# On branch master
-# Your branch is ahead of 'origin/master' by 2 commits.
-#
-# Changed but not updated:
-#   (use &quot;git add ...&quot; to update what will be committed)
-#   (use &quot;git checkout -- ...&quot; to discard changes in working directory)
-#
-#        modified:   tracks.php
-#
-no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)</pre></div>
-</div>
-
-<p>Notice that the changes in tracks.php are still waiting for us when we perform another git status.</p>
-<p>Git log is a command used to see the history of a project.</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ git log
-commit e47cd6eb917d2a68ec6d1197a38faa1a1ff5e564
-Author: Matt Gauger 
-Date:   Thu Dec 9 14:27:04 2010 -0600
-
-    Some other places where it's nice to have newlines.
-
-commit fb2cc2b00bfd797cca355a4215b2c289e281e040
-Author: Matt Gauger 
-Date:   Thu Dec 9 14:26:23 2010 -0600
-
-    Add a newline here.
-
-commit 4cce3dff9c8d03b7db1710f7addaa7d556921a44
-Author: raster 
-Date:   Sun Nov 14 11:38:50 2010 -0600
-
-    Minor changes, still learning git
-
-[truncated for length]</pre></div>
-</div>
-
-<p>At this point you may be asking, how does our user upload their changes back to Github?</p>
-<p>The command required is:&nbsp;</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ git push</pre></div>
-</div>
-
-<p>And in its default form, it knows what to push and where: It defaults to Github when you use the git clone command as above. A more complicated form of git push will allow you to choose the branch and the server to push to, but for our beginner user that is only using the master branch and Github server, it is unnecessary to understand.</p>
-<p>Similarly, to get changes from the server, use the command:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ git fetch</pre></div>
-</div>
-
-<p>This is, again, some default behavior that knows to go talk to the Github server. It will pull down changes from the user&#8217;s repo on Github, in this default manner, and it is important to note that<strong> this won&#8217;t include the changes made by other Github users</strong>. This part can initially be confusing to people who are looking to keep up with a project&#8217;s main development or other developer&#8217;s contributions, and Github&#8217;s documentation explains this stuff (and it is managed largely through the Github website) so I&#8217;ll leave it beyond the scope of this blog post.</p>
-<p>The git fetch command is useful if you have two computers with SSH keys in Github, for example, and you commit and push from your desktop, but want to grab your most recent changes on your laptop.</p>
-<p>The other question you may be asking yourself at this point is: What happens if I screw up? What if you accidentally delete a file from your project, or you save something you didn&#8217;t mean to save. In this case, you can restore the project to the state of the last commit. Git is, after all, storing all the states of the project, so you can roll it backwards as necessary. The command to reset a project back to its previously committed state is:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ git reset --hard HEAD</pre></div>
-</div>
-
-<p>There&#8217;s a lot going on here to point out. The git reset part is obviously the command that we use to reset a project to a previous state. The state we&#8217;re telling to to go back to is called HEAD, which is just a placeholder name for the last commit. There&#8217;s lots of these placeholder names in git, and it&#8217;s nice to learn the common ones. For the purposes of this blog post, we can ignore the &#8211;hard, and refer you to the reference materials and &#8220;man git-reset&#8221; on your shell for further explanation.</p>
-<p>You want to <strong>be careful with git reset</strong>, obviously. It will reset all the files in your project to the state they were in at the last commit. So all changes since the last commit will go away. This isn&#8217;t always ideal. You could lose a lot of work this way. If you want to only reset one file, this is the way that I do it, and I imagine there are other ways in the very many different git commands:</p>
-<p>&nbsp;</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ git checkout -- init.php
-$ git checkout HEAD init.php</pre></div>
-</div>
-
-<p>In this case we&#8217;re taking the state of init.php back to the last commit, which again, is referenced with the placeholder name HEAD.&nbsp;</p>
-<p>That&#8217;s the most common commands that this beginner user will encounter and have to grasp in using Github and git. So now what? Well, remember that our user had the end goal of contributing back to Pete Prodoehl&#8217;s Heard project. The way to do is to go back to our user&#8217;s fork of Heard on Github, and use the Pull Request button.&nbsp;[[posterous-content:saBGwBFliwBpFsmACHAI]]</p>
-<p>Which is highlighted in blue above.</p>
-<p>By submitting a Pull Request back to Pete for the changes the user has made, Pete can choose which commits to pull into his version of Heard, which is basically the official repo for the project at this time. By getting Pete to accept a Pull Request, our user has contributed back to Heard, which was the user&#8217;s initial goal. It wasn&#8217;t the easiest road to contributing back, but once developers learn these skills and they have set up both git and Github to their liking, it is actually quite fast, fun, and powerful to use Github to contribute to open source.</p>
-<p>Thanks for reading! Please leave comments on places where this could be improved or any other thoughts you have.</p>
-<p><strong>Slides from my talk:</strong></p>
-<div style=""><strong style="display: block; margin: 12px 0 4px;"><a href="http://www.slideshare.net/mathiasx/matt-gauger-git-github-web414-december-2010" title="Matt Gauger - Git &amp; Github web414 December 2010">Matt Gauger - Git &amp; Github web414 December 2010</a></strong> 
+  <article class="post">
+    
+    <h1 class="title"><a href="/blog/2010/12/31/what-s-new-and-great-in-rails-3-milwaukee-ruby-users-group-december-2010/">What&#8217;s New and Great in Rails 3 - Milwaukee Ruby Users Group - December 2010</a></h1>
+    <div class="entry">
+        <p>While I was going to write a whole blog post (essentially what I said during the talk) I think these slides stand on their own pretty well.</p>
+<div style="">
 <object height="355" width="425">
-<param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=gitgithubweb414december9th2010-101210120907-phpapp02&amp;stripped_title=matt-gauger-git-github-web414-december-2010&amp;userName=mathiasx" />
+<param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=rails3slides2-101230222626-phpapp01&amp;stripped_title=whats-new-and-great-in-rails-3-matt-gauger-milwaukee-ruby-users-group-december-2010&amp;userName=mathiasx" />
 <param name="allowFullScreen" value="true" />
-<param name="allowScriptAccess" value="always" /><embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=gitgithubweb414december9th2010-101210120907-phpapp02&amp;stripped_title=matt-gauger-git-github-web414-december-2010&amp;userName=mathiasx" type="application/x-shockwave-flash" height="355" width="425"></embed>
+<param name="allowScriptAccess" value="always" /><embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=rails3slides2-101230222626-phpapp01&amp;stripped_title=whats-new-and-great-in-rails-3-matt-gauger-milwaukee-ruby-users-group-december-2010&amp;userName=mathiasx" type="application/x-shockwave-flash" height="355" width="425"></embed>
 </object>
 <div style="padding: 5px 0 12px;">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/mathiasx">mathiasx</a>.</div>
 </div>
-<p>&nbsp;</p>
-<p><strong>Further reading:</strong></p>
-<ul>
-<li>Github has great documentation online at <a href="http://help.github.com/">help.github.com</a>. I highly suggest you start there.</li>
-<li>Github will point you in the direction of the <a href="http://gitref.org/">gitref.org</a> page for a quick overview of Git.</li>
-<li>Scott Chacon released his book, <a href="http://progit.org/book/">Pro Git</a>, online for free. It is also available from Apress on Amazon: <a href="http://www.amazon.com/gp/product/1430218339?ie=UTF8&amp;tag=httpmattgauco-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=1430218339">Pro Git</a><img src="http://www.assoc-amazon.com/e/ir?t=httpmattgauco-20&amp;l=as2&amp;o=1&amp;a=1430218339" border="0" height="1" alt="" width="1" style="border: none !important; margin: 0px !important;" />. (Full disclosure: Amazon Associates link. That is, I earn a small commission on stuff sold through these links on my blog.)</li>
-<li>The <a href="http://progit.org/blog.html">Pro Git blog</a> is a good place to continue to pick up Git tricks and tips as you learn.</li>
-<li>It hasn&#8217;t been updated in a long time, but the <a href="http://www.gitready.com/">git ready</a>&nbsp;blog has taught me many tricks that I use with git.</li>
-</ul>
-<p><strong>All other resources mentioned:</strong></p>
-<ul>
-<li><a href="http://git-scm.com/">http://git-scm.com/</a></li>
-<li><a href="https://github.com">https://github.com</a></li>
-<li><a href="http://rasterweb.net/raster/">http://rasterweb.net/raster/</a></li>
-<li><a href="https://github.com/raster/Heard">https://github.com/raster/Heard</a></li>
-<li><a href="http://g.raphaeljs.com/">http://g.raphaeljs.com/</a></li>
-<li><a href="http://openssh.com/faq.html">http://openssh.com/faq.html</a></li>
-<li><a href="http://en.wikipedia.org/w/index.php?title=Key_(cryptography)">http://en.wikipedia.org/w/index.php?title=Key_(cryptography)</a></li>
-</ul>
-<ul>
-</ul>
-
-
-
 
 
         
@@ -368,230 +822,7 @@ $ git checkout HEAD init.php</pre></div>
 
 
 
-<time datetime="2010-12-10T00:00:00-06:00" pubdate  data-updated="true" >Dec 10<span>th</span>, 2010</time>.</div>
-        <div class="tags">
-
-</div>
-    </div>
-
-  </article>
-
-
-  <article class="post">
-    
-    <h1 class="title"><a href="/blog/2010/12/01/what-i-m-doing-in-december/">What I&#8217;m Doing in December</a></h1>
-    <div class="entry">
-        <p>Aside from being really busy at work, I&#8217;ll be giving three talks at users groups in December. How did I end up agreeing to give three talks in one month? People heard me talking about some topic and they asked me to talk to their group on it. If asked, I&#8217;ll usually agree. I&#8217;m trying to tie them together thematically to make it a three-parter (and encourage people to come to all three meetups) so I&#8217;m calling the series:&nbsp;&#8216;Tis the Season to Write Web Apps, A Three Part Adventure.</p>
-<p>&nbsp;</p>
-<p><span style="font-size: large;">Development Tools: Git and Github (aka, &#8216;Tis the Season to Write Web Apps Part 1)</span></p>
-<p><span style="font-size: small;"><a href="http://web414.com/node/1008">Web414</a></span></p>
-<p>7PM, December 9th, 2010 @ <a href="http://bucketworks.org/">Bucketworks</a></p>
-<p>I&#8217;ve been asked to talk about Git and Github and give a basic intro on how to use it. I&#8217;ll also talk about my developer workflow and technical team collaboration. I&#8217;d also like to point out that&nbsp;<a href="http://twitter.com/ralphholzmann">Ralph Holzmann</a>&nbsp;will be&nbsp;talking about LABjs and yepnope.js after my talk. It should be a great night with lots of technical content!</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p><span style="font-size: large;">PHP vs Rails (aka,&nbsp;</span><span style="font-size: large;">&#8216;Tis the Season to Write Web Apps</span><span style="font-size: large;">&nbsp;Part 2)</span></p>
-<p><span style="font-size: small;"><a href="http://www.mkepug.org/calendar/15421909/">Milwaukee PHP Users Group</a></span></p>
-<p>6PM, December 14th, 2010 @ <a href="http://bucketworks.org/">Bucketworks</a></p>
-<p>This talk started as the idea of comparing how traditional LAMP servers differ from how application servers behave. I&#8217;ll be covering Apache and phpmod, some information about nginx, and compare performance. A very basic web app will be used as an example and I&#8217;ll introduce some tools used for benchmarking web applications. Note that the topic has seemingly mutated from &#8220;LAMP servers versus Application Servers&#8221; to PHP vs. Rails, possibly to draw out more folks by using good keywords ;)</p>
-<p>&nbsp;</p>
-<p><span style="font-size: large;">What&#8217;s new and great in Rails 3! (aka,&nbsp;</span><span style="font-size: large;">&#8216;Tis the Season to Write Web Apps&nbsp;</span><span style="font-size: large;">Part 3!)</span></p>
-<p><span style="font-size: large;"><span style="font-size: small;"><a href="http://www.meetup.com/RubyMKE/calendar/15149551/">RubyMKE</a></span></span></p>
-<p>7PM, December 20th, 2010 @ <a href="http://bucketworks.org/">Bucketworks</a></p>
-<p>I&#8217;ll be talking about what&#8217;s different in Rails 3 and what stays the same. A perfect follow-up to those that want to know about writing for an application server after the MKE PUG talk. I&#8217;ll have a ported version of the basic web app from the MKEPUG talk.</p>
-<p>&nbsp;</p>
-<p>All code and slides will be available here and on <a href="http://github.com/mathias">my Github</a> after the talks. I&#8217;ll hopefully have time to put together summary blog posts afterwards, too.</p>
-<p>Also: Be sure to join us at&nbsp;<a href="http://web414.com/node/990">MilwaukeeDevHouse5</a>&nbsp;on December 3rd, 2010, 5PM-midnight. The description from Web414:</p>
-<p style="padding-left: 30px;">&nbsp;</p>
-<p style="padding-left: 30px;">This will be the first MilwaukeeDevHouse with a purpose&#8230; In the past we just called it a &#8220;party with laptops&#8221; and invited you to come and work on whatever you wanted to. You can still do that, but we&#8217;re also going to focus on ways to make BarCampMilwaukee (and Bucketworks) better.&nbsp;Call it &#8220;Hack the BarCamp!&#8221; or maybe &#8220;Hack the Bucket!&#8221;</p>
-<p>&nbsp;</p>
-<p style="padding-left: 30px;">&nbsp;</p>
-<p>See you there!</p>
-
-        
-        
-    </div>
-
-    <div class="meta">
-        <div class="author">
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
-</div>
-        <div class="date">
-
-
-
-
-
-
-
-
-
-
-
-
-<time datetime="2010-12-01T00:00:00-06:00" pubdate  data-updated="true" >Dec 1<span>st</span>, 2010</time>.</div>
-        <div class="tags">
-
-</div>
-    </div>
-
-  </article>
-
-
-  <article class="post">
-    
-    <h1 class="title"><a href="/blog/2010/10/31/-library-ruby-site-1-8-rubygems-rb-779-in-report-activate-error-could-not-find-rubygem-railties-0-gem-loaderror-/">/Library/Ruby/Site/1.8/rubygems.rb:779: In `report_activate_error&#8217;: Could Not Find RubyGem Railties (>= 0) (Gem::LoadError)</a></h1>
-    <div class="entry">
-        <p>I tend to blog things that I want to remember, but couldn&#8217;t find in one quick Google search.</p>
-<p>This is an error I got while starting the <a href="http://railstutorial.org/book">Rails Tutorial</a>, because I was using an old system (I counted about 160 gems installed) and starting to use <a href="http://rvm.beginrescueend.com/">rvm</a> for managing my Ruby installs, because the Rails Tutorial recommends it. I haven&#8217;t had this kind of issue before, because rails, gem, and ruby commands have all just worked out-of-the-box for me since Mac OS X 10.5 was released.</p>
-<p>When I tried to create a new Rails app, I got the error in the title of the blog post:</p>
-<div class="CodeRay">
-  <div class="code"><pre>minimite:railstutorial.org mathiasx$ rails new first_app
-/Library/Ruby/Site/1.8/rubygems.rb:779:in `report_activate_error': Could not find RubyGem railties (&gt;= 0) (Gem::LoadError)
-        from /Library/Ruby/Site/1.8/rubygems.rb:214:in `activate'
-        from /Library/Ruby/Site/1.8/rubygems.rb:1082:in `gem'
-        from /usr/bin/rails:18
-minimite:railstutorial.org mathiasx$ rails -v
-/Library/Ruby/Site/1.8/rubygems.rb:779:in `report_activate_error': Could not find RubyGem railties (&gt;= 0) (Gem::LoadError)
-        from /Library/Ruby/Site/1.8/rubygems.rb:214:in `activate'
-        from /Library/Ruby/Site/1.8/rubygems.rb:1082:in `gem'
-        from /usr/bin/rails:18</pre></div>
-</div>
-
-<p>That didn&#8217;t make sense. Where is the Rails command being run from?</p>
-<div class="CodeRay">
-  <div class="code"><pre>minimite:railstutorial.org mathiasx$ which ruby
-/Users/mathiasx/.rvm/rubies/ruby-1.9.2-p0/bin/ruby
-minimite:railstutorial.org mathiasx$ which gem
-/Users/mathiasx/.rvm/rubies/ruby-1.9.2-p0/bin/gem
-minimite:railstutorial.org mathiasx$ which rails
-/usr/bin/rails</pre></div>
-</div>
-
-<p>Aha. Obviously the previously-installed Rails gem, from before installing rvm, was an issue. So I figured I&#8217;d just clean it up.</p>
-<div class="CodeRay">
-  <div class="code"><pre>minimite:railstutorial.org mathiasx$ rvm list
-
-rvm rubies
-
-   ruby-1.8.7-p302 [ i386 ]
-=&gt; ruby-1.9.2-p0 [ i386 ]
-
-minimite:railstutorial.org mathiasx$ rvm use 1.8.7
-Using /Users/mathiasx/.rvm/gems/ruby-1.8.7-p302
-minimite:railstutorial.org mathiasx$ sudo gem uninstall rails
-Remove executables:
-        rails
-
-in addition to the gem? [Yn]  y
-Removing rails
-Successfully uninstalled rails-3.0.1
-minimite:railstutorial.org mathiasx$ which rails
-/usr/bin/rails</pre></div>
-</div>
-
-<p>But I hadn&#8217;t been paying attention. I still had not removed the Rails executable, because I was calling the rvm version of Ruby 1.8.7 and not the system-level one. Knowing that Rails was in /usr/bin/rails, I assumed that the gem executable that managed it would also be in /usr/bin:</p>
-<div class="CodeRay">
-  <div class="code"><pre>minimite:railstutorial.org mathiasx$ sudo /usr/bin/gem uninstall rails
-Remove executables:
-        rails
-
-in addition to the gem? [Yn]  y
-Removing rails
-
-You have requested to uninstall the gem:
-        rails-3.0.0
-clearance-0.9.0.rc9 depends on [rails (~&gt; 3.0.0)]
-factory_girl_rails-1.0 depends on [rails (&gt;= 3.0.0.beta4)]
-suspenders-0.1.0.beta.4 depends on [rails (&gt;= 3.0.0)]
-If you remove this gems, one or more dependencies will not be met.
-Continue with Uninstall? [Yn]  y
-Successfully uninstalled rails-3.0.0</pre></div>
-</div>
-
-<p>I&#8217;d finally removed the system-level Rails script and can switch back to using rvm for everything:</p>
-<div class="CodeRay">
-  <div class="code"><pre>minimite:railstutorial.org mathiasx$ rvm use 1.9.2
-Using /Users/mathiasx/.rvm/gems/ruby-1.9.2-p0
-minimite:railstutorial.org mathiasx$ which rails
-/Users/mathiasx/.rvm/gems/ruby-1.9.2-p0/bin/rails
-Using /Users/mathiasx/.rvm/gems/ruby-1.9.2-p0
-minimite:railstutorial.org mathiasx$ rails new first_app
-      create  
-      &lt;-- Lots of output --&gt;</pre></div>
-</div>
-
-<p>It works!</p>
-<p><strong>Lesson learned:</strong> Always pay attention. The answer is probably sitting right in front of you.</p>
-
-        
-        
-    </div>
-
-    <div class="meta">
-        <div class="author">
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
-</div>
-        <div class="date">
-
-
-
-
-
-
-
-
-
-
-
-
-<time datetime="2010-10-31T00:00:00-05:00" pubdate  data-updated="true" >Oct 31<span>st</span>, 2010</time>.</div>
-        <div class="tags">
-
-</div>
-    </div>
-
-  </article>
-
-
-  <article class="post">
-    
-    <h1 class="title"><a href="/blog/2010/10/16/the-master-s-word/">The Master&#8217;s Word</a></h1>
-    <div class="entry">
-        <p>Last night, at the opening of <a href="http://www.sector67.org/">Sector67</a>&nbsp;and during a discussion about human language, expression, and the limits thereof, I told a story I&#8217;ve read somewhere, but I cannot remember the source. My details on the story are quite fuzzy; I am quite sure it comes from an eastern oral tradition, but googling couldn&#8217;t help me. Further, I embellished the details to fit in with a story about kung fu, but this story could equally be a Buddhist Koan or something else. Any tips to where it came from would be highly helpful. Without further ado, here&#8217;s my version of the story:</p>
-<p>The Master had studied kung fu his entire life, and was widely regarded in the land as the best in the known world. He practiced alone in his mountaintop sanctuary for years, uninterrupted.</p>
-<p>A Challenger came, a young upstart who had defeated monks and warriors across the land with his kung fu. He was eager to defeat The Master and take his place as the world&#8217;s best. As he was undefeated, The Challenger prepared on his own, studying defenses against every form and developing his own offensive technique that he believed could not be countered.</p>
-<p>Arriving upon the top of the mountain, the Challenger introduced himself to The Master, who remained silent. The Challenger announced his intentions of dueling with The Master and determining who was the best in the land.</p>
-<p>The Master appeared thoughtful for a second, then opened his mouth and uttered a single word. The Challenger fell dead on the spot. The Master had condensed an entire lifetime of learning, knowledge, and experience into a single word. He no longer required the movements of kung fu or the physical realm to defeat The Challenger.</p>
-<p>Editor&#8217;s note: I imagine, in a Buddhist version of this story, the Master has meditated for years in his mountaintop retreat, and instead of killing The Challenger, The Master utters one word and The Challenger is enlightened.</p>
-
-        
-        
-    </div>
-
-    <div class="meta">
-        <div class="author">
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
-</div>
-        <div class="date">
-
-
-
-
-
-
-
-
-
-
-
-
-<time datetime="2010-10-16T00:00:00-05:00" pubdate  data-updated="true" >Oct 16<span>th</span>, 2010</time>.</div>
+<time datetime="2010-12-31T00:00:00-06:00" pubdate  data-updated="true" >Dec 31<span>st</span>, 2010</time>.</div>
         <div class="tags">
 
 </div>

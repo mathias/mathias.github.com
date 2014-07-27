@@ -7,7 +7,7 @@
     <meta name="author" content="Matt Gauger">
 
     
-    <meta name="description" content="Run Rake. Just Run Rake. Recently, I was setting up my laptop for an existing Rails project with the help of a pair. My pair was pivot on this &hellip;">
+    <meta name="description" content="Reset a Lost Password on an Ubuntu VM (This post is part of my blog archiving project. This post appeared on Coderwall on April 24, 2013.) You may &hellip;">
     
 
     <link href="/atom.xml" rel="alternate" title="blog.mattgauger.com" type="application/atom+xml">
@@ -65,33 +65,39 @@
 
   <article class="post">
     
-    <h1 class="title"><a href="/blog/2012/07/13/run-rake-just-run-rake/">Run Rake. Just Run Rake.</a></h1>
+    <h1 class="title"><a href="/blog/2013/04/24/reset-a-lost-password-on-an-ubuntu-vm/">Reset a Lost Password on an Ubuntu VM</a></h1>
     <div class="entry">
-        <p>Recently, I was setting up my laptop for an existing Rails project with the help of a pair. My pair was pivot on this project, which means that he&#8217;d been on it longer and so was bringing his experience and knowledge to the table, while I was seeing the project with fresh eyes.</p>
+        <hr />
 
-<p>&#8220;This is going to take forever to set up,&#8221; he grumbled. &#8220;The documentation&#8217;s out of date, and I remember there&#8217;s a bunch of gotchas to setting this project up. We&#8217;ll need to compile this, then do that, then you get an API key for..&#8221;</p>
+<p><em>(This post is part of my blog archiving project. This post appeared on <a href="https://coderwall.com/p/vibura">Coderwall</a> on April 24, 2013.)</em></p>
 
-<p>I went to Github and cloned the repo to my laptop.</p>
+<hr />
 
-<p>&#8220;Just run rake,&#8221; I replied.</p>
+<p>You may be like me and keep a couple virtual machines around on your laptop for development, testing, and gaming. I had an Ubuntu VM in VMWare that I&#8217;d lost the password to, and I wanted to reset it so that I could get back to coding.</p>
 
-<p>&#8220;What?&#8221;</p>
+<p>Typically, with a desktop computer or a server, you hold down some key while the computer is booting to get into the Grub boot manager and then boot into something called &#8220;single user mode&#8221;, where you&#8217;re able to change passwords, fix configs, repair disks, etc.</p>
 
-<p>&#8220;Just run rake. It will tell us what to do next.&#8221;</p>
+<p>Unfortunately, the boot screen just flies right by in Ubuntu under VMWare. So the first thing you&#8217;ll need to do is shut down the VM, and then get ready to start it up. <strong>But before you start the VM</strong>: get ready to hit <code>Shift</code> because that&#8217;s what will get you into Grub. Ready? Ok. Boot it and hit <code>Shift</code>.</p>
 
-<p>And indeed, it did tell us what to do. I&#8217;ve called this test-based configuration, or other funny things in the past, but you can just think of it as trying to get to a known good state - a state where all the tests run. If it prevents the tests from running, then it&#8217;s the next thing you need.</p>
+<p>Now you should be in Grub. If you don&#8217;t get it, don&#8217;t worry, just shut down and try again.</p>
 
-<p>I had to silence my pair&#8217;s grumbling at this process, because at first it seems like you&#8217;re going to be waiting a lot for rake, and that it might be easier just to remember all the steps necessary to set up a project.</p>
+<p>Choose the &#8216;Advanced Options&#8217; and then any of the &#8220;recovery&#8221; lines from the Grub menu for Ubuntu.</p>
 
-<p>It turns out rake showed us all the steps we needed to do to get the project running. A full log of what this looks like setting up a simple Rails app can be seen <a href="https://gist.github.com/3112558">in this gist</a>.</p>
+<p>You&#8217;ll get dropped into another menu system. Choose <code>root</code>: this is the single-user mode where you are root.</p>
 
-<h3>Why?</h3>
+<p>Your / filesystem may be mounted as read-only at this point. Type this to mount it as read-write:</p>
 
-<p>The point of software craftsmanship is to be pragmatic, not to seek perfection. I could have memorized the steps necessary to set up the average Rails project, but those steps wouldn&#8217;t have applied here. And indeed, my pair could have memorized them, since he had been on the project. But those steps would go out the window as soon as my pair was on another project. It is far more pragmatic to know the behavior of our tools (like knowing that rake will tell us about each thing necessary to get to a state where the tests pass) and rely on that behavior rather than to seek perfection on this one project.</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mount -rw -o remount /</span></code></pre></td></tr></table></div></figure>
 
-<p>Note: we could have used our experience with Rails and software craftsmen to avoid some of the steps you see me running in the gist: for example, you probably know that if the databases aren&#8217;t created, that you can run <code>rake db:create:all db:migrate db:test:prepare</code> all at once, without running rake inbetween every single rake task. That&#8217;d be far more pragmatic, as you&#8217;re saving yourself time and effort by knowing the toolset. But I wanted to demonstrate that running rake between every single step told us what to do next.</p>
 
-<p>Now, ask yourself: How can you &#8220;just run rake&#8221; with your projects?</p>
+<p>Now you can reset passwords, etc, like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>passwd myuser</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Good luck!</p>
 
         
         
@@ -116,7 +122,7 @@
 
 
 
-<time datetime="2012-07-13T14:59:00-05:00" pubdate  data-updated="true" >Jul 13<span>th</span>, 2012</time>.</div>
+<time datetime="2013-04-24T11:46:00-05:00" pubdate  data-updated="true" >Apr 24<span>th</span>, 2013</time>.</div>
         <div class="tags">
 
 </div>
@@ -127,60 +133,16 @@
 
   <article class="post">
     
-    <h1 class="title"><a href="/blog/2012/04/21/mosh-ssh-tunnels-tmux/">Mosh, SSH Tunnels, and Tmux</a></h1>
+    <h1 class="title"><a href="/blog/2013/03/17/by-augmenting-human-intellect/">By Augmenting Human Intellect, We Mean</a></h1>
     <div class="entry">
-        <p>I&#8217;m currently preparing for RailsConf. One of the things I wanted to do before I left was figure out a way to monitor a process on a Linux server running on my LAN. The process frequently crashes and needs some prodding to restart.</p>
+        <blockquote>
+By &#8220;augmenting human intellect&#8221; we mean increasing the capability of a man to approach a complex problem situation, to gain comprehension to suit his particular needs, and to derive solutions to problems. Increased capability in this respect is taken to mean a mixture of the following: more-rapid comprehension, better comprehension, the possibility of gaining a useful degree of comprehension in a situation that previously was too complex, speedier solutions, better solutions, and the possibility of finding solutions to problems that before seemed insoluble. And by &#8220;complex situations&#8221; we include the professional problems of diplomats, executives, social scientists, life scientists, physical scientists, attorneys, designers&#8211;whether the problem situation exists for twenty minutes or twenty years. We do not speak of isolated clever tricks that help in particular situations. We refer to a way of life in an integrated domain where hunches, cut-and-try, intangibles, and the human &#8220;feel for a situation&#8221; usefully co-exist with powerful concepts, streamlined terminology and notation, sophisticated methods, and high-powered electronic aids.
+<footer>
+<strong>Douglas C. Engelbart</strong>
+&ndash;
+<cite><a href="http://www.dougengelbart.org/pubs/augment-3906.html">Augmenting Human Intellect: A Conceptual Framework </a></cite>
+</blockquote>
 
-<p>One solution might be to set up DynDNS and configure the router to point from some random port to the SSH port on the Linux machine running on the LAN. That idea didn&#8217;t strike my fancy, as it just isn&#8217;t terribly secure to open up a port to the entire world, and it seems that DynDNS costs money to use since 2008. I&#8217;m sure there are free alternatives, but I couldn&#8217;t be bothered to find them, much less configure them.</p>
-
-<p>A much better solution would be an SSH tunnel up to my Linode, and a reverse tunnel back down to the Linux server on my LAN. If you haven&#8217;t used reverse SSH tunneling before, it is really neat. Here&#8217;s an example:</p>
-
-<p>From the local server:</p>
-
-<pre><code>ssh -R 2048:localhost:22 username@example.com
-</code></pre>
-
-<p>From the server out in the Internet (aka example.com in this example)</p>
-
-<pre><code>ssh -p 2048 other_username@localhost
-</code></pre>
-
-<p>Note that the &#8216;localhost&#8217; in the second example refers to your local server, not the one out in the internet. So <code>other_username</code> should be the username on your local server (not the remote server.) Confused yet? Good.</p>
-
-<p>Now, this setup will get you pretty far: You&#8217;re now able to run commands on the local server from the Linode out in the cloud. But you may notice a problem fairly quickly: if you kill that SSH shell on the local server, the connection up to the server on the internet dies, and so does the reverse tunnel that was inside that.</p>
-
-<p>Fix that by starting up a tmux session on the local server first, then detaching it.</p>
-
-<pre><code>tmux new -s ssh-tunnel
-ssh -R 2048:localhost:22 username@example.com
-&lt;leader-d&gt;
-</code></pre>
-
-<p>Now the tmux session will happily keep that SSH shell open on the local server and you can reverse tunnel back over it.</p>
-
-<p>My solution involves <a href="http://mosh.mit.edu">Mosh</a>, which I&#8217;ve been using quite a bit since it exploded on Hacker News and other news sites. Simply put, Mosh is like SSH, but it uses UDP packets to make itself more reliable. &#8220;More reliable without TCP?&#8221; you say? Well, Mosh is doing a little more work to buffer the connection to the other machine (including instant response to typing when there&#8217;d otherwise be lag) and maintains that connection: even if you change IPs, hop on a train, etc. It&#8217;s pretty amazing, and so far I&#8217;ve been loving it. Click through to the Mosh site to read up more on it. It really is awesome.</p>
-
-<p>With Mosh, we add another layer to the puzzle, so that my final setup looked like this:</p>
-
-<pre><code>matts_laptop$ mosh matt@someserver.local
-matt@someserver.local$ tmux new -s ssh-tunnel
-&lt;tmux session starts&gt;
-matt@someserver.local$ ssh -R 2048:localhost:22 username@example.com
-&lt;leader-d&gt;
-</code></pre>
-
-<p>Pop open another window in my local tmux session (are you beginning to see a pattern?) and then connect with mosh up to my Linode:</p>
-
-<pre><code>matts_laptop$ mosh me@mattgauger.com
-me@mattgauger.com$ tmux new -s server-monitor
-&lt;tmux session starts&gt;
-me@mattgauger.com$ ssh -p 2048 matt@localhost # Note: this is the matt@someserver.local account!
-matt@someserver.local$ &lt;monitor the process I'm concerned with&gt;
-</code></pre>
-
-<p>Now I&#8217;ve got this mostly-persistent (thanks to mosh and tmux) session that I can detach from if I really need to, but I&#8217;ll still be able to connect back up to my Linode and check on the server on my LAN from RailsConf.</p>
-
-<p>Pretty cool, huh?</p>
 
         
         
@@ -205,7 +167,7 @@ matt@someserver.local$ &lt;monitor the process I'm concerned with&gt;
 
 
 
-<time datetime="2012-04-21T21:14:00-05:00" pubdate  data-updated="true" >Apr 21<span>st</span>, 2012</time>.</div>
+<time datetime="2013-03-17T22:44:00-05:00" pubdate  data-updated="true" >Mar 17<span>th</span>, 2013</time>.</div>
         <div class="tags">
 
 </div>
@@ -216,28 +178,45 @@ matt@someserver.local$ &lt;monitor the process I'm concerned with&gt;
 
   <article class="post">
     
-    <h1 class="title"><a href="/blog/2012/04/13/announcing-a-new-virtual-book-club-the-diamond-age/">Announcing a Virtual Book Club: The Diamond Age</a></h1>
+    <h1 class="title"><a href="/blog/2013/03/07/filter-or-be-filtered/">Filter or Be Filtered</a></h1>
     <div class="entry">
-        <p><img src="/images/The_Diamond_Age.jpg" alt="The Diamond Age book cover" /></p>
+        <p>Eli Pariser&#8217;s talk, <a href="http://www.ted.com/talks/eli_pariser_beware_online_filter_bubbles.html">Beware online &#8220;filter bubbles&#8221;</a> recently hit the front page of the TED Talks website. I found it interesting because it discusses some of what I&#8217;ve seen happening online, and some of my fears for how we search and consume content. Watch the video if you haven&#8217;t to see just how much is already being filtered on the web for you.</p>
 
-<p>Recently I decided that it&#8217;s time to re-read The Diamond Age by Neal Stephenson. But, without external motivators, the list of books that I&#8217;d like to read grows and grows, and reading books actual takes me a lot longer than it should. (Because, well, the internet is so damn interesting, and I haven&#8217;t finished reading that.)</p>
+<p>Right after I saw the video, of course, <a href="http://washingtonpost.com/business/technology/facebook-to-change-news-feed-to-a-personalized-newspaper/2013/03/07/b294f61e-8751-11e2-98a3-b3db6b9ac586_story.html">Facebook announced</a> that they&#8217;ll be rolling out a new version of the the news feed. They are quoted as making it more like a &#8220;personal newspaper&#8221; &mdash; a filter, essentially, for the things Facebook thinks you want to see. As the video above pointed out, they&#8217;ve already been filtering <em>out</em> the things they think you don&#8217;t want for awhile.</p>
 
-<p>So I&#8217;m trying an experiment. I am proposing to hold a book club, online, so that I will read The Diamond Age again. My current plan is to use Google Plus Hangouts and hold weekly online meetings to discuss progress in the book. I&#8217;ve never really run a book club on my own before, so we&#8217;ll see where this goes.</p>
+<p>No doubt there will be some backlash as people adjust to changes on Facebook, but very few will abandon it. And if you are the kind of person that would abandon Facebook over filtering, or privacy, or concerns about owning your own data, you don&#8217;t have a lot of choices of where to go.</p>
 
-<p>If you&#8217;re interested, please indicate that interest by signing up below. I&#8217;ll use the sign ups to plan and gauge when to start.</p>
+<p>Sure, you can specifically seek out services that aren&#8217;t going to give you a filtered world view &mdash; <a href="https://duckduckgo.com/">DuckDuckGo</a> comes to mind. But that&#8217;s not always possible. The problem is bigger than just the search engine you use and whether or not you&#8217;re logged into Facebook. Just about every site is run by someone else, and they are analyzing you constantly. They are in a brutal battle to keep you as their consumer and keep you from going to other sites. But are the things that they think you want to see what you really want or need to see?</p>
 
-<h3><a href="https://docs.google.com/spreadsheet/viewform?formkey=dFBBNUJZcUZuX1Q3Uk5VbGRVRVNsQ3c6MQ#gid=0">Sign up form</a></h3>
+<p>As a developer, I&#8217;m capable of taking matters into my own hands, to some degree. Most of the sites that I use on a daily basis have an API and allow me to export or scrape my personal data. But the cost of switching off of the nice service, the well-designed UI/UX of an official mobile app, and so on has kept me from taking the plunge to export my data and go set up shop on my own version of various web services.</p>
 
-<p></p>
+<p>Recently I revamped a very old, empty repo that I had on Github. The point of this repo was code a way to export all of my data from <a href="https://www.last.fm/">Last.fm</a>. But for whatever reason the repo has been empty for something like 4 years now. So the other week, I sat down, checked the <a href="http://www.last.fm/api">Last.fm API docs</a>, and wrote a very simple Ruby script to dump out all the JSON it could about my top tracks, artists, and albums over the past 7 years. That script is available as my <a href="https://github.com/mathias/birdsong">birdsong</a> repo on Github.</p>
 
+<p>So far, I don&#8217;t have a real use for the data. I could try to use some visualization tools on it to make cool graphs or maps. Or I could try and get analytics out of it: genres listened to, how they&#8217;ve changed over the years. But for now, I am content to just have the JSON data.</p>
 
-<p>Get The Diamond Age: (non-affiliate links)</p>
+<p>All in all, it&#8217;s around 30 megabytes of JSON data, which is really just plain text with no compression, so it is really quite a lot of data. There&#8217;s more I can do, though. I plan to do to start taking control, to both aggregate my own data and filter it.</p>
 
-<ul>
-<li><a href="http://www.amazon.com/The-Diamond-Age-Illustrated-Spectra/dp/0553380966/">Paperback</a></li>
-<li><a href="http://www.amazon.com/Diamond-Bantam-Spectra-Book-ebook/dp/B000FBJCKI/">Kindle Edition</a></li>
-</ul>
+<p>For a long time it has bothered me that <a href="https://www.google.com/reader">Google Reader</a> stopped receiving new features, and the features that existed only went so far. To be fair, Google Reader has been a rock solid web service for many, many years for me. It allows me to read my feeds quickly, reliably, and has parsed feeds well &mdash; all problems I&#8217;ve had with other feed readers. It&#8217;s always had some neat features like showing me analytics of what I read.</p>
 
+<p><img src="/images/google_reader_trends.png" alt="Google Reader Trends" /></p>
+
+<p>But as far as discovering new content and helping me to eliminate content I don&#8217;t read or don&#8217;t want to read, Google Reader is not so great. Reader is terrible at suggesting new feeds to read to me; it constantly suggests Dilbert and Lifehacker, and has for the past 5 years or so. I have no interest in either of those. It has never analyzed my reading patterns to such a degree that it suggested something new that blew me away. I am looking for those kinds of interesting suggestions: not just for feeds that match what I already read, but things that are outside of my normal bubble but would be interesting to me.</p>
+
+<p>Luckily, Google Reader has an API, and rather than just exporting my data and building a new service, I can start to build off of it. I get to keep a lot of the features I enjoy while extending it with my own code.</p>
+
+<p>In Pariser&#8217;s talk, he talks about encoding algorithms of filtering and recommendation with a sense of civic duty. To some degree, this means having some journalistic integrity. Such an algorithm needs to present both sides of the story. One issue of many feed readers and other content online is that, well, it only shows one view. The view of the article you&#8217;re on.</p>
+
+<p>But imagine a feed reader that was more like the front page of Google News. It would not only show you the blog post you&#8217;re reading, but all recent blog posts from other authors about similar topics. Maybe, if they&#8217;re responding to a news event or writing about a known fact, the reader could do the work to track down the original source. To take it even further, without even really needing to be aware of motive, politics, and other factors, a dumb feed reader with good suggestions could probably present both sides of the story. Both sides of an argument. Both liberal and conservative takes on the same bill.</p>
+
+<p>Dreaming up features like this can be a deep rabbit hole. Start considering the consequences of pulling up all past articles you&#8217;ve read about similar keywords or tags. Or performing searches for academic papers on the topic. Pulling in data from Wikipedia. Looking up books you&#8217;ve read or are planning to read on Goodreads that are related to the blog post you&#8217;re reading. Or any other number of ways to slice and dice content. And it doesn&#8217;t have to stop with Google Reader.</p>
+
+<p>Opportunities to make better tools and more intelligently consume information are all around us. At the same time, consumer-consuming corporations on the web try to trap us into filter bubbles. They try to provide us with what they think we want, but can they ever really know? In the end, it&#8217;s control-your-own-filters or be filtered<a href="#filter-or-be-filtered-note" name="filter-or-be-filtered-note-return"><sup>1</sup></a>.</p>
+
+<hr />
+
+<p><a name="filter-or-be-filtered-note"></a></p>
+
+<p><strong>1</strong> The name of this article was lifted from Daniel Rushkoff&#8217;s <a href="http://www.goodreads.com/book/show/9408311-program-or-be-programmed">Program or be Programmed</a>, a book which I didn&#8217;t really enjoy. It was not what I thought it would be about: why we should learn to program so that we can control the complex technical systems around us rather than be controlled by them, or how programming&#8217;s problem solving skills can be applied elsewhere. Instead, I found the book to be some technology-fear-mongering and a bunch of diatribes about how things online or in computers are &#8220;less real.&#8221; Suffice to say, I did not enjoy it. <a href="#filter-or-be-filtered-note-return">&#8617;</a></p>
 
         
         
@@ -262,7 +241,7 @@ matt@someserver.local$ &lt;monitor the process I'm concerned with&gt;
 
 
 
-<time datetime="2012-04-13T15:29:00-05:00" pubdate  data-updated="true" >Apr 13<span>th</span>, 2012</time>.</div>
+<time datetime="2013-03-07T22:09:00-06:00" pubdate  data-updated="true" >Mar 7<span>th</span>, 2013</time>.</div>
         <div class="tags">
 
 </div>
@@ -273,15 +252,76 @@ matt@someserver.local$ &lt;monitor the process I'm concerned with&gt;
 
   <article class="post">
     
-    <h1 class="title"><a href="/blog/2012/03/25/new-site-on-octopress-and-twitter-bootstrap/">New Site on Octopress and Twitter Bootstrap</a></h1>
+    <h1 class="title"><a href="/blog/2013/03/03/insanely-powerful-widgets-brought-to-you-by-moores-law/">Insanely Powerful Widgets, Brought to You by Moore&#8217;s Law</a></h1>
     <div class="entry">
-        <p>Hi there. As you may have noticed, my blog is moving over to Github pages. I&#8217;ve used Octopress as a starting point, and ported a <a href="https://github.com/jlong/sass-twitter-bootstrap">SASS version of Twitter Bootstrap</a> to use for building the layout.</p>
+        <p>I&#8217;ve been teaching my downstairs neighbor basic electronics and how to solder. He&#8217;s a musician and has been working his way through several kits from <a href="http://bleeplabs.com/">Bleep Labs</a>.</p>
 
-<p>Some people called out the fact that I&#8217;m using Twitter Bootstrap on Twitter. When Twitter Bootstrap first came out, I was appalled to see so many sites turning into Twitter through Bootstrap, but I&#8217;m over it now. Bootstrap provides a GREAT grid system and makes it very fast to get a responsive layout up. Plus, I liked my <a href="https://twitter.com/mathiasx">Twitter profile background</a> so much that I made this site look like it. So just deal with it.</p>
+<p>As I explained each component: the resistor, the capacitor, the diode, etc., I eventually got to the transistor. I told my neighbor how transistors are rarely used on their own now. The transistors in the kit were there mainly because they were easy to solder, but usually a circuit designer would opt not to use them.</p>
 
-<p>I still have a bit of work to do to copy over my blog posts from Posterous. Jekyll provides an exporter script that I&#8217;ve tried, but it resulted in a lot of data loss. I have to decide whether I&#8217;m going to finish writing <a href="https://github.com/mathias/posterous-exporter">my own script</a> or just export the blog posts manually, since they require a lot of HTML cleanup. (I used the Posterous WYSIWYG editor to write quite a few of those blog posts, which resulted in a ton of inline styles and weird paragraph / block elements being inserted.)</p>
+<p>On its own, a single transistor can&#8217;t do much, and takes up some amount of space, which is actually quite large relative to the circuits we build now. I scored bags of hundreds of transistors that were about to be thrown out at the <a href="http://milwaukeemakerspace.org/">Milwaukee Makerspace</a> when we were putting together the electronics lab &mdash; not because they didn&#8217;t work but because that many transistors simply wouldn&#8217;t get used. &#8220;Nowadays, you might as well throw an Arduino in a project,&#8221; was one of the reasons. No one wants to work at the abstraction level of single transistors anymore.</p>
 
-<p>You can subscribe to the Atom feed above to receive updates in the future.</p>
+<p>It turned out that the <a href="http://bleeplabs.com/store/the-bleep-drum/">drum machine kit</a> that we were putting together contained an Atmel AVR microprocessor - the main chip of the Arduino. In an effort to save space and complexity, the designers had used a microprocessor instead of discrete transistors. The chip in the Arduino and the Bleep Drum is the ATmega328, which has something like 600,000 transistors inside it.
+And I explained how the form factor of the components we were using was obsolete. Even the tight-packed pins of a typical integrated circuit (a computer chip, in common parlance), spaced at 0.1&#8221;, just isn&#8217;t dense enough for modern circuits. The parts we were using were all designed to be soldered to the circuit board by human hands. Slow, error-prone human hands. The vast majority of circuit boards produced today are <a href="http://en.m.wikipedia.org/wiki/Surface-mount_technology">surface mount</a>: parts placed by robots and soldered all in one go by another machine.</p>
+
+<p>&#8220;It&#8217;s really neat that you know all this stuff,&#8221; my neighbor remarked. But I shrugged it off. This knowledge, especially of how analog circuits work and how audio signals are modified by analog components, is mostly obsolete. Better to just use some analog-to-digital converters and put a microprocessor on it. Or better yet, something way more powerful than a simple microprocessor.</p>
+
+<p>We keep putting more and more transistors on a single die, or chip, every day. This trend was first spotted by Intel co-founder Gordon E. Moore, and so we call it <a href="http://en.wikipedia.org/wiki/Moore's_law">Moore&#8217;s law</a>. So far, Moore&#8217;s prediction that the number of transistors on integrated circuits would double every 2 years has been quite accurate. It has led us from the simplest integrated circuit in 1958 to the Core i7 processor in my Macbook Air today.</p>
+
+<p>The other day I tweeted about the crazy processing power that we get today under Moore&#8217;s Law.</p>
+
+<blockquote class="twitter-tweet" align="center"><p>Crazy future; my MBA doesn&#8217;t sweat when running Linux-in-VMware, Chrome, Emacs, LightTable, other apps, terminals &amp; 4 REPLs all at once.</p>&mdash; mathiasx (@mathiasx) <a href="https://twitter.com/mathiasx/status/307668858985140225">March 2, 2013</a></blockquote>
+
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>And in truth, I was running more software than I could fit into that tweet, because I was listening to music, had a few PDFs in the background, and was managing my ebook collection at the same time. But those notorious CPU hogs listed in the tweet should be enough to illustrate just how much is going on without really pushing the processing cores of the Macbook Air.</p>
+
+<p>Remember, my 13&#8221; Macbook Air only weighs 2.96 pounds. In 2005, I had a 12&#8221; Powerbook G4 that weighed 4.6 pounds and had, by my back-of-the-envelope calculations on Geekbench scores <sup><a href="#geekbench-notes" name="geekbench-notes-return">1</a></sup>, my Macbook Air is almost 9 times as powerful as the Powerbook G4 was.</p>
+
+<p>Where is this progress taking us? Well, my iPhone is already pretty powerful. It&#8217;s hard to get a raw number of FLOPS (floating-point operations per second) for the processor in an iPhone 4S, but we can get a Geekbench score for it. It is weighed against the same scale as the Macbook Air is measured on. On that scale, my iPhone measures<sup><a href="#geekbench-iphone-notes" name="geekbench-iphone-notes-return">2</a></sup> very close to the Powerbook G4 I had 8 years ago, but the iPhone has the advantage of having two cores.</p>
+
+<p>Some people incorrectly read Moore&#8217;s Law as &#8220;processor <em>speed</em> doubling every 2 years,&#8221; which it is not. We&#8217;ve found that there&#8217;s more to processing power than just gigahertz, though. The number of cores in a processor, and therefore the number of simultaneous things that a computer can do, is increasing. While there&#8217;s some issues as we grow into this new paradigm where everything has multiple cores and we have to ensure consistency between them, this is overall a net win for those of us seeking more powerful computers.</p>
+
+<p>To be honest, I don&#8217;t really even notice my computer as physical hardware anymore. It is just the stage for software to run on: quiet, fast, lightweight, and very infrequently does the hardware bog down to make me wait. Only a few short years ago, we would have to wait for the computer to do something &#8211; usually shown as the hourglass on Windows and the spinning beachball on Macs. Even things like copying a file between two directories could stop a system in its tracks, and the computer would simply stop accepting any input from the user. Now, processors, RAM, and SSDs are so fast that I rarely have to wait for them. And if I do have to wait, say, for some piece of software to be installed, the fact that the computer is multicore means that I can go and browse the internet in another window without noticing.</p>
+
+<p>It&#8217;s likely that, just like the example of VMware running Linux running on my Macbook Air in the my tweet, eventually we will get to the point of having so much computing power embedded around us that we will virtualize everything. It&#8217;s possible that we will take not just files or even processes between computing devices but the whole environment, a whole virtualized machine and operating system. As a thought experiment, imagine pausing a VMware virtual machine while it is performing some CPU-intensive task on your laptop. Now copy that paused VM over to another machine, and start it back up. The software will continue to chug along on the CPU-intensive task like nothing happened<sup><a href="#vm-notes" name="vm-notes-return">3</a></sup>. Advances in processing power, storage speed, and wireless networking speed will continue to progress until this process could be seamless to the user.</p>
+
+<p>In some regards, sending the whole VM across the wire and starting it back up on another processor is simpler than trying to marshal a raw process between two machines, and ensure that the process can still run in the other machine&#8217;s environment. It doesn&#8217;t solve the problem of running one process on many machines at once, but it could be used in cases where we can spin up one copy of a process that we want to parallelize, and then copy that VM to many different machines with chunks of the dataset to process. In fact, that&#8217;s basically how many large distributed processing projects like BOINC (the software that SETI@Home runs on) work.</p>
+
+<p>And so it&#8217;s likely that, for reasons of ease of use, sandboxing for security and safety, and simply because we have so much processing power, in the future our phones and our wearable computers will simply be running a virtual machine. Then we don&#8217;t need to worry about what software is running on our desktop PCs when we get home and have access to a larger display; we just move our processing over to the desktop computer, which ever is more convenient. (Even more likely is that we just have a display that acts like an accessory that we can &#8220;throw&#8221; the video onto, rather than having a separate desktop computer.)</p>
+
+<p>The things around us are getting progressively more powerful by way of cheap, small processors. Where before I was saying that electronics hobbyists would rather use an Arduino into a project than deal with many transistors, industry would rather throw a small ARM processor into everything around us and write software than design a custom piece of hardware.</p>
+
+<p>Case in point, over on the Panic blog, the case of <a href="http://www.panic.com/blog/2013/03/the-lightning-digital-av-adapter-surprise/">The Lightning Digital AV Adapter Surprise</a>. After wondering why the new Lightning AV adapter for the iPad mini took a few moments to boot up, and seemed to display a scaled version of the video, they cracked open the Lightning AV cable to find: an ARM processor! As far as they can tell, the iPad mini sends a bit of software to the processor in the Lightning cable every time it is connected, essentially booting the cable up, and sets an Airplay stream down the cable to the other end, where the ARM processor decodes it, upscales it to HD, and sends it to the TV. This makes the Lightning AV cable, in essence, the world&#8217;s smallest AppleTV. And we thought the new AppleTV was small when it was debuted.</p>
+
+<p>When I go to a concert now, the room is full of smartphones being pointed at the stage taking video or pictures. And while most people might think, &#8220;That&#8217;s a lot of pictures and video that will be uploaded to Facebook,&#8221; I think about the fact that the people in the room with me are holding more processing power in their hands than we had in most of the computer labs in my schools and in college. Those phones will just keep getting more powerful, and soon they&#8217;ll match the performance of the Macbook Air I&#8217;ve got in my backpack. Even the mundane things will have plenty of processing power because it will be cheap and simpler to put a cheap processor in it. But those cheap processors are getting more powerful every day, and that is exciting.</p>
+
+<p>So while I may have learned digital logic in college and can help you build up a simple adder from NAND gates, and as a hobbyist I&#8217;ve learned to build <a href="http://www.geofex.com/article_folders/fuzzface/fffram.htm">guitar fuzz pedals from a few transistors</a>, that knowledge is increasingly obsolete in the face of rapid progress. We will soon be packing powerful processors into everything around us, sometimes in surprisingly ways, simply because it is easier and cheaper than designing a custom piece of hardware. But the future is exciting, and that knowledge isn&#8217;t completely useless, as long as I can share it with a few more people to show us just how far we&#8217;ve come.</p>
+
+<hr />
+
+<p><a name="geekbench-notes"></a></p>
+
+<p><strong>1.</strong></p>
+
+<p>&#8220;Geekbench scores are calibrated against a baseline score of 1,000 (which is the score of a single-processor Power Mac G5 @ 1.6GHz). Higher scores are better, with double the score indicating double the performance.&#8221;</p>
+
+<p>Scores:</p>
+
+<ul>
+<li><a href="http://browser.primatelabs.com/geekbench2/1713385">MacBook Air (13-inch Mid 2012)</a>: 7675</li>
+<li><a href="http://browser.primatelabs.com/geekbench2/1545796">PowerBook G4 (12-inch 1.5 GHz)</a>: 861</li>
+</ul>
+
+
+<p><a href="#geekbench-notes-return">&#8617;</a></p>
+
+<p><a name="geekbench-iphone-notes"></a>
+<strong>2.</strong> Geekbench score for <a href="http://browser.primatelabs.com/ios-benchmarks">iPhone 4S</a>: 651 <a href="#geekbench-iphone-notes-return">&#8617;</a></p>
+
+<p><a name="vm-notes"></a>
+<strong>3.</strong> Of course, there&#8217;s some issues with this. Anything that was happening synchronously would probably failed, as well as anything that depends on a network connection in progress. But for the purposes of the thought experiment, let&#8217;s ignore those problems. <a href="#vm-notes-return">&#8617;</a></p>
 
         
         
@@ -306,7 +346,7 @@ matt@someserver.local$ &lt;monitor the process I'm concerned with&gt;
 
 
 
-<time datetime="2012-03-25T13:52:00-05:00" pubdate  data-updated="true" >Mar 25<span>th</span>, 2012</time>.</div>
+<time datetime="2013-03-03T11:10:00-06:00" pubdate  data-updated="true" >Mar 3<span>rd</span>, 2013</time>.</div>
         <div class="tags">
 
 </div>
@@ -317,291 +357,84 @@ matt@someserver.local$ &lt;monitor the process I'm concerned with&gt;
 
   <article class="post">
     
-    <h1 class="title"><a href="/blog/2012/02/17/madjs-february-2012-how-coffeescript-jasmine-made-me-a-better-javascript-developer/">MadJS February 2012 - How CoffeeScript & Jasmine Made Me a Better JavaScript Developer</a></h1>
+    <h1 class="title"><a href="/blog/2013/03/02/google-glass-you-cant-control-the-future/">Google Glass: You Can&#8217;t Control the Future</a></h1>
     <div class="entry">
-        <p>Recently, I spoke at the MadJS group about CoffeeScript &amp; Jasmine. My slides appear below. Since Slideshare doesn&#8217;t show my notes, you can either download the keynote file above, or you can read the notes below, which I&#8217;ve pulled out of the slides. I feel that the notes are necessary to know what I&#8217;m talking about, and I hate reading slide decks where there&#8217;s no context or notes. This isn&#8217;t going to be as helpful as having seen my talk in person, but hopefully you get some value out of my talk and the notes together:</p>
-<div style=""><strong style="display: block; margin: 12px 0 4px;"><a href="http://www.slideshare.net/mathiasx/coffeescript-jasmine-madjs-february-2012" title="CoffeeScript &amp; Jasmine - MadJS February 2012" target="_blank">CoffeeScript &amp; Jasmine - MadJS February 2012</a></strong> <iframe marginheight="0" scrolling="no" src="http://www.slideshare.net/slideshow/embed_code/11637009" marginwidth="0" frameborder="0" height="355" width="425"></iframe>
-<div style="padding: 5px 0 12px;">View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/mathiasx" target="_blank">Matt Gauger</a></div>
-</div>
-<h2>How CoffeeScript &amp; Jasmine made me a better JS developer</h2>
-<h3>First, an introduction:</h3>
-<ul>
-<li>I&rsquo;m Matt Gauger</li>
-<li>@mathiasx on twitter</li>
-</ul>
-<h3>I work at <a href="http://bendyworks.com">Bendyworks</a></h3>
-<ul>
-<li>We primarily do Ruby on Rails work, with iOS now.</li>
-<li>We care very deeply about software craftsmanship and honing our agile practices.</li>
-</ul>
-<h3>Which leads me to my dilemma</h3>
-<ul>
-<li>Are you familiar with impostor syndrome?</li>
-<li>It&#8217;s the idea that even very skilled practitioners may sometimes feel like an impostor due to over-emphasizing their weaknesses.</li>
-<li>Further, it&rsquo;s the inability to internalize your own accomplishments.</li>
-</ul>
-<h3>I felt like an impostor when it came to JavaScript.</h3>
-<ul>
-<li>Of course, I could read and write the syntax, pull in jQuery, manipulate the DOM, etc.</li>
-<li>I had several projects under my belt at this time that used AJAX and were fairly complex</li>
-<li>I&#8217;d even read JavaScript: The Good Parts several times, taken notes, etc.</li>
-</ul>
-<h3>So, what does this have to do with CoffeeScript?</h3>
-<ul>
-<li>My thesis: How CoffeeScript &amp; Jasmine made me a better JS developer (and how it can help you, too)</li>
-<li>But before that: Let me warn you that I&#8217;m not going to go over every piece of syntax here.</li>
-<li>I&#8217;m not going to be able to teach you all of CoffeeScript or Jasmine in this talk.</li>
-<li>For that, see the resources &amp; books at the end of the talk.</li>
-</ul>
-<h3>CoffeeScript History</h3>
-<ul>
-<li>2010 I learn about CoffeeScript, and it sort of looks like Ruby and Python.</li>
-<li>It grabs my interest.</li>
-<li>But at that point it&#8217;s still a novelty: The compiler is in Ruby, no one uses it for real dev yet.</li>
-<li>It was a *toy*</li>
-</ul>
-<h3>Today</h3>
-<ul>
-<li>Flash-forward to today, and everyone is extolling CoffeeScript. </li>
-<li>It comes with Rails 3 by default now and gets compiled on the fly into JS for your app.</li>
-<li>I&rsquo;ve been using CoffeeScript for about a year now.</li>
-</ul>
-<h3>CoffeeScript has Good Parts?</h3>
-<p>So why use CoffeeScript? What are its good parts?</p>
-<ul>
-<li>It restricts you to a subset of JS you&rsquo;d recognize from JS: The Good Parts.</li>
-<li>It puts JSLint &amp; a compiler between me and the half dozen browsers I need to support</li>
-<li>It warns me when I do something wrong</li>
-</ul>
-<p>This might be the most important part of the talk, and reason to use CoffeeScript</p>
-<ul>
-<li>If you&rsquo;re like me, you&rsquo;ll put the compiled JS up next to the CoffeeScript</li>
-<li>By reading the output of the compiler, you&rsquo;re learning what good JS looks like.</li>
-</ul>
-<h3>Criticisms of CoffeeScript:</h3>
-<ul>
-<li>It&#8217;s not what runs in the browser.</li>
-<li>Difficult to debug =&gt; Finding bugs (Names are the same between CoffeeScript &amp; JS; its readable)</li>
-<li>May feel like you&rsquo;re learning a whole different language (It&rsquo;s not, it&rsquo;s less verbose JS)</li>
-</ul>
-<h3>That isn&#8217;t to say that CoffeeScript eliminates all bugs</h3>
-<ul>
-<li>At this point we may want to differentiate between bugs that are caused by poor syntax and mistakes (mistake bugs), and bugs that come from the interaction between complicated data &amp; edge cases (ie computer is in a state you didn&#8217;t predict when you wrote the code)</li>
-<li>CoffeeScript can help cut down on a lot of the former.</li>
-</ul>
-<h3>Some examples of CoffeeScript helping you with bugs:</h3>
-<p>Coercing the wrong types</p>
-<ul>
-<li>This will print it&rsquo;s true happily.</li>
-<li>That&rsquo;s not quite what you expect when the data is more complicated than 1 and the string 1.</li>
-<li>Type coercion is the number 1 reason for <a href="http://wtfjs.com/">WTFJS</a></li>
-<li>Ok, so that&rsquo;s a very simple example.</li>
-<li>But how often are you going to get bitten by more complicated versions of that same bug?</li>
-<li>And are you always going to remember to use triple equals? === I am now.</li>
-</ul>
-<h3>Scope</h3>
-<ul>
-<li>CoffeeScript scope is essentially the same as in JS</li>
-<li>JS and CoffeeScript have &ldquo;lexical scope&rdquo;</li>
-<li>1. <span> </span>Every function creates a scope, and the only way to create a scope is to define a function.</li>
-<li>2. A variable lives in the outermost scope in which an assignment has been made to that variable.</li>
-<li>3.<span> </span> Outside of its scope, a variable is invisible.</li>
-<li>The neat thing is that CoffeeScript&rsquo;s compiler places the vars for each scope at the top of that scope</li>
-<li>Define a variable at a specific scope by giving it a sensible initial value</li>
-<li>Hopefully this is better than &lsquo;null&rsquo;, but you could do worse and just not initialize it at all.</li>
-<li>JavaScript won&rsquo;t force you to initialize it, but doing so can help you to figure out scope issues.</li>
-</ul>
-<h3>a ?= b</h3>
-<ul>
-<li>the ?= is syntactic sugar, the ? is called the existential operator in CoffeeScript</li>
-<li>Combined with =, the existential operator means &ldquo;a equals b unless a?&rdquo; or     
-<ul>
-<li>&ldquo;Let b be the default value for a.&rdquo;</li>
-</ul>
-</li>
-</ul>
-<h3>Lastly, wrapping up your code.</h3>
-<ul>
-<li>CoffeeScript can wrap each compiled file into a scope</li>
-<li>This may be the default, depending on the version of coffeescript you&rsquo;re using - you might need to pass an option now to either wrap or not wrap your code in a scope.</li>
-<li>This is actually pretty cool &#8211; if you&rsquo;re including a lot of JavaScripts on a website, you can&rsquo;t mix scope there &#8211; no accidental leakage into the global scope space.</li>
-<li>Compiled CoffeeScript Example: </li>
-</ul>
-<div class="CodeRay">
-  <div class="code"><pre>(function() {
-  console.log &quot;hello world!&quot;;
-}).call(this);</pre></div>
-</div>
+        <p>There&#8217;s been quite a bit of backlash surrounding the new Google Glass product. As someone who has wanted wearable computing for awhile, I&#8217;d like to talk about it a bit. My only real qualifications on this subject come from the fact that I&#8217;ve read a lot of scifi<sup><a href="#accelerando-note" name="accelerando-note-return">1</a></sup> and that I&#8217;m an open source developer that would like to build software for wearable computing that makes people&#8217;s lives better.</p>
 
-<h3>Simpler Looping</h3>
-<ul>
-<li>You write list comprehensions rather than for loops in CoffeeScript</li>
-<li>Comprehensions are expressions, and can be returned and assigned</li>
-</ul>
-<h3>Jeremy Ashkenas&rsquo;s Example</h3>
-<ul>
-<li>Loop over every item in a list, in CoffeeScript:</li>
-</ul>
-<div class="CodeRay">
-  <div class="code"><pre>for item in list
-  process item</pre></div>
-</div>
+<p>When I&#8217;m talking about wearable computing glasses in general rather than just the Google Glass product, I will call them smart glasses. There doesn&#8217;t seem to be a consistent name yet, and the phrase <a href="http://en.wikipedia.org/wiki/EyeTap">eyetap</a> only refers to a very specific type of smart glasses.</p>
 
-<h3>Intention gets obscured by managing the loop, in JS:</h3>
-<div class="CodeRay">
-  <div class="code"><pre>for (var i = 0, l = list.length; i &lt; l; i++) {
-  var item = list[i];
-  process(item);
-}</pre></div>
-</div>
+<h2>The promise</h2>
 
-<li>CoffeeScript allows &ldquo;reasonably solid&rdquo; JavaScript developers to accomplish the latter by simply writing the former.</li>
-<h3>In Review:&nbsp;CoffeeScript will help you:</h3>
-<ul>
-<li>Write OO, Prototype-based code</li>
-<li>Avoid bugs in comparisons</li>
-<li>Stop using ==, only use ===</li>
-<li>Manage scope and avoid state through scope creep</li>
-<li>Reduce off-by-one errors in looping, and generally write better loops than you were writing before</li>
-</ul>
-<h3>Jasmine</h3>
-<p>(My) History (with Jasmine)</p>
-<ul>
-<li>I started using Jasmine last summer on a client project.</li>
-<li>It&rsquo;s enough like the BDD tool we use in Rails, Cucumber, that I consider it a BDD tool.</li>
-<li>It makes the most sense to me of the BDD/TDD tools in JS I&rsquo;ve used</li>
-</ul>
-<h3>Why Jasmine?</h3>
-<ul>
-<li>All code should be tested =&gt; that&rsquo;s what I believe.</li>
-<li>You can spend some up-front time testing your code, or you can spend a lot of time bug fixing later</li>
-<li>I realize that not all legacy codebases are going to have full test coverage overnight.</li>
-</ul>
-<h3>The example on the Jasmine site:</h3>
-<div class="CodeRay">
-  <div class="code"><pre>describe(&quot;Jasmine&quot;, function() {
-  it(&quot;makes testing awesome!&quot;, function() {
-    expect(yourCode).toBeLotsBetter();
-  });
-});</pre></div>
-</div>
+<p>As Amber Case explains in this TED Talk, <a href="http://www.ted.com/talks/amber_case_we_are_all_cyborgs_now.html">we are all cyborgs now</a>. As soon as man started using tools, we were augmenting what evolution gave us to become something more. A cyborg. When you drive a car, you are a cyborg because your legs could not carry you that fast. Welcome to the future, human.</p>
+
+<p>That progress marches on constantly, much faster than evolution could ever provide us with enhancements. Computers, the internet, and smartphones are some of the latest and greatest in the enhancements that we add to our bodies to be something more. We&#8217;re already using smartphones to constantly be connected to a wider world than just what we can see and hear in the room. We&#8217;re extending our brains by using things like Google Search and Wikipedia to find and remember far more than our meatbrains could do on their own. And we&#8217;re connected to others to a degree that no other form of communication has matched. When scifi authors write about this kind of brain enhanced by technology, they sometimes refer to it as the exocortex. I&#8217;d argue that we already have exocortexes: our digital selves, the software and websites we use, the tools like Twitter and Facebook that we communicate over, are all part of those exocortexes. Without them, we are less than the whole. And while not everyone feels it yet, I certainly feel a little limited when cut off from my exocortex.</p>
+
+<p>The promise, then, of Google Glass is to constantly be connected to that information source and communications tools. Not to interrupt your daily life, but to simply be better integrated into it. Some people want to point out that Glass is going to be a distraction from &#8220;real life&#8221;, but your real life already includes these &#8220;distractions&#8221; to a degree that you&#8217;re probably not thinking about. How often do you check your email during your work day? Twitter? What apps do you use on your smartphone to find the next bar to go to or figure out a restaurant that everyone can eat at? Does using any of those constitute putting real life on hold while you spend some quality time with something fake? No, they&#8217;re just part of life.</p>
+
+<h2>The buzz</h2>
+
+<p>I was initially quite excited about Google Glass, because it is the first real promise of wearable computing for the masses at a price point that we will probably be able to afford. For nearly a year, the product has been announced but no real details have surfaced. With the announcement of the Google Glass Explorer contest, more information has been leaking out of the Googleplex. After the <a href="http://www.youtube.com/watch?v=9c6W4CCU9M4">Youtube video showing real Glass in use</a> was posted, I quickly realized that Google Glass was not intended for me in the way that I was hoping.</p>
+
+<p>Simply put, Glass is going to do the things that consumers now want to do quickly with their smartphones: receive and send texts &amp; email, take pictures, take videos, and post that content up to things like Facebook, Youtube, and Google+. Another valid use is quickly searching Google for something, which could be useful for everything from trivia night to trying to remember what goes in your favorite korma.</p>
+
+<p>But the things I&#8217;m interested in? Coding while walking around (twiddling fingers in the air, no doubt), augmenting my poor social skills by having my wearable remember faces and previous conversations, providing heads-up documentation while I am doing some task, reading full ebooks in a sitting with some sort of speed-reading app, etc. And some of these, like coding and reading, are quite focused activities that would benefit from having full-screen display of information rather than just a hovering box in the corner of one eye. Since the Glass only really shows notifications and thumbnails of photos and videos, it isn&#8217;t going to provide that focused experience. At least until Google or some other company builds binocular, full-vision smart glasses.</p>
+
+<p>Then again, building a device that most consumers will want to use is exactly what Google should be doing. I&#8217;m a relatively tiny market, and it&#8217;d make no sense for Google to prioritize my features over the average consumer. I&#8217;m well aware of that. But all that said, I still plan on being an early-adopter, at least after the price drops a little.</p>
+
+<h2>The marketing bullshit</h2>
+
+<p>You may have heard that <a href="http://www.independent.co.uk/news/world/americas/google-cofounder-sergey-brin-feels-emasculated-by-smartphones-8514748.html">Sergey Brin said</a> that smartphones are &#8220;emasculating.&#8221; I&#8217;m not going to linger on this topic too long, but whether he thought this up on the fly or a marketing team came up with it, it makes him sound like an idiot. And in case you forgot, Google makes smartphones. Is it &#8220;emasculating&#8221; to open a refrigerator? What about when you ride the bus rather than drive a car in to work? What does this tell female smartphone users when you say this? I believe the correct usage of the word &#8220;emasculating&#8221; is to &#8220;deprive (a man) of his male role or identity. Ex: he feels emasculated because he cannot control his sons&#8217; behavior.&#8221; What does that have to do with a smartphone? It&#8217;s just a poor choice of words all around. Sorry Sergey, but I&#8217;m calling bullshit on your statement.</p>
+
+<h2>The wearable device Cambrian explosion</h2>
+
+<p>We can only hope that as soon as Google Glass comes out, two things start to happen: hackers figure out how to root (or jailbreak, or whatever we&#8217;re going to call it) Glass and install Linux on it. This will ensure that open source software can start being developed for it for all sorts of niche users (like me) and not just the average consumer mentioned above. It also will help to combat some of the security and privacy concerns outlined below. Maybe in the long run, Linux isn&#8217;t the best OS to run on such a device, but that doesn&#8217;t matter initially. As soon as open source hackers figure it out, anything and everything can run on it. We&#8217;ll see a Cambrian explosion of wearable computing apps.</p>
+
+<p>I think we&#8217;ll also see hardware manufacturers, especially the OEMs that typically make keyboards, mice, and cheap Android phones, start to produce similar glasses to the Google Glass devices. They&#8217;ll likely run Android or some flavor of whatever Microsoft is calling a mobile OS, but will probably be a lot easier to hack than the Google Glass device. And they&#8217;ll get cheaper. The best part about all of this is that by leading the way, Google is practically ensuring that we&#8217;re going to have lots of manufacturers building these devices, and they&#8217;re going to get cheaper. The demand for wearable displays in the past were limited to applications in military and some industry jobs, along with academic research, and so wearable displays tended towards the expensive and impractical in the past. Eventually, smart glasses will probably be as common as smartphones, and around the same price point. Don&#8217;t be surprised if, in a few years, it makes a lot more sense for someone to wear smart glasses than to carry around a smartphone in their pocket.</p>
+
+<p>By being first to market, Google is also giving us a good model for what interactions with smart glasses can look like. The early, proto-smartphones like the Blackberry were arguably very poor in terms of user experience &amp; interaction design. It wasn&#8217;t until the Apple iPhone came along that we started to get good UX on mobile devices. Now, even free, low-end Android phones come with some UX heritage imprinted from Apple&#8217;s iOS. While it remains to be seen whether Glass&#8217;s UX is great and not just as good as the Youtube video makes it out to be, I hope that it helps imprint some good UX concepts onto all future devices.</p>
+
+<h2>The &#8220;dorky&#8221; backlash</h2>
+
+<p>I&#8217;ve seen a few blogs, perhaps in an attempt to stir up trouble and get pageviews, call out Google Glass for being dorky. You&#8217;ll see phrases like &#8220;But why would anyone want to wear something so dorky?&#8221; The authors of these pieces of trying to enforce the status quo the same way that kids in school make fun of the clothes that others wear. Why are they doing that? They may have valid fears of the technology&#8217;s privacy implications. But more likely, they&#8217;re responding to what, in literature, we&#8217;d call &#8220;the fear of the other.&#8221; The Google Glass device is new and unknown. People who would break from the tribe and wear it are weird; possibly nonhuman. They are the other.</p>
+
+<p>There&#8217;s a fear mentioned in some blog posts about Glass that someone might pay more attention to their Glass display than to the other person in a social situation. I imagine that the way it works out in reality is that common courtesy comes into play here, and that you wouldn&#8217;t ignore someone in favor of your glass any more than you&#8217;d walk away from someone you were talking to to look at Twitter on your phone. That said, some people have done that to me, and I expect that it is really just a fault of people rather than the technology.</p>
+
+<p>Some of this backlash, too, is the fear that someone else with that easy access to information and search results (perhaps even more discreetly than the voice searching we&#8217;ve seen so far) is going to give others an unfair advantage. Suddenly everyone will remember everything and be experts on trivia, or last quarter&#8217;s financials, or any other things that smart glasses will make easy. But again, as I discussed before, this is all part of the wearer&#8217;s exocortex. It is as much as part of them as using a hammer or using a calendar on the wall to remember something.</p>
+
+<p>By being a part of the cyborg human, the device is a prosthetic that the wearer uses to enable their exocortex. But rather than compensating for some handicap, it helps to enhance the wearer. Would you deny someone their hearing aids because they might be able to hear more than you? I think the feelings and popular opinion on these topics will change as more people start wearing smart glasses and other wearable technology. It&#8217;s already perfectly acceptable to use your smartphone to play Angry Birds while sitting in a waiting room, and I&#8217;m pretty sure that the activities that the Google Glass will lend itself to will soon become socially acceptable, too.</p>
+
+<h2>The fear</h2>
+
+<p>The biggest, and most valid in my mind, issue with Google Glass is what it will mean for everyone to suddenly have an always-on, always-available camera and microphone on their face. I&#8217;d suggest you go read Mark Hurst&#8217;s article on Creative Good, <a href="http://creativegood.com/blog/the-google-glass-feature-no-one-is-talking-about/">The Google Glass feature no one is talking about</a> if you haven&#8217;t yet, to get up to speed on this debate.</p>
+
+<p>While I believe in privacy and support organizations like the <a href="https://eff.org">EFF</a>, I think it is a little short-sighted and silly to react so strongly to the fact that the Google Glass device will have a camera on it. The two fears outlined in that article are:</p>
 
 <ul>
-<li>This example sucks!</li>
-<li>A better example:</li>
+<li>That anyone, at any time, could be taking photos or video of you without your consent. And you wouldn&#8217;t know.</li>
+<li>That Google will now be able to index and otherwise process any audio, video, and images you send to them, along with the other data the Glass will send along: date and time, Google user account, etc.</li>
 </ul>
-<div class="CodeRay">
-  <div class="code"><pre>describe ('addition', function() {
-  it('adds two numbers', function() {
-    expect(1 + 2).toEqual(3);
-  });
-});</pre></div>
-</div>
 
-<ul>
-<li>Better? Not really. But we can see what the syntax is doing here and I&rsquo;m using a real assertion!</li>
-</ul>
-<h3>How should we test JS?</h3>
-<ul>
-<li>Functions should not depend on the DOM</li>
-<li>Our Logic needs to be in separate pieces     
-<ul>
-<li>to make it easier to test the logic, things like AJAX calls, etc</li>
-<li>without interacting with the DOM</li>
-</ul>
-</li>
-</ul>
-<h3>Easier to test = better code</h3>
-<ul>
-<li>it just so turns out, that the abstraction for testing is a better abstraction overall</li>
-<li>I&#8217;ve heard &#8220;The first implementation of your code is the unit tests&#8221; so it may not be DRY, but tests should show how to implement your code!</li>
-</ul>
-<h3>Follow TDD/BDD:</h3>
-<h3>red, green, refactor</h3>
-<ul>
-<li>You can still do this in Jasmine, in fact, I find it kind of natural.</li>
-</ul>
-<h3>Jasmine is designed to be standalone</h3>
-<ul>
-<li>This means you don&rsquo;t need jQuery and you don&rsquo;t need to run it in a real browser (but you can)</li>
-</ul>
-<h3>Some really cool features of Jasmine:</h3>
-<p>Matchers:</p>
-<ul>
-<li>.toBe()</li>
-<li>.toBeNull()</li>
-<li>.toBeTruthy()</li>
-<li>.toBeDefined()</li>
-<li>.toBeUndefined()</li>
-</ul>
-<h3>Setup and teardown:</h3>
-<div class="CodeRay">
-  <div class="code"><pre>beforeEach()
-afterEach()</pre></div>
-</div>
 
-<ul>
-<li class="li1">You can use after Each to run a teardown function after each successful test</li>
-<li class="li1">If you need a teardown function after a test whether it passed or failed, use after()</li>
-</ul>
-<h3>Spies: built-in mocking &amp; stubbing</h3>
-<ul>
-<li>In Ruby, we&rsquo;ve been doing mocking and stubbing for awhile.</li>
-<li>Jasmine&rsquo;s spies make it easy!</li>
-<li>These let you do things like watch to see if a method was called</li>
-<li>Or to stub out other methods so you don&rsquo;t do real AJAX calls, etc.</li>
-</ul>
-<h3>But what about legacy codebases?</h3>
-<ul>
-<li>So you&rsquo;re thinking, &#8220;CoffeeScript and Jasmine sound great, but I have a legacy codebase.&#8221;</li>
-<li>Or, &#8220;I&rsquo;ll never get to use either; and they don&rsquo;t help my big legacy codebase.&#8221;</li>
-<li>Well, we&rsquo;ve run into this and I have a plan.</li>
-</ul>
-<h3>Start simple.</h3>
-<ul>
-<li>First, get your tools lined up.</li>
-<li>Get the CoffeeScript compiler in your tool chain</li>
-<li>Get Jasmine set up and passing a dummy test.</li>
-<li>You still haven&rsquo;t done anything with your legacy code at this point.</li>
-</ul>
-<h3>Fix one bug.<br />(red, green, refactor)</h3>
-<ul>
-<li>It all starts with one bug. Or one feature, if you&rsquo;re feeling adventurous.&nbsp;</li>
-<li>You might not be able to pull out an entire feature and rewrite it. I understand that. Don&#8217;t give in to this temptation yet!</li>
-<li>The way to start this is to write a test around the bug and see it fail. (this might be hard -&gt; depending on how tied your code is to the DOM &#8211; see Jasmine-JQuery for DOM Fixtures)</li>
-<li>Then fix the bug in regular old JavaScript. See the Jasmine test pass.</li>
-</ul>
-<h3>Rewrite the affected code in CoffeeScript.</h3>
-<ul>
-You&rsquo;ve got a working test around this bug.
-<li>(You know the test works because you saw it red then green.)</li>
-<li>Now&rsquo;s your chance to rewrite it in CoffeeScript. It may only be one function at this point. That&rsquo;s ok.</li>
-</ul>
-<h3>Start grouping in files / modules.</h3>
-<ul>
-<li>We found that even with a legacy codebase of a lot of JavaScript, we were able to figure out logical chunks that should live together in CoffeeScript files.</li>
-</ul>
-<h3>Keep improving the codebase.</h3>
-<ul>
-<li>This is the hardest part.</li>
-<li>The temptation is there to just give up and fix bugs only in JS, not to write unit tests, etc.</li>
-<li>The other temptation is the one you usually can&rsquo;t give into, which is to try to rewrite everything all at once -&gt; this rarely is accomplishable, it&rsquo;s better to stage the changes.</li>
-<li>The big rewrite doesn&#8217;t work!</li>
-</ul>
-<h3>Lessons Learned:</h3>
-<ul>
-<li>&nbsp;These tools can help you learn JS better.</li>
-<li>Legacy codebases can slowly grow better through using CoffeeScript &amp; Jasmine.</li>
-<li>Taking advantage of these is up to you! </li>
-</ul>
-<h3>Thanks!</h3>
-<h3>Resources to learn more:</h3>
-<ul>
-<li><span class="s2"><a href="http://jashkenas.github.com/coffee-script/">http://jashkenas.github.com/coffee-script/</a></span></li>
-<li><span class="s2"><a href="http://pivotal.github.com/jasmine/">http://pivotal.github.com/jasmine/</a></span></li>
-<li><span class="s2"><a href="http://pragprog.com/book/tbcoffee/coffeescript">http://pragprog.com/book/tbcoffee/coffeescript</a></span></li>
-<li><a href="http://js2coffee.org"><span class="s2">http://js2coffee.org</span></a>/</li>
-</ul>
+<p>This seems to happen with every technology. And you may not realize it, but if you are advocating against the Google Glass for the above reasons, then you have far more reasons to be vocal about banning smartphones and even cheap digital cameras. I think it&#8217;s easy for someone to exclaim &#8220;But they could be taking videos of me in a public place, possibly something embarrassing!&#8221; and not realize that there already exists a whole bunch of terrible usage of existing technology out there to exploit women by taking pictures and video of them without their consent. No one seems up in arms, marching to ban the cheap digital camera on behalf of exploited women. The same technology is used by parents to take pictures and videos of their kids. Here, the technology itself is not so much to blame as the people who would use it to exploit others.</p>
+
+<p>There have been attempts to try and regulate digital cameras and smart phones in the past, usually to force them to emit some kind of loud shutter noise when a picture is taken or a video is started. But just about everything comes with a camera now; are you really going to regulate all of that? Part of my point here is that you can&#8217;t regulate the future and try to lock down technology, because the companies that want to sell you the technology will just find a way around it. Let&#8217;s be honest here, governments are too slow to out-maneuver technology.</p>
+
+<p>The fact of the matter is that in public, you&#8217;re probably being monitored by far more than just someone&#8217;s glasses, and that&#8217;s far more worrying than worrying about this new technology that Google is building. Security cameras abound. Your movements online are tracked by any number of ISPs, advertisement platforms, and governments. Have you been up in arms all this time about that and only now adding Google Glass to the list of technologies to worry about? I&#8217;m just pointing out the absurdity of singling out Google Glass here.</p>
+
+<p>Now, what about the fear that, simply put, you won&#8217;t know if someone with Google Glass glasses on could be taking a video and you wouldn&#8217;t know it? Isn&#8217;t that true that they could already be doing this every time you&#8217;re standing around someone with a smartphone in their hand? The fact is that the majority of people are probably going to be polite and follow the same kinds of social expectations you&#8217;d have around that. Just like you&#8217;re already doing whenever you take out your smartphone. Do people take videos of people on the bus because they think they&#8217;re funny? Sure, but that&#8217;s not the only use for a camera on a smartphone.</p>
+
+<p>Lastly, there&#8217;s the concern that all of the data from Glass will be going into Google, to be indexed and searched, and could be subpoenaed by the government. This problem does not really point at the technology as the source of that concern. <strong>If you&#8217;re really worried about what kinds of things a corporation or government could do with all that information, especially a corrupt government, then the problem lies with the governments and corporations.</strong> You&#8217;ve been contributing to the constant stream of information into Google and Facebook&#8217;s datacenters for years. Twitter will give up your information to the government if pressured; yet we communicate over Twitter all of the time. The government has been installing taps into data exchanges for years to monitor online communications. So think about it. It might make a lot more sense for you to focus on fixing those organizations, or weakening their growing Big Brother powers, rather than chasing after perceived rights lost when someone wears a camera on their face in public.</p>
+
+<p>Open source, again, provides a way out here: It&#8217;s likely that an open source OS like Linux will put more control about what information it leaks into the hands of users. At the same time, the open source software probably won&#8217;t see widespread usage by the average consumer, and so we should continue to question and call out this kind of abuse of information by corporations and governments. And, we can do what Mozilla is doing with <a href="http://www.mozilla.org/en-US/firefox/partners/">Firefox OS</a> and provide software that encodes some of our ideals about freedom and privacy right into the software, while making it attractive for manufacturers to use by making it free.</p>
+
+<p>So don&#8217;t try to shout down a fledgling technology just because it could be used to limit your freedoms or privacy. Lots of technologies <em>could</em> be used to limit those things. You can&#8217;t regulate the technology, because cheap clones are on the way and a lot of people are going to want them. Instead, the real menace here is those that would use technology to limit your privacy. Those are what you should fear when you feel uneasy about the future. I&#8217;d like to see a lot more discussion on that topic, but the latest gadget fad pays the bills (with advertising, at least) better, I suppose. And I guess I&#8217;d like to see more writing on the <strong>potential</strong> of new technologies to improve the human condition and make us better cyborgs, rather than just whether or not it will be the killer Facebook app. But we can all dream, right?</p>
+
+<hr />
+
+<p><a name="accelerando-note"></a></p>
+
+<p><strong>1</strong>: In particular, <a href="static/fiction/accelerando/accelerando.html">Accelerando</a> features a main character with smart glasses. It&#8217;s an interesting portrait of how a well-connected digital savant might use this wearable technology while still interacting with people and places.
+<a href="#accelerando-note-return">&#8617;</a></p>
 
         
         
@@ -626,7 +459,7 @@ You&rsquo;ve got a working test around this bug.
 
 
 
-<time datetime="2012-02-17T00:00:00-06:00" pubdate  data-updated="true" >Feb 17<span>th</span>, 2012</time>.</div>
+<time datetime="2013-03-02T15:09:00-06:00" pubdate  data-updated="true" >Mar 2<span>nd</span>, 2013</time>.</div>
         <div class="tags">
 
 </div>

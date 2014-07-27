@@ -7,7 +7,7 @@
     <meta name="author" content="Matt Gauger">
 
     
-    <meta name="description" content="Invalid Gemspec in [.rvm/gems/ruby-1.9.2-p180@gemset/specifications/actionmailer-3.2.0.gemspec]: Illformed Requirement [&#8220;# 3.2.0&#8221;] &hellip;">
+    <meta name="description" content="Find Naughty Naughty Model Calls in Your Views (This post is part of my blog archiving project. This post appeared on Coderwall on January 24, 2013 &hellip;">
     
 
     <link href="/atom.xml" rel="alternate" title="blog.mattgauger.com" type="application/atom+xml">
@@ -65,116 +65,43 @@
 
   <article class="post">
     
-    <h1 class="title"><a href="/blog/2012/01/21/invalid-gemspec-in-rvm-gems-ruby-1-9-2-p180-gemset-specifications-actionmailer-3-2-0-gemspec-illformed-requirement-3-2-0-/">Invalid Gemspec in [.rvm/gems/ruby-1.9.2-p180@gemset/specifications/actionmailer-3.2.0.gemspec]: Illformed Requirement [&#8220;# 3.2.0&#8221;]</a></h1>
+    <h1 class="title"><a href="/blog/2013/01/24/find-naughty-naughty-model-calls-in-your-views/">Find Naughty Naughty Model Calls in Your Views</a></h1>
     <div class="entry">
-        <p>Recently while trying to create a new Rails 3.2 project, I ran into this error after creating a new RVM gemset in Ruby 1.9.2-p180 and a Gemfile requiring only Rails 3.2.0:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ bundle
-Fetching source index for http://rubygems.org/
-Installing rake (0.9.2.2) 
-Installing i18n (0.6.0) 
-Installing multi_json (1.0.4) 
-Installing activesupport (3.2.0) 
-Installing builder (3.0.0) 
-Installing activemodel (3.2.0)
-Invalid gemspec in [/Users/mathiasx/Developer/.rvm/gems/ruby-1.9.2-p180@big_fan/specifications/activemodel-3.2.0.gemspec]: Illformed requirement [&quot;# 3.2.0&quot;]
-... These Illformed requirement errors continue for every package Rails wants ...</pre></div>
-</div>
+        <hr />
 
-<p>I thought that I might be able to continue on and ignore these errors, but I hadn&#8217;t seen anything like them anymore.</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ rails new .
-Invalid gemspec in [/Users/mathiasx/Developer/.rvm/gems/ruby-1.9.2-p180@big_fan/specifications/actionmailer-3.2.0.gemspec]: Illformed requirement [&quot;# 3.2.0&quot;]
-... again, it throws this error many times ...</pre></div>
-</div>
+<p><em>(This post is part of my blog archiving project. This post appeared on <a href="https://coderwall.com/p/33siha">Coderwall</a> on January 24, 2013.)</em></p>
 
-<p>That didn&#8217;t generate a new Rails project in my current directory, so something was clearly wrong. But what does <strong>Illformed request: Syck:DefaultKey</strong> mean? Well, it turns out that the gemspecs of requirements in Rails 3.2.0 are using a new format that older Rubygems can&#8217;t parse. The first indicator was that my version of Rubygems was out of date:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ gem -v
-Invalid gemspec in [/Users/mathiasx/Developer/.rvm/gems/ruby-1.9.2-p180@big_fan/specifications/actionmailer-3.2.0.gemspec]: Illformed requirement [&quot;# 3.2.0&quot;]
-... I've cut out a bunch of the output from the invalid gemspecs here ...
-1.8.8</pre></div>
-</div>
+<hr />
 
-<p>We&#8217;d like to be on Rubygems 1.8.13 or newer, but I also don&#8217;t want to see those invalid gemspec warnings anymore, so I clear out my gemset with:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ rvm gemset empty
-WARN: Are you SURE you wish to remove the installed gemset for gemset 'ruby-1.9.2-p180@big_fan' (/Users/mathiasx/Developer/.rvm/gems/ruby-1.9.2-p180@big_fan)?
-(anything other than 'yes' will cancel) &gt; yes
-$ cd ..
-$ cd project/
-Using /Users/mathiasx/Developer/.rvm/gems/ruby-1.9.2-p180 with gemset big_fan</pre></div>
-</div>
+<p>I found this really helpful in a project where almost all the views were requesting things from the database rather than letting the controller handle it.</p>
 
-<p>Note that I have my rvmrc file like this so that it created and trusted the gemset upon encountering it:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ cat .rvmrc
-rvm use 1.9.2@big_fan --create</pre></div>
-</div>
+<p>I&#8217;ve got a couple little regexes with various levels of specificity to help you seek and destroy!</p>
 
-<h2>Getting everything working again:</h2>
-<p>Upgrade your Rubygems (this will only apply to this version of Ruby in RVM, not all versions of Ruby)</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ gem update --system
-== 1.8.15 / 2012-01-06
+<p>In vim with Fugitive, run:</p>
 
-* 1 bug fix:
+<pre><code>:Ggrep "(&lt;%|=|-).*[A-Z].*\.(find|order|where|includes|all)" app/views/
+</code></pre>
 
-  * Don't eager load yaml, it creates a bad loop. Fixes #256
+<p>This will find places where someone is using model classes with queries in your views. This should work for both erb and haml views. You&#8217;ll probably get a few false matches (I eliminated the common ones like capitalized link titles in a link_to call, for example), but overall I was able to reduce a ton of naughty code.</p>
 
+<p>If you want to catch other annoying things (like using Time.now calls), you can look for what should be classes used in views:</p>
 
-------------------------------------------------------------------------------
+<pre><code>:Ggrep "(&lt;%|=|-).*[A-Z].*\." app/views
+</code></pre>
 
-RubyGems installed the following executables:
-        /Users/mathiasx/Developer/.rvm/rubies/ruby-1.9.2-p180/bin/gem
+<p>If you want to be even simpler, you could just look for those ActiveRelation queries:</p>
 
-RubyGems system software updated</pre></div>
-</div>
+<pre><code>:Ggrep "(find|order|where|includes|all)" app/views/
+</code></pre>
 
-<p>Then just to be safe, make sure the gems we have are pristine (According to the manpage, gem pristine: &#8220;Restores installed gems to pristine condition from files located in the gem cache.&#8221;)</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ gem pristine --all</pre></div>
-</div>
+<p>These also both work from the command line (if you don&#8217;t have Fugitive in your vim yet) by replacing :Ggrep with git-grep:</p>
 
-<p>And it is safe to now bundle:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ bundle
-Fetching source index for http://rubygems.org/
-Installing rake (0.9.2.2) 
-Installing i18n (0.6.0) 
-Installing multi_json (1.0.4) 
-Installing activesupport (3.2.0) 
-Installing builder (3.0.0) 
-Installing activemodel (3.2.0) 
-Installing erubis (2.7.0) 
-Installing journey (1.0.0) 
-Installing rack (1.4.0) 
-Installing rack-cache (1.1) 
-Installing rack-test (0.6.1) 
-Installing hike (1.2.1) 
-Installing tilt (1.3.3) 
-Installing sprockets (2.1.2) 
-Installing actionpack (3.2.0) 
-Installing mime-types (1.17.2) 
-Installing polyglot (0.3.3) 
-Installing treetop (1.4.10) 
-Installing mail (2.4.1) 
-Installing actionmailer (3.2.0) 
-Installing arel (3.0.0) 
-Installing tzinfo (0.3.31) 
-Installing activerecord (3.2.0) 
-Installing activeresource (3.2.0) 
-Using bundler (1.0.18) 
-Installing json (1.6.5) with native extensions 
-Installing rack-ssl (1.3.2) 
-Installing rdoc (3.12) 
-Installing thor (0.14.6) 
-Installing railties (3.2.0) 
-Installing rails (3.2.0) 
-Your bundle is complete! Use `bundle show [gemname]` to see where a bundled gem is installed.</pre></div>
-</div>
+<pre><code>git-grep "(find|order|where|includes|all)" app/views/
+</code></pre>
 
-<p>Now we should have a happy gemset and the error will be gone. Let me know if you have any questions. Happy hacking!</p>
+<p>With these tools in your belt, you can find all those calls to the database in your views and improve your Rails app.</p>
+
+<p>Let me know if this tip was helpful at @mathiasx on Twitter!</p>
 
         
         
@@ -199,7 +126,7 @@ Your bundle is complete! Use `bundle show [gemname]` to see where a bundled gem 
 
 
 
-<time datetime="2012-01-21T00:00:00-06:00" pubdate  data-updated="true" >Jan 21<span>st</span>, 2012</time>.</div>
+<time datetime="2013-01-24T11:32:00-06:00" pubdate  data-updated="true" >Jan 24<span>th</span>, 2013</time>.</div>
         <div class="tags">
 
 </div>
@@ -210,183 +137,18 @@ Your bundle is complete! Use `bundle show [gemname]` to see where a bundled gem 
 
   <article class="post">
     
-    <h1 class="title"><a href="/blog/2011/01/03/getting-mongodb-and-devise-to-play-well-on-rails-3/">Getting MongoDB and Devise to Play Well on Rails 3</a></h1>
+    <h1 class="title"><a href="/blog/2012/12/25/find-a-unique-name-for-your-project/">Find a Unique Name for Your Project</a></h1>
     <div class="entry">
-        <p>While there&#8217;s a <a href="http://www.mongodb.org/display/DOCS/Rails+3+-+Getting+Started">good guide</a> on the MongoDB site about getting mongo_mapper to work in Rails 3, I ran into some additional issues getting the popular <a href="https://github.com/plataformatec/devise">devise</a>&nbsp;<span style="font-family: helvetica, arial, freesans, clean, sans-serif; line-height: 20px;">authentication engine for Rails to work with Mongo. This documents how to create a Rails app from scratch that uses both MongoDB and Devise. So if you don&#8217;t want to reinvent the wheel on authentication (read: Users, login, logout, etc) and want to run your app on MongoDB, this should be useful.</span></p>
-<p><span style="font-family: helvetica, arial, freesans, clean, sans-serif; line-height: 20px;">First of all, you&#8217;ll need Rails 3. I&#8217;m on Rails 3.0.3. I created a new gemset for this app, just to keep things clean. Run the rails new command with the&nbsp;</span><span style="font-family: Courier New, Courier, monospace; line-height: 16px;">&#8211;skip-active-record </span>switch.</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ rails new awesome_app --skip-active-record</pre></div>
-</div>
+        <hr />
 
-<p>Open up the Gemfile of the new app. It&#8217;s going to be pretty empty to start. This is what I ended up with, after reading the Mongo guide mentioned at the beginning of the post:</p>
-<div class="CodeRay">
-  <div class="code"><pre>require 'rubygems'
-require 'mongo'
+<p><em>(This post is part of my blog archiving project. This post appeared on <a href="https://coderwall.com/p/vmz1xq">Coderwall</a> on December 25, 2012.)</em></p>
 
-source :rubygems
+<hr />
 
-gem 'mongo_mapper'
-gem 'rails', '3.0.3'
-gem 'devise', '1.1.3'
-gem 'devise-mongo_mapper',
-  :git    =&gt; 'git://github.com/collectiveidea/devise-mongo_mapper'
+<pre><code>grep ".*a.*b.*c.*" /usr/share/dict/words
+</code></pre>
 
-group :test, :development do
-  [whatever testing gems you want in here]
-end</pre></div>
-</div>
-
-<p>You&#8217;ll notice the devise-mongo_mapper gem in there. That&#8217;s the secret sauce that lets us use mongo_mapper as the ORM for Devise. As I haven&#8217;t really played with the mongoid gem (and therefore don&#8217;t have any experience with it) I didn&#8217;t try to get mongoid to work.</p>
-<p>Go ahead and run a bundle install:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ bundle install</pre></div>
-</div>
-
-<p>Then run this to install devise files into the Rails app:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ rails generate devise:install</pre></div>
-</div>
-
-<p>There&#8217;s two initializer files we&#8217;ll need. We add the one for mongo, which I put in config/initializers/mongo.rb:</p>
-<div class="CodeRay">
-  <div class="code"><pre>MongoMapper.connection = Mongo::Connection.new('localhost', 27017)
-MongoMapper.database = &quot;awesome-app-#{Rails.env}&quot;
-
-if defined?(PhusionPassenger)
-   PhusionPassenger.on_event(:starting_worker_process) do |forked|
-     MongoMapper.connection.connect_to_master if forked
-   end
-end</pre></div>
-</div>
-
-<p>And one for devise, which you&#8217;ll find created for you in config/initializers/devise.rb. Change the ORM Configuration settings to this:</p>
-<div class="CodeRay">
-  <div class="code"><pre># ==&gt;; ORM configuration
-# Load and configure the ORM. Supports :active_record (default) and
-# :mongoid (bson_ext recommended) by default. Other ORMs may be
-# available as additional gems.
-  require 'devise/orm/mongo_mapper'</pre></div>
-</div>
-
-<p>Be sure to add this line to config/application.rb and edit in the appropriate address. This will keep Devise from complaining later:</p>
-<div class="CodeRay">
-  <div class="code"><pre>config.action_mailer.default_url_options = { :host =&gt; &quot;yourdomain.com&quot; }</pre></div>
-</div>
-
-<p>The last step is to create an User model and tell Devise and mongo_mapper to do their thing. Tell Devise to make a Users model and then install the Devise Views to our app so that we can modify them later, if we wish:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ rails generate devise users
-$ rails generate devise:views</pre></div>
-</div>
-
-<p>In app/models/user.rb:</p>
-<div class="CodeRay">
-  <div class="code"><pre>class User
-  include MongoMapper::Document         
-  plugin MongoMapper::Devise
-
-  devise :database_authenticatable, :confirmable, :lockable, 
-         :recoverable, :rememberable, :registerable, :trackable, 
-         :timeoutable, :validatable, :token_authenticatable
-
-  attr_accessible :email, :password, :password_confirmation
-   
-end</pre></div>
-</div>
-
-<p>You can, of course, choose which of those Devise options to enable for your user model. Refer to the <a href="http://rubydoc.info/github/plataformatec/devise/master/Devise/Models">devise documentation</a> for more information.</p>
-<p>In app/controllers/application_controller.rb:</p>
-<div class="CodeRay">
-  <div class="code"><pre>class ApplicationController &lt; ActionController::Base
-  protect_from_forgery
-  
-  filter_parameter_logging :password, :password_confirmation
-  
-  def after_sign_out_path_for(resource_or_scope)
-    new_user_session_path
-  end
-end</pre></div>
-</div>
-
-<p>In config/routes.rb add these lines:</p>
-<div class="CodeRay">
-  <div class="code"><pre>devise_for :users, :admin
-resource :user</pre></div>
-</div>
-
-<p>At this point, you should probably check your app by running a quick `rails server` and seeing it if spits out any errors to your terminal. If it&#8217;s all good, then you are probably thinking you&#8217;ll want to actually use this authentication system now. Let&#8217;s add a very basic &#8220;Home&#8221; controller:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ rails generate controller Home index token</pre></div>
-</div>
-
-<p>In app/controllers/home_controller.rb, add the following before_filter line to the beginning of the class so that it looks like this:</p>
-<div class="CodeRay">
-  <div class="code"><pre>class HomeController &lt; ApplicationController
-  before_filter :authenticate_user!, :only =&gt; :token
-  
-  def index
-  end
-
-  def token
-  end
-
-end</pre></div>
-</div>
-
-<p>In app/views/home/index.haml (I&#8217;m using HAML, but I&#8217;ve also included an ERb example after this:</p>
-<div class="CodeRay">
-  <div class="code"><pre>- if user_signed_in?
-  %ul
-    %li= current_user.email
-    %li= link_to 'My info', edit_user_path
-    %li= link_to 'Sign out', destroy_user_session_path
-- else
-  %ul
-    %li= link_to 'Sign in', new_user_session_path
-    %li= link_to 'Sign up', new_user_path</pre></div>
-</div>
-
-<div class="CodeRay">
-  <div class="code"><pre># ERb version of app/views/home/index.html.erb:
-&lt;% if user_signed_in? -%&gt;
-  &lt;ul&gt;
-    &lt;li&gt;&lt;%= current_user.email %&gt;&lt;/li&gt;
-    &lt;li&gt; link_to 'My info', edit_user_registration_path %&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;%= link_to 'Sign out', destroy_user_session_path %&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;% else -%&gt;
-  &lt;/code&gt;&lt;ul&gt;&lt;code&gt;
-    &lt;li&gt;&lt;%= link_to 'Sign in', new_user_session_path %&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;%= link_to 'Sign up', new_user_path %&gt;&lt;/li&gt;
-&lt;% end -%&gt;</pre></div>
-</div>
-
-<p>This will enable very basic login / logouts using the Devise views that we installed earlier. If you run rails server again, you&#8217;ll be able to create an account. But, if your system isn&#8217;t set up to send mail (like mine) then you may get an error, or simply won&#8217;t get a confirmation code, so you won&#8217;t be able to login with that user. Here&#8217;s a quick solution. Drop into the mongo shell:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ mongo
-MongoDB shell version: 1.6.4</pre></div>
-</div>
-
-<p>Use your database, which you set above in config/initializers/mongo.rb. In this case, it&#8217;s awesome-app-development:</p>
-<div class="CodeRay">
-  <div class="code"><pre>&gt; use awesome-app-development
-switched to db awesome-app-development</pre></div>
-</div>
-
-<p>Find all the entries in the Users document:</p>
-<div class="CodeRay">
-  <div class="code"><pre>&gt; db.users.find();
-{ &quot;_id&quot; : ObjectId(&quot;4d216ae217cacc289c000005&quot;), &quot;email&quot; : &quot;matt.gauger@gmail.com&quot;, &quot;encrypted_password&quot; : &quot;$2aasdf&quot;, &quot;password_salt&quot; : &quot;$2aasdf&quot;, &quot;authentication_token&quot; : null, &quot;remember_token&quot; : null, &quot;remember_created_at&quot; : null, &quot;reset_password_token&quot; : null, &quot;confirmation_token&quot; : &quot;YsFg8CFBwNIm5kof7xC9&quot;, &quot;confirmed_at&quot; : null, &quot;confirmation_sent_at&quot; : &quot;Mon Jan 03 2011 00:21:22 GMT-0600 (CST)&quot;, &quot;failed_attempts&quot; : 0, &quot;unlock_token&quot; : null, &quot;locked_at&quot; : null, &quot;sign_in_count&quot; : 0, &quot;current_sign_in_at&quot; : null, &quot;last_sign_in_at&quot; : null, &quot;current_sign_in_ip&quot; : null, &quot;last_sign_in_ip&quot; : null }</pre></div>
-</div>
-
-<p>The bit we need is the confirmation_token: &#8220;YsFg8CFBwNIm5kof7xC9&#8221;. Copy the token and go to the following in your browser:</p>
-<div class="CodeRay">
-  <div class="code"><pre>http://localhost:3000/users/confirmation?confirmation_token=YsFg8CFBwNIm5kof7xC9</pre></div>
-</div>
-
-<p>Remember to replace your token with the one in that URL. You could alternatively make it so your app can send mail, or just turn off :confirmable in your Users model. This was a quick little solution that I found and wanted to share.</p>
-<p>&nbsp;</p>
-<p>Hopefully this gets you going with Mongo and Devise quickly and without any snags.&nbsp;There&#8217;s a lot more to Devise, so I&#8217;d recommend you start looking at some of the <a href="https://github.com/plataformatec/devise/wiki/Example-Applications">Example applications</a>&nbsp;and the <a href="https://github.com/plataformatec/devise/wiki">documentation</a>.</p>
+<p>where the pattern is the letters you want with anything in-between.</p>
 
         
         
@@ -411,7 +173,7 @@ switched to db awesome-app-development</pre></div>
 
 
 
-<time datetime="2011-01-03T00:00:00-06:00" pubdate  data-updated="true" >Jan 3<span>rd</span>, 2011</time>.</div>
+<time datetime="2012-12-25T11:32:00-06:00" pubdate  data-updated="true" >Dec 25<span>th</span>, 2012</time>.</div>
         <div class="tags">
 
 </div>
@@ -422,18 +184,33 @@ switched to db awesome-app-development</pre></div>
 
   <article class="post">
     
-    <h1 class="title"><a href="/blog/2010/12/31/what-s-new-and-great-in-rails-3-milwaukee-ruby-users-group-december-2010/">What&#8217;s New and Great in Rails 3 - Milwaukee Ruby Users Group - December 2010</a></h1>
+    <h1 class="title"><a href="/blog/2012/07/13/run-rake-just-run-rake/">Run Rake. Just Run Rake.</a></h1>
     <div class="entry">
-        <p>While I was going to write a whole blog post (essentially what I said during the talk) I think these slides stand on their own pretty well.</p>
-<div style="">
-<object height="355" width="425">
-<param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=rails3slides2-101230222626-phpapp01&amp;stripped_title=whats-new-and-great-in-rails-3-matt-gauger-milwaukee-ruby-users-group-december-2010&amp;userName=mathiasx" />
-<param name="allowFullScreen" value="true" />
-<param name="allowScriptAccess" value="always" /><embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=rails3slides2-101230222626-phpapp01&amp;stripped_title=whats-new-and-great-in-rails-3-matt-gauger-milwaukee-ruby-users-group-december-2010&amp;userName=mathiasx" type="application/x-shockwave-flash" height="355" width="425"></embed>
-</object>
-<div style="padding: 5px 0 12px;">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/mathiasx">mathiasx</a>.</div>
-</div>
+        <p>Recently, I was setting up my laptop for an existing Rails project with the help of a pair. My pair was pivot on this project, which means that he&#8217;d been on it longer and so was bringing his experience and knowledge to the table, while I was seeing the project with fresh eyes.</p>
 
+<p>&#8220;This is going to take forever to set up,&#8221; he grumbled. &#8220;The documentation&#8217;s out of date, and I remember there&#8217;s a bunch of gotchas to setting this project up. We&#8217;ll need to compile this, then do that, then you get an API key for..&#8221;</p>
+
+<p>I went to Github and cloned the repo to my laptop.</p>
+
+<p>&#8220;Just run rake,&#8221; I replied.</p>
+
+<p>&#8220;What?&#8221;</p>
+
+<p>&#8220;Just run rake. It will tell us what to do next.&#8221;</p>
+
+<p>And indeed, it did tell us what to do. I&#8217;ve called this test-based configuration, or other funny things in the past, but you can just think of it as trying to get to a known good state - a state where all the tests run. If it prevents the tests from running, then it&#8217;s the next thing you need.</p>
+
+<p>I had to silence my pair&#8217;s grumbling at this process, because at first it seems like you&#8217;re going to be waiting a lot for rake, and that it might be easier just to remember all the steps necessary to set up a project.</p>
+
+<p>It turns out rake showed us all the steps we needed to do to get the project running. A full log of what this looks like setting up a simple Rails app can be seen <a href="https://gist.github.com/3112558">in this gist</a>.</p>
+
+<h3>Why?</h3>
+
+<p>The point of software craftsmanship is to be pragmatic, not to seek perfection. I could have memorized the steps necessary to set up the average Rails project, but those steps wouldn&#8217;t have applied here. And indeed, my pair could have memorized them, since he had been on the project. But those steps would go out the window as soon as my pair was on another project. It is far more pragmatic to know the behavior of our tools (like knowing that rake will tell us about each thing necessary to get to a state where the tests pass) and rely on that behavior rather than to seek perfection on this one project.</p>
+
+<p>Note: we could have used our experience with Rails and software craftsmen to avoid some of the steps you see me running in the gist: for example, you probably know that if the databases aren&#8217;t created, that you can run <code>rake db:create:all db:migrate db:test:prepare</code> all at once, without running rake inbetween every single rake task. That&#8217;d be far more pragmatic, as you&#8217;re saving yourself time and effort by knowing the toolset. But I wanted to demonstrate that running rake between every single step told us what to do next.</p>
+
+<p>Now, ask yourself: How can you &#8220;just run rake&#8221; with your projects?</p>
 
         
         
@@ -458,7 +235,7 @@ switched to db awesome-app-development</pre></div>
 
 
 
-<time datetime="2010-12-31T00:00:00-06:00" pubdate  data-updated="true" >Dec 31<span>st</span>, 2010</time>.</div>
+<time datetime="2012-07-13T14:59:00-05:00" pubdate  data-updated="true" >Jul 13<span>th</span>, 2012</time>.</div>
         <div class="tags">
 
 </div>
@@ -469,63 +246,116 @@ switched to db awesome-app-development</pre></div>
 
   <article class="post">
     
-    <h1 class="title"><a href="/blog/2010/12/26/techniques-for-learning-a-new-skill/">Techniques for Learning a New Skill</a></h1>
+    <h1 class="title"><a href="/blog/2012/04/21/mosh-ssh-tunnels-tmux/">Mosh, SSH Tunnels, and Tmux</a></h1>
     <div class="entry">
-        <p>I just found these notes in an old notebook and figured they deserved a blog post . This isn&#8217;t self-help type stuff, it&#8217;s just practical. I&#8217;m blogging this so that some day I find it when reading my old blog posts, just as I found the list in an old notebook.</p>
-<p>Techniques helpful in learning any skill:</p>
+        <p>I&#8217;m currently preparing for RailsConf. One of the things I wanted to do before I left was figure out a way to monitor a process on a Linux server running on my LAN. The process frequently crashes and needs some prodding to restart.</p>
+
+<p>One solution might be to set up DynDNS and configure the router to point from some random port to the SSH port on the Linux machine running on the LAN. That idea didn&#8217;t strike my fancy, as it just isn&#8217;t terribly secure to open up a port to the entire world, and it seems that DynDNS costs money to use since 2008. I&#8217;m sure there are free alternatives, but I couldn&#8217;t be bothered to find them, much less configure them.</p>
+
+<p>A much better solution would be an SSH tunnel up to my Linode, and a reverse tunnel back down to the Linux server on my LAN. If you haven&#8217;t used reverse SSH tunneling before, it is really neat. Here&#8217;s an example:</p>
+
+<p>From the local server:</p>
+
+<pre><code>ssh -R 2048:localhost:22 username@example.com
+</code></pre>
+
+<p>From the server out in the Internet (aka example.com in this example)</p>
+
+<pre><code>ssh -p 2048 other_username@localhost
+</code></pre>
+
+<p>Note that the &#8216;localhost&#8217; in the second example refers to your local server, not the one out in the internet. So <code>other_username</code> should be the username on your local server (not the remote server.) Confused yet? Good.</p>
+
+<p>Now, this setup will get you pretty far: You&#8217;re now able to run commands on the local server from the Linode out in the cloud. But you may notice a problem fairly quickly: if you kill that SSH shell on the local server, the connection up to the server on the internet dies, and so does the reverse tunnel that was inside that.</p>
+
+<p>Fix that by starting up a tmux session on the local server first, then detaching it.</p>
+
+<pre><code>tmux new -s ssh-tunnel
+ssh -R 2048:localhost:22 username@example.com
+&lt;leader-d&gt;
+</code></pre>
+
+<p>Now the tmux session will happily keep that SSH shell open on the local server and you can reverse tunnel back over it.</p>
+
+<p>My solution involves <a href="http://mosh.mit.edu">Mosh</a>, which I&#8217;ve been using quite a bit since it exploded on Hacker News and other news sites. Simply put, Mosh is like SSH, but it uses UDP packets to make itself more reliable. &#8220;More reliable without TCP?&#8221; you say? Well, Mosh is doing a little more work to buffer the connection to the other machine (including instant response to typing when there&#8217;d otherwise be lag) and maintains that connection: even if you change IPs, hop on a train, etc. It&#8217;s pretty amazing, and so far I&#8217;ve been loving it. Click through to the Mosh site to read up more on it. It really is awesome.</p>
+
+<p>With Mosh, we add another layer to the puzzle, so that my final setup looked like this:</p>
+
+<pre><code>matts_laptop$ mosh matt@someserver.local
+matt@someserver.local$ tmux new -s ssh-tunnel
+&lt;tmux session starts&gt;
+matt@someserver.local$ ssh -R 2048:localhost:22 username@example.com
+&lt;leader-d&gt;
+</code></pre>
+
+<p>Pop open another window in my local tmux session (are you beginning to see a pattern?) and then connect with mosh up to my Linode:</p>
+
+<pre><code>matts_laptop$ mosh me@mattgauger.com
+me@mattgauger.com$ tmux new -s server-monitor
+&lt;tmux session starts&gt;
+me@mattgauger.com$ ssh -p 2048 matt@localhost # Note: this is the matt@someserver.local account!
+matt@someserver.local$ &lt;monitor the process I'm concerned with&gt;
+</code></pre>
+
+<p>Now I&#8217;ve got this mostly-persistent (thanks to mosh and tmux) session that I can detach from if I really need to, but I&#8217;ll still be able to connect back up to my Linode and check on the server on my LAN from RailsConf.</p>
+
+<p>Pretty cool, huh?</p>
+
+        
+        
+    </div>
+
+    <div class="meta">
+        <div class="author">
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
+</div>
+        <div class="date">
+
+
+
+
+
+
+
+
+
+
+
+
+<time datetime="2012-04-21T21:14:00-05:00" pubdate  data-updated="true" >Apr 21<span>st</span>, 2012</time>.</div>
+        <div class="tags">
+
+</div>
+    </div>
+
+  </article>
+
+
+  <article class="post">
+    
+    <h1 class="title"><a href="/blog/2012/04/13/announcing-a-new-virtual-book-club-the-diamond-age/">Announcing a Virtual Book Club: The Diamond Age</a></h1>
+    <div class="entry">
+        <p><img src="/images/The_Diamond_Age.jpg" alt="The Diamond Age book cover" /></p>
+
+<p>Recently I decided that it&#8217;s time to re-read The Diamond Age by Neal Stephenson. But, without external motivators, the list of books that I&#8217;d like to read grows and grows, and reading books actual takes me a lot longer than it should. (Because, well, the internet is so damn interesting, and I haven&#8217;t finished reading that.)</p>
+
+<p>So I&#8217;m trying an experiment. I am proposing to hold a book club, online, so that I will read The Diamond Age again. My current plan is to use Google Plus Hangouts and hold weekly online meetings to discuss progress in the book. I&#8217;ve never really run a book club on my own before, so we&#8217;ll see where this goes.</p>
+
+<p>If you&#8217;re interested, please indicate that interest by signing up below. I&#8217;ll use the sign ups to plan and gauge when to start.</p>
+
+<h3><a href="https://docs.google.com/spreadsheet/viewform?formkey=dFBBNUJZcUZuX1Q3Uk5VbGRVRVNsQ3c6MQ#gid=0">Sign up form</a></h3>
+
+<p></p>
+
+
+<p>Get The Diamond Age: (non-affiliate links)</p>
+
 <ul>
-<li>Know your starting point (measure it, somehow) =&gt; &#8220;You can&#8217;t manage what you can&#8217;t measure.&#8221;</li>
-<li>Set objectives.</li>
-<li>Have techniques for improvement available.</li>
-<li>Assess your progress after a reasonable period.</li>
-<li>Have strategies for continuing improvement and maintaining the skill.</li>
+<li><a href="http://www.amazon.com/The-Diamond-Age-Illustrated-Spectra/dp/0553380966/">Paperback</a></li>
+<li><a href="http://www.amazon.com/Diamond-Bantam-Spectra-Book-ebook/dp/B000FBJCKI/">Kindle Edition</a></li>
 </ul>
-<p>I&#8217;d add in there to have a good way to record your progress. Something like <a href="http://www.daytum.com/">Daytum</a> will probably work if you want a web-based tool. Excel spreadsheets and notebooks work great, too.</p>
-
-        
-        
-    </div>
-
-    <div class="meta">
-        <div class="author">
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
-</div>
-        <div class="date">
-
-
-
-
-
-
-
-
-
-
-
-
-<time datetime="2010-12-26T00:00:00-06:00" pubdate  data-updated="true" >Dec 26<span>th</span>, 2010</time>.</div>
-        <div class="tags">
-
-</div>
-    </div>
-
-  </article>
-
-
-  <article class="post">
-    
-    <h1 class="title"><a href="/blog/2010/12/14/presentation-lamp-vs-the-world/">Presentation: LAMP vs. The World</a></h1>
-    <div class="entry">
-        <strong style="display: block; margin: 12px 0 4px;"><a href="http://www.slideshare.net/mathiasx/matt-gauger-lamp-vs-the-world-mke-php-users-group-december-14-2010" title="Matt Gauger - Lamp vs. the world - MKE PHP Users Group - December 14, 2010 ">Matt Gauger - Lamp vs. the world - MKE PHP Users Group - December 14, 2010 </a></strong> 
-<object height="355" width="425">
-<param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=lampvs-theworld-101214192052-phpapp01&amp;stripped_title=matt-gauger-lamp-vs-the-world-mke-php-users-group-december-14-2010&amp;userName=mathiasx" />
-<param name="allowFullScreen" value="true" />
-<param name="allowScriptAccess" value="always" /><embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=lampvs-theworld-101214192052-phpapp01&amp;stripped_title=matt-gauger-lamp-vs-the-world-mke-php-users-group-december-14-2010&amp;userName=mathiasx" type="application/x-shockwave-flash" height="355" width="425"></embed>
-</object>
-<div style="padding: 5px 0 12px;">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/mathiasx">mathiasx</a>.</div>
-
 
 
         
@@ -551,7 +381,7 @@ switched to db awesome-app-development</pre></div>
 
 
 
-<time datetime="2010-12-14T00:00:00-06:00" pubdate  data-updated="true" >Dec 14<span>th</span>, 2010</time>.</div>
+<time datetime="2012-04-13T15:29:00-05:00" pubdate  data-updated="true" >Apr 13<span>th</span>, 2012</time>.</div>
         <div class="tags">
 
 </div>
