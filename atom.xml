@@ -4,7 +4,7 @@
   <title><![CDATA[blog.mattgauger.com]]></title>
   <link href="http://blog.mattgauger.com/atom.xml" rel="self"/>
   <link href="http://blog.mattgauger.com/"/>
-  <updated>2014-04-13T17:32:24-05:00</updated>
+  <updated>2014-07-27T11:42:12-05:00</updated>
   <id>http://blog.mattgauger.com/</id>
   <author>
     <name><![CDATA[Matt Gauger]]></name>
@@ -1056,6 +1056,97 @@ Note: It could be that I messed up these numbers a bit; I went off the current t
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[Minsky's Circle Algorithm in Shoes.rb / Hackety Hack]]></title>
+    <link href="http://blog.mattgauger.com/blog/2013/07/27/minskys-circle-algorithm-in-shoes-dot-rb-slash-hackety-hack/"/>
+    <updated>2013-07-27T11:32:00-05:00</updated>
+    <id>http://blog.mattgauger.com/blog/2013/07/27/minskys-circle-algorithm-in-shoes-dot-rb-slash-hackety-hack</id>
+    <content type="html"><![CDATA[<hr />
+
+<p><em>(This post is part of my blog archiving project. This post appeared on <a href="https://coderwall.com/p/fukypa">Coderwall</a> on July 27, 2013.)</em></p>
+
+<hr />
+
+<p>I wanted to try to implement Minsky&#8217;s Circle Algorithm from the famous <a href="http://en.wikipedia.org/wiki/HAKMEM">HAKMEM</a>. As noted in lots of other places online (<a href="http://brainwagon.org/2010/08/09/drawing-circles-ala-marvin-minsky/">1</a>, <a href="https://news.ycombinator.com/item?id=3111501">2</a>, <a href="http://cabezal.com/misc/minsky-circles.html">3</a>), the algorithm doesn&#8217;t plot a true circle, but rather a very round ellipse. Here&#8217;s the text from the HAKMEM entry:</p>
+
+<blockquote><p>ITEM 149 (Minsky): CIRCLE ALGORITHM Here is an elegant way to draw almost circles on a point-plotting display:</p>
+
+<blockquote><p>&nbsp;&nbsp;&nbsp;NEW X = OLD X - epsilon * OLD Y</p>
+
+<p>&nbsp;&nbsp;&nbsp;NEW Y = OLD Y + epsilon * NEW(!) X</p></blockquote>
+
+<p>This makes a very round ellipse centered at the origin with its size determined by the initial point. epsilon determines the angular velocity of the circulating point, and slightly affects the eccentricity. If epsilon is a power of 2, then we don&#8217;t even need multiplication, let alone square roots, sines, and cosines! The &#8220;circle&#8221; will be perfectly stable because the points soon become periodic.</p>
+
+<p>The circle algorithm was invented by mistake when I tried to save one register in a display hack! Ben Gurley had an amazing display hack using only about six or seven instructions, and it was a great wonder. But it was basically line-oriented. It occurred to me that it would be exciting to have curves, and I was trying to get a curve display hack with minimal instructions.</p></blockquote>
+
+<p>The benefit of using this algorithm, at the time, was that it doesn&#8217;t use cosine/sine or any other complicated functions, and so could be implemented on the rather-limited computers of that time to draw circles fast. (I believe it was used to draw the orbits of ships on the early game <a href="http://en.wikipedia.org/wiki/Spacewar_(video_game">SpaceWar</a>, but I don&#8217;t know that for sure.)</p>
+
+<p>To implement it myself, I needed to be able to plot points on a display. So I turned to Hackety-Hack, which comes with Shoes for drawing graphics. The Shoes DSL for drawing shapes is rather simple, which means we can take the pseudocode above and turn it into a working demo rather easily:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Shoes</span><span class="o">.</span><span class="n">app</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">epsilon</span> <span class="o">=</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">16</span>
+</span><span class='line'>  <span class="n">offset</span> <span class="o">=</span> <span class="mi">250</span>
+</span><span class='line'>  <span class="n">x</span> <span class="o">=</span> <span class="mi">20</span>
+</span><span class='line'>  <span class="n">y</span> <span class="o">=</span> <span class="mi">20</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">fill</span> <span class="n">red</span>
+</span><span class='line'>  <span class="n">shape</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">move_to</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">offset</span><span class="p">,</span><span class="n">y</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="mi">100</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">epsilon</span> <span class="o">*</span> <span class="n">y</span>
+</span><span class='line'>      <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">epsilon</span> <span class="o">*</span> <span class="n">x</span>
+</span><span class='line'>      <span class="n">line_to</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">offset</span><span class="p">,</span><span class="n">y</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">fill</span> <span class="n">blue</span>
+</span><span class='line'>  <span class="n">oval</span><span class="p">({</span><span class="ss">top</span><span class="p">:</span> <span class="mi">250</span><span class="p">,</span> <span class="ss">left</span><span class="p">:</span> <span class="mi">320</span><span class="p">,</span> <span class="ss">radius</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="ss">center</span><span class="p">:</span> <span class="kp">true</span><span class="p">})</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Epsilon is 1/16, as indicated by some quick googling &#8211; basically a small power of two. I have to use the offset to get the center of the circle closer to the center of the Shoes window &#8211; without the offset, the circle will only be a quarter-circle in the upper left corner.</p>
+
+<h2>How does this compare to plotting a real circle?</h2>
+
+<p>If we want to compare the roundness of our &#8220;circle&#8221; to a real circle drawn by Shoes, we can add this line in before the closing <code>end</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">fill</span> <span class="n">blue</span>
+</span><span class='line'>  <span class="n">oval</span><span class="p">({</span><span class="ss">top</span><span class="p">:</span> <span class="mi">250</span><span class="p">,</span> <span class="ss">left</span><span class="p">:</span> <span class="mi">320</span><span class="p">,</span> <span class="ss">radius</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="ss">center</span><span class="p">:</span> <span class="kp">true</span><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Although their radiuses are going to be slightly different.</p>
+
+<p>Here&#8217;s what we end up with. Minsky&#8217;s Circle Algorithm on the left in red, a real circle on the right in blue:</p>
+
+<p><img src="http://www.mattgauger.com/img//Shoes-20130727-151954.jpg" alt="Hackety Hack" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[By augmenting human intellect, we mean]]></title>
     <link href="http://blog.mattgauger.com/blog/2013/03/17/by-augmenting-human-intellect/"/>
     <updated>2013-03-17T22:44:00-05:00</updated>
@@ -1700,122 +1791,6 @@ You&rsquo;ve got a working test around this bug.
 <li><span class="s2"><a href="http://pragprog.com/book/tbcoffee/coffeescript">http://pragprog.com/book/tbcoffee/coffeescript</a></span></li>
 <li><a href="http://js2coffee.org"><span class="s2">http://js2coffee.org</span></a>/</li>
 </ul>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Invalid gemspec in [.rvm/gems/ruby-1.9.2-p180@gemset/specifications/actionmailer-3.2.0.gemspec]: Illformed requirement ["# 3.2.0"] ]]></title>
-    <link href="http://blog.mattgauger.com/blog/2012/01/21/invalid-gemspec-in-rvm-gems-ruby-1-9-2-p180-gemset-specifications-actionmailer-3-2-0-gemspec-illformed-requirement-3-2-0-/"/>
-    <updated>2012-01-21T00:00:00-06:00</updated>
-    <id>http://blog.mattgauger.com/blog/2012/01/21/invalid-gemspec-in-rvm-gems-ruby-1-9-2-p180-gemset-specifications-actionmailer-3-2-0-gemspec-illformed-requirement-3-2-0-</id>
-    <content type="html"><![CDATA[<p>Recently while trying to create a new Rails 3.2 project, I ran into this error after creating a new RVM gemset in Ruby 1.9.2-p180 and a Gemfile requiring only Rails 3.2.0:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ bundle
-Fetching source index for http://rubygems.org/
-Installing rake (0.9.2.2) 
-Installing i18n (0.6.0) 
-Installing multi_json (1.0.4) 
-Installing activesupport (3.2.0) 
-Installing builder (3.0.0) 
-Installing activemodel (3.2.0)
-Invalid gemspec in [/Users/mathiasx/Developer/.rvm/gems/ruby-1.9.2-p180@big_fan/specifications/activemodel-3.2.0.gemspec]: Illformed requirement [&quot;# 3.2.0&quot;]
-... These Illformed requirement errors continue for every package Rails wants ...</pre></div>
-</div>
-
-<p>I thought that I might be able to continue on and ignore these errors, but I hadn&#8217;t seen anything like them anymore.</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ rails new .
-Invalid gemspec in [/Users/mathiasx/Developer/.rvm/gems/ruby-1.9.2-p180@big_fan/specifications/actionmailer-3.2.0.gemspec]: Illformed requirement [&quot;# 3.2.0&quot;]
-... again, it throws this error many times ...</pre></div>
-</div>
-
-<p>That didn&#8217;t generate a new Rails project in my current directory, so something was clearly wrong. But what does <strong>Illformed request: Syck:DefaultKey</strong> mean? Well, it turns out that the gemspecs of requirements in Rails 3.2.0 are using a new format that older Rubygems can&#8217;t parse. The first indicator was that my version of Rubygems was out of date:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ gem -v
-Invalid gemspec in [/Users/mathiasx/Developer/.rvm/gems/ruby-1.9.2-p180@big_fan/specifications/actionmailer-3.2.0.gemspec]: Illformed requirement [&quot;# 3.2.0&quot;]
-... I've cut out a bunch of the output from the invalid gemspecs here ...
-1.8.8</pre></div>
-</div>
-
-<p>We&#8217;d like to be on Rubygems 1.8.13 or newer, but I also don&#8217;t want to see those invalid gemspec warnings anymore, so I clear out my gemset with:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ rvm gemset empty
-WARN: Are you SURE you wish to remove the installed gemset for gemset 'ruby-1.9.2-p180@big_fan' (/Users/mathiasx/Developer/.rvm/gems/ruby-1.9.2-p180@big_fan)?
-(anything other than 'yes' will cancel) &gt; yes
-$ cd ..
-$ cd project/
-Using /Users/mathiasx/Developer/.rvm/gems/ruby-1.9.2-p180 with gemset big_fan</pre></div>
-</div>
-
-<p>Note that I have my rvmrc file like this so that it created and trusted the gemset upon encountering it:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ cat .rvmrc
-rvm use 1.9.2@big_fan --create</pre></div>
-</div>
-
-<h2>Getting everything working again:</h2>
-<p>Upgrade your Rubygems (this will only apply to this version of Ruby in RVM, not all versions of Ruby)</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ gem update --system
-== 1.8.15 / 2012-01-06
-
-* 1 bug fix:
-
-  * Don't eager load yaml, it creates a bad loop. Fixes #256
-
-
-------------------------------------------------------------------------------
-
-RubyGems installed the following executables:
-        /Users/mathiasx/Developer/.rvm/rubies/ruby-1.9.2-p180/bin/gem
-
-RubyGems system software updated</pre></div>
-</div>
-
-<p>Then just to be safe, make sure the gems we have are pristine (According to the manpage, gem pristine: &#8220;Restores installed gems to pristine condition from files located in the gem cache.&#8221;)</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ gem pristine --all</pre></div>
-</div>
-
-<p>And it is safe to now bundle:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ bundle
-Fetching source index for http://rubygems.org/
-Installing rake (0.9.2.2) 
-Installing i18n (0.6.0) 
-Installing multi_json (1.0.4) 
-Installing activesupport (3.2.0) 
-Installing builder (3.0.0) 
-Installing activemodel (3.2.0) 
-Installing erubis (2.7.0) 
-Installing journey (1.0.0) 
-Installing rack (1.4.0) 
-Installing rack-cache (1.1) 
-Installing rack-test (0.6.1) 
-Installing hike (1.2.1) 
-Installing tilt (1.3.3) 
-Installing sprockets (2.1.2) 
-Installing actionpack (3.2.0) 
-Installing mime-types (1.17.2) 
-Installing polyglot (0.3.3) 
-Installing treetop (1.4.10) 
-Installing mail (2.4.1) 
-Installing actionmailer (3.2.0) 
-Installing arel (3.0.0) 
-Installing tzinfo (0.3.31) 
-Installing activerecord (3.2.0) 
-Installing activeresource (3.2.0) 
-Using bundler (1.0.18) 
-Installing json (1.6.5) with native extensions 
-Installing rack-ssl (1.3.2) 
-Installing rdoc (3.12) 
-Installing thor (0.14.6) 
-Installing railties (3.2.0) 
-Installing rails (3.2.0) 
-Your bundle is complete! Use `bundle show [gemname]` to see where a bundled gem is installed.</pre></div>
-</div>
-
-<p>Now we should have a happy gemset and the error will be gone. Let me know if you have any questions. Happy hacking!</p>
 ]]></content>
   </entry>
   
