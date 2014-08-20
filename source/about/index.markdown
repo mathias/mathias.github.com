@@ -28,7 +28,7 @@ This was once the stuff of scifi, but so was a supercomputer in everyone's pocke
 * [gnar](https://github.com/mathias/gnar): A small Hacker News-like social link sharing site on [Hoplon](http://hoplon.io), ClojureScript, Castra, Clojure, and [HoneySQL](https://github.com/jkk/honeysql). Built in around 8 hours to nearly feature-complete status thanks to the power of Hoplon!
 * [hearst](https://github.com/mathias/hearst): Currently a URL normalizer library for some of my other Clojure projects; my goal is to make this a NLP tool like Python's [newspaper](https://github.com/codelucas/newspaper) for ingesting articles into [remembrance](https://github.com/mathias/remembrance).
 * [falcor](https://github.com/mathias/falcor): Metaprogrammed factory-factory in Ruby. Mostly useful as a quick way to create fixtured JSON services.
-* [loudspkr](https://github.com/mathias/loudspkr): A dashboard for Bendyworks written on top of Dashing. Currently rewriting the entire frontend to be a responsive, beautiful system that doesn't look anything like Windows Metro.
+* [loudspkr](https://github.com/mathias/loudspkr): A dashboard for Bendyworks written on top of [Dashing](https://github.com/Shopify/dashing). Currently rewriting the entire frontend to be a responsive, beautiful system that doesn't look anything like Windows Metro.
 * [hum](https://github.com/mathias/hum): A Web Audio API wrapper for ClojureScript.
 * [ecstatic](https://github.com/mathias/ecstatic): a static site generator with modern Ruby tooling. Finally released!
 * [mathias/dotfiles](https://github.com/mathias/dotfiles): My dotfiles collection. Reasonable defaults that I prefer.
