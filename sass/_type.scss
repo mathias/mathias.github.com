@@ -37,21 +37,21 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 h1 {
-  font-size: 30px;
-  line-height: $baseLineHeight * 2;
+  font-size: 32px;
+  line-height: $baseLineHeight * 1.4;
   small {
     font-size: 18px;
   }
 }
 h2 {
   font-size: 24px;
-  line-height: $baseLineHeight * 2;
+  line-height: $baseLineHeight * 1.4;
   small {
     font-size: 18px;
   }
 }
 h3 {
-  line-height: $baseLineHeight * 1.5;
+  line-height: $baseLineHeight * 1.4;
   font-size: 18px;
   small {
     font-size: 14px;
