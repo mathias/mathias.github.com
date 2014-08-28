@@ -38,7 +38,7 @@ Since the Atreus uses a Teensy as its brain, it can be reconfigured easily by up
 
 I haven't worked on my chording keyboard in a long time.  I'm happy to see that things like the [tmk firmware](https://github.com/tmk/tmk_keyboard) will now make that project much easier. With my new knowledge and the many open source projects now available, I'm going to restart work on [that project](/blog/2013/08/03/building-a-chording-keyboard-lessons-learned-and-progress-so-far/).
 
-Further, I've been playing with Matt Adereth's [dactyl](https://github.com/adereth/dactyl) to design chording keyboard layouts to be 3D printed. Dactyl allows me to write Clojure code and output it in a format that OpenSCAD can generate a 3D model with.
+Further, I've been playing with Matt Adereth's [dactyl](https://github.com/adereth/dactyl) to design chording keyboard layouts. Dactyl allows me to write Clojure code and output it in a format that OpenSCAD can generate a 3D model with. OpenSCAD can export the files to the formats that 3D printers use. 3D printing has a lot of promise for iteratively prototyping unique ergonomic peripherals, and I intend to try out several ideas for one-hand / chording keyboards.
 
 If you're interested in building your own keyboard, I would recommend the Ergo Dox. Especially if you can get the kit that Massdrop produced, because the circuit boards are well-made. Otherwise, spend some time on the Geekhack & Deskthority forums, read some wiki pages, and test some keyboards. And if you're interested in building the Atreus, join the [discussion](http://geekhack.org/index.php?topic=54759.0)! Everyone in that thread has been very helpful.  This project wouldn't have been possible without their answers and advice.
 
