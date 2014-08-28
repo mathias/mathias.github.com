@@ -6,9 +6,7 @@ date: 2012-03-16 21:06
 
 I'm a software developer at [Bendyworks](http://bendyworks.com) located in Madison, WI.
 
-I consider myself pretty good at (and get paid to do): Clojure, ClojureScript, Ruby, Rails, JavaScript, vim, emacs, and git.
-
-I am learning: (more) Clojure & ClojureScript, (more) emacs, [machine learning](https://www.coursera.org/course/ml), Apache Storm, Datomic, [Android: Netrunner](http://www.fantasyflightgames.com/edge_minisite.asp?eidm=207), guitar, and ukulele.
+I have way too many interests. I am interested in functional programming, intelligent agents, and ubiquitous + wearable computing. On the practical side, I prefer to use Clojure & ClojureScript. I've spent a lot of time working with Ruby, JavaScript, and the standard assortment of developer tools: vim, emacs, git, and just about everything else.
 
 A list of the open source I've built or contributed to is on my [Open Source](/open-source) page. All of my work can be found at [github.com/mathias](https://github.com/mathias).
 
@@ -16,12 +14,6 @@ Slides from my presentations are on the [Presentations](/presentations) page.
 
 You can see what books I'm reading over at [my Goodreads](
 https://www.goodreads.com/mathiasx). I'm currently working towards a goal of reading at least 60 books in 2014.
-
-My interests intersect the worlds of how we learn and how we can use technology to better ourselves as strange cyborgs of the future. The field of intelligence augmentation is just beginning, and I intend to be a part of it. Ways in which these interests manifest include: How we can train better developers through the concept of apprenticeship, how we can build tools that help us to learn and remember (intelligence augmentation apps), how we begin to integrate that software with us in everyday life through wearable computing, and how those intelligence augmentation apps can use machine learning and artificial intelligence to become extensions of us.
-
-This was once the stuff of scifi, but so was a supercomputer in everyone's pocket, once. I studied cyberpunk literature academically, so I know that if we don't build our own future, some corporation will do it for us, and we probably won't like what they come up with.
-
-<p></p>
 
 
 ### Blog comments
