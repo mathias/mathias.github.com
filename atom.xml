@@ -4,7 +4,7 @@
   <title><![CDATA[blog.mattgauger.com]]></title>
   <link href="http://blog.mattgauger.com/atom.xml" rel="self"/>
   <link href="http://blog.mattgauger.com/"/>
-  <updated>2014-08-27T20:23:42-05:00</updated>
+  <updated>2014-08-27T20:25:17-05:00</updated>
   <id>http://blog.mattgauger.com/</id>
   <author>
     <name><![CDATA[Matt Gauger]]></name>
@@ -38,7 +38,7 @@
 
 <p><a href="https://www.flickr.com/photos/mattgauger/14785346149" title="IMG_3156 by Matt Gauger, on Flickr"><img src="https://farm6.staticflickr.com/5565/14785346149_ece2db51a3_z.jpg" width="640" height="480" alt="IMG_3156"></a></p>
 
-<p>I finished the birch ply with semi-gloss marine polyurethane. The polyurethane should give it a durable finish, and added a nice amber tint to the wood. The downside is that more than a week after the finish coat went on, the poly is still out gassing some headache-inducing fumes.</p>
+<p>I finished the birch ply with semi-gloss marine polyurethane. The polyurethane should give it a durable finish, and added a nice amber tint to the wood. The downside is that more than a week after the final coat went on, the poly is still out gassing some headache-inducing fumes.</p>
 
 <p>After applying the finish, I hot-glued the switches in and soldered it together. There&#8217;s no PCB with this design, just point-to-point with wires and components to a central Teensy. I used <a href="http://deskthority.net/wiki/Cherry_MX_Clear">Cherry MX Clear</a> switches for the majority of the keys because they seem the closest to my Happy Hacking&#8217;s Topre switches to me. The modifiers are <a href="http://deskthority.net/wiki/Cherry_MX_Black">Cherry MX Blacks</a>.</p>
 
