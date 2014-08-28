@@ -8,7 +8,7 @@ I'm a software developer at [Bendyworks](http://bendyworks.com) located in Madis
 
 I have way too many interests. I am interested in functional programming, intelligent agents, and ubiquitous + wearable computing. On the practical side, I prefer to use Clojure & ClojureScript. I've spent a lot of time working with Ruby, JavaScript, and the standard assortment of developer tools: vim, emacs, git, and just about everything else.
 
-A list of the open source I've built or contributed to is on my [Open Source](/open-source) page. All of my work can be found at [github.com/mathias](https://github.com/mathias).
+A list of the open source I've built or contributed to is on my [Open Source](/open-source) page. My work can be found at [github.com/mathias](https://github.com/mathias).
 
 Slides from my presentations are on the [Presentations](/presentations) page.
 
