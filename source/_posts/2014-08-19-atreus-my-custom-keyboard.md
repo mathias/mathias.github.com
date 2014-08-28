@@ -36,7 +36,7 @@ Since the Atreus uses a Teensy as its brain, it can be reconfigured easily by up
 
 ## What next?
 
-I haven't worked on my chording keyboard in a long time.  I'm happy to see that things like the [tmk firmware](https://github.com/tmk/tmk_keyboard) will now make that project much easier. With my new knowledge and the many open source projects now available, I'm going to restart work on  [my chording keyboard](/blog/2013/08/03/building-a-chording-keyboard-lessons-learned-and-progress-so-far/).
+I haven't worked on my chording keyboard in a long time.  I'm happy to see that things like the [tmk firmware](https://github.com/tmk/tmk_keyboard) will now make that project much easier. With my new knowledge and the many open source projects now available, I'm going to restart work on [that project](/blog/2013/08/03/building-a-chording-keyboard-lessons-learned-and-progress-so-far/).
 
 Further, I've been playing with Matt Adereth's [dactyl](https://github.com/adereth/dactyl) to design chording keyboard layouts to be 3D printed. Dactyl allows me to write Clojure code and output it in a format that OpenSCAD can generate a 3D model with.
 
