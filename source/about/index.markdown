@@ -10,7 +10,7 @@ I consider myself pretty good at (and get paid to do): Clojure, ClojureScript, R
 
 I am learning: (more) Clojure & ClojureScript, (more) emacs, [machine learning](https://www.coursera.org/course/ml), Apache Storm, Datomic, [Android: Netrunner](http://www.fantasyflightgames.com/edge_minisite.asp?eidm=207), guitar, and ukulele.
 
-My open source code is online at [github.com/mathias](https://github.com/mathias) where I try to push an open source commit at least once per day. You can also check out my [open source report card](http://osrc.dfm.io/mathias).
+A list of the open source I've built or contributed to is on my [Open Source](/open-source) page. All of my work can be found at [github.com/mathias](https://github.com/mathias).
 
 Slides from my presentations are on the [Presentations](/presentations) page.
 
