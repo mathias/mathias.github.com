@@ -7,7 +7,7 @@
     <meta name="author" content="Matt Gauger">
 
     
-    <meta name="description" content="Reset a Lost Password on an Ubuntu VM (This post is part of my blog archiving project. This post appeared on Coderwall on April 24, 2013.) You may &hellip;">
+    <meta name="description" content="WARNING: Nokogiri Was Built Against LibXML Version x.x.x (This post is part of my blog archiving project. This post appeared on Coderwall on May 23 &hellip;">
     
 
     <link href="/atom.xml" rel="alternate" title="blog.mattgauger.com" type="application/atom+xml">
@@ -38,6 +38,7 @@
         <nav class="menu left"><ul class="nav">
   <li><a href="/about">About</a></li>
   <li><a href="/blog/archives">Blog Archives</a></li>
+  <li><a href="/open-source">Open Source</a></li>
   <li><a href="/presentations">Presentations</a></li>
   
   <li class="divider-vertical"></li>
@@ -61,6 +62,72 @@
   <article class="page span8 offset2">
     
     
+
+
+  <article class="post">
+    
+    <h1 class="title"><a href="/blog/2013/05/23/warning-nokogiri-was-built-against-libxml-version-x-dot-x-x/">WARNING: Nokogiri Was Built Against LibXML Version x.x.x</a></h1>
+    <div class="entry">
+        <hr />
+
+<p><em>(This post is part of my blog archiving project. This post appeared on <a href="https://coderwall.com/p/kia38w">Coderwall</a> on May 23, 2013.)</em></p>
+
+<hr />
+
+<p>When you run tests or rake, if you see:</p>
+
+<pre><code>WARNING: Nokogiri was built against LibXML version 2.9.0, but has dynamically loaded 2.7.8
+</code></pre>
+
+<p>Then do the following:</p>
+
+<pre><code> gem uninstall nokogiri libxml-ruby
+
+brew update
+
+brew uninstall libxml2
+brew install libxml2 --with-xml2-config
+
+brew uninstall libxslt
+brew install libxslt
+brew unlink libxslt
+
+bundle config build.nokogiri -- --with-xml2-dir=/usr --with-xslt-dir=/usr --with-iconv-dir=/usr
+bundle
+</code></pre>
+
+<p>Nokogiri should now be compiled against the right version!</p>
+
+        
+        
+    </div>
+
+    <div class="meta">
+        <div class="author">
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
+</div>
+        <div class="date">
+
+
+
+
+
+
+
+
+
+
+
+
+<time datetime="2013-05-23T11:46:00-05:00" pubdate  data-updated="true" >May 23<span>rd</span>, 2013</time>.</div>
+        <div class="tags">
+
+</div>
+    </div>
+
+  </article>
 
 
   <article class="post">
@@ -347,119 +414,6 @@ And I explained how the form factor of the components we were using was obsolete
 
 
 <time datetime="2013-03-03T11:10:00-06:00" pubdate  data-updated="true" >Mar 3<span>rd</span>, 2013</time>.</div>
-        <div class="tags">
-
-</div>
-    </div>
-
-  </article>
-
-
-  <article class="post">
-    
-    <h1 class="title"><a href="/blog/2013/03/02/google-glass-you-cant-control-the-future/">Google Glass: You Can&#8217;t Control the Future</a></h1>
-    <div class="entry">
-        <p>There&#8217;s been quite a bit of backlash surrounding the new Google Glass product. As someone who has wanted wearable computing for awhile, I&#8217;d like to talk about it a bit. My only real qualifications on this subject come from the fact that I&#8217;ve read a lot of scifi<sup><a href="#accelerando-note" name="accelerando-note-return">1</a></sup> and that I&#8217;m an open source developer that would like to build software for wearable computing that makes people&#8217;s lives better.</p>
-
-<p>When I&#8217;m talking about wearable computing glasses in general rather than just the Google Glass product, I will call them smart glasses. There doesn&#8217;t seem to be a consistent name yet, and the phrase <a href="http://en.wikipedia.org/wiki/EyeTap">eyetap</a> only refers to a very specific type of smart glasses.</p>
-
-<h2>The promise</h2>
-
-<p>As Amber Case explains in this TED Talk, <a href="http://www.ted.com/talks/amber_case_we_are_all_cyborgs_now.html">we are all cyborgs now</a>. As soon as man started using tools, we were augmenting what evolution gave us to become something more. A cyborg. When you drive a car, you are a cyborg because your legs could not carry you that fast. Welcome to the future, human.</p>
-
-<p>That progress marches on constantly, much faster than evolution could ever provide us with enhancements. Computers, the internet, and smartphones are some of the latest and greatest in the enhancements that we add to our bodies to be something more. We&#8217;re already using smartphones to constantly be connected to a wider world than just what we can see and hear in the room. We&#8217;re extending our brains by using things like Google Search and Wikipedia to find and remember far more than our meatbrains could do on their own. And we&#8217;re connected to others to a degree that no other form of communication has matched. When scifi authors write about this kind of brain enhanced by technology, they sometimes refer to it as the exocortex. I&#8217;d argue that we already have exocortexes: our digital selves, the software and websites we use, the tools like Twitter and Facebook that we communicate over, are all part of those exocortexes. Without them, we are less than the whole. And while not everyone feels it yet, I certainly feel a little limited when cut off from my exocortex.</p>
-
-<p>The promise, then, of Google Glass is to constantly be connected to that information source and communications tools. Not to interrupt your daily life, but to simply be better integrated into it. Some people want to point out that Glass is going to be a distraction from &#8220;real life&#8221;, but your real life already includes these &#8220;distractions&#8221; to a degree that you&#8217;re probably not thinking about. How often do you check your email during your work day? Twitter? What apps do you use on your smartphone to find the next bar to go to or figure out a restaurant that everyone can eat at? Does using any of those constitute putting real life on hold while you spend some quality time with something fake? No, they&#8217;re just part of life.</p>
-
-<h2>The buzz</h2>
-
-<p>I was initially quite excited about Google Glass, because it is the first real promise of wearable computing for the masses at a price point that we will probably be able to afford. For nearly a year, the product has been announced but no real details have surfaced. With the announcement of the Google Glass Explorer contest, more information has been leaking out of the Googleplex. After the <a href="http://www.youtube.com/watch?v=9c6W4CCU9M4">Youtube video showing real Glass in use</a> was posted, I quickly realized that Google Glass was not intended for me in the way that I was hoping.</p>
-
-<p>Simply put, Glass is going to do the things that consumers now want to do quickly with their smartphones: receive and send texts &amp; email, take pictures, take videos, and post that content up to things like Facebook, Youtube, and Google+. Another valid use is quickly searching Google for something, which could be useful for everything from trivia night to trying to remember what goes in your favorite korma.</p>
-
-<p>But the things I&#8217;m interested in? Coding while walking around (twiddling fingers in the air, no doubt), augmenting my poor social skills by having my wearable remember faces and previous conversations, providing heads-up documentation while I am doing some task, reading full ebooks in a sitting with some sort of speed-reading app, etc. And some of these, like coding and reading, are quite focused activities that would benefit from having full-screen display of information rather than just a hovering box in the corner of one eye. Since the Glass only really shows notifications and thumbnails of photos and videos, it isn&#8217;t going to provide that focused experience. At least until Google or some other company builds binocular, full-vision smart glasses.</p>
-
-<p>Then again, building a device that most consumers will want to use is exactly what Google should be doing. I&#8217;m a relatively tiny market, and it&#8217;d make no sense for Google to prioritize my features over the average consumer. I&#8217;m well aware of that. But all that said, I still plan on being an early-adopter, at least after the price drops a little.</p>
-
-<h2>The marketing bullshit</h2>
-
-<p>You may have heard that <a href="http://www.independent.co.uk/news/world/americas/google-cofounder-sergey-brin-feels-emasculated-by-smartphones-8514748.html">Sergey Brin said</a> that smartphones are &#8220;emasculating.&#8221; I&#8217;m not going to linger on this topic too long, but whether he thought this up on the fly or a marketing team came up with it, it makes him sound like an idiot. And in case you forgot, Google makes smartphones. Is it &#8220;emasculating&#8221; to open a refrigerator? What about when you ride the bus rather than drive a car in to work? What does this tell female smartphone users when you say this? I believe the correct usage of the word &#8220;emasculating&#8221; is to &#8220;deprive (a man) of his male role or identity. Ex: he feels emasculated because he cannot control his sons&#8217; behavior.&#8221; What does that have to do with a smartphone? It&#8217;s just a poor choice of words all around. Sorry Sergey, but I&#8217;m calling bullshit on your statement.</p>
-
-<h2>The wearable device Cambrian explosion</h2>
-
-<p>We can only hope that as soon as Google Glass comes out, two things start to happen: hackers figure out how to root (or jailbreak, or whatever we&#8217;re going to call it) Glass and install Linux on it. This will ensure that open source software can start being developed for it for all sorts of niche users (like me) and not just the average consumer mentioned above. It also will help to combat some of the security and privacy concerns outlined below. Maybe in the long run, Linux isn&#8217;t the best OS to run on such a device, but that doesn&#8217;t matter initially. As soon as open source hackers figure it out, anything and everything can run on it. We&#8217;ll see a Cambrian explosion of wearable computing apps.</p>
-
-<p>I think we&#8217;ll also see hardware manufacturers, especially the OEMs that typically make keyboards, mice, and cheap Android phones, start to produce similar glasses to the Google Glass devices. They&#8217;ll likely run Android or some flavor of whatever Microsoft is calling a mobile OS, but will probably be a lot easier to hack than the Google Glass device. And they&#8217;ll get cheaper. The best part about all of this is that by leading the way, Google is practically ensuring that we&#8217;re going to have lots of manufacturers building these devices, and they&#8217;re going to get cheaper. The demand for wearable displays in the past were limited to applications in military and some industry jobs, along with academic research, and so wearable displays tended towards the expensive and impractical in the past. Eventually, smart glasses will probably be as common as smartphones, and around the same price point. Don&#8217;t be surprised if, in a few years, it makes a lot more sense for someone to wear smart glasses than to carry around a smartphone in their pocket.</p>
-
-<p>By being first to market, Google is also giving us a good model for what interactions with smart glasses can look like. The early, proto-smartphones like the Blackberry were arguably very poor in terms of user experience &amp; interaction design. It wasn&#8217;t until the Apple iPhone came along that we started to get good UX on mobile devices. Now, even free, low-end Android phones come with some UX heritage imprinted from Apple&#8217;s iOS. While it remains to be seen whether Glass&#8217;s UX is great and not just as good as the Youtube video makes it out to be, I hope that it helps imprint some good UX concepts onto all future devices.</p>
-
-<h2>The &#8220;dorky&#8221; backlash</h2>
-
-<p>I&#8217;ve seen a few blogs, perhaps in an attempt to stir up trouble and get pageviews, call out Google Glass for being dorky. You&#8217;ll see phrases like &#8220;But why would anyone want to wear something so dorky?&#8221; The authors of these pieces of trying to enforce the status quo the same way that kids in school make fun of the clothes that others wear. Why are they doing that? They may have valid fears of the technology&#8217;s privacy implications. But more likely, they&#8217;re responding to what, in literature, we&#8217;d call &#8220;the fear of the other.&#8221; The Google Glass device is new and unknown. People who would break from the tribe and wear it are weird; possibly nonhuman. They are the other.</p>
-
-<p>There&#8217;s a fear mentioned in some blog posts about Glass that someone might pay more attention to their Glass display than to the other person in a social situation. I imagine that the way it works out in reality is that common courtesy comes into play here, and that you wouldn&#8217;t ignore someone in favor of your glass any more than you&#8217;d walk away from someone you were talking to to look at Twitter on your phone. That said, some people have done that to me, and I expect that it is really just a fault of people rather than the technology.</p>
-
-<p>Some of this backlash, too, is the fear that someone else with that easy access to information and search results (perhaps even more discreetly than the voice searching we&#8217;ve seen so far) is going to give others an unfair advantage. Suddenly everyone will remember everything and be experts on trivia, or last quarter&#8217;s financials, or any other things that smart glasses will make easy. But again, as I discussed before, this is all part of the wearer&#8217;s exocortex. It is as much as part of them as using a hammer or using a calendar on the wall to remember something.</p>
-
-<p>By being a part of the cyborg human, the device is a prosthetic that the wearer uses to enable their exocortex. But rather than compensating for some handicap, it helps to enhance the wearer. Would you deny someone their hearing aids because they might be able to hear more than you? I think the feelings and popular opinion on these topics will change as more people start wearing smart glasses and other wearable technology. It&#8217;s already perfectly acceptable to use your smartphone to play Angry Birds while sitting in a waiting room, and I&#8217;m pretty sure that the activities that the Google Glass will lend itself to will soon become socially acceptable, too.</p>
-
-<h2>The fear</h2>
-
-<p>The biggest, and most valid in my mind, issue with Google Glass is what it will mean for everyone to suddenly have an always-on, always-available camera and microphone on their face. I&#8217;d suggest you go read Mark Hurst&#8217;s article on Creative Good, <a href="http://creativegood.com/blog/the-google-glass-feature-no-one-is-talking-about/">The Google Glass feature no one is talking about</a> if you haven&#8217;t yet, to get up to speed on this debate.</p>
-
-<p>While I believe in privacy and support organizations like the <a href="https://eff.org">EFF</a>, I think it is a little short-sighted and silly to react so strongly to the fact that the Google Glass device will have a camera on it. The two fears outlined in that article are:</p>
-
-<ul>
-<li>That anyone, at any time, could be taking photos or video of you without your consent. And you wouldn&#8217;t know.</li>
-<li>That Google will now be able to index and otherwise process any audio, video, and images you send to them, along with the other data the Glass will send along: date and time, Google user account, etc.</li>
-</ul>
-
-
-<p>This seems to happen with every technology. And you may not realize it, but if you are advocating against the Google Glass for the above reasons, then you have far more reasons to be vocal about banning smartphones and even cheap digital cameras. I think it&#8217;s easy for someone to exclaim &#8220;But they could be taking videos of me in a public place, possibly something embarrassing!&#8221; and not realize that there already exists a whole bunch of terrible usage of existing technology out there to exploit women by taking pictures and video of them without their consent. No one seems up in arms, marching to ban the cheap digital camera on behalf of exploited women. The same technology is used by parents to take pictures and videos of their kids. Here, the technology itself is not so much to blame as the people who would use it to exploit others.</p>
-
-<p>There have been attempts to try and regulate digital cameras and smart phones in the past, usually to force them to emit some kind of loud shutter noise when a picture is taken or a video is started. But just about everything comes with a camera now; are you really going to regulate all of that? Part of my point here is that you can&#8217;t regulate the future and try to lock down technology, because the companies that want to sell you the technology will just find a way around it. Let&#8217;s be honest here, governments are too slow to out-maneuver technology.</p>
-
-<p>The fact of the matter is that in public, you&#8217;re probably being monitored by far more than just someone&#8217;s glasses, and that&#8217;s far more worrying than worrying about this new technology that Google is building. Security cameras abound. Your movements online are tracked by any number of ISPs, advertisement platforms, and governments. Have you been up in arms all this time about that and only now adding Google Glass to the list of technologies to worry about? I&#8217;m just pointing out the absurdity of singling out Google Glass here.</p>
-
-<p>Now, what about the fear that, simply put, you won&#8217;t know if someone with Google Glass glasses on could be taking a video and you wouldn&#8217;t know it? Isn&#8217;t that true that they could already be doing this every time you&#8217;re standing around someone with a smartphone in their hand? The fact is that the majority of people are probably going to be polite and follow the same kinds of social expectations you&#8217;d have around that. Just like you&#8217;re already doing whenever you take out your smartphone. Do people take videos of people on the bus because they think they&#8217;re funny? Sure, but that&#8217;s not the only use for a camera on a smartphone.</p>
-
-<p>Lastly, there&#8217;s the concern that all of the data from Glass will be going into Google, to be indexed and searched, and could be subpoenaed by the government. This problem does not really point at the technology as the source of that concern. <strong>If you&#8217;re really worried about what kinds of things a corporation or government could do with all that information, especially a corrupt government, then the problem lies with the governments and corporations.</strong> You&#8217;ve been contributing to the constant stream of information into Google and Facebook&#8217;s datacenters for years. Twitter will give up your information to the government if pressured; yet we communicate over Twitter all of the time. The government has been installing taps into data exchanges for years to monitor online communications. So think about it. It might make a lot more sense for you to focus on fixing those organizations, or weakening their growing Big Brother powers, rather than chasing after perceived rights lost when someone wears a camera on their face in public.</p>
-
-<p>Open source, again, provides a way out here: It&#8217;s likely that an open source OS like Linux will put more control about what information it leaks into the hands of users. At the same time, the open source software probably won&#8217;t see widespread usage by the average consumer, and so we should continue to question and call out this kind of abuse of information by corporations and governments. And, we can do what Mozilla is doing with <a href="http://www.mozilla.org/en-US/firefox/partners/">Firefox OS</a> and provide software that encodes some of our ideals about freedom and privacy right into the software, while making it attractive for manufacturers to use by making it free.</p>
-
-<p>So don&#8217;t try to shout down a fledgling technology just because it could be used to limit your freedoms or privacy. Lots of technologies <em>could</em> be used to limit those things. You can&#8217;t regulate the technology, because cheap clones are on the way and a lot of people are going to want them. Instead, the real menace here is those that would use technology to limit your privacy. Those are what you should fear when you feel uneasy about the future. I&#8217;d like to see a lot more discussion on that topic, but the latest gadget fad pays the bills (with advertising, at least) better, I suppose. And I guess I&#8217;d like to see more writing on the <strong>potential</strong> of new technologies to improve the human condition and make us better cyborgs, rather than just whether or not it will be the killer Facebook app. But we can all dream, right?</p>
-
-<hr />
-
-<p><a name="accelerando-note"></a></p>
-
-<p><strong>1</strong>: In particular, <a href="static/fiction/accelerando/accelerando.html">Accelerando</a> features a main character with smart glasses. It&#8217;s an interesting portrait of how a well-connected digital savant might use this wearable technology while still interacting with people and places.
-<a href="#accelerando-note-return">&#8617;</a></p>
-
-        
-        
-    </div>
-
-    <div class="meta">
-        <div class="author">
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
-</div>
-        <div class="date">
-
-
-
-
-
-
-
-
-
-
-
-
-<time datetime="2013-03-02T15:09:00-06:00" pubdate  data-updated="true" >Mar 2<span>nd</span>, 2013</time>.</div>
         <div class="tags">
 
 </div>

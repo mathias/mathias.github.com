@@ -7,7 +7,7 @@
     <meta name="author" content="Matt Gauger">
 
     
-    <meta name="description" content="Git Fml (This post is part of my blog archiving project. This post appeared on Coderwall on September 3, 2013.) For when you need to go back to a &hellip;">
+    <meta name="description" content="Apprentice Talk Video &amp; Notes Back in September, I had a blast speaking at Nickel City Ruby. My talk was entitled &#8220;Apprenticeship: &hellip;">
     
 
     <link href="/atom.xml" rel="alternate" title="blog.mattgauger.com" type="application/atom+xml">
@@ -38,6 +38,7 @@
         <nav class="menu left"><ul class="nav">
   <li><a href="/about">About</a></li>
   <li><a href="/blog/archives">Blog Archives</a></li>
+  <li><a href="/open-source">Open Source</a></li>
   <li><a href="/presentations">Presentations</a></li>
   
   <li class="divider-vertical"></li>
@@ -61,6 +62,47 @@
   <article class="page span8 offset2">
     
     
+
+
+  <article class="post">
+    
+    <h1 class="title"><a href="/blog/2013/11/11/apprentice-talk-video-and-notes/">Apprentice Talk Video &amp; Notes</a></h1>
+    <div class="entry">
+        <p>Back in September, I had a blast speaking at <a href="http://nickelcityruby.com/">Nickel City Ruby</a>. My talk was entitled &#8220;Apprenticeship: Software Craftsmanship&#8217;s Missing Link&#8221; and included a lot of slides of sasquatches. The video has been posted to Confreaks, so I&#8217;m embedding it here. Also note that I have posted my notes and a few resources over on the microsite I created for this talk, <a href="http://blog.mattgauger.com/apprenticeship/">http://blog.mattgauger.com/apprenticeship/</a></p>
+
+<iframe width="640" height="360" src="//www.youtube.com/embed/zuL7rAwmwCY" frameborder="0" allowfullscreen></iframe>
+
+
+        
+        
+    </div>
+
+    <div class="meta">
+        <div class="author">
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
+</div>
+        <div class="date">
+
+
+
+
+
+
+
+
+
+
+
+
+<time datetime="2013-11-11T19:22:00-06:00" pubdate  data-updated="true" >Nov 11<span>th</span>, 2013</time>.</div>
+        <div class="tags">
+
+</div>
+    </div>
+
+  </article>
 
 
   <article class="post">
@@ -587,72 +629,6 @@
 
 
 <time datetime="2013-07-27T11:32:00-05:00" pubdate  data-updated="true" >Jul 27<span>th</span>, 2013</time>.</div>
-        <div class="tags">
-
-</div>
-    </div>
-
-  </article>
-
-
-  <article class="post">
-    
-    <h1 class="title"><a href="/blog/2013/05/23/warning-nokogiri-was-built-against-libxml-version-x-dot-x-x/">WARNING: Nokogiri Was Built Against LibXML Version x.x.x</a></h1>
-    <div class="entry">
-        <hr />
-
-<p><em>(This post is part of my blog archiving project. This post appeared on <a href="https://coderwall.com/p/kia38w">Coderwall</a> on May 23, 2013.)</em></p>
-
-<hr />
-
-<p>When you run tests or rake, if you see:</p>
-
-<pre><code>WARNING: Nokogiri was built against LibXML version 2.9.0, but has dynamically loaded 2.7.8
-</code></pre>
-
-<p>Then do the following:</p>
-
-<pre><code> gem uninstall nokogiri libxml-ruby
-
-brew update
-
-brew uninstall libxml2
-brew install libxml2 --with-xml2-config
-
-brew uninstall libxslt
-brew install libxslt
-brew unlink libxslt
-
-bundle config build.nokogiri -- --with-xml2-dir=/usr --with-xslt-dir=/usr --with-iconv-dir=/usr
-bundle
-</code></pre>
-
-<p>Nokogiri should now be compiled against the right version!</p>
-
-        
-        
-    </div>
-
-    <div class="meta">
-        <div class="author">
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
-</div>
-        <div class="date">
-
-
-
-
-
-
-
-
-
-
-
-
-<time datetime="2013-05-23T11:46:00-05:00" pubdate  data-updated="true" >May 23<span>rd</span>, 2013</time>.</div>
         <div class="tags">
 
 </div>
