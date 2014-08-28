@@ -4,7 +4,7 @@
   <title><![CDATA[blog.mattgauger.com]]></title>
   <link href="http://blog.mattgauger.com/atom.xml" rel="self"/>
   <link href="http://blog.mattgauger.com/"/>
-  <updated>2014-08-27T20:20:48-05:00</updated>
+  <updated>2014-08-27T20:23:42-05:00</updated>
   <id>http://blog.mattgauger.com/</id>
   <author>
     <name><![CDATA[Matt Gauger]]></name>
@@ -18,7 +18,7 @@
     <link href="http://blog.mattgauger.com/blog/2014/08/19/atreus-my-custom-keyboard/"/>
     <updated>2014-08-19T21:38:00-05:00</updated>
     <id>http://blog.mattgauger.com/blog/2014/08/19/atreus-my-custom-keyboard</id>
-    <content type="html"><![CDATA[<p>Last year I wrote about about building <a href="http://blog.mattgauger.com/blog/2013/08/03/building-a-chording-keyboard-lessons-learned-and-progress-so-far/">chording keyboards</a> and <a href="http://blog.mattgauger.com/blog/2013/08/06/a-simple-text-editor-foot-pedal/">USB foot pedals</a>. At the time, using the <a href="http://www.pjrc.com/teensy/">Teensy micro controller</a> as a USB HID device was possible, but it still required a lot of research . There was no good central resource for knowledge about building keyboards. Since then, the <a href="http://deskthority.net/wiki/ErgoDox">Ergo Dox</a> keyboard was released as open source and got quite popular. This seems to have opened the door for many to get into building keyboards.</p>
+    <content type="html"><![CDATA[<p>Last year I wrote about about building <a href="http://blog.mattgauger.com/blog/2013/08/03/building-a-chording-keyboard-lessons-learned-and-progress-so-far/">chording keyboards</a> and <a href="http://blog.mattgauger.com/blog/2013/08/06/a-simple-text-editor-foot-pedal/">USB foot pedals</a>. At the time, using the <a href="http://www.pjrc.com/teensy/">Teensy micro controller</a> as a USB HID device was possible, but it still required a lot of research. There was no good central resource for knowledge about building keyboards. Since then, the <a href="http://deskthority.net/wiki/ErgoDox">Ergo Dox</a> keyboard was released as open source and got quite popular. This seems to have opened the door for many to get into building keyboards.</p>
 
 <iframe class="vine-embed" src="https://vine.co/v/M9xtVUQ2O7O/embed/simple" width="320" height="320" frameborder="0" style="float:right;"></iframe>
 
