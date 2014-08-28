@@ -20,7 +20,7 @@ Through [Geekhack](http://geekhack.org), I found the [Atreus](https://github.com
 
 <a href="https://www.flickr.com/photos/mattgauger/14785346149" title="IMG_3156 by Matt Gauger, on Flickr"><img src="https://farm6.staticflickr.com/5565/14785346149_ece2db51a3_z.jpg" width="640" height="480" alt="IMG_3156"></a>
 
-I finished the birch ply with semi-gloss marine polyurethane. The polyurethane should give it a durable finish, and added a nice amber tint to the wood. The downside is that more than a week after the finish coat went on, the poly is still out gassing some headache-inducing fumes.
+I finished the birch ply with semi-gloss marine polyurethane. The polyurethane should give it a durable finish, and added a nice amber tint to the wood. The downside is that more than a week after the final coat went on, the poly is still out gassing some headache-inducing fumes.
 
 After applying the finish, I hot-glued the switches in and soldered it together. There's no PCB with this design, just point-to-point with wires and components to a central Teensy. I used [Cherry MX Clear](http://deskthority.net/wiki/Cherry_MX_Clear) switches for the majority of the keys because they seem the closest to my Happy Hacking's Topre switches to me. The modifiers are [Cherry MX Blacks](http://deskthority.net/wiki/Cherry_MX_Black).
 
