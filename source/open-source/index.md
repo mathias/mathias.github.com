@@ -13,7 +13,7 @@ I've contributed to and built a number of open source projects. I am [mathias](h
 * [falcor](https://github.com/mathias/falcor): Metaprogrammed factory-factory in Ruby. Mostly useful as a quick way to create fixtured JSON services.
 * [loudspkr](https://github.com/mathias/loudspkr): A dashboard for Bendyworks written on top of [Dashing](https://github.com/Shopify/dashing). Currently rewriting the entire frontend to be a responsive, beautiful system that doesn't look anything like Windows Metro.
 * [hum](https://github.com/mathias/hum): A Web Audio API wrapper for ClojureScript.
-* [ecstatic](https://github.com/mathias/ecstatic): a static site generator with modern Ruby tooling. Finally released!
+* [ecstatic](https://github.com/mathias/ecstatic): a static site generator with modern Ruby tooling.
 * [mathias/dotfiles](https://github.com/mathias/dotfiles): My dotfiles collection. Reasonable defaults that I prefer.
 * [mathias/chording](https://github.com/mathias/chording): My chording keyboard project. Firmware and plans.
 * [riffraffle](https://github.com/mathias/riffraffle) A simple Rails-based Ember app for running conference raffles. Extracted from [snow_mobile_raffle](https://github.com/mathias/snow_mobile_raffle)
