@@ -26,6 +26,8 @@ I've contributed to and built a number of open source projects. I am [mathias](h
 In order of going further back in time:
 
 * Numerous docs PRs all over the place.
+* lein-bikeshed: [https://github.com/dakrone/lein-bikeshed](https://github.com/dakrone/lein-bikeshed)
+* atreus-firmware: [https://github.com/technomancy/atreus-firmware](https://github.com/technomancy/atreus-firmware)
 * clojure-mail: [https://github.com/owainlewis/clojure-mail](https://github.com/owainlewis/clojure-mail)
 * emacs-live: [https://github.com/overtone/emacs-live](https://github.com/overtone/emacs-live)
 * rm-hull / monet: [https://github.com/rm-hull/monet](https://github.com/rm-hull/monet)
