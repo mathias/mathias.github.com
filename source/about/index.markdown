@@ -4,7 +4,7 @@ title: "About"
 date: 2012-03-16 21:06
 ---
 
-I'm a software developer at [Bendyworks](http://bendyworks.com) located in Madison, WI.
+I'm a software developer located in Madison, WI. Currently looking for the next big adventure, and enjoying some down time with my family, our cats, and good books.
 
 I have way too many interests. I am interested in functional programming, intelligent agents, and ubiquitous + wearable computing. On the practical side, I prefer to use Clojure & ClojureScript. I've spent a lot of time working with Ruby, JavaScript, and the standard assortment of developer tools: vim, emacs, git, and just about everything else.
 
@@ -14,7 +14,6 @@ Slides from my presentations are on the [Presentations](/presentations) page.
 
 You can see what books I'm reading over at [my Goodreads](
 https://www.goodreads.com/mathiasx). I'm currently working towards a goal of reading at least 60 books in 2014.
-
 
 ### Blog comments
 
