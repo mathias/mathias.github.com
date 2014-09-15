@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Clojure Code Quality Tools"
-date: 2014-09-07 10:35
+date: 2014-09-15 13:39
 ---
 
 I work with many programming languages on a daily basis. As a polyglot programmer, I've come to appreciate tools that help me follow best practices. For JavaScript, there's the excellent [jshint](http://jshint.com/). When I need to verify some XML, there's [xmllint](http://xmlsoft.org/xmllint.html). In a Ruby on Rails project, I can count on the [rails\_best\_practices](http://rubygems.org/gems/rails_best_practices) gem. For Ruby smells, I prefer the combo of [rubocop](https://github.com/bbatsov/rubocop). There's tools like [SimpleCov](https://github.com/colszowka/simplecov) to measure and show test suite coverage on my Ruby projects. [cane](https://github.com/square/cane) helps me to ensure line length, method complexity, and more in my Ruby code. [Syntastic](https://github.com/scrooloose/syntastic) helps bring real syntax checking to vim for many langauges. Every day, more open source tools are introduced that help me to improve the quality of the software that I write.
