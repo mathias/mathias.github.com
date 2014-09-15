@@ -4,7 +4,7 @@
   <title><![CDATA[blog.mattgauger.com]]></title>
   <link href="http://blog.mattgauger.com/atom.xml" rel="self"/>
   <link href="http://blog.mattgauger.com/"/>
-  <updated>2014-09-12T17:50:45-05:00</updated>
+  <updated>2014-09-15T13:40:11-05:00</updated>
   <id>http://blog.mattgauger.com/</id>
   <author>
     <name><![CDATA[Matt Gauger]]></name>
@@ -12,6 +12,164 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Clojure Code Quality Tools]]></title>
+    <link href="http://blog.mattgauger.com/blog/2014/09/15/clojure-code-quality-tools/"/>
+    <updated>2014-09-15T13:39:00-05:00</updated>
+    <id>http://blog.mattgauger.com/blog/2014/09/15/clojure-code-quality-tools</id>
+    <content type="html"><![CDATA[<p>I work with many programming languages on a daily basis. As a polyglot programmer, I&#8217;ve come to appreciate tools that help me follow best practices. For JavaScript, there&#8217;s the excellent <a href="http://jshint.com/">jshint</a>. When I need to verify some XML, there&#8217;s <a href="http://xmlsoft.org/xmllint.html">xmllint</a>. In a Ruby on Rails project, I can count on the <a href="http://rubygems.org/gems/rails_best_practices">rails_best_practices</a> gem. For Ruby smells, I prefer the combo of <a href="https://github.com/bbatsov/rubocop">rubocop</a>. There&#8217;s tools like <a href="https://github.com/colszowka/simplecov">SimpleCov</a> to measure and show test suite coverage on my Ruby projects. <a href="https://github.com/square/cane">cane</a> helps me to ensure line length, method complexity, and more in my Ruby code. <a href="https://github.com/scrooloose/syntastic">Syntastic</a> helps bring real syntax checking to vim for many langauges. Every day, more open source tools are introduced that help me to improve the quality of the software that I write.</p>
+
+<p>It follows that when I write Clojure code, I want nice tooling to help me manage code quality, namespace management, and out-of-date dependencies. What tools do I use on a day-to-day basis for this? In this post, I&#8217;ll show 4 tools that I use in my workflow every day on Clojure projects, and also provide some other tools for further exploration. Most of these tools exist as plugins to the excellent <a href="http://leiningen.org/">Leiningen</a> tool for Clojure.</p>
+
+<h2><a href="https://github.com/xsc/lein-ancient">lein-ancient</a></h2>
+
+<p>This plugin to <code>lein</code> exists simply to check your project for outdated dependencies. Without <a href="https://github.com/xsc/lein-ancient">lein-ancient</a>, I&#8217;d be unable to keep up with some of the faster-moving libraries in the Java and Clojure world.</p>
+
+<p>After adding ancient to your <code>~/.lein/profiles.clj</code>, running the <code>lein ancient</code> command yields output on the same project as before:</p>
+
+<script src="https://gist.github.com/mathias/bac5e554f971d7aa462f.js"></script>
+
+
+<p>Whoops! Looks like I haven&#8217;t been keeping up to date with my dependencies. <code>lein ancient</code> makes checking for new dependency versions easy. Further, thanks to the ubiquity of <a href="http://semver.org/">semantic versioning</a> in Clojure projects, it is usually quite safe to bump the minor versions (0.0.x) of dependencies.</p>
+
+<p>You can also use lein-ancient to find outdated lein plugins in your <code>~/.lein/profiles.clj</code> file. Just run it with the <code>profiles</code> argument:</p>
+
+<script src="https://gist.github.com/mathias/02b999542ea837b87e30.js"></script>
+
+
+<h2><a href="https://github.com/jonase/kibit">lein kibit</a></h2>
+
+<p>As we gain experience and confidence in a programming language, we begin to talk about whether we&#8217;re writing <em>idiomatic</em> code. I&#8217;d argue that idiomatic code is code that accomplishes a goal with proper use of language features, in a way that other developers familiar with that language would understand. A simpler way to say it might be: idiomatic code uses the community-accepted best practices of how to do something.</p>
+
+<p>Clojure&#8217;s design seeks to solve some problems found in older Lisps, as well as add in niceties like complementary predicate functions. A good example of these convenient complementary functions are <code>if</code> and <code>if-not</code>. Clojure also contains several cases of simplification for common usage. For example, when you don&#8217;t need an else clause on an <code>if</code>, you can use the <code>when</code> macro.</p>
+
+<p>Wouldn&#8217;t it be great if there was someone who was well-versed in Clojure idioms pairing with you and offering suggestions? That&#8217;s exactly what <a href="https://github.com/jonase/kibit">kibit</a> does.</p>
+
+<p>Running against a project I&#8217;d set up to contain some smells, <code>lein kibit</code> found:</p>
+
+<script src="https://gist.github.com/mathias/fc0d446aeb90f44a6731.js"></script>
+
+
+<p>These kinds of small improvements are all over our Clojure projects. They&#8217;re not show-stopper bugs, but they&#8217;re small places for improvement.</p>
+
+<p>Kibit&#8217;s suggestions are almost always logically equivalent to the original code. Still, I always do some smoke-testing to ensure the code still works after using Kibit&#8217;s suggestion, and it generally does. Problems I frequently fix with Kibit are replacing <code>if</code> statements with the <code>when</code> macro, as well as places where the code checks for empty seqs, or that I can simplify nil checks.</p>
+
+<p>You can point lein kibit at a specific namespace by appending the path, like this: <code>lein kibit src/foo/bar.clj</code></p>
+
+<p>Kibit catches many cases where there is a more-idiomatic way to express what you are trying to do. I recommend running it often. In fact, it&#8217;s possible to use <a href="https://github.com/jonase/kibit#usage-from-inside-emacs">kibit in your emacs buffers</a> if you want it to be that much more convenient and real-time.</p>
+
+<h2><a href="https://github.com/jonase/eastwood">Eastwood</a></h2>
+
+<p>For linting Clojure code, there&#8217;s Eastwood. It is similar in functionality to Kibit, bit will catch different issues than Kibit. Built on two interesting Clojure projects: <a href="https://github.com/clojure/tools.analyzer">tools.analyzer</a> and <a href="https://github.com/clojure/tools.analyzer.jvm">tools.analyzer.jvm</a>, Eastwood does a powerful examination of your code inside the JVM. It is worth highlighting that since Eastwood loads your code to analyze it, it might trigger any side effects that happen when your code loads: writing files, modifying databases, etc. Note that it only loads the code; it does not execute it.</p>
+
+<p>After adding <code>eastwood</code> to your lein <code>profiles.clj</code>, simply run: <code>lein eastwood</code> and you will see output like:</p>
+
+<script src="https://gist.github.com/mathias/b93cea02293eac933bee.js"></script>
+
+
+<p>That&#8217;s a lot of problems for a simple file! Notice how one mistake got caught for two reasons: A misplaced docstring (placed after the arguments vector) becomes just a string in the function body that will be thrown away.</p>
+
+<p>Another nice catch that Eastwood provides is detecting the redefinition of the var <code>qux</code> in the file.</p>
+
+<p>But Eastwood covers a lot more cases than just vars being def&#8217;d more than once. See the <a href="https://github.com/jonase/eastwood#whats-there">full list</a> to find out what else it does. There&#8217;s a few linters that are disabled by default, but they might make sense to enable for your project.</p>
+
+<p>Frequently running lint tools can help prevent subtle problems that come from code that looks correct but contains some small error. Eastwood is less concerned with style than tools like JSHint are, but we have other tools that cover stylistic concerns.</p>
+
+<h2><a href="https://github.com/dakrone/lein-bikeshed">lein bikeshed</a></h2>
+
+<p>This is a relative newcomer to my own tool set. <a href="https://github.com/dakrone/lein-bikeshed">lein bikeshed</a> has features related to the low-hanging fruit in our Clojure code: lines longer than 80 characters, blank lines at ends of files, and more. It will also tell you what percentage of functions have docstrings. Like other tools mentioned here, it is a lein plugin that you add to your <code>profiles.clj</code>.</p>
+
+<p>A run of <code>lein bikeshed</code> on its own source (which purposefully includes some code designed to fail) looks like this:</p>
+
+<script src="https://gist.github.com/mathias/271e06ebce8fe6428b83.js"></script>
+
+
+<p>Bikeshed might give a lot of output for your existing projects, but the warnings are worth investigating and addressing. You can always silence the long-lines warning if it doesn&#8217;t matter to you with the <code>-m</code> command line argument.</p>
+
+<h2>Tying it all together with a Lein alias</h2>
+
+<p>Wouldn&#8217;t it be great to run all these tools frequently, so that you can check for as many problems as possible? Well, you can, with a lein alias. (The lein wiki documents aliases in the <a href="https://github.com/technomancy/leiningen/blob/stable/sample.project.clj#L195-L211">lein sample.project.clj</a>.)</p>
+
+<p>In <code>~/.lein/profiles.clj</code>, inside your <code>:user</code> map, add the line:</p>
+
+<script src="https://gist.github.com/mathias/eef9f3f3e9e0ba40cb78.js"></script>
+
+
+<p>Now, when you want to run all these tools at once on a project, you simply invoke <code>lein omni</code>. I use this alias on all my Clojure(Script) projects. I have grown accustomed to seeing the kinds of output that a clean Clojure project will have.</p>
+
+<p>It&#8217;s worth noting that I don&#8217;t run Eastwood unless it is necessary for the project. When it is necessary, I override the alias in the project&#8217;s <code>project.clj</code> to run Eastwood as well.</p>
+
+<p>This command can take some time to complete, but with an alias we&#8217;re only spinning up lein once.</p>
+
+<h2>And a bash alias</h2>
+
+<p>The output of <code>lein omni</code> can be long, which can either result in a lot of scrolling or neglecting to run the command due to the inconvenience. To help manage the length of the output, I&#8217;ve created a bash alias that runs the plugins and pipes them to less.</p>
+
+<p>My personal bash alias also runs midje at the end. You can choose whether to run the tests for your own alias. That&#8217;s just my personal preference.</p>
+
+<script src="https://gist.github.com/mathias/8b6a0040fcd7e4ae890f.js"></script>
+
+
+<p>Note that just like running the lein alias above, this may take a bit of time. Since we&#8217;re piping it to <code>less</code>, it might take awhile before <code>less</code> receives output. While it is still running, output will periodically show up at the bottom of the <code>less</code> buffer. You can use both Emac&#8217;s and vim&#8217;s movement commands in <code>less</code> to advance the buffer. I find <code>less</code> to be more manageable for scrolling through output than switching to <code>tmux</code>&#8217;s history scrolling mode.</p>
+
+<h2>Managing your namespaces: <a href="https://github.com/technomancy/slamhound">lein slamhound</a></h2>
+
+<p>Namespace management often becomes an issue on nontrivial Clojure projects. Actively developing a project means managing the functions we pull in from other namespaces and from libraries. These require statements can often get out of date. Often, they&#8217;re either missing namespaces that are needed, or containing requirements for old functions that are no longer used in the current code.</p>
+
+<p><a href="https://github.com/technomancy/slamhound">slamhound</a> is a tool that can help to manage dependencies in your namespaces. It knows how to require and import Clojure and Java dependencies, and can remove stale requires that are no longer necessary. Slamhound can often fix missing requires for functions that it can resolve.</p>
+
+<p><strong>Note: slamhound rewrites the namespace macros in your project&#8217;s .clj files!</strong> I recommend only running it on code that&#8217;s committed to git (or whatever you use as a VCS) so that you can review and  rollback any changes it makes.</p>
+
+<p>The most basic way to use slamhound is to add it to your <code>~/.lein/profiles.clj</code> as a dependency. Then add this alias:</p>
+
+<script src="https://gist.github.com/mathias/f3799e60c63b0aebf17e.js"></script>
+
+
+<p>Now you can use slamhound on a project by running <code>lein slamhound</code> in the project&#8217;s directory. There&#8217;s also REPL and Emacs support, which you can learn more about in the <a href="https://github.com/technomancy/slamhound#repl-usage">slamhound README</a>.</p>
+
+<h2>Measuring test coverage with <a href="https://github.com/lshift/cloverage">cloverage</a></h2>
+
+<p>It is often claimed that less unit testing is necessary in Clojure because Clojure is functional and makes use of immutable data structures. And it is true that with functional programming, most tests are simple: given some input, the output should be a certain value.</p>
+
+<p>Some would even argue that Clojure functions should be well-factored enough into simple functions that the behavior of the function is apparent and requires no tests. Still others maintain that developing in the REPL is as good as writing unit tests, since functions are constantly evaluated and integrated with this style of development.</p>
+
+<p>That said, there&#8217;s still mutable Java code to interop with, there&#8217;s still the necessary evil of functions with side effects, and we might want to check the <em>structure</em> of the data we&#8217;re producing in our functions rather than the value of it. For all those reasons and to check that I don&#8217;t introduce regressions, I tend to write unit tests in Clojure.</p>
+
+<p>This blog post isn&#8217;t a platform to argue for or against testing Clojure. But when you do test, you may wonder how to tell how much test coverage your test suite has. How do we know at a glance what percentage of our namespaces is being tested? And how do we find lines that are never being exercised in our tests? After all, we can&#8217;t improve what we don&#8217;t measure.</p>
+
+<p>That&#8217;s where <a href="https://github.com/lshift/cloverage">cloverage</a> comes in. Cloverage is another lein plugin, so it gets added to <code>~/.lein/profiles.clj</code> like the others. Then run <code>lein cloverage</code> in your project; it will run the test suite and generate a coverage report.</p>
+
+<p>The coverage report appears in <code>target/coverage</code> as HTML files, broken down by namespace.</p>
+
+<p>You can still use Cloverage even if you don&#8217;t use <code>clojure.test</code>. I use <a href="https://github.com/marick/Midje">midje</a> in most of my tests. To use Cloverage in those situations, wrap your tests in a <code>deftest</code>.</p>
+
+<p>Since <code>deftest</code> has a hyphenated Clojure keyword as its identifier, and Midje facts have a string as an identifier, I&#8217;ve come to use the <code>deftest</code> to group related tests together. Usually this means naming the group of tests after the function I&#8217;m testing. Then I name Midje facts after the situation that the fact exercises. This makes sense to me because it fits well with the hierarchy of rspec unit tests in Ruby.</p>
+
+<p>Here&#8217;s an example of using this approach:</p>
+
+<script src="https://gist.github.com/mathias/94e1a4d7b8bce7c02e23.js"></script>
+
+
+<p>Cloverage also outputs a <code>coverage.txt</code> file that might be useful for use with services like <a href="http://coveralls.io">Coveralls</a>. I haven&#8217;t used this, so I can&#8217;t comment on its usefulness.</p>
+
+<p>If you&#8217;re using <a href="https://github.com/slagyr/speclj">speclj</a> for your tests, you might run into some issues getting Cloverage to play nice. I don&#8217;t use speclj often, so when I couldn&#8217;t get it to work with Cloverage, I didn&#8217;t pursue the issue.</p>
+
+<h2>Final Thoughts</h2>
+
+<p>That&#8217;s all! I did write a bit more on using <code>lein deps :tree</code> to find dependency-of-dependencies conflicts, but the functionality stopped working in the most recent version of Leiningen (2.4.3). If you&#8217;re interested in that section, I&#8217;ve put it online as a <a href="https://gist.github.com/mathias/2af80c34edbc53582f53">gist</a>. When a new release of lein brings that functionality back, I&#8217;ll write a quick follow-up post for it.</p>
+
+<p>I&#8217;m also thinking about writing some posts about other development tools that I use, particularly how I use <a href="https://github.com/marick/midje">midje</a> to test, and how you can benchmark code with <a href="https://github.com/davidsantiago/perforate">perforate</a>. If you&#8217;re interested in those topics, get in touch and let me know.</p>
+
+<p>I&#8217;m sure there&#8217;s more tools out there that are useful that I don&#8217;t know about, and I&#8217;d love to hear about them.</p>
+
+<p>Have fun and enjoy your cleaner codebase with these tools in your tool belt!</p>
+
+<hr />
+
+<p>Interested in commenting or contacting me? Send an email to <a href="mailto:contact@mattgauger.com">contact@mattgauger.com</a>. Thanks!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Atreus: My Custom Keyboard]]></title>
@@ -1414,82 +1572,6 @@ By &#8220;augmenting human intellect&#8221; we mean increasing the capability of
 <p><a name="filter-or-be-filtered-note"></a></p>
 
 <p><strong>1</strong> The name of this article was lifted from Daniel Rushkoff&#8217;s <a href="http://www.goodreads.com/book/show/9408311-program-or-be-programmed">Program or be Programmed</a>, a book which I didn&#8217;t really enjoy. It was not what I thought it would be about: why we should learn to program so that we can control the complex technical systems around us rather than be controlled by them, or how programming&#8217;s problem solving skills can be applied elsewhere. Instead, I found the book to be some technology-fear-mongering and a bunch of diatribes about how things online or in computers are &#8220;less real.&#8221; Suffice to say, I did not enjoy it. <a href="#filter-or-be-filtered-note-return">&#8617;</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Insanely powerful widgets, brought to you by Moore's Law]]></title>
-    <link href="http://blog.mattgauger.com/blog/2013/03/03/insanely-powerful-widgets-brought-to-you-by-moores-law/"/>
-    <updated>2013-03-03T11:10:00-06:00</updated>
-    <id>http://blog.mattgauger.com/blog/2013/03/03/insanely-powerful-widgets-brought-to-you-by-moores-law</id>
-    <content type="html"><![CDATA[<p>I&#8217;ve been teaching my downstairs neighbor basic electronics and how to solder. He&#8217;s a musician and has been working his way through several kits from <a href="http://bleeplabs.com/">Bleep Labs</a>.</p>
-
-<p>As I explained each component: the resistor, the capacitor, the diode, etc., I eventually got to the transistor. I told my neighbor how transistors are rarely used on their own now. The transistors in the kit were there mainly because they were easy to solder, but usually a circuit designer would opt not to use them.</p>
-
-<p>On its own, a single transistor can&#8217;t do much, and takes up some amount of space, which is actually quite large relative to the circuits we build now. I scored bags of hundreds of transistors that were about to be thrown out at the <a href="http://milwaukeemakerspace.org/">Milwaukee Makerspace</a> when we were putting together the electronics lab &mdash; not because they didn&#8217;t work but because that many transistors simply wouldn&#8217;t get used. &#8220;Nowadays, you might as well throw an Arduino in a project,&#8221; was one of the reasons. No one wants to work at the abstraction level of single transistors anymore.</p>
-
-<p>It turned out that the <a href="http://bleeplabs.com/store/the-bleep-drum/">drum machine kit</a> that we were putting together contained an Atmel AVR microprocessor - the main chip of the Arduino. In an effort to save space and complexity, the designers had used a microprocessor instead of discrete transistors. The chip in the Arduino and the Bleep Drum is the ATmega328, which has something like 600,000 transistors inside it.
-And I explained how the form factor of the components we were using was obsolete. Even the tight-packed pins of a typical integrated circuit (a computer chip, in common parlance), spaced at 0.1&#8221;, just isn&#8217;t dense enough for modern circuits. The parts we were using were all designed to be soldered to the circuit board by human hands. Slow, error-prone human hands. The vast majority of circuit boards produced today are <a href="http://en.m.wikipedia.org/wiki/Surface-mount_technology">surface mount</a>: parts placed by robots and soldered all in one go by another machine.</p>
-
-<p>&#8220;It&#8217;s really neat that you know all this stuff,&#8221; my neighbor remarked. But I shrugged it off. This knowledge, especially of how analog circuits work and how audio signals are modified by analog components, is mostly obsolete. Better to just use some analog-to-digital converters and put a microprocessor on it. Or better yet, something way more powerful than a simple microprocessor.</p>
-
-<p>We keep putting more and more transistors on a single die, or chip, every day. This trend was first spotted by Intel co-founder Gordon E. Moore, and so we call it <a href="http://en.wikipedia.org/wiki/Moore's_law">Moore&#8217;s law</a>. So far, Moore&#8217;s prediction that the number of transistors on integrated circuits would double every 2 years has been quite accurate. It has led us from the simplest integrated circuit in 1958 to the Core i7 processor in my Macbook Air today.</p>
-
-<p>The other day I tweeted about the crazy processing power that we get today under Moore&#8217;s Law.</p>
-
-<blockquote class="twitter-tweet" align="center"><p>Crazy future; my MBA doesn&#8217;t sweat when running Linux-in-VMware, Chrome, Emacs, LightTable, other apps, terminals &amp; 4 REPLs all at once.</p>&mdash; mathiasx (@mathiasx) <a href="https://twitter.com/mathiasx/status/307668858985140225">March 2, 2013</a></blockquote>
-
-
-<script async src="http://blog.mattgauger.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>And in truth, I was running more software than I could fit into that tweet, because I was listening to music, had a few PDFs in the background, and was managing my ebook collection at the same time. But those notorious CPU hogs listed in the tweet should be enough to illustrate just how much is going on without really pushing the processing cores of the Macbook Air.</p>
-
-<p>Remember, my 13&#8221; Macbook Air only weighs 2.96 pounds. In 2005, I had a 12&#8221; Powerbook G4 that weighed 4.6 pounds and had, by my back-of-the-envelope calculations on Geekbench scores <sup><a href="#geekbench-notes" name="geekbench-notes-return">1</a></sup>, my Macbook Air is almost 9 times as powerful as the Powerbook G4 was.</p>
-
-<p>Where is this progress taking us? Well, my iPhone is already pretty powerful. It&#8217;s hard to get a raw number of FLOPS (floating-point operations per second) for the processor in an iPhone 4S, but we can get a Geekbench score for it. It is weighed against the same scale as the Macbook Air is measured on. On that scale, my iPhone measures<sup><a href="#geekbench-iphone-notes" name="geekbench-iphone-notes-return">2</a></sup> very close to the Powerbook G4 I had 8 years ago, but the iPhone has the advantage of having two cores.</p>
-
-<p>Some people incorrectly read Moore&#8217;s Law as &#8220;processor <em>speed</em> doubling every 2 years,&#8221; which it is not. We&#8217;ve found that there&#8217;s more to processing power than just gigahertz, though. The number of cores in a processor, and therefore the number of simultaneous things that a computer can do, is increasing. While there&#8217;s some issues as we grow into this new paradigm where everything has multiple cores and we have to ensure consistency between them, this is overall a net win for those of us seeking more powerful computers.</p>
-
-<p>To be honest, I don&#8217;t really even notice my computer as physical hardware anymore. It is just the stage for software to run on: quiet, fast, lightweight, and very infrequently does the hardware bog down to make me wait. Only a few short years ago, we would have to wait for the computer to do something &#8211; usually shown as the hourglass on Windows and the spinning beachball on Macs. Even things like copying a file between two directories could stop a system in its tracks, and the computer would simply stop accepting any input from the user. Now, processors, RAM, and SSDs are so fast that I rarely have to wait for them. And if I do have to wait, say, for some piece of software to be installed, the fact that the computer is multicore means that I can go and browse the internet in another window without noticing.</p>
-
-<p>It&#8217;s likely that, just like the example of VMware running Linux running on my Macbook Air in the my tweet, eventually we will get to the point of having so much computing power embedded around us that we will virtualize everything. It&#8217;s possible that we will take not just files or even processes between computing devices but the whole environment, a whole virtualized machine and operating system. As a thought experiment, imagine pausing a VMware virtual machine while it is performing some CPU-intensive task on your laptop. Now copy that paused VM over to another machine, and start it back up. The software will continue to chug along on the CPU-intensive task like nothing happened<sup><a href="#vm-notes" name="vm-notes-return">3</a></sup>. Advances in processing power, storage speed, and wireless networking speed will continue to progress until this process could be seamless to the user.</p>
-
-<p>In some regards, sending the whole VM across the wire and starting it back up on another processor is simpler than trying to marshal a raw process between two machines, and ensure that the process can still run in the other machine&#8217;s environment. It doesn&#8217;t solve the problem of running one process on many machines at once, but it could be used in cases where we can spin up one copy of a process that we want to parallelize, and then copy that VM to many different machines with chunks of the dataset to process. In fact, that&#8217;s basically how many large distributed processing projects like BOINC (the software that SETI@Home runs on) work.</p>
-
-<p>And so it&#8217;s likely that, for reasons of ease of use, sandboxing for security and safety, and simply because we have so much processing power, in the future our phones and our wearable computers will simply be running a virtual machine. Then we don&#8217;t need to worry about what software is running on our desktop PCs when we get home and have access to a larger display; we just move our processing over to the desktop computer, which ever is more convenient. (Even more likely is that we just have a display that acts like an accessory that we can &#8220;throw&#8221; the video onto, rather than having a separate desktop computer.)</p>
-
-<p>The things around us are getting progressively more powerful by way of cheap, small processors. Where before I was saying that electronics hobbyists would rather use an Arduino into a project than deal with many transistors, industry would rather throw a small ARM processor into everything around us and write software than design a custom piece of hardware.</p>
-
-<p>Case in point, over on the Panic blog, the case of <a href="http://www.panic.com/blog/2013/03/the-lightning-digital-av-adapter-surprise/">The Lightning Digital AV Adapter Surprise</a>. After wondering why the new Lightning AV adapter for the iPad mini took a few moments to boot up, and seemed to display a scaled version of the video, they cracked open the Lightning AV cable to find: an ARM processor! As far as they can tell, the iPad mini sends a bit of software to the processor in the Lightning cable every time it is connected, essentially booting the cable up, and sets an Airplay stream down the cable to the other end, where the ARM processor decodes it, upscales it to HD, and sends it to the TV. This makes the Lightning AV cable, in essence, the world&#8217;s smallest AppleTV. And we thought the new AppleTV was small when it was debuted.</p>
-
-<p>When I go to a concert now, the room is full of smartphones being pointed at the stage taking video or pictures. And while most people might think, &#8220;That&#8217;s a lot of pictures and video that will be uploaded to Facebook,&#8221; I think about the fact that the people in the room with me are holding more processing power in their hands than we had in most of the computer labs in my schools and in college. Those phones will just keep getting more powerful, and soon they&#8217;ll match the performance of the Macbook Air I&#8217;ve got in my backpack. Even the mundane things will have plenty of processing power because it will be cheap and simpler to put a cheap processor in it. But those cheap processors are getting more powerful every day, and that is exciting.</p>
-
-<p>So while I may have learned digital logic in college and can help you build up a simple adder from NAND gates, and as a hobbyist I&#8217;ve learned to build <a href="http://www.geofex.com/article_folders/fuzzface/fffram.htm">guitar fuzz pedals from a few transistors</a>, that knowledge is increasingly obsolete in the face of rapid progress. We will soon be packing powerful processors into everything around us, sometimes in surprisingly ways, simply because it is easier and cheaper than designing a custom piece of hardware. But the future is exciting, and that knowledge isn&#8217;t completely useless, as long as I can share it with a few more people to show us just how far we&#8217;ve come.</p>
-
-<hr />
-
-<p><a name="geekbench-notes"></a></p>
-
-<p><strong>1.</strong></p>
-
-<p>&#8220;Geekbench scores are calibrated against a baseline score of 1,000 (which is the score of a single-processor Power Mac G5 @ 1.6GHz). Higher scores are better, with double the score indicating double the performance.&#8221;</p>
-
-<p>Scores:</p>
-
-<ul>
-<li><a href="http://browser.primatelabs.com/geekbench2/1713385">MacBook Air (13-inch Mid 2012)</a>: 7675</li>
-<li><a href="http://browser.primatelabs.com/geekbench2/1545796">PowerBook G4 (12-inch 1.5 GHz)</a>: 861</li>
-</ul>
-
-
-<p><a href="#geekbench-notes-return">&#8617;</a></p>
-
-<p><a name="geekbench-iphone-notes"></a>
-<strong>2.</strong> Geekbench score for <a href="http://browser.primatelabs.com/ios-benchmarks">iPhone 4S</a>: 651 <a href="#geekbench-iphone-notes-return">&#8617;</a></p>
-
-<p><a name="vm-notes"></a>
-<strong>3.</strong> Of course, there&#8217;s some issues with this. Anything that was happening synchronously would probably failed, as well as anything that depends on a network connection in progress. But for the purposes of the thought experiment, let&#8217;s ignore those problems. <a href="#vm-notes-return">&#8617;</a></p>
 ]]></content>
   </entry>
   

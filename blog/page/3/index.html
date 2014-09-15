@@ -7,7 +7,7 @@
     <meta name="author" content="Matt Gauger">
 
     
-    <meta name="description" content="Apprentice Talk Video &amp; Notes Back in September, I had a blast speaking at Nickel City Ruby. My talk was entitled &#8220;Apprenticeship: &hellip;">
+    <meta name="description" content="Indent and Colorize HTML Strings in Pry (This post is part of my blog archiving project. This post appeared on Coderwall on November 14, 2013.) Note &hellip;">
     
 
     <link href="/atom.xml" rel="alternate" title="blog.mattgauger.com" type="application/atom+xml">
@@ -62,6 +62,73 @@
   <article class="page span8 offset2">
     
     
+
+
+  <article class="post">
+    
+    <h1 class="title"><a href="/blog/2013/11/14/indent-and-colorize-html-strings-in-pry/">Indent and Colorize HTML Strings in Pry</a></h1>
+    <div class="entry">
+        <hr />
+
+<p><em>(This post is part of my blog archiving project. This post appeared on <a href="https://coderwall.com/p/hlbana">Coderwall</a> on November 14, 2013.)</em></p>
+
+<p><em>Note: I have converted the inline code to Gists for better readabililty.</em></p>
+
+<hr />
+
+<p>An issue I run into frequently while testing with tools like <a href="https://github.com/jnicklas/capybara">capybara</a> by dropping into <a href="http://pryrepl.org/">pry</a> is that the last response for a page is a single string, containing the HTML that was rendered. But those string have lost indentation and generally make it really hard to see the content of the page, or whatever you care about.</p>
+
+<p>For example, a simple login page might look like:</p>
+
+<script src="https://gist.github.com/mathias/2007dab63a9fe77d7182.js"></script>
+
+
+<p>Wouldn&#8217;t it be great if Pry could re-indent and colorize that string of HTML for you? Well, I put together a quick little Pry command that does. Throw this into your <code>~/.pryrc</code>:</p>
+
+<script src="https://gist.github.com/mathias/21a971d0bdb3620a8909.js"></script>
+
+
+<p>Originally, I had tried to use the html5 fork of the <code>tidy</code> command: <a href="https://github.com/w3c/tidy-html5">https://github.com/w3c/tidy-html5</a> but that tool <em>changes</em> the HTML as it parses it, and spits out a bunch of warnings. So instead, I have this pry command use <code>nokogiri</code> when it is available. The command should warn you if you try to use it without <code>nokogiri</code> available. What is output should be very close to the original rendered HTML, just cleaned up and re-indented.</p>
+
+<p>So what does it look like in action?</p>
+
+<script src="https://gist.github.com/mathias/4065f861db4cd9e280ad.js"></script>
+
+
+<p>(imagine that pry has colorized this output, too, through the excellent CodeRay tool.)</p>
+
+<p>I&#8217;d love to hear from you if you find this useful! Or even if you don&#8217;t find it useful, but have some suggestions to improve it. Thanks!</p>
+
+        
+        
+    </div>
+
+    <div class="meta">
+        <div class="author">
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
+</div>
+        <div class="date">
+
+
+
+
+
+
+
+
+
+
+
+
+<time datetime="2013-11-14T11:32:00-06:00" pubdate  data-updated="true" >Nov 14<span>th</span>, 2013</time>.</div>
+        <div class="tags">
+
+</div>
+    </div>
+
+  </article>
 
 
   <article class="post">
@@ -509,126 +576,6 @@
 
 
 <time datetime="2013-08-03T08:21:00-05:00" pubdate  data-updated="true" >Aug 3<span>rd</span>, 2013</time>.</div>
-        <div class="tags">
-
-</div>
-    </div>
-
-  </article>
-
-
-  <article class="post">
-    
-    <h1 class="title"><a href="/blog/2013/07/27/minskys-circle-algorithm-in-shoes-dot-rb-slash-hackety-hack/">Minsky&#8217;s Circle Algorithm in Shoes.rb / Hackety Hack</a></h1>
-    <div class="entry">
-        <hr />
-
-<p><em>(This post is part of my blog archiving project. This post appeared on <a href="https://coderwall.com/p/fukypa">Coderwall</a> on July 27, 2013.)</em></p>
-
-<hr />
-
-<p>I wanted to try to implement Minsky&#8217;s Circle Algorithm from the famous <a href="http://en.wikipedia.org/wiki/HAKMEM">HAKMEM</a>. As noted in lots of other places online (<a href="http://brainwagon.org/2010/08/09/drawing-circles-ala-marvin-minsky/">1</a>, <a href="https://news.ycombinator.com/item?id=3111501">2</a>, <a href="http://cabezal.com/misc/minsky-circles.html">3</a>), the algorithm doesn&#8217;t plot a true circle, but rather a very round ellipse. Here&#8217;s the text from the HAKMEM entry:</p>
-
-<blockquote><p>ITEM 149 (Minsky): CIRCLE ALGORITHM Here is an elegant way to draw almost circles on a point-plotting display:</p>
-
-<blockquote><p>&nbsp;&nbsp;&nbsp;NEW X = OLD X - epsilon * OLD Y</p>
-
-<p>&nbsp;&nbsp;&nbsp;NEW Y = OLD Y + epsilon * NEW(!) X</p></blockquote>
-
-<p>This makes a very round ellipse centered at the origin with its size determined by the initial point. epsilon determines the angular velocity of the circulating point, and slightly affects the eccentricity. If epsilon is a power of 2, then we don&#8217;t even need multiplication, let alone square roots, sines, and cosines! The &#8220;circle&#8221; will be perfectly stable because the points soon become periodic.</p>
-
-<p>The circle algorithm was invented by mistake when I tried to save one register in a display hack! Ben Gurley had an amazing display hack using only about six or seven instructions, and it was a great wonder. But it was basically line-oriented. It occurred to me that it would be exciting to have curves, and I was trying to get a curve display hack with minimal instructions.</p></blockquote>
-
-<p>The benefit of using this algorithm, at the time, was that it doesn&#8217;t use cosine/sine or any other complicated functions, and so could be implemented on the rather-limited computers of that time to draw circles fast. (I believe it was used to draw the orbits of ships on the early game <a href="http://en.wikipedia.org/wiki/Spacewar_(video_game">SpaceWar</a>, but I don&#8217;t know that for sure.)</p>
-
-<p>To implement it myself, I needed to be able to plot points on a display. So I turned to Hackety-Hack, which comes with Shoes for drawing graphics. The Shoes DSL for drawing shapes is rather simple, which means we can take the pseudocode above and turn it into a working demo rather easily:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Shoes</span><span class="o">.</span><span class="n">app</span> <span class="k">do</span>
-</span><span class='line'>  <span class="n">epsilon</span> <span class="o">=</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">16</span>
-</span><span class='line'>  <span class="n">offset</span> <span class="o">=</span> <span class="mi">250</span>
-</span><span class='line'>  <span class="n">x</span> <span class="o">=</span> <span class="mi">20</span>
-</span><span class='line'>  <span class="n">y</span> <span class="o">=</span> <span class="mi">20</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">fill</span> <span class="n">red</span>
-</span><span class='line'>  <span class="n">shape</span> <span class="k">do</span>
-</span><span class='line'>    <span class="n">move_to</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">offset</span><span class="p">,</span><span class="n">y</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="mi">100</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span>
-</span><span class='line'>      <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">epsilon</span> <span class="o">*</span> <span class="n">y</span>
-</span><span class='line'>      <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">epsilon</span> <span class="o">*</span> <span class="n">x</span>
-</span><span class='line'>      <span class="n">line_to</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">offset</span><span class="p">,</span><span class="n">y</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">fill</span> <span class="n">blue</span>
-</span><span class='line'>  <span class="n">oval</span><span class="p">({</span><span class="ss">top</span><span class="p">:</span> <span class="mi">250</span><span class="p">,</span> <span class="ss">left</span><span class="p">:</span> <span class="mi">320</span><span class="p">,</span> <span class="ss">radius</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="ss">center</span><span class="p">:</span> <span class="kp">true</span><span class="p">})</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Epsilon is 1/16, as indicated by some quick googling &#8211; basically a small power of two. I have to use the offset to get the center of the circle closer to the center of the Shoes window &#8211; without the offset, the circle will only be a quarter-circle in the upper left corner.</p>
-
-<h2>How does this compare to plotting a real circle?</h2>
-
-<p>If we want to compare the roundness of our &#8220;circle&#8221; to a real circle drawn by Shoes, we can add this line in before the closing <code>end</code>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">fill</span> <span class="n">blue</span>
-</span><span class='line'>  <span class="n">oval</span><span class="p">({</span><span class="ss">top</span><span class="p">:</span> <span class="mi">250</span><span class="p">,</span> <span class="ss">left</span><span class="p">:</span> <span class="mi">320</span><span class="p">,</span> <span class="ss">radius</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="ss">center</span><span class="p">:</span> <span class="kp">true</span><span class="p">})</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Although their radiuses are going to be slightly different.</p>
-
-<p>Here&#8217;s what we end up with. Minsky&#8217;s Circle Algorithm on the left in red, a real circle on the right in blue:</p>
-
-<p><img src="http://www.mattgauger.com/img//Shoes-20130727-151954.jpg" alt="Hackety Hack" /></p>
-
-        
-        
-    </div>
-
-    <div class="meta">
-        <div class="author">
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
-</div>
-        <div class="date">
-
-
-
-
-
-
-
-
-
-
-
-
-<time datetime="2013-07-27T11:32:00-05:00" pubdate  data-updated="true" >Jul 27<span>th</span>, 2013</time>.</div>
         <div class="tags">
 
 </div>
