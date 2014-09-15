@@ -64,7 +64,20 @@
     <h1 class="title">Clojure Code Quality Tools</h1>
     <div class="entry"><p>I work with many programming languages on a daily basis. As a polyglot programmer, I&#8217;ve come to appreciate tools that help me follow best practices. For JavaScript, there&#8217;s the excellent <a href="http://jshint.com/">jshint</a>. When I need to verify some XML, there&#8217;s <a href="http://xmlsoft.org/xmllint.html">xmllint</a>. In a Ruby on Rails project, I can count on the <a href="http://rubygems.org/gems/rails_best_practices">rails_best_practices</a> gem. For Ruby smells, I prefer the combo of <a href="https://github.com/bbatsov/rubocop">rubocop</a>. There&#8217;s tools like <a href="https://github.com/colszowka/simplecov">SimpleCov</a> to measure and show test suite coverage on my Ruby projects. <a href="https://github.com/square/cane">cane</a> helps me to ensure line length, method complexity, and more in my Ruby code. <a href="https://github.com/scrooloose/syntastic">Syntastic</a> helps bring real syntax checking to vim for many langauges. Every day, more open source tools are introduced that help me to improve the quality of the software that I write.</p>
 
-<p>It follows that when I write Clojure code, I want nice tooling to help me manage code quality, namespace management, and out-of-date dependencies. What tools do I use on a day-to-day basis for this? In this post, I&#8217;ll show 4 tools that I use in my workflow every day on Clojure projects, and also provide some other tools for further exploration. Most of these tools exist as plugins to the excellent <a href="http://leiningen.org/">Leiningen</a> tool for Clojure.</p>
+<p>It follows that when I write Clojure code, I want nice tooling to help me manage code quality, namespace management, and out-of-date dependencies. What tools do I use on a day-to-day basis for this? In this post, I&#8217;ll show 5 tools that I use in my workflow every day on Clojure projects, and also provide some other tools for further exploration. Most of these tools exist as plugins to the excellent <a href="http://leiningen.org/">Leiningen</a> tool for Clojure.</p>
+
+<h2>lein deps :tree</h2>
+
+<p>In the past, <code>lein deps</code> was a command that downloaded the correct versions of your project&#8217;s dependencies. Running <code>lein deps</code> is no longer necessary, as each lein command now checks for dependencies before executing. But <code>deps</code> provides an interesting variant for our uses: <code>lein deps :tree</code>.</p>
+
+<p>The <code>:tree</code> keyword at the end instructs lein to print out your project&#8217;s dependencies as a tree. This itself is a good visualization, but not what we&#8217;re looking for. The tree command will first print out any dependencies-of-dependencies which have conflicts with other dependencies. For example, here&#8217;s what <code>lein deps :tree</code> says for one of my projects:</p>
+
+<script src="https://gist.github.com/mathias/8eca3548f751bec6ea55.js"></script>
+
+
+<p>As you can see, the tool suggests dependencies that request conflicting versions, and how we can modify our <code>project.clj</code> file to resolve those conflicting versions by excluding one or the other. This isn&#8217;t always very useful, but when you run into issues because two different Clojure libraries require two wildly different <code>joda-time</code> versions (a situation I have run into before), it will be good to know what dependencies are causing that issue and how you might go about resolving it.</p>
+
+<p>Note that this functionality disappeared in Leiningen 2.4.3 but is back in 2.5.0, so make sure you run <code>lein upgrade</code>!</p>
 
 <h2><a href="https://github.com/xsc/lein-ancient">lein-ancient</a></h2>
 
@@ -201,11 +214,9 @@
 
 <h2>Final Thoughts</h2>
 
-<p>That&#8217;s all! I did write a bit more on using <code>lein deps :tree</code> to find dependency-of-dependencies conflicts, but the functionality stopped working in the most recent version of Leiningen (2.4.3). If you&#8217;re interested in that section, I&#8217;ve put it online as a <a href="https://gist.github.com/mathias/2af80c34edbc53582f53">gist</a>. When a new release of lein brings that functionality back, I&#8217;ll write a quick follow-up post for it.</p>
+<p>In this post, I covered 5 tools to add to your workflow all the time, and some others that might be useful in certain cases. I&#8217;m sure there&#8217;s more tools out there that are useful that I don&#8217;t know about, and I&#8217;d love to hear about them.</p>
 
 <p>I&#8217;m also thinking about writing some posts about other development tools that I use, particularly how I use <a href="https://github.com/marick/midje">midje</a> to test, and how you can benchmark code with <a href="https://github.com/davidsantiago/perforate">perforate</a>. If you&#8217;re interested in those topics, get in touch and let me know.</p>
-
-<p>I&#8217;m sure there&#8217;s more tools out there that are useful that I don&#8217;t know about, and I&#8217;d love to hear about them.</p>
 
 <p>Have fun and enjoy your cleaner codebase with these tools in your tool belt!</p>
 
