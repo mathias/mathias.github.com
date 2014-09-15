@@ -4,7 +4,7 @@
   <title><![CDATA[blog.mattgauger.com]]></title>
   <link href="http://blog.mattgauger.com/atom.xml" rel="self"/>
   <link href="http://blog.mattgauger.com/"/>
-  <updated>2014-09-15T13:54:32-05:00</updated>
+  <updated>2014-09-15T13:55:10-05:00</updated>
   <id>http://blog.mattgauger.com/</id>
   <author>
     <name><![CDATA[Matt Gauger]]></name>
@@ -18,7 +18,7 @@
     <link href="http://blog.mattgauger.com/blog/2014/09/15/clojure-code-quality-tools/"/>
     <updated>2014-09-15T13:39:00-05:00</updated>
     <id>http://blog.mattgauger.com/blog/2014/09/15/clojure-code-quality-tools</id>
-    <content type="html"><![CDATA[<p>I work with many programming languages on a daily basis. As a polyglot programmer, I&#8217;ve come to appreciate tools that help me follow best practices. For JavaScript, there&#8217;s the excellent <a href="http://jshint.com/">jshint</a>. When I need to verify some XML, there&#8217;s <a href="http://xmlsoft.org/xmllint.html">xmllint</a>. In a Ruby on Rails project, I can count on the <a href="http://rubygems.org/gems/rails_best_practices">rails_best_practices</a> gem. For Ruby smells, I reach for <a href="https://github.com/bbatsov/rubocop">rubocop</a>. There&#8217;s tools like <a href="https://github.com/colszowka/simplecov">SimpleCov</a> to measure test coverage on my Ruby projects. <a href="https://github.com/square/cane">cane</a> helps me to ensure line length, method complexity, and more in my Ruby code. <a href="https://github.com/scrooloose/syntastic">Syntastic</a> helps bring real syntax checking to vim for many langauges. Every day, more open source tools are introduced that help me to improve the quality of the software that I write.</p>
+    <content type="html"><![CDATA[<p>I work with many programming languages on a daily basis. As a polyglot programmer, I&#8217;ve come to appreciate tools that help me follow best practices. For JavaScript, there&#8217;s the excellent <a href="http://jshint.com/">jshint</a>. When I need to verify some XML, there&#8217;s <a href="http://xmlsoft.org/xmllint.html">xmllint</a>. In a Ruby on Rails project, I can count on the <a href="http://rubygems.org/gems/rails_best_practices">rails_best_practices</a> gem. For Ruby smells, I reach for <a href="https://github.com/bbatsov/rubocop">rubocop</a>. There&#8217;s tools like <a href="https://github.com/colszowka/simplecov">SimpleCov</a> to measure test coverage on my Ruby projects. <a href="https://github.com/square/cane">cane</a> helps me to ensure line length, method complexity, and more in my Ruby code. <a href="https://github.com/scrooloose/syntastic">Syntastic</a> helps bring real syntax checking to vim for many languages. Every day, more open source tools are introduced that help me to improve the quality of the software that I write.</p>
 
 <p>It follows that when I write Clojure code, I want nice tooling to help me manage code quality, namespace management, and out-of-date dependencies. What tools do I use on a day-to-day basis for this? In this post, I&#8217;ll show 5 tools that I use in my workflow every day on Clojure projects, and also provide some other tools for further exploration. Most of these tools exist as plugins to the excellent <a href="http://leiningen.org/">Leiningen</a> tool for Clojure.</p>
 
