@@ -7,7 +7,7 @@
     <meta name="author" content="Matt Gauger">
 
     
-    <meta name="description" content="Open URL From Terminal.app and the &#8216;Open&#8217; Command More and more as I blog, I find I like to post little tips, and beginners thank me for &hellip;">
+    <meta name="description" content="Git & Github: A Beginner&#8217;s Guide &nbsp;Let me start off by saying that this blog post isn&#8217;t going to introduce you to the&nbsp; &hellip;">
     
 
     <link href="/atom.xml" rel="alternate" title="blog.mattgauger.com" type="application/atom+xml">
@@ -62,54 +62,6 @@
   <article class="page span8 offset2">
     
     
-
-
-  <article class="post">
-    
-    <h1 class="title"><a href="/blog/2010/12/12/open-url-from-terminal-app-and-the-open-command/">Open URL From Terminal.app and the &#8216;Open&#8217; Command</a></h1>
-    <div class="entry">
-        <p>More and more as I blog, I find I like to post little tips, and beginners thank me for showing them something new, More advanced users may have simply overlooked whatever I&#8217;m sharing, so they can find it useful, too. So in that vein, I just reminded myself of a little Mac OSX Terminal.app trick I use all the time, and wanted to post it here.</p>
-<p>When you have a URL in Terminal.app, say in a README file you&#8217;re reading, or coming back from a dig/whois command, you can just right-click (option-click) on the URL and click Open URL. It&#8217;s fast, it works, and it saves me a few milliseconds of copy/pasting it. Awesomest trick ever? Not really. Useful? Definitely.</p>
-<p>[[posterous-content:GhDhggrykxnlvvnjjkAp]]</p>
-<div>An alternative form of this is to use the Mac OSX &#8220;open&#8221; command on any number of things: Files, applications, URLs. Here&#8217;s how it looks:&nbsp;</div>
-<div class="CodeRay">
-  <div class="code"><pre>banshee:diaspora mathiasx$ open http://joindiaspora.com
-banshee:diaspora mathiasx$ open README.md 
-banshee:diaspora mathiasx$ open /Applications/Google\ Chrome.app/</pre></div>
-</div>
-
-<p>That will open the <a href="https://joindiaspora.com/">joindiaspora.com</a> site in your default browser, a file called README.md in whatever your default text editor is, and the final command will open Google Chrome if it isn&#8217;t open, otherwise it will simply switch focus to it.</p>
-
-        
-        
-    </div>
-
-    <div class="meta">
-        <div class="author">
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
-</div>
-        <div class="date">
-
-
-
-
-
-
-
-
-
-
-
-
-<time datetime="2010-12-12T00:00:00-06:00" pubdate  data-updated="true" >Dec 12<span>th</span>, 2010</time>.</div>
-        <div class="tags">
-
-</div>
-    </div>
-
-  </article>
 
 
   <article class="post">
@@ -593,6 +545,54 @@ minimite:railstutorial.org mathiasx$ rails new first_app
 
 
 <time datetime="2010-10-16T00:00:00-05:00" pubdate  data-updated="true" >Oct 16<span>th</span>, 2010</time>.</div>
+        <div class="tags">
+
+</div>
+    </div>
+
+  </article>
+
+
+  <article class="post">
+    
+    <h1 class="title"><a href="/blog/2010/10/13/-library-ruby-gems-1-8-gems-eventmachine-0-12-10-lib-eventmachine-rb-572-in-start-tcp-server-no-acceptor-runtimeerror-/">/Library/Ruby/Gems/1.8/gems/eventmachine-0.12.10/lib/eventmachine.rb:572: In `start_tcp_server&#8217;: No Acceptor (RuntimeError)</a></h1>
+    <div class="entry">
+        <p>Seeing this error when trying to run your Rack or Sinatra webapp?</p>
+<p>It&#8217;s probably because you&#8217;re already running something on the port you&#8217;re trying to use. This happens quite a bit if you&#8217;re using daemonized Rack apps that go off on their own after you close the controlling shell.</p>
+<p>Use this command to see what&#8217;s happening on a port:</p>
+<div class="CodeRay">
+  <div class="code"><pre>$ lsof -i :4567
+COMMAND   PID     USER   FD   TYPE     DEVICE SIZE/OFF NODE NAME
+ruby    74716 mathiasx    5u  IPv4 0x073562a4      0t0  TCP *:tram (LISTEN)</pre></div>
+</div>
+
+<div>It&#8217;ll help you see the PID of the process that&#8217;s hogging that port. Just be careful not to kill anything that <strong>should</strong> be on that port!</div>
+<p>&nbsp;</p>
+
+        
+        
+    </div>
+
+    <div class="meta">
+        <div class="author">
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
+</div>
+        <div class="date">
+
+
+
+
+
+
+
+
+
+
+
+
+<time datetime="2010-10-13T00:00:00-05:00" pubdate  data-updated="true" >Oct 13<span>th</span>, 2010</time>.</div>
         <div class="tags">
 
 </div>

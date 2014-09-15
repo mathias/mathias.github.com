@@ -4,7 +4,7 @@
   <title><![CDATA[blog.mattgauger.com]]></title>
   <link href="http://blog.mattgauger.com/atom.xml" rel="self"/>
   <link href="http://blog.mattgauger.com/"/>
-  <updated>2014-09-15T13:48:31-05:00</updated>
+  <updated>2014-09-15T13:54:07-05:00</updated>
   <id>http://blog.mattgauger.com/</id>
   <author>
     <name><![CDATA[Matt Gauger]]></name>
@@ -18,176 +18,7 @@
     <link href="http://blog.mattgauger.com/blog/2014/09/15/clojure-code-quality-tools/"/>
     <updated>2014-09-15T13:39:00-05:00</updated>
     <id>http://blog.mattgauger.com/blog/2014/09/15/clojure-code-quality-tools</id>
-    <content type="html"><![CDATA[<p>I work with many programming languages on a daily basis. As a polyglot programmer, I&#8217;ve come to appreciate tools that help me follow best practices. For JavaScript, there&#8217;s the excellent <a href="http://jshint.com/">jshint</a>. When I need to verify some XML, there&#8217;s <a href="http://xmlsoft.org/xmllint.html">xmllint</a>. In a Ruby on Rails project, I can count on the <a href="http://rubygems.org/gems/rails_best_practices">rails_best_practices</a> gem. For Ruby smells, I prefer the combo of <a href="https://github.com/bbatsov/rubocop">rubocop</a>. There&#8217;s tools like <a href="https://github.com/colszowka/simplecov">SimpleCov</a> to measure and show test suite coverage on my Ruby projects. <a href="https://github.com/square/cane">cane</a> helps me to ensure line length, method complexity, and more in my Ruby code. <a href="https://github.com/scrooloose/syntastic">Syntastic</a> helps bring real syntax checking to vim for many langauges. Every day, more open source tools are introduced that help me to improve the quality of the software that I write.</p>
-
-<p>It follows that when I write Clojure code, I want nice tooling to help me manage code quality, namespace management, and out-of-date dependencies. What tools do I use on a day-to-day basis for this? In this post, I&#8217;ll show 5 tools that I use in my workflow every day on Clojure projects, and also provide some other tools for further exploration. Most of these tools exist as plugins to the excellent <a href="http://leiningen.org/">Leiningen</a> tool for Clojure.</p>
-
-<h2>lein deps :tree</h2>
-
-<p>In the past, <code>lein deps</code> was a command that downloaded the correct versions of your project&#8217;s dependencies. Running <code>lein deps</code> is no longer necessary, as each lein command now checks for dependencies before executing. But <code>deps</code> provides an interesting variant for our uses: <code>lein deps :tree</code>.</p>
-
-<p>The <code>:tree</code> keyword at the end instructs lein to print out your project&#8217;s dependencies as a tree. This itself is a good visualization, but not what we&#8217;re looking for. The tree command will first print out any dependencies-of-dependencies which have conflicts with other dependencies. For example, here&#8217;s what <code>lein deps :tree</code> says for one of my projects:</p>
-
-<script src="https://gist.github.com/mathias/8eca3548f751bec6ea55.js"></script>
-
-
-<p>As you can see, the tool suggests dependencies that request conflicting versions, and how we can modify our <code>project.clj</code> file to resolve those conflicting versions by excluding one or the other. This isn&#8217;t always very useful, but when you run into issues because two different Clojure libraries require two wildly different <code>joda-time</code> versions (a situation I have run into before), it will be good to know what dependencies are causing that issue and how you might go about resolving it.</p>
-
-<p>Note that this functionality disappeared in Leiningen 2.4.3 but is back in 2.5.0, so make sure you run <code>lein upgrade</code>!</p>
-
-<h2><a href="https://github.com/xsc/lein-ancient">lein-ancient</a></h2>
-
-<p>This plugin to <code>lein</code> exists simply to check your project for outdated dependencies. Without <a href="https://github.com/xsc/lein-ancient">lein-ancient</a>, I&#8217;d be unable to keep up with some of the faster-moving libraries in the Java and Clojure world.</p>
-
-<p>After adding ancient to your <code>~/.lein/profiles.clj</code>, running the <code>lein ancient</code> command yields output on the same project as before:</p>
-
-<script src="https://gist.github.com/mathias/bac5e554f971d7aa462f.js"></script>
-
-
-<p>Whoops! Looks like I haven&#8217;t been keeping up to date with my dependencies. <code>lein ancient</code> makes checking for new dependency versions easy. Further, thanks to the ubiquity of <a href="http://semver.org/">semantic versioning</a> in Clojure projects, it is usually quite safe to bump the minor versions (0.0.x) of dependencies.</p>
-
-<p>You can also use lein-ancient to find outdated lein plugins in your <code>~/.lein/profiles.clj</code> file. Just run it with the <code>profiles</code> argument:</p>
-
-<script src="https://gist.github.com/mathias/02b999542ea837b87e30.js"></script>
-
-
-<h2><a href="https://github.com/jonase/kibit">lein kibit</a></h2>
-
-<p>As we gain experience and confidence in a programming language, we begin to talk about whether we&#8217;re writing <em>idiomatic</em> code. I&#8217;d argue that idiomatic code is code that accomplishes a goal with proper use of language features, in a way that other developers familiar with that language would understand. A simpler way to say it might be: idiomatic code uses the community-accepted best practices of how to do something.</p>
-
-<p>Clojure&#8217;s design seeks to solve some problems found in older Lisps, as well as add in niceties like complementary predicate functions. A good example of these convenient complementary functions are <code>if</code> and <code>if-not</code>. Clojure also contains several cases of simplification for common usage. For example, when you don&#8217;t need an else clause on an <code>if</code>, you can use the <code>when</code> macro.</p>
-
-<p>Wouldn&#8217;t it be great if there was someone who was well-versed in Clojure idioms pairing with you and offering suggestions? That&#8217;s exactly what <a href="https://github.com/jonase/kibit">kibit</a> does.</p>
-
-<p>Running against a project I&#8217;d set up to contain some smells, <code>lein kibit</code> found:</p>
-
-<script src="https://gist.github.com/mathias/fc0d446aeb90f44a6731.js"></script>
-
-
-<p>These kinds of small improvements are all over our Clojure projects. They&#8217;re not show-stopper bugs, but they&#8217;re small places for improvement.</p>
-
-<p>Kibit&#8217;s suggestions are almost always logically equivalent to the original code. Still, I always do some smoke-testing to ensure the code still works after using Kibit&#8217;s suggestion, and it generally does. Problems I frequently fix with Kibit are replacing <code>if</code> statements with the <code>when</code> macro, as well as places where the code checks for empty seqs, or that I can simplify nil checks.</p>
-
-<p>You can point lein kibit at a specific namespace by appending the path, like this: <code>lein kibit src/foo/bar.clj</code></p>
-
-<p>Kibit catches many cases where there is a more-idiomatic way to express what you are trying to do. I recommend running it often. In fact, it&#8217;s possible to use <a href="https://github.com/jonase/kibit#usage-from-inside-emacs">kibit in your emacs buffers</a> if you want it to be that much more convenient and real-time.</p>
-
-<h2><a href="https://github.com/jonase/eastwood">Eastwood</a></h2>
-
-<p>For linting Clojure code, there&#8217;s Eastwood. It is similar in functionality to Kibit, bit will catch different issues than Kibit. Built on two interesting Clojure projects: <a href="https://github.com/clojure/tools.analyzer">tools.analyzer</a> and <a href="https://github.com/clojure/tools.analyzer.jvm">tools.analyzer.jvm</a>, Eastwood does a powerful examination of your code inside the JVM. It is worth highlighting that since Eastwood loads your code to analyze it, it might trigger any side effects that happen when your code loads: writing files, modifying databases, etc. Note that it only loads the code; it does not execute it.</p>
-
-<p>After adding <code>eastwood</code> to your lein <code>profiles.clj</code>, simply run: <code>lein eastwood</code> and you will see output like:</p>
-
-<script src="https://gist.github.com/mathias/b93cea02293eac933bee.js"></script>
-
-
-<p>That&#8217;s a lot of problems for a simple file! Notice how one mistake got caught for two reasons: A misplaced docstring (placed after the arguments vector) becomes just a string in the function body that will be thrown away.</p>
-
-<p>Another nice catch that Eastwood provides is detecting the redefinition of the var <code>qux</code> in the file.</p>
-
-<p>But Eastwood covers a lot more cases than just vars being def&#8217;d more than once. See the <a href="https://github.com/jonase/eastwood#whats-there">full list</a> to find out what else it does. There&#8217;s a few linters that are disabled by default, but they might make sense to enable for your project.</p>
-
-<p>Frequently running lint tools can help prevent subtle problems that come from code that looks correct but contains some small error. Eastwood is less concerned with style than tools like JSHint are, but we have other tools that cover stylistic concerns.</p>
-
-<h2><a href="https://github.com/dakrone/lein-bikeshed">lein bikeshed</a></h2>
-
-<p>This is a relative newcomer to my own tool set. <a href="https://github.com/dakrone/lein-bikeshed">lein bikeshed</a> has features related to the low-hanging fruit in our Clojure code: lines longer than 80 characters, blank lines at ends of files, and more. It will also tell you what percentage of functions have docstrings. Like other tools mentioned here, it is a lein plugin that you add to your <code>profiles.clj</code>.</p>
-
-<p>A run of <code>lein bikeshed</code> on its own source (which purposefully includes some code designed to fail) looks like this:</p>
-
-<script src="https://gist.github.com/mathias/271e06ebce8fe6428b83.js"></script>
-
-
-<p>Bikeshed might give a lot of output for your existing projects, but the warnings are worth investigating and addressing. You can always silence the long-lines warning if it doesn&#8217;t matter to you with the <code>-m</code> command line argument.</p>
-
-<h2>Tying it all together with a Lein alias</h2>
-
-<p>Wouldn&#8217;t it be great to run all these tools frequently, so that you can check for as many problems as possible? Well, you can, with a lein alias. (The lein wiki documents aliases in the <a href="https://github.com/technomancy/leiningen/blob/stable/sample.project.clj#L195-L211">lein sample.project.clj</a>.)</p>
-
-<p>In <code>~/.lein/profiles.clj</code>, inside your <code>:user</code> map, add the line:</p>
-
-<script src="https://gist.github.com/mathias/eef9f3f3e9e0ba40cb78.js"></script>
-
-
-<p>Now, when you want to run all these tools at once on a project, you simply invoke <code>lein omni</code>. I use this alias on all my Clojure(Script) projects. I have grown accustomed to seeing the kinds of output that a clean Clojure project will have.</p>
-
-<p>It&#8217;s worth noting that I don&#8217;t run Eastwood unless it is necessary for the project. When it is necessary, I override the alias in the project&#8217;s <code>project.clj</code> to run Eastwood as well.</p>
-
-<p>This command can take some time to complete, but with an alias we&#8217;re only spinning up lein once.</p>
-
-<h2>And a bash alias</h2>
-
-<p>The output of <code>lein omni</code> can be long, which can either result in a lot of scrolling or neglecting to run the command due to the inconvenience. To help manage the length of the output, I&#8217;ve created a bash alias that runs the plugins and pipes them to less.</p>
-
-<p>My personal bash alias also runs midje at the end. You can choose whether to run the tests for your own alias. That&#8217;s just my personal preference.</p>
-
-<script src="https://gist.github.com/mathias/8b6a0040fcd7e4ae890f.js"></script>
-
-
-<p>Note that just like running the lein alias above, this may take a bit of time. Since we&#8217;re piping it to <code>less</code>, it might take awhile before <code>less</code> receives output. While it is still running, output will periodically show up at the bottom of the <code>less</code> buffer. You can use both Emac&#8217;s and vim&#8217;s movement commands in <code>less</code> to advance the buffer. I find <code>less</code> to be more manageable for scrolling through output than switching to <code>tmux</code>&#8217;s history scrolling mode.</p>
-
-<h2>Managing your namespaces: <a href="https://github.com/technomancy/slamhound">lein slamhound</a></h2>
-
-<p>Namespace management often becomes an issue on nontrivial Clojure projects. Actively developing a project means managing the functions we pull in from other namespaces and from libraries. These require statements can often get out of date. Often, they&#8217;re either missing namespaces that are needed, or containing requirements for old functions that are no longer used in the current code.</p>
-
-<p><a href="https://github.com/technomancy/slamhound">slamhound</a> is a tool that can help to manage dependencies in your namespaces. It knows how to require and import Clojure and Java dependencies, and can remove stale requires that are no longer necessary. Slamhound can often fix missing requires for functions that it can resolve.</p>
-
-<p><strong>Note: slamhound rewrites the namespace macros in your project&#8217;s .clj files!</strong> I recommend only running it on code that&#8217;s committed to git (or whatever you use as a VCS) so that you can review and  rollback any changes it makes.</p>
-
-<p>The most basic way to use slamhound is to add it to your <code>~/.lein/profiles.clj</code> as a dependency. Then add this alias:</p>
-
-<script src="https://gist.github.com/mathias/f3799e60c63b0aebf17e.js"></script>
-
-
-<p>Now you can use slamhound on a project by running <code>lein slamhound</code> in the project&#8217;s directory. There&#8217;s also REPL and Emacs support, which you can learn more about in the <a href="https://github.com/technomancy/slamhound#repl-usage">slamhound README</a>.</p>
-
-<h2>Measuring test coverage with <a href="https://github.com/lshift/cloverage">cloverage</a></h2>
-
-<p>It is often claimed that less unit testing is necessary in Clojure because Clojure is functional and makes use of immutable data structures. And it is true that with functional programming, most tests are simple: given some input, the output should be a certain value.</p>
-
-<p>Some would even argue that Clojure functions should be well-factored enough into simple functions that the behavior of the function is apparent and requires no tests. Still others maintain that developing in the REPL is as good as writing unit tests, since functions are constantly evaluated and integrated with this style of development.</p>
-
-<p>That said, there&#8217;s still mutable Java code to interop with, there&#8217;s still the necessary evil of functions with side effects, and we might want to check the <em>structure</em> of the data we&#8217;re producing in our functions rather than the value of it. For all those reasons and to check that I don&#8217;t introduce regressions, I tend to write unit tests in Clojure.</p>
-
-<p>This blog post isn&#8217;t a platform to argue for or against testing Clojure. But when you do test, you may wonder how to tell how much test coverage your test suite has. How do we know at a glance what percentage of our namespaces is being tested? And how do we find lines that are never being exercised in our tests? After all, we can&#8217;t improve what we don&#8217;t measure.</p>
-
-<p>That&#8217;s where <a href="https://github.com/lshift/cloverage">cloverage</a> comes in. Cloverage is another lein plugin, so it gets added to <code>~/.lein/profiles.clj</code> like the others. Then run <code>lein cloverage</code> in your project; it will run the test suite and generate a coverage report.</p>
-
-<p>The coverage report appears in <code>target/coverage</code> as HTML files, broken down by namespace.</p>
-
-<p>You can still use Cloverage even if you don&#8217;t use <code>clojure.test</code>. I use <a href="https://github.com/marick/Midje">midje</a> in most of my tests. To use Cloverage in those situations, wrap your tests in a <code>deftest</code>.</p>
-
-<p>Since <code>deftest</code> has a hyphenated Clojure keyword as its identifier, and Midje facts have a string as an identifier, I&#8217;ve come to use the <code>deftest</code> to group related tests together. Usually this means naming the group of tests after the function I&#8217;m testing. Then I name Midje facts after the situation that the fact exercises. This makes sense to me because it fits well with the hierarchy of rspec unit tests in Ruby.</p>
-
-<p>Here&#8217;s an example of using this approach:</p>
-
-<script src="https://gist.github.com/mathias/94e1a4d7b8bce7c02e23.js"></script>
-
-
-<p>Cloverage also outputs a <code>coverage.txt</code> file that might be useful for use with services like <a href="http://coveralls.io">Coveralls</a>. I haven&#8217;t used this, so I can&#8217;t comment on its usefulness.</p>
-
-<p>If you&#8217;re using <a href="https://github.com/slagyr/speclj">speclj</a> for your tests, you might run into some issues getting Cloverage to play nice. I don&#8217;t use speclj often, so when I couldn&#8217;t get it to work with Cloverage, I didn&#8217;t pursue the issue.</p>
-
-<h2>Final Thoughts</h2>
-
-<p>In this post, I covered 5 tools to add to your workflow all the time, and some others that might be useful in certain cases. I&#8217;m sure there&#8217;s more tools out there that are useful that I don&#8217;t know about, and I&#8217;d love to hear about them.</p>
-
-<p>I&#8217;m also thinking about writing some posts about other development tools that I use, particularly how I use <a href="https://github.com/marick/midje">midje</a> to test, and how you can benchmark code with <a href="https://github.com/davidsantiago/perforate">perforate</a>. If you&#8217;re interested in those topics, get in touch and let me know.</p>
-
-<p>Have fun and enjoy your cleaner codebase with these tools in your tool belt!</p>
-
-<hr />
-
-<p>Interested in commenting or contacting me? Send an email to <a href="mailto:contact@mattgauger.com">contact@mattgauger.com</a>. Thanks!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Clojure Code Quality Tools]]></title>
-    <link href="http://blog.mattgauger.com/blog/2014/09/15/clojure-code-quality-tools/"/>
-    <updated>2014-09-15T13:39:00-05:00</updated>
-    <id>http://blog.mattgauger.com/blog/2014/09/15/clojure-code-quality-tools</id>
-    <content type="html"><![CDATA[<p>I work with many programming languages on a daily basis. As a polyglot programmer, I&#8217;ve come to appreciate tools that help me follow best practices. For JavaScript, there&#8217;s the excellent <a href="http://jshint.com/">jshint</a>. When I need to verify some XML, there&#8217;s <a href="http://xmlsoft.org/xmllint.html">xmllint</a>. In a Ruby on Rails project, I can count on the <a href="http://rubygems.org/gems/rails_best_practices">rails_best_practices</a> gem. For Ruby smells, I prefer the combo of <a href="https://github.com/bbatsov/rubocop">rubocop</a>. There&#8217;s tools like <a href="https://github.com/colszowka/simplecov">SimpleCov</a> to measure and show test suite coverage on my Ruby projects. <a href="https://github.com/square/cane">cane</a> helps me to ensure line length, method complexity, and more in my Ruby code. <a href="https://github.com/scrooloose/syntastic">Syntastic</a> helps bring real syntax checking to vim for many langauges. Every day, more open source tools are introduced that help me to improve the quality of the software that I write.</p>
+    <content type="html"><![CDATA[<p>I work with many programming languages on a daily basis. As a polyglot programmer, I&#8217;ve come to appreciate tools that help me follow best practices. For JavaScript, there&#8217;s the excellent <a href="http://jshint.com/">jshint</a>. When I need to verify some XML, there&#8217;s <a href="http://xmlsoft.org/xmllint.html">xmllint</a>. In a Ruby on Rails project, I can count on the <a href="http://rubygems.org/gems/rails_best_practices">rails_best_practices</a> gem. For Ruby smells, I reach for <a href="https://github.com/bbatsov/rubocop">rubocop</a>. There&#8217;s tools like <a href="https://github.com/colszowka/simplecov">SimpleCov</a> to measure and show test suite coverage on my Ruby projects. <a href="https://github.com/square/cane">cane</a> helps me to ensure line length, method complexity, and more in my Ruby code. <a href="https://github.com/scrooloose/syntastic">Syntastic</a> helps bring real syntax checking to vim for many langauges. Every day, more open source tools are introduced that help me to improve the quality of the software that I write.</p>
 
 <p>It follows that when I write Clojure code, I want nice tooling to help me manage code quality, namespace management, and out-of-date dependencies. What tools do I use on a day-to-day basis for this? In this post, I&#8217;ll show 5 tools that I use in my workflow every day on Clojure projects, and also provide some other tools for further exploration. Most of these tools exist as plugins to the excellent <a href="http://leiningen.org/">Leiningen</a> tool for Clojure.</p>
 
@@ -1707,6 +1538,51 @@ By &#8220;augmenting human intellect&#8221; we mean increasing the capability of
 <cite><a href="http://www.dougengelbart.org/pubs/augment-3906.html">Augmenting Human Intellect: A Conceptual Framework </a></cite>
 </blockquote>
 
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Filter or Be Filtered]]></title>
+    <link href="http://blog.mattgauger.com/blog/2013/03/07/filter-or-be-filtered/"/>
+    <updated>2013-03-07T22:09:00-06:00</updated>
+    <id>http://blog.mattgauger.com/blog/2013/03/07/filter-or-be-filtered</id>
+    <content type="html"><![CDATA[<p>Eli Pariser&#8217;s talk, <a href="http://www.ted.com/talks/eli_pariser_beware_online_filter_bubbles.html">Beware online &#8220;filter bubbles&#8221;</a> recently hit the front page of the TED Talks website. I found it interesting because it discusses some of what I&#8217;ve seen happening online, and some of my fears for how we search and consume content. Watch the video if you haven&#8217;t to see just how much is already being filtered on the web for you.</p>
+
+<p>Right after I saw the video, of course, <a href="http://washingtonpost.com/business/technology/facebook-to-change-news-feed-to-a-personalized-newspaper/2013/03/07/b294f61e-8751-11e2-98a3-b3db6b9ac586_story.html">Facebook announced</a> that they&#8217;ll be rolling out a new version of the the news feed. They are quoted as making it more like a &#8220;personal newspaper&#8221; &mdash; a filter, essentially, for the things Facebook thinks you want to see. As the video above pointed out, they&#8217;ve already been filtering <em>out</em> the things they think you don&#8217;t want for awhile.</p>
+
+<p>No doubt there will be some backlash as people adjust to changes on Facebook, but very few will abandon it. And if you are the kind of person that would abandon Facebook over filtering, or privacy, or concerns about owning your own data, you don&#8217;t have a lot of choices of where to go.</p>
+
+<p>Sure, you can specifically seek out services that aren&#8217;t going to give you a filtered world view &mdash; <a href="https://duckduckgo.com/">DuckDuckGo</a> comes to mind. But that&#8217;s not always possible. The problem is bigger than just the search engine you use and whether or not you&#8217;re logged into Facebook. Just about every site is run by someone else, and they are analyzing you constantly. They are in a brutal battle to keep you as their consumer and keep you from going to other sites. But are the things that they think you want to see what you really want or need to see?</p>
+
+<p>As a developer, I&#8217;m capable of taking matters into my own hands, to some degree. Most of the sites that I use on a daily basis have an API and allow me to export or scrape my personal data. But the cost of switching off of the nice service, the well-designed UI/UX of an official mobile app, and so on has kept me from taking the plunge to export my data and go set up shop on my own version of various web services.</p>
+
+<p>Recently I revamped a very old, empty repo that I had on Github. The point of this repo was code a way to export all of my data from <a href="https://www.last.fm/">Last.fm</a>. But for whatever reason the repo has been empty for something like 4 years now. So the other week, I sat down, checked the <a href="http://www.last.fm/api">Last.fm API docs</a>, and wrote a very simple Ruby script to dump out all the JSON it could about my top tracks, artists, and albums over the past 7 years. That script is available as my <a href="https://github.com/mathias/birdsong">birdsong</a> repo on Github.</p>
+
+<p>So far, I don&#8217;t have a real use for the data. I could try to use some visualization tools on it to make cool graphs or maps. Or I could try and get analytics out of it: genres listened to, how they&#8217;ve changed over the years. But for now, I am content to just have the JSON data.</p>
+
+<p>All in all, it&#8217;s around 30 megabytes of JSON data, which is really just plain text with no compression, so it is really quite a lot of data. There&#8217;s more I can do, though. I plan to do to start taking control, to both aggregate my own data and filter it.</p>
+
+<p>For a long time it has bothered me that <a href="https://www.google.com/reader">Google Reader</a> stopped receiving new features, and the features that existed only went so far. To be fair, Google Reader has been a rock solid web service for many, many years for me. It allows me to read my feeds quickly, reliably, and has parsed feeds well &mdash; all problems I&#8217;ve had with other feed readers. It&#8217;s always had some neat features like showing me analytics of what I read.</p>
+
+<p><img src="http://blog.mattgauger.com/images/google_reader_trends.png" alt="Google Reader Trends" /></p>
+
+<p>But as far as discovering new content and helping me to eliminate content I don&#8217;t read or don&#8217;t want to read, Google Reader is not so great. Reader is terrible at suggesting new feeds to read to me; it constantly suggests Dilbert and Lifehacker, and has for the past 5 years or so. I have no interest in either of those. It has never analyzed my reading patterns to such a degree that it suggested something new that blew me away. I am looking for those kinds of interesting suggestions: not just for feeds that match what I already read, but things that are outside of my normal bubble but would be interesting to me.</p>
+
+<p>Luckily, Google Reader has an API, and rather than just exporting my data and building a new service, I can start to build off of it. I get to keep a lot of the features I enjoy while extending it with my own code.</p>
+
+<p>In Pariser&#8217;s talk, he talks about encoding algorithms of filtering and recommendation with a sense of civic duty. To some degree, this means having some journalistic integrity. Such an algorithm needs to present both sides of the story. One issue of many feed readers and other content online is that, well, it only shows one view. The view of the article you&#8217;re on.</p>
+
+<p>But imagine a feed reader that was more like the front page of Google News. It would not only show you the blog post you&#8217;re reading, but all recent blog posts from other authors about similar topics. Maybe, if they&#8217;re responding to a news event or writing about a known fact, the reader could do the work to track down the original source. To take it even further, without even really needing to be aware of motive, politics, and other factors, a dumb feed reader with good suggestions could probably present both sides of the story. Both sides of an argument. Both liberal and conservative takes on the same bill.</p>
+
+<p>Dreaming up features like this can be a deep rabbit hole. Start considering the consequences of pulling up all past articles you&#8217;ve read about similar keywords or tags. Or performing searches for academic papers on the topic. Pulling in data from Wikipedia. Looking up books you&#8217;ve read or are planning to read on Goodreads that are related to the blog post you&#8217;re reading. Or any other number of ways to slice and dice content. And it doesn&#8217;t have to stop with Google Reader.</p>
+
+<p>Opportunities to make better tools and more intelligently consume information are all around us. At the same time, consumer-consuming corporations on the web try to trap us into filter bubbles. They try to provide us with what they think we want, but can they ever really know? In the end, it&#8217;s control-your-own-filters or be filtered<a href="#filter-or-be-filtered-note" name="filter-or-be-filtered-note-return"><sup>1</sup></a>.</p>
+
+<hr />
+
+<p><a name="filter-or-be-filtered-note"></a></p>
+
+<p><strong>1</strong> The name of this article was lifted from Daniel Rushkoff&#8217;s <a href="http://www.goodreads.com/book/show/9408311-program-or-be-programmed">Program or be Programmed</a>, a book which I didn&#8217;t really enjoy. It was not what I thought it would be about: why we should learn to program so that we can control the complex technical systems around us rather than be controlled by them, or how programming&#8217;s problem solving skills can be applied elsewhere. Instead, I found the book to be some technology-fear-mongering and a bunch of diatribes about how things online or in computers are &#8220;less real.&#8221; Suffice to say, I did not enjoy it. <a href="#filter-or-be-filtered-note-return">&#8617;</a></p>
 ]]></content>
   </entry>
   
