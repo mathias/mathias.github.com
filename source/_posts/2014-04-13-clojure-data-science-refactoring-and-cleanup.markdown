@@ -66,7 +66,7 @@ And in `core.clj`:
 
 <script src="https://gist.github.com/mathias/9966384.js"></script>
 
-Running `lein run -m autodjinn.gmail-ingestion` one more time, we should see that our changes did not break the system. The config is now only loaded once, and we use it everything.
+Running `lein run -m autodjinn.gmail-ingestion` one more time, we should see that our changes did not break the system. The config is now only loaded once, and we use it everywhere.
 
 That's it! We've taken care of some low-hanging fruit and are ready to implement some new functionality. If you want to compare what you've done with my version, you can run `git diff v0.1.1` on the [autodjinn repo](https://github.com/mathias/autodjinn).
 
