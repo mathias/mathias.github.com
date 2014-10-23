@@ -4,7 +4,7 @@
   <title><![CDATA[blog.mattgauger.com]]></title>
   <link href="http://blog.mattgauger.com/atom.xml" rel="self"/>
   <link href="http://blog.mattgauger.com/"/>
-  <updated>2014-10-23T18:19:08-05:00</updated>
+  <updated>2014-10-23T18:27:20-05:00</updated>
   <id>http://blog.mattgauger.com/</id>
   <author>
     <name><![CDATA[Matt Gauger]]></name>
@@ -166,7 +166,7 @@
 
 <p>Note that we had to change the inner query to take the attr we want to query on as a variable; this is the proper way to pass a piece of data into a query we want to run. The <code>$</code> that comes first in the <code>:in</code> clause tells Datomic to use the second <code>d/q</code> argument as our dataset (the db value we pass in), and the <code>?attr</code> tells it to bind the third <code>d/q</code> argument as the variable <code>?attr</code>.</p>
 
-<p>While the three variations on functions are similar, we aren&#8217;t reusing lots of code. In the long run, less code should mean less bugs and the ability to fix problems in one place.</p>
+<p>While the three variations on functions are similar, we keep the code DRY. (DRY is an acronym for Don&#8217;t Repeat Yourself.) In the long run, less code should mean less bugs and the ability to fix problems in one place.</p>
 
 <p>Building complex systems by composing functions is one of the features of Clojure that I enjoy the most! And notice how we got to these finished query functions by building up functionality in our REPL: another aspect of writing systems in Clojure that I appreciate.</p>
 
