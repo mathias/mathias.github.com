@@ -141,9 +141,9 @@ Building complex systems by composing functions is one of the features of Clojur
 
 ## Querying against large data sets
 
-Right now, our functions calculate the sent counts across all messages every time they're called. This is fine for the small sample dataset I've been working with locally, but if it were to run against the 35K+ messages that are in my Gmail inbox alone (not to mention all the labels and other places my email lives&hellip;) it would take a very long time. With even bigger systems, we can run into an additional problem: the results may not fit into memory.
+Right now, our functions calculate the sent counts across all messages every time they're called. This is fine for the small sample dataset I've been working with locally, but if it were to run against the 35K+ messages that are in my Gmail inbox alone (not to mention all the labels and other places my email lives&hellip;) it would take a very long time. With even bigger datasets, we can run into an additional problem: the results may not fit into memory.
 
-When building systems with datasets big enough that the intermediate or final results may not fit into memory, or that may take too much time to compute, there are two general approaches that we will explore. The first is storing results as data (known as memoizing or caching the results), and the other is breaking up the work to run on distributed systems like Hadoop or Apache Storm.
+When building systems with datasets big enough that they don't fit into memory, or that may take too much time to compute to be practical, there are two general approaches that we will explore. The first is storing results as data (known as memoizing or caching the results), and the other is breaking up the work to run on distributed systems like Hadoop or Apache Storm.
 
 For this data, we only want to avoid redoing the calculating every time we want to know the sent counts. Currently, the data in our system changes infrequently, and it's likely that we could tell the system to recompute sent counts only after ingesting new data from Gmail. For these reasons, a reasonable solution will be to store the computed sent counts back into Datomic.
 
