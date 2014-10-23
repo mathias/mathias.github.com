@@ -7,7 +7,7 @@
     <meta name="author" content="Matt Gauger">
 
     
-    <meta name="description" content="Clojure Code Quality Tools I work with many programming languages on a daily basis. As a polyglot programmer, I&#8217;ve come to appreciate tools &hellip;">
+    <meta name="description" content="Clojure Data Science: Sent Counts and Aggregates This is Part 3 of a series of blog posts called Clojure Data Science. Check out the previous post &hellip;">
     
 
     <link href="/atom.xml" rel="alternate" title="blog.mattgauger.com" type="application/atom+xml">
@@ -62,6 +62,239 @@
   <article class="page span8 offset2">
     
     
+
+
+  <article class="post">
+    
+    <h1 class="title"><a href="/blog/2014/10/23/clojure-data-science-sent-counts-and-aggregates/">Clojure Data Science: Sent Counts and Aggregates</a></h1>
+    <div class="entry">
+        <hr />
+
+<p>This is Part 3 of a series of blog posts called <a href="/categories/clojure-data-science">Clojure Data Science</a>. Check out the <a href="blog/2014/04/13/clojure-data-science-refactoring-and-cleanup/">previous post</a> if you missed it.</p>
+
+<hr />
+
+<p>For this post, we want to generate some summaries of our data by doing aggregate queries. We won&#8217;t yet be pulling in tools like <a href="http://storm.incubator.apache.org/">Apache Storm</a> into the mix, since we can accomplish this through Datomic queries. We will also talk about trade-offs of running aggregate queries on large datasets and devise a way to save our data back to Datomic.</p>
+
+<h2>Updating dependencies</h2>
+
+<p>It has been some time since we worked on <a href="https://github.com/mathias/autodjinn">autodjinn</a>. Libraries move fast in the Clojure ecosystem, and we want to make sure that we&#8217;re developing against the most recent versions of each dependency. Before we begin making changes, let&#8217;s update everything. If you have already read my <a href="http://blog.mattgauger.com/blog/2015/09/15/clojure-code-quality-tools/">Clojure Code Quality Tools</a> post, you&#8217;ll be familiar with the <code>lein ancient</code> plugin.</p>
+
+<p>Below is output when I run <code>lein ancient</code> on the last post&#8217;s finished git tag, <code>v0.1.1</code>. To go back to that state, you can run <code>git checkout v0.1.1</code> on the <a href="https://github.com/mathias/autodjinn">autodjinn repo</a>.</p>
+
+<script src="https://gist.github.com/mathias/c349dc7cb110edb56235.js"></script>
+
+
+<p>It looks like our <a href="https://github.com/james-henderson/nomad">nomad</a> dependency is out of date. Update the version number in <code>project.clj</code> to <code>0.7.0</code> and run <code>lein ancient</code> again to verify that it worked.</p>
+
+<p>If you take a look at <code>project.clj</code> yourself, you may notice that our project is still on Clojure <code>1.5.1</code>. <code>lein ancient</code> doesn&#8217;t look at the version of Clojure that we&#8217;re specifying; it assumes you have a good reason for picking the Clojure version you specify. In our case, we&#8217;d like to be on the latest stable Clojure, version <code>1.6.0</code>. Update the version of Clojure in <code>project.clj</code> and then run your REPL. There should be no issues with using the functionality in the app that we created in previous posts. If there is, carefully read the error messages and try to find a solution before moving on.</p>
+
+<p>To save on the hassle of upgrading, I have created a tag for the project after upgrading Clojure and nomad. To go to that tag in your local copy of the repo, run <code>git checkout v0.1.2</code>.</p>
+
+<h2>Datomic query refresher</h2>
+
+<p>If you remember back to the <a href="blog/2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/">first post</a>, we wrapped up by querying for entity IDs and then using Datomic&#8217;s built-in <code>entity</code> and <code>touch</code> functions to instantiate each message with all of its attributes. We had to do this because the query itself only returned a set of entity IDs:</p>
+
+<script src="https://gist.github.com/mathias/ab5a827ca860c89e0043.js"></script>
+
+
+<p>Note that the Datomic query is made up of several parts:</p>
+
+<ul>
+<li>The <code>:find</code> clause says what will be returned. In this case, it is the <code>?eid</code> variable for each record we matched in the rest of the query.</li>
+<li>The <code>:where</code> clause gives a condition to match. In this case, we want all <code>?eid</code> where the entity has a <code>:mail/uid</code> fact, but we don&#8217;t care about the <code>:mail/uid</code> fact&#8217;s value, so we give it a wildcard with the underscore (<code>_</code>).</li>
+</ul>
+
+
+<p>We could pass in the <code>:mail/uid</code> we care about, and only get one message&#8217;s entity-ID back.</p>
+
+<script src="https://gist.github.com/mathias/4990c69f1e4c4a7dc7e9.js"></script>
+
+
+<p>Notice how the <code>?uid</code> variable gets passed in with the <code>:in</code> clause, as the third argument to <code>d/q</code>?</p>
+
+<p>Or we could change the query to match on other attributes:</p>
+
+<script src="https://gist.github.com/mathias/3685937809a50e36c424.js"></script>
+
+
+<p>In all these cases, we&#8217;d still get the entity IDs back because the <code>:find</code> clause tells Datomic to return <code>?eid</code>. Typically, we pass around entity IDs and lazy-load any facts (attributes) that we need off that entity.</p>
+
+<p>But, we could just as easily return other attributes from an entity as part of a query. Let&#8217;s ask for the recipients of all the emails in our system:</p>
+
+<script src="https://gist.github.com/mathias/be2baf0af0b652966240.js"></script>
+
+
+<p>While it is less common to return only the value of an entity&#8217;s attribute, being able to do so will allow us to build more functionality on top of our email abstraction later.</p>
+
+<p>One last thing. Take a look at the return of that query above. Remember that the results returned by a Datomic query are a <a href="http://clojure.github.io/clojure/clojure.core-api.html#clojure.core/set">set</a>. In Clojure, sets are a collection of unique values. So we’re seeing the unique list of addresses that are in the To: field in our data. What we&#8217;re not seeing is duplicate recipient addresses. To be able to count the number of times an email address received a message, we&#8217;ll need a list with non-unique members.</p>
+
+<p>Datomic creates a unique set for the values returned by a query. This is generally a great thing, since it gets around some of the issues that one can run into with JOINing in SQL. But in this case, it is not ideal for what we want to accomplish. We could try to get around the uniqueness constraint on output by returning vectors of the entity ID and the <code>?to</code> address, and then mapping across the result to pull out the second item:</p>
+
+<script src="https://gist.github.com/mathias/d6401a036d032caccde3.js"></script>
+
+
+<p>There&#8217;s a simpler way that we can use in the Datomic query. By keeping it inside Datomic, we can later combine this approach with more-complex queries. We can tell the Datomic query to look at other attributes when considering what the unique key is by passing the query a <code>:with</code> clause. By changing our query slightly to include a <code>:with</code> clause, we end up with the full list of recipients in our datastore:</p>
+
+<script src="https://gist.github.com/mathias/f36ae56bef0e1b6cdfa9.js"></script>
+
+
+<p>At this point, it might be a good idea to review Datomic&#8217;s <a href="http://docs.datomic.com/query.html">querying</a> guide. We&#8217;ll be using some of the advanced querying features found in the later sections of that guide, most notably aggregate functions.</p>
+
+<h2>Sent Counts</h2>
+
+<p>For this feature, we want to find all the pairs of from-to addresses for each email in our datastore, and then sum up the counts for each pair. We will save all these sent counts into a new entity type in Datomic. This will allow us to ask Datomic questions like who sends you the most email, and who you send the most email to.</p>
+
+<p>We start by building up the query in our REPL. Let&#8217;s start with a simpler query, to count how many emails have been sent <em>to</em> each email address in our data store. Note that this isn&#8217;t sufficient to answer the question above, since we won&#8217;t know who those emails came <em>from</em>; they could have been sent by us or by someone else, or they could have been sent to us. Later, we&#8217;ll make it work with from-to pairs that allow us to know things like who is sending email to us.</p>
+
+<p>A simple way to do this would be to wrap our previous query in the <a href="http://clojure.github.io/clojure/clojure.core-api.html#clojure.core/frequencies">frequencies</a> function that Clojure.core provides. <code>frequencies</code> returns a map of items with their count from a Clojure collection.</p>
+
+<script src="https://gist.github.com/mathias/af050f75d1c610d6d422.js"></script>
+
+
+<p>However, we want to perform the same sort of thing in Datomic itself. To do that, we&#8217;re going to need to know about aggregate functions. Aggregate functions operate over the intermediate results of a Datomic query. Datomic provides functions like <code>max</code>, <code>min</code>, <code>sum</code>, <code>count</code>, <code>rand</code> (for getting a random value out of the query results), and more. With aggregates, we need to be sure to use a <code>:with</code> clause to ensure we aggregate over all our values.</p>
+
+<p>Looking at that short list of aggregate functions I&#8217;ve named, we can see that we probably want to use the <code>count</code> function to count the occurance of each email address in a to field in our data. To see how aggregates work, I&#8217;ve come up with a simpler example (the only new thing to know is that Datomic&#8217;s Datalog implementation can query across Clojure collections as easily as it can against a database value, so I&#8217;ve given a simple vector-of-vectors here to describe data in the form</p>
+
+<p><code>[database-id person-name]</code></p>
+
+<p>When the query looks at records in the data, our <code>:where</code> clause gives each position in the vector an id and a name based on position in the vector.)</p>
+
+<script src="https://gist.github.com/mathias/6b8da156388ed1cd9290.js"></script>
+
+
+<p>Let&#8217;s review what happened there. Before the <code>count</code> aggregate function was applied, our results looked like this:</p>
+
+<p><code>[["Jon"] ["Jon"] ["Bob"] ["Chris"]]</code></p>
+
+<p>So the <code>count</code> function just counts across the values of the variable it is passed (in our case, <code>?name</code>), and by pairing it with the original <code>?name</code> value, we get each name and the number of times it appears in our dataset.</p>
+
+<p>It makes sense that we can do the same thing with our recipient email addresses from the previous query. Combining our previous queries with the <code>count</code> aggregate function, we get:</p>
+
+<script src="https://gist.github.com/mathias/8b346f1019d588bea534.js"></script>
+
+
+<p>That looks like the same kind of data we were getting with the use of the <code>frequencies</code> function before! So now we know how to use a Datomic aggregate function to count results in our queries.</p>
+
+<p>What&#8217;s next? Well, what we really want is to get results that are of the form</p>
+
+<p><code>[from-address to-address]</code></p>
+
+<p>and count those tuples. That way, we can differentiate between email sent to us versus email we&#8217;ve sent to others, etc. And eventually, we&#8217;d like to save those queries off as functions that we can call to compute the counts from other places in our project.</p>
+
+<p>We can&#8217;t pass a tuple like <code>[from-address to-address]</code> to the <code>count</code> aggregate function in one query. The way around this is to write two queries. The inner query will return the tuples, and the outer query will return the tuple and a count of the tuple in the output data. Since the queries run on the peer, we don&#8217;t really have to worry about whether it is one query or two, just that it returns the correct data at the end.</p>
+
+<p>So what would the inner query look like? Remember that the outer query will still need a field to pass to the <code>:with</code> clause, so we&#8217;ll probably want to pass through the entity ID.</p>
+
+<script src="https://gist.github.com/mathias/61e60a563ffc29f06af8.js"></script>
+
+
+<p>Those tuples will be used by our outer query. However, we also need a combined value for the count to operate on. For that, we can throw in a function call in the <code>:where</code> clause and give it a binding at the end for Datomic to use for that new value. In this case, I&#8217;ll combine the <code>?from</code> and <code>?to</code> values into a PersistentVector that the <code>count</code> aggregate function can use. The combined query ends up looking like this:</p>
+
+<script src="https://gist.github.com/mathias/d26c7175670b8c29e7c2.js"></script>
+
+
+<p>And the output is as we expect.</p>
+
+<h2>Reusable functions</h2>
+
+<p>The next step is to turn the query above into various functions we can use to query for from-to counts later. In our data, we don&#8217;t just have recipients in the To: field, we also have CC and BCC recipients. Those fields will need their own variations of the query function, but since they will share so much functionality, we will try to compose our functions in such a way that we avoid duplicate code.</p>
+
+<p>In general, when I write query functions for Datomic, I use multiple arities to always allow a database value to be passed to the query function. This can be useful, for example, when we want to query against previous (historical) values of the database, or when we want to work with a particular database value across multiple queries, to ensure our data is consistent and doesn&#8217;t change between queries.</p>
+
+<p>Such a query function typically looks like this:</p>
+
+<script src="https://gist.github.com/mathias/f61fb370a3a2120daf6f.js"></script>
+
+
+<p>By taking advantage of multiple arities, we can default to not having to pass a database value into the function. But in the cases where we do need to ensure a particular database version is used, we can do that. This is a very powerful idiom that I&#8217;ve learned since I began to use Datomic, and I suggest you structure all your query functions similarly.</p>
+
+<p>Now, let&#8217;s take that function that only queries for <code>:mail/to</code> addresses and make it more generic, with specific wrapper functions for each case where we&#8217;d want to use it:</p>
+
+<script src="https://gist.github.com/mathias/67647105799f7f2ff1cf.js"></script>
+
+
+<p>Note that we had to change the inner query to take the attr we want to query on as a variable; this is the proper way to pass a piece of data into a query we want to run. The <code>$</code> that comes first in the <code>:in</code> clause tells Datomic to use the second <code>d/q</code> argument as our dataset (the db value we pass in), and the <code>?attr</code> tells it to bind the third <code>d/q</code> argument as the variable <code>?attr</code>.</p>
+
+<p>While the three variations on functions are similar, we aren&#8217;t reusing lots of code. In the long run, less code should mean less bugs and the ability to fix problems in one place.</p>
+
+<p>Building complex systems by composing functions is one of the features of Clojure that I enjoy the most! And notice how we got to these finished query functions by building up functionality in our REPL: another aspect of writing systems in Clojure that I appreciate.</p>
+
+<h2>Querying against large data sets</h2>
+
+<p>Right now, our functions calculate the sent counts across all messages every time they&#8217;re called. This is fine for the small sample dataset I&#8217;ve been working with locally, but if it were to run against the 35K+ messages that are in my Gmail inbox alone (not to mention all the labels and other places my email lives&hellip;) it would take a very long time. With even bigger systems, we can run into an additional problem: the results may not fit into memory.</p>
+
+<p>When building systems with datasets big enough that the intermediate or final results may not fit into memory, or that may take too much time to compute, there are two general approaches that we will explore. The first is storing results as data (known as memoizing or caching the results), and the other is breaking up the work to run on distributed systems like Hadoop or Apache Storm.</p>
+
+<p>For this data, we only want to avoid redoing the calculating every time we want to know the sent counts. Currently, the data in our system changes infrequently, and it&#8217;s likely that we could tell the system to recompute sent counts only after ingesting new data from Gmail. For these reasons, a reasonable solution will be to store the computed sent counts back into Datomic.</p>
+
+<h2>A new entity type to store our results</h2>
+
+<p>For all three query functions we wrote, each result is of the form:</p>
+
+<p><code>[from-address to-address count]</code></p>
+
+<p>Let&#8217;s add to the Datomic schema in our <code>core.clj</code> file to create a new <code>:sent-count</code> entity type with these three attributes. Note that sent counts don&#8217;t really have a unique identifier of their own; it is the combination of <code>from</code> -> <code>to</code> addresses that uniquely identifies them. However, we will leave the <code>from</code> and <code>to</code> addresses as separate fields so it is easy to use them in queries.</p>
+
+<p>Add the following maps to the <code>schema-txn</code> vector:</p>
+
+<script src="https://gist.github.com/mathias/661dadfdb2e639209452.js"></script>
+
+
+<p>You&#8217;ll have to call the <code>update-schema</code> function in your REPL to run the schema transaction.</p>
+
+<p>Something that&#8217;s worth calling out is that we&#8217;re using a Datomic schema <code>valueType</code> that we haven&#8217;t seen yet in this project: <code>db.type/ref</code>. In most cases, you&#8217;d want to use the <code>ref</code> type to associate with other entities in Datomic. But we can also use it to associate with a given list of facts. Here, we give the <code>ref</code> type an enum of the possible values that <code>:sent-count/type</code> can have: <code>to</code>, <code>cc</code>, and <code>bcc</code>. By adding this <code>type</code> field to our new entities, we can either choose to look at sent counts for only one type of address, or we can sum up all the counts for a given from-to pair and get the total counts for the system.</p>
+
+<p>Our next job is to add some functions to create the initial sent counts data, as well as to query for it. To keep things clean, I created a <code>sent-counts</code> namespace for these functions to live in. I&#8217;ve provided it below with minimal explanation, since it should look very familiar to what we&#8217;ve already done.</p>
+
+<p><a href="https://github.com/mathias/autodjinn/blob/29cc08d1ead6043287ecb82136d3ee519668100f/src/autodjinn/sent_counts.clj">/src/autodjinn/sent_counts.clj</a></p>
+
+<p>After adding in the <code>sent_counts.clj</code> file, running:</p>
+
+<p><code>(sent-counts/create-sent-counts)</code></p>
+
+<p>will populate your datastore with the sent counts computed with functions we created earlier.</p>
+
+<p>Note: The sent counts don&#8217;t have any sort of unique key on them, so if you run <code>create-sent-counts</code> multiple times, you&#8217;ll get duplicate results. We&#8217;ll handle that another time when we need to update our data.</p>
+
+<h2>Wrapping up</h2>
+
+<p>We&#8217;ve covered a lot of material on querying Datomic. In particular, we used aggregate functions to get the counts and sums of records in our data store. Because we don&#8217;t want to run the queries all the time, we created a new entity type to store our sent counts and saved our data into it. With query functions like those found in the <code>sent-counts</code> namespace, we can start to ask our data questions like &#8220;In the dataset, what address was sent the most email?&#8221;</p>
+
+<p>If you want to compare what you’ve done with my version, you can run <code>git diff v0.1.3</code> on the <a href="https://github.com/mathias/autodjinn">autodjinn repo</a>.</p>
+
+<p>Please let me know what you think of these posts by sending me an email at <a href="mailto:contact@mattgauger.com">contact@mattgauger.com</a>. I’d love to hear from you!</p>
+
+        
+        
+    </div>
+
+    <div class="meta">
+        <div class="author">
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
+</div>
+        <div class="date">
+
+
+
+
+
+
+
+
+
+
+
+
+<time datetime="2014-10-23T18:18:00-05:00" pubdate  data-updated="true" >Oct 23<span>rd</span>, 2014</time>.</div>
+        <div class="tags">
+
+</div>
+    </div>
+
+  </article>
 
 
   <article class="post">
@@ -468,7 +701,7 @@
 <script src="https://gist.github.com/mathias/9966384.js"></script>
 
 
-<p>Running <code>lein run -m autodjinn.gmail-ingestion</code> one more time, we should see that our changes did not break the system. The config is now only loaded once, and we use it everything.</p>
+<p>Running <code>lein run -m autodjinn.gmail-ingestion</code> one more time, we should see that our changes did not break the system. The config is now only loaded once, and we use it everywhere.</p>
 
 <p>That&#8217;s it! We&#8217;ve taken care of some low-hanging fruit and are ready to implement some new functionality. If you want to compare what you&#8217;ve done with my version, you can run <code>git diff v0.1.1</code> on the <a href="https://github.com/mathias/autodjinn">autodjinn repo</a>.</p>
 
@@ -498,369 +731,6 @@
 
 
 <time datetime="2014-04-13T16:28:00-05:00" pubdate  data-updated="true" >Apr 13<span>th</span>, 2014</time>.</div>
-        <div class="tags">
-
-</div>
-    </div>
-
-  </article>
-
-
-  <article class="post">
-    
-    <h1 class="title"><a href="/blog/2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/">Clojure Data Science: Ingesting Your Gmail Inbox</a></h1>
-    <div class="entry">
-        <hr />
-
-<p>This is Part 1 of a series of blog posts inspired by the exercises from <a href="http://shop.oreilly.com/product/0636920025054.do">Agile Data Science</a> with Clojure. You may be interested in my <a href="http://blog.mattgauger.com/blog/2014/03/14/agile-data-science-review-and-thoughts/">review</a> of the book.</p>
-
-<hr />
-
-<p>For this blog post series, we are going to use your Gmail inbox as a dataset for an exploration of data science practices. Namely, we will use your email for machine learning and natural language processing applications. Email makes interesting data to process:</p>
-
-<ul>
-<li>it has lots of metadata that we can use as features <a href="#cds-gmail-footnote-1" name="cds-gmail-footnote-1-return">[1]</a></li>
-<li>we can model the relationships of senders and receivers as a graph</li>
-<li>each message has a body of text associated with it that we can analyze</li>
-<li>gaining insights from our personal communication is far more interesting than using an open data set!</li>
-</ul>
-
-
-<p><strong>Note:</strong> This is not an intro-to-Clojure blog post. If you need a tutorial that starts with the basics, I recommend the <a href="http://aphyr.com/tags/Clojure-from-the-ground-up">Clojure from the ground up</a> blog post series by <a href="https://twitter.com/aphyr">Aphyr</a>. It does an excellent job at introducing concepts in Clojure.</p>
-
-<p>In this post, I follow my typical Clojure workflow: I open a REPL and begin exploring the problem space. I look at individual pieces of data and start transforming them. When I write some functionality that I like for one piece of data, I try to extract it into the source code as a function that can work for any data our project may see. In this way, we can build up the project to contain the functions that are necessary to get to our goal.</p>
-
-<p>So what is our goal for this blog post? Well, we want to fetch all emails from our Gmail inbox. We want to get metadata for each email, including things like who sent it and when it was sent. Then, we want to save the messages into a database so we can do further processing in later posts.</p>
-
-<p>Starting off, make a new basic Clojure project with lein. I&#8217;ve named my project <a href="https://github.com/mathias/autodjinn">autodjinn</a> after <a href="http://en.wikipedia.org/wiki/Email#Origin">AUTODIN</a>, one of the first email networks. You can use the <a href="https://github.com/mathias/autodjinn">repo</a> to refer to and to clone to follow along. At the beginning of each subsequent post, I&#8217;ll provide a SHA that you can reset the code to. Feel free to name your project whatever you want; just be sure to pay attention to the changes in filenames and namespaces as we go along!</p>
-
-<p>Create the project and enter it:</p>
-
-<script src="https://gist.github.com/mathias/9861772.js"></script>
-
-
-<p>To import our Gmail data, we will use a Clojure library called <a href="https://github.com/owainlewis/clojure-mail">clojure-mail</a>. Clojure-mail is still under active development and is likely to change. For this blog post, we&#8217;ll be using version <code>0.1.6</code> to ensure compatibility between the code in this post and the library.</p>
-
-<p>Edit <code>project.clj</code> to contain your information and add the <code>[clojure-mail "0.1.6"]</code> dependency:</p>
-
-<script src="https://gist.github.com/mathias/9861804.js"></script>
-
-
-<p>We&#8217;ll start by working in <code>src/autodjinn/core.clj</code> and later move the functionality out into a script for our email import task. Open up the file in your favorite editor and launch a REPL.</p>
-
-<p>In your REPL, <code>(use 'autodjinn.core)</code> and verify it worked by running <code>(foo "MYNAME")</code>. You should see &#8220;MYNAME Hello, World!&#8221; printed out. Feel free to remove the <code>(defn foo…)</code> in <code>core.clj</code> now. We will not need it.</p>
-
-<p>You may want to use something like Emacs&#8217; <a href="https://github.com/clojure-emacs/cider">cider</a> or LightTable&#8217;s InstaREPL as your REPL environment. But you can use the regular Clojure REPL to build this project, as well. If you are not working with a REPL integrated to your editor, you will need to run <code>(use 'autodjinn.core :reload)</code> to force a reload of the code each time you save.</p>
-
-<h2>Connecting to Gmail</h2>
-
-<p>Our first goal is to connect to our inbox and verify that we can read email from it. To do that, we&#8217;re going to need to use our Gmail address and password &mdash; which we don&#8217;t want to put into our source files. <strong>It&#8217;s bad practice to put a password or a private key into a source file or check it into our repo! Just don&#8217;t do it!</strong></p>
-
-<p>Instead, we will use a nice library called <a href="https://github.com/james-henderson/nomad">nomad</a> to load a config file containing our email address and password. We will add the config file to <code>.gitignore</code> so that it is never saved into our code.</p>
-
-<p>Add the line <code>[jarohen/nomad "0.6.3"]</code> to your <code>project.clj</code> dependencies before moving on, and run <code>lein deps</code> in a console to pull in the dependency.</p>
-
-<p>Back in our <code>core.clj</code> add the require statements for <code>clojure-mail</code> and <code>nomad</code> to your ns macro like this:</p>
-
-<script src="https://gist.github.com/mathias/9863912.js"></script>
-
-
-<p>Then create a new file in <code>resources/config/autodjinn-config.edn</code>. It should look like this, with your email address and password filled in:</p>
-
-<script src="https://gist.github.com/mathias/9864315.js"></script>
-
-
-<p>Now open up your <code>.gitignore</code> file and add the following line to it:</p>
-
-<script src="https://gist.github.com/mathias/9866473.js"></script>
-
-
-<p>Following <a href="https://github.com/james-henderson/nomad#hello-world">nomad&#8217;s README</a>, we need to load our config file and pull out our <code>gmail-username</code> and <code>gmail-password</code> keys. We add to the following to <code>core.clj</code> after the <code>ns</code> macro:</p>
-
-<script src="https://gist.github.com/mathias/8c0849fc0e137f1bd611.js"></script>
-
-
-<p>Using the <code>get</code> function here is a safe lookup for maps that returns <code>nil</code> if nothing is found for the key. Back in our REPL, we can see this in action with some quick experimentation:</p>
-
-<script src="https://gist.github.com/mathias/9864411.js"></script>
-
-
-<p>We could also use the shorter <code>(:keyname mymap)</code> syntax here, since symbols are an invocable function that looks up a key in a map. But the <code>get</code> function reads better than <code>(:gmail-username (autodjinn-config))</code> in my opinion.</p>
-
-<p>In your REPL, you should now be able to get the values for <code>gmail-username</code> and <code>gmail-password</code>:</p>
-
-<script src="https://gist.github.com/mathias/9864585.js"></script>
-
-
-<p>Note that since I&#8217;m in the <code>user</code> namespace here, I had to qualify the vars with their <code>autodjinn.core</code> namespace. If this is confusing, you might want to read up on <a href="http://clojure-doc.org/articles/language/namespaces.html">namespaces in Clojure</a> before moving on. (See also: the &#8216;Namespaces&#8217; section in <a href="http://aphyr.com/posts/311-clojure-from-the-ground-up-logistics">Clojure from the ground up: logistics</a>.)</p>
-
-<p><code>clojure-mail</code> requires us to open a connection to Gmail with the <code>gen-store</code> function (<a href="https://github.com/owainlewis/clojure-mail/blob/c3aad67b42aad96405d4c329ca48e29b7960d412/src/clojure_mail/core.clj#L80-L83">src</a>). We then pass that connection around to various functions to interact with our inbox. Define a var called <code>my-store</code> in your <code>core.clj</code> that does this with our email address and password:</p>
-
-<script src="https://gist.github.com/mathias/9865909.js"></script>
-
-
-<p>Make sure the <code>(def my-store…</code> above has been run in your REPL and then take a look at our open connection:</p>
-
-<script src="https://gist.github.com/mathias/9865937.js"></script>
-
-
-<p>The type of <code>my-store</code> should be an <code>IMAPSSLStore</code> as above. If it didn&#8217;t work, you&#8217;ll see a string error message when you try to define <code>my-store</code>.</p>
-
-<h2>Your inbox as a list</h2>
-
-<p>Now we&#8217;ll use our REPL to build up a function that will eventually import all of our email. To start, we can use the <code>inbox</code> function (<a href="https://github.com/owainlewis/clojure-mail/blob/c3aad67b42aad96405d4c329ca48e29b7960d412/src/clojure_mail/core.clj#L198-L201">src</a>) from <code>clojure-mail</code> to get a seq of messages in our inbox. Note that since it is a seq and inboxes can be very large, we limit it with the <code>take</code> function.</p>
-
-<script src="https://gist.github.com/mathias/9866030.js"></script>
-
-
-<p>If everything is working, you should see a list of of the <code>IMAPMessage</code>s returned by the last line in your REPL.</p>
-
-<p>What if, instead, we wanted to loop over many messages and print out their subjects? We can pull in the <code>message</code> namespace (<a href="https://github.com/owainlewis/clojure-mail/blob/master/src/clojure_mail/message.clj">src</a>) from <code>clojure-mail</code>, which gives us convenience functions for getting at message data.</p>
-
-<p>You&#8217;ll have to be careful running this next line &mdash; on a large inbox it&#8217;ll print out the subject of everything in your inbox! If you have a lot of messages, consider wrapping the call to <code>inbox</code> in a <code>take</code> as above.</p>
-
-<script src="https://gist.github.com/mathias/9866059.js"></script>
-
-
-<p>Those are the subject lines of the 4 messages in the inbox of my test account, so I know that this is working. Save our <code>doseq</code> line into a function called <code>ingest-inbox</code>; we&#8217;ll come back to it later:</p>
-
-<script src="https://gist.github.com/mathias/9866289.js"></script>
-
-
-<h2>Examining messages</h2>
-
-<p>Before we move on, let&#8217;s take a look at an individual message and what we can get out of it from the <code>message</code> namespace.</p>
-
-<script src="https://gist.github.com/mathias/9866195.js"></script>
-
-
-<p>From this, we can see a few things:</p>
-
-<ul>
-<li>The ID returned by <code>message/id</code> looks like a good candidate to get good unique IDs for each message when we store the messages. But we might want to strip off those angle brackets first.</li>
-<li>The <code>message/message-body</code> function doesn&#8217;t return a string of the body. Instead, it returns a list of maps which contains the <code>text/plain</code> form of the body and the <code>text/html</code> form. We will have to extract each from the map so that we can use the plaintext version for things like language processing. We&#8217;ll also keep the HTML version in case we need it later.</li>
-<li>If you started digging in to the <code>message</code> namespace&#8217;s source you may have noticed that we don&#8217;t have functions for getting date sent or date received for a message. Nor can we get a list of addresses CCed or BCCed for the message. We&#8217;ll have to write those functions ourselves.</li>
-</ul>
-
-
-<h2>Cleaning up the IDs</h2>
-
-<p>Let&#8217;s focus on writing a function to clean up the ID returned by the <code>message/id</code> function. Recall that such IDs look like <code>&lt;CAJiAYR90LbbN6k8tVXuhQc8f6bZoK647ycdc7mxF5mVEaoLKHw@mail.gmail.com&gt;</code></p>
-
-<p>The <code>clojure.string</code> namespace provides a <code>replace</code> function which does simple replacement on a string. We can use it like this:</p>
-
-<script src="https://gist.github.com/mathias/9866344.js"></script>
-
-
-<p>That worked for replacing the angle brackets for the original string. But remember that data structures are immutable in Clojure, including strings. Replacing the first angle bracket didn&#8217;t change the original string when we tried to replace the other angle bracket. We need something that allows us to build up an intermediate value and pass it to the next function. For that, we will use the <a href="http://clojure.github.io/clojure/clojure.core-api.html#clojure.core/-%3e">thread-first</a> macro: <code>-&gt;</code>. It is easiest if I show the macro in use with some comments showing what the intermediate values would be at each step:</p>
-
-<script src="https://gist.github.com/mathias/9866380.js"></script>
-
-
-<p>It is called the <strong>thread-first</strong> macro because it threads through the first argument to each function. In this case, <code>clojure.string/replace</code>&#8217;s first argument is the string to replace on. So the each successively returned value gets passed to the next function above.</p>
-
-<p>Now that we&#8217;ve figured out how to clean up that ID, we will create a function to clean up any ID we pass it:</p>
-
-<script src="https://gist.github.com/mathias/9866436.js"></script>
-
-
-<h2>Extracting the message bodies</h2>
-
-<p>Recall the <code>message/message-body</code> call above:</p>
-
-<script src="https://gist.github.com/mathias/9866777.js"></script>
-
-
-<p>Ideally, we want to write a function that can get the <code>text/plain</code> body out of this value, and another function that can get the <code>text/html</code> body out. Notice that the <code>:content-type</code> values aren&#8217;t quite so simple as just selecting the item in the list where the string <code>text/plain</code> appears. We will need our function to ignore the additional information in the <code>:content-type</code> value, which includes things like string encodings.</p>
-
-<p>Let&#8217;s look at just the first map in the list returned by <code>message/message-body</code>:</p>
-
-<script src="https://gist.github.com/mathias/9866861.js"></script>
-
-
-<p>If we build a predicate function that can detect when the <code>:content-type</code> key is the type we want, we can use it in a <code>filter</code> function to choose the correct type of body in our functions.</p>
-
-<p>Notice that <code>TEXT/PLAIN</code> and <code>TEXT/HTML</code> are always separated from the rest of the content-type by a semicolon, and it always appears first. You&#8217;d have to look at a few messages from your inbox to arrive at the same conclusion, but I&#8217;ve already done the work and can assure you that the previous statement is true.</p>
-
-<p>Then, an easy to to get at the part of the content-type we want would be to split on the semicolon and take the first element returned:</p>
-
-<script src="https://gist.github.com/mathias/9867049.js"></script>
-
-
-<p>This leads us to a function to first clean up the content-type string, and then our predicate function to detect if it is the one we want:</p>
-
-<script src="https://gist.github.com/mathias/9867072.js"></script>
-
-
-<p>To finish off our work on the message bodies, we want to filter the list returned by <code>message/message-body</code>:</p>
-
-<script src="https://gist.github.com/mathias/9867356.js"></script>
-
-
-<p>And turn it into a function that works for any message bodies list:</p>
-
-<script src="https://gist.github.com/mathias/9867382.js"></script>
-
-
-<p>Note that we&#8217;ve also used this function to create two convenience functions, one for extracting plaintext bodies and one for extracting HTML bodies. By keeping functions simple and small, we can build up useful functions for our project rather than try to plan it all out ahead of time.</p>
-
-<h2>Getting more information out of the IMAPMessages</h2>
-
-<p>As noted above, we will need to write a few more functions to get the fields of the <code>IMAPMessage</code>s that we cannot get through this version of <code>clojure-mail</code>. Recall that we want to get CC list, BCC list, date sent, and date received values. To do that, we will use Java interop functionality. It&#8217;s really not as bad as it sounds. Remember that the <code>IMAPMessage</code>s we see are Java instances of the <code>IMAPMessage</code> class. Calling a method on an instance is accomplished by using a dot before the method name, with the method in the function position, such as: <code>(.javaMethod some-java-instance)</code></p>
-
-<p>To start, we can look at <code>clojure-mail</code>&#8217;s <a href="https://github.com/owainlewis/clojure-mail/blob/c3aad67b42aad96405d4c329ca48e29b7960d412/project.clj">project.clj</a> and see that it depends on <code>javax.mail</code>. The next step is to find the documentation for the Java implementation of <code>javax.mail.Message</code>, which <a href="http://docs.oracle.com/javaee/6/api/javax/mail/Message.html">lives here</a>.</p>
-
-<p>In the REPL, we can try some of the Java interop on our <code>my-msg</code>:</p>
-
-<script src="https://gist.github.com/mathias/9876540.js"></script>
-
-
-<p>The datetimes for each message are automatically turned into Clojure instants for us, which is convenient. If we dig into how the <code>clojure-mail.message/to</code> function [<a href="https://github.com/owainlewis/clojure-mail/blob/c3aad67b42aad96405d4c329ca48e29b7960d412/src/clojure_mail/message.clj#L16-L20">src</a>] works, we see that it is using the <code>.getRecipients</code> method. <code>.getRecipients</code> takes the message and a constant of a <code>RecipientType</code>. For our purposes, we want the <code>javax.mail.Message$RecipientType/CC</code> and <code>javax.mail.Message$RecipientType/BCC</code> recipients:</p>
-
-<script src="https://gist.github.com/mathias/9876632.js"></script>
-
-
-<p>The last line maps the <code>str</code> function across each element returned, so that we get the string representation of the email addresses. That way, our database can just store the strings.</p>
-
-<p>As before, now that we know how to use these methods in the REPL, we write functions in <code>core.clj</code> to take advantage of our newfound knowledge:</p>
-
-<script src="https://gist.github.com/mathias/9876737.js"></script>
-
-
-<p>In the REPL, it should now be possible to get a nice map representation of all the fields on the message we care about:</p>
-
-<script src="https://gist.github.com/mathias/9876884.js"></script>
-
-
-<p>Congrats on making it this far. We&#8217;ve used quite a few neat little features of Clojure and the libraries we&#8217;re building this project with to get here.</p>
-
-<p>The last step we&#8217;ll go through in this post is to get these messages into a database.</p>
-
-<h2>Enter Datomic, the immutable datastore</h2>
-
-<p><a href="http://www.datomic.com/">Datomic</a> is a great database layer built on Clojure that gives us a database value representing immutable data. New transactions on the database create new database values. It fits very well with Clojure&#8217;s own concept of <a href="http://clojure.org/state">state and identity</a> because it was designed by the same folks as Clojure. Plus, Datomic is meant to grow and scale in modern environments like AWS, with many backend datastore options to run it on.</p>
-
-<p>There&#8217;s some important reasons why you might choose Datomic as your database for a data science / machine learning application:</p>
-
-<ul>
-<li>There are various storage backends, so you can grow from tens of thousands of rows in PostgreSQL on a developer&#8217;s laptop to millions of records (or more) in Riak or DynamoDB on AWS. That is, it has a good migration path from small datasets to big data through the Datomic import/export process</li>
-<li>The concept of time associated with each value in Datomic means that we can query for historical data to compare against</li>
-<li>Datomic has a lightweight schema compared to a relational database like PostgreSQL. Schemas are just data! When we begin computing new values from our dataset, we can add new types of entities easily at the same time.</li>
-<li>Datomic&#8217;s schemas allow us to treat it as a key-value store, relational database, or even build a graph store on top of it, if we need to</li>
-</ul>
-
-
-<p><strong>Note</strong>: I won&#8217;t go through setting up an entire Datomic installation here. It&#8217;s worth reading up on the <a href="http://docs.datomic.com/">docs</a> and the <a href="http://www.datomic.com/rationale.html">rationale</a> behind Datomic&#8217;s design.</p>
-
-<p>You can get the <a href="https://my.datomic.com/downloads/free">Datomic free build</a> if you like, but you will be limited to in-memory stores. It is unlikely that your Gmail inbox will fit into memory on your dev machine. Instead, I recommend signing up for the free <a href="http://www.datomic.com/get-datomic.html">Datomic Pro Starter Edition</a>. (The free Starter Edition is fine because you will not be using this project in a commercial capacity.) Once you have Datomic Pro downloaded and installed in your local Maven, I recommend using the PostgreSQL storage adapter locally with memcached. Follow the guides for configuring storage on the <a href="http://docs.datomic.com/storage.html">Datomic Storage</a> page.</p>
-
-<p>Add the correct line to your <code>project.clj</code> dependencies for the version of Datomic you&#8217;ll be using (mine was <code>[com.datomic/datomic-pro "0.9.4384"]</code> which might be a bit out of date and likely won&#8217;t match yours.) Now we can start using Datomic in our <code>core.clj</code> and our REPL.</p>
-
-<p>The first thing we need is the URI where the Datomic database lives. When we start up the Datomic transactor, you will see a DB URI that looks something like <code>datomic:sql://DBNAMEHERE?jdbc:postgresql://localhost:5432/datomic?user=datomic&amp;password=datomic</code> in the output. Grab that URI and add it to our <code>resources/config/autodjinn-config.edn</code>:</p>
-
-<script src="https://gist.github.com/mathias/9877346.js"></script>
-
-
-<p>Back at the top of <code>core.clj</code>, save that value to a var as we did with <code>gmail-username</code> and <code>gmail-password</code>:</p>
-
-<script src="https://gist.github.com/mathias/9877374.js"></script>
-
-
-<p>And then in the REPL:</p>
-
-<script src="https://gist.github.com/mathias/9879199.js"></script>
-
-
-<p>Note that according to the <a href="http://docs.datomic.com/clojure/index.html#datomic.api/create-database">datomic clojure docs for the create-database function</a>, it returns true if the database was created, and false if it already exists. So running <code>create-database</code> every time we run our script is safe, since it won&#8217;t destroy data.</p>
-
-<p>If the above work in the REPL doesn&#8217;t work, it is likely your code is unable to talk to your running Datomic, or your Datomic transactor is not configured correctly. Diagnose it with Googling and reading the docs until you get it to work, then move on.</p>
-
-<p>Calling <code>(d/db db-connection)</code> gives us the current value of our database. In most cases, we want to just get the most current value. So, we can write a convenience function <code>new-db-val</code> to always get us the current (and possibly different) database value. But there are cases where we want to coordinate several queries and use the same database values for each. In those cases, we won&#8217;t use the function get the latest database value, but rather pass this database value to the queries so that all query against the same state.</p>
-
-<p>In our <code>core.clj</code>, we can add the code we need to create the database, get our connection, and the convenience <code>new-db-val</code> function:</p>
-
-<script src="https://gist.github.com/mathias/9879246.js"></script>
-
-
-<p>Next, we need to tell Datomic about the schema of our data. Schemas are just data that you run as a transaction on the database. Reading up on the <a href="http://docs.datomic.com/schema.html">Schema</a> page of the Datomic docs might be helpful to understand what&#8217;s going on here. The short version is that we define each attribute of an email and set up its properties. The collection of all attributes together will constitute a <code>mail</code> entity, so we namespace all the attributes under the <code>:mail/</code> namespace.</p>
-
-<script src="https://gist.github.com/mathias/9879323.js"></script>
-
-
-<p>We add that var def to our <code>core.clj</code> because it is, after all, just data. We may choose later to move it to its own <code>edn</code> file, but for now, it can live in our source code. Next, we want to apply this schema to our database with a transaction. That looks like this:</p>
-
-<script src="https://gist.github.com/mathias/9879355.js"></script>
-
-
-<p>Now we put that transaction in a convenience function in <code>core.clj</code> that we&#8217;ll run every time we run this file. The function will ensure that our database is &#8216;converged&#8217; to this schema. Running a transaction will create a new database value. But it will not blow away any data that we had in the database by running this transaction many times. It will simply try to update the existing attributes, and nothing in the attributes themselves need change. It is far more work to retract (delete) data in Datomic than it is to add or update it. This leads to much more safety around working with data without worrying that we will destroy data, and it encourages a REPL-based exploration of the data and its history.</p>
-
-<script src="https://gist.github.com/mathias/9879424.js"></script>
-
-
-<p>Now that our <code>mail</code> entities are defined in Datomic, we can try a query to find all the entity-IDs where any <code>:mail/uid</code> value is present. Read up on the <a href="http://docs.datomic.com/query.html">Query</a> page of the Datomic docs to dig into querying deeper. You might also be interested in the excellent <a href="http://www.learndatalogtoday.org/">Learn Datalog Today</a> website to learn more about querying Datomic with Datalog.</p>
-
-<script src="https://gist.github.com/mathias/9879491.js"></script>
-
-
-<p>Since we have no <code>mail</code> entities in our database, Datomic returns an empty set. So now we reach the end of task: We can ingest some emails and save them in our database! Return to the <code>ingest-inbox</code> function that we left before. Here&#8217;s what the updated version will look like:</p>
-
-<script src="https://gist.github.com/mathias/9879494.js"></script>
-
-
-<p>We use the <code>@</code>-sign before the <code>(d/transact…)</code> call because Datomic normally returns a promise of the completed transaction. However, we want to force Datomic to complete each transaction before moving on by deref-ing it with the <code>@</code>-sign. Per the Clojure docs: &#8220;Calls to deref/@ prior to delivery will block.&#8221;</p>
-
-<p>If you run this function in your REPL, you should see it start to ingest your email from Gmail!</p>
-
-<script src="https://gist.github.com/mathias/9879552.js"></script>
-
-
-<p>Note that this could a take a <strong>long time</strong> if you&#8217;ve chosen to import a really large Gmail inbox! You might want to stop the import at some point; in most REPLs <code>Ctrl-c</code> will stop the running function.</p>
-
-<p>If we query for our entity-IDs again, as above, we should see some values returned!</p>
-
-<p>What does one of those database entities look like when we run it through Datomic&#8217;s <a href="http://docs.datomic.com/clojure/index.html#datomic.api/entity">entity</a> and <a href="http://docs.datomic.com/clojure/index.html#datomic.api/touch">touch</a> functions to instantiate all its attributes?</p>
-
-<script src="https://gist.github.com/mathias/9879636.js"></script>
-
-
-<h2>Wrapping up</h2>
-
-<p>That&#8217;s it for this blog post. It took a little setup, but we were able to build up a working Gmail import tool with help from our REPL and some nice Clojure libraries.</p>
-
-<p>Next time, we&#8217;ll be looking at doing some basic querying of the data, including getting a count of the number of times each email address has sent you an email.</p>
-
-<p>Comments? Questions? Feel free to contact me at <a href="mailto:contact@mattgauger.com">contact@mattgauger.com</a>. I&#8217;d love to hear from you.</p>
-
-<hr />
-
-<p><a name="cds-gmail-footnote-1"></a>
-<strong>1</strong> In this case, machine learning <em>features</em>, which are the input variables for our learning tasks. Not software features that we a client might ask us to implement. See: <a href="https://en.wikipedia.org/wiki/Feature_learning">Feature learning - Wikipedia, the free encyclopedia</a>.
-<a href="#cds-gmail-footnote-1-return">↩</a></p>
-
-        
-        
-    </div>
-
-    <div class="meta">
-        <div class="author">
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
-</div>
-        <div class="date">
-
-
-
-
-
-
-
-
-
-
-
-
-<time datetime="2014-03-30T14:44:00-05:00" pubdate  data-updated="true" >Mar 30<span>th</span>, 2014</time>.</div>
         <div class="tags">
 
 </div>

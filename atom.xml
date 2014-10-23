@@ -4,7 +4,7 @@
   <title><![CDATA[blog.mattgauger.com]]></title>
   <link href="http://blog.mattgauger.com/atom.xml" rel="self"/>
   <link href="http://blog.mattgauger.com/"/>
-  <updated>2014-09-22T17:30:27-05:00</updated>
+  <updated>2014-10-23T18:19:08-05:00</updated>
   <id>http://blog.mattgauger.com/</id>
   <author>
     <name><![CDATA[Matt Gauger]]></name>
@@ -12,6 +12,210 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Clojure Data Science: Sent Counts and Aggregates]]></title>
+    <link href="http://blog.mattgauger.com/blog/2014/10/23/clojure-data-science-sent-counts-and-aggregates/"/>
+    <updated>2014-10-23T18:18:00-05:00</updated>
+    <id>http://blog.mattgauger.com/blog/2014/10/23/clojure-data-science-sent-counts-and-aggregates</id>
+    <content type="html"><![CDATA[<hr />
+
+<p>This is Part 3 of a series of blog posts called <a href="http://blog.mattgauger.com/categories/clojure-data-science">Clojure Data Science</a>. Check out the <a href="blog/2014/04/13/clojure-data-science-refactoring-and-cleanup/">previous post</a> if you missed it.</p>
+
+<hr />
+
+<p>For this post, we want to generate some summaries of our data by doing aggregate queries. We won&#8217;t yet be pulling in tools like <a href="http://storm.incubator.apache.org/">Apache Storm</a> into the mix, since we can accomplish this through Datomic queries. We will also talk about trade-offs of running aggregate queries on large datasets and devise a way to save our data back to Datomic.</p>
+
+<h2>Updating dependencies</h2>
+
+<p>It has been some time since we worked on <a href="https://github.com/mathias/autodjinn">autodjinn</a>. Libraries move fast in the Clojure ecosystem, and we want to make sure that we&#8217;re developing against the most recent versions of each dependency. Before we begin making changes, let&#8217;s update everything. If you have already read my <a href="http://blog.mattgauger.com/blog/2015/09/15/clojure-code-quality-tools/">Clojure Code Quality Tools</a> post, you&#8217;ll be familiar with the <code>lein ancient</code> plugin.</p>
+
+<p>Below is output when I run <code>lein ancient</code> on the last post&#8217;s finished git tag, <code>v0.1.1</code>. To go back to that state, you can run <code>git checkout v0.1.1</code> on the <a href="https://github.com/mathias/autodjinn">autodjinn repo</a>.</p>
+
+<script src="https://gist.github.com/mathias/c349dc7cb110edb56235.js"></script>
+
+
+<p>It looks like our <a href="https://github.com/james-henderson/nomad">nomad</a> dependency is out of date. Update the version number in <code>project.clj</code> to <code>0.7.0</code> and run <code>lein ancient</code> again to verify that it worked.</p>
+
+<p>If you take a look at <code>project.clj</code> yourself, you may notice that our project is still on Clojure <code>1.5.1</code>. <code>lein ancient</code> doesn&#8217;t look at the version of Clojure that we&#8217;re specifying; it assumes you have a good reason for picking the Clojure version you specify. In our case, we&#8217;d like to be on the latest stable Clojure, version <code>1.6.0</code>. Update the version of Clojure in <code>project.clj</code> and then run your REPL. There should be no issues with using the functionality in the app that we created in previous posts. If there is, carefully read the error messages and try to find a solution before moving on.</p>
+
+<p>To save on the hassle of upgrading, I have created a tag for the project after upgrading Clojure and nomad. To go to that tag in your local copy of the repo, run <code>git checkout v0.1.2</code>.</p>
+
+<h2>Datomic query refresher</h2>
+
+<p>If you remember back to the <a href="blog/2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/">first post</a>, we wrapped up by querying for entity IDs and then using Datomic&#8217;s built-in <code>entity</code> and <code>touch</code> functions to instantiate each message with all of its attributes. We had to do this because the query itself only returned a set of entity IDs:</p>
+
+<script src="https://gist.github.com/mathias/ab5a827ca860c89e0043.js"></script>
+
+
+<p>Note that the Datomic query is made up of several parts:</p>
+
+<ul>
+<li>The <code>:find</code> clause says what will be returned. In this case, it is the <code>?eid</code> variable for each record we matched in the rest of the query.</li>
+<li>The <code>:where</code> clause gives a condition to match. In this case, we want all <code>?eid</code> where the entity has a <code>:mail/uid</code> fact, but we don&#8217;t care about the <code>:mail/uid</code> fact&#8217;s value, so we give it a wildcard with the underscore (<code>_</code>).</li>
+</ul>
+
+
+<p>We could pass in the <code>:mail/uid</code> we care about, and only get one message&#8217;s entity-ID back.</p>
+
+<script src="https://gist.github.com/mathias/4990c69f1e4c4a7dc7e9.js"></script>
+
+
+<p>Notice how the <code>?uid</code> variable gets passed in with the <code>:in</code> clause, as the third argument to <code>d/q</code>?</p>
+
+<p>Or we could change the query to match on other attributes:</p>
+
+<script src="https://gist.github.com/mathias/3685937809a50e36c424.js"></script>
+
+
+<p>In all these cases, we&#8217;d still get the entity IDs back because the <code>:find</code> clause tells Datomic to return <code>?eid</code>. Typically, we pass around entity IDs and lazy-load any facts (attributes) that we need off that entity.</p>
+
+<p>But, we could just as easily return other attributes from an entity as part of a query. Let&#8217;s ask for the recipients of all the emails in our system:</p>
+
+<script src="https://gist.github.com/mathias/be2baf0af0b652966240.js"></script>
+
+
+<p>While it is less common to return only the value of an entity&#8217;s attribute, being able to do so will allow us to build more functionality on top of our email abstraction later.</p>
+
+<p>One last thing. Take a look at the return of that query above. Remember that the results returned by a Datomic query are a <a href="http://clojure.github.io/clojure/clojure.core-api.html#clojure.core/set">set</a>. In Clojure, sets are a collection of unique values. So we’re seeing the unique list of addresses that are in the To: field in our data. What we&#8217;re not seeing is duplicate recipient addresses. To be able to count the number of times an email address received a message, we&#8217;ll need a list with non-unique members.</p>
+
+<p>Datomic creates a unique set for the values returned by a query. This is generally a great thing, since it gets around some of the issues that one can run into with JOINing in SQL. But in this case, it is not ideal for what we want to accomplish. We could try to get around the uniqueness constraint on output by returning vectors of the entity ID and the <code>?to</code> address, and then mapping across the result to pull out the second item:</p>
+
+<script src="https://gist.github.com/mathias/d6401a036d032caccde3.js"></script>
+
+
+<p>There&#8217;s a simpler way that we can use in the Datomic query. By keeping it inside Datomic, we can later combine this approach with more-complex queries. We can tell the Datomic query to look at other attributes when considering what the unique key is by passing the query a <code>:with</code> clause. By changing our query slightly to include a <code>:with</code> clause, we end up with the full list of recipients in our datastore:</p>
+
+<script src="https://gist.github.com/mathias/f36ae56bef0e1b6cdfa9.js"></script>
+
+
+<p>At this point, it might be a good idea to review Datomic&#8217;s <a href="http://docs.datomic.com/query.html">querying</a> guide. We&#8217;ll be using some of the advanced querying features found in the later sections of that guide, most notably aggregate functions.</p>
+
+<h2>Sent Counts</h2>
+
+<p>For this feature, we want to find all the pairs of from-to addresses for each email in our datastore, and then sum up the counts for each pair. We will save all these sent counts into a new entity type in Datomic. This will allow us to ask Datomic questions like who sends you the most email, and who you send the most email to.</p>
+
+<p>We start by building up the query in our REPL. Let&#8217;s start with a simpler query, to count how many emails have been sent <em>to</em> each email address in our data store. Note that this isn&#8217;t sufficient to answer the question above, since we won&#8217;t know who those emails came <em>from</em>; they could have been sent by us or by someone else, or they could have been sent to us. Later, we&#8217;ll make it work with from-to pairs that allow us to know things like who is sending email to us.</p>
+
+<p>A simple way to do this would be to wrap our previous query in the <a href="http://clojure.github.io/clojure/clojure.core-api.html#clojure.core/frequencies">frequencies</a> function that Clojure.core provides. <code>frequencies</code> returns a map of items with their count from a Clojure collection.</p>
+
+<script src="https://gist.github.com/mathias/af050f75d1c610d6d422.js"></script>
+
+
+<p>However, we want to perform the same sort of thing in Datomic itself. To do that, we&#8217;re going to need to know about aggregate functions. Aggregate functions operate over the intermediate results of a Datomic query. Datomic provides functions like <code>max</code>, <code>min</code>, <code>sum</code>, <code>count</code>, <code>rand</code> (for getting a random value out of the query results), and more. With aggregates, we need to be sure to use a <code>:with</code> clause to ensure we aggregate over all our values.</p>
+
+<p>Looking at that short list of aggregate functions I&#8217;ve named, we can see that we probably want to use the <code>count</code> function to count the occurance of each email address in a to field in our data. To see how aggregates work, I&#8217;ve come up with a simpler example (the only new thing to know is that Datomic&#8217;s Datalog implementation can query across Clojure collections as easily as it can against a database value, so I&#8217;ve given a simple vector-of-vectors here to describe data in the form</p>
+
+<p><code>[database-id person-name]</code></p>
+
+<p>When the query looks at records in the data, our <code>:where</code> clause gives each position in the vector an id and a name based on position in the vector.)</p>
+
+<script src="https://gist.github.com/mathias/6b8da156388ed1cd9290.js"></script>
+
+
+<p>Let&#8217;s review what happened there. Before the <code>count</code> aggregate function was applied, our results looked like this:</p>
+
+<p><code>[["Jon"] ["Jon"] ["Bob"] ["Chris"]]</code></p>
+
+<p>So the <code>count</code> function just counts across the values of the variable it is passed (in our case, <code>?name</code>), and by pairing it with the original <code>?name</code> value, we get each name and the number of times it appears in our dataset.</p>
+
+<p>It makes sense that we can do the same thing with our recipient email addresses from the previous query. Combining our previous queries with the <code>count</code> aggregate function, we get:</p>
+
+<script src="https://gist.github.com/mathias/8b346f1019d588bea534.js"></script>
+
+
+<p>That looks like the same kind of data we were getting with the use of the <code>frequencies</code> function before! So now we know how to use a Datomic aggregate function to count results in our queries.</p>
+
+<p>What&#8217;s next? Well, what we really want is to get results that are of the form</p>
+
+<p><code>[from-address to-address]</code></p>
+
+<p>and count those tuples. That way, we can differentiate between email sent to us versus email we&#8217;ve sent to others, etc. And eventually, we&#8217;d like to save those queries off as functions that we can call to compute the counts from other places in our project.</p>
+
+<p>We can&#8217;t pass a tuple like <code>[from-address to-address]</code> to the <code>count</code> aggregate function in one query. The way around this is to write two queries. The inner query will return the tuples, and the outer query will return the tuple and a count of the tuple in the output data. Since the queries run on the peer, we don&#8217;t really have to worry about whether it is one query or two, just that it returns the correct data at the end.</p>
+
+<p>So what would the inner query look like? Remember that the outer query will still need a field to pass to the <code>:with</code> clause, so we&#8217;ll probably want to pass through the entity ID.</p>
+
+<script src="https://gist.github.com/mathias/61e60a563ffc29f06af8.js"></script>
+
+
+<p>Those tuples will be used by our outer query. However, we also need a combined value for the count to operate on. For that, we can throw in a function call in the <code>:where</code> clause and give it a binding at the end for Datomic to use for that new value. In this case, I&#8217;ll combine the <code>?from</code> and <code>?to</code> values into a PersistentVector that the <code>count</code> aggregate function can use. The combined query ends up looking like this:</p>
+
+<script src="https://gist.github.com/mathias/d26c7175670b8c29e7c2.js"></script>
+
+
+<p>And the output is as we expect.</p>
+
+<h2>Reusable functions</h2>
+
+<p>The next step is to turn the query above into various functions we can use to query for from-to counts later. In our data, we don&#8217;t just have recipients in the To: field, we also have CC and BCC recipients. Those fields will need their own variations of the query function, but since they will share so much functionality, we will try to compose our functions in such a way that we avoid duplicate code.</p>
+
+<p>In general, when I write query functions for Datomic, I use multiple arities to always allow a database value to be passed to the query function. This can be useful, for example, when we want to query against previous (historical) values of the database, or when we want to work with a particular database value across multiple queries, to ensure our data is consistent and doesn&#8217;t change between queries.</p>
+
+<p>Such a query function typically looks like this:</p>
+
+<script src="https://gist.github.com/mathias/f61fb370a3a2120daf6f.js"></script>
+
+
+<p>By taking advantage of multiple arities, we can default to not having to pass a database value into the function. But in the cases where we do need to ensure a particular database version is used, we can do that. This is a very powerful idiom that I&#8217;ve learned since I began to use Datomic, and I suggest you structure all your query functions similarly.</p>
+
+<p>Now, let&#8217;s take that function that only queries for <code>:mail/to</code> addresses and make it more generic, with specific wrapper functions for each case where we&#8217;d want to use it:</p>
+
+<script src="https://gist.github.com/mathias/67647105799f7f2ff1cf.js"></script>
+
+
+<p>Note that we had to change the inner query to take the attr we want to query on as a variable; this is the proper way to pass a piece of data into a query we want to run. The <code>$</code> that comes first in the <code>:in</code> clause tells Datomic to use the second <code>d/q</code> argument as our dataset (the db value we pass in), and the <code>?attr</code> tells it to bind the third <code>d/q</code> argument as the variable <code>?attr</code>.</p>
+
+<p>While the three variations on functions are similar, we aren&#8217;t reusing lots of code. In the long run, less code should mean less bugs and the ability to fix problems in one place.</p>
+
+<p>Building complex systems by composing functions is one of the features of Clojure that I enjoy the most! And notice how we got to these finished query functions by building up functionality in our REPL: another aspect of writing systems in Clojure that I appreciate.</p>
+
+<h2>Querying against large data sets</h2>
+
+<p>Right now, our functions calculate the sent counts across all messages every time they&#8217;re called. This is fine for the small sample dataset I&#8217;ve been working with locally, but if it were to run against the 35K+ messages that are in my Gmail inbox alone (not to mention all the labels and other places my email lives&hellip;) it would take a very long time. With even bigger systems, we can run into an additional problem: the results may not fit into memory.</p>
+
+<p>When building systems with datasets big enough that the intermediate or final results may not fit into memory, or that may take too much time to compute, there are two general approaches that we will explore. The first is storing results as data (known as memoizing or caching the results), and the other is breaking up the work to run on distributed systems like Hadoop or Apache Storm.</p>
+
+<p>For this data, we only want to avoid redoing the calculating every time we want to know the sent counts. Currently, the data in our system changes infrequently, and it&#8217;s likely that we could tell the system to recompute sent counts only after ingesting new data from Gmail. For these reasons, a reasonable solution will be to store the computed sent counts back into Datomic.</p>
+
+<h2>A new entity type to store our results</h2>
+
+<p>For all three query functions we wrote, each result is of the form:</p>
+
+<p><code>[from-address to-address count]</code></p>
+
+<p>Let&#8217;s add to the Datomic schema in our <code>core.clj</code> file to create a new <code>:sent-count</code> entity type with these three attributes. Note that sent counts don&#8217;t really have a unique identifier of their own; it is the combination of <code>from</code> -> <code>to</code> addresses that uniquely identifies them. However, we will leave the <code>from</code> and <code>to</code> addresses as separate fields so it is easy to use them in queries.</p>
+
+<p>Add the following maps to the <code>schema-txn</code> vector:</p>
+
+<script src="https://gist.github.com/mathias/661dadfdb2e639209452.js"></script>
+
+
+<p>You&#8217;ll have to call the <code>update-schema</code> function in your REPL to run the schema transaction.</p>
+
+<p>Something that&#8217;s worth calling out is that we&#8217;re using a Datomic schema <code>valueType</code> that we haven&#8217;t seen yet in this project: <code>db.type/ref</code>. In most cases, you&#8217;d want to use the <code>ref</code> type to associate with other entities in Datomic. But we can also use it to associate with a given list of facts. Here, we give the <code>ref</code> type an enum of the possible values that <code>:sent-count/type</code> can have: <code>to</code>, <code>cc</code>, and <code>bcc</code>. By adding this <code>type</code> field to our new entities, we can either choose to look at sent counts for only one type of address, or we can sum up all the counts for a given from-to pair and get the total counts for the system.</p>
+
+<p>Our next job is to add some functions to create the initial sent counts data, as well as to query for it. To keep things clean, I created a <code>sent-counts</code> namespace for these functions to live in. I&#8217;ve provided it below with minimal explanation, since it should look very familiar to what we&#8217;ve already done.</p>
+
+<p><a href="https://github.com/mathias/autodjinn/blob/29cc08d1ead6043287ecb82136d3ee519668100f/src/autodjinn/sent_counts.clj">/src/autodjinn/sent_counts.clj</a></p>
+
+<p>After adding in the <code>sent_counts.clj</code> file, running:</p>
+
+<p><code>(sent-counts/create-sent-counts)</code></p>
+
+<p>will populate your datastore with the sent counts computed with functions we created earlier.</p>
+
+<p>Note: The sent counts don&#8217;t have any sort of unique key on them, so if you run <code>create-sent-counts</code> multiple times, you&#8217;ll get duplicate results. We&#8217;ll handle that another time when we need to update our data.</p>
+
+<h2>Wrapping up</h2>
+
+<p>We&#8217;ve covered a lot of material on querying Datomic. In particular, we used aggregate functions to get the counts and sums of records in our data store. Because we don&#8217;t want to run the queries all the time, we created a new entity type to store our sent counts and saved our data into it. With query functions like those found in the <code>sent-counts</code> namespace, we can start to ask our data questions like &#8220;In the dataset, what address was sent the most email?&#8221;</p>
+
+<p>If you want to compare what you’ve done with my version, you can run <code>git diff v0.1.3</code> on the <a href="https://github.com/mathias/autodjinn">autodjinn repo</a>.</p>
+
+<p>Please let me know what you think of these posts by sending me an email at <a href="mailto:contact@mattgauger.com">contact@mattgauger.com</a>. I’d love to hear from you!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Clojure Code Quality Tools]]></title>
@@ -331,7 +535,7 @@
 <script src="https://gist.github.com/mathias/9966384.js"></script>
 
 
-<p>Running <code>lein run -m autodjinn.gmail-ingestion</code> one more time, we should see that our changes did not break the system. The config is now only loaded once, and we use it everything.</p>
+<p>Running <code>lein run -m autodjinn.gmail-ingestion</code> one more time, we should see that our changes did not break the system. The config is now only loaded once, and we use it everywhere.</p>
 
 <p>That&#8217;s it! We&#8217;ve taken care of some low-hanging fruit and are ready to implement some new functionality. If you want to compare what you&#8217;ve done with my version, you can run <code>git diff v0.1.1</code> on the <a href="https://github.com/mathias/autodjinn">autodjinn repo</a>.</p>
 
@@ -1538,51 +1742,6 @@ By &#8220;augmenting human intellect&#8221; we mean increasing the capability of
 <cite><a href="http://www.dougengelbart.org/pubs/augment-3906.html">Augmenting Human Intellect: A Conceptual Framework </a></cite>
 </blockquote>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Filter or Be Filtered]]></title>
-    <link href="http://blog.mattgauger.com/blog/2013/03/07/filter-or-be-filtered/"/>
-    <updated>2013-03-07T22:09:00-06:00</updated>
-    <id>http://blog.mattgauger.com/blog/2013/03/07/filter-or-be-filtered</id>
-    <content type="html"><![CDATA[<p>Eli Pariser&#8217;s talk, <a href="http://www.ted.com/talks/eli_pariser_beware_online_filter_bubbles.html">Beware online &#8220;filter bubbles&#8221;</a> recently hit the front page of the TED Talks website. I found it interesting because it discusses some of what I&#8217;ve seen happening online, and some of my fears for how we search and consume content. Watch the video if you haven&#8217;t to see just how much is already being filtered on the web for you.</p>
-
-<p>Right after I saw the video, of course, <a href="http://washingtonpost.com/business/technology/facebook-to-change-news-feed-to-a-personalized-newspaper/2013/03/07/b294f61e-8751-11e2-98a3-b3db6b9ac586_story.html">Facebook announced</a> that they&#8217;ll be rolling out a new version of the the news feed. They are quoted as making it more like a &#8220;personal newspaper&#8221; &mdash; a filter, essentially, for the things Facebook thinks you want to see. As the video above pointed out, they&#8217;ve already been filtering <em>out</em> the things they think you don&#8217;t want for awhile.</p>
-
-<p>No doubt there will be some backlash as people adjust to changes on Facebook, but very few will abandon it. And if you are the kind of person that would abandon Facebook over filtering, or privacy, or concerns about owning your own data, you don&#8217;t have a lot of choices of where to go.</p>
-
-<p>Sure, you can specifically seek out services that aren&#8217;t going to give you a filtered world view &mdash; <a href="https://duckduckgo.com/">DuckDuckGo</a> comes to mind. But that&#8217;s not always possible. The problem is bigger than just the search engine you use and whether or not you&#8217;re logged into Facebook. Just about every site is run by someone else, and they are analyzing you constantly. They are in a brutal battle to keep you as their consumer and keep you from going to other sites. But are the things that they think you want to see what you really want or need to see?</p>
-
-<p>As a developer, I&#8217;m capable of taking matters into my own hands, to some degree. Most of the sites that I use on a daily basis have an API and allow me to export or scrape my personal data. But the cost of switching off of the nice service, the well-designed UI/UX of an official mobile app, and so on has kept me from taking the plunge to export my data and go set up shop on my own version of various web services.</p>
-
-<p>Recently I revamped a very old, empty repo that I had on Github. The point of this repo was code a way to export all of my data from <a href="https://www.last.fm/">Last.fm</a>. But for whatever reason the repo has been empty for something like 4 years now. So the other week, I sat down, checked the <a href="http://www.last.fm/api">Last.fm API docs</a>, and wrote a very simple Ruby script to dump out all the JSON it could about my top tracks, artists, and albums over the past 7 years. That script is available as my <a href="https://github.com/mathias/birdsong">birdsong</a> repo on Github.</p>
-
-<p>So far, I don&#8217;t have a real use for the data. I could try to use some visualization tools on it to make cool graphs or maps. Or I could try and get analytics out of it: genres listened to, how they&#8217;ve changed over the years. But for now, I am content to just have the JSON data.</p>
-
-<p>All in all, it&#8217;s around 30 megabytes of JSON data, which is really just plain text with no compression, so it is really quite a lot of data. There&#8217;s more I can do, though. I plan to do to start taking control, to both aggregate my own data and filter it.</p>
-
-<p>For a long time it has bothered me that <a href="https://www.google.com/reader">Google Reader</a> stopped receiving new features, and the features that existed only went so far. To be fair, Google Reader has been a rock solid web service for many, many years for me. It allows me to read my feeds quickly, reliably, and has parsed feeds well &mdash; all problems I&#8217;ve had with other feed readers. It&#8217;s always had some neat features like showing me analytics of what I read.</p>
-
-<p><img src="http://blog.mattgauger.com/images/google_reader_trends.png" alt="Google Reader Trends" /></p>
-
-<p>But as far as discovering new content and helping me to eliminate content I don&#8217;t read or don&#8217;t want to read, Google Reader is not so great. Reader is terrible at suggesting new feeds to read to me; it constantly suggests Dilbert and Lifehacker, and has for the past 5 years or so. I have no interest in either of those. It has never analyzed my reading patterns to such a degree that it suggested something new that blew me away. I am looking for those kinds of interesting suggestions: not just for feeds that match what I already read, but things that are outside of my normal bubble but would be interesting to me.</p>
-
-<p>Luckily, Google Reader has an API, and rather than just exporting my data and building a new service, I can start to build off of it. I get to keep a lot of the features I enjoy while extending it with my own code.</p>
-
-<p>In Pariser&#8217;s talk, he talks about encoding algorithms of filtering and recommendation with a sense of civic duty. To some degree, this means having some journalistic integrity. Such an algorithm needs to present both sides of the story. One issue of many feed readers and other content online is that, well, it only shows one view. The view of the article you&#8217;re on.</p>
-
-<p>But imagine a feed reader that was more like the front page of Google News. It would not only show you the blog post you&#8217;re reading, but all recent blog posts from other authors about similar topics. Maybe, if they&#8217;re responding to a news event or writing about a known fact, the reader could do the work to track down the original source. To take it even further, without even really needing to be aware of motive, politics, and other factors, a dumb feed reader with good suggestions could probably present both sides of the story. Both sides of an argument. Both liberal and conservative takes on the same bill.</p>
-
-<p>Dreaming up features like this can be a deep rabbit hole. Start considering the consequences of pulling up all past articles you&#8217;ve read about similar keywords or tags. Or performing searches for academic papers on the topic. Pulling in data from Wikipedia. Looking up books you&#8217;ve read or are planning to read on Goodreads that are related to the blog post you&#8217;re reading. Or any other number of ways to slice and dice content. And it doesn&#8217;t have to stop with Google Reader.</p>
-
-<p>Opportunities to make better tools and more intelligently consume information are all around us. At the same time, consumer-consuming corporations on the web try to trap us into filter bubbles. They try to provide us with what they think we want, but can they ever really know? In the end, it&#8217;s control-your-own-filters or be filtered<a href="#filter-or-be-filtered-note" name="filter-or-be-filtered-note-return"><sup>1</sup></a>.</p>
-
-<hr />
-
-<p><a name="filter-or-be-filtered-note"></a></p>
-
-<p><strong>1</strong> The name of this article was lifted from Daniel Rushkoff&#8217;s <a href="http://www.goodreads.com/book/show/9408311-program-or-be-programmed">Program or be Programmed</a>, a book which I didn&#8217;t really enjoy. It was not what I thought it would be about: why we should learn to program so that we can control the complex technical systems around us rather than be controlled by them, or how programming&#8217;s problem solving skills can be applied elsewhere. Instead, I found the book to be some technology-fear-mongering and a bunch of diatribes about how things online or in computers are &#8220;less real.&#8221; Suffice to say, I did not enjoy it. <a href="#filter-or-be-filtered-note-return">&#8617;</a></p>
 ]]></content>
   </entry>
   
