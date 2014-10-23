@@ -135,7 +135,7 @@ Now, let's take that function that only queries for `:mail/to` addresses and mak
 
 Note that we had to change the inner query to take the attr we want to query on as a variable; this is the proper way to pass a piece of data into a query we want to run. The `$` that comes first in the `:in` clause tells Datomic to use the second `d/q` argument as our dataset (the db value we pass in), and the `?attr` tells it to bind the third `d/q` argument as the variable `?attr`.
 
-While the three variations on functions are similar, we aren't reusing lots of code. In the long run, less code should mean less bugs and the ability to fix problems in one place.
+While the three variations on functions are similar, we keep the code DRY. (DRY is an acronym for Don't Repeat Yourself.) In the long run, less code should mean less bugs and the ability to fix problems in one place.
 
 Building complex systems by composing functions is one of the features of Clojure that I enjoy the most! And notice how we got to these finished query functions by building up functionality in our REPL: another aspect of writing systems in Clojure that I appreciate.
 
