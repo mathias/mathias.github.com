@@ -4,7 +4,7 @@
   <title><![CDATA[blog.mattgauger.com]]></title>
   <link href="http://blog.mattgauger.com/atom.xml" rel="self"/>
   <link href="http://blog.mattgauger.com/"/>
-  <updated>2014-10-24T09:51:03-05:00</updated>
+  <updated>2014-10-24T10:14:40-05:00</updated>
   <id>http://blog.mattgauger.com/</id>
   <author>
     <name><![CDATA[Matt Gauger]]></name>
@@ -20,7 +20,7 @@
     <id>http://blog.mattgauger.com/blog/2014/10/23/clojure-data-science-sent-counts-and-aggregates</id>
     <content type="html"><![CDATA[<hr />
 
-<p>This is Part 3 of a series of blog posts called <a href="http://blog.mattgauger.com/categories/clojure-data-science">Clojure Data Science</a>. Check out the <a href="blog/2014/04/13/clojure-data-science-refactoring-and-cleanup/">previous post</a> if you missed it.</p>
+<p>This is Part 3 of a series of blog posts called <a href="http://blog.mattgauger.com/blog/categories/clojure-data-science">Clojure Data Science</a>. Check out the <a href="http://blog.mattgauger.com/blog/2014/04/13/clojure-data-science-refactoring-and-cleanup/">previous post</a> if you missed it.</p>
 
 <hr />
 
@@ -28,7 +28,7 @@
 
 <h2>Updating dependencies</h2>
 
-<p>It has been some time since we worked on <a href="https://github.com/mathias/autodjinn">autodjinn</a>. Libraries move fast in the Clojure ecosystem, and we want to make sure that we&#8217;re developing against the most recent versions of each dependency. Before we begin making changes, let&#8217;s update everything. If you have already read my <a href="http://blog.mattgauger.com/blog/2014/09/15/clojure-code-quality-tools/">Clojure Code Quality Tools</a> post, you&#8217;ll be familiar with the <code>lein ancient</code> plugin.</p>
+<p>It has been some time since we worked on <a href="https://github.com/mathias/autodjinn">autodjinn</a>. Libraries move fast in the Clojure ecosystem, and we want to make sure that we&#8217;re developing against the most recent versions of each dependency. Before we begin making changes, let&#8217;s update everything. If you have already read my [Clojure Code Quality Tools]/blog/2014/09/15/clojure-code-quality-tools/) post, you&#8217;ll be familiar with the <code>lein ancient</code> plugin.</p>
 
 <p>Below is output when I run <code>lein ancient</code> on the last post&#8217;s finished git tag, <code>v0.1.1</code>. To go back to that state, you can run <code>git checkout v0.1.1</code> on the <a href="https://github.com/mathias/autodjinn">autodjinn repo</a>.</p>
 
@@ -43,7 +43,7 @@
 
 <h2>Datomic query refresher</h2>
 
-<p>If you remember back to the <a href="blog/2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/">first post</a>, we wrapped up by querying for entity IDs and then using Datomic&#8217;s built-in <code>entity</code> and <code>touch</code> functions to instantiate each message with all of its attributes. We had to do this because the query itself only returned a set of entity IDs:</p>
+<p>If you remember back to the <a href="http://blog.mattgauger.com/blog/2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/">first post</a>, we wrapped up by querying for entity IDs and then using Datomic&#8217;s built-in <code>entity</code> and <code>touch</code> functions to instantiate each message with all of its attributes. We had to do this because the query itself only returned a set of entity IDs:</p>
 
 <script src="https://gist.github.com/mathias/ab5a827ca860c89e0043.js"></script>
 
