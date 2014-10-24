@@ -6,7 +6,7 @@ date: 2014-10-23 18:18
 
 ---
 
-This is Part 3 of a series of blog posts called [Clojure Data Science](/categories/clojure-data-science). Check out the [previous post](blog/2014/04/13/clojure-data-science-refactoring-and-cleanup/) if you missed it.
+This is Part 3 of a series of blog posts called [Clojure Data Science](http://blog.mattgauger.com/blog/categories/clojure-data-science). Check out the [previous post](http://blog.mattgauger.com/blog/2014/04/13/clojure-data-science-refactoring-and-cleanup/) if you missed it.
 
 ---
 
@@ -14,7 +14,7 @@ For this post, we want to generate some summaries of our data by doing aggregate
 
 ## Updating dependencies
 
-It has been some time since we worked on [autodjinn](https://github.com/mathias/autodjinn). Libraries move fast in the Clojure ecosystem, and we want to make sure that we're developing against the most recent versions of each dependency. Before we begin making changes, let's update everything. If you have already read my [Clojure Code Quality Tools](/blog/2014/09/15/clojure-code-quality-tools/) post, you'll be familiar with the `lein ancient` plugin.
+It has been some time since we worked on [autodjinn](https://github.com/mathias/autodjinn). Libraries move fast in the Clojure ecosystem, and we want to make sure that we're developing against the most recent versions of each dependency. Before we begin making changes, let's update everything. If you have already read my [Clojure Code Quality Tools]/blog/2014/09/15/clojure-code-quality-tools/) post, you'll be familiar with the `lein ancient` plugin.
 
 Below is output when I run `lein ancient` on the last post's finished git tag, `v0.1.1`. To go back to that state, you can run `git checkout v0.1.1` on the [autodjinn repo](https://github.com/mathias/autodjinn).
 
@@ -28,7 +28,7 @@ To save on the hassle of upgrading, I have created a tag for the project after u
 
 ## Datomic query refresher
 
-If you remember back to the [first post](blog/2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/), we wrapped up by querying for entity IDs and then using Datomic's built-in `entity` and `touch` functions to instantiate each message with all of its attributes. We had to do this because the query itself only returned a set of entity IDs:
+If you remember back to the [first post](http://blog.mattgauger.com/blog/2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/), we wrapped up by querying for entity IDs and then using Datomic's built-in `entity` and `touch` functions to instantiate each message with all of its attributes. We had to do this because the query itself only returned a set of entity IDs:
 
 <script src="https://gist.github.com/mathias/ab5a827ca860c89e0043.js"></script>
 
