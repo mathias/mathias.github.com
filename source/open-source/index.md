@@ -26,18 +26,18 @@ I've contributed to and built a number of open source projects. I am [mathias](h
 In order of going further back in time:
 
 * Numerous docs PRs all over the place.
-* pliny: <https://github.com/interagent/pliny>
-* lein-bikeshed: [https://github.com/dakrone/lein-bikeshed](https://github.com/dakrone/lein-bikeshed)
-* atreus-firmware: [https://github.com/technomancy/atreus-firmware](https://github.com/technomancy/atreus-firmware)
-* clojure-mail: [https://github.com/owainlewis/clojure-mail](https://github.com/owainlewis/clojure-mail)
-* emacs-live: [https://github.com/overtone/emacs-live](https://github.com/overtone/emacs-live)
-* rm-hull / monet: [https://github.com/rm-hull/monet](https://github.com/rm-hull/monet)
-* rylnd's pair script: [https://github.com/rylnd/dotfiles](https://github.com/rylnd/dotfiles)
-* styleguide_rails: [https://github.com/begriffs/styleguide_rails](https://github.com/begriffs/styleguide_rails)
-* The Sapling Events conferences websites: [https://github.com/SaplingEvents](https://github.com/SaplingEvents)
-* rstat.us: [https://github.com/hotsh/rstat.us/](https://github.com/hotsh/rstat.us/)
-* The [Hackety Hack](http://hackety.com) project and its website:
-  * [https://github.com/hacketyhack/hacketyhack](https://github.com/hacketyhack/hacketyhack)
-  * [https://github.com/hacketyhack/hackety-hack.com](https://github.com/hacketyhack/hackety-hack.com)
-* Errbit: [https://github.com/errbit/errbit](https://github.com/errbit/errbit)
-* bendyworks/idkfa: [https://github.com/bendyworks/idkfa](https://github.com/bendyworks/idkfa)
+* [pliny](https://github.com/interagent/pliny)
+* [lein-bikeshed](https://github.com/dakrone/lein-bikeshed)
+* [atreus-firmware](https://github.com/technomancy/atreus-firmware)
+* [clojure-mail](https://github.com/owainlewis/clojure-mail)
+* [emacs-live](https://github.com/overtone/emacs-live)
+* [rm-hull/ monet](https://github.com/rm-hull/monet)
+* [rylnd's pair script](https://github.com/rylnd/dotfiles)
+* [styleguide_rails](https://github.com/begriffs/styleguide_rails)
+* [Sapling Events conference websites](https://github.com/SaplingEvents)
+* [rstat.us](https://github.com/hotsh/rstat.us/)
+* The <http://hackety.com> project and its website:
+  * <https://github.com/hacketyhack/hacketyhack>
+  * <https://github.com/hacketyhack/hackety-hack.com>
+* [Errbit](https://github.com/errbit/errbit)
+* [bendyworks/idkfa](https://github.com/bendyworks/idkfa)
