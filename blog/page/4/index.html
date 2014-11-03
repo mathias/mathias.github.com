@@ -120,10 +120,7 @@
 
 <p>And still, those alternative layouts doesn&#8217;t get me to the point where I can type out an entire block of code at once. For example, I might want to map a key to output something I frequently type, such as a Javascript anonymous function. Knowing which editor I&#8217;m in, I could have the keyboard leave the cursor in the function body, ready to be filled in:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>function() {
+<figure class='code'><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class=''><span class='line'>function() {
 </span><span class='line'>  _
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
@@ -331,27 +328,7 @@
 
 <p>To implement it myself, I needed to be able to plot points on a display. So I turned to Hackety-Hack, which comes with Shoes for drawing graphics. The Shoes DSL for drawing shapes is rather simple, which means we can take the pseudocode above and turn it into a working demo rather easily:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Shoes</span><span class="o">.</span><span class="n">app</span> <span class="k">do</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Shoes</span><span class="o">.</span><span class="n">app</span> <span class="k">do</span>
 </span><span class='line'>  <span class="n">epsilon</span> <span class="o">=</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">16</span>
 </span><span class='line'>  <span class="n">offset</span> <span class="o">=</span> <span class="mi">250</span>
 </span><span class='line'>  <span class="n">x</span> <span class="o">=</span> <span class="mi">20</span>
@@ -380,9 +357,7 @@
 
 <p>If we want to compare the roundness of our &#8220;circle&#8221; to a real circle drawn by Shoes, we can add this line in before the closing <code>end</code>:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">fill</span> <span class="n">blue</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">fill</span> <span class="n">blue</span>
 </span><span class='line'>  <span class="n">oval</span><span class="p">({</span><span class="ss">top</span><span class="p">:</span> <span class="mi">250</span><span class="p">,</span> <span class="ss">left</span><span class="p">:</span> <span class="mi">320</span><span class="p">,</span> <span class="ss">radius</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="ss">center</span><span class="p">:</span> <span class="kp">true</span><span class="p">})</span>
 </span></code></pre></td></tr></table></div></figure>
 
@@ -515,14 +490,12 @@ bundle
 
 <p>Your / filesystem may be mounted as read-only at this point. Type this to mount it as read-write:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mount -rw -o remount /</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class=''><span class='line'>mount -rw -o remount /</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Now you can reset passwords, etc, like this:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>passwd myuser</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class=''><span class='line'>passwd myuser</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Good luck!</p>
