@@ -26,6 +26,7 @@ I've contributed to and built a number of open source projects. I am [mathias](h
 In order of going further back in time:
 
 * Numerous docs PRs all over the place.
+* pliny: <https://github.com/interagent/pliny>
 * lein-bikeshed: [https://github.com/dakrone/lein-bikeshed](https://github.com/dakrone/lein-bikeshed)
 * atreus-firmware: [https://github.com/technomancy/atreus-firmware](https://github.com/technomancy/atreus-firmware)
 * clojure-mail: [https://github.com/owainlewis/clojure-mail](https://github.com/owainlewis/clojure-mail)
