@@ -27,6 +27,9 @@ In order of going further back in time:
 
 * Numerous docs PRs all over the place.
 * [pliny](https://github.com/interagent/pliny)
+* [boot-cljs](https://github.com/adzerk/boot-cljs)
+* [exercism/xclojure](https://github.com/exercism/xclojure): Exercism's Clojure exercises
+* [newspaper-delivery](https://github.com/voidfiles/newspaper-delivery)
 * [lein-bikeshed](https://github.com/dakrone/lein-bikeshed)
 * [atreus-firmware](https://github.com/technomancy/atreus-firmware)
 * [clojure-mail](https://github.com/owainlewis/clojure-mail)
