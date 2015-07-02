@@ -6,7 +6,7 @@ date: 2014-03-20 13:29
 
 *Note:* I began writing a much longer blog post that went into a ton of detail about how to build an app dashboard that used Hoplon and Castra. The kind of dashboard that just consumes JSON API endpoints from another app or other data sources. Such dashboards update on the fly in the browser. Many apps these days need a dashboard like this to monitor stats: worker job queues, database size, average response times, etc.
 
-Rather than that long blog post, I wanted to simply show the steps I would take to build such a dashboard with [Hoplon](http://hoplon.io) and [Castra](https://github.com/tailrecursion/castra). I won't go into detail here or explain either Hoplon or Castra &mdash; go read on your own first, and also look into [boot](https://github.com/tailrecusion/boot), the build tool this uses.
+Rather than that long blog post, I wanted to simply show the steps I would take to build such a dashboard with [Hoplon](http://hoplon.io) and [Castra](https://github.com/tailrecursion/castra). I won't go into detail here or explain either Hoplon or Castra &mdash; go read on your own first, and also look into [boot](https://github.com/tailrecursion/boot), the build tool this uses.
 
 If you want to follow along, I've provided a [repo](https://github.com/mathias/gleam). The [README](https://github.com/mathias/gleam/blob/30b4976b313c950c6cc97e64c65036eb21d75378/README.md) has instructions for getting setup. Assuming you have boot installed, you can just run `boot gleam-app` to get started.
 
