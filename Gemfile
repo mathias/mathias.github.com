@@ -13,7 +13,6 @@ group :development do
   gem 'rubypants'
   gem 'sass', '~> 3.1'
   gem 'stringex', '~> 1.4.0'
-  gem 'thin'
 end
 
-gem 'sinatra', '1.3.3'
+gem 'sinatra'
