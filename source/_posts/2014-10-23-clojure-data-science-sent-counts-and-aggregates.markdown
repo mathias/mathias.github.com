@@ -14,7 +14,7 @@ For this post, we want to generate some summaries of our data by doing aggregate
 
 ## Updating dependencies
 
-It has been some time since we worked on [autodjinn](https://github.com/mathias/autodjinn). Libraries move fast in the Clojure ecosystem, and we want to make sure that we're developing against the most recent versions of each dependency. Before we begin making changes, let's update everything. If you have already read my [Clojure Code Quality Tools]/blog/2014/09/15/clojure-code-quality-tools/) post, you'll be familiar with the `lein ancient` plugin.
+It has been some time since we worked on [autodjinn](https://github.com/mathias/autodjinn). Libraries move fast in the Clojure ecosystem, and we want to make sure that we're developing against the most recent versions of each dependency. Before we begin making changes, let's update everything. If you have already read my [Clojure Code Quality Tools](/blog/2014/09/15/clojure-code-quality-tools/) post, you'll be familiar with the `lein ancient` plugin.
 
 Below is output when I run `lein ancient` on the last post's finished git tag, `v0.1.1`. To go back to that state, you can run `git checkout v0.1.1` on the [autodjinn repo](https://github.com/mathias/autodjinn).
 
