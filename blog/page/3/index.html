@@ -281,7 +281,7 @@ Note: It could be that I messed up these numbers a bit; I went off the current t
 <p>There are quite a few commercial products you can buy. They come with their own caveats:</p>
 
 <ul>
-<li><a href="http://www.kinesis-ergo.com/fs-savant-elite.htm">Kinesis</a> makes several, but they <a href="http://www.kinesis-ergo.com/fs-elite-single-compatibility.htm">can only be programmed on Windows</a>. They are also very expensive.</li>
+<li><a href="https://www.kinesis-ergo.com/products/#foot-section">Kinesis</a> makes several, but they can only be programmed on Windows. They are also very expensive.</li>
 <li>The <a href="http://www.xkeys.com/xkeys/xkfoot.php">Xkeys Foot Pedals</a> look good, but they are also expensive.</li>
 <li>The DealExtreme <a href="http://dx.com/p/usb-triple-action-foot-switch-keyboard-control-foot-pedal-56508">Triple Action Foot Pedal</a> provides three buttons and is relatively cheap; however, the reviews I&#8217;ve read say the reliably is poor. This product can only be programmed on Windows.</li>
 </ul>
@@ -317,7 +317,7 @@ Note: It could be that I messed up these numbers a bit; I went off the current t
 
 <p><a href="http://www.flickr.com/photos/mattgauger/9451907469/" title="IMG_1902 by Matt Gauger, on Flickr"><img src="http://farm8.staticflickr.com/7451/9451907469_e6e6fc661f_z.jpg" width="480" height="640" alt="IMG_1902" style="display: block; margin: 0 auto;" /></a></p>
 
-<p>The next step is to program the Teensy to send the key events we want. In this case, my coworker <a href="https://twitter.com/inyourdom">Josh</a> suggested a vim clutch that enters insert mode when you press down on the pedal, and leaves insert mode when you release it. Since the Teensy&#8217;s Button class detects both button press and button release events, we can write code to do that.</p>
+<p>The next step is to program the Teensy to send the key events we want. In this case, my coworker <a href="https://twitter.com/losingkeys">Josh</a> suggested a vim clutch that enters insert mode when you press down on the pedal, and leaves insert mode when you release it. Since the Teensy&#8217;s Button class detects both button press and button release events, we can write code to do that.</p>
 
 <p>Here&#8217;s what the code looks like:</p>
 
