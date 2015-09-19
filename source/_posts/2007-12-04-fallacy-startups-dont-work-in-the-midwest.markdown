@@ -2,7 +2,6 @@
 layout: post
 title: "Fallacy: Startups don't work in the Midwest"
 date: 2007-12-07 12:09
-categories: blog_archive_project
 ---
 
 (This post is part of my blog archiving project. This post appeared on

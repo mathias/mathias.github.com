@@ -2,7 +2,6 @@
 layout: post
 title: "Jogging the memory with Shoes"
 date: 2007-11-29 12:09
-categories: blog_archive_project
 ---
 
 (This post is part of my blog archiving project. This post appeared on

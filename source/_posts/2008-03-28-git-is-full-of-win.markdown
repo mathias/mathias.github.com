@@ -2,7 +2,6 @@
 layout: post
 title: "Git is full of win"
 date: 2008-03-28
-categories: blog_archive_project
 ---
 
 (This post is part of my blog archiving project. This post appeared on
