@@ -12,7 +12,7 @@ When I first starting talking about [building a chording keyboard](/blog/2013/08
 
 There are quite a few commercial products you can buy. They come with their own caveats:
 
-* [Kinesis](http://www.kinesis-ergo.com/fs-savant-elite.htm) makes several, but they [can only be programmed on Windows](http://www.kinesis-ergo.com/fs-elite-single-compatibility.htm). They are also very expensive.
+* [Kinesis](https://www.kinesis-ergo.com/products/#foot-section) makes several, but they can only be programmed on Windows. They are also very expensive.
 * The [Xkeys Foot Pedals](http://www.xkeys.com/xkeys/xkfoot.php) look good, but they are also expensive.
 * The DealExtreme [Triple Action Foot Pedal](http://dx.com/p/usb-triple-action-foot-switch-keyboard-control-foot-pedal-56508) provides three buttons and is relatively cheap; however, the reviews I've read say the reliably is poor. This product can only be programmed on Windows.
 
@@ -46,7 +46,7 @@ Lastly, I used some velcro inside to attach the Teensy to the project box. All d
 
 <a href="http://www.flickr.com/photos/mattgauger/9451907469/" title="IMG_1902 by Matt Gauger, on Flickr"><img src="http://farm8.staticflickr.com/7451/9451907469_e6e6fc661f_z.jpg" width="480" height="640" alt="IMG_1902" style="display: block; margin: 0 auto;" /></a>
 
-The next step is to program the Teensy to send the key events we want. In this case, my coworker [Josh](https://twitter.com/inyourdom) suggested a vim clutch that enters insert mode when you press down on the pedal, and leaves insert mode when you release it. Since the Teensy's Button class detects both button press and button release events, we can write code to do that.
+The next step is to program the Teensy to send the key events we want. In this case, my coworker [Josh](https://twitter.com/losingkeys) suggested a vim clutch that enters insert mode when you press down on the pedal, and leaves insert mode when you release it. Since the Teensy's Button class detects both button press and button release events, we can write code to do that.
 
 Here's what the code looks like:
 
