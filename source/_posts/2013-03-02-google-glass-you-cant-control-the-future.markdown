@@ -77,5 +77,5 @@ So don't try to shout down a fledgling technology just because it could be used 
 
 <a name="accelerando-note"></a>
 
-**1**: In particular, [Accelerando](static/fiction/accelerando/accelerando.html) features a main character with smart glasses. It's an interesting portrait of how a well-connected digital savant might use this wearable technology while still interacting with people and places.
+**1**: In particular, [Accelerando](http://www.antipope.org/charlie/blog-static/fiction/accelerando/accelerando.html) features a main character with smart glasses. It's an interesting portrait of how a well-connected digital savant might use this wearable technology while still interacting with people and places.
 <a href="#accelerando-note-return">&#8617;</a>
