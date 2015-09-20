@@ -2,8 +2,6 @@
 layout: post
 title: "Mosh, SSH Tunnels, and Tmux"
 date: 2012-04-21 21:14
-comments: true
-categories: 
 ---
 
 I'm currently preparing for RailsConf. One of the things I wanted to do before I left was figure out a way to monitor a process on a Linux server running on my LAN. The process frequently crashes and needs some prodding to restart.

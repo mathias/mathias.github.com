@@ -2,15 +2,13 @@
 layout: post
 title: "Filter or Be Filtered"
 date: 2013-03-07 22:09
-comments: true
-categories: 
 ---
 
 Eli Pariser's talk, [Beware online "filter bubbles"](http://www.ted.com/talks/eli_pariser_beware_online_filter_bubbles.html) recently hit the front page of the TED Talks website. I found it interesting because it discusses some of what I've seen happening online, and some of my fears for how we search and consume content. Watch the video if you haven't to see just how much is already being filtered on the web for you.
 
-Right after I saw the video, of course, [Facebook announced](http://washingtonpost.com/business/technology/facebook-to-change-news-feed-to-a-personalized-newspaper/2013/03/07/b294f61e-8751-11e2-98a3-b3db6b9ac586_story.html) that they'll be rolling out a new version of the the news feed. They are quoted as making it more like a "personal newspaper" &mdash; a filter, essentially, for the things Facebook thinks you want to see. As the video above pointed out, they've already been filtering *out* the things they think you don't want for awhile. 
+Right after I saw the video, of course, [Facebook announced](http://washingtonpost.com/business/technology/facebook-to-change-news-feed-to-a-personalized-newspaper/2013/03/07/b294f61e-8751-11e2-98a3-b3db6b9ac586_story.html) that they'll be rolling out a new version of the the news feed. They are quoted as making it more like a "personal newspaper" &mdash; a filter, essentially, for the things Facebook thinks you want to see. As the video above pointed out, they've already been filtering *out* the things they think you don't want for awhile.
 
-No doubt there will be some backlash as people adjust to changes on Facebook, but very few will abandon it. And if you are the kind of person that would abandon Facebook over filtering, or privacy, or concerns about owning your own data, you don't have a lot of choices of where to go. 
+No doubt there will be some backlash as people adjust to changes on Facebook, but very few will abandon it. And if you are the kind of person that would abandon Facebook over filtering, or privacy, or concerns about owning your own data, you don't have a lot of choices of where to go.
 
 Sure, you can specifically seek out services that aren't going to give you a filtered world view &mdash; [DuckDuckGo](https://duckduckgo.com/) comes to mind. But that's not always possible. The problem is bigger than just the search engine you use and whether or not you're logged into Facebook. Just about every site is run by someone else, and they are analyzing you constantly. They are in a brutal battle to keep you as their consumer and keep you from going to other sites. But are the things that they think you want to see what you really want or need to see?
 

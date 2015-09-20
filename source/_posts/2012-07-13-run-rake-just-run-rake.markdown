@@ -2,8 +2,6 @@
 layout: post
 title: "Run rake. Just run rake."
 date: 2012-07-13 14:59
-comments: true
-categories: 
 ---
 
 Recently, I was setting up my laptop for an existing Rails project with the help of a pair. My pair was pivot on this project, which means that he'd been on it longer and so was bringing his experience and knowledge to the table, while I was seeing the project with fresh eyes.
@@ -28,6 +26,6 @@ It turns out rake showed us all the steps we needed to do to get the project run
 
 The point of software craftsmanship is to be pragmatic, not to seek perfection. I could have memorized the steps necessary to set up the average Rails project, but those steps wouldn't have applied here. And indeed, my pair could have memorized them, since he had been on the project. But those steps would go out the window as soon as my pair was on another project. It is far more pragmatic to know the behavior of our tools (like knowing that rake will tell us about each thing necessary to get to a state where the tests pass) and rely on that behavior rather than to seek perfection on this one project.
 
-Note: we could have used our experience with Rails and software craftsmen to avoid some of the steps you see me running in the gist: for example, you probably know that if the databases aren't created, that you can run `rake db:create:all db:migrate db:test:prepare` all at once, without running rake inbetween every single rake task. That'd be far more pragmatic, as you're saving yourself time and effort by knowing the toolset. But I wanted to demonstrate that running rake between every single step told us what to do next. 
+Note: we could have used our experience with Rails and software craftsmen to avoid some of the steps you see me running in the gist: for example, you probably know that if the databases aren't created, that you can run `rake db:create:all db:migrate db:test:prepare` all at once, without running rake inbetween every single rake task. That'd be far more pragmatic, as you're saving yourself time and effort by knowing the toolset. But I wanted to demonstrate that running rake between every single step told us what to do next.
 
 Now, ask yourself: How can you "just run rake" with your projects?

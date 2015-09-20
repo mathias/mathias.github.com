@@ -2,8 +2,6 @@
 layout: post
 title: "Incredibly powerful widgets, brought to you by Moore's Law"
 date: 2013-03-03 11:10
-comments: true
-categories: 
 ---
 
 I've been teaching my downstairs neighbor basic electronics and how to solder. He's a musician and has been working his way through several kits from [Bleep Labs](http://bleeplabs.com/).
@@ -13,7 +11,7 @@ As I explained each component: the resistor, the capacitor, the diode, etc., I e
 On its own, a single transistor can't do much, and takes up some amount of space, which is actually quite large relative to the circuits we build now. I scored bags of hundreds of transistors that were about to be thrown out at the [Milwaukee Makerspace](http://milwaukeemakerspace.org/) when we were putting together the electronics lab &mdash; not because they didn't work but because that many transistors simply wouldn't get used. "Nowadays, you might as well throw an Arduino in a project," was one of the reasons. No one wants to work at the abstraction level of single transistors anymore.
 
 It turned out that the [drum machine kit](http://bleeplabs.com/store/bleep-drum-midi/) that we were putting together contained an Atmel AVR microprocessor - the main chip of the Arduino. In an effort to save space and complexity, the designers had used a microprocessor instead of discrete transistors. The chip in the Arduino and the Bleep Drum is the ATmega328, which has something like 600,000 transistors inside it.
-And I explained how the form factor of the components we were using was obsolete. Even the tight-packed pins of a typical integrated circuit (a computer chip, in common parlance), spaced at 0.1", just isn't dense enough for modern circuits. The parts we were using were all designed to be soldered to the circuit board by human hands. Slow, error-prone human hands. The vast majority of circuit boards produced today are [surface mount](http://en.m.wikipedia.org/wiki/Surface-mount_technology): parts placed by robots and soldered all in one go by another machine. 
+And I explained how the form factor of the components we were using was obsolete. Even the tight-packed pins of a typical integrated circuit (a computer chip, in common parlance), spaced at 0.1", just isn't dense enough for modern circuits. The parts we were using were all designed to be soldered to the circuit board by human hands. Slow, error-prone human hands. The vast majority of circuit boards produced today are [surface mount](http://en.m.wikipedia.org/wiki/Surface-mount_technology): parts placed by robots and soldered all in one go by another machine.
 
 "It's really neat that you know all this stuff," my neighbor remarked. But I shrugged it off. This knowledge, especially of how analog circuits work and how audio signals are modified by analog components, is mostly obsolete. Better to just use some analog-to-digital converters and put a microprocessor on it. Or better yet, something way more powerful than a simple microprocessor.
 
@@ -52,11 +50,11 @@ So while I may have learned digital logic in college and can help you build up a
 
 <a name="geekbench-notes"></a>
 
-**1.** 
+**1.**
 
 "Geekbench scores are calibrated against a baseline score of 1,000 (which is the score of a single-processor Power Mac G5 @ 1.6GHz). Higher scores are better, with double the score indicating double the performance."
 
-Scores: 
+Scores:
 
 * [MacBook Air (13-inch Mid 2012)](http://browser.primatelabs.com/geekbench2/1713385): 7675
 * [PowerBook G4 (12-inch 1.5 GHz)](http://browser.primatelabs.com/geekbench2/1545796): 861

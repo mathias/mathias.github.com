@@ -2,8 +2,6 @@
 layout: post
 title: "By augmenting human intellect, we mean"
 date: 2013-03-17 22:44
-comments: true
-categories: 
 ---
 
 <blockquote>

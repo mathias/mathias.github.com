@@ -2,8 +2,6 @@
 layout: post
 title: "Building a chording keyboard: progress so far"
 date: 2013-08-03 08:21
-comments: true
-categories: 
 ---
 
 Chording keyboards have been a computing peripheral for a long time. They've been in use at least since Douglas Engelbart gave what is known as [The Mother of all Demos](http://www.youtube.com/watch?v=yJDv-zdhzMY) in 1968. Rather than try to sum up the history and potential of the device here, I recommend you read the excellent essay [Engelbart's Violin](http://www.loper-os.org/?p=861) by Stanislav Datskovskiy on loper-os.org

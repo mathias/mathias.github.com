@@ -2,8 +2,6 @@
 layout: post
 title: "Google Glass: You can't control the future"
 date: 2013-03-02 15:09
-comments: true
-categories: 
 ---
 
 There's been quite a bit of backlash surrounding the new Google Glass product. As someone who has wanted wearable computing for awhile, I'd like to talk about it a bit. My only real qualifications on this subject come from the fact that I've read a lot of scifi<sup><a href="#accelerando-note" name="accelerando-note-return">1</a></sup> and that I'm an open source developer that would like to build software for wearable computing that makes people's lives better.

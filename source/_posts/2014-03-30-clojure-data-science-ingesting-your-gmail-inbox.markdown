@@ -141,7 +141,7 @@ Recall the `message/message-body` call above:
 
 <script src="https://gist.github.com/mathias/9866777.js"></script>
 
-Ideally, we want to write a function that can get the `text/plain` body out of this value, and another function that can get the `text/html` body out. Notice that the `:content-type` values aren't quite so simple as just selecting the item in the list where the string `text/plain` appears. We will need our function to ignore the additional information in the `:content-type` value, which includes things like string encodings. 
+Ideally, we want to write a function that can get the `text/plain` body out of this value, and another function that can get the `text/html` body out. Notice that the `:content-type` values aren't quite so simple as just selecting the item in the list where the string `text/plain` appears. We will need our function to ignore the additional information in the `:content-type` value, which includes things like string encodings.
 
 Let's look at just the first map in the list returned by `message/message-body`:
 

@@ -19,18 +19,18 @@ Then do the following:
 
 
      gem uninstall nokogiri libxml-ruby
-    
+
     brew update
-    
+
     brew uninstall libxml2
     brew install libxml2 --with-xml2-config
-    
+
     brew uninstall libxslt
     brew install libxslt
     brew unlink libxslt
-    
+
     bundle config build.nokogiri -- --with-xml2-dir=/usr --with-xslt-dir=/usr --with-iconv-dir=/usr
     bundle
-    
+
 
 Nokogiri should now be compiled against the right version!

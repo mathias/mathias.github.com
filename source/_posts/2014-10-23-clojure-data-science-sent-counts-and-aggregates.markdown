@@ -79,7 +79,7 @@ A simple way to do this would be to wrap our previous query in the [frequencies]
 
 However, we want to perform the same sort of thing in Datomic itself. To do that, we're going to need to know about aggregate functions. Aggregate functions operate over the intermediate results of a Datomic query. Datomic provides functions like `max`, `min`, `sum`, `count`, `rand` (for getting a random value out of the query results), and more. With aggregates, we need to be sure to use a `:with` clause to ensure we aggregate over all our values.
 
-Looking at that short list of aggregate functions I've named, we can see that we probably want to use the `count` function to count the occurance of each email address in a to field in our data. To see how aggregates work, I've come up with a simpler example (the only new thing to know is that Datomic's Datalog implementation can query across Clojure collections as easily as it can against a database value, so I've given a simple vector-of-vectors here to describe data in the form 
+Looking at that short list of aggregate functions I've named, we can see that we probably want to use the `count` function to count the occurance of each email address in a to field in our data. To see how aggregates work, I've come up with a simpler example (the only new thing to know is that Datomic's Datalog implementation can query across Clojure collections as easily as it can against a database value, so I've given a simple vector-of-vectors here to describe data in the form
 
 `[database-id person-name]`
 
@@ -99,7 +99,7 @@ It makes sense that we can do the same thing with our recipient email addresses 
 
 That looks like the same kind of data we were getting with the use of the `frequencies` function before! So now we know how to use a Datomic aggregate function to count results in our queries.
 
-What's next? Well, what we really want is to get results that are of the form 
+What's next? Well, what we really want is to get results that are of the form
 
 `[from-address to-address]`
 
@@ -107,7 +107,7 @@ and count those tuples. That way, we can differentiate between email sent to us 
 
 We can't pass a tuple like `[from-address to-address]` to the `count` aggregate function in one query. The way around this is to write two queries. The inner query will return the tuples, and the outer query will return the tuple and a count of the tuple in the output data. Since the queries run on the peer, we don't really have to worry about whether it is one query or two, just that it returns the correct data at the end.
 
-So what would the inner query look like? Remember that the outer query will still need a field to pass to the `:with` clause, so we'll probably want to pass through the entity ID. 
+So what would the inner query look like? Remember that the outer query will still need a field to pass to the `:with` clause, so we'll probably want to pass through the entity ID.
 
 <script src="https://gist.github.com/mathias/61e60a563ffc29f06af8.js"></script>
 

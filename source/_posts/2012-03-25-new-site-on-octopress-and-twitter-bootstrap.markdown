@@ -2,8 +2,6 @@
 layout: post
 title: "New site on Octopress and Twitter Bootstrap"
 date: 2012-03-25 13:52
-comments: true
-categories: 
 ---
 
 Hi there. As you may have noticed, my blog is moving over to Github pages. I've used Octopress as a starting point, and ported a [SASS version of Twitter Bootstrap](https://github.com/jlong/sass-twitter-bootstrap) to use for building the layout.

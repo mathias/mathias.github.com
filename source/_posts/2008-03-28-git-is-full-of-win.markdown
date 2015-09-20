@@ -35,7 +35,7 @@ developers fast. In fact, git makes it so much easier than previous SCM
 tools to branch and merge both local and remote repos that developers
 can keep several branches around locally for various changes to live in.
 
-The best 
+The best
 [image I
 found](http://www.mcl.iis.u-tokyo.ac.jp/eng_version/index.html)
 to represent this style of passing around changes has nothing to do with

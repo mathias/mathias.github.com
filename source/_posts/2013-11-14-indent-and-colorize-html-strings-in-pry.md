@@ -22,7 +22,7 @@ Wouldn't it be great if Pry could re-indent and colorize that string of HTML for
 
 <script src="https://gist.github.com/mathias/21a971d0bdb3620a8909.js"></script>
 
-Originally, I had tried to use the html5 fork of the `tidy` command: [https://github.com/w3c/tidy-html5](https://github.com/w3c/tidy-html5) but that tool *changes* the HTML as it parses it, and spits out a bunch of warnings. So instead, I have this pry command use `nokogiri` when it is available. The command should warn you if you try to use it without `nokogiri` available. What is output should be very close to the original rendered HTML, just cleaned up and re-indented. 
+Originally, I had tried to use the html5 fork of the `tidy` command: [https://github.com/w3c/tidy-html5](https://github.com/w3c/tidy-html5) but that tool *changes* the HTML as it parses it, and spits out a bunch of warnings. So instead, I have this pry command use `nokogiri` when it is available. The command should warn you if you try to use it without `nokogiri` available. What is output should be very close to the original rendered HTML, just cleaned up and re-indented.
 
 So what does it look like in action?
 
