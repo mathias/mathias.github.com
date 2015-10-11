@@ -2,6 +2,8 @@
 layout: post
 title: "Milwaukee DevHouse 1 Recap"
 date: 2008-03-19
+redirect_from:
+  - /blog/2008/03/19/milwaukee-devhouse-1-recap/
 ---
 
 (This post is part of my blog archiving project. This post appeared on
