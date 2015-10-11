@@ -2,6 +2,8 @@
 layout: post
 title: "Git is full of win"
 date: 2008-03-28
+redirect_from:
+  - /blog/2008/03/28/git-is-full-of-win/
 ---
 
 (This post is part of my blog archiving project. This post appeared on
