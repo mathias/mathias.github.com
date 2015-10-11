@@ -13,3 +13,7 @@ github_username:  mathias
 markdown: kramdown
 source: "source"
 deploy: "_deploy"
+
+# Plugins, extensions, etc:
+gems:
+- jekyll-redirect-from
