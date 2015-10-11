@@ -1,7 +1,0 @@
-// Styles specific to embedding videos in posts
-
-.video.youtube {
-  display:block;
-  width: 640px;
-  @include center-block();
-}
