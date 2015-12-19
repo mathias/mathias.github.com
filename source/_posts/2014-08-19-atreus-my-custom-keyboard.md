@@ -14,11 +14,11 @@ Almost exactly a month ago, I started working on building my own keyboard. I wan
 
 Through [Geekhack](http://geekhack.org), I found the [Atreus](https://github.com/technomancy/atreus), a keyboard designed by [Phil Hagelberg](http://technomancy.us/) (better known as [technomancy](https://github.com/technomancy) online.) The Atreus is open source ([hardware](https://github.com/technomancy/atreus), [firmware](https://github.com/technomancy/atreus-firmware)), and has gone through several revisions at this point. My keyboard is done now, and I wanted to share it.
 
-<a href="https://www.flickr.com/photos/mattgauger/14785511628" title="IMG_3220 by Matt Gauger, on Flickr"><img src="https://farm6.staticflickr.com/5592/14785511628_5827e18f92_z.jpg" width="640" height="480" alt="IMG_3220"></a>
+<a data-flickr-embed="true"  href="https://www.flickr.com/photos/mattgauger/14785511628" title="IMG_3220"><img src="https://farm6.staticflickr.com/5592/14785511628_8eea0e6a61_c.jpg" width="800" height="600" alt="IMG_3220"></a>
 
 [The original Atreus](http://technomancy.us/173) was constructed out of layers of laser-cut acrylic. Since then, some folks on the [Geekhack thread](http://geekhack.org/index.php?topic=54759.0) have redesigned the laser-cut design to be cut out of a sheet of birch plywood on [Ponoko](https://ponoko.com). Ponoko is a great: you upload a file and choose materials and size. The Ponoko website keeps you updated on your project's status as they check your design, pick materials, and so on. Later, your laser-cut project arrives in the mail. I highly recommend Ponoko's service if you need laser cutting and can't get it done at a local makerspace.
 
-<a href="https://www.flickr.com/photos/mattgauger/14785346149" title="IMG_3156 by Matt Gauger, on Flickr"><img src="https://farm6.staticflickr.com/5565/14785346149_ece2db51a3_z.jpg" width="640" height="480" alt="IMG_3156"></a>
+<a data-flickr-embed="true"  href="https://www.flickr.com/photos/mattgauger/14785346149" title="IMG_3156"><img src="https://farm6.staticflickr.com/5565/14785346149_53f639dc31_c.jpg" width="800" height="600" alt="IMG_3156"></a>
 
 I finished the birch ply with semi-gloss marine polyurethane. The polyurethane should give it a durable finish, and added a nice amber tint to the wood. The downside is that more than a week after the final coat went on, the poly is still out gassing some headache-inducing fumes.
 
@@ -45,3 +45,5 @@ If you're interested in building your own keyboard, I would recommend the Ergo D
 ---
 
 Interested in commenting or contacting me? Send an email to [contact@mattgauger.com](mailto:contact@mattgauger.com). Thanks!
+
+<script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
