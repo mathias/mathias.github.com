@@ -5,6 +5,7 @@ published: true
 redirect_from:
   - /blog/2008/05/06/nuking-arphids-rfid-tag-/
   - /blog/2008/05/06/nuking-arphids-rfid-tag/
+  - /2008/05/06/nuking-arphids-rfid-tag-/
 ---
 <small>(This post is part of my blog archiving project. This post appeared on [mathiasx.baywords.com](http://mathiasx.baywords.com/2008/05/06/nuking-arphids-rfid-tag/) on May 6th, 2008.)</small>
 

@@ -4,6 +4,8 @@ title: Your personal information doesn’t belong to Facebook.
 published: true
 redirect_from:
   - /blog/2008/05/05/your-personal-information-doesn-t-belong-to-facebook-/
+  - /blog/2008/05/05/your-personal-information-doesn-t-belong-to-facebook/
+  - /2008/05/05/your-personal-information-doesn-t-belong-to-facebook-/
 ---
 <small>(This post is part of my blog archiving project. This post appeared on [mathiasx.baywords.com](http://mathiasx.baywords.com/2008/05/05/your-personal-information-doesnt-belong-to-facebook/) on May 5th, 2008.)</small>
 
