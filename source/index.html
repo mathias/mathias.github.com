@@ -16,8 +16,11 @@ redirect_from:
         <h2>
           <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
         </h2>
-        {{ post.excerpt | strip_html }}
+        {% if post.post_excerpt %}
+          {{ post.post_excerpt | markdownify }}
+        {% endif %}
         <a class="" href="{{ post.url | prepend: site.baseurl }}">Read more.</a>
+        <small>({{ post.content | number_of_words }} words)</small>
       </li>
     {% endfor %}
   </ul>

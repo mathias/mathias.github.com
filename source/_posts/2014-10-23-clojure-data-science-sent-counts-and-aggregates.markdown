@@ -2,6 +2,8 @@
 layout: post
 title: "Clojure Data Science: Sent Counts and Aggregates"
 date: 2014-10-23 18:18
+post_excerpt:
+  For this post, we want to generate some summaries of our data by doing aggregate queries. We won't yet be pulling in tools like [Apache Storm](http://storm.incubator.apache.org/) into the mix, since we can accomplish this through Datomic queries. We will also talk about trade-offs of running aggregate queries on large datasets and devise a way to save our data back to Datomic.
 ---
 
 ---
