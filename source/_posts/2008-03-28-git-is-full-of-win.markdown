@@ -79,5 +79,3 @@ posts this week: one on [GitHub](http://github.com/), a git repository
 hosting service, and [git-wiki](http://atonie.org/2008/02/git-wiki), a
 wiki intended for personal use that checks its changes into a local git
 repo.
-
-[](http://atonie.org/2008/02/git-wiki)

@@ -21,8 +21,8 @@ We keep putting more and more transistors on a single die, or chip, every day. T
 
 The other day I tweeted about the crazy processing power that we get today under Moore's Law.
 
-<blockquote class="twitter-tweet" align="center"><p>Crazy future; my MBA doesn't sweat when running Linux-in-VMware, Chrome, Emacs, LightTable, other apps, terminals &amp; 4 REPLs all at once.</p>&mdash; mathiasx (@mathiasx) <a href="https://twitter.com/mathiasx/status/307668858985140225">March 2, 2013</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+> Crazy future; my MBA doesn't sweat when running Linux-in-VMware, Chrome, Emacs, LightTable, other apps, terminals &amp; 4 REPLs all at once.
+&mdash; mathiasx (@mathiasx) <a href="https://twitter.com/mathiasx/status/307668858985140225">March 2, 2013</a>
 
 And in truth, I was running more software than I could fit into that tweet, because I was listening to music, had a few PDFs in the background, and was managing my ebook collection at the same time. But those notorious CPU hogs listed in the tweet should be enough to illustrate just how much is going on without really pushing the processing cores of the Macbook Air.
 

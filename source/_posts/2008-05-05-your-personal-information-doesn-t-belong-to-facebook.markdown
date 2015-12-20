@@ -7,7 +7,8 @@ redirect_from:
   - /blog/2008/05/05/your-personal-information-doesn-t-belong-to-facebook/
   - /2008/05/05/your-personal-information-doesn-t-belong-to-facebook-/
 ---
-<small>(This post is part of my blog archiving project. This post appeared on [mathiasx.baywords.com](http://mathiasx.baywords.com/2008/05/05/your-personal-information-doesnt-belong-to-facebook/) on May 5th, 2008.)</small>
+
+(This post is part of my blog archiving project. This post appeared on [mathiasx.baywords.com](http://mathiasx.baywords.com/2008/05/05/your-personal-information-doesnt-belong-to-facebook/) on May 5th, 2008.)
 
 Today I had to perform a lot of voodoo to delete my Facebook account. They allow you to deactivate it, but they keep your personal information. If you contact them to delete it, they’ll try to make you [jump through a bunch of hoops](http://stevenmansour.com/writings/2007/jul/23/2342/2504_steps_to_closing_your_facebook_account).
 

@@ -81,7 +81,6 @@ command hints off the physical copy & thinking up multiple ways to implement
 classes containing the data in Ruby. The reinforcement of forgotten vi command
 skills in developing this widget in MacVim should be obvious.
 
-</p>
 Using the drop-down allows you to access such diverse topics as:
 
 ![shoes2.jpg][]

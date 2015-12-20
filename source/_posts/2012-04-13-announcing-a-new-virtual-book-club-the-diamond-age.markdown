@@ -16,8 +16,6 @@ If you're interested, please indicate that interest by signing up below. I'll us
 
 ### [Sign up form](https://docs.google.com/spreadsheet/viewform?formkey=dFBBNUJZcUZuX1Q3Uk5VbGRVRVNsQ3c6MQ#gid=0)
 
-<p></p>
-
 Get The Diamond Age: (non-affiliate links)
 
 * [Paperback](http://www.amazon.com/The-Diamond-Age-Illustrated-Spectra/dp/0553380966/)

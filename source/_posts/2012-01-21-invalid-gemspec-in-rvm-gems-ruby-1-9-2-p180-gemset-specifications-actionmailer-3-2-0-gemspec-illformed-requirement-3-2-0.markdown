@@ -5,12 +5,13 @@ title: ! 'Invalid gemspec in [.rvm/gems/ruby-1.9.2-p180@gemset/specifications/ac
 published: true
 redirect_from:
   - /blog/2012/01/21/invalid-gemspec-in-rvm-gems-ruby-1-9-2-p180-gemset-specifications-actionmailer-3-2-0-gemspec-illformed-requirement-3-2-0-/
-  - /2012/01/21/invalid-gemspec-in-rvm-gems-ruby-1-9-2-p180-gemset-specifications-actionmailer-3-2-0-gemspec-illformed-requirement-3-2-0/
   - /blog/2012/01/21/invalid-gemspec-in-rvm-gems-ruby-1-9-2-p180-gemset-specifications-actionmailer-3-2-0-gemspec-illformed-requirement-3-2-0/
 ---
-<p>Recently while trying to create a new Rails 3.2 project, I ran into this error after creating a new RVM gemset in Ruby 1.9.2-p180 and a Gemfile requiring only Rails 3.2.0:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ bundle
+
+Recently while trying to create a new Rails 3.2 project, I ran into this error after creating a new RVM gemset in Ruby 1.9.2-p180 and a Gemfile requiring only Rails 3.2.0:
+
+```
+$ bundle
 Fetching source index for http://rubygems.org/
 Installing rake (0.9.2.2)
 Installing i18n (0.6.0)
@@ -18,68 +19,75 @@ Installing multi_json (1.0.4)
 Installing activesupport (3.2.0)
 Installing builder (3.0.0)
 Installing activemodel (3.2.0)
-Invalid gemspec in [/Users/mathiasx/Developer/.rvm/gems/ruby-1.9.2-p180@big_fan/specifications/activemodel-3.2.0.gemspec]: Illformed requirement [&quot;# 3.2.0&quot;]
-... These Illformed requirement errors continue for every package Rails wants ...</pre></div>
-</div>
+Invalid gemspec in [/Users/mathiasx/Developer/.rvm/gems/ruby-1.9.2-p180@big_fan/specifications/activemodel-3.2.0.gemspec]: Illformed requirement ["# 3.2.0"]
+... These Illformed requirement errors continue for every package Rails wants ...
+```
 
-<p>I thought that I might be able to continue on and ignore these errors, but I hadn't seen anything like them anymore.</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ rails new .
-Invalid gemspec in [/Users/mathiasx/Developer/.rvm/gems/ruby-1.9.2-p180@big_fan/specifications/actionmailer-3.2.0.gemspec]: Illformed requirement [&quot;# 3.2.0&quot;]
-... again, it throws this error many times ...</pre></div>
-</div>
+I thought that I might be able to continue on and ignore these errors, but I hadn't seen anything like them anymore.
 
-<p>That didn't generate a new Rails project in my current directory, so something was clearly wrong. But what does <strong>Illformed request: Syck:DefaultKey</strong> mean? Well, it turns out that the gemspecs of requirements in Rails 3.2.0 are using a new format that older Rubygems can't parse. The first indicator was that my version of Rubygems was out of date:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ gem -v
-Invalid gemspec in [/Users/mathiasx/Developer/.rvm/gems/ruby-1.9.2-p180@big_fan/specifications/actionmailer-3.2.0.gemspec]: Illformed requirement [&quot;# 3.2.0&quot;]
+```
+$ rails new .
+Invalid gemspec in [/Users/mathiasx/Developer/.rvm/gems/ruby-1.9.2-p180@big_fan/specifications/actionmailer-3.2.0.gemspec]: Illformed requirement ["# 3.2.0"]
+... again, it throws this error many times ...
+```
+
+That didn't generate a new Rails project in my current directory, so something was clearly wrong. But what does **Illformed request: Syck:DefaultKey** mean? Well, it turns out that the gemspecs of requirements in Rails 3.2.0 are using a new format that older Rubygems can't parse. The first indicator was that my version of Rubygems was out of date:
+
+```
+$ gem -v
+Invalid gemspec in [/Users/mathiasx/Developer/.rvm/gems/ruby-1.9.2-p180@big_fan/specifications/actionmailer-3.2.0.gemspec]: Illformed requirement ["# 3.2.0"]
 ... I've cut out a bunch of the output from the invalid gemspecs here ...
-1.8.8</pre></div>
-</div>
+1.8.8
+```
 
-<p>We'd like to be on Rubygems 1.8.13 or newer, but I also don't want to see those invalid gemspec warnings anymore, so I clear out my gemset with:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ rvm gemset empty
+We'd like to be on Rubygems 1.8.13 or newer, but I also don't want to see those invalid gemspec warnings anymore, so I clear out my gemset with:
+
+```
+$ rvm gemset empty
 WARN: Are you SURE you wish to remove the installed gemset for gemset 'ruby-1.9.2-p180@big_fan' (/Users/mathiasx/Developer/.rvm/gems/ruby-1.9.2-p180@big_fan)?
-(anything other than 'yes' will cancel) &gt; yes
+(anything other than 'yes' will cancel) > yes
 $ cd ..
 $ cd project/
-Using /Users/mathiasx/Developer/.rvm/gems/ruby-1.9.2-p180 with gemset big_fan</pre></div>
-</div>
+Using /Users/mathiasx/Developer/.rvm/gems/ruby-1.9.2-p180 with gemset big_fan
+```
 
-<p>Note that I have my rvmrc file like this so that it created and trusted the gemset upon encountering it:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ cat .rvmrc
-rvm use 1.9.2@big_fan --create</pre></div>
-</div>
+Note that I have my rvmrc file like this so that it created and trusted the gemset upon encountering it:
 
-<h2>Getting everything working again:</h2>
-<p>Upgrade your Rubygems (this will only apply to this version of Ruby in RVM, not all versions of Ruby)</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ gem update --system
+```
+$ cat .rvmrc
+rvm use 1.9.2@big_fan --create
+```
+
+## Getting everything working again:
+
+Upgrade your Rubygems (this will only apply to this version of Ruby in RVM, not all versions of Ruby)
+
+```
+$ gem update --system
 == 1.8.15 / 2012-01-06
 
 * 1 bug fix:
 
   * Don't eager load yaml, it creates a bad loop. Fixes #256
 
-
 ------------------------------------------------------------------------------
 
 RubyGems installed the following executables:
         /Users/mathiasx/Developer/.rvm/rubies/ruby-1.9.2-p180/bin/gem
 
-RubyGems system software updated</pre></div>
-</div>
+RubyGems system software updated
+```
 
-<p>Then just to be safe, make sure the gems we have are pristine (According to the manpage, gem pristine: "Restores installed gems to pristine condition from files located in the gem cache.")</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ gem pristine --all</pre></div>
-</div>
+Then just to be safe, make sure the gems we have are pristine (According to the manpage, gem pristine: "Restores installed gems to pristine condition from files located in the gem cache.")
 
-<p>And it is safe to now bundle:</p>
-<div class="CodeRay">
-  <div class="code"><pre>$ bundle
+```
+$ gem pristine --all
+```
+
+And it is safe to now bundle:
+
+```
+$ bundle
 Fetching source index for http://rubygems.org/
 Installing rake (0.9.2.2)
 Installing i18n (0.6.0)
@@ -112,7 +120,7 @@ Installing rdoc (3.12)
 Installing thor (0.14.6)
 Installing railties (3.2.0)
 Installing rails (3.2.0)
-Your bundle is complete! Use `bundle show [gemname]` to see where a bundled gem is installed.</pre></div>
-</div>
+Your bundle is complete! Use `bundle show [gemname]` to see where a bundled gem is installed.
+```
 
-<p>Now we should have a happy gemset and the error will be gone. Let me know if you have any questions. Happy hacking!</p>
+Now we should have a happy gemset and the error will be gone. Let me know if you have any questions. Happy hacking!

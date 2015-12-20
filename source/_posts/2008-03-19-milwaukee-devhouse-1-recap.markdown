@@ -16,11 +16,6 @@ I don’t really know what to say about it. We all met up at Bucketworks
 in Milwaukee with the intent to hack and hang out. I got there at 6PM
 and left at around 5:30AM on the next day. It was quite the party.
 
-![devhouse
-photo](http://farm3.static.flickr.com/2106/2334180617_cb572b20ec.jpg?v=0)
-
-*(via [my flickr](http://flickr.com/photos/mattgauger/))*
-
 4braham started a twitter-events mashup project, and I unfortunately
 wasn’t much help with it.. I guess I’m too easily distracted. Other
 projects are detailed in Pete’s posts, I was actually out in the
@@ -29,7 +24,4 @@ conference room.
 
 The light table where we did our plotting:
 
-![light table at
-bucketworks](http://farm4.static.flickr.com/3047/2334539597_e42fccdbe0.jpg?v=0)
-
-*(via [ashe’s flickr](http://flickr.com/photos/drydens/))*
+[Author's note 2015-12-19: Image is gone from Flickr]
