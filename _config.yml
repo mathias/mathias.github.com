@@ -2,13 +2,15 @@
 title: Matt Gauger
 email: contact@mattgauger.com
 description: > # this means to ignore newlines until "baseurl:"
-  
+
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://blog.mattgauger.com" # the base hostname & protocol for your site
 github_username:  mathias
 
 # Build settings
 markdown: kramdown
+kramdown:
+    input: GFM
 source: "source"
 deploy: "_deploy"
 permalink: "pretty"
