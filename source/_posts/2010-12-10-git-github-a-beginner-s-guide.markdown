@@ -2,6 +2,8 @@
 layout: post
 title: ! 'Git & Github: A Beginner''s Guide'
 published: true
+redirect_from:
+  - /blog/2010/12/10/git-github-a-beginner-s-guide/
 ---
 <p>&nbsp;Let me start off by saying that this blog post isn't going to introduce you to the&nbsp;intricacies&nbsp;of git. There is certainly a lot to be learned and a lot that I could write about branching, managing git servers, and any number of the git commands and ways to use them. I've linked to more resources where you can learn all of that at the bottom of this post.</p>
 <p>Instead, I'm going to focus on the beginner user, maybe someone that has never contributed to open source but wants to learn and wants to help out. They're not interested in learning the in's and out's of every single command. They just want to <em>get stuff done</em>.</p>

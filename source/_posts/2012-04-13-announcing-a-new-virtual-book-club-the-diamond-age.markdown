@@ -2,6 +2,8 @@
 layout: post
 title: "Announcing a virtual book club: The Diamond Age"
 date: 2012-04-13 15:29
+redirect_from:
+  - /blog/2012/04/13/announcing-a-new-virtual-book-club-the-diamond-age/
 ---
 
 ![The Diamond Age book cover](/images/The_Diamond_Age.jpg)

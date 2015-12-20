@@ -2,6 +2,8 @@
 layout: post
 title: Getting MongoDB and Devise to play well on Rails 3
 published: true
+redirect_from:
+  - /blog/2011/01/03/getting-mongodb-and-devise-to-play-well-on-rails-3/
 ---
 <p>While there's a <a href="http://www.mongodb.org/display/DOCS/Rails+3+-+Getting+Started">good guide</a> on the MongoDB site about getting mongo_mapper to work in Rails 3, I ran into some additional issues getting the popular <a href="https://github.com/plataformatec/devise">devise</a>&nbsp;<span style="font-family: helvetica, arial, freesans, clean, sans-serif; line-height: 20px;">authentication engine for Rails to work with Mongo. This documents how to create a Rails app from scratch that uses both MongoDB and Devise. So if you don't want to reinvent the wheel on authentication (read: Users, login, logout, etc) and want to run your app on MongoDB, this should be useful.</span></p>
 <p><span style="font-family: helvetica, arial, freesans, clean, sans-serif; line-height: 20px;">First of all, you'll need Rails 3. I'm on Rails 3.0.3. I created a new gemset for this app, just to keep things clean. Run the rails new command with the&nbsp;</span><span style="font-family: Courier New, Courier, monospace; line-height: 16px;">--skip-active-record </span>switch.</p>

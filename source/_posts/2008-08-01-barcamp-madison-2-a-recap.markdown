@@ -2,6 +2,8 @@
 layout: post
 title: ! 'BarCamp Madison 2: A Recap'
 published: true
+redirect_from:
+  - /blog/2008/08/01/barcamp-madison-2-a-recap/
 ---
 <p><span style="font-family: Lucida Grande, Lucida Sans Unicode, Arial, sans-serif; font-size: 12px;">
 <p style="margin-top: 1em; margin-right: 0px; margin-bottom: 1em; margin-left: 0px;"><span style="color: #424037; font-family: Arial, Helvetica, sans-serif; line-height: 21px;">(This post is part of my blog archiving project. This post appeared on&nbsp;<a href="http://bytecodex.wordpress.com/2008/08/01/barcamp-madison-2-a-recap/">bytecodex.wordpress.com</a>&nbsp;on August 1st, 2008.)</span></p>

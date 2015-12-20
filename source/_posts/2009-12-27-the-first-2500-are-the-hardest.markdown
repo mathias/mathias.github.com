@@ -2,6 +2,8 @@
 layout: post
 title: The First 2500 Are the Hardest
 published: true
+redirect_from:
+  - /blog/2009/12/27/the-first-2500-are-the-hardest/
 ---
 <p><span style="color: #424037; font-size: 12px; line-height: 21px;">(This post is part of my blog archiving project. This post appeared on <a href="http://blog.mattgauger.com/2009/12/27/the-first-2500-are-the-hardest/">blog.mattgauger.com</a>&nbsp;on December 27, 2009.)</span></p>
 <p><span style="color: #424037; font-size: 12px; line-height: 21px;"><span style="color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-size: 14px; line-height: 19px;">

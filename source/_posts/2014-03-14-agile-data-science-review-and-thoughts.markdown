@@ -2,6 +2,8 @@
 layout: post
 title: "Agile Data Science: Review and Thoughts"
 date: 2014-03-14 19:53
+redirect_from:
+  - /blog/2014/03/14/agile-data-science-review-and-thoughts/
 ---
 
 <a href="http://shop.oreilly.com/product/0636920025054.do">

@@ -2,6 +2,8 @@
 layout: post
 title: Web414 January 2010
 published: true
+redirect_from:
+  - /blog/2010/01/14/web414-january-2010/
 ---
 <p><span style="color: #424037; font-size: 12px; line-height: 21px;">(This post is part of my blog archiving project. This post appeared on&nbsp;<a href="http://blog.mattgauger.com/2010/01/14/web414-january-2010/">blog.mattgauger.com</a>&nbsp;on January 14, 2010.)</span></p>
 <p><span style="color: #424037; font-size: 12px; line-height: 21px;"><span style="color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-size: 14px; line-height: 19px;">

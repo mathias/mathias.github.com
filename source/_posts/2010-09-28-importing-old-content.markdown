@@ -2,6 +2,8 @@
 layout: post
 title: Importing old content
 published: true
+redirect_from:
+  - /blog/2010/09/28/importing-old-content/
 ---
 
 I've got text archives of my blog posts going back to about 2008 2007,

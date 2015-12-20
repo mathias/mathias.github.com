@@ -2,6 +2,8 @@
 layout: post
 title: ! 'Presentation: LAMP vs. The World'
 published: true
+redirect_from:
+  - /blog/2010/12/14/presentation-lamp-vs-the-world/
 ---
 <strong style="display: block; margin: 12px 0 4px;"><a href="http://www.slideshare.net/mathiasx/matt-gauger-lamp-vs-the-world-mke-php-users-group-december-14-2010" title="Matt Gauger - Lamp vs. the world - MKE PHP Users Group - December 14, 2010 ">Matt Gauger - Lamp vs. the world - MKE PHP Users Group - December 14, 2010 </a></strong> 
 <object height="355" width="425">

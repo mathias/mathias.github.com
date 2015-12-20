@@ -2,6 +2,8 @@
 layout: post
 title: "Clojure Data Science: Ingesting Your Gmail Inbox"
 date: 2014-03-30 14:44
+redirect_from:
+  - /blog/2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/
 ---
 
 ---

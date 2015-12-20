@@ -2,6 +2,8 @@
 layout: post
 title: "Incredibly powerful widgets, brought to you by Moore's Law"
 date: 2013-03-03 11:10
+redirect_from:
+  - /blog/2013/03/03/incredibly-powerful-widgets-brought-to-you-by-moores-law/
 ---
 
 I've been teaching my downstairs neighbor basic electronics and how to solder. He's a musician and has been working his way through several kits from [Bleep Labs](http://bleeplabs.com/).

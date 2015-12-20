@@ -2,6 +2,8 @@
 layout: post
 title: "Housekeeping: Imported Coderwall protips"
 date: 2014-07-27 12:05
+redirect_from:
+  - /blog/2014/07/27/housekeeping-imported-coderwall-protips/
 ---
 
 As part of my continuing effort to archive content I've created to this blog, I've migrated all of [my Coderwall protips](https://coderwall.com/p/u/mathias).

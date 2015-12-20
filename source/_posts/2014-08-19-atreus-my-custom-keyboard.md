@@ -2,6 +2,8 @@
 layout: post
 title: "Atreus: My Custom Keyboard"
 date: 2014-08-19 21:38
+redirect_from:
+  - /blog/2014/08/19/atreus-my-custom-keyboard/
 ---
 
 Last year I wrote about about building [chording keyboards](/blog/2013/08/03/building-a-chording-keyboard-lessons-learned-and-progress-so-far/) and [USB foot pedals](/blog/2013/08/06/a-simple-text-editor-foot-pedal/). At the time, using the [Teensy micro controller](http://www.pjrc.com/teensy/) as a USB HID device was possible, but it still required a lot of research. There was no good central resource for knowledge about building keyboards. Since then, the [Ergo Dox](http://deskthority.net/wiki/ErgoDox) keyboard was released as open source and got quite popular. This seems to have opened the door for many to get into building keyboards.

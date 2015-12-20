@@ -2,6 +2,8 @@
 layout: post
 title: The Master's Word
 published: true
+redirect_from:
+  - /blog/2010/10/16/the-master-s-word/
 ---
 <p>Last night, at the opening of <a href="http://www.sector67.org/">Sector67</a>&nbsp;and during a discussion about human language, expression, and the limits thereof, I told a story I've read somewhere, but I cannot remember the source. My details on the story are quite fuzzy; I am quite sure it comes from an eastern oral tradition, but googling couldn't help me. Further, I embellished the details to fit in with a story about kung fu, but this story could equally be a Buddhist Koan or something else. Any tips to where it came from would be highly helpful. Without further ado, here's my version of the story:</p>
 <p>The Master had studied kung fu his entire life, and was widely regarded in the land as the best in the known world. He practiced alone in his mountaintop sanctuary for years, uninterrupted.</p>

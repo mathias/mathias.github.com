@@ -2,6 +2,8 @@
 layout: post
 title: What I'm doing in December
 published: true
+redirect_from:
+  - /blog/2010/12/01/what-i-m-doing-in-december/
 ---
 <p>Aside from being really busy at work, I'll be giving three talks at users groups in December. How did I end up agreeing to give three talks in one month? People heard me talking about some topic and they asked me to talk to their group on it. If asked, I'll usually agree. I'm trying to tie them together thematically to make it a three-parter (and encourage people to come to all three meetups) so I'm calling the series:&nbsp;'Tis the Season to Write Web Apps, A Three Part Adventure.</p>
 <p>&nbsp;</p>

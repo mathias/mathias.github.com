@@ -2,6 +2,8 @@
 layout: post
 title: "A theory of compound intelligence gain"
 date: 2014-01-12 14:02
+redirect_from:
+  - /blog/2014/01/12/a-theory-of-compound-intelligence-gain/
 ---
 
 Note that this is probably not enough to call a theory. It's an idea, at most.

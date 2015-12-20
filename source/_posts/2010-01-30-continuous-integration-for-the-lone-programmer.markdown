@@ -2,6 +2,8 @@
 layout: post
 title: Continuous Integration for the Lone Programmer
 published: true
+redirect_from:
+  - /blog/2010/01/30/continuous-integration-for-the-lone-programmer/
 ---
 <p><span style="color: #424037; font-size: 12px; line-height: 21px;">(This post is part of my blog archiving project. This post appeared on&nbsp;<a href="http://blog.mattgauger.com/2010/01/30/continuous-integration/">blog.mattgauger.com</a>&nbsp;on January 30, 2010.)</span></p>
 <p><span style="color: #424037; font-size: 12px; line-height: 21px;"><span style="color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-size: 14px; line-height: 19px;">

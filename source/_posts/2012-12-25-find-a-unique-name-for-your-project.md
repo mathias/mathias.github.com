@@ -2,6 +2,8 @@
 layout: post
 title: "Find a unique name for your project"
 date: 2012-12-25 11:32
+redirect_from:
+  - /blog/2012/12/25/find-a-unique-name-for-your-project/
 ---
 
 ---

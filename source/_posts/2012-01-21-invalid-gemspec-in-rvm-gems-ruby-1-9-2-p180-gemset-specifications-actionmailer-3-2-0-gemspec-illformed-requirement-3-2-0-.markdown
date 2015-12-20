@@ -3,6 +3,10 @@ layout: post
 title: ! 'Invalid gemspec in [.rvm/gems/ruby-1.9.2-p180@gemset/specifications/actionmailer-3.2.0.gemspec]:
   Illformed requirement ["# 3.2.0"] '
 published: true
+redirect_from:
+  - /blog/2012/01/21/invalid-gemspec-in-rvm-gems-ruby-1-9-2-p180-gemset-specifications-actionmailer-3-2-0-gemspec-illformed-requirement-3-2-0-/
+  - /2012/01/21/invalid-gemspec-in-rvm-gems-ruby-1-9-2-p180-gemset-specifications-actionmailer-3-2-0-gemspec-illformed-requirement-3-2-0/
+  - /blog/2012/01/21/invalid-gemspec-in-rvm-gems-ruby-1-9-2-p180-gemset-specifications-actionmailer-3-2-0-gemspec-illformed-requirement-3-2-0/
 ---
 <p>Recently while trying to create a new Rails 3.2 project, I ran into this error after creating a new RVM gemset in Ruby 1.9.2-p180 and a Gemfile requiring only Rails 3.2.0:</p>
 <div class="CodeRay">

@@ -2,6 +2,8 @@
 layout: post
 title: Passion, Absurdity, and Creativity
 published: true
+redirect_from:
+  - /blog/2009/12/27/passion-absurdity-and-creativity/
 ---
 
 <p>

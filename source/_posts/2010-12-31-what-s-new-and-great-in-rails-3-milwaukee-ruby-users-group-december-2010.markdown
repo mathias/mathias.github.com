@@ -2,6 +2,8 @@
 layout: post
 title: What's new and great in Rails 3 - Milwaukee Ruby Users Group - December 2010
 published: true
+redirect_from:
+  - /blog/2010/12/31/what-s-new-and-great-in-rails-3-milwaukee-ruby-users-group-december-2010/
 ---
 <p>While I was going to write a whole blog post (essentially what I said during the talk) I think these slides stand on their own pretty well.</p>
 <div style="">

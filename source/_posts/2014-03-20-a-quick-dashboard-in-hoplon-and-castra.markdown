@@ -2,6 +2,8 @@
 layout: post
 title: "A quick dashboard in Hoplon &amp; Castra"
 date: 2014-03-20 13:29
+redirect_from:
+  - /blog/2014/03/20/a-quick-dashboard-in-hoplon-and-castra/
 ---
 
 *Note:* I began writing a much longer blog post that went into a ton of detail about how to build an app dashboard that used Hoplon and Castra. The kind of dashboard that just consumes JSON API endpoints from another app or other data sources. Such dashboards update on the fly in the browser. Many apps these days need a dashboard like this to monitor stats: worker job queues, database size, average response times, etc.

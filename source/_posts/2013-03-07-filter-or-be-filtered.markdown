@@ -2,6 +2,8 @@
 layout: post
 title: "Filter or Be Filtered"
 date: 2013-03-07 22:09
+redirect_from:
+  - /blog/2013/03/07/filter-or-be-filtered/
 ---
 
 Eli Pariser's talk, [Beware online "filter bubbles"](http://www.ted.com/talks/eli_pariser_beware_online_filter_bubbles.html) recently hit the front page of the TED Talks website. I found it interesting because it discusses some of what I've seen happening online, and some of my fears for how we search and consume content. Watch the video if you haven't to see just how much is already being filtered on the web for you.

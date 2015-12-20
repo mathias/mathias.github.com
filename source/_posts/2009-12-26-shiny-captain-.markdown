@@ -2,6 +2,9 @@
 layout: post
 title: Shiny, Captain!
 published: true
+redirect_from:
+  - /blog/2009/12/26/shiny-captain-/
+  - /blog/2009/12/26/shiny-captain/
 ---
 <p><span style="font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-size: 14px; line-height: 19px;">
 <p style="margin-top: 0px; margin-right: 0px; margin-bottom: 1em; margin-left: 0px; font-size: 14px; vertical-align: baseline; background-color: transparent; color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-weight: 400; line-height: 1.4em; letter-spacing: 0px; text-align: left; padding: 0px;"><span style="color: #424037; font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 21px;">(This post is part of my blog archiving project. This post appeared on <a href="http://blog.mattgauger.com/2009/12/26/shiny-captain/">blog.mattgauger.com</a>&nbsp;on December 29. 2009.)</span></p>

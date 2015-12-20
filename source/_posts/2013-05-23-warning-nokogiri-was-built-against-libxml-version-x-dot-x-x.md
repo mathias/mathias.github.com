@@ -2,6 +2,8 @@
 layout: post
 title: "WARNING: Nokogiri was built against LibXML version x.x.x"
 date: 2013-05-23 11:46
+redirect_from:
+  - /blog/2013/05/23/warning-nokogiri-was-built-against-libxml-version-x-dot-x-x/
 ---
 
 ---

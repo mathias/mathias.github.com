@@ -2,6 +2,8 @@
 layout: post
 title: "Reset a lost password on an Ubuntu VM"
 date: 2013-04-24 11:46
+redirect_from:
+  - /blog/2013/04/24/reset-a-lost-password-on-an-ubuntu-vm/
 ---
 
 ---

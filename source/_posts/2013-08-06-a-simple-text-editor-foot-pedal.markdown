@@ -2,6 +2,8 @@
 layout: post
 title: "A simple text editor foot pedal"
 date: 2013-08-06 15:06
+redirect_from:
+  - /blog/2013/08/06/a-simple-text-editor-foot-pedal/
 ---
 
 When I first starting talking about [building a chording keyboard](/blog/2013/08/03/building-a-chording-keyboard-lessons-learned-and-progress-so-far/), both in person and online, people began to ask me about the possibility of building a computer foot pedal. With the Teensy microcontroller, a foot pedal would only need to watch a single digital input and output a few characters to the OS; much simpler than my chording keyboard project.

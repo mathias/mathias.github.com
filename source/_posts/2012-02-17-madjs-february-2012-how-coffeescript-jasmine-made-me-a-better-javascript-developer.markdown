@@ -3,6 +3,8 @@ layout: post
 title: MadJS February 2012 - How CoffeeScript & Jasmine Made Me a Better JavaScript
   Developer
 published: true
+redirect_from:
+  - /blog/2012/02/17/madjs-february-2012-how-coffeescript-jasmine-made-me-a-better-javascript-developer/
 ---
 <p>Recently, I spoke at the MadJS group about CoffeeScript &amp; Jasmine. My slides appear below. Since Slideshare doesn't show my notes, you can either download the keynote file above, or you can read the notes below, which I've pulled out of the slides. I feel that the notes are necessary to know what I'm talking about, and I hate reading slide decks where there's no context or notes. This isn't going to be as helpful as having seen my talk in person, but hopefully you get some value out of my talk and the notes together:</p>
 <div style=""><strong style="display: block; margin: 12px 0 4px;"><a href="http://www.slideshare.net/mathiasx/coffeescript-jasmine-madjs-february-2012" title="CoffeeScript &amp; Jasmine - MadJS February 2012" target="_blank">CoffeeScript &amp; Jasmine - MadJS February 2012</a></strong> <iframe marginheight="0" scrolling="no" src="http://www.slideshare.net/slideshow/embed_code/11637009" marginwidth="0" frameborder="0" height="355" width="425"></iframe>

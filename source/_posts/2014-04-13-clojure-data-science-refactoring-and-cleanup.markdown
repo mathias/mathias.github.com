@@ -2,6 +2,8 @@
 layout: post
 title: "Clojure Data Science: Refactoring and Cleanup"
 date: 2014-04-13 16:28
+redirect_from:
+  - /blog/2014/04/13/clojure-data-science-refactoring-and-cleanup/
 ---
 
 ---

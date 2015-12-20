@@ -2,6 +2,8 @@
 layout: post
 title: Techniques for learning a new skill
 published: true
+redirect_from:
+  - /blog/2010/12/26/techniques-for-learning-a-new-skill/
 ---
 <p>I just found these notes in an old notebook and figured they deserved a blog post . This isn't self-help type stuff, it's just practical. I'm blogging this so that some day I find it when reading my old blog posts, just as I found the list in an old notebook.</p>
 <p>Techniques helpful in learning any skill:</p>

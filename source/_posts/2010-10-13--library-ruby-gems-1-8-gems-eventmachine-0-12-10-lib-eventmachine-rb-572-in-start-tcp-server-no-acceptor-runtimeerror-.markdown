@@ -3,7 +3,12 @@ layout: post
 title: ! '/Library/Ruby/Gems/1.8/gems/eventmachine-0.12.10/lib/eventmachine.rb:572:in
   `start_tcp_server'': no acceptor (RuntimeError)'
 published: true
+redirect_from:
+  - /blog/2010/10/13/-library-ruby-gems-1-8-gems-eventmachine-0-12-10-lib-eventmachine-rb-572-in-start-tcp-server-no-acceptor-runtimeerror-/
+  - /blog/2010/10/13/-library-ruby-gems-1-8-gems-eventmachine-0-12-10-lib-eventmachine-rb-572-in-start-tcp-server-no-acceptor-runtimeerror/
+  - /2010/10/13/-library-ruby-gems-1-8-gems-eventmachine-0-12-10-lib-eventmachine-rb-572-in-start-tcp-server-no-acceptor-runtimeerror-/
 ---
+
 <p>Seeing this error when trying to run your Rack or Sinatra webapp?</p>
 <p>It's probably because you're already running something on the port you're trying to use. This happens quite a bit if you're using daemonized Rack apps that go off on their own after you close the controlling shell.</p>
 <p>Use this command to see what's happening on a port:</p>

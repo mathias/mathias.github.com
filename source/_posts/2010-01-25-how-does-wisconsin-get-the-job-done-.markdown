@@ -2,6 +2,10 @@
 layout: post
 title: How Does Wisconsin Get the Job Done?
 published: true
+redirect_from:
+  - /blog/2010/01/25/how-does-wisconsin-get-the-job-done-/
+  - /blog/2010/01/25/how-does-wisconsin-get-the-job-done/
+  - /2010/01/25/how-does-wisconsin-get-the-job-done-/
 ---
 <p>
   (This post is part of my blog archiving project. This post appeared on <a href="http://blog.mattgauger.com/2010/01/25/how-does-wisconsin/">blog.mattgauger.com</a>&nbsp;on January 25, 2010.)

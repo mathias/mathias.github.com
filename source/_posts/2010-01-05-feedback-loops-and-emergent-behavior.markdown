@@ -2,6 +2,8 @@
 layout: post
 title: Feedback Loops and Emergent Behavior
 published: true
+redirect_from:
+  - /blog/2010/01/05/feedback-loops-and-emergent-behavior/
 ---
 
 <p style="margin-top: 0px; margin-right: 0px; margin-bottom: 1em; margin-left: 0px; font-size: 14px; vertical-align: baseline; background-color: transparent; color: #000000; font-family: DroidSansRegular, Bitstream Vera Sans, Verdana, sans-serif; font-weight: 400; line-height: 1.4em; letter-spacing: 0px; text-align: left; padding: 0px;"><span style="color: #424037; font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 21px;">(This post is part of my blog archiving project. This post appeared on&nbsp;<a href="http://blog.mattgauger.com/2010/01/05/emergent-behavior/">blog.mattgauger.com</a>&nbsp;on January 5, 2010.)</span></p>

@@ -2,6 +2,8 @@
 layout: post
 title: "Minsky's Circle Algorithm in Shoes.rb / Hackety Hack"
 date: 2013-07-27 11:32
+redirect_from:
+  - /blog/2013/07/27/minskys-circle-algorithm-in-shoes-dot-rb-slash-hackety-hack/
 ---
 
 ---

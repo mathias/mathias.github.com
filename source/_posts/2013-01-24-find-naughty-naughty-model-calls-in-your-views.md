@@ -2,6 +2,8 @@
 layout: post
 title: "Find naughty naughty model calls in your views"
 date: 2013-01-24 11:32
+redirect_from:
+  - /blog/2013/01/24/find-naughty-naughty-model-calls-in-your-views/
 ---
 
 ---

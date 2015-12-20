@@ -3,7 +3,12 @@ layout: post
 title: ! '/Library/Ruby/Site/1.8/rubygems.rb:779:in `report_activate_error'': Could
   not find RubyGem railties (>= 0) (Gem::LoadError) '
 published: true
+redirect_from:
+  - /blog/2010/10/31/-library-ruby-site-1-8-rubygems-rb-779-in-report-activate-error-could-not-find-rubygem-railties-0-gem-loaderror-/
+  - /2010/10/31/-library-ruby-site-1-8-rubygems-rb-779-in-report-activate-error-could-not-find-rubygem-railties-0-gem-loaderror-/
+  - /blog/2010/10/31/-library-ruby-site-1-8-rubygems-rb-779-in-report-activate-error-could-not-find-rubygem-railties-0-gem-loaderror/
 ---
+
 <p>I tend to blog things that I want to remember, but couldn't find in one quick Google search.</p>
 <p>This is an error I got while starting the <a href="http://railstutorial.org/book">Rails Tutorial</a>, because I was using an old system (I counted about 160 gems installed) and starting to use <a href="http://rvm.beginrescueend.com/">rvm</a> for managing my Ruby installs, because the Rails Tutorial recommends it. I haven't had this kind of issue before, because rails, gem, and ruby commands have all just worked out-of-the-box for me since Mac OS X 10.5 was released.</p>
 <p>When I tried to create a new Rails app, I got the error in the title of the blog post:</p>
