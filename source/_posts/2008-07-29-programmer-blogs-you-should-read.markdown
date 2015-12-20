@@ -2,6 +2,8 @@
 layout: post
 title: Programmer Blogs You Should Read
 published: true
+redirect_from:
+  - /blog/2008/07/29/programmer-blogs-you-should-read/
 ---
 <p>(This post is part of my blog archiving project. This post appeared on&nbsp;<a href="http://bytecodex.wordpress.com/2008/07/29/programmer-blogs-you-should-read/">bytecodex.wordpress.com</a>&nbsp;on&nbsp;July 29, 2008. I wanted to note that despite being so short, this blog post was both the most read blog post on my Wordpress blog, as far as I know. Most of the blogs listed here are now defunct.)</p>
 
