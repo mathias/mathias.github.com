@@ -24,6 +24,7 @@ tramp
 _site
 drafts/
 .jekyll-metadata
+source/_drafts
 source/_stash
 source/stylesheets/screen.css
 _deploy
