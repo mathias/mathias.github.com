@@ -12,15 +12,16 @@ I'm currently reading the book [Race Against the Machine](http://www.amazon.com/
 
 While *Race Against the Machine* describes technological progress as a force that leaves behind skilled workers who no longer have relevant skills, my thinking is on intelligence augmentation, and how I can use my own knowledge and programming skills to build tools that increase my own effectiveness and ability to perform my job. Namely, how can I write software that improves my cognition and memory such that I am better at writing software, and gain other benefits from having increased cognition and memory?
 
-Douglas Engelbart [wrote extensively](http://www.dougengelbart.org/pubs/augment-3906.html) about augmenting intelligence, primarily with improving workflows and then with computer software. I've previously [quoted him](http://blog.mattgauger.com/blog/2013/03/17/by-augmenting-human-intellect/) on this blog. I feel that part of that quote bears repeating here:
+Douglas Engelbart [wrote extensively](http://www.dougengelbart.org/pubs/augment-3906.html) about augmenting intelligence, primarily with improving workflows and then with computer software. I've previously [quoted him]({% post_url 2013-03-17-by-augmenting-human-intellect %}) on this blog. I feel that part of that quote bears repeating here:
 
 <blockquote>
 By "augmenting human intellect" we mean increasing the capability of a man to approach a complex problem situation, to gain comprehension to suit his particular needs, and to derive solutions to problems.
 <footer>
 <strong>Douglas C. Engelbart</strong>
 &ndash;
-<cite><a href="http://www.dougengelbart.org/pubs/augment-3906.html">Augmenting Human Intellect: A Conceptual Framework </a></cite>
+<cite><a href="http://www.dougengelbart.org/pubs/augment-3906.html">Augmenting Human Intellect: A Conceptual Framework </a></cite></footer>
 </blockquote>
+
 
 Of course, Engelbart was writing about this in 1962 -- well before every home had a personal computer and everyone had a powerful supercomputer in their pocket. For a modern overview of Engelbart's framework, see [The Design of Artifacts for Augmenting Intellect](http://fluid.media.mit.edu/sites/default/files/The%20Design%20of%20Artifacts%20for%20Augmenting%20Intellect.pdf).
 
