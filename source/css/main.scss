@@ -3,15 +3,15 @@
 ---
 @charset "utf-8";
 
-
-
 // Our variables
-$base-font-family: Georgia, serif;
+$base-font-family: "Merriweather", Georgia, serif;
 $base-font-size:   16px;
 $small-font-size:  $base-font-size * 0.875;
 $base-line-height: 1.5rem;
 
 $spacing-unit:     30px;
+
+$header-font-family: "Open Sans", "Helvetica Neue", "Helvetica-Neue", helvetica, sans-serif;
 
 $text-color:       #111;
 $background-color: #fdfdfd;
