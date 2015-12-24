@@ -116,13 +116,13 @@ For the `concert_cam`, it was easy enough to have a big arcade-style button send
 
 Here's the `concert_cam` button pedestal with Teensy and Raspberry Pi getting wired in:
 
-<a href="http://www.flickr.com/photos/mattgauger/9427820477/" title="IMG_1817 by Matt Gauger, on Flickr"><img src="http://farm8.staticflickr.com/7395/9427820477_a8b4630519_z.jpg" width="480" height="640" alt="IMG_1817"></a>
+<a data-flickr-embed="true"  href="https://www.flickr.com/photos/mattgauger/9427820477/" title="IMG_1817"><img src="https://farm8.staticflickr.com/7395/9427820477_44686f75e2_c.jpg" width="600" height="800" alt="IMG_1817"></a>
 
 Confident by my success with using the Teensy in the `concert_cam`, I decided to put a Teensy in my Nostromo, replacing the normal USB board inside it and translating keyboard chords into key press events at the hardware level.
 
 The first step is to open up the Nostromo. This is pretty easy; just unscrew all the visible screws, and find & unscrew the other screws underneath the rubber feet of the gamepad. The Nostromo comes apart into three pieces, and looks like this inside:
 
-<a href="http://www.flickr.com/photos/mattgauger/9427844525/" title="iPhoto by Matt Gauger, on Flickr"><img src="http://farm4.staticflickr.com/3784/9427844525_4b59fa4bc3_b.jpg" width="581" height="733" alt="iPhoto"></a>
+<a data-flickr-embed="true"  href="https://www.flickr.com/photos/mattgauger/9427844525/" title="iPhoto"><img src="https://farm4.staticflickr.com/3784/9427844525_3560e6cef4_b.jpg" width="581" height="733" alt="iPhoto"></a>
 
 The first problem encountered is those little grey ribbons - they're ZIF surface mount stuff, and everything else inside is surface mount here, too. For an electronics hobbyist, surface mount components can represent a big source of frustration. For me, I just didn't want to deal with them. I can't really solder to the cables with any precision and the spacing of the connectors was so small that there was no hope of attaching wires there. Further, the circuit boards had traces running inside but didn't really have any pins that I could solder to. A real bummer.
 
@@ -144,7 +144,7 @@ Since I only have about 15 keys and maybe another 4 or 5 input/outputs that I ne
 
 While waiting for the key switches to arrive, I began work on the one non-surface-mount component in the Nostromo that I could solder to: the scroll wheel. On the scroll wheel's PCB, there is a mechanical encoder, a button (the click when you press down on a mouse scroll wheel) and an LED.
 
-<a href="http://www.flickr.com/photos/mattgauger/9430775972/" title="skitched-20130803-121011 by Matt Gauger, on Flickr"><img src="http://farm8.staticflickr.com/7453/9430775972_991c8e8a8d_c.jpg" width="600" height="800" alt="skitched-20130803-121011"></a>
+<a data-flickr-embed="true"  href="https://www.flickr.com/photos/mattgauger/9430775972/" title="skitched-20130803-121011"><img src="https://farm8.staticflickr.com/7453/9430775972_1075a250b2_b.jpg" width="768" height="1024" alt="skitched-20130803-121011"></a>
 
 Here's a quick link for reading up on how mechanical encoders work in mice, and particularly, how to interface one with an Arduino: [Mouse Scroll Wheel Sensor and Arduino](http://forum.arduino.cc/index.php/topic,15336.0.html). There's also some source code in that thread that will probably prove useful later. Note in the picture that the middle leg of the encoder is ground, and the two ends correspond to the signals sent when you rotate it &mdash; you'll have to figure out whether the scroll direction matches their location yourself by experimenting.
 
@@ -198,3 +198,5 @@ Such a project may take a decade or more to realize, though, and so is not under
 If you have any questions, comments, or your own chording keyboard project, I'd love to hear about it over on Twitter, where I am [@mathiasx](https://twitter.com/mathiasx).
 
 [1]: http://en.wikipedia.org/wiki/Rollover_(key)#n-key_rollover
+
+<script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
