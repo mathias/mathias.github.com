@@ -74,7 +74,7 @@ However, this pedal only has one foot switch. You could easily add more M-Audio 
 
 ---
 
-If you have any questions or comments, I'd love to hear about it over on Twitter, where I am [@mathiasx](https://twitter.com/mathiasx).
+If you have any questions or comments, I'd love to hear about it [in an email](mailto:contact@mattgauger.com).
 
 
 ### Research:
