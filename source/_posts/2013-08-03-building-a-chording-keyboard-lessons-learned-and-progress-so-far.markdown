@@ -197,7 +197,7 @@ Such a project may take a decade or more to realize, though, and so is not under
 
 ---
 
-If you have any questions, comments, or your own chording keyboard project, I'd love to hear about it over on Twitter, where I am [@mathiasx](https://twitter.com/mathiasx).
+If you have any questions, comments, or your own chording keyboard project, I'd love to hear about it [in an email](mailto:contact@mattgauger.com).
 
 [1]: http://en.wikipedia.org/wiki/Rollover_(key)#n-key_rollover
 
