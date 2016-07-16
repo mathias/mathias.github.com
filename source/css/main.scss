@@ -14,7 +14,8 @@ $spacing-unit:     30px;
 $header-font-family: "Open Sans", "Helvetica Neue", "Helvetica-Neue", helvetica, sans-serif;
 
 $text-color:       #111;
-$background-color: #fdfdfd;
+$background-color: rgb(250,250,250);
+$header-color:     #eee;
 $brand-color:      #2a7ae2;
 
 $grey-color:       #828282;
@@ -26,8 +27,6 @@ $content-width:    800px;
 
 $on-palm:          600px;
 $on-laptop:        800px;
-
-
 
 // Using media queries with like this:
 // @include media-query($on-palm) {
