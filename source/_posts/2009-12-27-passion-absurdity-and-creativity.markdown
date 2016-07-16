@@ -17,7 +17,7 @@ Hackety Hack was the modern self-contained equivilent of programming BASIC on a 
 In a [blog post](http://shack-a-nerd.livejournal.com/70594.html) about __why_, [shack_a_nerd](http://shack-a-nerd.livejournal.com/) wrote
 
 > When I was sad I would often return to the Poignant Guide and reread it, just pick it up from any chapter and start reading, and it would never fail to cheer me up, to remind me that there are wonderful things out there, and to inspire me to try to contribute something of my own.
-> 
+>
 > Once I commented on the poignant-stiffs mailing list that I thought it was less of a useful programming guide for people who didn’t know how to program already, and more like a novel for computer programmers.
 
 I thought a lot about what I was contributing and what I was coding. For months, I haven't touched any code. I was contributing nothing to the world. Before his disappearance, __why_ created a wealth of amazing things. His creativity and ability to be nonsensical set him apart from the mindless programmer drones out there.

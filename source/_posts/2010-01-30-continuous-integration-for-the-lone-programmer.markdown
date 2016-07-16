@@ -6,7 +6,7 @@ redirect_from:
   - /blog/2010/01/30/continuous-integration-for-the-lone-programmer/
 ---
 
-(This post is part of my blog archiving project. This post appeared on [blog.mattgauger.com](http://blog.mattgauger.com/2010/01/30/continuous-integration/) on January 30, 2010.)
+(This post is part of my blog archiving project. This post appeared on [blog.mattgauger.com](http://blog.mattgauger.com/2010/01/30/continuous-integration/) on January 30, 2010.)
 
 There’s a laundry list of tools and practices in my head that I consider part of modern software engineering (version control, unit testing, code reviews, etc.) These aren’t necessarily required on every project. Continuous integration seems to be a practice that many prominent developers are using. But continuous integration servers aren’t very glamorous, and therefore don’t get a lot of discussion.
 

@@ -3,7 +3,7 @@ layout: post
 title: "Fallacy: Startups don't work in the Midwest"
 date: 2007-12-07 12:09
 redirect_from:
-  - /blog/2007/12/07/fallacy-startups-dont-work-in-the-midwest/ 
+  - /blog/2007/12/07/fallacy-startups-dont-work-in-the-midwest/
 ---
 
 (This post is part of my blog archiving project. This post appeared on
