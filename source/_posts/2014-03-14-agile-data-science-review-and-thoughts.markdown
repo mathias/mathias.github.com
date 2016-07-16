@@ -7,7 +7,7 @@ redirect_from:
 ---
 
 <a href="http://shop.oreilly.com/product/0636920025054.do">
-  <img src="//blog.mattgauger.com/images/agile_data_science_cover.gif" alt="Agile Data Science cover" style="display: block; float:right; margin: 10px;">
+  <img src="/images/agile_data_science_cover.gif" alt="Agile Data Science cover" style="display: block; float:right; margin: 10px;">
 </a>
 
 Recently, I read the book [Agile Data Science](http://shop.oreilly.com/product/0636920025054.do) by Russell Jurney. The book covers data science and how the author applies an agile workflow and powerful tooling to accomplish tasks. While I found the book interesting, and would recommend it as a good introduction, I have some issues with the book that I'd like to discuss. I'd like to go over the book and the tools briefly, if only to save my thoughts for later.
