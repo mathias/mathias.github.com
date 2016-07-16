@@ -1,4 +1,6 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
+
+ruby '2.3.1'
 
 group :development do
   gem 'RedCloth', '~> 4.2.9'
@@ -16,3 +18,4 @@ group :development do
 end
 
 gem 'sinatra'
+gem 'rake'
