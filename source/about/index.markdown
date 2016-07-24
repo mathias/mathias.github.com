@@ -4,7 +4,7 @@ title: "About"
 date: 2012-03-16 21:06
 ---
 
-I'm a software developer. I have way too many interests. I am interested in functional programming, intelligent agents, and ubiquitous + wearable computing. On the practical side, I prefer to use Clojure & ClojureScript. I've spent a lot of time working with Ruby, JavaScript, and the standard assortment of developer tools: vim, emacs, git, and just about everything else.
+I'm a software developer. I am interested in functional programming, intelligent agents, and ubiquitous + wearable computing. On the practical side, I prefer to use Clojure & ClojureScript. I've spent a lot of time working with Ruby, JavaScript, and the standard assortment of developer tools: vim, emacs, git, and just about everything else.
 
 I work for [Heroku](http://www.heroku.com/home).
 
