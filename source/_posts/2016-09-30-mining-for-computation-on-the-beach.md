@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Mining for computation on the beach"
-date: 2016-09-30 08:23
+date: 2017-03-12
 ---
 
 The introduction to [Writing GNU Emacs Extensions](https://www.goodreads.com/book/show/1639039.Writing_GNU_Emacs_Extensions) introduces Emacs by talking about plumbers. "Plumbers?" you might think. The thing it wants us to think about is whether plumbers make their own tools.
