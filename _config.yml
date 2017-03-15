@@ -11,6 +11,7 @@ github_username:  mathias
 markdown: kramdown
 kramdown:
     input: GFM
+highlighter: rouge
 source: "source"
 deploy: "_deploy"
 permalink: "pretty"
