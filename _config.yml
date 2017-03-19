@@ -1,4 +1,5 @@
 # Site settings
+name: Matt Gauger
 title: Matt Gauger
 email: contact@mattgauger.com
 description: > # this means to ignore newlines until "baseurl:"
