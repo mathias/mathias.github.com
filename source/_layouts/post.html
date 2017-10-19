@@ -1,17 +1,36 @@
 ---
 layout: default
 ---
-<div class="container">
-  <article>
-    <header class="post-header">
-      <h1 class="post-header__title">{{ page.title }}</h1>
-      {% if !(page.show_date == false) && page.date %}
-      <p class="post-header__date">{{ page.date | date: "%B %-d, %Y" }}</p>
-      {% endif %}
-      {% if page.tags %}
-      <p class="post-header__tags">{{ page.tags | join(' ') }}</p>
-      {% endif %}
-    </header>
-    {{ content }}
-  </article>
+
+<div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    {% if page.author %}
+        {{ page.author }}
+    {% else %}
+        {{ site.author.name }}
+    {% endif %}
+
+    {% if page.date %}
+      <br>
+      <span>on&nbsp;</span><time datetime="{{ page.date }}">{{ page.date | date: "%B %d, %Y" }}</time>
+    {% endif %}
+  </div>
+
+  <h1 class="post-title">{{ page.title }}</h1>
+  <div class="post-line"></div>
+
+  {{ content }}
+
+</div>
+
+<div class="pagination">
+  {% if page.next.url %}
+    <a href="{{ page.next.url | prepend: site.baseurl }}" class="left arrow">&#8592;</a>
+  {% endif %}
+  {% if page.previous.url %}
+    <a href="{{ page.previous.url | prepend: site.baseurl }}" class="right arrow">&#8594;</a>
+  {% endif %}
+
+  <a href="#" class="top">Top</a>
 </div>
