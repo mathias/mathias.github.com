@@ -6,6 +6,7 @@ description: > # this means to ignore newlines until "baseurl:"
 
 baseurl: "" # the subpath of your site, e.g. /blog/
 paginate: 10
+paginate_path: '/posts/:num'
 url: "http://blog.mattgauger.com" # the base hostname & protocol for your site
 github_username: mathias
 
