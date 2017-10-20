@@ -2,6 +2,8 @@
 layout: post
 title: "Why build intelligence augmentation tools?"
 date: 2017-04-10 10:48
+redirect_from:
+  - /blog/2017/04/10/why-build-intelligence-augmentation-tools/
 ---
 
 In a [past blog post](http://blog.mattgauger.com/blog/2014/01/12/a-theory-of-compound-intelligence-gain/) I talked about the concept of *intelligence augmentation*. The idea of building software to augment intelligence has been around for some time. That post covers its history more than this one will.
