@@ -1,7 +1,6 @@
 ---
 layout: post
-title: ! '/Library/Ruby/Site/1.8/rubygems.rb:779:in `report_activate_error'': Could
-  not find RubyGem railties (>= 0) (Gem::LoadError) '
+title: ! '/Library/Ruby/Site/1.8/rubygems.rb:779:in `report_activate_error'': Could not find RubyGem railties (>= 0) (Gem::LoadError)'
 published: true
 redirect_from:
   - /blog/2010/10/31/-library-ruby-site-1-8-rubygems-rb-779-in-report-activate-error-could-not-find-rubygem-railties-0-gem-loaderror-/

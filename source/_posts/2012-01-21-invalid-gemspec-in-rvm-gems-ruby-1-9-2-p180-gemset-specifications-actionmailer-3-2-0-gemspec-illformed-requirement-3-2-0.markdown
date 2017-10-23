@@ -1,7 +1,6 @@
 ---
 layout: post
-title: ! 'Invalid gemspec in [.rvm/gems/ruby-1.9.2-p180@gemset/specifications/actionmailer-3.2.0.gemspec]:
-  Illformed requirement ["# 3.2.0"] '
+title: ! 'Invalid gemspec in [.rvm/gems/ruby-1.9.2-p180@gemset/specifications/actionmailer-3.2.0.gemspec]: Illformed requirement ["# 3.2.0"] '
 published: true
 redirect_from:
   - /blog/2012/01/21/invalid-gemspec-in-rvm-gems-ruby-1-9-2-p180-gemset-specifications-actionmailer-3-2-0-gemspec-illformed-requirement-3-2-0-/
