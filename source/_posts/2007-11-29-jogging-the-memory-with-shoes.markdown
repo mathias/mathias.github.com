@@ -2,6 +2,8 @@
 layout: post
 title: "Jogging the memory with Shoes"
 date: 2007-11-29 12:09
+redirect_from:
+  - /blog/2007/11/29/jogging-the-memory-with-shoes/
 ---
 
 (This post is part of my blog archiving project. This post appeared on
@@ -39,9 +41,9 @@ elements in a web page, and graphics/animations are easily added. Most
 apps are as simple as:
 
     Shoes.app do
-         stack :margin => 10 do
-              para "Chunky Bacon!"
-          end
+      stack :margin => 10 do
+        para "Chunky Bacon!"
+      end
     end
 
 But the real frustration is in the lack of documentation. There are a
@@ -79,7 +81,6 @@ command hints off the physical copy & thinking up multiple ways to implement
 classes containing the data in Ruby. The reinforcement of forgotten vi command
 skills in developing this widget in MacVim should be obvious.
 
-</p>
 Using the drop-down allows you to access such diverse topics as:
 
 ![shoes2.jpg][]
@@ -110,6 +111,6 @@ Until next time, happy hacking.
   [Shoes]: http://code.whytheluckystiff.net/shoes/
   [Phil Crissman]: http://philcrissman.com/
   [twittering]: http://twitter.com/philcrissman
-  [Shoes cheatsheet widget]: http://bytecodex.files.wordpress.com/2007/11/shoes1.png?w=510-
-  [shoes2.jpg]: http://bytecodex.files.wordpress.com/2007/11/shoes2.jpg?w=510
-  [shoes3-1.jpg]: http://bytecodex.files.wordpress.com/2007/11/shoes3-1.jpg?w=510
+  [Shoes cheatsheet widget]: /images/shoes-cheatsheet.png
+  [shoes2.jpg]: /images/shoes-cheatsheet-2.jpg
+  [shoes3-1.jpg]: /images/shoes-vim-cheatsheet.jpg

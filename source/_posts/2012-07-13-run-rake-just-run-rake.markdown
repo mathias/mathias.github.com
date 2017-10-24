@@ -2,6 +2,8 @@
 layout: post
 title: "Run rake. Just run rake."
 date: 2012-07-13 14:59
+redirect_from:
+  - /blog/2012/07/13/run-rake-just-run-rake/
 ---
 
 Recently, I was setting up my laptop for an existing Rails project with the help of a pair. My pair was pivot on this project, which means that he'd been on it longer and so was bringing his experience and knowledge to the table, while I was seeing the project with fresh eyes.

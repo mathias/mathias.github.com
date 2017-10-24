@@ -2,6 +2,8 @@
 layout: post
 title: "Indent and colorize HTML strings in pry"
 date: 2013-11-14 11:32
+redirect_from:
+  - /blog/2013/11/14/indent-and-colorize-html-strings-in-pry/
 ---
 
 ---

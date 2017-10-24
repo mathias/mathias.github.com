@@ -2,6 +2,8 @@
 layout: post
 title: "In the year 2100"
 date: 2013-12-16 23:41
+redirect_from:
+  - /blog/2013/12/16/in-the-year-2100/
 ---
 
 Recently I was asked by a coworker to write up some ideas for where our company would be in the future. Not just next year, or in 5 years, but where we saw the company in the year 2100. For my other coworkers, the year 2100 probably represents far enough out to ensure they stop thinking in the constraints of right now. But for someone who has read as much science fiction as I have, I saw a wide gulf of time.

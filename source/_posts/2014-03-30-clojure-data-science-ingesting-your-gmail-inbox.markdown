@@ -2,11 +2,13 @@
 layout: post
 title: "Clojure Data Science: Ingesting Your Gmail Inbox"
 date: 2014-03-30 14:44
+redirect_from:
+  - /blog/2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/
 ---
 
 ---
 
-This is Part 1 of a series of blog posts inspired by the exercises from [Agile Data Science](http://shop.oreilly.com/product/0636920025054.do) with Clojure. You may be interested in my [review](http://blog.mattgauger.com/blog/2014/03/14/agile-data-science-review-and-thoughts/) of the book.
+This is Part 1 of a series of blog posts inspired by the exercises from [Agile Data Science](http://shop.oreilly.com/product/0636920025054.do) with Clojure. You may be interested in my [review]({% post_url 2014-03-14-agile-data-science-review-and-thoughts %}) of the book.
 
 ---
 

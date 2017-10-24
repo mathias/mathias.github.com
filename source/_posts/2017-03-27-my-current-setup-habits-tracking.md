@@ -2,6 +2,8 @@
 layout: post
 title: "My current setup: Habits tracking"
 date: 2017-03-27 17:53
+redirect_from:
+  - /blog/2017/03/27/my-current-setup-habits-tracking/
 ---
 
 In the past, [I blogged about](/blog/2013/12/28/an-unscientific-study-in-behavior-change-with-software/) how I used Lift.do (now [coach.me](https://www.coach.me)) to prompt for habit-forming. Learning how to form new habits is one of the key tools to focusing on your growth and the ability learn more. You might recall from that previous post that I refer to the [Fogg method](http://www.foggmethod.com/) for behavior change. The three steps are:

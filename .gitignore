@@ -1,17 +1,12 @@
-.bundle
+# OSX
 .DS_Store
+
+# Sass
 .sass-cache
 .gist-cache
 .pygments-cache
-_deploy
-public
-sass.old
-source.old
-source/_stash
-source/stylesheets/screen.css
-vendor
-node_modules
 
+# Emacs
 *~
 \#*\#
 /.emacs.desktop
@@ -25,4 +20,12 @@ tramp
 .org-id-locations
 *_archive
 
+# Jekyll
+_site
 drafts/
+.jekyll-metadata
+source/_drafts
+source/_stash
+source/stylesheets/screen.css
+_deploy
+public

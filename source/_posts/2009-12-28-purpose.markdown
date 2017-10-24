@@ -1,0 +1,29 @@
+---
+layout: post
+title: Purpose
+published: true
+redirect_from:
+  - /blog/2009/12/28/purpose/
+---
+
+(This post is part of my blog archiving project. This post appeared on [http://blog.mattgauger.com/2009/12/28/purpose/](http://blog.mattgauger.com/2009/12/28/purpose/) on December 28, 2009.)
+
+Every blog has to have a purpose. For awhile, I had a blog hosted on Wordpress.com, [The Byte Codex](http://bytecodex.wordpress.com/). I had told myself that it was my coding blog, and that all insights I gained in coding would end up there. Also, I’d blog about tech events I attended.
+
+Unfortunately, I wasn’t coding enough and consistently at a level to produce world-changing “insights” on a regular basis. I got really wrapped up in trying to find something I could claim expertise on, and then blog about. But I wasn’t an expert on anything and wasn’t _creating_ anything. The frustration and self-censorship about what I told myself I was supposed to be posting crippled my posting momentum. Further, the Midwest wasn’t providing many tech events for me to blog about, and the recaps all were more hazy memories surrounded by other people’s Creative Commons-licensed pictures of the event. (I usually am having a blast and forget to take notes or my own photos.)
+
+All of my previous blogs had ‘rules’ in my head about what they were _for_ and what could or couldn’t be posted on them. All of them failed. There’s something telling here. I think there’s plenty of reasons to have a specialized blog for different topics, possibly even trying to keep your life or your work separated out. But for me, I’m going to stick with a nice mix of personal anecdotes, book reviews, bike stuff (did I mention bikes yet on this blog?) and of course, little coding projects. I don’t want to wall myself in with rules that those are the only things that can get posted here, either. I have to take a deep breath, put away my inner quality control and publish everything.
+
+A blog can have a purpose, but it shouldn’t be so narrowly defined that it never gets updated. After all, a blog with new posts is better than an insightful blog that has gone stagnant, in my book.
+
+**Appendix: A little history:**
+
+In the past, I’ve had several blogs:
+
+*   xiphidae [(archive.org link)](http://web.archive.org/web/*/http://tranzor.net/~xiphias)
+*   [The Byte Codex](http://bytecodex.wordpress.com/)
+*   [Livejournal](http://mathiasdgauger.livejournal.com/)
+*   [mathiasx.baywords.com/](http://mathiasx.baywords.com/) - notable for the RFID microwaving video and a rant on Facebook, which are the only real posts.
+*   and probably a few others that I’m forgetting.
+
+Luckily, those blogs are not too terribly embarrassing to share.

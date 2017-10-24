@@ -2,6 +2,8 @@
 layout: post
 title: "An (unscientific) study in behavior change with software"
 date: 2013-12-28 08:54
+redirect_from:
+  - /blog/2013/12/28/an-unscientific-study-in-behavior-change-with-software/
 ---
 
 Forming habits is hard. There's been tons of research on what practices help form new habits successfully. And there has been research on what software can do to help form new habits. It's not enough to simply send daily reminders or keep track of the goals in a visible place. For software to help us form new habits successfully, we must look to the current research for clues as to how habits are formed.

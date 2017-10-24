@@ -2,11 +2,15 @@
 layout: post
 title: "Clojure Data Science: Sent Counts and Aggregates"
 date: 2014-10-23 18:18
+post_excerpt:
+  For this post, we want to generate some summaries of our data by doing aggregate queries. We won't yet be pulling in tools like [Apache Storm](http://storm.incubator.apache.org/) into the mix, since we can accomplish this through Datomic queries. We will also talk about trade-offs of running aggregate queries on large datasets and devise a way to save our data back to Datomic.
+redirect_from:
+  - /blog/2014/10/23/clojure-data-science-sent-counts-and-aggregates/
 ---
 
 ---
 
-This is Part 3 of a series of blog posts called [Clojure Data Science](http://blog.mattgauger.com/blog/categories/clojure-data-science). Check out the [previous post](http://blog.mattgauger.com/blog/2014/04/13/clojure-data-science-refactoring-and-cleanup/) if you missed it.
+This is Part 3 of a series of blog posts called [Clojure Data Science](/categories/clojure-data-science/). Check out the [previous post]({% post_url 2014-04-13-clojure-data-science-refactoring-and-cleanup %}) if you missed it.
 
 ---
 
@@ -28,7 +32,7 @@ To save on the hassle of upgrading, I have created a tag for the project after u
 
 ## Datomic query refresher
 
-If you remember back to the [first post](http://blog.mattgauger.com/blog/2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/), we wrapped up by querying for entity IDs and then using Datomic's built-in `entity` and `touch` functions to instantiate each message with all of its attributes. We had to do this because the query itself only returned a set of entity IDs:
+If you remember back to the [first post]({% post_url 2014-03-30-clojure-data-science-ingesting-your-gmail-inbox %}), we wrapped up by querying for entity IDs and then using Datomic's built-in `entity` and `touch` functions to instantiate each message with all of its attributes. We had to do this because the query itself only returned a set of entity IDs:
 
 <script src="https://gist.github.com/mathias/ab5a827ca860c89e0043.js"></script>
 

@@ -2,6 +2,8 @@
 layout: post
 title: "Fallacy: Startups don't work in the Midwest"
 date: 2007-12-07 12:09
+redirect_from:
+  - /blog/2007/12/07/fallacy-startups-dont-work-in-the-midwest/
 ---
 
 (This post is part of my blog archiving project. This post appeared on
@@ -47,7 +49,7 @@ else (hosting, support, infrastructure) is all distributed over the web,
 can happen anywhere, and is available to customers all over the world.
 You could work out of your cabana in the Caribbean as long as you have
 broadband, and no one would be the wiser. In connection with this is our
-next point:\
+next point:
 
 **Technology is cheap and readily available**, too: laptops and servers
 (or even virtual hosting) is all the technology you really need. The
@@ -190,7 +192,7 @@ sprawling region, their public transportation, neighborhoods
 concentrating the tech community, and constant tech events/conferences
 trumps what we can pull off in the midwest any day.
 
-#### Time to prove them wrong.
+## Time to prove them wrong.
 
 Go out there and make the next big thing. It won't cost you much,
 it's not risky, and you'll see your friends and the tech community

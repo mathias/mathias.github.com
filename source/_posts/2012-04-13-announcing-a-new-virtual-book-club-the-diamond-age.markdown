@@ -2,6 +2,8 @@
 layout: post
 title: "Announcing a virtual book club: The Diamond Age"
 date: 2012-04-13 15:29
+redirect_from:
+  - /blog/2012/04/13/announcing-a-new-virtual-book-club-the-diamond-age/
 ---
 
 ![The Diamond Age book cover](/images/The_Diamond_Age.jpg)
@@ -13,8 +15,6 @@ So I'm trying an experiment. I am proposing to hold a book club, online, so that
 If you're interested, please indicate that interest by signing up below. I'll use the sign ups to plan and gauge when to start.
 
 ### [Sign up form](https://docs.google.com/spreadsheet/viewform?formkey=dFBBNUJZcUZuX1Q3Uk5VbGRVRVNsQ3c6MQ#gid=0)
-
-<p></p>
 
 Get The Diamond Age: (non-affiliate links)
 

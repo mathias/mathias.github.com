@@ -1,13 +1,31 @@
-{% capture root_url %}{{ site.root | strip_slash }}{% endcapture %}
-{% include head.html %}
+<!DOCTYPE html>
+<html lang="en">
 
-<body>
-  <header class="inner">{% include header.html %}</header>
-  <div class="container bottom-left-rounded-corner bottom-right-rounded-corner" id="page-container">
-    {{ content | expand_urls: root_url }}
-    <hr />
-    <footer class="footer">{% include footer.html %}</footer>
-  </div>
-  {% include after_footer.html %}
-</body>
+  {% include head.html %}
+
+  <body>
+    <nav class="nav">
+      <div class="nav-container">
+        <a href="{{ site.baseurl }}/">
+          <h2 class="nav-title">{{ site.title }}</h2>
+        </a>
+        <ul>
+          <li><a href="{{ '/about' | prepend: site.baseurl }}">About</a></li>
+          <li><a href="{{ '/archives' | prepend: site.baseurl }}">Blog Archives</a></li>
+          <li><a href="{{ '/open-source' | prepend: site.baseurl }}">Open Source</a></li>
+          <li><a href="{{ '/presentations' | prepend: site.baseurl }}">Presentations</a></li>
+        </ul>
+    </div>
+  </nav>
+
+    <main>
+      {{ content }}
+    </main>
+
+    <footer>
+      <span>
+        &copy; <time datetime="{{ site.time }}">{{ site.time | date: '%Y' }}</time> {{ site.name }}.
+      </span>
+    </footer>
+  </body>
 </html>
