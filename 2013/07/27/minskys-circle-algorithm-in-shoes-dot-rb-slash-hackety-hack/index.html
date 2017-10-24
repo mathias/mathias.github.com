@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    
+      Minsky's Circle Algorithm in Shoes.rb / Hackety Hack &middot; Matt Gauger
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+</head>
+
+
+  <body>
+    <nav class="nav">
+      <div class="nav-container">
+        <a href="/">
+          <h2 class="nav-title">Matt Gauger</h2>
+        </a>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/archives">Blog Archives</a></li>
+          <li><a href="/open-source">Open Source</a></li>
+          <li><a href="/presentations">Presentations</a></li>
+        </ul>
+    </div>
+  </nav>
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span> Matt Gauger
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2013-07-27 11:32:00 -0500">July 27, 2013</time>
+    
+  </div>
+
+  <h1 class="post-title">Minsky's Circle Algorithm in Shoes.rb / Hackety Hack</h1>
+  <div class="post-line"></div>
+
+  <hr />
+
+<p><em>(This post is part of my blog archiving project. This post appeared on <a href="https://coderwall.com/p/fukypa">Coderwall</a> on July 27, 2013.)</em></p>
+
+<hr />
+
+<p>I wanted to try to implement Minsky’s Circle Algorithm from the famous <a href="http://en.wikipedia.org/wiki/HAKMEM">HAKMEM</a>. As noted in lots of other places online (<a href="http://brainwagon.org/2010/08/09/drawing-circles-ala-marvin-minsky/">1</a>, <a href="https://news.ycombinator.com/item?id=3111501">2</a>, <a href="http://cabezal.com/misc/minsky-circles.html">3</a>), the algorithm doesn’t plot a true circle, but rather a very round ellipse. Here’s the text from the HAKMEM entry:</p>
+
+<blockquote>
+  <p>ITEM 149 (Minsky): CIRCLE ALGORITHM Here is an elegant way to draw almost circles on a point-plotting display:</p>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <p>   NEW X = OLD X - epsilon * OLD Y</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <p>   NEW Y = OLD Y + epsilon * NEW(!) X</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <p>This makes a very round ellipse centered at the origin with its size determined by the initial point. epsilon determines the angular velocity of the circulating point, and slightly affects the eccentricity. If epsilon is a power of 2, then we don’t even need multiplication, let alone square roots, sines, and cosines! The “circle” will be perfectly stable because the points soon become periodic.</p>
+</blockquote>
+
+<blockquote>
+  <p>The circle algorithm was invented by mistake when I tried to save one register in a display hack! Ben Gurley had an amazing display hack using only about six or seven instructions, and it was a great wonder. But it was basically line-oriented. It occurred to me that it would be exciting to have curves, and I was trying to get a curve display hack with minimal instructions.</p>
+</blockquote>
+
+<p>The benefit of using this algorithm, at the time, was that it doesn’t use cosine/sine or any other complicated functions, and so could be implemented on the rather-limited computers of that time to draw circles fast. (I believe it was used to draw the orbits of ships on the early game <a href="http://en.wikipedia.org/wiki/Spacewar_(video_game), but I don't know that for sure.">SpaceWar</a></p>
+
+<p>To implement it myself, I needed to be able to plot points on a display. So I turned to Hackety-Hack, which comes with Shoes for drawing graphics. The Shoes DSL for drawing shapes is rather simple, which means we can take the pseudocode above and turn it into a working demo rather easily:</p>
+
+<pre><code class="language-ruby">Shoes.app do
+  epsilon = 1.0/16
+  offset = 250
+  x = 20
+  y = 20
+
+  fill red
+  shape do
+    move_to(x + offset,y + offset)
+
+    100.times do
+      x = x - epsilon * y
+      y = y + epsilon * x
+      line_to(x + offset,y + offset)
+    end
+  end
+
+  fill blue
+  oval({top: 250, left: 320, radius: 25, center: true})
+end
+
+</code></pre>
+
+<p>Epsilon is 1/16, as indicated by some quick googling – basically a small power of two. I have to use the offset to get the center of the circle closer to the center of the Shoes window – without the offset, the circle will only be a quarter-circle in the upper left corner.</p>
+
+<h2 id="how-does-this-compare-to-plotting-a-real-circle">How does this compare to plotting a real circle?</h2>
+
+<p>If we want to compare the roundness of our “circle” to a real circle drawn by Shoes, we can add this line in before the closing <code>end</code>:</p>
+
+<pre><code class="language-ruby">  fill blue
+  oval({top: 250, left: 320, radius: 25, center: true})
+</code></pre>
+
+<p>Although their radiuses are going to be slightly different.</p>
+
+<p>Here’s what we end up with. Minsky’s Circle Algorithm on the left in red, a real circle on the right in blue:</p>
+
+<p><img src="http://www.mattgauger.com/img//Shoes-20130727-151954.jpg" alt="Hackety Hack" /></p>
+
+
+
+</div>
+
+<div class="pagination">
+  
+    <a href="/2013/08/03/building-a-chording-keyboard-lessons-learned-and-progress-so-far/" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2013/05/23/warning-nokogiri-was-built-against-libxml-version-x-dot-x-x/" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+
+    </main>
+
+    <footer>
+      <span>
+        &copy; <time datetime="2017-10-24 13:29:00 -0500">2017</time> Matt Gauger.
+      </span>
+    </footer>
+  </body>
+</html>

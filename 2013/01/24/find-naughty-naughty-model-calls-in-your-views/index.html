@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    
+      Find naughty naughty model calls in your views &middot; Matt Gauger
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+</head>
+
+
+  <body>
+    <nav class="nav">
+      <div class="nav-container">
+        <a href="/">
+          <h2 class="nav-title">Matt Gauger</h2>
+        </a>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/archives">Blog Archives</a></li>
+          <li><a href="/open-source">Open Source</a></li>
+          <li><a href="/presentations">Presentations</a></li>
+        </ul>
+    </div>
+  </nav>
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span> Matt Gauger
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2013-01-24 11:32:00 -0600">January 24, 2013</time>
+    
+  </div>
+
+  <h1 class="post-title">Find naughty naughty model calls in your views</h1>
+  <div class="post-line"></div>
+
+  <hr />
+
+<p><em>(This post is part of my blog archiving project. This post appeared on <a href="https://coderwall.com/p/33siha">Coderwall</a> on January 24, 2013.)</em></p>
+
+<hr />
+
+<p>I found this really helpful in a project where almost all the views were requesting things from the database rather than letting the controller handle it.</p>
+
+<p>I’ve got a couple little regexes with various levels of specificity to help you seek and destroy!</p>
+
+<p>In vim with Fugitive, run:</p>
+
+<pre><code>:Ggrep "(&lt;%|=|-).*[A-Z].*\.(find|order|where|includes|all)" app/views/
+</code></pre>
+
+<p>This will find places where someone is using model classes with queries in your views. This should work for both erb and haml views. You’ll probably get a few false matches (I eliminated the common ones like capitalized link titles in a link_to call, for example), but overall I was able to reduce a ton of naughty code.</p>
+
+<p>If you want to catch other annoying things (like using Time.now calls), you can look for what should be classes used in views:</p>
+
+<pre><code>:Ggrep "(&lt;%|=|-).*[A-Z].*\." app/views
+</code></pre>
+
+<p>If you want to be even simpler, you could just look for those ActiveRelation queries:</p>
+
+<pre><code>:Ggrep "(find|order|where|includes|all)" app/views/
+</code></pre>
+
+<p>These also both work from the command line (if you don’t have Fugitive in your vim yet) by replacing :Ggrep with git-grep:</p>
+
+<pre><code>git-grep "(find|order|where|includes|all)" app/views/
+</code></pre>
+
+<p>With these tools in your belt, you can find all those calls to the database in your views and improve your Rails app.</p>
+
+<p>Let me know if this tip was helpful at @mathiasx on Twitter!</p>
+
+
+</div>
+
+<div class="pagination">
+  
+    <a href="/2013/03/02/google-glass-you-cant-control-the-future/" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2012/12/25/find-a-unique-name-for-your-project/" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+
+    </main>
+
+    <footer>
+      <span>
+        &copy; <time datetime="2017-10-24 13:29:00 -0500">2017</time> Matt Gauger.
+      </span>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    
+      Clojure Data Science: Refactoring and Cleanup &middot; Matt Gauger
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+</head>
+
+
+  <body>
+    <nav class="nav">
+      <div class="nav-container">
+        <a href="/">
+          <h2 class="nav-title">Matt Gauger</h2>
+        </a>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/archives">Blog Archives</a></li>
+          <li><a href="/open-source">Open Source</a></li>
+          <li><a href="/presentations">Presentations</a></li>
+        </ul>
+    </div>
+  </nav>
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span> Matt Gauger
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2014-04-13 16:28:00 -0500">April 13, 2014</time>
+    
+  </div>
+
+  <h1 class="post-title">Clojure Data Science: Refactoring and Cleanup</h1>
+  <div class="post-line"></div>
+
+  <hr />
+
+<p>This is Part 2 of a series of blog posts called <a href="/blog/categories/clojure-data-science">Clojure Data Science</a>. Check out the <a href="/blog/2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/">previous post</a> if you missed it.</p>
+
+<hr />
+
+<p>Welcome to the second post in this series. If you followed along in the last post, your code should be ready to use in this post. If not, or if you need to go back to known working state, you can clone the <a href="https://github.com/mathias/autodjinn">autodjinn repo</a> and <code>git checkout v0.1.0</code>.</p>
+
+<p>I started out writing this post to develop simple functionality on our inbox data. Finishing the post was taking longer than I was expecting, so I split the post in half in the interest of posting this sooner.</p>
+
+<p>In this post, we need to create an email ingestion script that we can run repeatedly with <code>lein</code>. And we need to talk about refactoring our code out into maintainable namespaces.</p>
+
+<p>So make sure your Datomic transactor is running and launch a REPL, because it is time to give our code a makeover.</p>
+
+<h2 id="a-gmail-ingestion-script">A Gmail ingestion script</h2>
+
+<p>Because Clojure sits on the JVM, it shares some similarities with Java. One of these is the special purpose of a <code>-main</code> function. You can think of this as the <code>main</code> method in a Java class. The <code>-main</code> function in a Clojure namespace will be run when a tool like <code>lein</code> tries to “run” the namespace. That sounds like exactly what we want to do with our Gmail import functionality, so we will add a <code>-main</code> function that calls our <code>ingest-inbox</code> function. To get started, we will only have it print us a message.</p>
+
+<script src="https://gist.github.com/mathias/9965864.js"></script>
+
+<p>You can then run this by invoking <code>lein run -m autodjinn.core</code>. You should see <code>Hello world!</code> if everything worked. You may notice that the process doesn’t seem to quit after it prints the hello world message – this seems to be problem with Leiningen. To ensure that our process ends when the script is done, we can add a <code>(System/exit 0)</code> line to the end of our <code>-main</code> function to ensure that the process quits normally. On *nix systems, a 0 return code means successful exit, and a nonzero response code means something went wrong. Knowing this, we can take advantage of response codes in the future to signal that an error occurred in our script. But for now, we will have the script end by returning 0 to indicate a successful exit.</p>
+
+<p>Think back to what we did to ingest email in our REPL in the last post. We had to connect to the database, run the data schema transaction, and then we were able to run <code>ingest-inbox</code> to pull in our email.</p>
+
+<p>The following function will do the same thing. Remember that things like trying to create an existing database or performing a schema update against the same schema in Datomic should be harmless. It will add a new transaction ID, but it will not modify or destroy data. Putting together all the steps we need to run, we get a <code>-main</code> function that looks like this:</p>
+
+<script src="https://gist.github.com/mathias/9965933.js"></script>
+
+<h2 id="refactoring-namespaces">Refactoring namespaces</h2>
+
+<p>With Clojure, one must walk a fine line between putting all of your functions into one big file, and having too many namespaces. One big file quickly grows unmaintainable and gains too many responsibilities.</p>
+
+<p>But having too many namespaces can also be a problem. It may create strange cyclic dependency errors. Or you may find that with many separate namespaces, you have to require many namespaces to get anything done.</p>
+
+<p>To avoid this, I start with most code in one namespace, and then look for common functionality to extract to a new namespace. Good candidates to extract are those that all talk about the same business logic or business domain. You may notice that the responsibility for one group of functions is different than the rest of the functions. That is a good candidate for a new namespace. Looking at responsibilities can be a good way to determine where to break apart functions into namespaces.</p>
+
+<p>In this project, we can identify two responsibilities that currently live in our autodjinn.core namespace. The first is working with the database. The second is ingesting Gmail messages. As our project grows, we will not want the code for ingesting Gmail messages to live in <code>autodjinn.core</code>. With that in mind, let’s create a new file called <code>src/autodjinn/gmail_ingestion.clj</code> and move over the vars and functions that we think should live there. That file should look like this:</p>
+
+<script src="https://gist.github.com/mathias/9966207.js"></script>
+
+<p>Be sure to remove the functions and vars that we moved to this file from the <code>autodjinn.core</code> namespace. Note that we moved the <code>-main</code> function here, too, so that we can now run <code>lein run -m autodjinn.gmail-ingestion</code></p>
+
+<p>You may also notice that we still had to require the <code>datomic.api</code> namespace here to be able to perform a transaction. Our <code>autodjinn.core</code> namespace already handles database interaction, though. So let’s write a <code>create-mail</code> function in <code>core.clj</code> and call it in our new namespace:</p>
+
+<script src="https://gist.github.com/mathias/9966294.js"></script>
+
+<p>And in <code>gmail_ingestion.clj</code> we change <code>ingest-inbox</code> to use the new function. While we’re at it, we’ll break out a convenience function to prepare the attr map for Datomic:</p>
+
+<script src="https://gist.github.com/mathias/9966304.js"></script>
+
+<p>If we run our <code>lein run -m autodjinn.gmail-ingestion</code> command, we should see that the code is still working.</p>
+
+<p>Don’t forget to remove the <code>datomic.api</code> requirement in <code>gmail-ingestion</code> namespace! Now we only need to require Datomic in the <code>autodjinn.core</code> namespace.</p>
+
+<p>There’s one more low-hanging fruit that we can refactor about this code before moving on. The config file is loaded and used in both namespaces. We already require everything from <code>autodjinn.core</code> into <code>autodjinn.gmail-ingestion</code>. So we can safely change a few lines to use the config in <code>gmail_ingestion.clj</code> and stop requiring <code>nomad</code> in two places:</p>
+
+<script src="https://gist.github.com/mathias/9966372.js"></script>
+
+<p>And in <code>core.clj</code>:</p>
+
+<script src="https://gist.github.com/mathias/9966384.js"></script>
+
+<p>Running <code>lein run -m autodjinn.gmail-ingestion</code> one more time, we should see that our changes did not break the system. The config is now only loaded once, and we use it everywhere.</p>
+
+<p>That’s it! We’ve taken care of some low-hanging fruit and are ready to implement some new functionality. If you want to compare what you’ve done with my version, you can run <code>git diff v0.1.1</code> on the <a href="https://github.com/mathias/autodjinn">autodjinn repo</a>.</p>
+
+<p>Please let me know what you think of these posts by sending me an email at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#099;&#111;&#110;&#116;&#097;&#099;&#116;&#064;&#109;&#097;&#116;&#116;&#103;&#097;&#117;&#103;&#101;&#114;&#046;&#099;&#111;&#109;">&#099;&#111;&#110;&#116;&#097;&#099;&#116;&#064;&#109;&#097;&#116;&#116;&#103;&#097;&#117;&#103;&#101;&#114;&#046;&#099;&#111;&#109;</a>. I’d love to hear from you!</p>
+
+
+</div>
+
+<div class="pagination">
+  
+    <a href="/2014/07/27/housekeeping-imported-coderwall-protips/" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+
+    </main>
+
+    <footer>
+      <span>
+        &copy; <time datetime="2017-10-24 13:29:00 -0500">2017</time> Matt Gauger.
+      </span>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    
+      /Library/Ruby/Gems/1.8/gems/eventmachine-0.12.10/lib/eventmachine.rb:572:in `start_tcp_server': no acceptor (RuntimeError) &middot; Matt Gauger
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+</head>
+
+
+  <body>
+    <nav class="nav">
+      <div class="nav-container">
+        <a href="/">
+          <h2 class="nav-title">Matt Gauger</h2>
+        </a>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/archives">Blog Archives</a></li>
+          <li><a href="/open-source">Open Source</a></li>
+          <li><a href="/presentations">Presentations</a></li>
+        </ul>
+    </div>
+  </nav>
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span> Matt Gauger
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2010-10-13 00:00:00 -0500">October 13, 2010</time>
+    
+  </div>
+
+  <h1 class="post-title">/Library/Ruby/Gems/1.8/gems/eventmachine-0.12.10/lib/eventmachine.rb:572:in `start_tcp_server': no acceptor (RuntimeError)</h1>
+  <div class="post-line"></div>
+
+  <p>Seeing this error when trying to run your Rack or Sinatra webapp?</p>
+
+<p>It’s probably because you’re already running something on the port you’re trying to use. This happens quite a bit if you’re using daemonized Rack apps that go off on their own after you close the controlling shell.</p>
+
+<p>Use this command to see what’s happening on a port:</p>
+
+<pre><code>$ lsof -i :4567
+COMMAND   PID     USER   FD   TYPE     DEVICE SIZE/OFF NODE NAME
+ruby    74716 mathiasx    5u  IPv4 0x073562a4      0t0  TCP *:tram (LISTEN)
+</code></pre>
+
+<p>It’ll help you see the PID of the process that’s hogging that port. Just be careful not to kill anything that <strong>should</strong> be on that port!</p>
+
+
+</div>
+
+<div class="pagination">
+  
+    <a href="/2010/10/16/the-masters-word/" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2010/09/28/importing-old-content/" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+
+    </main>
+
+    <footer>
+      <span>
+        &copy; <time datetime="2017-10-24 13:29:00 -0500">2017</time> Matt Gauger.
+      </span>
+    </footer>
+  </body>
+</html>

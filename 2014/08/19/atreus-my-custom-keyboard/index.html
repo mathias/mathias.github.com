@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    
+      Atreus: My Custom Keyboard &middot; Matt Gauger
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+</head>
+
+
+  <body>
+    <nav class="nav">
+      <div class="nav-container">
+        <a href="/">
+          <h2 class="nav-title">Matt Gauger</h2>
+        </a>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/archives">Blog Archives</a></li>
+          <li><a href="/open-source">Open Source</a></li>
+          <li><a href="/presentations">Presentations</a></li>
+        </ul>
+    </div>
+  </nav>
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span> Matt Gauger
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2014-08-19 21:38:00 -0500">August 19, 2014</time>
+    
+  </div>
+
+  <h1 class="post-title">Atreus: My Custom Keyboard</h1>
+  <div class="post-line"></div>
+
+  <p>Last year I wrote about about building <a href="/blog/2013/08/03/building-a-chording-keyboard-lessons-learned-and-progress-so-far/">chording keyboards</a> and <a href="/blog/2013/08/06/a-simple-text-editor-foot-pedal/">USB foot pedals</a>. At the time, using the <a href="http://www.pjrc.com/teensy/">Teensy micro controller</a> as a USB HID device was possible, but it still required a lot of research. There was no good central resource for knowledge about building keyboards. Since then, the <a href="http://deskthority.net/wiki/ErgoDox">Ergo Dox</a> keyboard was released as open source and got quite popular. This seems to have opened the door for many to get into building keyboards.</p>
+
+<p>My friend <a href="http://coglib.com/~icordasc">Ian</a> ordered an Ergo Dox on the Massdrop crowdfunding campaign, after I suggested that I’d teach him to solder and we’d assemble it together. Finding time to get together and build it took almost a year, but we’ve started meeting up weekly to assemble the Ergo Dox. Building his keyboard has been a lot of fun, and inspired me to work on my own keyboard projects again.</p>
+
+<p>Almost exactly a month ago, I started working on building my own keyboard. I wanted to build a keyboard from scratch that could replace my daily-driver keyboard, a PFU Happy Hacking Lite, so it had to be smaller than most <a href="http://deskthority.net/wiki/Tenkeyless">tenkeyless</a> keyboards. The Ergo Dox’s columnar layout was always intriguing, but I wasn’t sure that I needed all those keys. (Normal keyboards stagger the keys of each row, which is a holdover from preventing mechanical typewriters from jamming. Columnar layouts assign a column of keys to each finger.)</p>
+
+<p>Through <a href="http://geekhack.org">Geekhack</a>, I found the <a href="https://github.com/technomancy/atreus">Atreus</a>, a keyboard designed by <a href="http://technomancy.us/">Phil Hagelberg</a> (better known as <a href="https://github.com/technomancy">technomancy</a> online.) The Atreus is open source (<a href="https://github.com/technomancy/atreus">hardware</a>, <a href="https://github.com/technomancy/atreus-firmware">firmware</a>), and has gone through several revisions at this point. My keyboard is done now, and I wanted to share it.</p>
+
+<p><a data-flickr-embed="true" href="https://www.flickr.com/photos/mattgauger/14785511628" title="IMG_3220"><img src="https://farm6.staticflickr.com/5592/14785511628_8eea0e6a61_c.jpg" width="800" height="600" alt="IMG_3220" /></a></p>
+
+<p><a href="http://technomancy.us/173">The original Atreus</a> was constructed out of layers of laser-cut acrylic. Since then, some folks on the <a href="http://geekhack.org/index.php?topic=54759.0">Geekhack thread</a> have redesigned the laser-cut design to be cut out of a sheet of birch plywood on <a href="https://ponoko.com">Ponoko</a>. Ponoko is a great: you upload a file and choose materials and size. The Ponoko website keeps you updated on your project’s status as they check your design, pick materials, and so on. Later, your laser-cut project arrives in the mail. I highly recommend Ponoko’s service if you need laser cutting and can’t get it done at a local makerspace.</p>
+
+<p><a data-flickr-embed="true" href="https://www.flickr.com/photos/mattgauger/14785346149" title="IMG_3156"><img src="https://farm6.staticflickr.com/5565/14785346149_53f639dc31_c.jpg" width="800" height="600" alt="IMG_3156" /></a></p>
+
+<p>I finished the birch ply with semi-gloss marine polyurethane. The polyurethane should give it a durable finish, and added a nice amber tint to the wood. The downside is that more than a week after the final coat went on, the poly is still out gassing some headache-inducing fumes.</p>
+
+<p>After applying the finish, I hot-glued the switches in and soldered it together. There’s no PCB with this design, just point-to-point with wires and components to a central Teensy. I used <a href="http://deskthority.net/wiki/Cherry_MX_Clear">Cherry MX Clear</a> switches for the majority of the keys because they seem the closest to my Happy Hacking’s Topre switches to me. The modifiers are <a href="http://deskthority.net/wiki/Cherry_MX_Black">Cherry MX Blacks</a>.</p>
+
+<p>Assembling the Atreus with point-to-point soldering wasn’t too bad, but I’ve had a lot of experience soldering. I’ve no doubt that the construction will be durable and reliable, but a PCB might make it easier to assemble for beginners. There’s some talk on Geekhack about using the <a href="http://deskthority.net/workshop-f7/onehand-20-keyboard-t6617.html">One Hand PCB</a> as a circuit board for a Atreus-like keyboard.</p>
+
+<p>The rest of my images from the build on Flickr in <a href="https://www.flickr.com/photos/mattgauger/sets/72157646763805951/">this album</a>.</p>
+
+<p>After hours of soldering, the moment of truth came: I plugged in the Teensy, uploaded the firmware, and typed some keys. It worked! I felt relieved that the keyboard worked on the first try. Because I had checked for continuity and shorts throughout the soldering process, I can be confident that my Atreus won’t have any issues with ghosting or glitches. The finished keyboard feels really solid; maybe more so than some plastic keyboards I’ve typed on before.</p>
+
+<p>Because the Atreus uses a columnar layout, I’m not planning to use it with a QWERTY layout. So, I decided to learn Dvorak. I’ve been practicing on the home row on <a href="http://dvorak.nl">dvorak.nl</a>, which is a great website for learning Dvorak in your browser. The neat thing about that typing tutor is that you don’t have to commit to changing any key layouts at the OS-level. I’ve got the default QWERTY layout on my Atreus now, but will be switching to a hardware-native Dvorak layout soon.</p>
+
+<p>Since the Atreus uses a Teensy as its brain, it can be reconfigured easily by uploading a new firmware. Keyboard layouts for the Atreus start as a JSON file, and then an emacs function can be invoked to compile and upload the firmware to the board. The same JSON file can also be used to generate an HTML table of the layout with Org Mode in emacs. More information can be found on the <a href="https://github.com/technomancy/atreus-firmware">firmware project repo</a>.</p>
+
+<h2 id="what-next">What next?</h2>
+
+<p>I haven’t worked on my chording keyboard in a long time.  I’m happy to see that things like the <a href="https://github.com/tmk/tmk_keyboard">tmk firmware</a> will now make that project much easier. With my new knowledge and the many open source projects now available, I’m going to restart work on <a href="/blog/2013/08/03/building-a-chording-keyboard-lessons-learned-and-progress-so-far/">that project</a>.</p>
+
+<p>Further, I’ve been playing with Matt Adereth’s <a href="https://github.com/adereth/dactyl">dactyl</a> to design chording keyboard layouts. Dactyl allows me to write Clojure code and output it in a format that OpenSCAD can generate a 3D model with. OpenSCAD can export the files to the formats that 3D printers use. 3D printing has a lot of promise for iteratively prototyping unique ergonomic peripherals, and I intend to try out several ideas for one-hand / chording keyboards.</p>
+
+<p>If you’re interested in building your own keyboard, I would recommend the Ergo Dox. Especially if you can get the kit that Massdrop produced, because the circuit boards are well-made. Otherwise, spend some time on the Geekhack &amp; Deskthority forums, read some wiki pages, and test some keyboards. And if you’re interested in building the Atreus, join the <a href="http://geekhack.org/index.php?topic=54759.0">discussion</a>! Everyone in that thread has been very helpful.  This project wouldn’t have been possible without their answers and advice.</p>
+
+<hr />
+
+<p>Interested in commenting or contacting me? Send an email to <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#099;&#111;&#110;&#116;&#097;&#099;&#116;&#064;&#109;&#097;&#116;&#116;&#103;&#097;&#117;&#103;&#101;&#114;&#046;&#099;&#111;&#109;">&#099;&#111;&#110;&#116;&#097;&#099;&#116;&#064;&#109;&#097;&#116;&#116;&#103;&#097;&#117;&#103;&#101;&#114;&#046;&#099;&#111;&#109;</a>. Thanks!</p>
+
+<script async="" src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
+
+
+
+</div>
+
+<div class="pagination">
+  
+    <a href="/2014/09/15/clojure-code-quality-tools/" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2014/07/27/housekeeping-imported-coderwall-protips/" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+
+    </main>
+
+    <footer>
+      <span>
+        &copy; <time datetime="2017-10-24 13:29:00 -0500">2017</time> Matt Gauger.
+      </span>
+    </footer>
+  </body>
+</html>

@@ -1,797 +1,222 @@
-
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>blog.mattgauger.com</title>
-    <meta name="author" content="Matt Gauger">
 
-    
-    <meta name="description" content="Clojure Data Science: Sent Counts and Aggregates This is Part 3 of a series of blog posts called Clojure Data Science. Check out the previous post &hellip;">
-    
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="/atom.xml" rel="alternate" title="blog.mattgauger.com" type="application/atom+xml">
-    <link rel="canonical" href="">
-    <link href="/favicon.ico" rel="shortcut icon">
-    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+  <title>
+    
+      Matt Gauger
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
 </head>
 
 
-<body>
-  <header class="inner"><div class="navbar">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
+  <body>
+    <nav class="nav">
+      <div class="nav-container">
+        <a href="/">
+          <h2 class="nav-title">Matt Gauger</h2>
+        </a>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/archives">Blog Archives</a></li>
+          <li><a href="/open-source">Open Source</a></li>
+          <li><a href="/presentations">Presentations</a></li>
+        </ul>
+    </div>
+  </nav>
 
-      <a href="/" class="brand">blog.mattgauger.com</a>
+    <main>
+      <div class="catalogue">
+  
+    <a href="/2017/10/24/a-new-look/" class="catalogue-item">
+      <div>
+        <time datetime="2017-10-24 10:48:00 -0500" class="catalogue-time">October 24, 2017</time>
+        <h1 class="catalogue-title">A new look</h1>
+        <div class="catalogue-line"></div>
 
-      <div class="nav-collapse">
-        <nav class="menu left"><ul class="nav">
-  <li><a href="/about">About</a></li>
-  <li><a href="/blog/archives">Blog Archives</a></li>
-  <li><a href="/open-source">Open Source</a></li>
-  <li><a href="/presentations">Presentations</a></li>
-  
-  <li class="divider-vertical"></li>
-  <li><a class="feed" href="http://feeds.feedburner.com/MattGaugerBlog" title="Atom XML/RSS Feed">Atom Feed</a></li>
-  
-</ul>
-</nav>
-        <div class="right">
-          <form class="navbar-search pull-right" action="http://google.com/search" method="get">
-            <input class="input-medium search-query span2" type="text" name="q" results="0" placeholder="Search">
-            <input type="hidden" name="q" value="site:blog.mattgauger.com">
-          </form>
-        </div>
+        <p>
+          You might notice that this looks a little different. I’ve switched to a much more modern, cleaner theme for my blog. I’ve also redirected all of the old /blog/ subpaths to their new locations (Sadly, it seems GitHub pages does not support permanent redirects with any sort of config file,...
+        </p>
+
       </div>
-    </div>
+    </a>
+  
+    <a href="/2017/04/10/why-build-intelligence-augmentation-tools/" class="catalogue-item">
+      <div>
+        <time datetime="2017-04-10 10:48:00 -0500" class="catalogue-time">April 10, 2017</time>
+        <h1 class="catalogue-title">Why build intelligence augmentation tools?</h1>
+        <div class="catalogue-line"></div>
+
+        <p>
+          In a past blog post I talked about the concept of intelligence augmentation. The idea of building software to augment intelligence has been around for some time. That post covers its history more than this one will. I’ve noticed that software developers I know (myself included) will have a...
+        </p>
+
+      </div>
+    </a>
+  
+    <a href="/2017/03/27/my-current-setup-habits-tracking/" class="catalogue-item">
+      <div>
+        <time datetime="2017-03-27 17:53:00 -0500" class="catalogue-time">March 27, 2017</time>
+        <h1 class="catalogue-title">My current setup: Habits tracking</h1>
+        <div class="catalogue-line"></div>
+
+        <p>
+          In the past, I blogged about how I used Lift.do (now coach.me) to prompt for habit-forming. Learning how to form new habits is one of the key tools to focusing on your growth and the ability learn more. You might recall from that previous post that I refer...
+        </p>
+
+      </div>
+    </a>
+  
+    <a href="/2017/03/12/mining-for-computation-on-the-beach/" class="catalogue-item">
+      <div>
+        <time datetime="2017-03-12 00:00:00 -0600" class="catalogue-time">March 12, 2017</time>
+        <h1 class="catalogue-title">Mining for computation on the beach</h1>
+        <div class="catalogue-line"></div>
+
+        <p>
+          The introduction to Writing GNU Emacs Extensions introduces Emacs by talking about plumbers. “Plumbers?” you might think. The thing it wants us to think about is whether plumbers make their own tools. Plumbers buy pipes and fittings in standardized sizes. They depend on the International Building Code and...
+        </p>
+
+      </div>
+    </a>
+  
+    <a href="/2014/10/23/clojure-data-science-sent-counts-and-aggregates/" class="catalogue-item">
+      <div>
+        <time datetime="2014-10-23 18:18:00 -0500" class="catalogue-time">October 23, 2014</time>
+        <h1 class="catalogue-title">Clojure Data Science: Sent Counts and Aggregates</h1>
+        <div class="catalogue-line"></div>
+
+        <p>
+           This is Part 3 of a series of blog posts called Clojure Data Science. Check out the previous post if you missed it.  For this post, we want to generate some summaries of our data by doing aggregate queries. We won’t yet be pulling...
+        </p>
+
+      </div>
+    </a>
+  
+    <a href="/2014/09/15/clojure-code-quality-tools/" class="catalogue-item">
+      <div>
+        <time datetime="2014-09-15 13:39:00 -0500" class="catalogue-time">September 15, 2014</time>
+        <h1 class="catalogue-title">Clojure Code Quality Tools</h1>
+        <div class="catalogue-line"></div>
+
+        <p>
+          I work with many programming languages on a daily basis. As a polyglot programmer, I’ve come to appreciate tools that help me follow best practices. For JavaScript, there’s the excellent jshint. When I need to verify some XML, there’s xmllint. In a Ruby on Rails project, I can...
+        </p>
+
+      </div>
+    </a>
+  
+    <a href="/2014/08/19/atreus-my-custom-keyboard/" class="catalogue-item">
+      <div>
+        <time datetime="2014-08-19 21:38:00 -0500" class="catalogue-time">August 19, 2014</time>
+        <h1 class="catalogue-title">Atreus: My Custom Keyboard</h1>
+        <div class="catalogue-line"></div>
+
+        <p>
+          Last year I wrote about about building chording keyboards and USB foot pedals. At the time, using the Teensy micro controller as a USB HID device was possible, but it still required a lot of research. There was no good central resource for knowledge about building keyboards....
+        </p>
+
+      </div>
+    </a>
+  
+    <a href="/2014/07/27/housekeeping-imported-coderwall-protips/" class="catalogue-item">
+      <div>
+        <time datetime="2014-07-27 12:05:00 -0500" class="catalogue-time">July 27, 2014</time>
+        <h1 class="catalogue-title">Housekeeping: Imported Coderwall protips</h1>
+        <div class="catalogue-line"></div>
+
+        <p>
+          As part of my continuing effort to archive content I’ve created to this blog, I’ve migrated all of my Coderwall protips. Here’s a quick list of the posts:  Indent and Colorize HTML Strings in Pry November 14, 2013. git fml September 3, 2013. Minsky’s Circle...
+        </p>
+
+      </div>
+    </a>
+  
+    <a href="/2014/04/13/clojure-data-science-refactoring-and-cleanup/" class="catalogue-item">
+      <div>
+        <time datetime="2014-04-13 16:28:00 -0500" class="catalogue-time">April 13, 2014</time>
+        <h1 class="catalogue-title">Clojure Data Science: Refactoring and Cleanup</h1>
+        <div class="catalogue-line"></div>
+
+        <p>
+           This is Part 2 of a series of blog posts called Clojure Data Science. Check out the previous post if you missed it.  Welcome to the second post in this series. If you followed along in the last post, your code should be ready...
+        </p>
+
+      </div>
+    </a>
+  
+    <a href="/2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/" class="catalogue-item">
+      <div>
+        <time datetime="2014-03-30 14:44:00 -0500" class="catalogue-time">March 30, 2014</time>
+        <h1 class="catalogue-title">Clojure Data Science: Ingesting Your Gmail Inbox</h1>
+        <div class="catalogue-line"></div>
+
+        <p>
+           This is Part 1 of a series of blog posts inspired by the exercises from Agile Data Science with Clojure. You may be interested in my review of the book.  For this blog post series, we are going to use your Gmail inbox as...
+        </p>
+
+      </div>
+    </a>
+  
+</div>
+
+<div class="pagination">
+  
+  <div class="pagination">
+    
+    <span>&laquo;</span>
+    
+
+    
+    
+    <em>1</em>
+    
+    
+    
+    <a href="/posts/2">2</a>
+    
+    
+    
+    <a href="/posts/3">3</a>
+    
+    
+    
+    <a href="/posts/4">4</a>
+    
+    
+    
+    <a href="/posts/5">5</a>
+    
+    
+    
+    <a href="/posts/6">6</a>
+    
+    
+    
+    <a href="/posts/7">7</a>
+    
+    
+
+    
+    <a href="/posts/2">&raquo;</a>
+    
   </div>
-</div>
-</header>
-  <div class="container bottom-left-rounded-corner bottom-right-rounded-corner" id="page-container">
-    <div class="row">
-  <article class="page span8 offset2">
-    
-    
-
-
-  <article class="post">
-    
-    <h1 class="title"><a href="/blog/2014/10/23/clojure-data-science-sent-counts-and-aggregates/">Clojure Data Science: Sent Counts and Aggregates</a></h1>
-    <div class="entry">
-        <hr />
-
-<p>This is Part 3 of a series of blog posts called <a href="http://blog.mattgauger.com/blog/categories/clojure-data-science">Clojure Data Science</a>. Check out the <a href="http://blog.mattgauger.com/blog/2014/04/13/clojure-data-science-refactoring-and-cleanup/">previous post</a> if you missed it.</p>
-
-<hr />
-
-<p>For this post, we want to generate some summaries of our data by doing aggregate queries. We won&#8217;t yet be pulling in tools like <a href="http://storm.incubator.apache.org/">Apache Storm</a> into the mix, since we can accomplish this through Datomic queries. We will also talk about trade-offs of running aggregate queries on large datasets and devise a way to save our data back to Datomic.</p>
-
-<h2>Updating dependencies</h2>
-
-<p>It has been some time since we worked on <a href="https://github.com/mathias/autodjinn">autodjinn</a>. Libraries move fast in the Clojure ecosystem, and we want to make sure that we&#8217;re developing against the most recent versions of each dependency. Before we begin making changes, let&#8217;s update everything. If you have already read my <a href="/blog/2014/09/15/clojure-code-quality-tools/">Clojure Code Quality Tools</a> post, you&#8217;ll be familiar with the <code>lein ancient</code> plugin.</p>
-
-<p>Below is output when I run <code>lein ancient</code> on the last post&#8217;s finished git tag, <code>v0.1.1</code>. To go back to that state, you can run <code>git checkout v0.1.1</code> on the <a href="https://github.com/mathias/autodjinn">autodjinn repo</a>.</p>
-
-<script src="https://gist.github.com/mathias/c349dc7cb110edb56235.js"></script>
-
-
-<p>It looks like our <a href="https://github.com/james-henderson/nomad">nomad</a> dependency is out of date. Update the version number in <code>project.clj</code> to <code>0.7.0</code> and run <code>lein ancient</code> again to verify that it worked.</p>
-
-<p>If you take a look at <code>project.clj</code> yourself, you may notice that our project is still on Clojure <code>1.5.1</code>. <code>lein ancient</code> doesn&#8217;t look at the version of Clojure that we&#8217;re specifying; it assumes you have a good reason for picking the Clojure version you specify. In our case, we&#8217;d like to be on the latest stable Clojure, version <code>1.6.0</code>. Update the version of Clojure in <code>project.clj</code> and then run your REPL. There should be no issues with using the functionality in the app that we created in previous posts. If there is, carefully read the error messages and try to find a solution before moving on.</p>
-
-<p>To save on the hassle of upgrading, I have created a tag for the project after upgrading Clojure and nomad. To go to that tag in your local copy of the repo, run <code>git checkout v0.1.2</code>.</p>
-
-<h2>Datomic query refresher</h2>
-
-<p>If you remember back to the <a href="http://blog.mattgauger.com/blog/2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/">first post</a>, we wrapped up by querying for entity IDs and then using Datomic&#8217;s built-in <code>entity</code> and <code>touch</code> functions to instantiate each message with all of its attributes. We had to do this because the query itself only returned a set of entity IDs:</p>
-
-<script src="https://gist.github.com/mathias/ab5a827ca860c89e0043.js"></script>
-
-
-<p>Note that the Datomic query is made up of several parts:</p>
-
-<ul>
-<li>The <code>:find</code> clause says what will be returned. In this case, it is the <code>?eid</code> variable for each record we matched in the rest of the query.</li>
-<li>The <code>:where</code> clause gives a condition to match. In this case, we want all <code>?eid</code> where the entity has a <code>:mail/uid</code> fact, but we don&#8217;t care about the <code>:mail/uid</code> fact&#8217;s value, so we give it a wildcard with the underscore (<code>_</code>).</li>
-</ul>
-
-
-<p>We could pass in the <code>:mail/uid</code> we care about, and only get one message&#8217;s entity-ID back.</p>
-
-<script src="https://gist.github.com/mathias/4990c69f1e4c4a7dc7e9.js"></script>
-
-
-<p>Notice how the <code>?uid</code> variable gets passed in with the <code>:in</code> clause, as the third argument to <code>d/q</code>?</p>
-
-<p>Or we could change the query to match on other attributes:</p>
-
-<script src="https://gist.github.com/mathias/3685937809a50e36c424.js"></script>
-
-
-<p>In all these cases, we&#8217;d still get the entity IDs back because the <code>:find</code> clause tells Datomic to return <code>?eid</code>. Typically, we pass around entity IDs and lazy-load any facts (attributes) that we need off that entity.</p>
-
-<p>But, we could just as easily return other attributes from an entity as part of a query. Let&#8217;s ask for the recipients of all the emails in our system:</p>
-
-<script src="https://gist.github.com/mathias/be2baf0af0b652966240.js"></script>
-
-
-<p>While it is less common to return only the value of an entity&#8217;s attribute, being able to do so will allow us to build more functionality on top of our email abstraction later.</p>
-
-<p>One last thing. Take a look at the return of that query above. Remember that the results returned by a Datomic query are a <a href="http://clojure.github.io/clojure/clojure.core-api.html#clojure.core/set">set</a>. In Clojure, sets are a collection of unique values. So we’re seeing the unique list of addresses that are in the To: field in our data. What we&#8217;re not seeing is duplicate recipient addresses. To be able to count the number of times an email address received a message, we&#8217;ll need a list with non-unique members.</p>
-
-<p>Datomic creates a unique set for the values returned by a query. This is generally a great thing, since it gets around some of the issues that one can run into with JOINing in SQL. But in this case, it is not ideal for what we want to accomplish. We could try to get around the uniqueness constraint on output by returning vectors of the entity ID and the <code>?to</code> address, and then mapping across the result to pull out the second item:</p>
-
-<script src="https://gist.github.com/mathias/d6401a036d032caccde3.js"></script>
-
-
-<p>There&#8217;s a simpler way that we can use in the Datomic query. By keeping it inside Datomic, we can later combine this approach with more-complex queries. We can tell the Datomic query to look at other attributes when considering what the unique key is by passing the query a <code>:with</code> clause. By changing our query slightly to include a <code>:with</code> clause, we end up with the full list of recipients in our datastore:</p>
-
-<script src="https://gist.github.com/mathias/f36ae56bef0e1b6cdfa9.js"></script>
-
-
-<p>At this point, it might be a good idea to review Datomic&#8217;s <a href="http://docs.datomic.com/query.html">querying</a> guide. We&#8217;ll be using some of the advanced querying features found in the later sections of that guide, most notably aggregate functions.</p>
-
-<h2>Sent Counts</h2>
-
-<p>For this feature, we want to find all the pairs of from-to addresses for each email in our datastore, and then sum up the counts for each pair. We will save all these sent counts into a new entity type in Datomic. This will allow us to ask Datomic questions like who sends you the most email, and who you send the most email to.</p>
-
-<p>We start by building up the query in our REPL. Let&#8217;s start with a simpler query, to count how many emails have been sent <em>to</em> each email address in our data store. Note that this isn&#8217;t sufficient to answer the question above, since we won&#8217;t know who those emails came <em>from</em>; they could have been sent by us or by someone else, or they could have been sent to us. Later, we&#8217;ll make it work with from-to pairs that allow us to know things like who is sending email to us.</p>
-
-<p>A simple way to do this would be to wrap our previous query in the <a href="http://clojure.github.io/clojure/clojure.core-api.html#clojure.core/frequencies">frequencies</a> function that Clojure.core provides. <code>frequencies</code> returns a map of items with their count from a Clojure collection.</p>
-
-<script src="https://gist.github.com/mathias/af050f75d1c610d6d422.js"></script>
-
-
-<p>However, we want to perform the same sort of thing in Datomic itself. To do that, we&#8217;re going to need to know about aggregate functions. Aggregate functions operate over the intermediate results of a Datomic query. Datomic provides functions like <code>max</code>, <code>min</code>, <code>sum</code>, <code>count</code>, <code>rand</code> (for getting a random value out of the query results), and more. With aggregates, we need to be sure to use a <code>:with</code> clause to ensure we aggregate over all our values.</p>
-
-<p>Looking at that short list of aggregate functions I&#8217;ve named, we can see that we probably want to use the <code>count</code> function to count the occurance of each email address in a to field in our data. To see how aggregates work, I&#8217;ve come up with a simpler example (the only new thing to know is that Datomic&#8217;s Datalog implementation can query across Clojure collections as easily as it can against a database value, so I&#8217;ve given a simple vector-of-vectors here to describe data in the form</p>
-
-<p><code>[database-id person-name]</code></p>
-
-<p>When the query looks at records in the data, our <code>:where</code> clause gives each position in the vector an id and a name based on position in the vector.)</p>
-
-<script src="https://gist.github.com/mathias/6b8da156388ed1cd9290.js"></script>
-
-
-<p>Let&#8217;s review what happened there. Before the <code>count</code> aggregate function was applied, our results looked like this:</p>
-
-<p><code>[["Jon"] ["Jon"] ["Bob"] ["Chris"]]</code></p>
-
-<p>So the <code>count</code> function just counts across the values of the variable it is passed (in our case, <code>?name</code>), and by pairing it with the original <code>?name</code> value, we get each name and the number of times it appears in our dataset.</p>
-
-<p>It makes sense that we can do the same thing with our recipient email addresses from the previous query. Combining our previous queries with the <code>count</code> aggregate function, we get:</p>
-
-<script src="https://gist.github.com/mathias/8b346f1019d588bea534.js"></script>
-
-
-<p>That looks like the same kind of data we were getting with the use of the <code>frequencies</code> function before! So now we know how to use a Datomic aggregate function to count results in our queries.</p>
-
-<p>What&#8217;s next? Well, what we really want is to get results that are of the form</p>
-
-<p><code>[from-address to-address]</code></p>
-
-<p>and count those tuples. That way, we can differentiate between email sent to us versus email we&#8217;ve sent to others, etc. And eventually, we&#8217;d like to save those queries off as functions that we can call to compute the counts from other places in our project.</p>
-
-<p>We can&#8217;t pass a tuple like <code>[from-address to-address]</code> to the <code>count</code> aggregate function in one query. The way around this is to write two queries. The inner query will return the tuples, and the outer query will return the tuple and a count of the tuple in the output data. Since the queries run on the peer, we don&#8217;t really have to worry about whether it is one query or two, just that it returns the correct data at the end.</p>
-
-<p>So what would the inner query look like? Remember that the outer query will still need a field to pass to the <code>:with</code> clause, so we&#8217;ll probably want to pass through the entity ID.</p>
-
-<script src="https://gist.github.com/mathias/61e60a563ffc29f06af8.js"></script>
-
-
-<p>Those tuples will be used by our outer query. However, we also need a combined value for the count to operate on. For that, we can throw in a function call in the <code>:where</code> clause and give it a binding at the end for Datomic to use for that new value. In this case, I&#8217;ll combine the <code>?from</code> and <code>?to</code> values into a PersistentVector that the <code>count</code> aggregate function can use. The combined query ends up looking like this:</p>
-
-<script src="https://gist.github.com/mathias/d26c7175670b8c29e7c2.js"></script>
-
-
-<p>And the output is as we expect.</p>
-
-<h2>Reusable functions</h2>
-
-<p>The next step is to turn the query above into various functions we can use to query for from-to counts later. In our data, we don&#8217;t just have recipients in the To: field, we also have CC and BCC recipients. Those fields will need their own variations of the query function, but since they will share so much functionality, we will try to compose our functions in such a way that we avoid duplicate code.</p>
-
-<p>In general, when I write query functions for Datomic, I use multiple arities to always allow a database value to be passed to the query function. This can be useful, for example, when we want to query against previous (historical) values of the database, or when we want to work with a particular database value across multiple queries, to ensure our data is consistent and doesn&#8217;t change between queries.</p>
-
-<p>Such a query function typically looks like this:</p>
-
-<script src="https://gist.github.com/mathias/f61fb370a3a2120daf6f.js"></script>
-
-
-<p>By taking advantage of multiple arities, we can default to not having to pass a database value into the function. But in the cases where we do need to ensure a particular database version is used, we can do that. This is a very powerful idiom that I&#8217;ve learned since I began to use Datomic, and I suggest you structure all your query functions similarly.</p>
-
-<p>Now, let&#8217;s take that function that only queries for <code>:mail/to</code> addresses and make it more generic, with specific wrapper functions for each case where we&#8217;d want to use it:</p>
-
-<script src="https://gist.github.com/mathias/67647105799f7f2ff1cf.js"></script>
-
-
-<p>Note that we had to change the inner query to take the attr we want to query on as a variable; this is the proper way to pass a piece of data into a query we want to run. The <code>$</code> that comes first in the <code>:in</code> clause tells Datomic to use the second <code>d/q</code> argument as our dataset (the db value we pass in), and the <code>?attr</code> tells it to bind the third <code>d/q</code> argument as the variable <code>?attr</code>.</p>
-
-<p>While the three variations on functions are similar, we keep the code DRY. (DRY is an acronym for Don&#8217;t Repeat Yourself.) In the long run, less code should mean less bugs and the ability to fix problems in one place.</p>
-
-<p>Building complex systems by composing functions is one of the features of Clojure that I enjoy the most! And notice how we got to these finished query functions by building up functionality in our REPL: another aspect of writing systems in Clojure that I appreciate.</p>
-
-<h2>Querying against large data sets</h2>
-
-<p>Right now, our functions calculate the sent counts across all messages every time they&#8217;re called. This is fine for the small sample dataset I&#8217;ve been working with locally, but if it were to run against the 35K+ messages that are in my Gmail inbox alone (not to mention all the labels and other places my email lives&hellip;) it would take a very long time. With even bigger datasets, we can run into an additional problem: the results may not fit into memory.</p>
-
-<p>When building systems with datasets big enough that they don&#8217;t fit into memory, or that may take too much time to compute to be practical, there are two general approaches that we will explore. The first is storing results as data (known as memoizing or caching the results), and the other is breaking up the work to run on distributed systems like Hadoop or Apache Storm.</p>
-
-<p>For this data, we only want to avoid redoing the calculating every time we want to know the sent counts. Currently, the data in our system changes infrequently, and it&#8217;s likely that we could tell the system to recompute sent counts only after ingesting new data from Gmail. For these reasons, a reasonable solution will be to store the computed sent counts back into Datomic.</p>
-
-<h2>A new entity type to store our results</h2>
-
-<p>For all three query functions we wrote, each result is of the form:</p>
-
-<p><code>[from-address to-address count]</code></p>
-
-<p>Let&#8217;s add to the Datomic schema in our <code>core.clj</code> file to create a new <code>:sent-count</code> entity type with these three attributes. Note that sent counts don&#8217;t really have a unique identifier of their own; it is the combination of <code>from</code> -> <code>to</code> addresses that uniquely identifies them. However, we will leave the <code>from</code> and <code>to</code> addresses as separate fields so it is easy to use them in queries.</p>
-
-<p>Add the following maps to the <code>schema-txn</code> vector:</p>
-
-<script src="https://gist.github.com/mathias/661dadfdb2e639209452.js"></script>
-
-
-<p>You&#8217;ll have to call the <code>update-schema</code> function in your REPL to run the schema transaction.</p>
-
-<p>Something that&#8217;s worth calling out is that we&#8217;re using a Datomic schema <code>valueType</code> that we haven&#8217;t seen yet in this project: <code>db.type/ref</code>. In most cases, you&#8217;d want to use the <code>ref</code> type to associate with other entities in Datomic. But we can also use it to associate with a given list of facts. Here, we give the <code>ref</code> type an enum of the possible values that <code>:sent-count/type</code> can have: <code>to</code>, <code>cc</code>, and <code>bcc</code>. By adding this <code>type</code> field to our new entities, we can either choose to look at sent counts for only one type of address, or we can sum up all the counts for a given from-to pair and get the total counts for the system.</p>
-
-<p>Our next job is to add some functions to create the initial sent counts data, as well as to query for it. To keep things clean, I created a <code>sent-counts</code> namespace for these functions to live in. I&#8217;ve provided it below with minimal explanation, since it should look very familiar to what we&#8217;ve already done.</p>
-
-<p><a href="https://github.com/mathias/autodjinn/blob/29cc08d1ead6043287ecb82136d3ee519668100f/src/autodjinn/sent_counts.clj">/src/autodjinn/sent_counts.clj</a></p>
-
-<p>After adding in the <code>sent_counts.clj</code> file, running:</p>
-
-<p><code>(sent-counts/create-sent-counts)</code></p>
-
-<p>will populate your datastore with the sent counts computed with functions we created earlier.</p>
-
-<p>Note: The sent counts don&#8217;t have any sort of unique key on them, so if you run <code>create-sent-counts</code> multiple times, you&#8217;ll get duplicate results. We&#8217;ll handle that another time when we need to update our data.</p>
-
-<h2>Wrapping up</h2>
-
-<p>We&#8217;ve covered a lot of material on querying Datomic. In particular, we used aggregate functions to get the counts and sums of records in our data store. Because we don&#8217;t want to run the queries all the time, we created a new entity type to store our sent counts and saved our data into it. With query functions like those found in the <code>sent-counts</code> namespace, we can start to ask our data questions like &#8220;In the dataset, what address was sent the most email?&#8221;</p>
-
-<p>If you want to compare what you’ve done with my version, you can run <code>git diff v0.1.3</code> on the <a href="https://github.com/mathias/autodjinn">autodjinn repo</a>.</p>
-
-<p>Please let me know what you think of these posts by sending me an email at <a href="mailto:contact@mattgauger.com">contact@mattgauger.com</a>. I’d love to hear from you!</p>
-
-        
-        
-    </div>
-
-    <div class="meta">
-        <div class="author">
   
-
-<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
-</div>
-        <div class="date">
-
-
-
-
-
-
-
-
-
-
-
-
-<time datetime="2014-10-23T18:18:00-05:00" pubdate  data-updated="true" >Oct 23<span>rd</span>, 2014</time>.</div>
-        <div class="tags">
-
-</div>
-    </div>
-
-  </article>
-
-
-  <article class="post">
-    
-    <h1 class="title"><a href="/blog/2014/09/15/clojure-code-quality-tools/">Clojure Code Quality Tools</a></h1>
-    <div class="entry">
-        <p>I work with many programming languages on a daily basis. As a polyglot programmer, I&#8217;ve come to appreciate tools that help me follow best practices. For JavaScript, there&#8217;s the excellent <a href="http://jshint.com/">jshint</a>. When I need to verify some XML, there&#8217;s <a href="http://xmlsoft.org/xmllint.html">xmllint</a>. In a Ruby on Rails project, I can count on the <a href="http://rubygems.org/gems/rails_best_practices">rails_best_practices</a> gem. For Ruby smells, I reach for <a href="https://github.com/bbatsov/rubocop">rubocop</a>. There&#8217;s tools like <a href="https://github.com/colszowka/simplecov">SimpleCov</a> to measure test coverage on my Ruby projects. <a href="https://github.com/square/cane">cane</a> helps me to ensure line length, method complexity, and more in my Ruby code. <a href="https://github.com/scrooloose/syntastic">Syntastic</a> helps bring real syntax checking to vim for many languages. Every day, more open source tools are introduced that help me to improve the quality of the software that I write.</p>
-
-<p>It follows that when I write Clojure code, I want nice tooling to help me manage code quality, namespace management, and out-of-date dependencies. What tools do I use on a day-to-day basis for this? In this post, I&#8217;ll show 5 tools that I use in my workflow every day on Clojure projects, and also provide some other tools for further exploration. Most of these tools exist as plugins to the excellent <a href="http://leiningen.org/">Leiningen</a> tool for Clojure.</p>
-
-<h2>lein deps :tree</h2>
-
-<p>In the past, <code>lein deps</code> was a command that downloaded the correct versions of your project&#8217;s dependencies. Running <code>lein deps</code> is no longer necessary, as each lein command now checks for dependencies before executing. But <code>deps</code> provides an interesting variant for our uses: <code>lein deps :tree</code>.</p>
-
-<p>The <code>:tree</code> keyword at the end instructs lein to print out your project&#8217;s dependencies as a tree. This itself is a good visualization, but not what we&#8217;re looking for. The tree command will first print out any dependencies-of-dependencies which have conflicts with other dependencies. For example, here&#8217;s what <code>lein deps :tree</code> says for one of my projects:</p>
-
-<script src="https://gist.github.com/mathias/8eca3548f751bec6ea55.js"></script>
-
-
-<p>As you can see, the tool suggests dependencies that request conflicting versions, and how we can modify our <code>project.clj</code> file to resolve those conflicting versions by excluding one or the other. This isn&#8217;t always very useful, but when you run into issues because two different Clojure libraries require two wildly different <code>joda-time</code> versions (a situation I have run into before), it will be good to know what dependencies are causing that issue and how you might go about resolving it.</p>
-
-<p>Note that this functionality disappeared in Leiningen 2.4.3 but is back in 2.5.0, so make sure you run <code>lein upgrade</code>!</p>
-
-<h2><a href="https://github.com/xsc/lein-ancient">lein-ancient</a></h2>
-
-<p>This plugin to <code>lein</code> exists simply to check your project for outdated dependencies. Without <a href="https://github.com/xsc/lein-ancient">lein-ancient</a>, I&#8217;d be unable to keep up with some of the faster-moving libraries in the Java and Clojure world.</p>
-
-<p>After adding ancient to your <code>~/.lein/profiles.clj</code>, running the <code>lein ancient</code> command yields output on the same project as before:</p>
-
-<script src="https://gist.github.com/mathias/bac5e554f971d7aa462f.js"></script>
-
-
-<p>Whoops! Looks like I haven&#8217;t been keeping up to date with my dependencies. <code>lein ancient</code> makes checking for new dependency versions easy. Further, thanks to the ubiquity of <a href="http://semver.org/">semantic versioning</a> in Clojure projects, it is usually quite safe to bump the minor versions (0.0.x) of dependencies.</p>
-
-<p>You can also use lein-ancient to find outdated lein plugins in your <code>~/.lein/profiles.clj</code> file. Just run it with the <code>profiles</code> argument:</p>
-
-<script src="https://gist.github.com/mathias/02b999542ea837b87e30.js"></script>
-
-
-<h2><a href="https://github.com/jonase/kibit">lein kibit</a></h2>
-
-<p>As we gain experience and confidence in a programming language, we begin to talk about whether we&#8217;re writing <em>idiomatic</em> code. I&#8217;d argue that idiomatic code is code that accomplishes a goal with proper use of language features, in a way that other developers familiar with that language would understand. A simpler way to say it might be: idiomatic code uses the community-accepted best practices of how to do something.</p>
-
-<p>Clojure&#8217;s design seeks to solve some problems found in older Lisps, as well as add in niceties like complementary predicate functions. A good example of these convenient complementary functions are <code>if</code> and <code>if-not</code>. Clojure also contains several cases of simplification for common usage. For example, when you don&#8217;t need an else clause on an <code>if</code>, you can use the <code>when</code> macro.</p>
-
-<p>Wouldn&#8217;t it be great if there was someone who was well-versed in Clojure idioms pairing with you and offering suggestions? That&#8217;s exactly what <a href="https://github.com/jonase/kibit">kibit</a> does.</p>
-
-<p>Running against a project I&#8217;d set up to contain some smells, <code>lein kibit</code> found:</p>
-
-<script src="https://gist.github.com/mathias/fc0d446aeb90f44a6731.js"></script>
-
-
-<p>These kinds of small improvements are all over our Clojure projects. They&#8217;re not show-stopper bugs, but they&#8217;re small places for improvement.</p>
-
-<p>Kibit&#8217;s suggestions are almost always logically equivalent to the original code. Still, I always do some smoke-testing to ensure the code still works after using Kibit&#8217;s suggestion, and it generally does. Problems I frequently fix with Kibit are replacing <code>if</code> statements with the <code>when</code> macro, as well as places where the code checks for empty seqs, or that I can simplify nil checks.</p>
-
-<p>You can point lein kibit at a specific namespace by appending the path, like this: <code>lein kibit src/foo/bar.clj</code></p>
-
-<p>Kibit catches many cases where there is a more-idiomatic way to express what you are trying to do. I recommend running it often. In fact, it&#8217;s possible to use <a href="https://github.com/jonase/kibit#usage-from-inside-emacs">kibit in your emacs buffers</a> if you want it to be that much more convenient and real-time.</p>
-
-<h2><a href="https://github.com/jonase/eastwood">Eastwood</a></h2>
-
-<p>For linting Clojure code, there&#8217;s Eastwood. It is similar in functionality to Kibit, bit will catch different issues than Kibit. Built on two interesting Clojure projects: <a href="https://github.com/clojure/tools.analyzer">tools.analyzer</a> and <a href="https://github.com/clojure/tools.analyzer.jvm">tools.analyzer.jvm</a>, Eastwood does a powerful examination of your code inside the JVM. It is worth highlighting that since Eastwood loads your code to analyze it, it might trigger any side effects that happen when your code loads: writing files, modifying databases, etc. Note that it only loads the code; it does not execute it.</p>
-
-<p>After adding <code>eastwood</code> to your lein <code>profiles.clj</code>, simply run: <code>lein eastwood</code> and you will see output like:</p>
-
-<script src="https://gist.github.com/mathias/b93cea02293eac933bee.js"></script>
-
-
-<p>That&#8217;s a lot of problems for a simple file! Notice how one mistake got caught for two reasons: A misplaced docstring (placed after the arguments vector) becomes just a string in the function body that will be thrown away.</p>
-
-<p>Another nice catch that Eastwood provides is detecting the redefinition of the var <code>qux</code> in the file.</p>
-
-<p>But Eastwood covers a lot more cases than just vars being def&#8217;d more than once. See the <a href="https://github.com/jonase/eastwood#whats-there">full list</a> to find out what else it does. There&#8217;s a few linters that are disabled by default, but they might make sense to enable for your project.</p>
-
-<p>Frequently running lint tools can help prevent subtle problems that come from code that looks correct but contains some small error. Eastwood is less concerned with style than tools like JSHint are, but we have other tools that cover stylistic concerns.</p>
-
-<h2><a href="https://github.com/dakrone/lein-bikeshed">lein bikeshed</a></h2>
-
-<p>This is a relative newcomer to my own tool set. <a href="https://github.com/dakrone/lein-bikeshed">lein bikeshed</a> has features related to the low-hanging fruit in our Clojure code: lines longer than 80 characters, blank lines at ends of files, and more. It will also tell you what percentage of functions have docstrings. Like other tools mentioned here, it is a lein plugin that you add to your <code>profiles.clj</code>.</p>
-
-<p>A run of <code>lein bikeshed</code> on its own source (which purposefully includes some code designed to fail) looks like this:</p>
-
-<script src="https://gist.github.com/mathias/271e06ebce8fe6428b83.js"></script>
-
-
-<p>Bikeshed might give a lot of output for your existing projects, but the warnings are worth investigating and addressing. You can always silence the long-lines warning if it doesn&#8217;t matter to you with the <code>-m</code> command line argument.</p>
-
-<h2>Tying it all together with a Lein alias</h2>
-
-<p>Wouldn&#8217;t it be great to run all these tools frequently, so that you can check for as many problems as possible? Well, you can, with a lein alias. (The lein wiki documents aliases in the <a href="https://github.com/technomancy/leiningen/blob/stable/sample.project.clj#L195-L211">lein sample.project.clj</a>.)</p>
-
-<p>In <code>~/.lein/profiles.clj</code>, inside your <code>:user</code> map, add the line:</p>
-
-<script src="https://gist.github.com/mathias/eef9f3f3e9e0ba40cb78.js"></script>
-
-
-<p>Now, when you want to run all these tools at once on a project, you simply invoke <code>lein omni</code>. I use this alias on all my Clojure(Script) projects. I have grown accustomed to seeing the kinds of output that a clean Clojure project will have.</p>
-
-<p>It&#8217;s worth noting that I don&#8217;t run Eastwood unless it is necessary for the project. When it is necessary, I override the alias in the project&#8217;s <code>project.clj</code> to run Eastwood as well.</p>
-
-<p>This command can take some time to complete, but with an alias we&#8217;re only spinning up lein once.</p>
-
-<h2>And a bash alias</h2>
-
-<p>The output of <code>lein omni</code> can be long, which can either result in a lot of scrolling or neglecting to run the command due to the inconvenience. To help manage the length of the output, I&#8217;ve created a bash alias that runs the plugins and pipes them to less.</p>
-
-<p>My personal bash alias also runs midje at the end. You can choose whether to run the tests for your own alias. That&#8217;s just my personal preference.</p>
-
-<script src="https://gist.github.com/mathias/8b6a0040fcd7e4ae890f.js"></script>
-
-
-<p>Note that just like running the lein alias above, this may take a bit of time. Since we&#8217;re piping it to <code>less</code>, it might take awhile before <code>less</code> receives output. While it is still running, output will periodically show up at the bottom of the <code>less</code> buffer. You can use both Emac&#8217;s and vim&#8217;s movement commands in <code>less</code> to advance the buffer. I find <code>less</code> to be more manageable for scrolling through output than switching to <code>tmux</code>&#8217;s history scrolling mode.</p>
-
-<h2>Managing your namespaces: <a href="https://github.com/technomancy/slamhound">lein slamhound</a></h2>
-
-<p>Namespace management often becomes an issue on nontrivial Clojure projects. Actively developing a project means managing the functions we pull in from other namespaces and from libraries. These require statements can often get out of date. Often, they&#8217;re either missing namespaces that are needed, or containing requirements for old functions that are no longer used in the current code.</p>
-
-<p><a href="https://github.com/technomancy/slamhound">slamhound</a> is a tool that can help to manage dependencies in your namespaces. It knows how to require and import Clojure and Java dependencies, and can remove stale requires that are no longer necessary. Slamhound can often fix missing requires for functions that it can resolve.</p>
-
-<p><strong>Note: slamhound rewrites the namespace macros in your project&#8217;s .clj files!</strong> I recommend only running it on code that&#8217;s committed to git (or whatever you use as a VCS) so that you can review and  rollback any changes it makes.</p>
-
-<p>The most basic way to use slamhound is to add it to your <code>~/.lein/profiles.clj</code> as a dependency. Then add this alias:</p>
-
-<script src="https://gist.github.com/mathias/f3799e60c63b0aebf17e.js"></script>
-
-
-<p>Now you can use slamhound on a project by running <code>lein slamhound</code> in the project&#8217;s directory. There&#8217;s also REPL and Emacs support, which you can learn more about in the <a href="https://github.com/technomancy/slamhound#repl-usage">slamhound README</a>.</p>
-
-<h2>Measuring test coverage with <a href="https://github.com/lshift/cloverage">cloverage</a></h2>
-
-<p>It is often claimed that less unit testing is necessary in Clojure because Clojure is functional and makes use of immutable data structures. And it is true that with functional programming, most tests are simple: given some input, the output should be a certain value.</p>
-
-<p>Some would even argue that Clojure functions should be well-factored enough into simple functions that the behavior of the function is apparent and requires no tests. Still others maintain that developing in the REPL is as good as writing unit tests, since functions are constantly evaluated and integrated with this style of development.</p>
-
-<p>That said, there&#8217;s still mutable Java code to interop with, there&#8217;s still the necessary evil of functions with side effects, and we might want to check the <em>structure</em> of the data we&#8217;re producing in our functions rather than the value of it. For all those reasons and to check that I don&#8217;t introduce regressions, I tend to write unit tests in Clojure.</p>
-
-<p>This blog post isn&#8217;t a platform to argue for or against testing Clojure. But when you do test, you may wonder how to tell how much test coverage your test suite has. How do we know at a glance what percentage of our namespaces is being tested? And how do we find lines that are never being exercised in our tests? After all, we can&#8217;t improve what we don&#8217;t measure.</p>
-
-<p>That&#8217;s where <a href="https://github.com/lshift/cloverage">cloverage</a> comes in. Cloverage is another lein plugin, so it gets added to <code>~/.lein/profiles.clj</code> like the others. Then run <code>lein cloverage</code> in your project; it will run the test suite and generate a coverage report.</p>
-
-<p>The coverage report appears in <code>target/coverage</code> as HTML files, broken down by namespace.</p>
-
-<p>You can still use Cloverage even if you don&#8217;t use <code>clojure.test</code>. I use <a href="https://github.com/marick/Midje">midje</a> in most of my tests. To use Cloverage in those situations, wrap your tests in a <code>deftest</code>.</p>
-
-<p>Since <code>deftest</code> has a hyphenated Clojure keyword as its identifier, and Midje facts have a string as an identifier, I&#8217;ve come to use the <code>deftest</code> to group related tests together. Usually this means naming the group of tests after the function I&#8217;m testing. Then I name Midje facts after the situation that the fact exercises. This makes sense to me because it fits well with the hierarchy of rspec unit tests in Ruby.</p>
-
-<p>Here&#8217;s an example of using this approach:</p>
-
-<script src="https://gist.github.com/mathias/94e1a4d7b8bce7c02e23.js"></script>
-
-
-<p>Cloverage also outputs a <code>coverage.txt</code> file that might be useful for use with services like <a href="http://coveralls.io">Coveralls</a>. I haven&#8217;t used this, so I can&#8217;t comment on its usefulness.</p>
-
-<p>If you&#8217;re using <a href="https://github.com/slagyr/speclj">speclj</a> for your tests, you might run into some issues getting Cloverage to play nice. I don&#8217;t use speclj often, so when I couldn&#8217;t get it to work with Cloverage, I didn&#8217;t pursue the issue.</p>
-
-<h2>Final Thoughts</h2>
-
-<p>In this post, I covered 5 tools to add to your workflow all the time, and some others that might be useful in certain cases. I&#8217;m sure there&#8217;s more tools out there that are useful that I don&#8217;t know about, and I&#8217;d love to hear about them.</p>
-
-<p>I&#8217;m also thinking about writing some posts about other development tools that I use, particularly how I use <a href="https://github.com/marick/midje">midje</a> to test, and how you can benchmark code with <a href="https://github.com/davidsantiago/perforate">perforate</a>. If you&#8217;re interested in those topics, get in touch and let me know.</p>
-
-<p>Have fun and enjoy your cleaner codebase with these tools in your tool belt!</p>
-
-<hr />
-
-<p>Interested in commenting or contacting me? Send an email to <a href="mailto:contact@mattgauger.com">contact@mattgauger.com</a>. Thanks!</p>
-
-        
-        
-    </div>
-
-    <div class="meta">
-        <div class="author">
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
-</div>
-        <div class="date">
-
-
-
-
-
-
-
-
-
-
-
-
-<time datetime="2014-09-15T13:39:00-05:00" pubdate  data-updated="true" >Sep 15<span>th</span>, 2014</time>.</div>
-        <div class="tags">
-
-</div>
-    </div>
-
-  </article>
-
-
-  <article class="post">
-    
-    <h1 class="title"><a href="/blog/2014/08/19/atreus-my-custom-keyboard/">Atreus: My Custom Keyboard</a></h1>
-    <div class="entry">
-        <p>Last year I wrote about about building <a href="/blog/2013/08/03/building-a-chording-keyboard-lessons-learned-and-progress-so-far/">chording keyboards</a> and <a href="/blog/2013/08/06/a-simple-text-editor-foot-pedal/">USB foot pedals</a>. At the time, using the <a href="http://www.pjrc.com/teensy/">Teensy micro controller</a> as a USB HID device was possible, but it still required a lot of research. There was no good central resource for knowledge about building keyboards. Since then, the <a href="http://deskthority.net/wiki/ErgoDox">Ergo Dox</a> keyboard was released as open source and got quite popular. This seems to have opened the door for many to get into building keyboards.</p>
-
-<iframe class="vine-embed" src="https://vine.co/v/M9xtVUQ2O7O/embed/simple" width="320" height="320" frameborder="0" style="float:right;"></iframe>
-
-
-<script async src="//platform.vine.co/static/scripts/embed.js" charset="utf-8"></script>
-
-
-<p>My friend <a href="http://coglib.com/~icordasc">Ian</a> ordered an Ergo Dox on the Massdrop crowdfunding campaign, after I suggested that I&#8217;d teach him to solder and we&#8217;d assemble it together. Finding time to get together and build it took almost a year, but we&#8217;ve started meeting up weekly to assemble the Ergo Dox. Building his keyboard has been a lot of fun, and inspired me to work on my own keyboard projects again.</p>
-
-<p>Almost exactly a month ago, I started working on building my own keyboard. I wanted to build a keyboard from scratch that could replace my daily-driver keyboard, a PFU Happy Hacking Lite, so it had to be smaller than most <a href="http://deskthority.net/wiki/Tenkeyless">tenkeyless</a> keyboards. The Ergo Dox&#8217;s columnar layout was always intriguing, but I wasn&#8217;t sure that I needed all those keys. (Normal keyboards stagger the keys of each row, which is a holdover from preventing mechanical typewriters from jamming. Columnar layouts assign a column of keys to each finger.)</p>
-
-<p>Through <a href="http://geekhack.org">Geekhack</a>, I found the <a href="https://github.com/technomancy/atreus">Atreus</a>, a keyboard designed by <a href="http://technomancy.us/">Phil Hagelberg</a> (better known as <a href="https://github.com/technomancy">technomancy</a> online.) The Atreus is open source (<a href="https://github.com/technomancy/atreus">hardware</a>, <a href="https://github.com/technomancy/atreus-firmware">firmware</a>), and has gone through several revisions at this point. My keyboard is done now, and I wanted to share it.</p>
-
-<p><a href="https://www.flickr.com/photos/mattgauger/14785511628" title="IMG_3220 by Matt Gauger, on Flickr"><img src="https://farm6.staticflickr.com/5592/14785511628_5827e18f92_z.jpg" width="640" height="480" alt="IMG_3220"></a></p>
-
-<p><a href="http://technomancy.us/173">The original Atreus</a> was constructed out of layers of laser-cut acrylic. Since then, some folks on the <a href="http://geekhack.org/index.php?topic=54759.0">Geekhack thread</a> have redesigned the laser-cut design to be cut out of a sheet of birch plywood on <a href="https://ponoko.com">Ponoko</a>. Ponoko is a great: you upload a file and choose materials and size. The Ponoko website keeps you updated on your project&#8217;s status as they check your design, pick materials, and so on. Later, your laser-cut project arrives in the mail. I highly recommend Ponoko&#8217;s service if you need laser cutting and can&#8217;t get it done at a local makerspace.</p>
-
-<p><a href="https://www.flickr.com/photos/mattgauger/14785346149" title="IMG_3156 by Matt Gauger, on Flickr"><img src="https://farm6.staticflickr.com/5565/14785346149_ece2db51a3_z.jpg" width="640" height="480" alt="IMG_3156"></a></p>
-
-<p>I finished the birch ply with semi-gloss marine polyurethane. The polyurethane should give it a durable finish, and added a nice amber tint to the wood. The downside is that more than a week after the final coat went on, the poly is still out gassing some headache-inducing fumes.</p>
-
-<p>After applying the finish, I hot-glued the switches in and soldered it together. There&#8217;s no PCB with this design, just point-to-point with wires and components to a central Teensy. I used <a href="http://deskthority.net/wiki/Cherry_MX_Clear">Cherry MX Clear</a> switches for the majority of the keys because they seem the closest to my Happy Hacking&#8217;s Topre switches to me. The modifiers are <a href="http://deskthority.net/wiki/Cherry_MX_Black">Cherry MX Blacks</a>.</p>
-
-<p>Assembling the Atreus with point-to-point soldering wasn&#8217;t too bad, but I&#8217;ve had a lot of experience soldering. I&#8217;ve no doubt that the construction will be durable and reliable, but a PCB might make it easier to assemble for beginners. There&#8217;s some talk on Geekhack about using the <a href="http://deskthority.net/workshop-f7/onehand-20-keyboard-t6617.html">One Hand PCB</a> as a circuit board for a Atreus-like keyboard.</p>
-
-<p>The rest of my images from the build on Flickr in <a href="https://www.flickr.com/photos/mattgauger/sets/72157646763805951/">this album</a>.</p>
-
-<p>After hours of soldering, the moment of truth came: I plugged in the Teensy, uploaded the firmware, and typed some keys. It worked! I felt relieved that the keyboard worked on the first try. Because I had checked for continuity and shorts throughout the soldering process, I can be confident that my Atreus won&#8217;t have any issues with ghosting or glitches. The finished keyboard feels really solid; maybe more so than some plastic keyboards I&#8217;ve typed on before.</p>
-
-<p>Because the Atreus uses a columnar layout, I&#8217;m not planning to use it with a QWERTY layout. So, I decided to learn Dvorak. I&#8217;ve been practicing on the home row on <a href="http://dvorak.nl">dvorak.nl</a>, which is a great website for learning Dvorak in your browser. The neat thing about that typing tutor is that you don&#8217;t have to commit to changing any key layouts at the OS-level. I&#8217;ve got the default QWERTY layout on my Atreus now, but will be switching to a hardware-native Dvorak layout soon.</p>
-
-<p>Since the Atreus uses a Teensy as its brain, it can be reconfigured easily by uploading a new firmware. Keyboard layouts for the Atreus start as a JSON file, and then an emacs function can be invoked to compile and upload the firmware to the board. The same JSON file can also be used to generate an HTML table of the layout with Org Mode in emacs. More information can be found on the <a href="https://github.com/technomancy/atreus-firmware">firmware project repo</a>.</p>
-
-<h2>What next?</h2>
-
-<p>I haven&#8217;t worked on my chording keyboard in a long time.  I&#8217;m happy to see that things like the <a href="https://github.com/tmk/tmk_keyboard">tmk firmware</a> will now make that project much easier. With my new knowledge and the many open source projects now available, I&#8217;m going to restart work on <a href="/blog/2013/08/03/building-a-chording-keyboard-lessons-learned-and-progress-so-far/">that project</a>.</p>
-
-<p>Further, I&#8217;ve been playing with Matt Adereth&#8217;s <a href="https://github.com/adereth/dactyl">dactyl</a> to design chording keyboard layouts. Dactyl allows me to write Clojure code and output it in a format that OpenSCAD can generate a 3D model with. OpenSCAD can export the files to the formats that 3D printers use. 3D printing has a lot of promise for iteratively prototyping unique ergonomic peripherals, and I intend to try out several ideas for one-hand / chording keyboards.</p>
-
-<p>If you&#8217;re interested in building your own keyboard, I would recommend the Ergo Dox. Especially if you can get the kit that Massdrop produced, because the circuit boards are well-made. Otherwise, spend some time on the Geekhack &amp; Deskthority forums, read some wiki pages, and test some keyboards. And if you&#8217;re interested in building the Atreus, join the <a href="http://geekhack.org/index.php?topic=54759.0">discussion</a>! Everyone in that thread has been very helpful.  This project wouldn&#8217;t have been possible without their answers and advice.</p>
-
-<hr />
-
-<p>Interested in commenting or contacting me? Send an email to <a href="mailto:contact@mattgauger.com">contact@mattgauger.com</a>. Thanks!</p>
-
-        
-        
-    </div>
-
-    <div class="meta">
-        <div class="author">
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
-</div>
-        <div class="date">
-
-
-
-
-
-
-
-
-
-
-
-
-<time datetime="2014-08-19T21:38:00-05:00" pubdate  data-updated="true" >Aug 19<span>th</span>, 2014</time>.</div>
-        <div class="tags">
-
-</div>
-    </div>
-
-  </article>
-
-
-  <article class="post">
-    
-    <h1 class="title"><a href="/blog/2014/07/27/housekeeping-imported-coderwall-protips/">Housekeeping: Imported Coderwall Protips</a></h1>
-    <div class="entry">
-        <p>As part of my continuing effort to archive content I&#8217;ve created to this blog, I&#8217;ve migrated all of <a href="https://coderwall.com/p/u/mathias">my Coderwall protips</a>.</p>
-
-<p>Here&#8217;s a quick list of the posts:</p>
-
-<ul>
-<li><a href="http://blog.mattgauger.com/blog/2013/11/14/indent-and-colorize-html-strings-in-pry/">Indent and Colorize HTML Strings in Pry</a> <em>November 14, 2013.</em></li>
-<li><a href="http://blog.mattgauger.com/blog/2013/09/03/git-fml/">git fml</a> <em>September 3, 2013.</em></li>
-<li><a href="http://blog.mattgauger.com/blog/2013/07/27/minskys-circle-algorithm-in-shoes-dot-rb-slash-hackety-hack/">Minsky&#8217;s Circle Algorithm in Shoes.rb / Hackety Hack</a> <em>July 27, 2013.</em></li>
-<li><a href="http://blog.mattgauger.com/blog/2013/05/23/warning-nokogiri-was-built-against-libxml-version-x-dot-x-x/">WARNING: Nokogiri Was Built Against LibXML Version x.x.x</a> <em>May 23, 2013.</em></li>
-<li><a href="http://blog.mattgauger.com/blog/2013/04/24/reset-a-lost-password-on-an-ubuntu-vm/">Reset a Lost Password on an Ubuntu VM</a> <em>April 24, 2013.</em></li>
-<li><a href="http://blog.mattgauger.com/blog/2013/01/24/find-naughty-naughty-model-calls-in-your-views/">Find Naughty Naughty Model Calls in Your Views</a> <em>January 24, 2013.</em></li>
-<li><a href="http://blog.mattgauger.com/blog/2012/12/25/find-a-unique-name-for-your-project/">Find a Unique Name for Your Project</a> <em>December 25, 2012.</em></li>
-</ul>
-
-
-        
-        
-    </div>
-
-    <div class="meta">
-        <div class="author">
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
-</div>
-        <div class="date">
-
-
-
-
-
-
-
-
-
-
-
-
-<time datetime="2014-07-27T12:05:00-05:00" pubdate  data-updated="true" >Jul 27<span>th</span>, 2014</time>.</div>
-        <div class="tags">
-
-</div>
-    </div>
-
-  </article>
-
-
-  <article class="post">
-    
-    <h1 class="title"><a href="/blog/2014/04/13/clojure-data-science-refactoring-and-cleanup/">Clojure Data Science: Refactoring and Cleanup</a></h1>
-    <div class="entry">
-        <hr />
-
-<p>This is Part 2 of a series of blog posts called <a href="/blog/categories/clojure-data-science">Clojure Data Science</a>. Check out the <a href="/blog/2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/">previous post</a> if you missed it.</p>
-
-<hr />
-
-<p>Welcome to the second post in this series. If you followed along in the last post, your code should be ready to use in this post. If not, or if you need to go back to known working state, you can clone the <a href="https://github.com/mathias/autodjinn">autodjinn repo</a> and <code>git checkout v0.1.0</code>.</p>
-
-<p>I started out writing this post to develop simple functionality on our inbox data. Finishing the post was taking longer than I was expecting, so I split the post in half in the interest of posting this sooner.</p>
-
-<p>In this post, we need to create an email ingestion script that we can run repeatedly with <code>lein</code>. And we need to talk about refactoring our code out into maintainable namespaces.</p>
-
-<p>So make sure your Datomic transactor is running and launch a REPL, because it is time to give our code a makeover.</p>
-
-<h2>A Gmail ingestion script</h2>
-
-<p>Because Clojure sits on the JVM, it shares some similarities with Java. One of these is the special purpose of a <code>-main</code> function. You can think of this as the <code>main</code> method in a Java class. The <code>-main</code> function in a Clojure namespace will be run when a tool like <code>lein</code> tries to &#8220;run&#8221; the namespace. That sounds like exactly what we want to do with our Gmail import functionality, so we will add a <code>-main</code> function that calls our <code>ingest-inbox</code> function. To get started, we will only have it print us a message.</p>
-
-<script src="https://gist.github.com/mathias/9965864.js"></script>
-
-
-<p>You can then run this by invoking <code>lein run -m autodjinn.core</code>. You should see <code>Hello world!</code> if everything worked. You may notice that the process doesn&#8217;t seem to quit after it prints the hello world message &#8211; this seems to be problem with Leiningen. To ensure that our process ends when the script is done, we can add a <code>(System/exit 0)</code> line to the end of our <code>-main</code> function to ensure that the process quits normally. On *nix systems, a 0 return code means successful exit, and a nonzero response code means something went wrong. Knowing this, we can take advantage of response codes in the future to signal that an error occurred in our script. But for now, we will have the script end by returning 0 to indicate a successful exit.</p>
-
-<p>Think back to what we did to ingest email in our REPL in the last post. We had to connect to the database, run the data schema transaction, and then we were able to run <code>ingest-inbox</code> to pull in our email.</p>
-
-<p>The following function will do the same thing. Remember that things like trying to create an existing database or performing a schema update against the same schema in Datomic should be harmless. It will add a new transaction ID, but it will not modify or destroy data. Putting together all the steps we need to run, we get a <code>-main</code> function that looks like this:</p>
-
-<script src="https://gist.github.com/mathias/9965933.js"></script>
-
-
-<h2>Refactoring namespaces</h2>
-
-<p>With Clojure, one must walk a fine line between putting all of your functions into one big file, and having too many namespaces. One big file quickly grows unmaintainable and gains too many responsibilities.</p>
-
-<p>But having too many namespaces can also be a problem. It may create strange cyclic dependency errors. Or you may find that with many separate namespaces, you have to require many namespaces to get anything done.</p>
-
-<p>To avoid this, I start with most code in one namespace, and then look for common functionality to extract to a new namespace. Good candidates to extract are those that all talk about the same business logic or business domain. You may notice that the responsibility for one group of functions is different than the rest of the functions. That is a good candidate for a new namespace. Looking at responsibilities can be a good way to determine where to break apart functions into namespaces.</p>
-
-<p>In this project, we can identify two responsibilities that currently live in our autodjinn.core namespace. The first is working with the database. The second is ingesting Gmail messages. As our project grows, we will not want the code for ingesting Gmail messages to live in <code>autodjinn.core</code>. With that in mind, let&#8217;s create a new file called <code>src/autodjinn/gmail_ingestion.clj</code> and move over the vars and functions that we think should live there. That file should look like this:</p>
-
-<script src="https://gist.github.com/mathias/9966207.js"></script>
-
-
-<p>Be sure to remove the functions and vars that we moved to this file from the <code>autodjinn.core</code> namespace. Note that we moved the <code>-main</code> function here, too, so that we can now run <code>lein run -m autodjinn.gmail-ingestion</code></p>
-
-<p>You may also notice that we still had to require the <code>datomic.api</code> namespace here to be able to perform a transaction. Our <code>autodjinn.core</code> namespace already handles database interaction, though. So let&#8217;s write a <code>create-mail</code> function in <code>core.clj</code> and call it in our new namespace:</p>
-
-<script src="https://gist.github.com/mathias/9966294.js"></script>
-
-
-<p>And in <code>gmail_ingestion.clj</code> we change <code>ingest-inbox</code> to use the new function. While we&#8217;re at it, we&#8217;ll break out a convenience function to prepare the attr map for Datomic:</p>
-
-<script src="https://gist.github.com/mathias/9966304.js"></script>
-
-
-<p>If we run our <code>lein run -m autodjinn.gmail-ingestion</code> command, we should see that the code is still working.</p>
-
-<p>Don&#8217;t forget to remove the <code>datomic.api</code> requirement in <code>gmail-ingestion</code> namespace! Now we only need to require Datomic in the <code>autodjinn.core</code> namespace.</p>
-
-<p>There&#8217;s one more low-hanging fruit that we can refactor about this code before moving on. The config file is loaded and used in both namespaces. We already require everything from <code>autodjinn.core</code> into <code>autodjinn.gmail-ingestion</code>. So we can safely change a few lines to use the config in <code>gmail_ingestion.clj</code> and stop requiring <code>nomad</code> in two places:</p>
-
-<script src="https://gist.github.com/mathias/9966372.js"></script>
-
-
-<p>And in <code>core.clj</code>:</p>
-
-<script src="https://gist.github.com/mathias/9966384.js"></script>
-
-
-<p>Running <code>lein run -m autodjinn.gmail-ingestion</code> one more time, we should see that our changes did not break the system. The config is now only loaded once, and we use it everywhere.</p>
-
-<p>That&#8217;s it! We&#8217;ve taken care of some low-hanging fruit and are ready to implement some new functionality. If you want to compare what you&#8217;ve done with my version, you can run <code>git diff v0.1.1</code> on the <a href="https://github.com/mathias/autodjinn">autodjinn repo</a>.</p>
-
-<p>Please let me know what you think of these posts by sending me an email at <a href="mailto:contact@mattgauger.com">contact@mattgauger.com</a>. I&#8217;d love to hear from you!</p>
-
-        
-        
-    </div>
-
-    <div class="meta">
-        <div class="author">
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Matt Gauger</span>.</span>
-</div>
-        <div class="date">
-
-
-
-
-
-
-
-
-
-
-
-
-<time datetime="2014-04-13T16:28:00-05:00" pubdate  data-updated="true" >Apr 13<span>th</span>, 2014</time>.</div>
-        <div class="tags">
-
-</div>
-    </div>
-
-  </article>
-
-
-<ul class="pager">
-  
-  
-    <li>
-    <a href="/blog/page/2/" class="next">Next</a>
-    </li>
-  
-</ul>
-
-<a href="/blog/archives" class="center">
-  <i class="icon-th-list"></i> 
-  Blog Archives
-</a>
-
-  </article>
 </div>
 
-    <hr />
-    <footer class="footer"><div class="row">
-  <div class="offset2 span1">
-  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
-</div>
+    </main>
 
-<div class="span7">
-  <p>
-    blog.mattgauger.com is licensed under a
-    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
-  </p>
-  <p>Copyright 2015 <a href="http://blog.mattgauger.com">Matt Gauger</a>.</p>
-</div>
-
-</div>
-</footer>
-  </div>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
-<script src="/javascripts/bootstrap-alert.js"></script>
-<script src="/javascripts/bootstrap-button.js"></script>
-<script src="/javascripts/bootstrap-collapse.js"></script>
-
-<script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-38944731-1']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
-
-</body>
+    <footer>
+      <span>
+        &copy; <time datetime="2017-10-24 13:29:00 -0500">2017</time> Matt Gauger.
+      </span>
+    </footer>
+  </body>
 </html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    
+      WARNING: Nokogiri was built against LibXML version x.x.x &middot; Matt Gauger
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+</head>
+
+
+  <body>
+    <nav class="nav">
+      <div class="nav-container">
+        <a href="/">
+          <h2 class="nav-title">Matt Gauger</h2>
+        </a>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/archives">Blog Archives</a></li>
+          <li><a href="/open-source">Open Source</a></li>
+          <li><a href="/presentations">Presentations</a></li>
+        </ul>
+    </div>
+  </nav>
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span> Matt Gauger
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2013-05-23 11:46:00 -0500">May 23, 2013</time>
+    
+  </div>
+
+  <h1 class="post-title">WARNING: Nokogiri was built against LibXML version x.x.x</h1>
+  <div class="post-line"></div>
+
+  <hr />
+
+<p><em>(This post is part of my blog archiving project. This post appeared on <a href="https://coderwall.com/p/kia38w">Coderwall</a> on May 23, 2013.)</em></p>
+
+<hr />
+
+<p>When you run tests or rake, if you see:</p>
+
+<pre><code>WARNING: Nokogiri was built against LibXML version 2.9.0, but has dynamically loaded 2.7.8
+</code></pre>
+
+<p>Then do the following:</p>
+
+<pre><code> gem uninstall nokogiri libxml-ruby
+
+brew update
+
+brew uninstall libxml2
+brew install libxml2 --with-xml2-config
+
+brew uninstall libxslt
+brew install libxslt
+brew unlink libxslt
+
+bundle config build.nokogiri -- --with-xml2-dir=/usr --with-xslt-dir=/usr --with-iconv-dir=/usr
+bundle
+</code></pre>
+
+<p>Nokogiri should now be compiled against the right version!</p>
+
+
+</div>
+
+<div class="pagination">
+  
+    <a href="/2013/07/27/minskys-circle-algorithm-in-shoes-dot-rb-slash-hackety-hack/" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2013/04/24/reset-a-lost-password-on-an-ubuntu-vm/" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+
+    </main>
+
+    <footer>
+      <span>
+        &copy; <time datetime="2017-10-24 13:29:00 -0500">2017</time> Matt Gauger.
+      </span>
+    </footer>
+  </body>
+</html>

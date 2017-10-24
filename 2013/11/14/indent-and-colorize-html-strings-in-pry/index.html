@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    
+      Indent and colorize HTML strings in pry &middot; Matt Gauger
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+</head>
+
+
+  <body>
+    <nav class="nav">
+      <div class="nav-container">
+        <a href="/">
+          <h2 class="nav-title">Matt Gauger</h2>
+        </a>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/archives">Blog Archives</a></li>
+          <li><a href="/open-source">Open Source</a></li>
+          <li><a href="/presentations">Presentations</a></li>
+        </ul>
+    </div>
+  </nav>
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span> Matt Gauger
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2013-11-14 11:32:00 -0600">November 14, 2013</time>
+    
+  </div>
+
+  <h1 class="post-title">Indent and colorize HTML strings in pry</h1>
+  <div class="post-line"></div>
+
+  <hr />
+
+<p><em>(This post is part of my blog archiving project. This post appeared on <a href="https://coderwall.com/p/hlbana">Coderwall</a> on November 14, 2013.)</em></p>
+
+<p><em>Note: I have converted the inline code to Gists for better readabililty.</em></p>
+
+<hr />
+
+<p>An issue I run into frequently while testing with tools like <a href="https://github.com/jnicklas/capybara">capybara</a> by dropping into <a href="http://pryrepl.org/">pry</a> is that the last response for a page is a single string, containing the HTML that was rendered. But those string have lost indentation and generally make it really hard to see the content of the page, or whatever you care about.</p>
+
+<p>For example, a simple login page might look like:</p>
+
+<script src="https://gist.github.com/mathias/2007dab63a9fe77d7182.js"></script>
+
+<p>Wouldn’t it be great if Pry could re-indent and colorize that string of HTML for you? Well, I put together a quick little Pry command that does. Throw this into your <code>~/.pryrc</code>:</p>
+
+<script src="https://gist.github.com/mathias/21a971d0bdb3620a8909.js"></script>
+
+<p>Originally, I had tried to use the html5 fork of the <code>tidy</code> command: <a href="https://github.com/w3c/tidy-html5">https://github.com/w3c/tidy-html5</a> but that tool <em>changes</em> the HTML as it parses it, and spits out a bunch of warnings. So instead, I have this pry command use <code>nokogiri</code> when it is available. The command should warn you if you try to use it without <code>nokogiri</code> available. What is output should be very close to the original rendered HTML, just cleaned up and re-indented.</p>
+
+<p>So what does it look like in action?</p>
+
+<script src="https://gist.github.com/mathias/4065f861db4cd9e280ad.js"></script>
+
+<p>(imagine that pry has colorized this output, too, through the excellent CodeRay tool.)</p>
+
+<p>I’d love to hear from you if you find this useful! Or even if you don’t find it useful, but have some suggestions to improve it. Thanks!</p>
+
+
+</div>
+
+<div class="pagination">
+  
+    <a href="/2013/12/16/in-the-year-2100/" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2013/11/11/apprentice-talk-video-and-notes/" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+
+    </main>
+
+    <footer>
+      <span>
+        &copy; <time datetime="2017-10-24 13:29:00 -0500">2017</time> Matt Gauger.
+      </span>
+    </footer>
+  </body>
+</html>

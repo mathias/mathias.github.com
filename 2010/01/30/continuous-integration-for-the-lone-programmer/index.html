@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    
+      Continuous Integration for the Lone Programmer &middot; Matt Gauger
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+</head>
+
+
+  <body>
+    <nav class="nav">
+      <div class="nav-container">
+        <a href="/">
+          <h2 class="nav-title">Matt Gauger</h2>
+        </a>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/archives">Blog Archives</a></li>
+          <li><a href="/open-source">Open Source</a></li>
+          <li><a href="/presentations">Presentations</a></li>
+        </ul>
+    </div>
+  </nav>
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span> Matt Gauger
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2010-01-30 00:00:00 -0600">January 30, 2010</time>
+    
+  </div>
+
+  <h1 class="post-title">Continuous Integration for the Lone Programmer</h1>
+  <div class="post-line"></div>
+
+  <p>(This post is part of my blog archiving project. This post appeared on <a href="http://blog.mattgauger.com/2010/01/30/continuous-integration/">blog.mattgauger.com</a> on January 30, 2010.)</p>
+
+<p>There’s a laundry list of tools and practices in my head that I consider part of modern software engineering (version control, unit testing, code reviews, etc.) These aren’t necessarily required on every project. Continuous integration seems to be a practice that many prominent developers are using. But continuous integration servers aren’t very glamorous, and therefore don’t get a lot of discussion.</p>
+
+<p>If you’re working alone on a project, committing it to version control, and using unit testing, what does it matter whether you run the tests yourself or have a continuous integration server running them? True, there’s a level of immediate feedback with running the tests yourself. But unless you’re building all the various unit testing and integration testing frameworks into one rake task, you may forget to run them all. In the case where you do have a rake task, your CI server could be running that for you on every commit. A continuous integration server ensures that the tests get run, whether you remember or not.</p>
+
+<p>The other plus to this setup is that you can choose how and when the CI server interrupts you. You may be in a flow state and not want to be bothered by stopping to run the unit tests every five minutes when you know you’re not breaking them. That could be dangerous, though. If you zone out for a half day and come back to find all the tests failing, you’ll need to go back through the builds to see when and what commit first broke it. Luckily, the CI server should tell you that.</p>
+
+<p>I set up <a href="http://integrityapp.com/">Integrity</a> locally to run as my continuous integration system. Technically, Integrity could be hacked to build and test just about anything that gives a Unix return code, but I’m using it in its most common purpose: building Ruby projects that are hosted in <a href="http://git-scm.org/">git</a> repos. While many developers are using <a href="http://github.com/">GitHub</a>, I’ve pointed Integrity at local git repos.</p>
+
+<p>I did consider setting up a Campfire chat room to receive build status messages in, but it seemed overkill to sit alone in a chatroom to be updated by Integrity. So, I enabled the email functionality, and now Integrity is configured to email me with build status. If I keep a Firefox tab open to the Integrity server and choose whether to look at my email or not, I have a fairly effective barrier to decide when to let myself be interrupted. Meanwhile, the builds continue.</p>
+
+<p>I’m hoping to optimize this and integrate it fully into my workflow, as TDD/BDD is a new thing to me and Integrity is already serving to reinforce writing good tests.</p>
+
+
+</div>
+
+<div class="pagination">
+  
+    <a href="/2010/09/28/currently-reading-clean-code-by-robert-c-martin/" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2010/01/25/how-does-wisconsin-get-the-job-done/" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+
+    </main>
+
+    <footer>
+      <span>
+        &copy; <time datetime="2017-10-24 13:29:00 -0500">2017</time> Matt Gauger.
+      </span>
+    </footer>
+  </body>
+</html>
