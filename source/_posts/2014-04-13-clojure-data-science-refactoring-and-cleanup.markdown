@@ -8,7 +8,7 @@ redirect_from:
 
 ---
 
-This is Part 2 of a series of blog posts called [Clojure Data Science](/blog/categories/clojure-data-science). Check out the [previous post](/blog/2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/) if you missed it.
+This is Part 2 of a series of blog posts called [Clojure Data Science](/categories/clojure-data-science). Check out the [previous post](/blog/2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/) if you missed it.
 
 ---
 
