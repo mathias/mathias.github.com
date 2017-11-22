@@ -5,9 +5,79 @@
     <description></description>
     <link>http://blog.mattgauger.com/</link>
     <atom:link href="http://blog.mattgauger.com/atom.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 20 Nov 2017 17:07:57 -0600</pubDate>
-    <lastBuildDate>Mon, 20 Nov 2017 17:07:57 -0600</lastBuildDate>
+    <pubDate>Tue, 21 Nov 2017 19:01:48 -0600</pubDate>
+    <lastBuildDate>Tue, 21 Nov 2017 19:01:48 -0600</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Elixir Code Quality Tools</title>
+        <description>&lt;p&gt;My &lt;a href=&quot;/blog/2014/09/15/clojure-code-quality-tools/&quot;&gt;Clojure Code Quality Tools&lt;/a&gt; post remains one of the more popular articles on this blog. Since then, I’ve been writing a lot more Elixir code. I thought it’d be fun to write a similar post on what to use with the Elixir programming language.&lt;/p&gt;
+
+&lt;p&gt;By default, Elixir will do a good job with pattern matching and unused functions warnings, as well as giving you deprecation warnings. But as you learn and progress in mastery of Elixir, you’ll want more feedback. That’s where code quality tools come in.&lt;/p&gt;
+
+&lt;p&gt;As indicated in the original post, tools should help us follow best practices. The top issues I run into with Elixir code are checking my function signatures and pattern matching to ensure I’ve caught all cases, enforcing good style, and checking my code coverage. This post introduces 5 tools that are now a part of my Elixir workflow, depending on the project.&lt;/p&gt;
+
+&lt;p&gt;This post will have less examples than the last, but you can refer to each project’s README to help you get started. Instead, I’ll cover why you might want to use each of these tools and what problems they solve.&lt;/p&gt;
+
+&lt;h1 id=&quot;doctestshttpelixir-langorggetting-startedmix-otpdocs-tests-and-withhtmldoctests&quot;&gt;&lt;a href=&quot;http://elixir-lang.org/getting-started/mix-otp/docs-tests-and-with.html#doctests&quot;&gt;doctests&lt;/a&gt;&lt;/h1&gt;
+
+&lt;p&gt;Built in to Elixir itself, doctests are a simple way to couple examples of useage where your function definition lives, in the source. They define an example call from an &lt;code&gt;iex&lt;/code&gt; prompt, and show what the return should be. When you set up a simple test file in the suite to run doctests, it will automatically check that the examples match the actual function call response. All it takes is a test file such as:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;defmodule Alohomora.ResourceTest do
+  use ExUnit.Case, async: true
+  doctest Alohomora.Resource
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And to test functions with doctests in your &lt;code&gt;Alohomora.Resource&lt;/code&gt; namespace. Best of all, there’s nothing extra to add – these tests will run when you run &lt;code&gt;mix test&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;dialyxirhttpsgithubcomjeremyjhdialyxir&quot;&gt;&lt;a href=&quot;https://github.com/jeremyjh/dialyxir&quot;&gt;dialyxir&lt;/a&gt;&lt;/h1&gt;
+
+&lt;p&gt;This library is actually a set of mix tasks on top of the popular Dialyzer tool for Erlang. Dialyzer, if you haven’t encountered it yet, is a DIscrepancy AnaLYZer for ERlang programs. That is to say, it finds dead code, type issues, and unnecessary tests. In my experience, it finds unreachable branches, and it finds tuple returns that aren’t matching a pattern where they’re used. These two seem to be the bulk of the things it finds for me, at least. It will also find functions that aren’t defined for the number of parameters you’re passing, but it seems to have issues with certain libraries I use – those libraries do in fact define functions with that signature.&lt;/p&gt;
+
+&lt;p&gt;To really get the power of Dialyzer, you’ll to start &lt;a href=&quot;https://hexdocs.pm/elixir/typespecs.html&quot;&gt;including type specs&lt;/a&gt; in your source.&lt;/p&gt;
+
+&lt;h1 id=&quot;dogmahttpsgithubcomlpildogma-and-credohttpsgithubcomrrrenecredo&quot;&gt;&lt;a href=&quot;https://github.com/lpil/dogma&quot;&gt;dogma&lt;/a&gt; and &lt;a href=&quot;https://github.com/rrrene/credo&quot;&gt;credo&lt;/a&gt;&lt;/h1&gt;
+
+&lt;p&gt;Style guides help a team to write consistent code, more than they specify architecture patterns or idiomatic solutions. If you want to start applying a style guide to your Elixir code, look no further than dogma. As indicated on its README, “It’s highly configurable so you can adjust it to fit your style guide, but comes with a sane set of defaults so for most people it should just work out-of-the-box.” I’d recommend starting with its default style guide and seeing what it yells about.&lt;/p&gt;
+
+&lt;p&gt;The kinds of things that dogma will tell you about are lines too long, trailing whitespace, and so on. You’ve probably seen similar output if you use a tool like &lt;code&gt;rubocop&lt;/code&gt; in Ruby.&lt;/p&gt;
+
+&lt;p&gt;Credo has some overlap with dogma, but it does far more. This tool is more concerned with code smells. Some examples are checking function complexity, negated conditionals, and idiomatic ways to format your pipe operators and one-line functions. You can read up on the &lt;a href=&quot;https://github.com/rrrene/elixir-style-guide&quot;&gt;credo docs&lt;/a&gt; to understand everything it checks for.&lt;/p&gt;
+
+&lt;p&gt;Ultimately, you may feel like you only need one or the other. For myself, I use credo with &lt;code&gt;mix credo --strict&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;excoverallshttpsgithubcomparrotyexcoveralls&quot;&gt;&lt;a href=&quot;https://github.com/parroty/excoveralls&quot;&gt;ExCoveralls&lt;/a&gt;&lt;/h1&gt;
+
+&lt;p&gt;Code coverage in your tests is an important metric to keep track of. While striving for 100% code coverage isn’t always worth it, it is good to know whether you’re exercising the code you think you are, and ensuring that all edge cases and error cases that you coded for have been checked with a test.&lt;/p&gt;
+
+&lt;p&gt;Installing ExCoveralls in your project will allow you to print out your code coverage for each module to the shell, as HTML, or to post the code coverage to Coveralls.io. ExCoveralls also supports being run from a few different CI tools including CircleCI, Semaphore, and Travis. If you don’t need all this, you could look into &lt;a href=&quot;https://github.com/mrinalwadhwa/excov&quot;&gt;ExCov&lt;/a&gt; or simply run &lt;code&gt;mix test --cover&lt;/code&gt; – although I find this built-in mix task’s output to be the least useful.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-erlang-observer-gui&quot;&gt;The Erlang observer GUI&lt;/h1&gt;
+
+&lt;p&gt;This one is built in, simply launch it from your `iex terminal:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;iex&amp;gt; :observer.start
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And it will launch a GUI tool. The GUI has charts of memory and processing done, as well as a graph of application supervisor trees. Honestly, there’s a lot more in this tool than I’ve had time to explore and learn about.&lt;/p&gt;
+
+&lt;h1 id=&quot;mix-profilefprof&quot;&gt;&lt;code&gt;mix profile.fprof&lt;/code&gt;&lt;/h1&gt;
+
+&lt;p&gt;This is another built-in tool that you can use. Profiling might not be the first tool you need when developing, but when you want to understand and trace what your code is doing, the &lt;code&gt;fprof&lt;/code&gt; tool’s output can be incredibly handy. Make sure you run this with &lt;code&gt;MIX_ENV=prod&lt;/code&gt; when you use this. It is also possible to &lt;a href=&quot;https://selfamusementpark.com/profiling-a-slow-elixir-test&quot;&gt;wrap fprof to profile slow test cases&lt;/a&gt;, which I have found useful in the past. There’s other libraries that you can install for profiling and tracing Elixir, but so far, &lt;code&gt;mix profile.fprof&lt;/code&gt; has worked well enough for me.&lt;/p&gt;
+
+&lt;h1 id=&quot;final-thoughts&quot;&gt;Final Thoughts&lt;/h1&gt;
+
+&lt;p&gt;This post was 5 tools for your Elixir workflow. If you’ve been working in Elixir for awhile, you may be already using them. And there’s probably more tools that I don’t know about, out there.&lt;/p&gt;
+
+&lt;p&gt;Let me know if you found this blog post useful, or if you have any other tools to recommend!&lt;/p&gt;
+</description>
+        <pubDate>Tue, 21 Nov 2017 00:00:00 -0600</pubDate>
+        <link>http://blog.mattgauger.com/2017/11/21/elixir-code-quality-tools/</link>
+        <guid isPermaLink="true">http://blog.mattgauger.com/2017/11/21/elixir-code-quality-tools/</guid>
+        
+        
+      </item>
     
       <item>
         <title>A new look</title>
@@ -771,302 +841,6 @@
         <pubDate>Sun, 13 Apr 2014 16:28:00 -0500</pubDate>
         <link>http://blog.mattgauger.com/2014/04/13/clojure-data-science-refactoring-and-cleanup/</link>
         <guid isPermaLink="true">http://blog.mattgauger.com/2014/04/13/clojure-data-science-refactoring-and-cleanup/</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Clojure Data Science: Ingesting Your Gmail Inbox</title>
-        <description>&lt;hr /&gt;
-
-&lt;p&gt;This is Part 1 of a series of blog posts inspired by the exercises from &lt;a href=&quot;http://shop.oreilly.com/product/0636920025054.do&quot;&gt;Agile Data Science&lt;/a&gt; with Clojure. You may be interested in my &lt;a href=&quot;/2014/03/14/agile-data-science-review-and-thoughts/&quot;&gt;review&lt;/a&gt; of the book.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;For this blog post series, we are going to use your Gmail inbox as a dataset for an exploration of data science practices. Namely, we will use your email for machine learning and natural language processing applications. Email makes interesting data to process:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;it has lots of metadata that we can use as features &lt;a href=&quot;#cds-gmail-footnote-1&quot; name=&quot;cds-gmail-footnote-1-return&quot;&gt;[1]&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;we can model the relationships of senders and receivers as a graph&lt;/li&gt;
-  &lt;li&gt;each message has a body of text associated with it that we can analyze&lt;/li&gt;
-  &lt;li&gt;gaining insights from our personal communication is far more interesting than using an open data set!&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; This is not an intro-to-Clojure blog post. If you need a tutorial that starts with the basics, I recommend the &lt;a href=&quot;http://aphyr.com/tags/Clojure-from-the-ground-up&quot;&gt;Clojure from the ground up&lt;/a&gt; blog post series by &lt;a href=&quot;https://twitter.com/aphyr&quot;&gt;Aphyr&lt;/a&gt;. It does an excellent job at introducing concepts in Clojure.&lt;/p&gt;
-
-&lt;p&gt;In this post, I follow my typical Clojure workflow: I open a REPL and begin exploring the problem space. I look at individual pieces of data and start transforming them. When I write some functionality that I like for one piece of data, I try to extract it into the source code as a function that can work for any data our project may see. In this way, we can build up the project to contain the functions that are necessary to get to our goal.&lt;/p&gt;
-
-&lt;p&gt;So what is our goal for this blog post? Well, we want to fetch all emails from our Gmail inbox. We want to get metadata for each email, including things like who sent it and when it was sent. Then, we want to save the messages into a database so we can do further processing in later posts.&lt;/p&gt;
-
-&lt;p&gt;Starting off, make a new basic Clojure project with lein. I’ve named my project &lt;a href=&quot;https://github.com/mathias/autodjinn&quot;&gt;autodjinn&lt;/a&gt; after &lt;a href=&quot;http://en.wikipedia.org/wiki/Email#Origin&quot;&gt;AUTODIN&lt;/a&gt;, one of the first email networks. You can use the &lt;a href=&quot;https://github.com/mathias/autodjinn&quot;&gt;repo&lt;/a&gt; to refer to and to clone to follow along. At the beginning of each subsequent post, I’ll provide a SHA that you can reset the code to. Feel free to name your project whatever you want; just be sure to pay attention to the changes in filenames and namespaces as we go along!&lt;/p&gt;
-
-&lt;p&gt;Create the project and enter it:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9861772.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;To import our Gmail data, we will use a Clojure library called &lt;a href=&quot;https://github.com/owainlewis/clojure-mail&quot;&gt;clojure-mail&lt;/a&gt;. Clojure-mail is still under active development and is likely to change. For this blog post, we’ll be using version &lt;code&gt;0.1.6&lt;/code&gt; to ensure compatibility between the code in this post and the library.&lt;/p&gt;
-
-&lt;p&gt;Edit &lt;code&gt;project.clj&lt;/code&gt; to contain your information and add the &lt;code&gt;[clojure-mail &quot;0.1.6&quot;]&lt;/code&gt; dependency:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9861804.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;We’ll start by working in &lt;code&gt;src/autodjinn/core.clj&lt;/code&gt; and later move the functionality out into a script for our email import task. Open up the file in your favorite editor and launch a REPL.&lt;/p&gt;
-
-&lt;p&gt;In your REPL, &lt;code&gt;(use &#39;autodjinn.core)&lt;/code&gt; and verify it worked by running &lt;code&gt;(foo &quot;MYNAME&quot;)&lt;/code&gt;. You should see “MYNAME Hello, World!” printed out. Feel free to remove the &lt;code&gt;(defn foo…)&lt;/code&gt; in &lt;code&gt;core.clj&lt;/code&gt; now. We will not need it.&lt;/p&gt;
-
-&lt;p&gt;You may want to use something like Emacs’ &lt;a href=&quot;https://github.com/clojure-emacs/cider&quot;&gt;cider&lt;/a&gt; or LightTable’s InstaREPL as your REPL environment. But you can use the regular Clojure REPL to build this project, as well. If you are not working with a REPL integrated to your editor, you will need to run &lt;code&gt;(use &#39;autodjinn.core :reload)&lt;/code&gt; to force a reload of the code each time you save.&lt;/p&gt;
-
-&lt;h2 id=&quot;connecting-to-gmail&quot;&gt;Connecting to Gmail&lt;/h2&gt;
-
-&lt;p&gt;Our first goal is to connect to our inbox and verify that we can read email from it. To do that, we’re going to need to use our Gmail address and password — which we don’t want to put into our source files. &lt;strong&gt;It’s bad practice to put a password or a private key into a source file or check it into our repo! Just don’t do it!&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Instead, we will use a nice library called &lt;a href=&quot;https://github.com/james-henderson/nomad&quot;&gt;nomad&lt;/a&gt; to load a config file containing our email address and password. We will add the config file to &lt;code&gt;.gitignore&lt;/code&gt; so that it is never saved into our code.&lt;/p&gt;
-
-&lt;p&gt;Add the line &lt;code&gt;[jarohen/nomad &quot;0.6.3&quot;]&lt;/code&gt; to your &lt;code&gt;project.clj&lt;/code&gt; dependencies before moving on, and run &lt;code&gt;lein deps&lt;/code&gt; in a console to pull in the dependency.&lt;/p&gt;
-
-&lt;p&gt;Back in our &lt;code&gt;core.clj&lt;/code&gt; add the require statements for &lt;code&gt;clojure-mail&lt;/code&gt; and &lt;code&gt;nomad&lt;/code&gt; to your ns macro like this:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9863912.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;Then create a new file in &lt;code&gt;resources/config/autodjinn-config.edn&lt;/code&gt;. It should look like this, with your email address and password filled in:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9864315.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;Now open up your &lt;code&gt;.gitignore&lt;/code&gt; file and add the following line to it:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9866473.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;Following &lt;a href=&quot;https://github.com/james-henderson/nomad#hello-world&quot;&gt;nomad’s README&lt;/a&gt;, we need to load our config file and pull out our &lt;code&gt;gmail-username&lt;/code&gt; and &lt;code&gt;gmail-password&lt;/code&gt; keys. We add to the following to &lt;code&gt;core.clj&lt;/code&gt; after the &lt;code&gt;ns&lt;/code&gt; macro:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/8c0849fc0e137f1bd611.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;Using the &lt;code&gt;get&lt;/code&gt; function here is a safe lookup for maps that returns &lt;code&gt;nil&lt;/code&gt; if nothing is found for the key. Back in our REPL, we can see this in action with some quick experimentation:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9864411.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;We could also use the shorter &lt;code&gt;(:keyname mymap)&lt;/code&gt; syntax here, since symbols are an invocable function that looks up a key in a map. But the &lt;code&gt;get&lt;/code&gt; function reads better than &lt;code&gt;(:gmail-username (autodjinn-config))&lt;/code&gt; in my opinion.&lt;/p&gt;
-
-&lt;p&gt;In your REPL, you should now be able to get the values for &lt;code&gt;gmail-username&lt;/code&gt; and &lt;code&gt;gmail-password&lt;/code&gt;:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9864585.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;Note that since I’m in the &lt;code&gt;user&lt;/code&gt; namespace here, I had to qualify the vars with their &lt;code&gt;autodjinn.core&lt;/code&gt; namespace. If this is confusing, you might want to read up on &lt;a href=&quot;http://clojure-doc.org/articles/language/namespaces.html&quot;&gt;namespaces in Clojure&lt;/a&gt; before moving on. (See also: the ‘Namespaces’ section in &lt;a href=&quot;http://aphyr.com/posts/311-clojure-from-the-ground-up-logistics&quot;&gt;Clojure from the ground up: logistics&lt;/a&gt;.)&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;clojure-mail&lt;/code&gt; requires us to open a connection to Gmail with the &lt;code&gt;gen-store&lt;/code&gt; function (&lt;a href=&quot;https://github.com/owainlewis/clojure-mail/blob/c3aad67b42aad96405d4c329ca48e29b7960d412/src/clojure_mail/core.clj#L80-L83&quot;&gt;src&lt;/a&gt;). We then pass that connection around to various functions to interact with our inbox. Define a var called &lt;code&gt;my-store&lt;/code&gt; in your &lt;code&gt;core.clj&lt;/code&gt; that does this with our email address and password:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9865909.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;Make sure the &lt;code&gt;(def my-store…&lt;/code&gt; above has been run in your REPL and then take a look at our open connection:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9865937.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;The type of &lt;code&gt;my-store&lt;/code&gt; should be an &lt;code&gt;IMAPSSLStore&lt;/code&gt; as above. If it didn’t work, you’ll see a string error message when you try to define &lt;code&gt;my-store&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;your-inbox-as-a-list&quot;&gt;Your inbox as a list&lt;/h2&gt;
-
-&lt;p&gt;Now we’ll use our REPL to build up a function that will eventually import all of our email. To start, we can use the &lt;code&gt;inbox&lt;/code&gt; function (&lt;a href=&quot;https://github.com/owainlewis/clojure-mail/blob/c3aad67b42aad96405d4c329ca48e29b7960d412/src/clojure_mail/core.clj#L198-L201&quot;&gt;src&lt;/a&gt;) from &lt;code&gt;clojure-mail&lt;/code&gt; to get a seq of messages in our inbox. Note that since it is a seq and inboxes can be very large, we limit it with the &lt;code&gt;take&lt;/code&gt; function.&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9866030.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;If everything is working, you should see a list of of the &lt;code&gt;IMAPMessage&lt;/code&gt;s returned by the last line in your REPL.&lt;/p&gt;
-
-&lt;p&gt;What if, instead, we wanted to loop over many messages and print out their subjects? We can pull in the &lt;code&gt;message&lt;/code&gt; namespace (&lt;a href=&quot;https://github.com/owainlewis/clojure-mail/blob/master/src/clojure_mail/message.clj&quot;&gt;src&lt;/a&gt;) from &lt;code&gt;clojure-mail&lt;/code&gt;, which gives us convenience functions for getting at message data.&lt;/p&gt;
-
-&lt;p&gt;You’ll have to be careful running this next line — on a large inbox it’ll print out the subject of everything in your inbox! If you have a lot of messages, consider wrapping the call to &lt;code&gt;inbox&lt;/code&gt; in a &lt;code&gt;take&lt;/code&gt; as above.&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9866059.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;Those are the subject lines of the 4 messages in the inbox of my test account, so I know that this is working. Save our &lt;code&gt;doseq&lt;/code&gt; line into a function called &lt;code&gt;ingest-inbox&lt;/code&gt;; we’ll come back to it later:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9866289.js&quot;&gt;&lt;/script&gt;
-
-&lt;h2 id=&quot;examining-messages&quot;&gt;Examining messages&lt;/h2&gt;
-
-&lt;p&gt;Before we move on, let’s take a look at an individual message and what we can get out of it from the &lt;code&gt;message&lt;/code&gt; namespace.&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9866195.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;From this, we can see a few things:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;The ID returned by &lt;code&gt;message/id&lt;/code&gt; looks like a good candidate to get good unique IDs for each message when we store the messages. But we might want to strip off those angle brackets first.&lt;/li&gt;
-  &lt;li&gt;The &lt;code&gt;message/message-body&lt;/code&gt; function doesn’t return a string of the body. Instead, it returns a list of maps which contains the &lt;code&gt;text/plain&lt;/code&gt; form of the body and the &lt;code&gt;text/html&lt;/code&gt; form. We will have to extract each from the map so that we can use the plaintext version for things like language processing. We’ll also keep the HTML version in case we need it later.&lt;/li&gt;
-  &lt;li&gt;If you started digging in to the &lt;code&gt;message&lt;/code&gt; namespace’s source you may have noticed that we don’t have functions for getting date sent or date received for a message. Nor can we get a list of addresses CCed or BCCed for the message. We’ll have to write those functions ourselves.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;cleaning-up-the-ids&quot;&gt;Cleaning up the IDs&lt;/h2&gt;
-
-&lt;p&gt;Let’s focus on writing a function to clean up the ID returned by the &lt;code&gt;message/id&lt;/code&gt; function. Recall that such IDs look like &lt;code&gt;&amp;lt;CAJiAYR90LbbN6k8tVXuhQc8f6bZoK647ycdc7mxF5mVEaoLKHw@mail.gmail.com&amp;gt;&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;The &lt;code&gt;clojure.string&lt;/code&gt; namespace provides a &lt;code&gt;replace&lt;/code&gt; function which does simple replacement on a string. We can use it like this:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9866344.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;That worked for replacing the angle brackets for the original string. But remember that data structures are immutable in Clojure, including strings. Replacing the first angle bracket didn’t change the original string when we tried to replace the other angle bracket. We need something that allows us to build up an intermediate value and pass it to the next function. For that, we will use the &lt;a href=&quot;http://clojure.github.io/clojure/clojure.core-api.html#clojure.core/-%3e&quot;&gt;thread-first&lt;/a&gt; macro: &lt;code&gt;-&amp;gt;&lt;/code&gt;. It is easiest if I show the macro in use with some comments showing what the intermediate values would be at each step:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9866380.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;It is called the &lt;strong&gt;thread-first&lt;/strong&gt; macro because it threads through the first argument to each function. In this case, &lt;code&gt;clojure.string/replace&lt;/code&gt;’s first argument is the string to replace on. So the each successively returned value gets passed to the next function above.&lt;/p&gt;
-
-&lt;p&gt;Now that we’ve figured out how to clean up that ID, we will create a function to clean up any ID we pass it:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9866436.js&quot;&gt;&lt;/script&gt;
-
-&lt;h2 id=&quot;extracting-the-message-bodies&quot;&gt;Extracting the message bodies&lt;/h2&gt;
-
-&lt;p&gt;Recall the &lt;code&gt;message/message-body&lt;/code&gt; call above:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9866777.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;Ideally, we want to write a function that can get the &lt;code&gt;text/plain&lt;/code&gt; body out of this value, and another function that can get the &lt;code&gt;text/html&lt;/code&gt; body out. Notice that the &lt;code&gt;:content-type&lt;/code&gt; values aren’t quite so simple as just selecting the item in the list where the string &lt;code&gt;text/plain&lt;/code&gt; appears. We will need our function to ignore the additional information in the &lt;code&gt;:content-type&lt;/code&gt; value, which includes things like string encodings.&lt;/p&gt;
-
-&lt;p&gt;Let’s look at just the first map in the list returned by &lt;code&gt;message/message-body&lt;/code&gt;:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9866861.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;If we build a predicate function that can detect when the &lt;code&gt;:content-type&lt;/code&gt; key is the type we want, we can use it in a &lt;code&gt;filter&lt;/code&gt; function to choose the correct type of body in our functions.&lt;/p&gt;
-
-&lt;p&gt;Notice that &lt;code&gt;TEXT/PLAIN&lt;/code&gt; and &lt;code&gt;TEXT/HTML&lt;/code&gt; are always separated from the rest of the content-type by a semicolon, and it always appears first. You’d have to look at a few messages from your inbox to arrive at the same conclusion, but I’ve already done the work and can assure you that the previous statement is true.&lt;/p&gt;
-
-&lt;p&gt;Then, an easy to to get at the part of the content-type we want would be to split on the semicolon and take the first element returned:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9867049.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;This leads us to a function to first clean up the content-type string, and then our predicate function to detect if it is the one we want:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9867072.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;To finish off our work on the message bodies, we want to filter the list returned by &lt;code&gt;message/message-body&lt;/code&gt;:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9867356.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;And turn it into a function that works for any message bodies list:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9867382.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;Note that we’ve also used this function to create two convenience functions, one for extracting plaintext bodies and one for extracting HTML bodies. By keeping functions simple and small, we can build up useful functions for our project rather than try to plan it all out ahead of time.&lt;/p&gt;
-
-&lt;h2 id=&quot;getting-more-information-out-of-the-imapmessages&quot;&gt;Getting more information out of the IMAPMessages&lt;/h2&gt;
-
-&lt;p&gt;As noted above, we will need to write a few more functions to get the fields of the &lt;code&gt;IMAPMessage&lt;/code&gt;s that we cannot get through this version of &lt;code&gt;clojure-mail&lt;/code&gt;. Recall that we want to get CC list, BCC list, date sent, and date received values. To do that, we will use Java interop functionality. It’s really not as bad as it sounds. Remember that the &lt;code&gt;IMAPMessage&lt;/code&gt;s we see are Java instances of the &lt;code&gt;IMAPMessage&lt;/code&gt; class. Calling a method on an instance is accomplished by using a dot before the method name, with the method in the function position, such as: &lt;code&gt;(.javaMethod some-java-instance)&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;To start, we can look at &lt;code&gt;clojure-mail&lt;/code&gt;’s &lt;a href=&quot;https://github.com/owainlewis/clojure-mail/blob/c3aad67b42aad96405d4c329ca48e29b7960d412/project.clj&quot;&gt;project.clj&lt;/a&gt; and see that it depends on &lt;code&gt;javax.mail&lt;/code&gt;. The next step is to find the documentation for the Java implementation of &lt;code&gt;javax.mail.Message&lt;/code&gt;, which &lt;a href=&quot;http://docs.oracle.com/javaee/6/api/javax/mail/Message.html&quot;&gt;lives here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;In the REPL, we can try some of the Java interop on our &lt;code&gt;my-msg&lt;/code&gt;:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9876540.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;The datetimes for each message are automatically turned into Clojure instants for us, which is convenient. If we dig into how the &lt;code&gt;clojure-mail.message/to&lt;/code&gt; function [&lt;a href=&quot;https://github.com/owainlewis/clojure-mail/blob/c3aad67b42aad96405d4c329ca48e29b7960d412/src/clojure_mail/message.clj#L16-L20&quot;&gt;src&lt;/a&gt;] works, we see that it is using the &lt;code&gt;.getRecipients&lt;/code&gt; method. &lt;code&gt;.getRecipients&lt;/code&gt; takes the message and a constant of a &lt;code&gt;RecipientType&lt;/code&gt;. For our purposes, we want the &lt;code&gt;javax.mail.Message$RecipientType/CC&lt;/code&gt; and &lt;code&gt;javax.mail.Message$RecipientType/BCC&lt;/code&gt; recipients:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9876632.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;The last line maps the &lt;code&gt;str&lt;/code&gt; function across each element returned, so that we get the string representation of the email addresses. That way, our database can just store the strings.&lt;/p&gt;
-
-&lt;p&gt;As before, now that we know how to use these methods in the REPL, we write functions in &lt;code&gt;core.clj&lt;/code&gt; to take advantage of our newfound knowledge:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9876737.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;In the REPL, it should now be possible to get a nice map representation of all the fields on the message we care about:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9876884.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;Congrats on making it this far. We’ve used quite a few neat little features of Clojure and the libraries we’re building this project with to get here.&lt;/p&gt;
-
-&lt;p&gt;The last step we’ll go through in this post is to get these messages into a database.&lt;/p&gt;
-
-&lt;h2 id=&quot;enter-datomic-the-immutable-datastore&quot;&gt;Enter Datomic, the immutable datastore&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.datomic.com/&quot;&gt;Datomic&lt;/a&gt; is a great database layer built on Clojure that gives us a database value representing immutable data. New transactions on the database create new database values. It fits very well with Clojure’s own concept of &lt;a href=&quot;http://clojure.org/state&quot;&gt;state and identity&lt;/a&gt; because it was designed by the same folks as Clojure. Plus, Datomic is meant to grow and scale in modern environments like AWS, with many backend datastore options to run it on.&lt;/p&gt;
-
-&lt;p&gt;There’s some important reasons why you might choose Datomic as your database for a data science / machine learning application:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;There are various storage backends, so you can grow from tens of thousands of rows in PostgreSQL on a developer’s laptop to millions of records (or more) in Riak or DynamoDB on AWS. That is, it has a good migration path from small datasets to big data through the Datomic import/export process&lt;/li&gt;
-  &lt;li&gt;The concept of time associated with each value in Datomic means that we can query for historical data to compare against&lt;/li&gt;
-  &lt;li&gt;Datomic has a lightweight schema compared to a relational database like PostgreSQL. Schemas are just data! When we begin computing new values from our dataset, we can add new types of entities easily at the same time.&lt;/li&gt;
-  &lt;li&gt;Datomic’s schemas allow us to treat it as a key-value store, relational database, or even build a graph store on top of it, if we need to&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: I won’t go through setting up an entire Datomic installation here. It’s worth reading up on the &lt;a href=&quot;http://docs.datomic.com/&quot;&gt;docs&lt;/a&gt; and the &lt;a href=&quot;http://www.datomic.com/rationale.html&quot;&gt;rationale&lt;/a&gt; behind Datomic’s design.&lt;/p&gt;
-
-&lt;p&gt;You can get the &lt;a href=&quot;https://my.datomic.com/downloads/free&quot;&gt;Datomic free build&lt;/a&gt; if you like, but you will be limited to in-memory stores. It is unlikely that your Gmail inbox will fit into memory on your dev machine. Instead, I recommend signing up for the free &lt;a href=&quot;http://www.datomic.com/get-datomic.html&quot;&gt;Datomic Pro Starter Edition&lt;/a&gt;. (The free Starter Edition is fine because you will not be using this project in a commercial capacity.) Once you have Datomic Pro downloaded and installed in your local Maven, I recommend using the PostgreSQL storage adapter locally with memcached. Follow the guides for configuring storage on the &lt;a href=&quot;http://docs.datomic.com/storage.html&quot;&gt;Datomic Storage&lt;/a&gt; page.&lt;/p&gt;
-
-&lt;p&gt;Add the correct line to your &lt;code&gt;project.clj&lt;/code&gt; dependencies for the version of Datomic you’ll be using (mine was &lt;code&gt;[com.datomic/datomic-pro &quot;0.9.4384&quot;]&lt;/code&gt; which might be a bit out of date and likely won’t match yours.) Now we can start using Datomic in our &lt;code&gt;core.clj&lt;/code&gt; and our REPL.&lt;/p&gt;
-
-&lt;p&gt;The first thing we need is the URI where the Datomic database lives. When we start up the Datomic transactor, you will see a DB URI that looks something like &lt;code&gt;datomic:sql://DBNAMEHERE?jdbc:postgresql://localhost:5432/datomic?user=datomic&amp;amp;password=datomic&lt;/code&gt; in the output. Grab that URI and add it to our &lt;code&gt;resources/config/autodjinn-config.edn&lt;/code&gt;:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9877346.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;Back at the top of &lt;code&gt;core.clj&lt;/code&gt;, save that value to a var as we did with &lt;code&gt;gmail-username&lt;/code&gt; and &lt;code&gt;gmail-password&lt;/code&gt;:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9877374.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;And then in the REPL:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9879199.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;Note that according to the &lt;a href=&quot;http://docs.datomic.com/clojure/index.html#datomic.api/create-database&quot;&gt;datomic clojure docs for the create-database function&lt;/a&gt;, it returns true if the database was created, and false if it already exists. So running &lt;code&gt;create-database&lt;/code&gt; every time we run our script is safe, since it won’t destroy data.&lt;/p&gt;
-
-&lt;p&gt;If the above work in the REPL doesn’t work, it is likely your code is unable to talk to your running Datomic, or your Datomic transactor is not configured correctly. Diagnose it with Googling and reading the docs until you get it to work, then move on.&lt;/p&gt;
-
-&lt;p&gt;Calling &lt;code&gt;(d/db db-connection)&lt;/code&gt; gives us the current value of our database. In most cases, we want to just get the most current value. So, we can write a convenience function &lt;code&gt;new-db-val&lt;/code&gt; to always get us the current (and possibly different) database value. But there are cases where we want to coordinate several queries and use the same database values for each. In those cases, we won’t use the function get the latest database value, but rather pass this database value to the queries so that all query against the same state.&lt;/p&gt;
-
-&lt;p&gt;In our &lt;code&gt;core.clj&lt;/code&gt;, we can add the code we need to create the database, get our connection, and the convenience &lt;code&gt;new-db-val&lt;/code&gt; function:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9879246.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;Next, we need to tell Datomic about the schema of our data. Schemas are just data that you run as a transaction on the database. Reading up on the &lt;a href=&quot;http://docs.datomic.com/schema.html&quot;&gt;Schema&lt;/a&gt; page of the Datomic docs might be helpful to understand what’s going on here. The short version is that we define each attribute of an email and set up its properties. The collection of all attributes together will constitute a &lt;code&gt;mail&lt;/code&gt; entity, so we namespace all the attributes under the &lt;code&gt;:mail/&lt;/code&gt; namespace.&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9879323.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;We add that var def to our &lt;code&gt;core.clj&lt;/code&gt; because it is, after all, just data. We may choose later to move it to its own &lt;code&gt;edn&lt;/code&gt; file, but for now, it can live in our source code. Next, we want to apply this schema to our database with a transaction. That looks like this:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9879355.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;Now we put that transaction in a convenience function in &lt;code&gt;core.clj&lt;/code&gt; that we’ll run every time we run this file. The function will ensure that our database is ‘converged’ to this schema. Running a transaction will create a new database value. But it will not blow away any data that we had in the database by running this transaction many times. It will simply try to update the existing attributes, and nothing in the attributes themselves need change. It is far more work to retract (delete) data in Datomic than it is to add or update it. This leads to much more safety around working with data without worrying that we will destroy data, and it encourages a REPL-based exploration of the data and its history.&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9879424.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;Now that our &lt;code&gt;mail&lt;/code&gt; entities are defined in Datomic, we can try a query to find all the entity-IDs where any &lt;code&gt;:mail/uid&lt;/code&gt; value is present. Read up on the &lt;a href=&quot;http://docs.datomic.com/query.html&quot;&gt;Query&lt;/a&gt; page of the Datomic docs to dig into querying deeper. You might also be interested in the excellent &lt;a href=&quot;http://www.learndatalogtoday.org/&quot;&gt;Learn Datalog Today&lt;/a&gt; website to learn more about querying Datomic with Datalog.&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9879491.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;Since we have no &lt;code&gt;mail&lt;/code&gt; entities in our database, Datomic returns an empty set. So now we reach the end of task: We can ingest some emails and save them in our database! Return to the &lt;code&gt;ingest-inbox&lt;/code&gt; function that we left before. Here’s what the updated version will look like:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9879494.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;We use the &lt;code&gt;@&lt;/code&gt;-sign before the &lt;code&gt;(d/transact…)&lt;/code&gt; call because Datomic normally returns a promise of the completed transaction. However, we want to force Datomic to complete each transaction before moving on by deref-ing it with the &lt;code&gt;@&lt;/code&gt;-sign. Per the Clojure docs: “Calls to deref/@ prior to delivery will block.”&lt;/p&gt;
-
-&lt;p&gt;If you run this function in your REPL, you should see it start to ingest your email from Gmail!&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9879552.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;Note that this could a take a &lt;strong&gt;long time&lt;/strong&gt; if you’ve chosen to import a really large Gmail inbox! You might want to stop the import at some point; in most REPLs &lt;code&gt;Ctrl-c&lt;/code&gt; will stop the running function.&lt;/p&gt;
-
-&lt;p&gt;If we query for our entity-IDs again, as above, we should see some values returned!&lt;/p&gt;
-
-&lt;p&gt;What does one of those database entities look like when we run it through Datomic’s &lt;a href=&quot;http://docs.datomic.com/clojure/index.html#datomic.api/entity&quot;&gt;entity&lt;/a&gt; and &lt;a href=&quot;http://docs.datomic.com/clojure/index.html#datomic.api/touch&quot;&gt;touch&lt;/a&gt; functions to instantiate all its attributes?&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9879636.js&quot;&gt;&lt;/script&gt;
-
-&lt;h2 id=&quot;wrapping-up&quot;&gt;Wrapping up&lt;/h2&gt;
-
-&lt;p&gt;That’s it for this blog post. It took a little setup, but we were able to build up a working Gmail import tool with help from our REPL and some nice Clojure libraries.&lt;/p&gt;
-
-&lt;p&gt;Next time, we’ll be looking at doing some basic querying of the data, including getting a count of the number of times each email address has sent you an email.&lt;/p&gt;
-
-&lt;p&gt;Comments? Questions? Feel free to contact me at &lt;a href=&quot;&amp;#109;&amp;#097;&amp;#105;&amp;#108;&amp;#116;&amp;#111;:&amp;#099;&amp;#111;&amp;#110;&amp;#116;&amp;#097;&amp;#099;&amp;#116;&amp;#064;&amp;#109;&amp;#097;&amp;#116;&amp;#116;&amp;#103;&amp;#097;&amp;#117;&amp;#103;&amp;#101;&amp;#114;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&quot;&gt;&amp;#099;&amp;#111;&amp;#110;&amp;#116;&amp;#097;&amp;#099;&amp;#116;&amp;#064;&amp;#109;&amp;#097;&amp;#116;&amp;#116;&amp;#103;&amp;#097;&amp;#117;&amp;#103;&amp;#101;&amp;#114;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&lt;/a&gt;. I’d love to hear from you.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a name=&quot;cds-gmail-footnote-1&quot;&gt;&lt;/a&gt;&lt;br /&gt;
-&lt;strong&gt;1&lt;/strong&gt; In this case, machine learning &lt;em&gt;features&lt;/em&gt;, which are the input variables for our learning tasks. Not software features that we a client might ask us to implement. See: &lt;a href=&quot;https://en.wikipedia.org/wiki/Feature_learning&quot;&gt;Feature learning - Wikipedia, the free encyclopedia&lt;/a&gt;.&lt;br /&gt;
-&lt;a href=&quot;#cds-gmail-footnote-1-return&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
-
-</description>
-        <pubDate>Sun, 30 Mar 2014 14:44:00 -0500</pubDate>
-        <link>http://blog.mattgauger.com/2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/</link>
-        <guid isPermaLink="true">http://blog.mattgauger.com/2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/</guid>
         
         
       </item>
