@@ -38,9 +38,9 @@
           <h2 class="nav-title">Matt Gauger</h2>
         </a>
         <ul>
-          <li><a href="/about">About</a></li>
-          <li><a href="/archives">Blog Archives</a></li>
-          <li><a href="/open-source">Open Source</a></li>
+          <li><a href="http://blog.mattgauger.com/about">About</a></li>
+          <li><a href="http://blog.mattgauger.com/archives">Blog Archives</a></li>
+          <li><a href="http://blog.mattgauger.com/open-source">Open Source</a></li>
         </ul>
     </div>
   </nav>
@@ -67,24 +67,24 @@
 
 <p>From the local server:</p>
 
-<pre><code>ssh -R 2048:localhost:22 username@example.com
-</code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>ssh -R 2048:localhost:22 username@example.com
+</code></pre></div>
 
 <p>From the server out in the Internet (aka example.com in this example)</p>
 
-<pre><code>ssh -p 2048 other_username@localhost
-</code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>ssh -p 2048 other_username@localhost
+</code></pre></div>
 
-<p>Note that the ‘localhost’ in the second example refers to your local server, not the one out in the internet. So <code>other_username</code> should be the username on your local server (not the remote server.) Confused yet? Good.</p>
+<p>Note that the ‘localhost’ in the second example refers to your local server, not the one out in the internet. So <code class="highlighter-rouge">other_username</code> should be the username on your local server (not the remote server.) Confused yet? Good.</p>
 
 <p>Now, this setup will get you pretty far: You’re now able to run commands on the local server from the Linode out in the cloud. But you may notice a problem fairly quickly: if you kill that SSH shell on the local server, the connection up to the server on the internet dies, and so does the reverse tunnel that was inside that.</p>
 
 <p>Fix that by starting up a tmux session on the local server first, then detaching it.</p>
 
-<pre><code>tmux new -s ssh-tunnel
+<div class="highlighter-rouge"><pre class="highlight"><code>tmux new -s ssh-tunnel
 ssh -R 2048:localhost:22 username@example.com
 &lt;leader-d&gt;
-</code></pre>
+</code></pre></div>
 
 <p>Now the tmux session will happily keep that SSH shell open on the local server and you can reverse tunnel back over it.</p>
 
@@ -92,21 +92,21 @@ ssh -R 2048:localhost:22 username@example.com
 
 <p>With Mosh, we add another layer to the puzzle, so that my final setup looked like this:</p>
 
-<pre><code>matts_laptop$ mosh matt@someserver.local
+<div class="highlighter-rouge"><pre class="highlight"><code>matts_laptop$ mosh matt@someserver.local
 matt@someserver.local$ tmux new -s ssh-tunnel
 &lt;tmux session starts&gt;
 matt@someserver.local$ ssh -R 2048:localhost:22 username@example.com
 &lt;leader-d&gt;
-</code></pre>
+</code></pre></div>
 
 <p>Pop open another window in my local tmux session (are you beginning to see a pattern?) and then connect with mosh up to my Linode:</p>
 
-<pre><code>matts_laptop$ mosh me@mattgauger.com
+<div class="highlighter-rouge"><pre class="highlight"><code>matts_laptop$ mosh me@mattgauger.com
 me@mattgauger.com$ tmux new -s server-monitor
 &lt;tmux session starts&gt;
 me@mattgauger.com$ ssh -p 2048 matt@localhost # Note: this is the matt@someserver.local account!
 matt@someserver.local$ &lt;monitor the process I'm concerned with&gt;
-</code></pre>
+</code></pre></div>
 
 <p>Now I’ve got this mostly-persistent (thanks to mosh and tmux) session that I can detach from if I really need to, but I’ll still be able to connect back up to my Linode and check on the server on my LAN from RailsConf.</p>
 

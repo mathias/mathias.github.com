@@ -38,9 +38,9 @@
           <h2 class="nav-title">Matt Gauger</h2>
         </a>
         <ul>
-          <li><a href="/about">About</a></li>
-          <li><a href="/archives">Blog Archives</a></li>
-          <li><a href="/open-source">Open Source</a></li>
+          <li><a href="http://blog.mattgauger.com/about">About</a></li>
+          <li><a href="http://blog.mattgauger.com/archives">Blog Archives</a></li>
+          <li><a href="http://blog.mattgauger.com/open-source">Open Source</a></li>
         </ul>
     </div>
   </nav>
@@ -93,11 +93,11 @@
 
 <p>Our user runs the</p>
 
-<p><code>ssh-keygen</code></p>
+<p><code class="highlighter-rouge">ssh-keygen</code></p>
 
-<p>command in their shell, hits enter for the defaults, and generates some files that live in <code>/home/[username]/.ssh</code> in Linux/BSD or <code>/Users/[username]/.ssh</code> if you’re on Mac OSX. If you’re still on Windows, it’ll be in Cygwin somewhere, likely. Sorry. Can’t help you there.</p>
+<p>command in their shell, hits enter for the defaults, and generates some files that live in <code class="highlighter-rouge">/home/[username]/.ssh</code> in Linux/BSD or <code class="highlighter-rouge">/Users/[username]/.ssh</code> if you’re on Mac OSX. If you’re still on Windows, it’ll be in Cygwin somewhere, likely. Sorry. Can’t help you there.</p>
 
-<p>One file is called <code>id_rsa</code> and the other is <code>id_rsa.pub</code>. The file with the .pub extension is, naturally, the public key. That’s the one that you want to copy into Github’s Account Settings page. Once you enter a public key (again, make sure it isn’t the private key!) into Github, it will know who you are when you communicate with Github using the git commands. The great thing about this is, every time we communicate with the server, we don’t have to type a password. Isn’t that cool?</p>
+<p>One file is called <code class="highlighter-rouge">id_rsa</code> and the other is <code class="highlighter-rouge">id_rsa.pub</code>. The file with the .pub extension is, naturally, the public key. That’s the one that you want to copy into Github’s Account Settings page. Once you enter a public key (again, make sure it isn’t the private key!) into Github, it will know who you are when you communicate with Github using the git commands. The great thing about this is, every time we communicate with the server, we don’t have to type a password. Isn’t that cool?</p>
 
 <p>At this point our beginner hasn’t actually gotten any files, made any changes, or asked Pete nicely to accept his changes. That may seem like all this effort was a waste, but in practice it is fairly quick and once you’ve done it once (and setup a Github account) you’re well on your way to doing all those things. Git also prefers to have your name and email address to identify changes as coming from you, and Github helpfully provides the commands for those when setting up a new account.</p>
 
@@ -105,13 +105,13 @@
 
 <p>Our user dives into the <a href="http://gitref.org/">gitref.org</a> page and discovers what they are supposed to do with this URL ending in .git: They must use the git clone command to clone it from Github down to wherever they are in the shell, like so:</p>
 
-<pre><code>$ git clone git@github.com:mathias-presentation/Heard.git
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git clone git@github.com:mathias-presentation/Heard.git
 Cloning into Heard...
 remote: Counting objects: 22, done.
 remote: Compressing objects: 100% (22/22), done.
 remote: Total 22 (delta 7), reused 0 (delta 0)
 Unpacking objects: 100% (22/22), done.
-</code></pre>
+</code></pre></div>
 
 <p>If the user’s SSH key was right, this will work. If not, they’ll have to go back and fix it. Looks like it worked, though, so we’ll move on.</p>
 
@@ -123,11 +123,11 @@ Unpacking objects: 100% (22/22), done.
 
 <p>Our user makes some basic changes to the PHP files in their local Heard directory. They reason that if git keeps tracks of versions of files, it will need to create a new version containing these changes. Git tracks changes on an object level, not a file or project/directory level. That means it is really smart about where you changed something. See some of the reference material for a full explanation of how git understands changes. For our purposes, the beginner finds the</p>
 
-<p><code>git commit</code></p>
+<p><code class="highlighter-rouge">git commit</code></p>
 
 <p>command. The documentation says that the commit command is used to take a snapshot of the code in the current state. That sounds perfect. But typing the command yields:</p>
 
-<pre><code>$ git commit
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git commit
 # On branch master
 # Changed but not updated:
 #   (use "git add ..." to update what will be committed)
@@ -138,15 +138,15 @@ Unpacking objects: 100% (22/22), done.
 #        modified:   tracks.php
 #
 no changes added to commit (use "git add" and/or "git commit -a")
-</code></pre>
+</code></pre></div>
 
 <p>Nothing happened, as indicated by the message “no changes added to commit.” Git has helpfully suggested some ways to commit at the bottom there. The first is to use the</p>
 
-<p><code>git add</code></p>
+<p><code class="highlighter-rouge">git add</code></p>
 
 <p>command, which sounds like a way to add files to a commit. The other is to pass in the -a argument to git commit, like this:</p>
 
-<p><code>git commit -a</code></p>
+<p><code class="highlighter-rouge">git commit -a</code></p>
 
 <p>The -a is for all, so when we tell git to git commit -a, we’re telling it to commit everything that changed, all at once. The user types that in and is dropped into.. a text editor?</p>
 
@@ -154,7 +154,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 
 <p>What is the text editor for? Git is asking for the user to write a commit message, that is, a description of what changed for the official history of this project. For something more user-friendly to write this commit message in, I suggest you type this arcane incantation from the wizards of old:</p>
 
-<p><code>git config core.editor "nano"</code></p>
+<p><code class="highlighter-rouge">git config core.editor "nano"</code></p>
 
 <p>The meaning of this spell is lost to the ages, but the nice thing is, it will drop you into the much more user-friendly nano editor, which list the CTRL- characters to save, quit, etc. along the bottom of the terminal.</p>
 
@@ -164,23 +164,23 @@ no changes added to commit (use "git add" and/or "git commit -a")
 
 <p>The first is simply another argument to add to the git commit command so that we don’t get dropped into a text editor to write our commit message. Usually, commit messages are only one line, so it makes sense to write the commit message right there on the command line:</p>
 
-<pre><code>$ git commit -am "Added the gRaphael library to be loaded, but haven't integrated it yet."
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git commit -am "Added the gRaphael library to be loaded, but haven't integrated it yet."
 [master 1a4014f] Added the gRaphael library to be loaded, but haven't integrated it yet.
  3 files changed, 3 insertions(+), 3 deletions(-)
-</code></pre>
+</code></pre></div>
 
 <p>As you can see, that worked, and it accepted our commit message right there on the command line. Notice that the commit message is wrapped in double quotes: “ “ This is because the shell will try to interpret words on their own as commands, and we don’t want that. So, to be safe, we wrap the whole thing in double quotes, so that the shell knows that this is a string to pass into the git command and not something to try and execute.</p>
 
 <p>What else does the output from git commit tell us? Well, we committed all three files at once. In other version control systems, you must commit all changes to files at once. This can get annoying. In git, you can choose which files you want to add to any given commit, and leave out anything else that changed. To do that, we use the git add command.</p>
 
-<pre><code>[do some work]
+<div class="highlighter-rouge"><pre class="highlight"><code>[do some work]
 $ git add config.php
 $ git add init.php
-</code></pre>
+</code></pre></div>
 
 <p>You’ll notice there’s no output from these commands. That’s because nothing has changed yet. Those changes still need to be committed. It would probably be helpful at this point to have a look at what changed and what didn’t. For that, we use the git status command.</p>
 
-<pre><code>$ git status
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git status
 # On branch master
 # Your branch is ahead of 'origin/master' by 1 commit.
 #
@@ -196,11 +196,11 @@ $ git add init.php
 #
 #        modified:   tracks.php
 #
-</code></pre>
+</code></pre></div>
 
 <p>As you can probably see, we’re not going to commit all the changes like we did in the first commit. We’re only going to commit the changes in the config.php and init.php files this time around, while tracks.php will be left out of the commit. Git status is a very useful command, and you will probably use it a lot to figure out the current state of your project and to see what should and shouldn’t be in a commit. Since we don’t want to commit all changes this time, we leave off the -a argument but keep the -m so we can specify a commit message:</p>
 
-<pre><code>$ git commit -m "A little refactoring."
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git commit -m "A little refactoring."
 [master 6dd5c59] A little refactoring.
  2 files changed, 2 insertions(+), 2 deletions(-)
 $ git status
@@ -214,13 +214,13 @@ $ git status
 #        modified:   tracks.php
 #
 no changes added to commit (use "git add" and/or "git commit -a")
-</code></pre>
+</code></pre></div>
 
 <p>Notice that the changes in tracks.php are still waiting for us when we perform another git status.</p>
 
 <p>Git log is a command used to see the history of a project.</p>
 
-<pre><code>$ git log
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git log
 commit e47cd6eb917d2a68ec6d1197a38faa1a1ff5e564
 Author: Matt Gauger
 Date:   Thu Dec 9 14:27:04 2010 -0600
@@ -240,19 +240,19 @@ Date:   Sun Nov 14 11:38:50 2010 -0600
     Minor changes, still learning git
 
 [truncated for length]
-</code></pre>
+</code></pre></div>
 
 <p>At this point you may be asking, how does our user upload their changes back to Github?</p>
 
 <p>The command required is: </p>
 
-<p><code>$ git push</code></p>
+<p><code class="highlighter-rouge">$ git push</code></p>
 
 <p>And in its default form, it knows what to push and where: It defaults to Github when you use the git clone command as above. A more complicated form of git push will allow you to choose the branch and the server to push to, but for our beginner user that is only using the master branch and Github server, it is unnecessary to understand.</p>
 
 <p>Similarly, to get changes from the server, use the command:</p>
 
-<p><code>$ git fetch</code></p>
+<p><code class="highlighter-rouge">$ git fetch</code></p>
 
 <p>This is, again, some default behavior that knows to go talk to the Github server. It will pull down changes from the user’s repo on Github, in this default manner, and it is important to note that <strong>this won’t include the changes made by other Github users</strong>. This part can initially be confusing to people who are looking to keep up with a project’s main development or other developer’s contributions, and Github’s documentation explains this stuff (and it is managed largely through the Github website) so I’ll leave it beyond the scope of this blog post.</p>
 
@@ -260,15 +260,15 @@ Date:   Sun Nov 14 11:38:50 2010 -0600
 
 <p>The other question you may be asking yourself at this point is: What happens if I screw up? What if you accidentally delete a file from your project, or you save something you didn’t mean to save. In this case, you can restore the project to the state of the last commit. Git is, after all, storing all the states of the project, so you can roll it backwards as necessary. The command to reset a project back to its previously committed state is:</p>
 
-<p><code>$ git reset --hard HEAD</code></p>
+<p><code class="highlighter-rouge">$ git reset --hard HEAD</code></p>
 
 <p>There’s a lot going on here to point out. The git reset part is obviously the command that we use to reset a project to a previous state. The state we’re telling to to go back to is called HEAD, which is just a placeholder name for the last commit. There’s lots of these placeholder names in git, and it’s nice to learn the common ones. For the purposes of this blog post, we can ignore the –hard, and refer you to the reference materials and “man git-reset” on your shell for further explanation.</p>
 
 <p>You want to <strong>be careful with git reset</strong>, obviously. It will reset all the files in your project to the state they were in at the last commit. So all changes since the last commit will go away. This isn’t always ideal. You could lose a lot of work this way. If you want to only reset one file, this is the way that I do it, and I imagine there are other ways in the very many different git commands:</p>
 
-<pre><code>$ git checkout -- init.php
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git checkout -- init.php
 $ git checkout HEAD init.php
-</code></pre>
+</code></pre></div>
 
 <p>In this case we’re taking the state of init.php back to the last commit, which again, is referenced with the placeholder name HEAD. </p>
 
@@ -291,7 +291,7 @@ $ git checkout HEAD init.php
 <ul>
   <li>Github has great documentation online at <a href="http://help.github.com/">help.github.com</a>. I highly suggest you start there.</li>
   <li>Github will point you in the direction of the <a href="http://gitref.org/">gitref.org</a> page for a quick overview of Git.</li>
-  <li>Scott Chacon released his book, <a href="http://progit.org/book/">Pro Git</a>, online for free. It is also available from Apress on Amazon: <a href="http://www.amazon.com/gp/product/1430218339">Pro Git</a><img src="http://www.assoc-amazon.com/e/ir?t=httpmattgauco-20&amp;l=as2&amp;o=1&amp;a=1430218339" alt="" />. (~~Full disclosure: Amazon Associates link.~~ [Author’s note as of 2015-12-19: I don’t have Amazon Affiliates/Associates links on my blog anymore and haven’t for awhile.])</li>
+  <li>Scott Chacon released his book, <a href="http://progit.org/book/">Pro Git</a>, online for free. It is also available from Apress on Amazon: <a href="http://www.amazon.com/gp/product/1430218339">Pro Git</a><img src="http://www.assoc-amazon.com/e/ir?t=httpmattgauco-20&amp;l=as2&amp;o=1&amp;a=1430218339" alt="" />. (<del>Full disclosure: Amazon Associates link.</del> [Author’s note as of 2015-12-19: I don’t have Amazon Affiliates/Associates links on my blog anymore and haven’t for awhile.])</li>
   <li>The <a href="http://progit.org/blog.html">Pro Git blog</a> is a good place to continue to pick up Git tricks and tips as you learn.</li>
   <li>It hasn’t been updated in a long time, but the <a href="http://www.gitready.com/">git ready</a> blog has taught me many tricks that I use with git.</li>
 </ul>

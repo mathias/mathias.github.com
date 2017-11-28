@@ -38,9 +38,9 @@
           <h2 class="nav-title">Matt Gauger</h2>
         </a>
         <ul>
-          <li><a href="/about">About</a></li>
-          <li><a href="/archives">Blog Archives</a></li>
-          <li><a href="/open-source">Open Source</a></li>
+          <li><a href="http://blog.mattgauger.com/about">About</a></li>
+          <li><a href="http://blog.mattgauger.com/archives">Blog Archives</a></li>
+          <li><a href="http://blog.mattgauger.com/open-source">Open Source</a></li>
         </ul>
     </div>
   </nav>
@@ -65,101 +65,101 @@
 
 <h2 id="lein-deps-tree">lein deps :tree</h2>
 
-<p>In the past, <code>lein deps</code> was a command that downloaded the correct versions of your project’s dependencies. Running <code>lein deps</code> is no longer necessary, as each lein command now checks for dependencies before executing. But <code>deps</code> provides an interesting variant for our uses: <code>lein deps :tree</code>.</p>
+<p>In the past, <code class="highlighter-rouge">lein deps</code> was a command that downloaded the correct versions of your project’s dependencies. Running <code class="highlighter-rouge">lein deps</code> is no longer necessary, as each lein command now checks for dependencies before executing. But <code class="highlighter-rouge">deps</code> provides an interesting variant for our uses: <code class="highlighter-rouge">lein deps :tree</code>.</p>
 
-<p>The <code>:tree</code> keyword at the end instructs lein to print out your project’s dependencies as a tree. This itself is a good visualization, but not what we’re looking for. The tree command will first print out any dependencies-of-dependencies which have conflicts with other dependencies. For example, here’s what <code>lein deps :tree</code> says for one of my projects:</p>
+<p>The <code class="highlighter-rouge">:tree</code> keyword at the end instructs lein to print out your project’s dependencies as a tree. This itself is a good visualization, but not what we’re looking for. The tree command will first print out any dependencies-of-dependencies which have conflicts with other dependencies. For example, here’s what <code class="highlighter-rouge">lein deps :tree</code> says for one of my projects:</p>
 
 <script src="https://gist.github.com/mathias/8eca3548f751bec6ea55.js"></script>
 
-<p>As you can see, the tool suggests dependencies that request conflicting versions, and how we can modify our <code>project.clj</code> file to resolve those conflicting versions by excluding one or the other. This isn’t always very useful, but when you run into issues because two different Clojure libraries require two wildly different <code>joda-time</code> versions (a situation I have run into before), it will be good to know what dependencies are causing that issue and how you might go about resolving it.</p>
+<p>As you can see, the tool suggests dependencies that request conflicting versions, and how we can modify our <code class="highlighter-rouge">project.clj</code> file to resolve those conflicting versions by excluding one or the other. This isn’t always very useful, but when you run into issues because two different Clojure libraries require two wildly different <code class="highlighter-rouge">joda-time</code> versions (a situation I have run into before), it will be good to know what dependencies are causing that issue and how you might go about resolving it.</p>
 
-<p>Note that this functionality disappeared in Leiningen 2.4.3 but is back in 2.5.0, so make sure you run <code>lein upgrade</code>!</p>
+<p>Note that this functionality disappeared in Leiningen 2.4.3 but is back in 2.5.0, so make sure you run <code class="highlighter-rouge">lein upgrade</code>!</p>
 
-<h2 id="lein-ancienthttpsgithubcomxsclein-ancient"><a href="https://github.com/xsc/lein-ancient">lein-ancient</a></h2>
+<h2 id="lein-ancient"><a href="https://github.com/xsc/lein-ancient">lein-ancient</a></h2>
 
-<p>This plugin to <code>lein</code> exists simply to check your project for outdated dependencies. Without <a href="https://github.com/xsc/lein-ancient">lein-ancient</a>, I’d be unable to keep up with some of the faster-moving libraries in the Java and Clojure world.</p>
+<p>This plugin to <code class="highlighter-rouge">lein</code> exists simply to check your project for outdated dependencies. Without <a href="https://github.com/xsc/lein-ancient">lein-ancient</a>, I’d be unable to keep up with some of the faster-moving libraries in the Java and Clojure world.</p>
 
-<p>After adding ancient to your <code>~/.lein/profiles.clj</code>, running the <code>lein ancient</code> command yields output on the same project as before:</p>
+<p>After adding ancient to your <code class="highlighter-rouge">~/.lein/profiles.clj</code>, running the <code class="highlighter-rouge">lein ancient</code> command yields output on the same project as before:</p>
 
 <script src="https://gist.github.com/mathias/bac5e554f971d7aa462f.js"></script>
 
-<p>Whoops! Looks like I haven’t been keeping up to date with my dependencies. <code>lein ancient</code> makes checking for new dependency versions easy. Further, thanks to the ubiquity of <a href="http://semver.org/">semantic versioning</a> in Clojure projects, it is usually quite safe to bump the minor versions (0.0.x) of dependencies.</p>
+<p>Whoops! Looks like I haven’t been keeping up to date with my dependencies. <code class="highlighter-rouge">lein ancient</code> makes checking for new dependency versions easy. Further, thanks to the ubiquity of <a href="http://semver.org/">semantic versioning</a> in Clojure projects, it is usually quite safe to bump the minor versions (0.0.x) of dependencies.</p>
 
-<p>You can also use lein-ancient to find outdated lein plugins in your <code>~/.lein/profiles.clj</code> file. Just run it with the <code>profiles</code> argument:</p>
+<p>You can also use lein-ancient to find outdated lein plugins in your <code class="highlighter-rouge">~/.lein/profiles.clj</code> file. Just run it with the <code class="highlighter-rouge">profiles</code> argument:</p>
 
 <script src="https://gist.github.com/mathias/02b999542ea837b87e30.js"></script>
 
-<h2 id="lein-kibithttpsgithubcomjonasekibit"><a href="https://github.com/jonase/kibit">lein kibit</a></h2>
+<h2 id="lein-kibit"><a href="https://github.com/jonase/kibit">lein kibit</a></h2>
 
 <p>As we gain experience and confidence in a programming language, we begin to talk about whether we’re writing <em>idiomatic</em> code. I’d argue that idiomatic code is code that accomplishes a goal with proper use of language features, in a way that other developers familiar with that language would understand. A simpler way to say it might be: idiomatic code uses the community-accepted best practices of how to do something.</p>
 
-<p>Clojure’s design seeks to solve some problems found in older Lisps, as well as add in niceties like complementary predicate functions. A good example of these convenient complementary functions are <code>if</code> and <code>if-not</code>. Clojure also contains several cases of simplification for common usage. For example, when you don’t need an else clause on an <code>if</code>, you can use the <code>when</code> macro.</p>
+<p>Clojure’s design seeks to solve some problems found in older Lisps, as well as add in niceties like complementary predicate functions. A good example of these convenient complementary functions are <code class="highlighter-rouge">if</code> and <code class="highlighter-rouge">if-not</code>. Clojure also contains several cases of simplification for common usage. For example, when you don’t need an else clause on an <code class="highlighter-rouge">if</code>, you can use the <code class="highlighter-rouge">when</code> macro.</p>
 
 <p>Wouldn’t it be great if there was someone who was well-versed in Clojure idioms pairing with you and offering suggestions? That’s exactly what <a href="https://github.com/jonase/kibit">kibit</a> does.</p>
 
-<p>Running against a project I’d set up to contain some smells, <code>lein kibit</code> found:</p>
+<p>Running against a project I’d set up to contain some smells, <code class="highlighter-rouge">lein kibit</code> found:</p>
 
 <script src="https://gist.github.com/mathias/fc0d446aeb90f44a6731.js"></script>
 
 <p>These kinds of small improvements are all over our Clojure projects. They’re not show-stopper bugs, but they’re small places for improvement.</p>
 
-<p>Kibit’s suggestions are almost always logically equivalent to the original code. Still, I always do some smoke-testing to ensure the code still works after using Kibit’s suggestion, and it generally does. Problems I frequently fix with Kibit are replacing <code>if</code> statements with the <code>when</code> macro, as well as places where the code checks for empty seqs, or that I can simplify nil checks.</p>
+<p>Kibit’s suggestions are almost always logically equivalent to the original code. Still, I always do some smoke-testing to ensure the code still works after using Kibit’s suggestion, and it generally does. Problems I frequently fix with Kibit are replacing <code class="highlighter-rouge">if</code> statements with the <code class="highlighter-rouge">when</code> macro, as well as places where the code checks for empty seqs, or that I can simplify nil checks.</p>
 
-<p>You can point lein kibit at a specific namespace by appending the path, like this: <code>lein kibit src/foo/bar.clj</code></p>
+<p>You can point lein kibit at a specific namespace by appending the path, like this: <code class="highlighter-rouge">lein kibit src/foo/bar.clj</code></p>
 
 <p>Kibit catches many cases where there is a more-idiomatic way to express what you are trying to do. I recommend running it often. In fact, it’s possible to use <a href="https://github.com/jonase/kibit#usage-from-inside-emacs">kibit in your emacs buffers</a> if you want it to be that much more convenient and real-time.</p>
 
-<h2 id="eastwoodhttpsgithubcomjonaseeastwood"><a href="https://github.com/jonase/eastwood">Eastwood</a></h2>
+<h2 id="eastwood"><a href="https://github.com/jonase/eastwood">Eastwood</a></h2>
 
 <p>For linting Clojure code, there’s Eastwood. It is similar in functionality to Kibit, bit will catch different issues than Kibit. Built on two interesting Clojure projects: <a href="https://github.com/clojure/tools.analyzer">tools.analyzer</a> and <a href="https://github.com/clojure/tools.analyzer.jvm">tools.analyzer.jvm</a>, Eastwood does a powerful examination of your code inside the JVM. It is worth highlighting that since Eastwood loads your code to analyze it, it might trigger any side effects that happen when your code loads: writing files, modifying databases, etc. Note that it only loads the code; it does not execute it.</p>
 
-<p>After adding <code>eastwood</code> to your lein <code>profiles.clj</code>, simply run: <code>lein eastwood</code> and you will see output like:</p>
+<p>After adding <code class="highlighter-rouge">eastwood</code> to your lein <code class="highlighter-rouge">profiles.clj</code>, simply run: <code class="highlighter-rouge">lein eastwood</code> and you will see output like:</p>
 
 <script src="https://gist.github.com/mathias/b93cea02293eac933bee.js"></script>
 
 <p>That’s a lot of problems for a simple file! Notice how one mistake got caught for two reasons: A misplaced docstring (placed after the arguments vector) becomes just a string in the function body that will be thrown away.</p>
 
-<p>Another nice catch that Eastwood provides is detecting the redefinition of the var <code>qux</code> in the file.</p>
+<p>Another nice catch that Eastwood provides is detecting the redefinition of the var <code class="highlighter-rouge">qux</code> in the file.</p>
 
 <p>But Eastwood covers a lot more cases than just vars being def’d more than once. See the <a href="https://github.com/jonase/eastwood#whats-there">full list</a> to find out what else it does. There’s a few linters that are disabled by default, but they might make sense to enable for your project.</p>
 
 <p>Frequently running lint tools can help prevent subtle problems that come from code that looks correct but contains some small error. Eastwood is less concerned with style than tools like JSHint are, but we have other tools that cover stylistic concerns.</p>
 
-<h2 id="lein-bikeshedhttpsgithubcomdakronelein-bikeshed"><a href="https://github.com/dakrone/lein-bikeshed">lein bikeshed</a></h2>
+<h2 id="lein-bikeshed"><a href="https://github.com/dakrone/lein-bikeshed">lein bikeshed</a></h2>
 
-<p>This is a relative newcomer to my own tool set. <a href="https://github.com/dakrone/lein-bikeshed">lein bikeshed</a> has features related to the low-hanging fruit in our Clojure code: lines longer than 80 characters, blank lines at ends of files, and more. It will also tell you what percentage of functions have docstrings. Like other tools mentioned here, it is a lein plugin that you add to your <code>profiles.clj</code>.</p>
+<p>This is a relative newcomer to my own tool set. <a href="https://github.com/dakrone/lein-bikeshed">lein bikeshed</a> has features related to the low-hanging fruit in our Clojure code: lines longer than 80 characters, blank lines at ends of files, and more. It will also tell you what percentage of functions have docstrings. Like other tools mentioned here, it is a lein plugin that you add to your <code class="highlighter-rouge">profiles.clj</code>.</p>
 
-<p>A run of <code>lein bikeshed</code> on its own source (which purposefully includes some code designed to fail) looks like this:</p>
+<p>A run of <code class="highlighter-rouge">lein bikeshed</code> on its own source (which purposefully includes some code designed to fail) looks like this:</p>
 
 <script src="https://gist.github.com/mathias/271e06ebce8fe6428b83.js"></script>
 
-<p>Bikeshed might give a lot of output for your existing projects, but the warnings are worth investigating and addressing. You can always silence the long-lines warning if it doesn’t matter to you with the <code>-m</code> command line argument.</p>
+<p>Bikeshed might give a lot of output for your existing projects, but the warnings are worth investigating and addressing. You can always silence the long-lines warning if it doesn’t matter to you with the <code class="highlighter-rouge">-m</code> command line argument.</p>
 
 <h2 id="tying-it-all-together-with-a-lein-alias">Tying it all together with a Lein alias</h2>
 
 <p>Wouldn’t it be great to run all these tools frequently, so that you can check for as many problems as possible? Well, you can, with a lein alias. (The lein wiki documents aliases in the <a href="https://github.com/technomancy/leiningen/blob/stable/sample.project.clj#L195-L211">lein sample.project.clj</a>.)</p>
 
-<p>In <code>~/.lein/profiles.clj</code>, inside your <code>:user</code> map, add the line:</p>
+<p>In <code class="highlighter-rouge">~/.lein/profiles.clj</code>, inside your <code class="highlighter-rouge">:user</code> map, add the line:</p>
 
 <script src="https://gist.github.com/mathias/eef9f3f3e9e0ba40cb78.js"></script>
 
-<p>Now, when you want to run all these tools at once on a project, you simply invoke <code>lein omni</code>. I use this alias on all my Clojure(Script) projects. I have grown accustomed to seeing the kinds of output that a clean Clojure project will have.</p>
+<p>Now, when you want to run all these tools at once on a project, you simply invoke <code class="highlighter-rouge">lein omni</code>. I use this alias on all my Clojure(Script) projects. I have grown accustomed to seeing the kinds of output that a clean Clojure project will have.</p>
 
-<p>It’s worth noting that I don’t run Eastwood unless it is necessary for the project. When it is necessary, I override the alias in the project’s <code>project.clj</code> to run Eastwood as well.</p>
+<p>It’s worth noting that I don’t run Eastwood unless it is necessary for the project. When it is necessary, I override the alias in the project’s <code class="highlighter-rouge">project.clj</code> to run Eastwood as well.</p>
 
 <p>This command can take some time to complete, but with an alias we’re only spinning up lein once.</p>
 
 <h2 id="and-a-bash-alias">And a bash alias</h2>
 
-<p>The output of <code>lein omni</code> can be long, which can either result in a lot of scrolling or neglecting to run the command due to the inconvenience. To help manage the length of the output, I’ve created a bash alias that runs the plugins and pipes them to less.</p>
+<p>The output of <code class="highlighter-rouge">lein omni</code> can be long, which can either result in a lot of scrolling or neglecting to run the command due to the inconvenience. To help manage the length of the output, I’ve created a bash alias that runs the plugins and pipes them to less.</p>
 
 <p>My personal bash alias also runs midje at the end. You can choose whether to run the tests for your own alias. That’s just my personal preference.</p>
 
 <script src="https://gist.github.com/mathias/8b6a0040fcd7e4ae890f.js"></script>
 
-<p>Note that just like running the lein alias above, this may take a bit of time. Since we’re piping it to <code>less</code>, it might take awhile before <code>less</code> receives output. While it is still running, output will periodically show up at the bottom of the <code>less</code> buffer. You can use both Emac’s and vim’s movement commands in <code>less</code> to advance the buffer. I find <code>less</code> to be more manageable for scrolling through output than switching to <code>tmux</code>’s history scrolling mode.</p>
+<p>Note that just like running the lein alias above, this may take a bit of time. Since we’re piping it to <code class="highlighter-rouge">less</code>, it might take awhile before <code class="highlighter-rouge">less</code> receives output. While it is still running, output will periodically show up at the bottom of the <code class="highlighter-rouge">less</code> buffer. You can use both Emac’s and vim’s movement commands in <code class="highlighter-rouge">less</code> to advance the buffer. I find <code class="highlighter-rouge">less</code> to be more manageable for scrolling through output than switching to <code class="highlighter-rouge">tmux</code>’s history scrolling mode.</p>
 
-<h2 id="managing-your-namespaces-lein-slamhoundhttpsgithubcomtechnomancyslamhound">Managing your namespaces: <a href="https://github.com/technomancy/slamhound">lein slamhound</a></h2>
+<h2 id="managing-your-namespaces-lein-slamhound">Managing your namespaces: <a href="https://github.com/technomancy/slamhound">lein slamhound</a></h2>
 
 <p>Namespace management often becomes an issue on nontrivial Clojure projects. Actively developing a project means managing the functions we pull in from other namespaces and from libraries. These require statements can often get out of date. Often, they’re either missing namespaces that are needed, or containing requirements for old functions that are no longer used in the current code.</p>
 
@@ -167,13 +167,13 @@
 
 <p><strong>Note: slamhound rewrites the namespace macros in your project’s .clj files!</strong> I recommend only running it on code that’s committed to git (or whatever you use as a VCS) so that you can review and  rollback any changes it makes.</p>
 
-<p>The most basic way to use slamhound is to add it to your <code>~/.lein/profiles.clj</code> as a dependency. Then add this alias:</p>
+<p>The most basic way to use slamhound is to add it to your <code class="highlighter-rouge">~/.lein/profiles.clj</code> as a dependency. Then add this alias:</p>
 
 <script src="https://gist.github.com/mathias/f3799e60c63b0aebf17e.js"></script>
 
-<p>Now you can use slamhound on a project by running <code>lein slamhound</code> in the project’s directory. There’s also REPL and Emacs support, which you can learn more about in the <a href="https://github.com/technomancy/slamhound#repl-usage">slamhound README</a>.</p>
+<p>Now you can use slamhound on a project by running <code class="highlighter-rouge">lein slamhound</code> in the project’s directory. There’s also REPL and Emacs support, which you can learn more about in the <a href="https://github.com/technomancy/slamhound#repl-usage">slamhound README</a>.</p>
 
-<h2 id="measuring-test-coverage-with-cloveragehttpsgithubcomlshiftcloverage">Measuring test coverage with <a href="https://github.com/lshift/cloverage">cloverage</a></h2>
+<h2 id="measuring-test-coverage-with-cloverage">Measuring test coverage with <a href="https://github.com/lshift/cloverage">cloverage</a></h2>
 
 <p>It is often claimed that less unit testing is necessary in Clojure because Clojure is functional and makes use of immutable data structures. And it is true that with functional programming, most tests are simple: given some input, the output should be a certain value.</p>
 
@@ -183,19 +183,19 @@
 
 <p>This blog post isn’t a platform to argue for or against testing Clojure. But when you do test, you may wonder how to tell how much test coverage your test suite has. How do we know at a glance what percentage of our namespaces is being tested? And how do we find lines that are never being exercised in our tests? After all, we can’t improve what we don’t measure.</p>
 
-<p>That’s where <a href="https://github.com/lshift/cloverage">cloverage</a> comes in. Cloverage is another lein plugin, so it gets added to <code>~/.lein/profiles.clj</code> like the others. Then run <code>lein cloverage</code> in your project; it will run the test suite and generate a coverage report.</p>
+<p>That’s where <a href="https://github.com/lshift/cloverage">cloverage</a> comes in. Cloverage is another lein plugin, so it gets added to <code class="highlighter-rouge">~/.lein/profiles.clj</code> like the others. Then run <code class="highlighter-rouge">lein cloverage</code> in your project; it will run the test suite and generate a coverage report.</p>
 
-<p>The coverage report appears in <code>target/coverage</code> as HTML files, broken down by namespace.</p>
+<p>The coverage report appears in <code class="highlighter-rouge">target/coverage</code> as HTML files, broken down by namespace.</p>
 
-<p>You can still use Cloverage even if you don’t use <code>clojure.test</code>. I use <a href="https://github.com/marick/Midje">midje</a> in most of my tests. To use Cloverage in those situations, wrap your tests in a <code>deftest</code>.</p>
+<p>You can still use Cloverage even if you don’t use <code class="highlighter-rouge">clojure.test</code>. I use <a href="https://github.com/marick/Midje">midje</a> in most of my tests. To use Cloverage in those situations, wrap your tests in a <code class="highlighter-rouge">deftest</code>.</p>
 
-<p>Since <code>deftest</code> has a hyphenated Clojure keyword as its identifier, and Midje facts have a string as an identifier, I’ve come to use the <code>deftest</code> to group related tests together. Usually this means naming the group of tests after the function I’m testing. Then I name Midje facts after the situation that the fact exercises. This makes sense to me because it fits well with the hierarchy of rspec unit tests in Ruby.</p>
+<p>Since <code class="highlighter-rouge">deftest</code> has a hyphenated Clojure keyword as its identifier, and Midje facts have a string as an identifier, I’ve come to use the <code class="highlighter-rouge">deftest</code> to group related tests together. Usually this means naming the group of tests after the function I’m testing. Then I name Midje facts after the situation that the fact exercises. This makes sense to me because it fits well with the hierarchy of rspec unit tests in Ruby.</p>
 
 <p>Here’s an example of using this approach:</p>
 
 <script src="https://gist.github.com/mathias/94e1a4d7b8bce7c02e23.js"></script>
 
-<p>Cloverage also outputs a <code>coverage.txt</code> file that might be useful for use with services like <a href="http://coveralls.io">Coveralls</a>. I haven’t used this, so I can’t comment on its usefulness.</p>
+<p>Cloverage also outputs a <code class="highlighter-rouge">coverage.txt</code> file that might be useful for use with services like <a href="http://coveralls.io">Coveralls</a>. I haven’t used this, so I can’t comment on its usefulness.</p>
 
 <p>If you’re using <a href="https://github.com/slagyr/speclj">speclj</a> for your tests, you might run into some issues getting Cloverage to play nice. I don’t use speclj often, so when I couldn’t get it to work with Cloverage, I didn’t pursue the issue.</p>
 
@@ -209,7 +209,7 @@
 
 <hr />
 
-<p>Interested in commenting or contacting me? Send an email to <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#099;&#111;&#110;&#116;&#097;&#099;&#116;&#064;&#109;&#097;&#116;&#116;&#103;&#097;&#117;&#103;&#101;&#114;&#046;&#099;&#111;&#109;">&#099;&#111;&#110;&#116;&#097;&#099;&#116;&#064;&#109;&#097;&#116;&#116;&#103;&#097;&#117;&#103;&#101;&#114;&#046;&#099;&#111;&#109;</a>. Thanks!</p>
+<p>Interested in commenting or contacting me? Send an email to <a href="mailto:contact@mattgauger.com">contact@mattgauger.com</a>. Thanks!</p>
 
 
 

@@ -38,9 +38,9 @@
           <h2 class="nav-title">Matt Gauger</h2>
         </a>
         <ul>
-          <li><a href="/about">About</a></li>
-          <li><a href="/archives">Blog Archives</a></li>
-          <li><a href="/open-source">Open Source</a></li>
+          <li><a href="http://blog.mattgauger.com/about">About</a></li>
+          <li><a href="http://blog.mattgauger.com/archives">Blog Archives</a></li>
+          <li><a href="http://blog.mattgauger.com/open-source">Open Source</a></li>
         </ul>
     </div>
   </nav>
@@ -65,7 +65,7 @@
 
 <p>In the very far past, I had a blog run on a friend’s server that was generated as static html files (and an RSS feed) by a perl script. It’s still available on <a href="http://web.archive.org/web/*/http://tranzor.net/~xiphias">archive.org</a>. There are several Ruby-based projects that do the same thing. I chose <a href="http://github.com/mojombo/jekyll/">Jekyll</a>, which is what <a href="http://pages.github.com/">Github Pages</a> runs on. I grabbed the gem off the Github gem server and set up the basic directory structure. The whole setup is extremely simple:</p>
 
-<pre><code>.
+<div class="highlighter-rouge"><pre class="highlight"><code>.
 |-- _config.yml
 |-- _layouts
 |   |-- default.html
@@ -74,7 +74,7 @@
 |   `-- 2009-12-26-shiny-captain.md
 |-- _site
 `-- index.html
-</code></pre>
+</code></pre></div>
 
 <p>After creating those files, I was off and running with creating a theme from scratch. I’ve had my eye on HTML5 for awhile, and recently read an <a href="http://www.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">article on Smashing Mag</a> that inspired me. I used their method of defining the HTML5 tags as blocks in CSS to allow me to write HTML5 now and render it in today’s browsers.</p>
 
@@ -94,7 +94,7 @@
 
 <p>This is some Ruby:</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="p">(</span><span class="no">Hpricot</span><span class="p">(</span><span class="nb">open</span> <span class="n">url</span><span class="p">)</span><span class="o">/</span><span class="ss">:enclosure</span><span class="p">).</span><span class="nf">map</span> <span class="p">{</span><span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="p">.</span><span class="nf">attributes</span><span class="p">[</span><span class="s2">"url"</span><span class="p">]}.</span><span class="nf">uniq</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">vid</span><span class="o">|</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="p">(</span><span class="no">Hpricot</span><span class="p">(</span><span class="nb">open</span> <span class="n">url</span><span class="p">)</span><span class="o">/</span><span class="ss">:enclosure</span><span class="p">).</span><span class="nf">map</span> <span class="p">{</span><span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="p">.</span><span class="nf">attributes</span><span class="p">[</span><span class="s2">"url"</span><span class="p">]}.</span><span class="nf">uniq</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">vid</span><span class="o">|</span>
   <span class="c1"># File.exist?(vid.split("/").last) ? next : `curl #{vid}`</span>
   <span class="n">filename</span> <span class="o">=</span> <span class="n">vid</span><span class="p">.</span><span class="nf">gsub</span><span class="p">(</span><span class="sr">/http:.+\//</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span>
   <span class="n">filename</span><span class="p">.</span><span class="nf">gsub!</span><span class="p">(</span><span class="sr">/-/</span><span class="p">,</span> <span class="s2">"_"</span><span class="p">)</span>
@@ -102,7 +102,7 @@
 
   <span class="nb">puts</span> <span class="s2">"Downloading </span><span class="si">#{</span><span class="n">vid</span><span class="si">}</span><span class="s2">"</span>
   <span class="nb">puts</span> <span class="n">filename</span>
-  <span class="sb">`curl -L </span><span class="si">#{</span><span class="n">vid</span><span class="si">}</span><span class="sb"> &gt; </span><span class="si">#{</span><span class="n">filename</span><span class="si">}</span><span class="sb">`</span></code></pre></div>
+  <span class="sb">`curl -L </span><span class="si">#{</span><span class="n">vid</span><span class="si">}</span><span class="sb"> &gt; </span><span class="si">#{</span><span class="n">filename</span><span class="si">}</span><span class="sb">`</span></code></pre></figure>
 
 
 

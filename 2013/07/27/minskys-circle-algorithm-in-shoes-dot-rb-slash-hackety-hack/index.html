@@ -38,9 +38,9 @@
           <h2 class="nav-title">Matt Gauger</h2>
         </a>
         <ul>
-          <li><a href="/about">About</a></li>
-          <li><a href="/archives">Blog Archives</a></li>
-          <li><a href="/open-source">Open Source</a></li>
+          <li><a href="http://blog.mattgauger.com/about">About</a></li>
+          <li><a href="http://blog.mattgauger.com/archives">Blog Archives</a></li>
+          <li><a href="http://blog.mattgauger.com/open-source">Open Source</a></li>
         </ul>
     </div>
   </nav>
@@ -95,38 +95,38 @@
 
 <p>To implement it myself, I needed to be able to plot points on a display. So I turned to Hackety-Hack, which comes with Shoes for drawing graphics. The Shoes DSL for drawing shapes is rather simple, which means we can take the pseudocode above and turn it into a working demo rather easily:</p>
 
-<pre><code class="language-ruby">Shoes.app do
-  epsilon = 1.0/16
-  offset = 250
-  x = 20
-  y = 20
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="no">Shoes</span><span class="p">.</span><span class="nf">app</span> <span class="k">do</span>
+  <span class="n">epsilon</span> <span class="o">=</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">16</span>
+  <span class="n">offset</span> <span class="o">=</span> <span class="mi">250</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="mi">20</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="mi">20</span>
 
-  fill red
-  shape do
-    move_to(x + offset,y + offset)
+  <span class="n">fill</span> <span class="n">red</span>
+  <span class="n">shape</span> <span class="k">do</span>
+    <span class="n">move_to</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">offset</span><span class="p">,</span><span class="n">y</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span>
 
-    100.times do
-      x = x - epsilon * y
-      y = y + epsilon * x
-      line_to(x + offset,y + offset)
-    end
-  end
+    <span class="mi">100</span><span class="p">.</span><span class="nf">times</span> <span class="k">do</span>
+      <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">epsilon</span> <span class="o">*</span> <span class="n">y</span>
+      <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">epsilon</span> <span class="o">*</span> <span class="n">x</span>
+      <span class="n">line_to</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">offset</span><span class="p">,</span><span class="n">y</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
 
-  fill blue
-  oval({top: 250, left: 320, radius: 25, center: true})
-end
+  <span class="n">fill</span> <span class="n">blue</span>
+  <span class="n">oval</span><span class="p">({</span><span class="ss">top: </span><span class="mi">250</span><span class="p">,</span> <span class="ss">left: </span><span class="mi">320</span><span class="p">,</span> <span class="ss">radius: </span><span class="mi">25</span><span class="p">,</span> <span class="ss">center: </span><span class="kp">true</span><span class="p">})</span>
+<span class="k">end</span>
 
-</code></pre>
+</code></pre></div>
 
 <p>Epsilon is 1/16, as indicated by some quick googling – basically a small power of two. I have to use the offset to get the center of the circle closer to the center of the Shoes window – without the offset, the circle will only be a quarter-circle in the upper left corner.</p>
 
 <h2 id="how-does-this-compare-to-plotting-a-real-circle">How does this compare to plotting a real circle?</h2>
 
-<p>If we want to compare the roundness of our “circle” to a real circle drawn by Shoes, we can add this line in before the closing <code>end</code>:</p>
+<p>If we want to compare the roundness of our “circle” to a real circle drawn by Shoes, we can add this line in before the closing <code class="highlighter-rouge">end</code>:</p>
 
-<pre><code class="language-ruby">  fill blue
-  oval({top: 250, left: 320, radius: 25, center: true})
-</code></pre>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code>  <span class="n">fill</span> <span class="n">blue</span>
+  <span class="n">oval</span><span class="p">({</span><span class="ss">top: </span><span class="mi">250</span><span class="p">,</span> <span class="ss">left: </span><span class="mi">320</span><span class="p">,</span> <span class="ss">radius: </span><span class="mi">25</span><span class="p">,</span> <span class="ss">center: </span><span class="kp">true</span><span class="p">})</span>
+</code></pre></div>
 
 <p>Although their radiuses are going to be slightly different.</p>
 

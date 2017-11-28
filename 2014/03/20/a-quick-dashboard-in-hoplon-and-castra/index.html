@@ -38,9 +38,9 @@
           <h2 class="nav-title">Matt Gauger</h2>
         </a>
         <ul>
-          <li><a href="/about">About</a></li>
-          <li><a href="/archives">Blog Archives</a></li>
-          <li><a href="/open-source">Open Source</a></li>
+          <li><a href="http://blog.mattgauger.com/about">About</a></li>
+          <li><a href="http://blog.mattgauger.com/archives">Blog Archives</a></li>
+          <li><a href="http://blog.mattgauger.com/open-source">Open Source</a></li>
         </ul>
     </div>
   </nav>
@@ -63,7 +63,7 @@
 
 <p>Rather than that long blog post, I wanted to simply show the steps I would take to build such a dashboard with <a href="http://hoplon.io">Hoplon</a> and <a href="https://github.com/tailrecursion/castra">Castra</a>. I won’t go into detail here or explain either Hoplon or Castra — go read on your own first, and also look into <a href="https://github.com/tailrecursion/boot">boot</a>, the build tool this uses.</p>
 
-<p>If you want to follow along, I’ve provided a <a href="https://github.com/mathias/gleam">repo</a>. The <a href="https://github.com/mathias/gleam/blob/30b4976b313c950c6cc97e64c65036eb21d75378/README.md">README</a> has instructions for getting setup. Assuming you have boot installed, you can just run <code>boot gleam-app</code> to get started.</p>
+<p>If you want to follow along, I’ve provided a <a href="https://github.com/mathias/gleam">repo</a>. The <a href="https://github.com/mathias/gleam/blob/30b4976b313c950c6cc97e64c65036eb21d75378/README.md">README</a> has instructions for getting setup. Assuming you have boot installed, you can just run <code class="highlighter-rouge">boot gleam-app</code> to get started.</p>
 
 <p>So here’s how I’d build up a dashboard, in several iterations:</p>
 
@@ -73,25 +73,25 @@
 
 <script src="https://gist.github.com/mathias/9670739.js"></script>
 
-<p>You’ll want to <code>git reset --hard 69b070</code> to get to this point.</p>
+<p>You’ll want to <code class="highlighter-rouge">git reset --hard 69b070</code> to get to this point.</p>
 
 <h2 id="move-the-data-to-clojurescript">Move the data to ClojureScript:</h2>
 
-<p>In <code>src/cljs/gleam/rpc.cljs</code>:</p>
+<p>In <code class="highlighter-rouge">src/cljs/gleam/rpc.cljs</code>:</p>
 
 <script src="https://gist.github.com/mathias/9635157.js"></script>
 
-<p>And take out the <code>(def articles…)</code> from <code>index.html.hl</code>. After boot recompiles everything, you should still see the data in the page.</p>
+<p>And take out the <code class="highlighter-rouge">(def articles…)</code> from <code class="highlighter-rouge">index.html.hl</code>. After boot recompiles everything, you should still see the data in the page.</p>
 
-<p>To get to this point, you can run <code>git reset --hard d63f299</code>.</p>
+<p>To get to this point, you can run <code class="highlighter-rouge">git reset --hard d63f299</code>.</p>
 
 <h2 id="move-the-data-to-the-server-side">Move the data to the server side</h2>
 
-<p>Change <code>src/cljs/gleam/rpc.cljs</code> again, this time to make a remote call for data:</p>
+<p>Change <code class="highlighter-rouge">src/cljs/gleam/rpc.cljs</code> again, this time to make a remote call for data:</p>
 
 <script src="https://gist.github.com/mathias/9671172.js"></script>
 
-<p>On the backend, we need something like this in <code>src/castra/gleam/api/gleam.clj</code>:</p>
+<p>On the backend, we need something like this in <code class="highlighter-rouge">src/castra/gleam/api/gleam.clj</code>:</p>
 
 <script src="https://gist.github.com/mathias/9671200.js"></script>
 
@@ -99,7 +99,7 @@
 
 <script src="https://gist.github.com/mathias/9671220.js"></script>
 
-<p>To get to this point in the example repo, you can do <code>git reset --hard 0bad1e5</code>.</p>
+<p>To get to this point in the example repo, you can do <code class="highlighter-rouge">git reset --hard 0bad1e5</code>.</p>
 
 <h2 id="real-time-data">Real time data</h2>
 
@@ -109,15 +109,15 @@
 
 <script src="https://gist.github.com/mathias/9671661.js"></script>
 
-<p>To get to this point, you can do a <code>git reset --hard f19325</code></p>
+<p>To get to this point, you can do a <code class="highlighter-rouge">git reset --hard f19325</code></p>
 
 <h2 id="talking-to-a-remote-service">Talking to a remote service.</h2>
 
-<p>The last step here is left as an exercise for the reader. You can imagine replacing the <code>articles</code> function in <code>src/castra/gleam/api/gleam.clj</code> with something that polls a remote JSON API for data. Or you could look at my social news app <a href="http://github.com/mathias/gnar">gnar</a> for inspiration on using a Postgres database for data.</p>
+<p>The last step here is left as an exercise for the reader. You can imagine replacing the <code class="highlighter-rouge">articles</code> function in <code class="highlighter-rouge">src/castra/gleam/api/gleam.clj</code> with something that polls a remote JSON API for data. Or you could look at my social news app <a href="http://github.com/mathias/gnar">gnar</a> for inspiration on using a Postgres database for data.</p>
 
 <p>I hope to finish up a post with full explanations soon. Castra is relatively new, and it’s worth explaining how some of the pieces fit together. My explanation should include more complicated interaction. like user authentication. I will be publishing that blog post after I get back from <a href="http://clojurewest.org">ClojureWest</a> next week!</p>
 
-<p>Let me know what you thought of this post by shooting me an <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#099;&#111;&#110;&#116;&#097;&#099;&#116;&#064;&#109;&#097;&#116;&#116;&#103;&#097;&#117;&#103;&#101;&#114;&#046;&#099;&#111;&#109;">email</a>. I’d love to hear from you.</p>
+<p>Let me know what you thought of this post by shooting me an <a href="mailto:contact@mattgauger.com">email</a>. I’d love to hear from you.</p>
 
 
 </div>

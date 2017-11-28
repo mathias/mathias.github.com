@@ -38,9 +38,9 @@
           <h2 class="nav-title">Matt Gauger</h2>
         </a>
         <ul>
-          <li><a href="/about">About</a></li>
-          <li><a href="/archives">Blog Archives</a></li>
-          <li><a href="/open-source">Open Source</a></li>
+          <li><a href="http://blog.mattgauger.com/about">About</a></li>
+          <li><a href="http://blog.mattgauger.com/archives">Blog Archives</a></li>
+          <li><a href="http://blog.mattgauger.com/open-source">Open Source</a></li>
         </ul>
     </div>
   </nav>
@@ -76,7 +76,7 @@
   <li>@mathiasx on twitter</li>
 </ul>
 
-<h3 id="i-work-at-bendyworkshttpbendyworkscom">I work at <a href="http://bendyworks.com">Bendyworks</a></h3>
+<h3 id="i-work-at-bendyworks">I work at <a href="http://bendyworks.com">Bendyworks</a></h3>
 
 <ul>
   <li>We primarily do Ruby on Rails work, with iOS now.</li>
@@ -207,10 +207,10 @@
   <li>Compiled CoffeeScript Example:</li>
 </ul>
 
-<pre><code>(function() {
+<div class="highlighter-rouge"><pre class="highlight"><code>(function() {
   console.log "hello world!";
 }).call(this);
-</code></pre>
+</code></pre></div>
 
 <h3 id="simpler-looping">Simpler Looping</h3>
 
@@ -225,17 +225,17 @@
   <li>Loop over every item in a list, in CoffeeScript:</li>
 </ul>
 
-<pre><code>for item in list
+<div class="highlighter-rouge"><pre class="highlight"><code>for item in list
   process item
-</code></pre>
+</code></pre></div>
 
 <h3 id="intention-gets-obscured-by-managing-the-loop-in-js">Intention gets obscured by managing the loop, in JS:</h3>
 
-<pre><code>for (var i = 0, l = list.length; i &lt; l; i++) {
+<div class="highlighter-rouge"><pre class="highlight"><code>for (var i = 0, l = list.length; i &lt; l; i++) {
   var item = list[i];
   process(item);
 }
-</code></pre>
+</code></pre></div>
 
 <ul>
   <li>CoffeeScript allows “reasonably solid” JavaScript developers to accomplish the latter by simply writing the former.</li>
@@ -271,24 +271,24 @@
 
 <h3 id="the-example-on-the-jasmine-site">The example on the Jasmine site:</h3>
 
-<pre><code>describe("Jasmine", function() {
+<div class="highlighter-rouge"><pre class="highlight"><code>describe("Jasmine", function() {
   it("makes testing awesome!", function() {
     expect(yourCode).toBeLotsBetter();
   });
 });
-</code></pre>
+</code></pre></div>
 
 <ul>
   <li>This example sucks!</li>
   <li>A better example:</li>
 </ul>
 
-<pre><code>describe ('addition', function() {
+<div class="highlighter-rouge"><pre class="highlight"><code>describe ('addition', function() {
   it('adds two numbers', function() {
     expect(1 + 2).toEqual(3);
   });
 });
-</code></pre>
+</code></pre></div>
 
 <ul>
   <li>Better? Not really. But we can see what the syntax is doing here and I’m using a real assertion!</li>
@@ -332,18 +332,18 @@
 <p>Matchers:</p>
 
 <ul>
-  <li><code>.toBe()</code></li>
-  <li><code>.toBeNull()</code></li>
-  <li><code>.toBeTruthy()</code></li>
-  <li><code>.toBeDefined()</code></li>
-  <li><code>.toBeUndefined()</code></li>
+  <li><code class="highlighter-rouge">.toBe()</code></li>
+  <li><code class="highlighter-rouge">.toBeNull()</code></li>
+  <li><code class="highlighter-rouge">.toBeTruthy()</code></li>
+  <li><code class="highlighter-rouge">.toBeDefined()</code></li>
+  <li><code class="highlighter-rouge">.toBeUndefined()</code></li>
 </ul>
 
 <h3 id="setup-and-teardown">Setup and teardown:</h3>
 
-<pre><code>beforeEach()
+<div class="highlighter-rouge"><pre class="highlight"><code>beforeEach()
 afterEach()
-</code></pre>
+</code></pre></div>
 
 <ul>
   <li>You can use after Each to run a teardown function after each successful test</li>

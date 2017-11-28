@@ -5,9 +5,9 @@
     <description></description>
     <link>http://blog.mattgauger.com/</link>
     <atom:link href="http://blog.mattgauger.com/atom.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 26 Nov 2017 10:28:46 -0600</pubDate>
-    <lastBuildDate>Sun, 26 Nov 2017 10:28:46 -0600</lastBuildDate>
-    <generator>Jekyll v2.5.3</generator>
+    <pubDate>Tue, 28 Nov 2017 17:14:12 -0600</pubDate>
+    <lastBuildDate>Tue, 28 Nov 2017 17:14:12 -0600</lastBuildDate>
+    <generator>Jekyll v3.6.2</generator>
     
       <item>
         <title>Elixir Code Quality Tools</title>
@@ -19,52 +19,52 @@
 
 &lt;p&gt;This post will have less examples than the last, but you can refer to each project’s README to help you get started. Instead, I’ll cover why you might want to use each of these tools and what problems they solve.&lt;/p&gt;
 
-&lt;h1 id=&quot;doctestshttpelixir-langorggetting-startedmix-otpdocs-tests-and-withhtmldoctests&quot;&gt;&lt;a href=&quot;http://elixir-lang.org/getting-started/mix-otp/docs-tests-and-with.html#doctests&quot;&gt;doctests&lt;/a&gt;&lt;/h1&gt;
+&lt;h1 id=&quot;doctests&quot;&gt;&lt;a href=&quot;http://elixir-lang.org/getting-started/mix-otp/docs-tests-and-with.html#doctests&quot;&gt;doctests&lt;/a&gt;&lt;/h1&gt;
 
-&lt;p&gt;Built in to Elixir itself, doctests are a simple way to couple examples of useage where your function definition lives, in the source. They define an example call from an &lt;code&gt;iex&lt;/code&gt; prompt, and show what the return should be. When you set up a simple test file in the suite to run doctests, it will automatically check that the examples match the actual function call response. All it takes is a test file such as:&lt;/p&gt;
+&lt;p&gt;Built in to Elixir itself, doctests are a simple way to couple examples of useage where your function definition lives, in the source. They define an example call from an &lt;code class=&quot;highlighter-rouge&quot;&gt;iex&lt;/code&gt; prompt, and show what the return should be. When you set up a simple test file in the suite to run doctests, it will automatically check that the examples match the actual function call response. All it takes is a test file such as:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;defmodule Alohomora.ResourceTest do
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;defmodule Alohomora.ResourceTest do
   use ExUnit.Case, async: true
   doctest Alohomora.Resource
 end
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;And to test functions with doctests in your &lt;code&gt;Alohomora.Resource&lt;/code&gt; namespace. Best of all, there’s nothing extra to add – these tests will run when you run &lt;code&gt;mix test&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;And to test functions with doctests in your &lt;code class=&quot;highlighter-rouge&quot;&gt;Alohomora.Resource&lt;/code&gt; namespace. Best of all, there’s nothing extra to add – these tests will run when you run &lt;code class=&quot;highlighter-rouge&quot;&gt;mix test&lt;/code&gt;.&lt;/p&gt;
 
-&lt;h1 id=&quot;dialyxirhttpsgithubcomjeremyjhdialyxir&quot;&gt;&lt;a href=&quot;https://github.com/jeremyjh/dialyxir&quot;&gt;dialyxir&lt;/a&gt;&lt;/h1&gt;
+&lt;h1 id=&quot;dialyxir&quot;&gt;&lt;a href=&quot;https://github.com/jeremyjh/dialyxir&quot;&gt;dialyxir&lt;/a&gt;&lt;/h1&gt;
 
 &lt;p&gt;This library is actually a set of mix tasks on top of the popular Dialyzer tool for Erlang. Dialyzer, if you haven’t encountered it yet, is a DIscrepancy AnaLYZer for ERlang programs. That is to say, it finds dead code, type issues, and unnecessary tests. In my experience, it finds unreachable branches, and it finds tuple returns that aren’t matching a pattern where they’re used. These two seem to be the bulk of the things it finds for me, at least. It will also find functions that aren’t defined for the number of parameters you’re passing, but it seems to have issues with certain libraries I use – those libraries do in fact define functions with that signature.&lt;/p&gt;
 
 &lt;p&gt;To really get the power of Dialyzer, you’ll to start &lt;a href=&quot;https://hexdocs.pm/elixir/typespecs.html&quot;&gt;including type specs&lt;/a&gt; in your source.&lt;/p&gt;
 
-&lt;h1 id=&quot;dogmahttpsgithubcomlpildogma-and-credohttpsgithubcomrrrenecredo&quot;&gt;&lt;a href=&quot;https://github.com/lpil/dogma&quot;&gt;dogma&lt;/a&gt; and &lt;a href=&quot;https://github.com/rrrene/credo&quot;&gt;credo&lt;/a&gt;&lt;/h1&gt;
+&lt;h1 id=&quot;dogma-and-credo&quot;&gt;&lt;a href=&quot;https://github.com/lpil/dogma&quot;&gt;dogma&lt;/a&gt; and &lt;a href=&quot;https://github.com/rrrene/credo&quot;&gt;credo&lt;/a&gt;&lt;/h1&gt;
 
 &lt;p&gt;Style guides help a team to write consistent code, more than they specify architecture patterns or idiomatic solutions. If you want to start applying a style guide to your Elixir code, look no further than dogma. As indicated on its README, “It’s highly configurable so you can adjust it to fit your style guide, but comes with a sane set of defaults so for most people it should just work out-of-the-box.” I’d recommend starting with its default style guide and seeing what it yells about.&lt;/p&gt;
 
-&lt;p&gt;The kinds of things that dogma will tell you about are lines too long, trailing whitespace, and so on. You’ve probably seen similar output if you use a tool like &lt;code&gt;rubocop&lt;/code&gt; in Ruby.&lt;/p&gt;
+&lt;p&gt;The kinds of things that dogma will tell you about are lines too long, trailing whitespace, and so on. You’ve probably seen similar output if you use a tool like &lt;code class=&quot;highlighter-rouge&quot;&gt;rubocop&lt;/code&gt; in Ruby.&lt;/p&gt;
 
 &lt;p&gt;Credo has some overlap with dogma, but it does far more. This tool is more concerned with code smells. Some examples are checking function complexity, negated conditionals, and idiomatic ways to format your pipe operators and one-line functions. You can read up on the &lt;a href=&quot;https://github.com/rrrene/elixir-style-guide&quot;&gt;credo docs&lt;/a&gt; to understand everything it checks for.&lt;/p&gt;
 
-&lt;p&gt;Ultimately, you may feel like you only need one or the other. For myself, I use credo with &lt;code&gt;mix credo --strict&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Ultimately, you may feel like you only need one or the other. For myself, I use credo with &lt;code class=&quot;highlighter-rouge&quot;&gt;mix credo --strict&lt;/code&gt;.&lt;/p&gt;
 
-&lt;h1 id=&quot;excoverallshttpsgithubcomparrotyexcoveralls&quot;&gt;&lt;a href=&quot;https://github.com/parroty/excoveralls&quot;&gt;ExCoveralls&lt;/a&gt;&lt;/h1&gt;
+&lt;h1 id=&quot;excoveralls&quot;&gt;&lt;a href=&quot;https://github.com/parroty/excoveralls&quot;&gt;ExCoveralls&lt;/a&gt;&lt;/h1&gt;
 
 &lt;p&gt;Code coverage in your tests is an important metric to keep track of. While striving for 100% code coverage isn’t always worth it, it is good to know whether you’re exercising the code you think you are, and ensuring that all edge cases and error cases that you coded for have been checked with a test.&lt;/p&gt;
 
-&lt;p&gt;Installing ExCoveralls in your project will allow you to print out your code coverage for each module to the shell, as HTML, or to post the code coverage to Coveralls.io. ExCoveralls also supports being run from a few different CI tools including CircleCI, Semaphore, and Travis. If you don’t need all this, you could look into &lt;a href=&quot;https://github.com/mrinalwadhwa/excov&quot;&gt;ExCov&lt;/a&gt; or simply run &lt;code&gt;mix test --cover&lt;/code&gt; – although I find this built-in mix task’s output to be the least useful.&lt;/p&gt;
+&lt;p&gt;Installing ExCoveralls in your project will allow you to print out your code coverage for each module to the shell, as HTML, or to post the code coverage to Coveralls.io. ExCoveralls also supports being run from a few different CI tools including CircleCI, Semaphore, and Travis. If you don’t need all this, you could look into &lt;a href=&quot;https://github.com/mrinalwadhwa/excov&quot;&gt;ExCov&lt;/a&gt; or simply run &lt;code class=&quot;highlighter-rouge&quot;&gt;mix test --cover&lt;/code&gt; – although I find this built-in mix task’s output to be the least useful.&lt;/p&gt;
 
 &lt;h1 id=&quot;the-erlang-observer-gui&quot;&gt;The Erlang observer GUI&lt;/h1&gt;
 
 &lt;p&gt;This one is built in, simply launch it from your `iex terminal:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;iex&amp;gt; :observer.start
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;iex&amp;gt; :observer.start
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;And it will launch a GUI tool. The GUI has charts of memory and processing done, as well as a graph of application supervisor trees. Honestly, there’s a lot more in this tool than I’ve had time to explore and learn about.&lt;/p&gt;
 
-&lt;h1 id=&quot;mix-profilefprof&quot;&gt;&lt;code&gt;mix profile.fprof&lt;/code&gt;&lt;/h1&gt;
+&lt;h1 id=&quot;mix-profilefprof&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mix profile.fprof&lt;/code&gt;&lt;/h1&gt;
 
-&lt;p&gt;This is another built-in tool that you can use. Profiling might not be the first tool you need when developing, but when you want to understand and trace what your code is doing, the &lt;code&gt;fprof&lt;/code&gt; tool’s output can be incredibly handy. Make sure you run this with &lt;code&gt;MIX_ENV=prod&lt;/code&gt; when you use this. It is also possible to &lt;a href=&quot;https://selfamusementpark.com/profiling-a-slow-elixir-test&quot;&gt;wrap fprof to profile slow test cases&lt;/a&gt;, which I have found useful in the past. There’s other libraries that you can install for profiling and tracing Elixir, but so far, &lt;code&gt;mix profile.fprof&lt;/code&gt; has worked well enough for me.&lt;/p&gt;
+&lt;p&gt;This is another built-in tool that you can use. Profiling might not be the first tool you need when developing, but when you want to understand and trace what your code is doing, the &lt;code class=&quot;highlighter-rouge&quot;&gt;fprof&lt;/code&gt; tool’s output can be incredibly handy. Make sure you run this with &lt;code class=&quot;highlighter-rouge&quot;&gt;MIX_ENV=prod&lt;/code&gt; when you use this. It is also possible to &lt;a href=&quot;https://selfamusementpark.com/profiling-a-slow-elixir-test&quot;&gt;wrap fprof to profile slow test cases&lt;/a&gt;, which I have found useful in the past. There’s other libraries that you can install for profiling and tracing Elixir, but so far, &lt;code class=&quot;highlighter-rouge&quot;&gt;mix profile.fprof&lt;/code&gt; has worked well enough for me.&lt;/p&gt;
 
 &lt;h1 id=&quot;final-thoughts&quot;&gt;Final Thoughts&lt;/h1&gt;
 
@@ -81,7 +81,7 @@ end
     
       <item>
         <title>A new look</title>
-        <description>&lt;p&gt;You might notice that this looks a little different. I’ve switched to a much more modern, cleaner theme for my blog. I’ve also redirected all of the old &lt;code&gt;/blog/&lt;/code&gt; subpaths to their new locations (Sadly, it seems GitHub pages does not support permanent redirects with any sort of config file, so the redirects are all in JavaScript.)&lt;/p&gt;
+        <description>&lt;p&gt;You might notice that this looks a little different. I’ve switched to a much more modern, cleaner theme for my blog. I’ve also redirected all of the old &lt;code class=&quot;highlighter-rouge&quot;&gt;/blog/&lt;/code&gt; subpaths to their new locations (Sadly, it seems GitHub pages does not support permanent redirects with any sort of config file, so the redirects are all in JavaScript.)&lt;/p&gt;
 
 &lt;p&gt;Let me know if you notice anything that seems wrong. &lt;a href=&quot;mailto:contact@mattgauger.com&quot;&gt;contact@mattgauger.com&lt;/a&gt;&lt;/p&gt;
 
@@ -322,9 +322,9 @@ end
 
 &lt;p&gt;You need to know your tools, and know where they came from, to know them well. This list is a good start on a deep knowledge of computing. Books help us to understand what came before, and to think about where we can go.&lt;/p&gt;
 
-&lt;p&gt;I’ve set up an &lt;a href=&quot;https://www.goodreads.com/review/list/2450080-mathiasx?shelf=apocalyptic-computing&quot;&gt;&lt;code&gt;apocalyptic-computing&lt;/code&gt; bookshelf on Goodreads&lt;/a&gt; to track these books. The name suggests that this is the list of books I’d bring with me to rebuild society, should we need it. With a list like this can we go “mining for computation on the beach” and hope to know enough to start from scratch.&lt;/p&gt;
+&lt;p&gt;I’ve set up an &lt;a href=&quot;https://www.goodreads.com/review/list/2450080-mathiasx?shelf=apocalyptic-computing&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;apocalyptic-computing&lt;/code&gt; bookshelf on Goodreads&lt;/a&gt; to track these books. The name suggests that this is the list of books I’d bring with me to rebuild society, should we need it. With a list like this can we go “mining for computation on the beach” and hope to know enough to start from scratch.&lt;/p&gt;
 
-&lt;p&gt;What books would be on your &lt;code&gt;apocalyptic-computing&lt;/code&gt; shelf? &lt;a href=&quot;&amp;#109;&amp;#097;&amp;#105;&amp;#108;&amp;#116;&amp;#111;:&amp;#099;&amp;#111;&amp;#110;&amp;#116;&amp;#097;&amp;#099;&amp;#116;&amp;#064;&amp;#109;&amp;#097;&amp;#116;&amp;#116;&amp;#103;&amp;#097;&amp;#117;&amp;#103;&amp;#101;&amp;#114;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&quot;&gt;Let me know&lt;/a&gt;, or set up your own Goodreads shelf and send it to me!&lt;/p&gt;
+&lt;p&gt;What books would be on your &lt;code class=&quot;highlighter-rouge&quot;&gt;apocalyptic-computing&lt;/code&gt; shelf? &lt;a href=&quot;mailto:contact@mattgauger.com&quot;&gt;Let me know&lt;/a&gt;, or set up your own Goodreads shelf and send it to me!&lt;/p&gt;
 
 &lt;h2 id=&quot;notes&quot;&gt;Notes&lt;/h2&gt;
 
@@ -352,42 +352,42 @@ end
 
 &lt;h2 id=&quot;updating-dependencies&quot;&gt;Updating dependencies&lt;/h2&gt;
 
-&lt;p&gt;It has been some time since we worked on &lt;a href=&quot;https://github.com/mathias/autodjinn&quot;&gt;autodjinn&lt;/a&gt;. Libraries move fast in the Clojure ecosystem, and we want to make sure that we’re developing against the most recent versions of each dependency. Before we begin making changes, let’s update everything. If you have already read my &lt;a href=&quot;/blog/2014/09/15/clojure-code-quality-tools/&quot;&gt;Clojure Code Quality Tools&lt;/a&gt; post, you’ll be familiar with the &lt;code&gt;lein ancient&lt;/code&gt; plugin.&lt;/p&gt;
+&lt;p&gt;It has been some time since we worked on &lt;a href=&quot;https://github.com/mathias/autodjinn&quot;&gt;autodjinn&lt;/a&gt;. Libraries move fast in the Clojure ecosystem, and we want to make sure that we’re developing against the most recent versions of each dependency. Before we begin making changes, let’s update everything. If you have already read my &lt;a href=&quot;/blog/2014/09/15/clojure-code-quality-tools/&quot;&gt;Clojure Code Quality Tools&lt;/a&gt; post, you’ll be familiar with the &lt;code class=&quot;highlighter-rouge&quot;&gt;lein ancient&lt;/code&gt; plugin.&lt;/p&gt;
 
-&lt;p&gt;Below is output when I run &lt;code&gt;lein ancient&lt;/code&gt; on the last post’s finished git tag, &lt;code&gt;v0.1.1&lt;/code&gt;. To go back to that state, you can run &lt;code&gt;git checkout v0.1.1&lt;/code&gt; on the &lt;a href=&quot;https://github.com/mathias/autodjinn&quot;&gt;autodjinn repo&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Below is output when I run &lt;code class=&quot;highlighter-rouge&quot;&gt;lein ancient&lt;/code&gt; on the last post’s finished git tag, &lt;code class=&quot;highlighter-rouge&quot;&gt;v0.1.1&lt;/code&gt;. To go back to that state, you can run &lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout v0.1.1&lt;/code&gt; on the &lt;a href=&quot;https://github.com/mathias/autodjinn&quot;&gt;autodjinn repo&lt;/a&gt;.&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/c349dc7cb110edb56235.js&quot;&gt;&lt;/script&gt;
 
-&lt;p&gt;It looks like our &lt;a href=&quot;https://github.com/james-henderson/nomad&quot;&gt;nomad&lt;/a&gt; dependency is out of date. Update the version number in &lt;code&gt;project.clj&lt;/code&gt; to &lt;code&gt;0.7.0&lt;/code&gt; and run &lt;code&gt;lein ancient&lt;/code&gt; again to verify that it worked.&lt;/p&gt;
+&lt;p&gt;It looks like our &lt;a href=&quot;https://github.com/james-henderson/nomad&quot;&gt;nomad&lt;/a&gt; dependency is out of date. Update the version number in &lt;code class=&quot;highlighter-rouge&quot;&gt;project.clj&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;0.7.0&lt;/code&gt; and run &lt;code class=&quot;highlighter-rouge&quot;&gt;lein ancient&lt;/code&gt; again to verify that it worked.&lt;/p&gt;
 
-&lt;p&gt;If you take a look at &lt;code&gt;project.clj&lt;/code&gt; yourself, you may notice that our project is still on Clojure &lt;code&gt;1.5.1&lt;/code&gt;. &lt;code&gt;lein ancient&lt;/code&gt; doesn’t look at the version of Clojure that we’re specifying; it assumes you have a good reason for picking the Clojure version you specify. In our case, we’d like to be on the latest stable Clojure, version &lt;code&gt;1.6.0&lt;/code&gt;. Update the version of Clojure in &lt;code&gt;project.clj&lt;/code&gt; and then run your REPL. There should be no issues with using the functionality in the app that we created in previous posts. If there is, carefully read the error messages and try to find a solution before moving on.&lt;/p&gt;
+&lt;p&gt;If you take a look at &lt;code class=&quot;highlighter-rouge&quot;&gt;project.clj&lt;/code&gt; yourself, you may notice that our project is still on Clojure &lt;code class=&quot;highlighter-rouge&quot;&gt;1.5.1&lt;/code&gt;. &lt;code class=&quot;highlighter-rouge&quot;&gt;lein ancient&lt;/code&gt; doesn’t look at the version of Clojure that we’re specifying; it assumes you have a good reason for picking the Clojure version you specify. In our case, we’d like to be on the latest stable Clojure, version &lt;code class=&quot;highlighter-rouge&quot;&gt;1.6.0&lt;/code&gt;. Update the version of Clojure in &lt;code class=&quot;highlighter-rouge&quot;&gt;project.clj&lt;/code&gt; and then run your REPL. There should be no issues with using the functionality in the app that we created in previous posts. If there is, carefully read the error messages and try to find a solution before moving on.&lt;/p&gt;
 
-&lt;p&gt;To save on the hassle of upgrading, I have created a tag for the project after upgrading Clojure and nomad. To go to that tag in your local copy of the repo, run &lt;code&gt;git checkout v0.1.2&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;To save on the hassle of upgrading, I have created a tag for the project after upgrading Clojure and nomad. To go to that tag in your local copy of the repo, run &lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout v0.1.2&lt;/code&gt;.&lt;/p&gt;
 
 &lt;h2 id=&quot;datomic-query-refresher&quot;&gt;Datomic query refresher&lt;/h2&gt;
 
-&lt;p&gt;If you remember back to the &lt;a href=&quot;/2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/&quot;&gt;first post&lt;/a&gt;, we wrapped up by querying for entity IDs and then using Datomic’s built-in &lt;code&gt;entity&lt;/code&gt; and &lt;code&gt;touch&lt;/code&gt; functions to instantiate each message with all of its attributes. We had to do this because the query itself only returned a set of entity IDs:&lt;/p&gt;
+&lt;p&gt;If you remember back to the &lt;a href=&quot;/2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/&quot;&gt;first post&lt;/a&gt;, we wrapped up by querying for entity IDs and then using Datomic’s built-in &lt;code class=&quot;highlighter-rouge&quot;&gt;entity&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;touch&lt;/code&gt; functions to instantiate each message with all of its attributes. We had to do this because the query itself only returned a set of entity IDs:&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/ab5a827ca860c89e0043.js&quot;&gt;&lt;/script&gt;
 
 &lt;p&gt;Note that the Datomic query is made up of several parts:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;The &lt;code&gt;:find&lt;/code&gt; clause says what will be returned. In this case, it is the &lt;code&gt;?eid&lt;/code&gt; variable for each record we matched in the rest of the query.&lt;/li&gt;
-  &lt;li&gt;The &lt;code&gt;:where&lt;/code&gt; clause gives a condition to match. In this case, we want all &lt;code&gt;?eid&lt;/code&gt; where the entity has a &lt;code&gt;:mail/uid&lt;/code&gt; fact, but we don’t care about the &lt;code&gt;:mail/uid&lt;/code&gt; fact’s value, so we give it a wildcard with the underscore (&lt;code&gt;_&lt;/code&gt;).&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;:find&lt;/code&gt; clause says what will be returned. In this case, it is the &lt;code class=&quot;highlighter-rouge&quot;&gt;?eid&lt;/code&gt; variable for each record we matched in the rest of the query.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;:where&lt;/code&gt; clause gives a condition to match. In this case, we want all &lt;code class=&quot;highlighter-rouge&quot;&gt;?eid&lt;/code&gt; where the entity has a &lt;code class=&quot;highlighter-rouge&quot;&gt;:mail/uid&lt;/code&gt; fact, but we don’t care about the &lt;code class=&quot;highlighter-rouge&quot;&gt;:mail/uid&lt;/code&gt; fact’s value, so we give it a wildcard with the underscore (&lt;code class=&quot;highlighter-rouge&quot;&gt;_&lt;/code&gt;).&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;We could pass in the &lt;code&gt;:mail/uid&lt;/code&gt; we care about, and only get one message’s entity-ID back.&lt;/p&gt;
+&lt;p&gt;We could pass in the &lt;code class=&quot;highlighter-rouge&quot;&gt;:mail/uid&lt;/code&gt; we care about, and only get one message’s entity-ID back.&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/4990c69f1e4c4a7dc7e9.js&quot;&gt;&lt;/script&gt;
 
-&lt;p&gt;Notice how the &lt;code&gt;?uid&lt;/code&gt; variable gets passed in with the &lt;code&gt;:in&lt;/code&gt; clause, as the third argument to &lt;code&gt;d/q&lt;/code&gt;?&lt;/p&gt;
+&lt;p&gt;Notice how the &lt;code class=&quot;highlighter-rouge&quot;&gt;?uid&lt;/code&gt; variable gets passed in with the &lt;code class=&quot;highlighter-rouge&quot;&gt;:in&lt;/code&gt; clause, as the third argument to &lt;code class=&quot;highlighter-rouge&quot;&gt;d/q&lt;/code&gt;?&lt;/p&gt;
 
 &lt;p&gt;Or we could change the query to match on other attributes:&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/3685937809a50e36c424.js&quot;&gt;&lt;/script&gt;
 
-&lt;p&gt;In all these cases, we’d still get the entity IDs back because the &lt;code&gt;:find&lt;/code&gt; clause tells Datomic to return &lt;code&gt;?eid&lt;/code&gt;. Typically, we pass around entity IDs and lazy-load any facts (attributes) that we need off that entity.&lt;/p&gt;
+&lt;p&gt;In all these cases, we’d still get the entity IDs back because the &lt;code class=&quot;highlighter-rouge&quot;&gt;:find&lt;/code&gt; clause tells Datomic to return &lt;code class=&quot;highlighter-rouge&quot;&gt;?eid&lt;/code&gt;. Typically, we pass around entity IDs and lazy-load any facts (attributes) that we need off that entity.&lt;/p&gt;
 
 &lt;p&gt;But, we could just as easily return other attributes from an entity as part of a query. Let’s ask for the recipients of all the emails in our system:&lt;/p&gt;
 
@@ -397,11 +397,11 @@ end
 
 &lt;p&gt;One last thing. Take a look at the return of that query above. Remember that the results returned by a Datomic query are a &lt;a href=&quot;http://clojure.github.io/clojure/clojure.core-api.html#clojure.core/set&quot;&gt;set&lt;/a&gt;. In Clojure, sets are a collection of unique values. So we’re seeing the unique list of addresses that are in the To: field in our data. What we’re not seeing is duplicate recipient addresses. To be able to count the number of times an email address received a message, we’ll need a list with non-unique members.&lt;/p&gt;
 
-&lt;p&gt;Datomic creates a unique set for the values returned by a query. This is generally a great thing, since it gets around some of the issues that one can run into with JOINing in SQL. But in this case, it is not ideal for what we want to accomplish. We could try to get around the uniqueness constraint on output by returning vectors of the entity ID and the &lt;code&gt;?to&lt;/code&gt; address, and then mapping across the result to pull out the second item:&lt;/p&gt;
+&lt;p&gt;Datomic creates a unique set for the values returned by a query. This is generally a great thing, since it gets around some of the issues that one can run into with JOINing in SQL. But in this case, it is not ideal for what we want to accomplish. We could try to get around the uniqueness constraint on output by returning vectors of the entity ID and the &lt;code class=&quot;highlighter-rouge&quot;&gt;?to&lt;/code&gt; address, and then mapping across the result to pull out the second item:&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/d6401a036d032caccde3.js&quot;&gt;&lt;/script&gt;
 
-&lt;p&gt;There’s a simpler way that we can use in the Datomic query. By keeping it inside Datomic, we can later combine this approach with more-complex queries. We can tell the Datomic query to look at other attributes when considering what the unique key is by passing the query a &lt;code&gt;:with&lt;/code&gt; clause. By changing our query slightly to include a &lt;code&gt;:with&lt;/code&gt; clause, we end up with the full list of recipients in our datastore:&lt;/p&gt;
+&lt;p&gt;There’s a simpler way that we can use in the Datomic query. By keeping it inside Datomic, we can later combine this approach with more-complex queries. We can tell the Datomic query to look at other attributes when considering what the unique key is by passing the query a &lt;code class=&quot;highlighter-rouge&quot;&gt;:with&lt;/code&gt; clause. By changing our query slightly to include a &lt;code class=&quot;highlighter-rouge&quot;&gt;:with&lt;/code&gt; clause, we end up with the full list of recipients in our datastore:&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/f36ae56bef0e1b6cdfa9.js&quot;&gt;&lt;/script&gt;
 
@@ -413,45 +413,45 @@ end
 
 &lt;p&gt;We start by building up the query in our REPL. Let’s start with a simpler query, to count how many emails have been sent &lt;em&gt;to&lt;/em&gt; each email address in our data store. Note that this isn’t sufficient to answer the question above, since we won’t know who those emails came &lt;em&gt;from&lt;/em&gt;; they could have been sent by us or by someone else, or they could have been sent to us. Later, we’ll make it work with from-to pairs that allow us to know things like who is sending email to us.&lt;/p&gt;
 
-&lt;p&gt;A simple way to do this would be to wrap our previous query in the &lt;a href=&quot;http://clojure.github.io/clojure/clojure.core-api.html#clojure.core/frequencies&quot;&gt;frequencies&lt;/a&gt; function that Clojure.core provides. &lt;code&gt;frequencies&lt;/code&gt; returns a map of items with their count from a Clojure collection.&lt;/p&gt;
+&lt;p&gt;A simple way to do this would be to wrap our previous query in the &lt;a href=&quot;http://clojure.github.io/clojure/clojure.core-api.html#clojure.core/frequencies&quot;&gt;frequencies&lt;/a&gt; function that Clojure.core provides. &lt;code class=&quot;highlighter-rouge&quot;&gt;frequencies&lt;/code&gt; returns a map of items with their count from a Clojure collection.&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/af050f75d1c610d6d422.js&quot;&gt;&lt;/script&gt;
 
-&lt;p&gt;However, we want to perform the same sort of thing in Datomic itself. To do that, we’re going to need to know about aggregate functions. Aggregate functions operate over the intermediate results of a Datomic query. Datomic provides functions like &lt;code&gt;max&lt;/code&gt;, &lt;code&gt;min&lt;/code&gt;, &lt;code&gt;sum&lt;/code&gt;, &lt;code&gt;count&lt;/code&gt;, &lt;code&gt;rand&lt;/code&gt; (for getting a random value out of the query results), and more. With aggregates, we need to be sure to use a &lt;code&gt;:with&lt;/code&gt; clause to ensure we aggregate over all our values.&lt;/p&gt;
+&lt;p&gt;However, we want to perform the same sort of thing in Datomic itself. To do that, we’re going to need to know about aggregate functions. Aggregate functions operate over the intermediate results of a Datomic query. Datomic provides functions like &lt;code class=&quot;highlighter-rouge&quot;&gt;max&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;min&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;sum&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;count&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;rand&lt;/code&gt; (for getting a random value out of the query results), and more. With aggregates, we need to be sure to use a &lt;code class=&quot;highlighter-rouge&quot;&gt;:with&lt;/code&gt; clause to ensure we aggregate over all our values.&lt;/p&gt;
 
-&lt;p&gt;Looking at that short list of aggregate functions I’ve named, we can see that we probably want to use the &lt;code&gt;count&lt;/code&gt; function to count the occurance of each email address in a to field in our data. To see how aggregates work, I’ve come up with a simpler example (the only new thing to know is that Datomic’s Datalog implementation can query across Clojure collections as easily as it can against a database value, so I’ve given a simple vector-of-vectors here to describe data in the form&lt;/p&gt;
+&lt;p&gt;Looking at that short list of aggregate functions I’ve named, we can see that we probably want to use the &lt;code class=&quot;highlighter-rouge&quot;&gt;count&lt;/code&gt; function to count the occurance of each email address in a to field in our data. To see how aggregates work, I’ve come up with a simpler example (the only new thing to know is that Datomic’s Datalog implementation can query across Clojure collections as easily as it can against a database value, so I’ve given a simple vector-of-vectors here to describe data in the form&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;[database-id person-name]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[database-id person-name]&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;When the query looks at records in the data, our &lt;code&gt;:where&lt;/code&gt; clause gives each position in the vector an id and a name based on position in the vector.)&lt;/p&gt;
+&lt;p&gt;When the query looks at records in the data, our &lt;code class=&quot;highlighter-rouge&quot;&gt;:where&lt;/code&gt; clause gives each position in the vector an id and a name based on position in the vector.)&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/6b8da156388ed1cd9290.js&quot;&gt;&lt;/script&gt;
 
-&lt;p&gt;Let’s review what happened there. Before the &lt;code&gt;count&lt;/code&gt; aggregate function was applied, our results looked like this:&lt;/p&gt;
+&lt;p&gt;Let’s review what happened there. Before the &lt;code class=&quot;highlighter-rouge&quot;&gt;count&lt;/code&gt; aggregate function was applied, our results looked like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;[[&quot;Jon&quot;] [&quot;Jon&quot;] [&quot;Bob&quot;] [&quot;Chris&quot;]]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[[&quot;Jon&quot;] [&quot;Jon&quot;] [&quot;Bob&quot;] [&quot;Chris&quot;]]&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;So the &lt;code&gt;count&lt;/code&gt; function just counts across the values of the variable it is passed (in our case, &lt;code&gt;?name&lt;/code&gt;), and by pairing it with the original &lt;code&gt;?name&lt;/code&gt; value, we get each name and the number of times it appears in our dataset.&lt;/p&gt;
+&lt;p&gt;So the &lt;code class=&quot;highlighter-rouge&quot;&gt;count&lt;/code&gt; function just counts across the values of the variable it is passed (in our case, &lt;code class=&quot;highlighter-rouge&quot;&gt;?name&lt;/code&gt;), and by pairing it with the original &lt;code class=&quot;highlighter-rouge&quot;&gt;?name&lt;/code&gt; value, we get each name and the number of times it appears in our dataset.&lt;/p&gt;
 
-&lt;p&gt;It makes sense that we can do the same thing with our recipient email addresses from the previous query. Combining our previous queries with the &lt;code&gt;count&lt;/code&gt; aggregate function, we get:&lt;/p&gt;
+&lt;p&gt;It makes sense that we can do the same thing with our recipient email addresses from the previous query. Combining our previous queries with the &lt;code class=&quot;highlighter-rouge&quot;&gt;count&lt;/code&gt; aggregate function, we get:&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/8b346f1019d588bea534.js&quot;&gt;&lt;/script&gt;
 
-&lt;p&gt;That looks like the same kind of data we were getting with the use of the &lt;code&gt;frequencies&lt;/code&gt; function before! So now we know how to use a Datomic aggregate function to count results in our queries.&lt;/p&gt;
+&lt;p&gt;That looks like the same kind of data we were getting with the use of the &lt;code class=&quot;highlighter-rouge&quot;&gt;frequencies&lt;/code&gt; function before! So now we know how to use a Datomic aggregate function to count results in our queries.&lt;/p&gt;
 
 &lt;p&gt;What’s next? Well, what we really want is to get results that are of the form&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;[from-address to-address]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[from-address to-address]&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;and count those tuples. That way, we can differentiate between email sent to us versus email we’ve sent to others, etc. And eventually, we’d like to save those queries off as functions that we can call to compute the counts from other places in our project.&lt;/p&gt;
 
-&lt;p&gt;We can’t pass a tuple like &lt;code&gt;[from-address to-address]&lt;/code&gt; to the &lt;code&gt;count&lt;/code&gt; aggregate function in one query. The way around this is to write two queries. The inner query will return the tuples, and the outer query will return the tuple and a count of the tuple in the output data. Since the queries run on the peer, we don’t really have to worry about whether it is one query or two, just that it returns the correct data at the end.&lt;/p&gt;
+&lt;p&gt;We can’t pass a tuple like &lt;code class=&quot;highlighter-rouge&quot;&gt;[from-address to-address]&lt;/code&gt; to the &lt;code class=&quot;highlighter-rouge&quot;&gt;count&lt;/code&gt; aggregate function in one query. The way around this is to write two queries. The inner query will return the tuples, and the outer query will return the tuple and a count of the tuple in the output data. Since the queries run on the peer, we don’t really have to worry about whether it is one query or two, just that it returns the correct data at the end.&lt;/p&gt;
 
-&lt;p&gt;So what would the inner query look like? Remember that the outer query will still need a field to pass to the &lt;code&gt;:with&lt;/code&gt; clause, so we’ll probably want to pass through the entity ID.&lt;/p&gt;
+&lt;p&gt;So what would the inner query look like? Remember that the outer query will still need a field to pass to the &lt;code class=&quot;highlighter-rouge&quot;&gt;:with&lt;/code&gt; clause, so we’ll probably want to pass through the entity ID.&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/61e60a563ffc29f06af8.js&quot;&gt;&lt;/script&gt;
 
-&lt;p&gt;Those tuples will be used by our outer query. However, we also need a combined value for the count to operate on. For that, we can throw in a function call in the &lt;code&gt;:where&lt;/code&gt; clause and give it a binding at the end for Datomic to use for that new value. In this case, I’ll combine the &lt;code&gt;?from&lt;/code&gt; and &lt;code&gt;?to&lt;/code&gt; values into a PersistentVector that the &lt;code&gt;count&lt;/code&gt; aggregate function can use. The combined query ends up looking like this:&lt;/p&gt;
+&lt;p&gt;Those tuples will be used by our outer query. However, we also need a combined value for the count to operate on. For that, we can throw in a function call in the &lt;code class=&quot;highlighter-rouge&quot;&gt;:where&lt;/code&gt; clause and give it a binding at the end for Datomic to use for that new value. In this case, I’ll combine the &lt;code class=&quot;highlighter-rouge&quot;&gt;?from&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;?to&lt;/code&gt; values into a PersistentVector that the &lt;code class=&quot;highlighter-rouge&quot;&gt;count&lt;/code&gt; aggregate function can use. The combined query ends up looking like this:&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/d26c7175670b8c29e7c2.js&quot;&gt;&lt;/script&gt;
 
@@ -469,11 +469,11 @@ end
 
 &lt;p&gt;By taking advantage of multiple arities, we can default to not having to pass a database value into the function. But in the cases where we do need to ensure a particular database version is used, we can do that. This is a very powerful idiom that I’ve learned since I began to use Datomic, and I suggest you structure all your query functions similarly.&lt;/p&gt;
 
-&lt;p&gt;Now, let’s take that function that only queries for &lt;code&gt;:mail/to&lt;/code&gt; addresses and make it more generic, with specific wrapper functions for each case where we’d want to use it:&lt;/p&gt;
+&lt;p&gt;Now, let’s take that function that only queries for &lt;code class=&quot;highlighter-rouge&quot;&gt;:mail/to&lt;/code&gt; addresses and make it more generic, with specific wrapper functions for each case where we’d want to use it:&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/67647105799f7f2ff1cf.js&quot;&gt;&lt;/script&gt;
 
-&lt;p&gt;Note that we had to change the inner query to take the attr we want to query on as a variable; this is the proper way to pass a piece of data into a query we want to run. The &lt;code&gt;$&lt;/code&gt; that comes first in the &lt;code&gt;:in&lt;/code&gt; clause tells Datomic to use the second &lt;code&gt;d/q&lt;/code&gt; argument as our dataset (the db value we pass in), and the &lt;code&gt;?attr&lt;/code&gt; tells it to bind the third &lt;code&gt;d/q&lt;/code&gt; argument as the variable &lt;code&gt;?attr&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Note that we had to change the inner query to take the attr we want to query on as a variable; this is the proper way to pass a piece of data into a query we want to run. The &lt;code class=&quot;highlighter-rouge&quot;&gt;$&lt;/code&gt; that comes first in the &lt;code class=&quot;highlighter-rouge&quot;&gt;:in&lt;/code&gt; clause tells Datomic to use the second &lt;code class=&quot;highlighter-rouge&quot;&gt;d/q&lt;/code&gt; argument as our dataset (the db value we pass in), and the &lt;code class=&quot;highlighter-rouge&quot;&gt;?attr&lt;/code&gt; tells it to bind the third &lt;code class=&quot;highlighter-rouge&quot;&gt;d/q&lt;/code&gt; argument as the variable &lt;code class=&quot;highlighter-rouge&quot;&gt;?attr&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;While the three variations on functions are similar, we keep the code DRY. (DRY is an acronym for Don’t Repeat Yourself.) In the long run, less code should mean less bugs and the ability to fix problems in one place.&lt;/p&gt;
 
@@ -491,37 +491,37 @@ end
 
 &lt;p&gt;For all three query functions we wrote, each result is of the form:&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;[from-address to-address count]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[from-address to-address count]&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;Let’s add to the Datomic schema in our &lt;code&gt;core.clj&lt;/code&gt; file to create a new &lt;code&gt;:sent-count&lt;/code&gt; entity type with these three attributes. Note that sent counts don’t really have a unique identifier of their own; it is the combination of &lt;code&gt;from&lt;/code&gt; -&amp;gt; &lt;code&gt;to&lt;/code&gt; addresses that uniquely identifies them. However, we will leave the &lt;code&gt;from&lt;/code&gt; and &lt;code&gt;to&lt;/code&gt; addresses as separate fields so it is easy to use them in queries.&lt;/p&gt;
+&lt;p&gt;Let’s add to the Datomic schema in our &lt;code class=&quot;highlighter-rouge&quot;&gt;core.clj&lt;/code&gt; file to create a new &lt;code class=&quot;highlighter-rouge&quot;&gt;:sent-count&lt;/code&gt; entity type with these three attributes. Note that sent counts don’t really have a unique identifier of their own; it is the combination of &lt;code class=&quot;highlighter-rouge&quot;&gt;from&lt;/code&gt; -&amp;gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;to&lt;/code&gt; addresses that uniquely identifies them. However, we will leave the &lt;code class=&quot;highlighter-rouge&quot;&gt;from&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;to&lt;/code&gt; addresses as separate fields so it is easy to use them in queries.&lt;/p&gt;
 
-&lt;p&gt;Add the following maps to the &lt;code&gt;schema-txn&lt;/code&gt; vector:&lt;/p&gt;
+&lt;p&gt;Add the following maps to the &lt;code class=&quot;highlighter-rouge&quot;&gt;schema-txn&lt;/code&gt; vector:&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/661dadfdb2e639209452.js&quot;&gt;&lt;/script&gt;
 
-&lt;p&gt;You’ll have to call the &lt;code&gt;update-schema&lt;/code&gt; function in your REPL to run the schema transaction.&lt;/p&gt;
+&lt;p&gt;You’ll have to call the &lt;code class=&quot;highlighter-rouge&quot;&gt;update-schema&lt;/code&gt; function in your REPL to run the schema transaction.&lt;/p&gt;
 
-&lt;p&gt;Something that’s worth calling out is that we’re using a Datomic schema &lt;code&gt;valueType&lt;/code&gt; that we haven’t seen yet in this project: &lt;code&gt;db.type/ref&lt;/code&gt;. In most cases, you’d want to use the &lt;code&gt;ref&lt;/code&gt; type to associate with other entities in Datomic. But we can also use it to associate with a given list of facts. Here, we give the &lt;code&gt;ref&lt;/code&gt; type an enum of the possible values that &lt;code&gt;:sent-count/type&lt;/code&gt; can have: &lt;code&gt;to&lt;/code&gt;, &lt;code&gt;cc&lt;/code&gt;, and &lt;code&gt;bcc&lt;/code&gt;. By adding this &lt;code&gt;type&lt;/code&gt; field to our new entities, we can either choose to look at sent counts for only one type of address, or we can sum up all the counts for a given from-to pair and get the total counts for the system.&lt;/p&gt;
+&lt;p&gt;Something that’s worth calling out is that we’re using a Datomic schema &lt;code class=&quot;highlighter-rouge&quot;&gt;valueType&lt;/code&gt; that we haven’t seen yet in this project: &lt;code class=&quot;highlighter-rouge&quot;&gt;db.type/ref&lt;/code&gt;. In most cases, you’d want to use the &lt;code class=&quot;highlighter-rouge&quot;&gt;ref&lt;/code&gt; type to associate with other entities in Datomic. But we can also use it to associate with a given list of facts. Here, we give the &lt;code class=&quot;highlighter-rouge&quot;&gt;ref&lt;/code&gt; type an enum of the possible values that &lt;code class=&quot;highlighter-rouge&quot;&gt;:sent-count/type&lt;/code&gt; can have: &lt;code class=&quot;highlighter-rouge&quot;&gt;to&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;cc&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;bcc&lt;/code&gt;. By adding this &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; field to our new entities, we can either choose to look at sent counts for only one type of address, or we can sum up all the counts for a given from-to pair and get the total counts for the system.&lt;/p&gt;
 
-&lt;p&gt;Our next job is to add some functions to create the initial sent counts data, as well as to query for it. To keep things clean, I created a &lt;code&gt;sent-counts&lt;/code&gt; namespace for these functions to live in. I’ve provided it below with minimal explanation, since it should look very familiar to what we’ve already done.&lt;/p&gt;
+&lt;p&gt;Our next job is to add some functions to create the initial sent counts data, as well as to query for it. To keep things clean, I created a &lt;code class=&quot;highlighter-rouge&quot;&gt;sent-counts&lt;/code&gt; namespace for these functions to live in. I’ve provided it below with minimal explanation, since it should look very familiar to what we’ve already done.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/mathias/autodjinn/blob/29cc08d1ead6043287ecb82136d3ee519668100f/src/autodjinn/sent_counts.clj&quot;&gt;/src/autodjinn/sent_counts.clj&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;After adding in the &lt;code&gt;sent_counts.clj&lt;/code&gt; file, running:&lt;/p&gt;
+&lt;p&gt;After adding in the &lt;code class=&quot;highlighter-rouge&quot;&gt;sent_counts.clj&lt;/code&gt; file, running:&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;(sent-counts/create-sent-counts)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;(sent-counts/create-sent-counts)&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;will populate your datastore with the sent counts computed with functions we created earlier.&lt;/p&gt;
 
-&lt;p&gt;Note: The sent counts don’t have any sort of unique key on them, so if you run &lt;code&gt;create-sent-counts&lt;/code&gt; multiple times, you’ll get duplicate results. We’ll handle that another time when we need to update our data.&lt;/p&gt;
+&lt;p&gt;Note: The sent counts don’t have any sort of unique key on them, so if you run &lt;code class=&quot;highlighter-rouge&quot;&gt;create-sent-counts&lt;/code&gt; multiple times, you’ll get duplicate results. We’ll handle that another time when we need to update our data.&lt;/p&gt;
 
 &lt;h2 id=&quot;wrapping-up&quot;&gt;Wrapping up&lt;/h2&gt;
 
-&lt;p&gt;We’ve covered a lot of material on querying Datomic. In particular, we used aggregate functions to get the counts and sums of records in our data store. Because we don’t want to run the queries all the time, we created a new entity type to store our sent counts and saved our data into it. With query functions like those found in the &lt;code&gt;sent-counts&lt;/code&gt; namespace, we can start to ask our data questions like “In the dataset, what address was sent the most email?”&lt;/p&gt;
+&lt;p&gt;We’ve covered a lot of material on querying Datomic. In particular, we used aggregate functions to get the counts and sums of records in our data store. Because we don’t want to run the queries all the time, we created a new entity type to store our sent counts and saved our data into it. With query functions like those found in the &lt;code class=&quot;highlighter-rouge&quot;&gt;sent-counts&lt;/code&gt; namespace, we can start to ask our data questions like “In the dataset, what address was sent the most email?”&lt;/p&gt;
 
-&lt;p&gt;If you want to compare what you’ve done with my version, you can run &lt;code&gt;git diff v0.1.3&lt;/code&gt; on the &lt;a href=&quot;https://github.com/mathias/autodjinn&quot;&gt;autodjinn repo&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you want to compare what you’ve done with my version, you can run &lt;code class=&quot;highlighter-rouge&quot;&gt;git diff v0.1.3&lt;/code&gt; on the &lt;a href=&quot;https://github.com/mathias/autodjinn&quot;&gt;autodjinn repo&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Please let me know what you think of these posts by sending me an email at &lt;a href=&quot;&amp;#109;&amp;#097;&amp;#105;&amp;#108;&amp;#116;&amp;#111;:&amp;#099;&amp;#111;&amp;#110;&amp;#116;&amp;#097;&amp;#099;&amp;#116;&amp;#064;&amp;#109;&amp;#097;&amp;#116;&amp;#116;&amp;#103;&amp;#097;&amp;#117;&amp;#103;&amp;#101;&amp;#114;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&quot;&gt;&amp;#099;&amp;#111;&amp;#110;&amp;#116;&amp;#097;&amp;#099;&amp;#116;&amp;#064;&amp;#109;&amp;#097;&amp;#116;&amp;#116;&amp;#103;&amp;#097;&amp;#117;&amp;#103;&amp;#101;&amp;#114;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&lt;/a&gt;. I’d love to hear from you!&lt;/p&gt;
+&lt;p&gt;Please let me know what you think of these posts by sending me an email at &lt;a href=&quot;mailto:contact@mattgauger.com&quot;&gt;contact@mattgauger.com&lt;/a&gt;. I’d love to hear from you!&lt;/p&gt;
 </description>
         <pubDate>Thu, 23 Oct 2014 18:18:00 -0500</pubDate>
         <link>http://blog.mattgauger.com/2014/10/23/clojure-data-science-sent-counts-and-aggregates/</link>
@@ -538,101 +538,101 @@ end
 
 &lt;h2 id=&quot;lein-deps-tree&quot;&gt;lein deps :tree&lt;/h2&gt;
 
-&lt;p&gt;In the past, &lt;code&gt;lein deps&lt;/code&gt; was a command that downloaded the correct versions of your project’s dependencies. Running &lt;code&gt;lein deps&lt;/code&gt; is no longer necessary, as each lein command now checks for dependencies before executing. But &lt;code&gt;deps&lt;/code&gt; provides an interesting variant for our uses: &lt;code&gt;lein deps :tree&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;In the past, &lt;code class=&quot;highlighter-rouge&quot;&gt;lein deps&lt;/code&gt; was a command that downloaded the correct versions of your project’s dependencies. Running &lt;code class=&quot;highlighter-rouge&quot;&gt;lein deps&lt;/code&gt; is no longer necessary, as each lein command now checks for dependencies before executing. But &lt;code class=&quot;highlighter-rouge&quot;&gt;deps&lt;/code&gt; provides an interesting variant for our uses: &lt;code class=&quot;highlighter-rouge&quot;&gt;lein deps :tree&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;The &lt;code&gt;:tree&lt;/code&gt; keyword at the end instructs lein to print out your project’s dependencies as a tree. This itself is a good visualization, but not what we’re looking for. The tree command will first print out any dependencies-of-dependencies which have conflicts with other dependencies. For example, here’s what &lt;code&gt;lein deps :tree&lt;/code&gt; says for one of my projects:&lt;/p&gt;
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;:tree&lt;/code&gt; keyword at the end instructs lein to print out your project’s dependencies as a tree. This itself is a good visualization, but not what we’re looking for. The tree command will first print out any dependencies-of-dependencies which have conflicts with other dependencies. For example, here’s what &lt;code class=&quot;highlighter-rouge&quot;&gt;lein deps :tree&lt;/code&gt; says for one of my projects:&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/8eca3548f751bec6ea55.js&quot;&gt;&lt;/script&gt;
 
-&lt;p&gt;As you can see, the tool suggests dependencies that request conflicting versions, and how we can modify our &lt;code&gt;project.clj&lt;/code&gt; file to resolve those conflicting versions by excluding one or the other. This isn’t always very useful, but when you run into issues because two different Clojure libraries require two wildly different &lt;code&gt;joda-time&lt;/code&gt; versions (a situation I have run into before), it will be good to know what dependencies are causing that issue and how you might go about resolving it.&lt;/p&gt;
+&lt;p&gt;As you can see, the tool suggests dependencies that request conflicting versions, and how we can modify our &lt;code class=&quot;highlighter-rouge&quot;&gt;project.clj&lt;/code&gt; file to resolve those conflicting versions by excluding one or the other. This isn’t always very useful, but when you run into issues because two different Clojure libraries require two wildly different &lt;code class=&quot;highlighter-rouge&quot;&gt;joda-time&lt;/code&gt; versions (a situation I have run into before), it will be good to know what dependencies are causing that issue and how you might go about resolving it.&lt;/p&gt;
 
-&lt;p&gt;Note that this functionality disappeared in Leiningen 2.4.3 but is back in 2.5.0, so make sure you run &lt;code&gt;lein upgrade&lt;/code&gt;!&lt;/p&gt;
+&lt;p&gt;Note that this functionality disappeared in Leiningen 2.4.3 but is back in 2.5.0, so make sure you run &lt;code class=&quot;highlighter-rouge&quot;&gt;lein upgrade&lt;/code&gt;!&lt;/p&gt;
 
-&lt;h2 id=&quot;lein-ancienthttpsgithubcomxsclein-ancient&quot;&gt;&lt;a href=&quot;https://github.com/xsc/lein-ancient&quot;&gt;lein-ancient&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;lein-ancient&quot;&gt;&lt;a href=&quot;https://github.com/xsc/lein-ancient&quot;&gt;lein-ancient&lt;/a&gt;&lt;/h2&gt;
 
-&lt;p&gt;This plugin to &lt;code&gt;lein&lt;/code&gt; exists simply to check your project for outdated dependencies. Without &lt;a href=&quot;https://github.com/xsc/lein-ancient&quot;&gt;lein-ancient&lt;/a&gt;, I’d be unable to keep up with some of the faster-moving libraries in the Java and Clojure world.&lt;/p&gt;
+&lt;p&gt;This plugin to &lt;code class=&quot;highlighter-rouge&quot;&gt;lein&lt;/code&gt; exists simply to check your project for outdated dependencies. Without &lt;a href=&quot;https://github.com/xsc/lein-ancient&quot;&gt;lein-ancient&lt;/a&gt;, I’d be unable to keep up with some of the faster-moving libraries in the Java and Clojure world.&lt;/p&gt;
 
-&lt;p&gt;After adding ancient to your &lt;code&gt;~/.lein/profiles.clj&lt;/code&gt;, running the &lt;code&gt;lein ancient&lt;/code&gt; command yields output on the same project as before:&lt;/p&gt;
+&lt;p&gt;After adding ancient to your &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.lein/profiles.clj&lt;/code&gt;, running the &lt;code class=&quot;highlighter-rouge&quot;&gt;lein ancient&lt;/code&gt; command yields output on the same project as before:&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/bac5e554f971d7aa462f.js&quot;&gt;&lt;/script&gt;
 
-&lt;p&gt;Whoops! Looks like I haven’t been keeping up to date with my dependencies. &lt;code&gt;lein ancient&lt;/code&gt; makes checking for new dependency versions easy. Further, thanks to the ubiquity of &lt;a href=&quot;http://semver.org/&quot;&gt;semantic versioning&lt;/a&gt; in Clojure projects, it is usually quite safe to bump the minor versions (0.0.x) of dependencies.&lt;/p&gt;
+&lt;p&gt;Whoops! Looks like I haven’t been keeping up to date with my dependencies. &lt;code class=&quot;highlighter-rouge&quot;&gt;lein ancient&lt;/code&gt; makes checking for new dependency versions easy. Further, thanks to the ubiquity of &lt;a href=&quot;http://semver.org/&quot;&gt;semantic versioning&lt;/a&gt; in Clojure projects, it is usually quite safe to bump the minor versions (0.0.x) of dependencies.&lt;/p&gt;
 
-&lt;p&gt;You can also use lein-ancient to find outdated lein plugins in your &lt;code&gt;~/.lein/profiles.clj&lt;/code&gt; file. Just run it with the &lt;code&gt;profiles&lt;/code&gt; argument:&lt;/p&gt;
+&lt;p&gt;You can also use lein-ancient to find outdated lein plugins in your &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.lein/profiles.clj&lt;/code&gt; file. Just run it with the &lt;code class=&quot;highlighter-rouge&quot;&gt;profiles&lt;/code&gt; argument:&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/02b999542ea837b87e30.js&quot;&gt;&lt;/script&gt;
 
-&lt;h2 id=&quot;lein-kibithttpsgithubcomjonasekibit&quot;&gt;&lt;a href=&quot;https://github.com/jonase/kibit&quot;&gt;lein kibit&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;lein-kibit&quot;&gt;&lt;a href=&quot;https://github.com/jonase/kibit&quot;&gt;lein kibit&lt;/a&gt;&lt;/h2&gt;
 
 &lt;p&gt;As we gain experience and confidence in a programming language, we begin to talk about whether we’re writing &lt;em&gt;idiomatic&lt;/em&gt; code. I’d argue that idiomatic code is code that accomplishes a goal with proper use of language features, in a way that other developers familiar with that language would understand. A simpler way to say it might be: idiomatic code uses the community-accepted best practices of how to do something.&lt;/p&gt;
 
-&lt;p&gt;Clojure’s design seeks to solve some problems found in older Lisps, as well as add in niceties like complementary predicate functions. A good example of these convenient complementary functions are &lt;code&gt;if&lt;/code&gt; and &lt;code&gt;if-not&lt;/code&gt;. Clojure also contains several cases of simplification for common usage. For example, when you don’t need an else clause on an &lt;code&gt;if&lt;/code&gt;, you can use the &lt;code&gt;when&lt;/code&gt; macro.&lt;/p&gt;
+&lt;p&gt;Clojure’s design seeks to solve some problems found in older Lisps, as well as add in niceties like complementary predicate functions. A good example of these convenient complementary functions are &lt;code class=&quot;highlighter-rouge&quot;&gt;if&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;if-not&lt;/code&gt;. Clojure also contains several cases of simplification for common usage. For example, when you don’t need an else clause on an &lt;code class=&quot;highlighter-rouge&quot;&gt;if&lt;/code&gt;, you can use the &lt;code class=&quot;highlighter-rouge&quot;&gt;when&lt;/code&gt; macro.&lt;/p&gt;
 
 &lt;p&gt;Wouldn’t it be great if there was someone who was well-versed in Clojure idioms pairing with you and offering suggestions? That’s exactly what &lt;a href=&quot;https://github.com/jonase/kibit&quot;&gt;kibit&lt;/a&gt; does.&lt;/p&gt;
 
-&lt;p&gt;Running against a project I’d set up to contain some smells, &lt;code&gt;lein kibit&lt;/code&gt; found:&lt;/p&gt;
+&lt;p&gt;Running against a project I’d set up to contain some smells, &lt;code class=&quot;highlighter-rouge&quot;&gt;lein kibit&lt;/code&gt; found:&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/fc0d446aeb90f44a6731.js&quot;&gt;&lt;/script&gt;
 
 &lt;p&gt;These kinds of small improvements are all over our Clojure projects. They’re not show-stopper bugs, but they’re small places for improvement.&lt;/p&gt;
 
-&lt;p&gt;Kibit’s suggestions are almost always logically equivalent to the original code. Still, I always do some smoke-testing to ensure the code still works after using Kibit’s suggestion, and it generally does. Problems I frequently fix with Kibit are replacing &lt;code&gt;if&lt;/code&gt; statements with the &lt;code&gt;when&lt;/code&gt; macro, as well as places where the code checks for empty seqs, or that I can simplify nil checks.&lt;/p&gt;
+&lt;p&gt;Kibit’s suggestions are almost always logically equivalent to the original code. Still, I always do some smoke-testing to ensure the code still works after using Kibit’s suggestion, and it generally does. Problems I frequently fix with Kibit are replacing &lt;code class=&quot;highlighter-rouge&quot;&gt;if&lt;/code&gt; statements with the &lt;code class=&quot;highlighter-rouge&quot;&gt;when&lt;/code&gt; macro, as well as places where the code checks for empty seqs, or that I can simplify nil checks.&lt;/p&gt;
 
-&lt;p&gt;You can point lein kibit at a specific namespace by appending the path, like this: &lt;code&gt;lein kibit src/foo/bar.clj&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;You can point lein kibit at a specific namespace by appending the path, like this: &lt;code class=&quot;highlighter-rouge&quot;&gt;lein kibit src/foo/bar.clj&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;Kibit catches many cases where there is a more-idiomatic way to express what you are trying to do. I recommend running it often. In fact, it’s possible to use &lt;a href=&quot;https://github.com/jonase/kibit#usage-from-inside-emacs&quot;&gt;kibit in your emacs buffers&lt;/a&gt; if you want it to be that much more convenient and real-time.&lt;/p&gt;
 
-&lt;h2 id=&quot;eastwoodhttpsgithubcomjonaseeastwood&quot;&gt;&lt;a href=&quot;https://github.com/jonase/eastwood&quot;&gt;Eastwood&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;eastwood&quot;&gt;&lt;a href=&quot;https://github.com/jonase/eastwood&quot;&gt;Eastwood&lt;/a&gt;&lt;/h2&gt;
 
 &lt;p&gt;For linting Clojure code, there’s Eastwood. It is similar in functionality to Kibit, bit will catch different issues than Kibit. Built on two interesting Clojure projects: &lt;a href=&quot;https://github.com/clojure/tools.analyzer&quot;&gt;tools.analyzer&lt;/a&gt; and &lt;a href=&quot;https://github.com/clojure/tools.analyzer.jvm&quot;&gt;tools.analyzer.jvm&lt;/a&gt;, Eastwood does a powerful examination of your code inside the JVM. It is worth highlighting that since Eastwood loads your code to analyze it, it might trigger any side effects that happen when your code loads: writing files, modifying databases, etc. Note that it only loads the code; it does not execute it.&lt;/p&gt;
 
-&lt;p&gt;After adding &lt;code&gt;eastwood&lt;/code&gt; to your lein &lt;code&gt;profiles.clj&lt;/code&gt;, simply run: &lt;code&gt;lein eastwood&lt;/code&gt; and you will see output like:&lt;/p&gt;
+&lt;p&gt;After adding &lt;code class=&quot;highlighter-rouge&quot;&gt;eastwood&lt;/code&gt; to your lein &lt;code class=&quot;highlighter-rouge&quot;&gt;profiles.clj&lt;/code&gt;, simply run: &lt;code class=&quot;highlighter-rouge&quot;&gt;lein eastwood&lt;/code&gt; and you will see output like:&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/b93cea02293eac933bee.js&quot;&gt;&lt;/script&gt;
 
 &lt;p&gt;That’s a lot of problems for a simple file! Notice how one mistake got caught for two reasons: A misplaced docstring (placed after the arguments vector) becomes just a string in the function body that will be thrown away.&lt;/p&gt;
 
-&lt;p&gt;Another nice catch that Eastwood provides is detecting the redefinition of the var &lt;code&gt;qux&lt;/code&gt; in the file.&lt;/p&gt;
+&lt;p&gt;Another nice catch that Eastwood provides is detecting the redefinition of the var &lt;code class=&quot;highlighter-rouge&quot;&gt;qux&lt;/code&gt; in the file.&lt;/p&gt;
 
 &lt;p&gt;But Eastwood covers a lot more cases than just vars being def’d more than once. See the &lt;a href=&quot;https://github.com/jonase/eastwood#whats-there&quot;&gt;full list&lt;/a&gt; to find out what else it does. There’s a few linters that are disabled by default, but they might make sense to enable for your project.&lt;/p&gt;
 
 &lt;p&gt;Frequently running lint tools can help prevent subtle problems that come from code that looks correct but contains some small error. Eastwood is less concerned with style than tools like JSHint are, but we have other tools that cover stylistic concerns.&lt;/p&gt;
 
-&lt;h2 id=&quot;lein-bikeshedhttpsgithubcomdakronelein-bikeshed&quot;&gt;&lt;a href=&quot;https://github.com/dakrone/lein-bikeshed&quot;&gt;lein bikeshed&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;lein-bikeshed&quot;&gt;&lt;a href=&quot;https://github.com/dakrone/lein-bikeshed&quot;&gt;lein bikeshed&lt;/a&gt;&lt;/h2&gt;
 
-&lt;p&gt;This is a relative newcomer to my own tool set. &lt;a href=&quot;https://github.com/dakrone/lein-bikeshed&quot;&gt;lein bikeshed&lt;/a&gt; has features related to the low-hanging fruit in our Clojure code: lines longer than 80 characters, blank lines at ends of files, and more. It will also tell you what percentage of functions have docstrings. Like other tools mentioned here, it is a lein plugin that you add to your &lt;code&gt;profiles.clj&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This is a relative newcomer to my own tool set. &lt;a href=&quot;https://github.com/dakrone/lein-bikeshed&quot;&gt;lein bikeshed&lt;/a&gt; has features related to the low-hanging fruit in our Clojure code: lines longer than 80 characters, blank lines at ends of files, and more. It will also tell you what percentage of functions have docstrings. Like other tools mentioned here, it is a lein plugin that you add to your &lt;code class=&quot;highlighter-rouge&quot;&gt;profiles.clj&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;A run of &lt;code&gt;lein bikeshed&lt;/code&gt; on its own source (which purposefully includes some code designed to fail) looks like this:&lt;/p&gt;
+&lt;p&gt;A run of &lt;code class=&quot;highlighter-rouge&quot;&gt;lein bikeshed&lt;/code&gt; on its own source (which purposefully includes some code designed to fail) looks like this:&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/271e06ebce8fe6428b83.js&quot;&gt;&lt;/script&gt;
 
-&lt;p&gt;Bikeshed might give a lot of output for your existing projects, but the warnings are worth investigating and addressing. You can always silence the long-lines warning if it doesn’t matter to you with the &lt;code&gt;-m&lt;/code&gt; command line argument.&lt;/p&gt;
+&lt;p&gt;Bikeshed might give a lot of output for your existing projects, but the warnings are worth investigating and addressing. You can always silence the long-lines warning if it doesn’t matter to you with the &lt;code class=&quot;highlighter-rouge&quot;&gt;-m&lt;/code&gt; command line argument.&lt;/p&gt;
 
 &lt;h2 id=&quot;tying-it-all-together-with-a-lein-alias&quot;&gt;Tying it all together with a Lein alias&lt;/h2&gt;
 
 &lt;p&gt;Wouldn’t it be great to run all these tools frequently, so that you can check for as many problems as possible? Well, you can, with a lein alias. (The lein wiki documents aliases in the &lt;a href=&quot;https://github.com/technomancy/leiningen/blob/stable/sample.project.clj#L195-L211&quot;&gt;lein sample.project.clj&lt;/a&gt;.)&lt;/p&gt;
 
-&lt;p&gt;In &lt;code&gt;~/.lein/profiles.clj&lt;/code&gt;, inside your &lt;code&gt;:user&lt;/code&gt; map, add the line:&lt;/p&gt;
+&lt;p&gt;In &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.lein/profiles.clj&lt;/code&gt;, inside your &lt;code class=&quot;highlighter-rouge&quot;&gt;:user&lt;/code&gt; map, add the line:&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/eef9f3f3e9e0ba40cb78.js&quot;&gt;&lt;/script&gt;
 
-&lt;p&gt;Now, when you want to run all these tools at once on a project, you simply invoke &lt;code&gt;lein omni&lt;/code&gt;. I use this alias on all my Clojure(Script) projects. I have grown accustomed to seeing the kinds of output that a clean Clojure project will have.&lt;/p&gt;
+&lt;p&gt;Now, when you want to run all these tools at once on a project, you simply invoke &lt;code class=&quot;highlighter-rouge&quot;&gt;lein omni&lt;/code&gt;. I use this alias on all my Clojure(Script) projects. I have grown accustomed to seeing the kinds of output that a clean Clojure project will have.&lt;/p&gt;
 
-&lt;p&gt;It’s worth noting that I don’t run Eastwood unless it is necessary for the project. When it is necessary, I override the alias in the project’s &lt;code&gt;project.clj&lt;/code&gt; to run Eastwood as well.&lt;/p&gt;
+&lt;p&gt;It’s worth noting that I don’t run Eastwood unless it is necessary for the project. When it is necessary, I override the alias in the project’s &lt;code class=&quot;highlighter-rouge&quot;&gt;project.clj&lt;/code&gt; to run Eastwood as well.&lt;/p&gt;
 
 &lt;p&gt;This command can take some time to complete, but with an alias we’re only spinning up lein once.&lt;/p&gt;
 
 &lt;h2 id=&quot;and-a-bash-alias&quot;&gt;And a bash alias&lt;/h2&gt;
 
-&lt;p&gt;The output of &lt;code&gt;lein omni&lt;/code&gt; can be long, which can either result in a lot of scrolling or neglecting to run the command due to the inconvenience. To help manage the length of the output, I’ve created a bash alias that runs the plugins and pipes them to less.&lt;/p&gt;
+&lt;p&gt;The output of &lt;code class=&quot;highlighter-rouge&quot;&gt;lein omni&lt;/code&gt; can be long, which can either result in a lot of scrolling or neglecting to run the command due to the inconvenience. To help manage the length of the output, I’ve created a bash alias that runs the plugins and pipes them to less.&lt;/p&gt;
 
 &lt;p&gt;My personal bash alias also runs midje at the end. You can choose whether to run the tests for your own alias. That’s just my personal preference.&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/8b6a0040fcd7e4ae890f.js&quot;&gt;&lt;/script&gt;
 
-&lt;p&gt;Note that just like running the lein alias above, this may take a bit of time. Since we’re piping it to &lt;code&gt;less&lt;/code&gt;, it might take awhile before &lt;code&gt;less&lt;/code&gt; receives output. While it is still running, output will periodically show up at the bottom of the &lt;code&gt;less&lt;/code&gt; buffer. You can use both Emac’s and vim’s movement commands in &lt;code&gt;less&lt;/code&gt; to advance the buffer. I find &lt;code&gt;less&lt;/code&gt; to be more manageable for scrolling through output than switching to &lt;code&gt;tmux&lt;/code&gt;’s history scrolling mode.&lt;/p&gt;
+&lt;p&gt;Note that just like running the lein alias above, this may take a bit of time. Since we’re piping it to &lt;code class=&quot;highlighter-rouge&quot;&gt;less&lt;/code&gt;, it might take awhile before &lt;code class=&quot;highlighter-rouge&quot;&gt;less&lt;/code&gt; receives output. While it is still running, output will periodically show up at the bottom of the &lt;code class=&quot;highlighter-rouge&quot;&gt;less&lt;/code&gt; buffer. You can use both Emac’s and vim’s movement commands in &lt;code class=&quot;highlighter-rouge&quot;&gt;less&lt;/code&gt; to advance the buffer. I find &lt;code class=&quot;highlighter-rouge&quot;&gt;less&lt;/code&gt; to be more manageable for scrolling through output than switching to &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt;’s history scrolling mode.&lt;/p&gt;
 
-&lt;h2 id=&quot;managing-your-namespaces-lein-slamhoundhttpsgithubcomtechnomancyslamhound&quot;&gt;Managing your namespaces: &lt;a href=&quot;https://github.com/technomancy/slamhound&quot;&gt;lein slamhound&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;managing-your-namespaces-lein-slamhound&quot;&gt;Managing your namespaces: &lt;a href=&quot;https://github.com/technomancy/slamhound&quot;&gt;lein slamhound&lt;/a&gt;&lt;/h2&gt;
 
 &lt;p&gt;Namespace management often becomes an issue on nontrivial Clojure projects. Actively developing a project means managing the functions we pull in from other namespaces and from libraries. These require statements can often get out of date. Often, they’re either missing namespaces that are needed, or containing requirements for old functions that are no longer used in the current code.&lt;/p&gt;
 
@@ -640,13 +640,13 @@ end
 
 &lt;p&gt;&lt;strong&gt;Note: slamhound rewrites the namespace macros in your project’s .clj files!&lt;/strong&gt; I recommend only running it on code that’s committed to git (or whatever you use as a VCS) so that you can review and  rollback any changes it makes.&lt;/p&gt;
 
-&lt;p&gt;The most basic way to use slamhound is to add it to your &lt;code&gt;~/.lein/profiles.clj&lt;/code&gt; as a dependency. Then add this alias:&lt;/p&gt;
+&lt;p&gt;The most basic way to use slamhound is to add it to your &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.lein/profiles.clj&lt;/code&gt; as a dependency. Then add this alias:&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/f3799e60c63b0aebf17e.js&quot;&gt;&lt;/script&gt;
 
-&lt;p&gt;Now you can use slamhound on a project by running &lt;code&gt;lein slamhound&lt;/code&gt; in the project’s directory. There’s also REPL and Emacs support, which you can learn more about in the &lt;a href=&quot;https://github.com/technomancy/slamhound#repl-usage&quot;&gt;slamhound README&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Now you can use slamhound on a project by running &lt;code class=&quot;highlighter-rouge&quot;&gt;lein slamhound&lt;/code&gt; in the project’s directory. There’s also REPL and Emacs support, which you can learn more about in the &lt;a href=&quot;https://github.com/technomancy/slamhound#repl-usage&quot;&gt;slamhound README&lt;/a&gt;.&lt;/p&gt;
 
-&lt;h2 id=&quot;measuring-test-coverage-with-cloveragehttpsgithubcomlshiftcloverage&quot;&gt;Measuring test coverage with &lt;a href=&quot;https://github.com/lshift/cloverage&quot;&gt;cloverage&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;measuring-test-coverage-with-cloverage&quot;&gt;Measuring test coverage with &lt;a href=&quot;https://github.com/lshift/cloverage&quot;&gt;cloverage&lt;/a&gt;&lt;/h2&gt;
 
 &lt;p&gt;It is often claimed that less unit testing is necessary in Clojure because Clojure is functional and makes use of immutable data structures. And it is true that with functional programming, most tests are simple: given some input, the output should be a certain value.&lt;/p&gt;
 
@@ -656,19 +656,19 @@ end
 
 &lt;p&gt;This blog post isn’t a platform to argue for or against testing Clojure. But when you do test, you may wonder how to tell how much test coverage your test suite has. How do we know at a glance what percentage of our namespaces is being tested? And how do we find lines that are never being exercised in our tests? After all, we can’t improve what we don’t measure.&lt;/p&gt;
 
-&lt;p&gt;That’s where &lt;a href=&quot;https://github.com/lshift/cloverage&quot;&gt;cloverage&lt;/a&gt; comes in. Cloverage is another lein plugin, so it gets added to &lt;code&gt;~/.lein/profiles.clj&lt;/code&gt; like the others. Then run &lt;code&gt;lein cloverage&lt;/code&gt; in your project; it will run the test suite and generate a coverage report.&lt;/p&gt;
+&lt;p&gt;That’s where &lt;a href=&quot;https://github.com/lshift/cloverage&quot;&gt;cloverage&lt;/a&gt; comes in. Cloverage is another lein plugin, so it gets added to &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.lein/profiles.clj&lt;/code&gt; like the others. Then run &lt;code class=&quot;highlighter-rouge&quot;&gt;lein cloverage&lt;/code&gt; in your project; it will run the test suite and generate a coverage report.&lt;/p&gt;
 
-&lt;p&gt;The coverage report appears in &lt;code&gt;target/coverage&lt;/code&gt; as HTML files, broken down by namespace.&lt;/p&gt;
+&lt;p&gt;The coverage report appears in &lt;code class=&quot;highlighter-rouge&quot;&gt;target/coverage&lt;/code&gt; as HTML files, broken down by namespace.&lt;/p&gt;
 
-&lt;p&gt;You can still use Cloverage even if you don’t use &lt;code&gt;clojure.test&lt;/code&gt;. I use &lt;a href=&quot;https://github.com/marick/Midje&quot;&gt;midje&lt;/a&gt; in most of my tests. To use Cloverage in those situations, wrap your tests in a &lt;code&gt;deftest&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;You can still use Cloverage even if you don’t use &lt;code class=&quot;highlighter-rouge&quot;&gt;clojure.test&lt;/code&gt;. I use &lt;a href=&quot;https://github.com/marick/Midje&quot;&gt;midje&lt;/a&gt; in most of my tests. To use Cloverage in those situations, wrap your tests in a &lt;code class=&quot;highlighter-rouge&quot;&gt;deftest&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;Since &lt;code&gt;deftest&lt;/code&gt; has a hyphenated Clojure keyword as its identifier, and Midje facts have a string as an identifier, I’ve come to use the &lt;code&gt;deftest&lt;/code&gt; to group related tests together. Usually this means naming the group of tests after the function I’m testing. Then I name Midje facts after the situation that the fact exercises. This makes sense to me because it fits well with the hierarchy of rspec unit tests in Ruby.&lt;/p&gt;
+&lt;p&gt;Since &lt;code class=&quot;highlighter-rouge&quot;&gt;deftest&lt;/code&gt; has a hyphenated Clojure keyword as its identifier, and Midje facts have a string as an identifier, I’ve come to use the &lt;code class=&quot;highlighter-rouge&quot;&gt;deftest&lt;/code&gt; to group related tests together. Usually this means naming the group of tests after the function I’m testing. Then I name Midje facts after the situation that the fact exercises. This makes sense to me because it fits well with the hierarchy of rspec unit tests in Ruby.&lt;/p&gt;
 
 &lt;p&gt;Here’s an example of using this approach:&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/94e1a4d7b8bce7c02e23.js&quot;&gt;&lt;/script&gt;
 
-&lt;p&gt;Cloverage also outputs a &lt;code&gt;coverage.txt&lt;/code&gt; file that might be useful for use with services like &lt;a href=&quot;http://coveralls.io&quot;&gt;Coveralls&lt;/a&gt;. I haven’t used this, so I can’t comment on its usefulness.&lt;/p&gt;
+&lt;p&gt;Cloverage also outputs a &lt;code class=&quot;highlighter-rouge&quot;&gt;coverage.txt&lt;/code&gt; file that might be useful for use with services like &lt;a href=&quot;http://coveralls.io&quot;&gt;Coveralls&lt;/a&gt;. I haven’t used this, so I can’t comment on its usefulness.&lt;/p&gt;
 
 &lt;p&gt;If you’re using &lt;a href=&quot;https://github.com/slagyr/speclj&quot;&gt;speclj&lt;/a&gt; for your tests, you might run into some issues getting Cloverage to play nice. I don’t use speclj often, so when I couldn’t get it to work with Cloverage, I didn’t pursue the issue.&lt;/p&gt;
 
@@ -682,7 +682,7 @@ end
 
 &lt;hr /&gt;
 
-&lt;p&gt;Interested in commenting or contacting me? Send an email to &lt;a href=&quot;&amp;#109;&amp;#097;&amp;#105;&amp;#108;&amp;#116;&amp;#111;:&amp;#099;&amp;#111;&amp;#110;&amp;#116;&amp;#097;&amp;#099;&amp;#116;&amp;#064;&amp;#109;&amp;#097;&amp;#116;&amp;#116;&amp;#103;&amp;#097;&amp;#117;&amp;#103;&amp;#101;&amp;#114;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&quot;&gt;&amp;#099;&amp;#111;&amp;#110;&amp;#116;&amp;#097;&amp;#099;&amp;#116;&amp;#064;&amp;#109;&amp;#097;&amp;#116;&amp;#116;&amp;#103;&amp;#097;&amp;#117;&amp;#103;&amp;#101;&amp;#114;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&lt;/a&gt;. Thanks!&lt;/p&gt;
+&lt;p&gt;Interested in commenting or contacting me? Send an email to &lt;a href=&quot;mailto:contact@mattgauger.com&quot;&gt;contact@mattgauger.com&lt;/a&gt;. Thanks!&lt;/p&gt;
 
 </description>
         <pubDate>Mon, 15 Sep 2014 13:39:00 -0500</pubDate>
@@ -732,7 +732,7 @@ end
 
 &lt;hr /&gt;
 
-&lt;p&gt;Interested in commenting or contacting me? Send an email to &lt;a href=&quot;&amp;#109;&amp;#097;&amp;#105;&amp;#108;&amp;#116;&amp;#111;:&amp;#099;&amp;#111;&amp;#110;&amp;#116;&amp;#097;&amp;#099;&amp;#116;&amp;#064;&amp;#109;&amp;#097;&amp;#116;&amp;#116;&amp;#103;&amp;#097;&amp;#117;&amp;#103;&amp;#101;&amp;#114;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&quot;&gt;&amp;#099;&amp;#111;&amp;#110;&amp;#116;&amp;#097;&amp;#099;&amp;#116;&amp;#064;&amp;#109;&amp;#097;&amp;#116;&amp;#116;&amp;#103;&amp;#097;&amp;#117;&amp;#103;&amp;#101;&amp;#114;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&lt;/a&gt;. Thanks!&lt;/p&gt;
+&lt;p&gt;Interested in commenting or contacting me? Send an email to &lt;a href=&quot;mailto:contact@mattgauger.com&quot;&gt;contact@mattgauger.com&lt;/a&gt;. Thanks!&lt;/p&gt;
 
 &lt;script async=&quot;&quot; src=&quot;//embedr.flickr.com/assets/client-code.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
 
@@ -776,25 +776,25 @@ end
 
 &lt;hr /&gt;
 
-&lt;p&gt;Welcome to the second post in this series. If you followed along in the last post, your code should be ready to use in this post. If not, or if you need to go back to known working state, you can clone the &lt;a href=&quot;https://github.com/mathias/autodjinn&quot;&gt;autodjinn repo&lt;/a&gt; and &lt;code&gt;git checkout v0.1.0&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Welcome to the second post in this series. If you followed along in the last post, your code should be ready to use in this post. If not, or if you need to go back to known working state, you can clone the &lt;a href=&quot;https://github.com/mathias/autodjinn&quot;&gt;autodjinn repo&lt;/a&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout v0.1.0&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;I started out writing this post to develop simple functionality on our inbox data. Finishing the post was taking longer than I was expecting, so I split the post in half in the interest of posting this sooner.&lt;/p&gt;
 
-&lt;p&gt;In this post, we need to create an email ingestion script that we can run repeatedly with &lt;code&gt;lein&lt;/code&gt;. And we need to talk about refactoring our code out into maintainable namespaces.&lt;/p&gt;
+&lt;p&gt;In this post, we need to create an email ingestion script that we can run repeatedly with &lt;code class=&quot;highlighter-rouge&quot;&gt;lein&lt;/code&gt;. And we need to talk about refactoring our code out into maintainable namespaces.&lt;/p&gt;
 
 &lt;p&gt;So make sure your Datomic transactor is running and launch a REPL, because it is time to give our code a makeover.&lt;/p&gt;
 
 &lt;h2 id=&quot;a-gmail-ingestion-script&quot;&gt;A Gmail ingestion script&lt;/h2&gt;
 
-&lt;p&gt;Because Clojure sits on the JVM, it shares some similarities with Java. One of these is the special purpose of a &lt;code&gt;-main&lt;/code&gt; function. You can think of this as the &lt;code&gt;main&lt;/code&gt; method in a Java class. The &lt;code&gt;-main&lt;/code&gt; function in a Clojure namespace will be run when a tool like &lt;code&gt;lein&lt;/code&gt; tries to “run” the namespace. That sounds like exactly what we want to do with our Gmail import functionality, so we will add a &lt;code&gt;-main&lt;/code&gt; function that calls our &lt;code&gt;ingest-inbox&lt;/code&gt; function. To get started, we will only have it print us a message.&lt;/p&gt;
+&lt;p&gt;Because Clojure sits on the JVM, it shares some similarities with Java. One of these is the special purpose of a &lt;code class=&quot;highlighter-rouge&quot;&gt;-main&lt;/code&gt; function. You can think of this as the &lt;code class=&quot;highlighter-rouge&quot;&gt;main&lt;/code&gt; method in a Java class. The &lt;code class=&quot;highlighter-rouge&quot;&gt;-main&lt;/code&gt; function in a Clojure namespace will be run when a tool like &lt;code class=&quot;highlighter-rouge&quot;&gt;lein&lt;/code&gt; tries to “run” the namespace. That sounds like exactly what we want to do with our Gmail import functionality, so we will add a &lt;code class=&quot;highlighter-rouge&quot;&gt;-main&lt;/code&gt; function that calls our &lt;code class=&quot;highlighter-rouge&quot;&gt;ingest-inbox&lt;/code&gt; function. To get started, we will only have it print us a message.&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/9965864.js&quot;&gt;&lt;/script&gt;
 
-&lt;p&gt;You can then run this by invoking &lt;code&gt;lein run -m autodjinn.core&lt;/code&gt;. You should see &lt;code&gt;Hello world!&lt;/code&gt; if everything worked. You may notice that the process doesn’t seem to quit after it prints the hello world message – this seems to be problem with Leiningen. To ensure that our process ends when the script is done, we can add a &lt;code&gt;(System/exit 0)&lt;/code&gt; line to the end of our &lt;code&gt;-main&lt;/code&gt; function to ensure that the process quits normally. On *nix systems, a 0 return code means successful exit, and a nonzero response code means something went wrong. Knowing this, we can take advantage of response codes in the future to signal that an error occurred in our script. But for now, we will have the script end by returning 0 to indicate a successful exit.&lt;/p&gt;
+&lt;p&gt;You can then run this by invoking &lt;code class=&quot;highlighter-rouge&quot;&gt;lein run -m autodjinn.core&lt;/code&gt;. You should see &lt;code class=&quot;highlighter-rouge&quot;&gt;Hello world!&lt;/code&gt; if everything worked. You may notice that the process doesn’t seem to quit after it prints the hello world message – this seems to be problem with Leiningen. To ensure that our process ends when the script is done, we can add a &lt;code class=&quot;highlighter-rouge&quot;&gt;(System/exit 0)&lt;/code&gt; line to the end of our &lt;code class=&quot;highlighter-rouge&quot;&gt;-main&lt;/code&gt; function to ensure that the process quits normally. On *nix systems, a 0 return code means successful exit, and a nonzero response code means something went wrong. Knowing this, we can take advantage of response codes in the future to signal that an error occurred in our script. But for now, we will have the script end by returning 0 to indicate a successful exit.&lt;/p&gt;
 
-&lt;p&gt;Think back to what we did to ingest email in our REPL in the last post. We had to connect to the database, run the data schema transaction, and then we were able to run &lt;code&gt;ingest-inbox&lt;/code&gt; to pull in our email.&lt;/p&gt;
+&lt;p&gt;Think back to what we did to ingest email in our REPL in the last post. We had to connect to the database, run the data schema transaction, and then we were able to run &lt;code class=&quot;highlighter-rouge&quot;&gt;ingest-inbox&lt;/code&gt; to pull in our email.&lt;/p&gt;
 
-&lt;p&gt;The following function will do the same thing. Remember that things like trying to create an existing database or performing a schema update against the same schema in Datomic should be harmless. It will add a new transaction ID, but it will not modify or destroy data. Putting together all the steps we need to run, we get a &lt;code&gt;-main&lt;/code&gt; function that looks like this:&lt;/p&gt;
+&lt;p&gt;The following function will do the same thing. Remember that things like trying to create an existing database or performing a schema update against the same schema in Datomic should be harmless. It will add a new transaction ID, but it will not modify or destroy data. Putting together all the steps we need to run, we get a &lt;code class=&quot;highlighter-rouge&quot;&gt;-main&lt;/code&gt; function that looks like this:&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/9965933.js&quot;&gt;&lt;/script&gt;
 
@@ -806,37 +806,37 @@ end
 
 &lt;p&gt;To avoid this, I start with most code in one namespace, and then look for common functionality to extract to a new namespace. Good candidates to extract are those that all talk about the same business logic or business domain. You may notice that the responsibility for one group of functions is different than the rest of the functions. That is a good candidate for a new namespace. Looking at responsibilities can be a good way to determine where to break apart functions into namespaces.&lt;/p&gt;
 
-&lt;p&gt;In this project, we can identify two responsibilities that currently live in our autodjinn.core namespace. The first is working with the database. The second is ingesting Gmail messages. As our project grows, we will not want the code for ingesting Gmail messages to live in &lt;code&gt;autodjinn.core&lt;/code&gt;. With that in mind, let’s create a new file called &lt;code&gt;src/autodjinn/gmail_ingestion.clj&lt;/code&gt; and move over the vars and functions that we think should live there. That file should look like this:&lt;/p&gt;
+&lt;p&gt;In this project, we can identify two responsibilities that currently live in our autodjinn.core namespace. The first is working with the database. The second is ingesting Gmail messages. As our project grows, we will not want the code for ingesting Gmail messages to live in &lt;code class=&quot;highlighter-rouge&quot;&gt;autodjinn.core&lt;/code&gt;. With that in mind, let’s create a new file called &lt;code class=&quot;highlighter-rouge&quot;&gt;src/autodjinn/gmail_ingestion.clj&lt;/code&gt; and move over the vars and functions that we think should live there. That file should look like this:&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/9966207.js&quot;&gt;&lt;/script&gt;
 
-&lt;p&gt;Be sure to remove the functions and vars that we moved to this file from the &lt;code&gt;autodjinn.core&lt;/code&gt; namespace. Note that we moved the &lt;code&gt;-main&lt;/code&gt; function here, too, so that we can now run &lt;code&gt;lein run -m autodjinn.gmail-ingestion&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Be sure to remove the functions and vars that we moved to this file from the &lt;code class=&quot;highlighter-rouge&quot;&gt;autodjinn.core&lt;/code&gt; namespace. Note that we moved the &lt;code class=&quot;highlighter-rouge&quot;&gt;-main&lt;/code&gt; function here, too, so that we can now run &lt;code class=&quot;highlighter-rouge&quot;&gt;lein run -m autodjinn.gmail-ingestion&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;You may also notice that we still had to require the &lt;code&gt;datomic.api&lt;/code&gt; namespace here to be able to perform a transaction. Our &lt;code&gt;autodjinn.core&lt;/code&gt; namespace already handles database interaction, though. So let’s write a &lt;code&gt;create-mail&lt;/code&gt; function in &lt;code&gt;core.clj&lt;/code&gt; and call it in our new namespace:&lt;/p&gt;
+&lt;p&gt;You may also notice that we still had to require the &lt;code class=&quot;highlighter-rouge&quot;&gt;datomic.api&lt;/code&gt; namespace here to be able to perform a transaction. Our &lt;code class=&quot;highlighter-rouge&quot;&gt;autodjinn.core&lt;/code&gt; namespace already handles database interaction, though. So let’s write a &lt;code class=&quot;highlighter-rouge&quot;&gt;create-mail&lt;/code&gt; function in &lt;code class=&quot;highlighter-rouge&quot;&gt;core.clj&lt;/code&gt; and call it in our new namespace:&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/9966294.js&quot;&gt;&lt;/script&gt;
 
-&lt;p&gt;And in &lt;code&gt;gmail_ingestion.clj&lt;/code&gt; we change &lt;code&gt;ingest-inbox&lt;/code&gt; to use the new function. While we’re at it, we’ll break out a convenience function to prepare the attr map for Datomic:&lt;/p&gt;
+&lt;p&gt;And in &lt;code class=&quot;highlighter-rouge&quot;&gt;gmail_ingestion.clj&lt;/code&gt; we change &lt;code class=&quot;highlighter-rouge&quot;&gt;ingest-inbox&lt;/code&gt; to use the new function. While we’re at it, we’ll break out a convenience function to prepare the attr map for Datomic:&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/9966304.js&quot;&gt;&lt;/script&gt;
 
-&lt;p&gt;If we run our &lt;code&gt;lein run -m autodjinn.gmail-ingestion&lt;/code&gt; command, we should see that the code is still working.&lt;/p&gt;
+&lt;p&gt;If we run our &lt;code class=&quot;highlighter-rouge&quot;&gt;lein run -m autodjinn.gmail-ingestion&lt;/code&gt; command, we should see that the code is still working.&lt;/p&gt;
 
-&lt;p&gt;Don’t forget to remove the &lt;code&gt;datomic.api&lt;/code&gt; requirement in &lt;code&gt;gmail-ingestion&lt;/code&gt; namespace! Now we only need to require Datomic in the &lt;code&gt;autodjinn.core&lt;/code&gt; namespace.&lt;/p&gt;
+&lt;p&gt;Don’t forget to remove the &lt;code class=&quot;highlighter-rouge&quot;&gt;datomic.api&lt;/code&gt; requirement in &lt;code class=&quot;highlighter-rouge&quot;&gt;gmail-ingestion&lt;/code&gt; namespace! Now we only need to require Datomic in the &lt;code class=&quot;highlighter-rouge&quot;&gt;autodjinn.core&lt;/code&gt; namespace.&lt;/p&gt;
 
-&lt;p&gt;There’s one more low-hanging fruit that we can refactor about this code before moving on. The config file is loaded and used in both namespaces. We already require everything from &lt;code&gt;autodjinn.core&lt;/code&gt; into &lt;code&gt;autodjinn.gmail-ingestion&lt;/code&gt;. So we can safely change a few lines to use the config in &lt;code&gt;gmail_ingestion.clj&lt;/code&gt; and stop requiring &lt;code&gt;nomad&lt;/code&gt; in two places:&lt;/p&gt;
+&lt;p&gt;There’s one more low-hanging fruit that we can refactor about this code before moving on. The config file is loaded and used in both namespaces. We already require everything from &lt;code class=&quot;highlighter-rouge&quot;&gt;autodjinn.core&lt;/code&gt; into &lt;code class=&quot;highlighter-rouge&quot;&gt;autodjinn.gmail-ingestion&lt;/code&gt;. So we can safely change a few lines to use the config in &lt;code class=&quot;highlighter-rouge&quot;&gt;gmail_ingestion.clj&lt;/code&gt; and stop requiring &lt;code class=&quot;highlighter-rouge&quot;&gt;nomad&lt;/code&gt; in two places:&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/9966372.js&quot;&gt;&lt;/script&gt;
 
-&lt;p&gt;And in &lt;code&gt;core.clj&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;And in &lt;code class=&quot;highlighter-rouge&quot;&gt;core.clj&lt;/code&gt;:&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/mathias/9966384.js&quot;&gt;&lt;/script&gt;
 
-&lt;p&gt;Running &lt;code&gt;lein run -m autodjinn.gmail-ingestion&lt;/code&gt; one more time, we should see that our changes did not break the system. The config is now only loaded once, and we use it everywhere.&lt;/p&gt;
+&lt;p&gt;Running &lt;code class=&quot;highlighter-rouge&quot;&gt;lein run -m autodjinn.gmail-ingestion&lt;/code&gt; one more time, we should see that our changes did not break the system. The config is now only loaded once, and we use it everywhere.&lt;/p&gt;
 
-&lt;p&gt;That’s it! We’ve taken care of some low-hanging fruit and are ready to implement some new functionality. If you want to compare what you’ve done with my version, you can run &lt;code&gt;git diff v0.1.1&lt;/code&gt; on the &lt;a href=&quot;https://github.com/mathias/autodjinn&quot;&gt;autodjinn repo&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;That’s it! We’ve taken care of some low-hanging fruit and are ready to implement some new functionality. If you want to compare what you’ve done with my version, you can run &lt;code class=&quot;highlighter-rouge&quot;&gt;git diff v0.1.1&lt;/code&gt; on the &lt;a href=&quot;https://github.com/mathias/autodjinn&quot;&gt;autodjinn repo&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Please let me know what you think of these posts by sending me an email at &lt;a href=&quot;&amp;#109;&amp;#097;&amp;#105;&amp;#108;&amp;#116;&amp;#111;:&amp;#099;&amp;#111;&amp;#110;&amp;#116;&amp;#097;&amp;#099;&amp;#116;&amp;#064;&amp;#109;&amp;#097;&amp;#116;&amp;#116;&amp;#103;&amp;#097;&amp;#117;&amp;#103;&amp;#101;&amp;#114;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&quot;&gt;&amp;#099;&amp;#111;&amp;#110;&amp;#116;&amp;#097;&amp;#099;&amp;#116;&amp;#064;&amp;#109;&amp;#097;&amp;#116;&amp;#116;&amp;#103;&amp;#097;&amp;#117;&amp;#103;&amp;#101;&amp;#114;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&lt;/a&gt;. I’d love to hear from you!&lt;/p&gt;
+&lt;p&gt;Please let me know what you think of these posts by sending me an email at &lt;a href=&quot;mailto:contact@mattgauger.com&quot;&gt;contact@mattgauger.com&lt;/a&gt;. I’d love to hear from you!&lt;/p&gt;
 </description>
         <pubDate>Sun, 13 Apr 2014 16:28:00 -0500</pubDate>
         <link>http://blog.mattgauger.com/2014/04/13/clojure-data-science-refactoring-and-cleanup/</link>

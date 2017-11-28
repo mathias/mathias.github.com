@@ -38,9 +38,9 @@
           <h2 class="nav-title">Matt Gauger</h2>
         </a>
         <ul>
-          <li><a href="/about">About</a></li>
-          <li><a href="/archives">Blog Archives</a></li>
-          <li><a href="/open-source">Open Source</a></li>
+          <li><a href="http://blog.mattgauger.com/about">About</a></li>
+          <li><a href="http://blog.mattgauger.com/archives">Blog Archives</a></li>
+          <li><a href="http://blog.mattgauger.com/open-source">Open Source</a></li>
         </ul>
     </div>
   </nav>
@@ -71,25 +71,25 @@
 
 <p>In vim with Fugitive, run:</p>
 
-<pre><code>:Ggrep "(&lt;%|=|-).*[A-Z].*\.(find|order|where|includes|all)" app/views/
-</code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>:Ggrep "(&lt;%|=|-).*[A-Z].*\.(find|order|where|includes|all)" app/views/
+</code></pre></div>
 
 <p>This will find places where someone is using model classes with queries in your views. This should work for both erb and haml views. You’ll probably get a few false matches (I eliminated the common ones like capitalized link titles in a link_to call, for example), but overall I was able to reduce a ton of naughty code.</p>
 
 <p>If you want to catch other annoying things (like using Time.now calls), you can look for what should be classes used in views:</p>
 
-<pre><code>:Ggrep "(&lt;%|=|-).*[A-Z].*\." app/views
-</code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>:Ggrep "(&lt;%|=|-).*[A-Z].*\." app/views
+</code></pre></div>
 
 <p>If you want to be even simpler, you could just look for those ActiveRelation queries:</p>
 
-<pre><code>:Ggrep "(find|order|where|includes|all)" app/views/
-</code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>:Ggrep "(find|order|where|includes|all)" app/views/
+</code></pre></div>
 
 <p>These also both work from the command line (if you don’t have Fugitive in your vim yet) by replacing :Ggrep with git-grep:</p>
 
-<pre><code>git-grep "(find|order|where|includes|all)" app/views/
-</code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>git-grep "(find|order|where|includes|all)" app/views/
+</code></pre></div>
 
 <p>With these tools in your belt, you can find all those calls to the database in your views and improve your Rails app.</p>
 

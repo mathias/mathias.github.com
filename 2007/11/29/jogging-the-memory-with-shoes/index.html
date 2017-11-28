@@ -38,9 +38,9 @@
           <h2 class="nav-title">Matt Gauger</h2>
         </a>
         <ul>
-          <li><a href="/about">About</a></li>
-          <li><a href="/archives">Blog Archives</a></li>
-          <li><a href="/open-source">Open Source</a></li>
+          <li><a href="http://blog.mattgauger.com/about">About</a></li>
+          <li><a href="http://blog.mattgauger.com/archives">Blog Archives</a></li>
+          <li><a href="http://blog.mattgauger.com/open-source">Open Source</a></li>
         </ul>
     </div>
   </nav>
@@ -59,103 +59,103 @@
   <h1 class="post-title">Jogging the memory with Shoes</h1>
   <div class="post-line"></div>
 
-  <p>(This post is part of my blog archiving project. This post appeared on<br />
+  <p>(This post is part of my blog archiving project. This post appeared on
 <a href="http://bytecodex.wordpress.com/2007/11/29/jogging-the-memory-with-shoes/">http://bytecodex.wordpress.com/</a> on November 29, 2007.)</p>
 
-<p>Today, I wanted to share my latest little one-night coding project. But<br />
-first, a little back story. I’ve been looking for a new Mac OS X GUI<br />
-text editor for the past couple of days because TextMate has once again<br />
-passed its free 30 day period for me. I don’t mind editing text purely<br />
-with keyboard commands in a terminal window, but sometimes it’s nice to<br />
-have a mouse and menus when you’re working with chunks of code. I’ve<br />
-read studies from Apple that while using only keyboard shortcuts seems<br />
+<p>Today, I wanted to share my latest little one-night coding project. But
+first, a little back story. I’ve been looking for a new Mac OS X GUI
+text editor for the past couple of days because TextMate has once again
+passed its free 30 day period for me. I don’t mind editing text purely
+with keyboard commands in a terminal window, but sometimes it’s nice to
+have a mouse and menus when you’re working with chunks of code. I’ve
+read studies from Apple that while using only keyboard shortcuts seems
 faster, in truth the mouse is quicker at the same task.</p>
 
-<p>On the command line, I’m more likely to use vi than emacs, although I<br />
-know my way around both. So when I found <a href="http://code.google.com/p/macvim/">MacVim</a>, an “experimental”<br />
-Cocoa interface to vim, I knew I’d found my new editor on the Mac. I’ve<br />
-already tried all the free editors that worked on Mac OS X in the past,<br />
-including jEdit (too slow), Eclipse (really an IDE, and even slower),<br />
-Komodo/Smultron/etc., and even most of the for-pay editors (BBEdit,<br />
-aforementioned TextMate, and SubEthaEdit). MacVim really takes the cake,<br />
-as the vim core understands far more languages &amp; markups than TextMate’s<br />
-bundles; it’s as fast as one can perceive a program to be; and it adds a<br />
-GUI (gooey!) layer of goodness on top, including tabs, mouse-based<br />
-copy/paste/cursor positioning, and a full-screen editing mode to<br />
+<p>On the command line, I’m more likely to use vi than emacs, although I
+know my way around both. So when I found <a href="http://code.google.com/p/macvim/">MacVim</a>, an “experimental”
+Cocoa interface to vim, I knew I’d found my new editor on the Mac. I’ve
+already tried all the free editors that worked on Mac OS X in the past,
+including jEdit (too slow), Eclipse (really an IDE, and even slower),
+Komodo/Smultron/etc., and even most of the for-pay editors (BBEdit,
+aforementioned TextMate, and SubEthaEdit). MacVim really takes the cake,
+as the vim core understands far more languages &amp; markups than TextMate’s
+bundles; it’s as fast as one can perceive a program to be; and it adds a
+GUI (gooey!) layer of goodness on top, including tabs, mouse-based
+copy/paste/cursor positioning, and a full-screen editing mode to
 eliminate distractions.</p>
 
-<p>I’ve also been playing with <a href="http://code.whytheluckystiff.net/shoes/">Shoes</a>, a framework for making GUI apps<br />
-in Ruby. Shoes is the brainchild of Ruby super-hacker WhyTheLuckyStiff,<br />
-and I wouldn’t have heard about it without <a href="http://philcrissman.com/">Phil Crissman</a>‘s<br />
+<p>I’ve also been playing with <a href="http://code.whytheluckystiff.net/shoes/">Shoes</a>, a framework for making GUI apps
+in Ruby. Shoes is the brainchild of Ruby super-hacker WhyTheLuckyStiff,
+and I wouldn’t have heard about it without <a href="http://philcrissman.com/">Phil Crissman</a>‘s
 <a href="http://twitter.com/philcrissman">twittering</a> about his interest in using it.</p>
 
-<p>The super simple syntax in Shoes lets you lay out GUI components like<br />
-elements in a web page, and graphics/animations are easily added. Most<br />
+<p>The super simple syntax in Shoes lets you lay out GUI components like
+elements in a web page, and graphics/animations are easily added. Most
 apps are as simple as:</p>
 
-<pre><code>Shoes.app do
+<div class="highlighter-rouge"><pre class="highlight"><code>Shoes.app do
   stack :margin =&gt; 10 do
     para "Chunky Bacon!"
   end
 end
-</code></pre>
+</code></pre></div>
 
-<p>But the real frustration is in the lack of documentation. There are a<br />
-handle of sample apps on the project’s SVN web repo and roughly 4<br />
-tutorials. The full documentation is currently being printed up as a<br />
-real-deal book by WhyTheLuckyStiff, and I didn’t feel coughing up the<br />
-$8+shipping to get a copy. (&amp; knowing Why, I wouldn’t understand<br />
-anything in it anyways). So, I’ve been playing around and doing a lot of<br />
-trial and error based on the sample apps to figure out functionality.<br />
-Luckily, Quicksilver makes the run-test-repeat loop very tight. (For the<br />
-interested, CMD-Space into QS, type “Shoes” TAB TAB, first three letters<br />
-of my Shoes’ script’s filename, ENTER &amp; it’s running. Having to launch<br />
-the .app rather than calling from the CLI is a problem unique to the OSX<br />
+<p>But the real frustration is in the lack of documentation. There are a
+handle of sample apps on the project’s SVN web repo and roughly 4
+tutorials. The full documentation is currently being printed up as a
+real-deal book by WhyTheLuckyStiff, and I didn’t feel coughing up the
+$8+shipping to get a copy. (&amp; knowing Why, I wouldn’t understand
+anything in it anyways). So, I’ve been playing around and doing a lot of
+trial and error based on the sample apps to figure out functionality.
+Luckily, Quicksilver makes the run-test-repeat loop very tight. (For the
+interested, CMD-Space into QS, type “Shoes” TAB TAB, first three letters
+of my Shoes’ script’s filename, ENTER &amp; it’s running. Having to launch
+the .app rather than calling from the CLI is a problem unique to the OSX
 version of Shoes. On Linux it’d be $ ./shoes App.rb )</p>
 
-<p>My first little app was nothing more than adding file saving and opening<br />
-functionality to the sample edit.rb script, added color and formatting,<br />
-buttons, etc. and then modified it to catch a few more commands given<br />
-via keypress. Nothing too fancy, but it was a good way to figure out the<br />
-majority of Shoes’ internals. While it was a fun idea to entertain,<br />
-Shoes is not the ideal platform to develop a text editor in. Luckily, I<br />
+<p>My first little app was nothing more than adding file saving and opening
+functionality to the sample edit.rb script, added color and formatting,
+buttons, etc. and then modified it to catch a few more commands given
+via keypress. Nothing too fancy, but it was a good way to figure out the
+majority of Shoes’ internals. While it was a fun idea to entertain,
+Shoes is not the ideal platform to develop a text editor in. Luckily, I
 don’t have to, as I’ve got MacVim.</p>
 
-<p>But maybe I could use a little tool to help me remember all the various<br />
+<p>But maybe I could use a little tool to help me remember all the various
 vi commands?</p>
 
 <p><img src="/images/shoes-cheatsheet.png" alt="Shoes cheatsheet widget" /></p>
 
-<p>Introducing my cheatsheet widget for vim in Ruby Shoes. It’s based off<br />
-the heavy cardstock “vi Quick Reference” sheet that everyone in my<br />
-vi-specific CSCI classes was issued (I imagine there’s an emacs<br />
-equivalent for classes where emacs is encouraged). Believe it or not,<br />
-the longest part of creating this app in Shoes was typing in all the<br />
-command hints off the physical copy &amp; thinking up multiple ways to implement<br />
-classes containing the data in Ruby. The reinforcement of forgotten vi command<br />
+<p>Introducing my cheatsheet widget for vim in Ruby Shoes. It’s based off
+the heavy cardstock “vi Quick Reference” sheet that everyone in my
+vi-specific CSCI classes was issued (I imagine there’s an emacs
+equivalent for classes where emacs is encouraged). Believe it or not,
+the longest part of creating this app in Shoes was typing in all the
+command hints off the physical copy &amp; thinking up multiple ways to implement
+classes containing the data in Ruby. The reinforcement of forgotten vi command
 skills in developing this widget in MacVim should be obvious.</p>
 
 <p>Using the drop-down allows you to access such diverse topics as:</p>
 
 <p><img src="/images/shoes-cheatsheet-2.jpg" alt="shoes2.jpg" /></p>
 
-<p>It really does make a nice little app to have running off to the side,<br />
-and I’d argue that it was far simpler to create than an Adobe AIR app or<br />
+<p>It really does make a nice little app to have running off to the side,
+and I’d argue that it was far simpler to create than an Adobe AIR app or
 Apple Dashboard widget would have been with the same functionality.</p>
 
-<p>Tomorrow, if suitably motivated I may extend it to read in any number of<br />
-.yml files containing ‘cheat sheet’ definitions, and add definitions<br />
-from any number of the PDF cheatsheets I’ve accumulated over the years<br />
-and never bothered to print out (glancing in my PDF dir, I spy PHP,<br />
-MySQL, sqlite3, microformats, and even, yes, Ruby &amp; Ruby on Rails<br />
-cheatsheets in there). Using graphics I’ll implement a simple ‘tab’<br />
-interface across the top and clean it up so it looks slick. (Red<br />
-background when you click on the Rails tab? With little Ruby icon<br />
+<p>Tomorrow, if suitably motivated I may extend it to read in any number of
+.yml files containing ‘cheat sheet’ definitions, and add definitions
+from any number of the PDF cheatsheets I’ve accumulated over the years
+and never bothered to print out (glancing in my PDF dir, I spy PHP,
+MySQL, sqlite3, microformats, and even, yes, Ruby &amp; Ruby on Rails
+cheatsheets in there). Using graphics I’ll implement a simple ‘tab’
+interface across the top and clean it up so it looks slick. (Red
+background when you click on the Rails tab? With little Ruby icon
 hovering there? Yes!)</p>
 
 <p><img src="/images/shoes-vim-cheatsheet.jpg" alt="shoes3-1.jpg" /></p>
 
-<p>Coding in Ruby is so much fun, it makes trivial things like this<br />
+<p>Coding in Ruby is so much fun, it makes trivial things like this
 interesting, and Shoes follows in that tradition.</p>
 
 <p>Until next time, happy hacking.</p>

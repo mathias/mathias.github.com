@@ -38,9 +38,9 @@
           <h2 class="nav-title">Matt Gauger</h2>
         </a>
         <ul>
-          <li><a href="/about">About</a></li>
-          <li><a href="/archives">Blog Archives</a></li>
-          <li><a href="/open-source">Open Source</a></li>
+          <li><a href="http://blog.mattgauger.com/about">About</a></li>
+          <li><a href="http://blog.mattgauger.com/archives">Blog Archives</a></li>
+          <li><a href="http://blog.mattgauger.com/open-source">Open Source</a></li>
         </ul>
     </div>
   </nav>
@@ -65,7 +65,7 @@
 
 <p>When I tried to create a new Rails app, I got the error in the title of the blog post:</p>
 
-<pre><code>minimite:railstutorial.org mathiasx$ rails new first_app
+<div class="highlighter-rouge"><pre class="highlight"><code>minimite:railstutorial.org mathiasx$ rails new first_app
 /Library/Ruby/Site/1.8/rubygems.rb:779:in `report_activate_error': Could not find RubyGem railties (&gt;= 0) (Gem::LoadError)
         from /Library/Ruby/Site/1.8/rubygems.rb:214:in `activate'
         from /Library/Ruby/Site/1.8/rubygems.rb:1082:in `gem'
@@ -75,70 +75,71 @@ minimite:railstutorial.org mathiasx$ rails -v
         from /Library/Ruby/Site/1.8/rubygems.rb:214:in `activate'
         from /Library/Ruby/Site/1.8/rubygems.rb:1082:in `gem'
         from /usr/bin/rails:18
-</code></pre>
+</code></pre></div>
 
 <p>That didn’t make sense. Where is the Rails command being run from?</p>
 
-<p><code>minimite:railstutorial.org mathiasx$ which ruby
+<p>```minimite:railstutorial.org mathiasx$ which ruby
 /Users/mathiasx/.rvm/rubies/ruby-1.9.2-p0/bin/ruby
 minimite:railstutorial.org mathiasx$ which gem
 /Users/mathiasx/.rvm/rubies/ruby-1.9.2-p0/bin/gem
 minimite:railstutorial.org mathiasx$ which rails
-/usr/bin/rails
-</code></p>
+/usr/bin/rails</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+Aha. Obviously the previously-installed Rails gem, from before installing rvm, was an issue. So I figured I'd just clean it up.
 
-<p>Aha. Obviously the previously-installed Rails gem, from before installing rvm, was an issue. So I figured I’d just clean it up.</p>
 
-<pre><code>minimite:railstutorial.org mathiasx$ rvm list
+</code></pre></div>
+<p>minimite:railstutorial.org mathiasx$ rvm list</p>
 
-rvm rubies
+<p>rvm rubies</p>
 
-   ruby-1.8.7-p302 [ i386 ]
-=&gt; ruby-1.9.2-p0 [ i386 ]
+<p>ruby-1.8.7-p302 [ i386 ]
+=&gt; ruby-1.9.2-p0 [ i386 ]</p>
 
-minimite:railstutorial.org mathiasx$ rvm use 1.8.7
+<p>minimite:railstutorial.org mathiasx$ rvm use 1.8.7
 Using /Users/mathiasx/.rvm/gems/ruby-1.8.7-p302
 minimite:railstutorial.org mathiasx$ sudo gem uninstall rails
 Remove executables:
-        rails
+        rails</p>
 
-in addition to the gem? [Yn]  y
+<p>in addition to the gem? [Yn]  y
 Removing rails
 Successfully uninstalled rails-3.0.1
 minimite:railstutorial.org mathiasx$ which rails
-/usr/bin/rails
-</code></pre>
+/usr/bin/rails</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+But I hadn't been paying attention. I still had not removed the Rails executable, because I was calling the rvm version of Ruby 1.8.7 and not the system-level one. Knowing that Rails was in `/usr/bin/rails`, I assumed that the gem executable that managed it would also be in `/usr/bin`:
 
-<p>But I hadn’t been paying attention. I still had not removed the Rails executable, because I was calling the rvm version of Ruby 1.8.7 and not the system-level one. Knowing that Rails was in <code>/usr/bin/rails</code>, I assumed that the gem executable that managed it would also be in <code>/usr/bin</code>:</p>
-
-<pre><code>minimite:railstutorial.org mathiasx$ sudo /usr/bin/gem uninstall rails
+</code></pre></div>
+<p>minimite:railstutorial.org mathiasx$ sudo /usr/bin/gem uninstall rails
 Remove executables:
-        rails
+        rails</p>
 
-in addition to the gem? [Yn]  y
-Removing rails
+<p>in addition to the gem? [Yn]  y
+Removing rails</p>
 
-You have requested to uninstall the gem:
+<p>You have requested to uninstall the gem:
         rails-3.0.0
 clearance-0.9.0.rc9 depends on [rails (~&gt; 3.0.0)]
 factory_girl_rails-1.0 depends on [rails (&gt;= 3.0.0.beta4)]
 suspenders-0.1.0.beta.4 depends on [rails (&gt;= 3.0.0)]
 If you remove this gems, one or more dependencies will not be met.
 Continue with Uninstall? [Yn]  y
-Successfully uninstalled rails-3.0.0
-</code></pre>
+Successfully uninstalled rails-3.0.0</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+I'd finally removed the system-level Rails script and can switch back to using rvm for everything:
 
-<p>I’d finally removed the system-level Rails script and can switch back to using rvm for everything:</p>
-
-<pre><code>minimite:railstutorial.org mathiasx$ rvm use 1.9.2
+</code></pre></div>
+<p>minimite:railstutorial.org mathiasx$ rvm use 1.9.2
 Using /Users/mathiasx/.rvm/gems/ruby-1.9.2-p0
 minimite:railstutorial.org mathiasx$ which rails
 /Users/mathiasx/.rvm/gems/ruby-1.9.2-p0/bin/rails
 Using /Users/mathiasx/.rvm/gems/ruby-1.9.2-p0
 minimite:railstutorial.org mathiasx$ rails new first_app
       create
-      &lt;-- Lots of output --&gt;
-</code></pre>
+      &lt;– Lots of output –&gt;
+```</p>
 
 <p>It works!</p>
 

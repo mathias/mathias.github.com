@@ -38,9 +38,9 @@
           <h2 class="nav-title">Matt Gauger</h2>
         </a>
         <ul>
-          <li><a href="/about">About</a></li>
-          <li><a href="/archives">Blog Archives</a></li>
-          <li><a href="/open-source">Open Source</a></li>
+          <li><a href="http://blog.mattgauger.com/about">About</a></li>
+          <li><a href="http://blog.mattgauger.com/archives">Blog Archives</a></li>
+          <li><a href="http://blog.mattgauger.com/open-source">Open Source</a></li>
         </ul>
     </div>
   </nav>
@@ -59,42 +59,42 @@
   <h1 class="post-title">Git is full of win</h1>
   <div class="post-line"></div>
 
-  <p>(This post is part of my blog archiving project. This post appeared on<br />
-<a href="http://bytecodex.wordpress.com/2008/03/23/git-is-full-of-win/">bytecodex.wordpress.com</a><br />
+  <p>(This post is part of my blog archiving project. This post appeared on
+<a href="http://bytecodex.wordpress.com/2008/03/23/git-is-full-of-win/">bytecodex.wordpress.com</a>
 on March 23, 2008.)</p>
 
-<p>The blogosphere seems to be blowing up with regards to the SCM suite<br />
-<a href="http://git.or.cz/" title="http://git.or.cz/">git</a>. At least, the blogosphere<br />
+<p>The blogosphere seems to be blowing up with regards to the SCM suite
+<a href="http://git.or.cz/" title="http://git.or.cz/">git</a>. At least, the blogosphere
 I frequent.</p>
 
-<p>git is an open source project started by Linus Torvalds and currently<br />
-maintained by Junio Hamano, intended to replace the proprietary<br />
-<a href="http://en.wikipedia.org/wiki/BitKeeper" title="Wikipedia - BitKeeper">BitKeeper</a><br />
-system that the Linux kernel project used. Like<br />
-<a href="http://www.monotone.ca/" title="http://www.monotone.ca/">Monotone</a> and<br />
-<a href="http://www.selenic.com/mercurial/wiki/" title="http://www.selenic.com/mercurial/wiki/">Mercurial</a>,<br />
-git is a modern decentralized revision control system that makes use of<br />
-cryptography. The ‘repo’ doesn’t live on one server, instead every local<br />
-copy on a developer’s machine is a full repo, with full version history.<br />
-Developers initially copy the repo from somewhere (also known as<br />
-branching or creating a clone) and make changes locally, commiting<br />
+<p>git is an open source project started by Linus Torvalds and currently
+maintained by Junio Hamano, intended to replace the proprietary
+<a href="http://en.wikipedia.org/wiki/BitKeeper" title="Wikipedia - BitKeeper">BitKeeper</a>
+system that the Linux kernel project used. Like
+<a href="http://www.monotone.ca/" title="http://www.monotone.ca/">Monotone</a> and
+<a href="http://www.selenic.com/mercurial/wiki/" title="http://www.selenic.com/mercurial/wiki/">Mercurial</a>,
+git is a modern decentralized revision control system that makes use of
+cryptography. The ‘repo’ doesn’t live on one server, instead every local
+copy on a developer’s machine is a full repo, with full version history.
+Developers initially copy the repo from somewhere (also known as
+branching or creating a clone) and make changes locally, commiting
 changes to their local repo as they code.</p>
 
-<p>The process of combining two branched repos in SCM is known as merging.<br />
-When developers are ready to share their changes, they can ‘merge’ their<br />
-work back into other developers’ trees, or others could pull down<br />
-changes from the developer’s local repo and work from there. Merging was<br />
-previously a time-consuming and frustrating task with other SCM tools,<br />
-but git needed to be able to merge the repos of the Linux kernel<br />
-developers fast. In fact, git makes it so much easier than previous SCM<br />
-tools to branch and merge both local and remote repos that developers<br />
+<p>The process of combining two branched repos in SCM is known as merging.
+When developers are ready to share their changes, they can ‘merge’ their
+work back into other developers’ trees, or others could pull down
+changes from the developer’s local repo and work from there. Merging was
+previously a time-consuming and frustrating task with other SCM tools,
+but git needed to be able to merge the repos of the Linux kernel
+developers fast. In fact, git makes it so much easier than previous SCM
+tools to branch and merge both local and remote repos that developers
 can keep several branches around locally for various changes to live in.</p>
 
-<p>The best<br />
-<a href="http://www.mcl.iis.u-tokyo.ac.jp/eng_version/index.html">image I<br />
-found</a><br />
-to represent this style of passing around changes has nothing to do with<br />
-version control, but gives a good idea if you think of ‘messages’ as the<br />
+<p>The best
+<a href="http://www.mcl.iis.u-tokyo.ac.jp/eng_version/index.html">image I
+found</a>
+to represent this style of passing around changes has nothing to do with
+version control, but gives a good idea if you think of ‘messages’ as the
 changes:</p>
 
 <p><img src="http://bytecodex.files.wordpress.com/2008/03/adhoc.jpg?w=269&amp;h=184" alt="adhoc.jpg" /></p>
@@ -103,34 +103,34 @@ changes:</p>
 
 <p>Usually while riding on bullet trains.</p>
 
-<p>Subversion &amp; CVS, on the other hand, use a centralized server that all<br />
-changes must be downloaded from and uploaded to; making concurrent work<br />
-possible. But a centralized server may be restrictive if a development<br />
-team is scattered across the globe (as in the Linux kernel team &amp; most<br />
-open source projects) rather than scattered across the cube farm. (As a<br />
-side note: git does allow for public repo servers, but that is a whole<br />
+<p>Subversion &amp; CVS, on the other hand, use a centralized server that all
+changes must be downloaded from and uploaded to; making concurrent work
+possible. But a centralized server may be restrictive if a development
+team is scattered across the globe (as in the Linux kernel team &amp; most
+open source projects) rather than scattered across the cube farm. (As a
+side note: git does allow for public repo servers, but that is a whole
 ‘nother topic.)</p>
 
-<p>Best of all, <strong>git is fast</strong>. <a href="http://www.advogato.org/person/apenwarr/diary/371.html" title="Blog for apenwarr - Git is the next Unix">Faster than your<br />
-filesystem</a>,<br />
-in some cases. You can throw data in its repo &amp; <strong>10 years later it<br />
-ensures you get the exact same file out</strong>, due to cryptographic hash<br />
-checking. SCM tools of years past couldn’t vouch for the integrity of<br />
-your files, in fact checking in files was more likely to corrupt files<br />
+<p>Best of all, <strong>git is fast</strong>. <a href="http://www.advogato.org/person/apenwarr/diary/371.html" title="Blog for apenwarr - Git is the next Unix">Faster than your
+filesystem</a>,
+in some cases. You can throw data in its repo &amp; <strong>10 years later it
+ensures you get the exact same file out</strong>, due to cryptographic hash
+checking. SCM tools of years past couldn’t vouch for the integrity of
+your files, in fact checking in files was more likely to corrupt files
 at some future point, rather than protect them.</p>
 
-<p>I’m not going to go into all the features of git or why it’s faster,<br />
-there’s <a href="http://robsanheim.com/2008/02/22/learn-git-10-different-ways/" title="Panasonic Youth - Learn Git 10 Different Ways ">plenty of<br />
-resources</a> already.<br />
-If you’ve used Subversion (svn) in the past, then <a href="http://git.or.cz/course/svn.html" title="Git -SVN Crash Course">this<br />
-tutorial</a> is<br />
+<p>I’m not going to go into all the features of git or why it’s faster,
+there’s <a href="http://robsanheim.com/2008/02/22/learn-git-10-different-ways/" title="Panasonic Youth - Learn Git 10 Different Ways ">plenty of
+resources</a> already.
+If you’ve used Subversion (svn) in the past, then <a href="http://git.or.cz/course/svn.html" title="Git -SVN Crash Course">this
+tutorial</a> is
 probably your best bet.</p>
 
-<p>Since this turned into more of an overview of git rather than covering<br />
-the two topics I had in mind when I started, look forward to two more<br />
-posts this week: one on <a href="http://github.com/">GitHub</a>, a git repository<br />
-hosting service, and <a href="http://atonie.org/2008/02/git-wiki">git-wiki</a>, a<br />
-wiki intended for personal use that checks its changes into a local git<br />
+<p>Since this turned into more of an overview of git rather than covering
+the two topics I had in mind when I started, look forward to two more
+posts this week: one on <a href="http://github.com/">GitHub</a>, a git repository
+hosting service, and <a href="http://atonie.org/2008/02/git-wiki">git-wiki</a>, a
+wiki intended for personal use that checks its changes into a local git
 repo.</p>
 
 
