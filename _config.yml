@@ -21,5 +21,6 @@ destination: "_deploy"
 permalink: "pretty"
 
 # Plugins, extensions, etc:
-gems:
+plugins:
+  - jekyll-paginate
   - jekyll-redirect-from
