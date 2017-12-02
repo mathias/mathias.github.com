@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    
+      NaNoGenMo 2017 &middot; Matt Gauger
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Feeds -->
+  <link rel='alternate' type='application/atom+xml' href='/atom.xml'>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-38944731-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-38944731-1');
+</script>
+
+</head>
+
+
+  <body>
+    <nav class="nav">
+      <div class="nav-container">
+        <a href="/">
+          <h2 class="nav-title">Matt Gauger</h2>
+        </a>
+        <ul>
+          <li><a href="http://blog.mattgauger.com/about">About</a></li>
+          <li><a href="http://blog.mattgauger.com/archives">Blog Archives</a></li>
+          <li><a href="http://blog.mattgauger.com/open-source">Open Source</a></li>
+        </ul>
+    </div>
+  </nav>
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span> Matt Gauger
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2017-12-01 00:00:00 -0600">December 01, 2017</time>
+    
+  </div>
+
+  <h1 class="post-title">NaNoGenMo 2017</h1>
+  <div class="post-line"></div>
+
+  <p>I participated in this year’s <a href="https://nanogenmo.github.io/">NaNoGenMo</a>, writing a procedural generation script to output a “novel.” This event is inspired by the <a href="http://nanowrimo.org/">National Novel Writing Month</a>, in which writers pen a novel in November. I am an avid follower of the <a href="http://procedural-generation.tumblr.com/">Procedural Generation tumblr</a> and I jumped on the chance to join in when NaNoGenMo was covered.</p>
+
+<p>My idea was to write a script that generated stories about all the people passing through the LAX airport – who they were, where they were going, if they were from another country, how they were feeling, and so on. I called my project “Departures and Arrivals.” You can view it <a href="https://github.com/mathias/destinations">on GitHub</a>.</p>
+
+<p>I didn’t get started until around Thanksgiving, but that still left me plenty of time for this simple idea. The <a href="https://github.com/mathias/destinations#journal">dev journal</a> in the README covers the development of my entry in more detail. In the end, I had gathered about 180 lines of data and wrote about 300 lines of code. There’s a lot of things I would’ve liked to improve.</p>
+
+<p>In particular, there’s not enough variety in the types of stories that the script can generate. and I would’ve liked to have it decide for some travelers to write small “sub-stories.” These would follow templates like “something goes wrong,” or “eating at a restaurant,” and have it go into detail there, procedurally-generating more details as it went. I also wanted to write some code that generated stories for the flight crews, the ground crew at the airport, and the employees of businesses.</p>
+
+<p>The code itself is not particularly spectacular. I chose Ruby due to my experience with it. I was able to identify a nice abstraction for inheritance – <code class="highlighter-rouge">DomesticPassenger</code> and <code class="highlighter-rouge">InternationalPassenger</code> are subclasses of <code class="highlighter-rouge">Passenger</code>, because they all share some common attributes like <code class="highlighter-rouge">name</code>.</p>
+
+<p>There’s no testing to speak of, and I’d like to dig in a bit more about how procedural generation is unit tested. My guess is largely around ensuring it works without raising an exception, regardless of output, and also checking with the random seed set for particular behavior.</p>
+
+<p>Participating this year has given me a lot of ideas about how I might do procedural generation for content better in the future, as well as made me appreciate even more the procedurally-generated fiction/games that I’ve played. I’ll likely repeat this again next year.</p>
+
+<p>You can read my finished novel, <a href="https://github.com/mathias/destinations/blob/master/departures.md">Departures and Arrivals</a> on GitHub.</p>
+
+
+</div>
+
+<div class="pagination">
+  
+  
+    <a href="/2017/11/21/elixir-code-quality-tools/" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+
+    </main>
+
+    <footer>
+      <span>
+        &copy; <time datetime="2017">2017</time> Matt Gauger.
+      </span>
+    </footer>
+  </body>
+</html>
