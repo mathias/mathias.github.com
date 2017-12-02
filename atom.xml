@@ -5,9 +5,34 @@
     <description></description>
     <link>http://blog.mattgauger.com/</link>
     <atom:link href="http://blog.mattgauger.com/atom.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 28 Nov 2017 17:14:12 -0600</pubDate>
-    <lastBuildDate>Tue, 28 Nov 2017 17:14:12 -0600</lastBuildDate>
+    <pubDate>Sat, 02 Dec 2017 09:21:31 -0600</pubDate>
+    <lastBuildDate>Sat, 02 Dec 2017 09:21:31 -0600</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
+    
+      <item>
+        <title>NaNoGenMo 2017</title>
+        <description>&lt;p&gt;I participated in this year’s &lt;a href=&quot;https://nanogenmo.github.io/&quot;&gt;NaNoGenMo&lt;/a&gt;, writing a procedural generation script to output a “novel.” This event is inspired by the &lt;a href=&quot;http://nanowrimo.org/&quot;&gt;National Novel Writing Month&lt;/a&gt;, in which writers pen a novel in November, inspired this event. I am an avid follower of the &lt;a href=&quot;http://procedural-generation.tumblr.com/&quot;&gt;Procedural Generation tumblr&lt;/a&gt; and I jumped on the chance to join in when NaNoGenMo was covered.&lt;/p&gt;
+
+&lt;p&gt;My idea was to write a script that generated stories about all the people passing through the LAX airport – who they were, where they were going, if they were from another country, how they were feeling, and so on. I called my project “Departures and Arrivals.” You can view it &lt;a href=&quot;https://github.com/mathias/destinations&quot;&gt;on GitHub&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I didn’t get started until around Thanksgiving, but that still left me plenty of time for this simple idea. The &lt;a href=&quot;https://github.com/mathias/destinations#journal&quot;&gt;dev journal&lt;/a&gt; in the README covers the development of my entry in more detail. In the end, I had gathered about 180 lines of data and wrote about 300 lines of code. There’s a lot of things I would’ve liked to improve.&lt;/p&gt;
+
+&lt;p&gt;In particular, there’s not enough variety in the types of stories that the script can generate. and I would’ve liked to have it decide for some travelers to write small “sub-stories.” These would follow templates like “something goes wrong,” or “eating at a restaurant,” and have it go into detail there, procedurally-generating more details as it went. I also wanted to write some code that generated stories for the flight crews, the ground crew at the airport, and the employees of businesses.&lt;/p&gt;
+
+&lt;p&gt;The code itself is not particularly spectacular. I chose Ruby due to my experience with it. I was able to identify a nice abstraction for inheritance – &lt;code class=&quot;highlighter-rouge&quot;&gt;DomesticPassenger&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;InternationalPassenger&lt;/code&gt; are subclasses of &lt;code class=&quot;highlighter-rouge&quot;&gt;Passenger&lt;/code&gt;, because they all share some common attributes like &lt;code class=&quot;highlighter-rouge&quot;&gt;name&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;There’s no testing to speak of, and I’d like to dig in a bit more about how procedural generation is unit tested. My guess is largely around ensuring it works without raising an exception, regardless of output, and also checking with the random seed set for particular behavior.&lt;/p&gt;
+
+&lt;p&gt;Participating this year has given me a lot of ideas about how I might do procedural generation for content better in the future, as well as made me appreciate even more the procedurally-generated fiction/games that I’ve played. I’ll likely repeat this again next year.&lt;/p&gt;
+
+&lt;p&gt;You can read my finished novel, &lt;a href=&quot;https://github.com/mathias/destinations/blob/master/departures.md&quot;&gt;Departures and Arrivals&lt;/a&gt; on GitHub.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 01 Dec 2017 00:00:00 -0600</pubDate>
+        <link>http://blog.mattgauger.com/2017/12/01/nanogenmo-2017/</link>
+        <guid isPermaLink="true">http://blog.mattgauger.com/2017/12/01/nanogenmo-2017/</guid>
+        
+        
+      </item>
     
       <item>
         <title>Elixir Code Quality Tools</title>
@@ -764,83 +789,6 @@ end
         <pubDate>Sun, 27 Jul 2014 12:05:00 -0500</pubDate>
         <link>http://blog.mattgauger.com/2014/07/27/housekeeping-imported-coderwall-protips/</link>
         <guid isPermaLink="true">http://blog.mattgauger.com/2014/07/27/housekeeping-imported-coderwall-protips/</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Clojure Data Science: Refactoring and Cleanup</title>
-        <description>&lt;hr /&gt;
-
-&lt;p&gt;This is Part 2 of a series of blog posts called &lt;a href=&quot;/categories/clojure-data-science&quot;&gt;Clojure Data Science&lt;/a&gt;. Check out the &lt;a href=&quot;/blog/2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/&quot;&gt;previous post&lt;/a&gt; if you missed it.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Welcome to the second post in this series. If you followed along in the last post, your code should be ready to use in this post. If not, or if you need to go back to known working state, you can clone the &lt;a href=&quot;https://github.com/mathias/autodjinn&quot;&gt;autodjinn repo&lt;/a&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout v0.1.0&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;I started out writing this post to develop simple functionality on our inbox data. Finishing the post was taking longer than I was expecting, so I split the post in half in the interest of posting this sooner.&lt;/p&gt;
-
-&lt;p&gt;In this post, we need to create an email ingestion script that we can run repeatedly with &lt;code class=&quot;highlighter-rouge&quot;&gt;lein&lt;/code&gt;. And we need to talk about refactoring our code out into maintainable namespaces.&lt;/p&gt;
-
-&lt;p&gt;So make sure your Datomic transactor is running and launch a REPL, because it is time to give our code a makeover.&lt;/p&gt;
-
-&lt;h2 id=&quot;a-gmail-ingestion-script&quot;&gt;A Gmail ingestion script&lt;/h2&gt;
-
-&lt;p&gt;Because Clojure sits on the JVM, it shares some similarities with Java. One of these is the special purpose of a &lt;code class=&quot;highlighter-rouge&quot;&gt;-main&lt;/code&gt; function. You can think of this as the &lt;code class=&quot;highlighter-rouge&quot;&gt;main&lt;/code&gt; method in a Java class. The &lt;code class=&quot;highlighter-rouge&quot;&gt;-main&lt;/code&gt; function in a Clojure namespace will be run when a tool like &lt;code class=&quot;highlighter-rouge&quot;&gt;lein&lt;/code&gt; tries to “run” the namespace. That sounds like exactly what we want to do with our Gmail import functionality, so we will add a &lt;code class=&quot;highlighter-rouge&quot;&gt;-main&lt;/code&gt; function that calls our &lt;code class=&quot;highlighter-rouge&quot;&gt;ingest-inbox&lt;/code&gt; function. To get started, we will only have it print us a message.&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9965864.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;You can then run this by invoking &lt;code class=&quot;highlighter-rouge&quot;&gt;lein run -m autodjinn.core&lt;/code&gt;. You should see &lt;code class=&quot;highlighter-rouge&quot;&gt;Hello world!&lt;/code&gt; if everything worked. You may notice that the process doesn’t seem to quit after it prints the hello world message – this seems to be problem with Leiningen. To ensure that our process ends when the script is done, we can add a &lt;code class=&quot;highlighter-rouge&quot;&gt;(System/exit 0)&lt;/code&gt; line to the end of our &lt;code class=&quot;highlighter-rouge&quot;&gt;-main&lt;/code&gt; function to ensure that the process quits normally. On *nix systems, a 0 return code means successful exit, and a nonzero response code means something went wrong. Knowing this, we can take advantage of response codes in the future to signal that an error occurred in our script. But for now, we will have the script end by returning 0 to indicate a successful exit.&lt;/p&gt;
-
-&lt;p&gt;Think back to what we did to ingest email in our REPL in the last post. We had to connect to the database, run the data schema transaction, and then we were able to run &lt;code class=&quot;highlighter-rouge&quot;&gt;ingest-inbox&lt;/code&gt; to pull in our email.&lt;/p&gt;
-
-&lt;p&gt;The following function will do the same thing. Remember that things like trying to create an existing database or performing a schema update against the same schema in Datomic should be harmless. It will add a new transaction ID, but it will not modify or destroy data. Putting together all the steps we need to run, we get a &lt;code class=&quot;highlighter-rouge&quot;&gt;-main&lt;/code&gt; function that looks like this:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9965933.js&quot;&gt;&lt;/script&gt;
-
-&lt;h2 id=&quot;refactoring-namespaces&quot;&gt;Refactoring namespaces&lt;/h2&gt;
-
-&lt;p&gt;With Clojure, one must walk a fine line between putting all of your functions into one big file, and having too many namespaces. One big file quickly grows unmaintainable and gains too many responsibilities.&lt;/p&gt;
-
-&lt;p&gt;But having too many namespaces can also be a problem. It may create strange cyclic dependency errors. Or you may find that with many separate namespaces, you have to require many namespaces to get anything done.&lt;/p&gt;
-
-&lt;p&gt;To avoid this, I start with most code in one namespace, and then look for common functionality to extract to a new namespace. Good candidates to extract are those that all talk about the same business logic or business domain. You may notice that the responsibility for one group of functions is different than the rest of the functions. That is a good candidate for a new namespace. Looking at responsibilities can be a good way to determine where to break apart functions into namespaces.&lt;/p&gt;
-
-&lt;p&gt;In this project, we can identify two responsibilities that currently live in our autodjinn.core namespace. The first is working with the database. The second is ingesting Gmail messages. As our project grows, we will not want the code for ingesting Gmail messages to live in &lt;code class=&quot;highlighter-rouge&quot;&gt;autodjinn.core&lt;/code&gt;. With that in mind, let’s create a new file called &lt;code class=&quot;highlighter-rouge&quot;&gt;src/autodjinn/gmail_ingestion.clj&lt;/code&gt; and move over the vars and functions that we think should live there. That file should look like this:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9966207.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;Be sure to remove the functions and vars that we moved to this file from the &lt;code class=&quot;highlighter-rouge&quot;&gt;autodjinn.core&lt;/code&gt; namespace. Note that we moved the &lt;code class=&quot;highlighter-rouge&quot;&gt;-main&lt;/code&gt; function here, too, so that we can now run &lt;code class=&quot;highlighter-rouge&quot;&gt;lein run -m autodjinn.gmail-ingestion&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;You may also notice that we still had to require the &lt;code class=&quot;highlighter-rouge&quot;&gt;datomic.api&lt;/code&gt; namespace here to be able to perform a transaction. Our &lt;code class=&quot;highlighter-rouge&quot;&gt;autodjinn.core&lt;/code&gt; namespace already handles database interaction, though. So let’s write a &lt;code class=&quot;highlighter-rouge&quot;&gt;create-mail&lt;/code&gt; function in &lt;code class=&quot;highlighter-rouge&quot;&gt;core.clj&lt;/code&gt; and call it in our new namespace:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9966294.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;And in &lt;code class=&quot;highlighter-rouge&quot;&gt;gmail_ingestion.clj&lt;/code&gt; we change &lt;code class=&quot;highlighter-rouge&quot;&gt;ingest-inbox&lt;/code&gt; to use the new function. While we’re at it, we’ll break out a convenience function to prepare the attr map for Datomic:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9966304.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;If we run our &lt;code class=&quot;highlighter-rouge&quot;&gt;lein run -m autodjinn.gmail-ingestion&lt;/code&gt; command, we should see that the code is still working.&lt;/p&gt;
-
-&lt;p&gt;Don’t forget to remove the &lt;code class=&quot;highlighter-rouge&quot;&gt;datomic.api&lt;/code&gt; requirement in &lt;code class=&quot;highlighter-rouge&quot;&gt;gmail-ingestion&lt;/code&gt; namespace! Now we only need to require Datomic in the &lt;code class=&quot;highlighter-rouge&quot;&gt;autodjinn.core&lt;/code&gt; namespace.&lt;/p&gt;
-
-&lt;p&gt;There’s one more low-hanging fruit that we can refactor about this code before moving on. The config file is loaded and used in both namespaces. We already require everything from &lt;code class=&quot;highlighter-rouge&quot;&gt;autodjinn.core&lt;/code&gt; into &lt;code class=&quot;highlighter-rouge&quot;&gt;autodjinn.gmail-ingestion&lt;/code&gt;. So we can safely change a few lines to use the config in &lt;code class=&quot;highlighter-rouge&quot;&gt;gmail_ingestion.clj&lt;/code&gt; and stop requiring &lt;code class=&quot;highlighter-rouge&quot;&gt;nomad&lt;/code&gt; in two places:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9966372.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;And in &lt;code class=&quot;highlighter-rouge&quot;&gt;core.clj&lt;/code&gt;:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/mathias/9966384.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;Running &lt;code class=&quot;highlighter-rouge&quot;&gt;lein run -m autodjinn.gmail-ingestion&lt;/code&gt; one more time, we should see that our changes did not break the system. The config is now only loaded once, and we use it everywhere.&lt;/p&gt;
-
-&lt;p&gt;That’s it! We’ve taken care of some low-hanging fruit and are ready to implement some new functionality. If you want to compare what you’ve done with my version, you can run &lt;code class=&quot;highlighter-rouge&quot;&gt;git diff v0.1.1&lt;/code&gt; on the &lt;a href=&quot;https://github.com/mathias/autodjinn&quot;&gt;autodjinn repo&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Please let me know what you think of these posts by sending me an email at &lt;a href=&quot;mailto:contact@mattgauger.com&quot;&gt;contact@mattgauger.com&lt;/a&gt;. I’d love to hear from you!&lt;/p&gt;
-</description>
-        <pubDate>Sun, 13 Apr 2014 16:28:00 -0500</pubDate>
-        <link>http://blog.mattgauger.com/2014/04/13/clojure-data-science-refactoring-and-cleanup/</link>
-        <guid isPermaLink="true">http://blog.mattgauger.com/2014/04/13/clojure-data-science-refactoring-and-cleanup/</guid>
         
         
       </item>
