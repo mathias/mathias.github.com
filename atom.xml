@@ -5,13 +5,13 @@
     <description></description>
     <link>http://blog.mattgauger.com/</link>
     <atom:link href="http://blog.mattgauger.com/atom.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 02 Dec 2017 09:21:31 -0600</pubDate>
-    <lastBuildDate>Sat, 02 Dec 2017 09:21:31 -0600</lastBuildDate>
+    <pubDate>Sat, 02 Dec 2017 09:58:49 -0600</pubDate>
+    <lastBuildDate>Sat, 02 Dec 2017 09:58:49 -0600</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
     
       <item>
         <title>NaNoGenMo 2017</title>
-        <description>&lt;p&gt;I participated in this year’s &lt;a href=&quot;https://nanogenmo.github.io/&quot;&gt;NaNoGenMo&lt;/a&gt;, writing a procedural generation script to output a “novel.” This event is inspired by the &lt;a href=&quot;http://nanowrimo.org/&quot;&gt;National Novel Writing Month&lt;/a&gt;, in which writers pen a novel in November, inspired this event. I am an avid follower of the &lt;a href=&quot;http://procedural-generation.tumblr.com/&quot;&gt;Procedural Generation tumblr&lt;/a&gt; and I jumped on the chance to join in when NaNoGenMo was covered.&lt;/p&gt;
+        <description>&lt;p&gt;I participated in this year’s &lt;a href=&quot;https://nanogenmo.github.io/&quot;&gt;NaNoGenMo&lt;/a&gt;, writing a procedural generation script to output a “novel.” This event is inspired by the &lt;a href=&quot;http://nanowrimo.org/&quot;&gt;National Novel Writing Month&lt;/a&gt;, in which writers pen a novel in November. I am an avid follower of the &lt;a href=&quot;http://procedural-generation.tumblr.com/&quot;&gt;Procedural Generation tumblr&lt;/a&gt; and I jumped on the chance to join in when NaNoGenMo was covered.&lt;/p&gt;
 
 &lt;p&gt;My idea was to write a script that generated stories about all the people passing through the LAX airport – who they were, where they were going, if they were from another country, how they were feeling, and so on. I called my project “Departures and Arrivals.” You can view it &lt;a href=&quot;https://github.com/mathias/destinations&quot;&gt;on GitHub&lt;/a&gt;.&lt;/p&gt;
 
