@@ -5,9 +5,55 @@
     <description></description>
     <link>http://blog.mattgauger.com/</link>
     <atom:link href="http://blog.mattgauger.com/atom.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 12 Dec 2017 19:16:12 -0600</pubDate>
-    <lastBuildDate>Tue, 12 Dec 2017 19:16:12 -0600</lastBuildDate>
+    <pubDate>Fri, 29 Dec 2017 14:16:59 -0600</pubDate>
+    <lastBuildDate>Fri, 29 Dec 2017 14:16:59 -0600</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
+    
+      <item>
+        <title>More Elixir Code Quality Tools</title>
+        <description>&lt;p&gt;The Elixir community is fast-moving, and there’s always new things to learn.  &lt;a href=&quot;https://github.com/asummers&quot;&gt;Andrew Summers&lt;/a&gt; wrote in to mention a few more tools that I didn’t cover in my &lt;a href=&quot;/2017/11/21/elixir-code-quality-tools/&quot;&gt;Elixir Code Quality Tools&lt;/a&gt; blog post:&lt;/p&gt;
+
+&lt;h1 id=&quot;wobserver&quot;&gt;&lt;a href=&quot;https://github.com/shinyscorpion/wobserver&quot;&gt;wobserver&lt;/a&gt;&lt;/h1&gt;
+
+&lt;p&gt;In my last post, I mentioned Erlang’s observer GUI. The Erlang observer runs as a small native app and charts things like memory used, BEAM process counts, supervisor trees, and more.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;wobserver&lt;/code&gt; runs as a web app and shows the same kind of information in your browser. Best of all, you can add it as a Plug into your Phoenix or Plug-based web apps. There’s a lot of information available to explore. There’s also an API that you can integrate or build your own reporting and graphing around.&lt;/p&gt;
+
+&lt;h1 id=&quot;list-dependencies-with-mix&quot;&gt;List dependencies with &lt;code class=&quot;highlighter-rouge&quot;&gt;mix&lt;/code&gt;&lt;/h1&gt;
+
+&lt;p&gt;In Clojure, we used &lt;code class=&quot;highlighter-rouge&quot;&gt;lein deps :tree&lt;/code&gt; to see a tree of all dependencies in Clojure. In Elixir, we can use the&lt;code class=&quot;highlighter-rouge&quot;&gt; mix app.tree&lt;/code&gt; task to see a tree of all the dependencies in our current application. For example:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mix app.tree
+annotatex
+├── elixir
+├── logger
+│   └── elixir
+├── runtime_tools
+├── guardian
+... output truncated ...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;see-outdated-dependencies-with-mix&quot;&gt;See outdated dependencies with &lt;code class=&quot;highlighter-rouge&quot;&gt;mix&lt;/code&gt;&lt;/h1&gt;
+
+&lt;p&gt;Outdated dependencies don’t always make themselves known. While following mailing lists for CVEs is important, I’d rather have a tool notify me  of new versions of a dependency. In Ruby, we can use &lt;code class=&quot;highlighter-rouge&quot;&gt;gem outdated&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;bundler outdated&lt;/code&gt; and even install tools like &lt;a href=&quot;https://github.com/rubysec/bundler-audit&quot;&gt;bundler-audit&lt;/a&gt;. With Elixir, we can use this task in &lt;code class=&quot;highlighter-rouge&quot;&gt;mix&lt;/code&gt;. It outputs a table with color-coding, which I cannot fully reproduce here, so you’ll have to try it for yourself.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mix hex.outdated
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;alias-mix-tasks&quot;&gt;Alias mix tasks&lt;/h1&gt;
+
+&lt;p&gt;There’s several reasons to use task aliases. One is to rename a longer task name to something shorter, because that task is often run. The other is to combine two or more tasks into one alias so that you can run them in that order. This helps you to build workflows and repeat steps necessary for setup each time. This is documented in the excellent &lt;a href=&quot;https://hexdocs.pm/mix/Mix.html#module-aliases&quot;&gt;mix docs&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;wrapping-up&quot;&gt;Wrapping up&lt;/h1&gt;
+
+&lt;p&gt;Thanks again to Andrew Summers for these suggestions. I hope that you find them useful. Have more that I’ve missed? &lt;a href=&quot;mailto:contact@mattgauger.com&quot;&gt;Get in touch&lt;/a&gt;, I’d love to hear from you.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 29 Dec 2017 00:00:00 -0600</pubDate>
+        <link>http://blog.mattgauger.com/2017/12/29/more-elixir-code-quality-tools/</link>
+        <guid isPermaLink="true">http://blog.mattgauger.com/2017/12/29/more-elixir-code-quality-tools/</guid>
+        
+        
+      </item>
     
       <item>
         <title>NaNoGenMo 2017</title>
@@ -96,6 +142,10 @@ end
 &lt;p&gt;This post was 5 tools for your Elixir workflow. If you’ve been working in Elixir for awhile, you may be already using them. And there’s probably more tools that I don’t know about, out there.&lt;/p&gt;
 
 &lt;p&gt;Let me know if you found this blog post useful, or if you have any other tools to recommend!&lt;/p&gt;
+
+&lt;h1 id=&quot;update-december-27-2017&quot;&gt;Update December 27, 2017:&lt;/h1&gt;
+
+&lt;p&gt;I’ve written up a &lt;a href=&quot;/2017/12/27/more-elixir-code-quality-tools/&quot;&gt;new blog post&lt;/a&gt; that covers tools submitted by reader Andrew Summers.&lt;/p&gt;
 </description>
         <pubDate>Tue, 21 Nov 2017 00:00:00 -0600</pubDate>
         <link>http://blog.mattgauger.com/2017/11/21/elixir-code-quality-tools/</link>
@@ -765,30 +815,6 @@ end
         <pubDate>Tue, 19 Aug 2014 21:38:00 -0500</pubDate>
         <link>http://blog.mattgauger.com/2014/08/19/atreus-my-custom-keyboard/</link>
         <guid isPermaLink="true">http://blog.mattgauger.com/2014/08/19/atreus-my-custom-keyboard/</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Housekeeping: Imported Coderwall protips</title>
-        <description>&lt;p&gt;As part of my continuing effort to archive content I’ve created to this blog, I’ve migrated all of &lt;a href=&quot;https://coderwall.com/p/u/mathias&quot;&gt;my Coderwall protips&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Here’s a quick list of the posts:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;/2013/11/14/indent-and-colorize-html-strings-in-pry/&quot;&gt;Indent and Colorize HTML Strings in Pry&lt;/a&gt; &lt;em&gt;November 14, 2013.&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/2013/09/03/git-fml/&quot;&gt;git fml&lt;/a&gt; &lt;em&gt;September 3, 2013.&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/2013/07/27/minskys-circle-algorithm-in-shoes-dot-rb-slash-hackety-hack/&quot;&gt;Minsky’s Circle Algorithm in Shoes.rb / Hackety Hack&lt;/a&gt; &lt;em&gt;July 27, 2013.&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/2013/05/23/warning-nokogiri-was-built-against-libxml-version-x-dot-x-x/&quot;&gt;WARNING: Nokogiri Was Built Against LibXML Version x.x.x&lt;/a&gt; &lt;em&gt;May 23, 2013.&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/2013/04/24/reset-a-lost-password-on-an-ubuntu-vm/&quot;&gt;Reset a Lost Password on an Ubuntu VM&lt;/a&gt; &lt;em&gt;April 24, 2013.&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/2013/01/24/find-naughty-naughty-model-calls-in-your-views/&quot;&gt;Find Naughty Naughty Model Calls in Your Views&lt;/a&gt; &lt;em&gt;January 24, 2013.&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/2012/12/25/find-a-unique-name-for-your-project/&quot;&gt;Find a Unique Name for Your Project&lt;/a&gt; &lt;em&gt;December 25, 2012.&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Sun, 27 Jul 2014 12:05:00 -0500</pubDate>
-        <link>http://blog.mattgauger.com/2014/07/27/housekeeping-imported-coderwall-protips/</link>
-        <guid isPermaLink="true">http://blog.mattgauger.com/2014/07/27/housekeeping-imported-coderwall-protips/</guid>
         
         
       </item>

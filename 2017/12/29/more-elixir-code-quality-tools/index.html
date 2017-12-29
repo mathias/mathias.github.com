@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    
+      More Elixir Code Quality Tools &middot; Matt Gauger
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Feeds -->
+  <link rel='alternate' type='application/atom+xml' href='/atom.xml'>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-38944731-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-38944731-1');
+</script>
+
+</head>
+
+
+  <body>
+    <nav class="nav">
+      <div class="nav-container">
+        <a href="/">
+          <h2 class="nav-title">Matt Gauger</h2>
+        </a>
+        <ul>
+          <li><a href="http://blog.mattgauger.com/about">About</a></li>
+          <li><a href="http://blog.mattgauger.com/archives">Blog Archives</a></li>
+          <li><a href="http://blog.mattgauger.com/open-source">Open Source</a></li>
+        </ul>
+    </div>
+  </nav>
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span> Matt Gauger
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2017-12-29 00:00:00 -0600">December 29, 2017</time>
+    
+  </div>
+
+  <h1 class="post-title">More Elixir Code Quality Tools</h1>
+  <div class="post-line"></div>
+
+  <p>The Elixir community is fast-moving, and there’s always new things to learn.  <a href="https://github.com/asummers">Andrew Summers</a> wrote in to mention a few more tools that I didn’t cover in my <a href="/2017/11/21/elixir-code-quality-tools/">Elixir Code Quality Tools</a> blog post:</p>
+
+<h1 id="wobserver"><a href="https://github.com/shinyscorpion/wobserver">wobserver</a></h1>
+
+<p>In my last post, I mentioned Erlang’s observer GUI. The Erlang observer runs as a small native app and charts things like memory used, BEAM process counts, supervisor trees, and more.</p>
+
+<p><code class="highlighter-rouge">wobserver</code> runs as a web app and shows the same kind of information in your browser. Best of all, you can add it as a Plug into your Phoenix or Plug-based web apps. There’s a lot of information available to explore. There’s also an API that you can integrate or build your own reporting and graphing around.</p>
+
+<h1 id="list-dependencies-with-mix">List dependencies with <code class="highlighter-rouge">mix</code></h1>
+
+<p>In Clojure, we used <code class="highlighter-rouge">lein deps :tree</code> to see a tree of all dependencies in Clojure. In Elixir, we can use the<code class="highlighter-rouge"> mix app.tree</code> task to see a tree of all the dependencies in our current application. For example:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ mix app.tree
+annotatex
+├── elixir
+├── logger
+│   └── elixir
+├── runtime_tools
+├── guardian
+... output truncated ...
+</code></pre></div>
+
+<h1 id="see-outdated-dependencies-with-mix">See outdated dependencies with <code class="highlighter-rouge">mix</code></h1>
+
+<p>Outdated dependencies don’t always make themselves known. While following mailing lists for CVEs is important, I’d rather have a tool notify me  of new versions of a dependency. In Ruby, we can use <code class="highlighter-rouge">gem outdated</code>, <code class="highlighter-rouge">bundler outdated</code> and even install tools like <a href="https://github.com/rubysec/bundler-audit">bundler-audit</a>. With Elixir, we can use this task in <code class="highlighter-rouge">mix</code>. It outputs a table with color-coding, which I cannot fully reproduce here, so you’ll have to try it for yourself.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ mix hex.outdated
+</code></pre></div>
+
+<h1 id="alias-mix-tasks">Alias mix tasks</h1>
+
+<p>There’s several reasons to use task aliases. One is to rename a longer task name to something shorter, because that task is often run. The other is to combine two or more tasks into one alias so that you can run them in that order. This helps you to build workflows and repeat steps necessary for setup each time. This is documented in the excellent <a href="https://hexdocs.pm/mix/Mix.html#module-aliases">mix docs</a>.</p>
+
+<h1 id="wrapping-up">Wrapping up</h1>
+
+<p>Thanks again to Andrew Summers for these suggestions. I hope that you find them useful. Have more that I’ve missed? <a href="mailto:contact@mattgauger.com">Get in touch</a>, I’d love to hear from you.</p>
+
+
+</div>
+
+<div class="pagination">
+  
+  
+    <a href="/2017/12/01/nanogenmo-2017/" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+
+    </main>
+
+    <footer>
+      <span>
+        &copy; <time datetime="2017">2017</time> Matt Gauger.
+      </span>
+    </footer>
+  </body>
+</html>
