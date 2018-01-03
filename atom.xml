@@ -5,8 +5,8 @@
     <description></description>
     <link>http://blog.mattgauger.com/</link>
     <atom:link href="http://blog.mattgauger.com/atom.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 29 Dec 2017 14:16:59 -0600</pubDate>
-    <lastBuildDate>Fri, 29 Dec 2017 14:16:59 -0600</lastBuildDate>
+    <pubDate>Wed, 03 Jan 2018 09:09:22 -0600</pubDate>
+    <lastBuildDate>Wed, 03 Jan 2018 09:09:22 -0600</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
     
       <item>
@@ -143,9 +143,9 @@ end
 
 &lt;p&gt;Let me know if you found this blog post useful, or if you have any other tools to recommend!&lt;/p&gt;
 
-&lt;h1 id=&quot;update-december-27-2017&quot;&gt;Update December 27, 2017:&lt;/h1&gt;
+&lt;h1 id=&quot;update-december-29-2017&quot;&gt;Update December 29, 2017:&lt;/h1&gt;
 
-&lt;p&gt;I’ve written up a &lt;a href=&quot;/2017/12/27/more-elixir-code-quality-tools/&quot;&gt;new blog post&lt;/a&gt; that covers tools submitted by reader Andrew Summers.&lt;/p&gt;
+&lt;p&gt;I’ve written up a &lt;a href=&quot;/2017/12/29/more-elixir-code-quality-tools/&quot;&gt;new blog post&lt;/a&gt; that covers tools submitted by reader Andrew Summers.&lt;/p&gt;
 </description>
         <pubDate>Tue, 21 Nov 2017 00:00:00 -0600</pubDate>
         <link>http://blog.mattgauger.com/2017/11/21/elixir-code-quality-tools/</link>
