@@ -66,6 +66,6 @@ This post was 5 tools for your Elixir workflow. If you've been working in Elixir
 
 Let me know if you found this blog post useful, or if you have any other tools to recommend!
 
-# Update December 27, 2017:
+# Update December 29, 2017:
 
-I've written up a [new blog post](/2017/12/27/more-elixir-code-quality-tools/) that covers tools submitted by reader Andrew Summers.
+I've written up a [new blog post](/2017/12/29/more-elixir-code-quality-tools/) that covers tools submitted by reader Andrew Summers.
