@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '2.4.2'
+ruby '2.5.1'
 
-gem 'jekyll', '~> 3.6.2'
+gem 'jekyll', '~> 3.8.3'
 gem 'jekyll-paginate'
 gem 'jekyll-redirect-from'
 gem 'jekyll-compose', group: [:jekyll_plugins]
