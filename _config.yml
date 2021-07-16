@@ -24,3 +24,7 @@ permalink: "pretty"
 plugins:
   - jekyll-paginate
   - jekyll-redirect-from
+whitelist:
+  - jekyll-redirect-from
+redirect_from:
+  json: false
