@@ -65,13 +65,13 @@
 
 <p>In my last post, I mentioned Erlang’s observer GUI. The Erlang observer runs as a small native app and charts things like memory used, BEAM process counts, supervisor trees, and more.</p>
 
-<p><code class="highlighter-rouge">wobserver</code> runs as a web app and shows the same kind of information in your browser. Best of all, you can add it as a Plug into your Phoenix or Plug-based web apps. There’s a lot of information available to explore. There’s also an API that you can integrate or build your own reporting and graphing around.</p>
+<p><code class="language-plaintext highlighter-rouge">wobserver</code> runs as a web app and shows the same kind of information in your browser. Best of all, you can add it as a Plug into your Phoenix or Plug-based web apps. There’s a lot of information available to explore. There’s also an API that you can integrate or build your own reporting and graphing around.</p>
 
-<h1 id="list-dependencies-with-mix">List dependencies with <code class="highlighter-rouge">mix</code></h1>
+<h1 id="list-dependencies-with-mix">List dependencies with <code class="language-plaintext highlighter-rouge">mix</code></h1>
 
-<p>In Clojure, we used <code class="highlighter-rouge">lein deps :tree</code> to see a tree of all dependencies in Clojure. In Elixir, we can use the<code class="highlighter-rouge"> mix app.tree</code> task to see a tree of all the dependencies in our current application. For example:</p>
+<p>In Clojure, we used <code class="language-plaintext highlighter-rouge">lein deps :tree</code> to see a tree of all dependencies in Clojure. In Elixir, we can use the<code class="language-plaintext highlighter-rouge"> mix app.tree</code> task to see a tree of all the dependencies in our current application. For example:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mix app.tree
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mix app.tree
 annotatex
 ├── elixir
 ├── logger
@@ -81,11 +81,11 @@ annotatex
 ... output truncated ...
 </code></pre></div></div>
 
-<h1 id="see-outdated-dependencies-with-mix">See outdated dependencies with <code class="highlighter-rouge">mix</code></h1>
+<h1 id="see-outdated-dependencies-with-mix">See outdated dependencies with <code class="language-plaintext highlighter-rouge">mix</code></h1>
 
-<p>Outdated dependencies don’t always make themselves known. While following mailing lists for CVEs is important, I’d rather have a tool notify me  of new versions of a dependency. In Ruby, we can use <code class="highlighter-rouge">gem outdated</code>, <code class="highlighter-rouge">bundler outdated</code> and even install tools like <a href="https://github.com/rubysec/bundler-audit">bundler-audit</a>. With Elixir, we can use this task in <code class="highlighter-rouge">mix</code>. It outputs a table with color-coding, which I cannot fully reproduce here, so you’ll have to try it for yourself.</p>
+<p>Outdated dependencies don’t always make themselves known. While following mailing lists for CVEs is important, I’d rather have a tool notify me  of new versions of a dependency. In Ruby, we can use <code class="language-plaintext highlighter-rouge">gem outdated</code>, <code class="language-plaintext highlighter-rouge">bundler outdated</code> and even install tools like <a href="https://github.com/rubysec/bundler-audit">bundler-audit</a>. With Elixir, we can use this task in <code class="language-plaintext highlighter-rouge">mix</code>. It outputs a table with color-coding, which I cannot fully reproduce here, so you’ll have to try it for yourself.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mix hex.outdated
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mix hex.outdated
 </code></pre></div></div>
 
 <h1 id="alias-mix-tasks">Alias mix tasks</h1>

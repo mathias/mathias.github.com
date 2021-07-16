@@ -65,7 +65,7 @@
 
 <p>When I tried to create a new Rails app, I got the error in the title of the blog post:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>minimite:railstutorial.org mathiasx$ rails new first_app
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>minimite:railstutorial.org mathiasx$ rails new first_app
 /Library/Ruby/Site/1.8/rubygems.rb:779:in `report_activate_error': Could not find RubyGem railties (&gt;= 0) (Gem::LoadError)
         from /Library/Ruby/Site/1.8/rubygems.rb:214:in `activate'
         from /Library/Ruby/Site/1.8/rubygems.rb:1082:in `gem'
@@ -85,7 +85,7 @@ minimite:railstutorial.org mathiasx$ which gem
 /Users/mathiasx/.rvm/rubies/ruby-1.9.2-p0/bin/gem
 minimite:railstutorial.org mathiasx$ which rails
 /usr/bin/rails</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 Aha. Obviously the previously-installed Rails gem, from before installing rvm, was an issue. So I figured I'd just clean it up.
 
 
@@ -108,7 +108,7 @@ Removing rails
 Successfully uninstalled rails-3.0.1
 minimite:railstutorial.org mathiasx$ which rails
 /usr/bin/rails</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 But I hadn't been paying attention. I still had not removed the Rails executable, because I was calling the rvm version of Ruby 1.8.7 and not the system-level one. Knowing that Rails was in `/usr/bin/rails`, I assumed that the gem executable that managed it would also be in `/usr/bin`:
 
 </code></pre></div></div>
@@ -127,7 +127,7 @@ suspenders-0.1.0.beta.4 depends on [rails (&gt;= 3.0.0)]
 If you remove this gems, one or more dependencies will not be met.
 Continue with Uninstall? [Yn]  y
 Successfully uninstalled rails-3.0.0</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 I'd finally removed the system-level Rails script and can switch back to using rvm for everything:
 
 </code></pre></div></div>

@@ -69,22 +69,22 @@
 
 <p>Typically, with a desktop computer or a server, you hold down some key while the computer is booting to get into the Grub boot manager and then boot into something called “single user mode”, where you’re able to change passwords, fix configs, repair disks, etc.</p>
 
-<p>Unfortunately, the boot screen just flies right by in Ubuntu under VMWare. So the first thing you’ll need to do is shut down the VM, and then get ready to start it up. <strong>But before you start the VM</strong>: get ready to hit <code class="highlighter-rouge">Shift</code> because that’s what will get you into Grub. Ready? Ok. Boot it and hit <code class="highlighter-rouge">Shift</code>.</p>
+<p>Unfortunately, the boot screen just flies right by in Ubuntu under VMWare. So the first thing you’ll need to do is shut down the VM, and then get ready to start it up. <strong>But before you start the VM</strong>: get ready to hit <code class="language-plaintext highlighter-rouge">Shift</code> because that’s what will get you into Grub. Ready? Ok. Boot it and hit <code class="language-plaintext highlighter-rouge">Shift</code>.</p>
 
 <p>Now you should be in Grub. If you don’t get it, don’t worry, just shut down and try again.</p>
 
 <p>Choose the ‘Advanced Options’ and then any of the “recovery” lines from the Grub menu for Ubuntu.</p>
 
-<p>You’ll get dropped into another menu system. Choose <code class="highlighter-rouge">root</code>: this is the single-user mode where you are root.</p>
+<p>You’ll get dropped into another menu system. Choose <code class="language-plaintext highlighter-rouge">root</code>: this is the single-user mode where you are root.</p>
 
 <p>Your / filesystem may be mounted as read-only at this point. Type this to mount it as read-write:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mount -rw -o remount /
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mount -rw -o remount /
 </code></pre></div></div>
 
 <p>Now you can reset passwords, etc, like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>passwd myuser
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>passwd myuser
 </code></pre></div></div>
 
 <p>Good luck!</p>

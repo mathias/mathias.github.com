@@ -73,11 +73,11 @@
 
 <script src="https://gist.github.com/mathias/2007dab63a9fe77d7182.js"></script>
 
-<p>Wouldn’t it be great if Pry could re-indent and colorize that string of HTML for you? Well, I put together a quick little Pry command that does. Throw this into your <code class="highlighter-rouge">~/.pryrc</code>:</p>
+<p>Wouldn’t it be great if Pry could re-indent and colorize that string of HTML for you? Well, I put together a quick little Pry command that does. Throw this into your <code class="language-plaintext highlighter-rouge">~/.pryrc</code>:</p>
 
 <script src="https://gist.github.com/mathias/21a971d0bdb3620a8909.js"></script>
 
-<p>Originally, I had tried to use the html5 fork of the <code class="highlighter-rouge">tidy</code> command: <a href="https://github.com/w3c/tidy-html5">https://github.com/w3c/tidy-html5</a> but that tool <em>changes</em> the HTML as it parses it, and spits out a bunch of warnings. So instead, I have this pry command use <code class="highlighter-rouge">nokogiri</code> when it is available. The command should warn you if you try to use it without <code class="highlighter-rouge">nokogiri</code> available. What is output should be very close to the original rendered HTML, just cleaned up and re-indented.</p>
+<p>Originally, I had tried to use the html5 fork of the <code class="language-plaintext highlighter-rouge">tidy</code> command: <a href="https://github.com/w3c/tidy-html5">https://github.com/w3c/tidy-html5</a> but that tool <em>changes</em> the HTML as it parses it, and spits out a bunch of warnings. So instead, I have this pry command use <code class="language-plaintext highlighter-rouge">nokogiri</code> when it is available. The command should warn you if you try to use it without <code class="language-plaintext highlighter-rouge">nokogiri</code> available. What is output should be very close to the original rendered HTML, just cleaned up and re-indented.</p>
 
 <p>So what does it look like in action?</p>
 

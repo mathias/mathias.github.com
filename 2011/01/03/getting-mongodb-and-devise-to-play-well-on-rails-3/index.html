@@ -61,9 +61,9 @@
 
   <p>While there’s a <a href="http://www.mongodb.org/display/DOCS/Rails+3+-+Getting+Started">good guide</a> on the MongoDB site about getting mongo_mapper to work in Rails 3, I ran into some additional issues getting the popular <a href="https://github.com/plataformatec/devise">devise</a> authentication engine for Rails to work with Mongo. This documents how to create a Rails app from scratch that uses both MongoDB and Devise. So if you don’t want to reinvent the wheel on authentication (read: Users, login, logout, etc) and want to run your app on MongoDB, this should be useful.</p>
 
-<p>First of all, you’ll need Rails 3. I’m on Rails 3.0.3. I created a new gemset for this app, just to keep things clean. Run the rails new command with the <code class="highlighter-rouge">--skip-active-record</code> switch.</p>
+<p>First of all, you’ll need Rails 3. I’m on Rails 3.0.3. I created a new gemset for this app, just to keep things clean. Run the rails new command with the <code class="language-plaintext highlighter-rouge">--skip-active-record</code> switch.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ rails new awesome_app --skip-active-record
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ rails new awesome_app --skip-active-record
 </code></pre></div></div>
 
 <p>Open up the Gemfile of the new app. It’s going to be pretty empty to start. This is what I ended up with, after reading the Mongo guide mentioned at the beginning of the post:</p>
@@ -87,12 +87,12 @@
 
 <p>Go ahead and run a bundle install:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ bundle install
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ bundle install
 </code></pre></div></div>
 
 <p>Then run this to install devise files into the Rails app:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ rails generate devise:install
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ rails generate devise:install
 </code></pre></div></div>
 
 <p>There’s two initializer files we’ll need. We add the one for mongo, which I put in config/initializers/mongo.rb:</p>
@@ -116,12 +116,12 @@
 
 <p>Be sure to add this line to config/application.rb and edit in the appropriate address. This will keep Devise from complaining later:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>config.action_mailer.default_url_options = { :host =&gt; "yourdomain.com" }
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>config.action_mailer.default_url_options = { :host =&gt; "yourdomain.com" }
 </code></pre></div></div>
 
 <p>The last step is to create an User model and tell Devise and mongo_mapper to do their thing. Tell Devise to make a Users model and then install the Devise Views to our app so that we can modify them later, if we wish:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ rails generate devise users
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ rails generate devise users
 $ rails generate devise:views
 </code></pre></div></div>
 
@@ -158,9 +158,9 @@ $ rails generate devise:views
 <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">devise_for</span> <span class="ss">:users</span><span class="p">,</span> <span class="ss">:admin</span>
 <span class="n">resource</span> <span class="ss">:user</span></code></pre></figure>
 
-<p>At this point, you should probably check your app by running a quick <code class="highlighter-rouge">rails server</code> and seeing it if spits out any errors to your terminal. If it’s all good, then you are probably thinking you’ll want to actually use this authentication system now. Let’s add a very basic “Home” controller:</p>
+<p>At this point, you should probably check your app by running a quick <code class="language-plaintext highlighter-rouge">rails server</code> and seeing it if spits out any errors to your terminal. If it’s all good, then you are probably thinking you’ll want to actually use this authentication system now. Let’s add a very basic “Home” controller:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ rails generate controller Home index token
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ rails generate controller Home index token
 </code></pre></div></div>
 
 <p>In app/controllers/home_controller.rb, add the following before_filter line to the beginning of the class so that it looks like this:</p>
@@ -203,25 +203,25 @@ $ rails generate devise:views
 
 <p>This will enable very basic login / logouts using the Devise views that we installed earlier. If you run rails server again, you’ll be able to create an account. But, if your system isn’t set up to send mail (like mine) then you may get an error, or simply won’t get a confirmation code, so you won’t be able to login with that user. Here’s a quick solution. Drop into the mongo shell:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mongo
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mongo
 MongoDB shell version: 1.6.4
 </code></pre></div></div>
 
 <p>Use your database, which you set above in config/initializers/mongo.rb. In this case, it’s awesome-app-development:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; use awesome-app-development
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; use awesome-app-development
 switched to db awesome-app-development
 </code></pre></div></div>
 
 <p>Find all the entries in the Users document:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; db.users.find();
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; db.users.find();
 { "_id" : ObjectId("4d216ae217cacc289c000005"), "email" : "matt.gauger@gmail.com", "encrypted_password" : "$2aasdf", "password_salt" : "$2aasdf", "authentication_token" : null, "remember_token" : null, "remember_created_at" : null, "reset_password_token" : null, "confirmation_token" : "YsFg8CFBwNIm5kof7xC9", "confirmed_at" : null, "confirmation_sent_at" : "Mon Jan 03 2011 00:21:22 GMT-0600 (CST)", "failed_attempts" : 0, "unlock_token" : null, "locked_at" : null, "sign_in_count" : 0, "current_sign_in_at" : null, "last_sign_in_at" : null, "current_sign_in_ip" : null, "last_sign_in_ip" : null }
 </code></pre></div></div>
 
 <p>The bit we need is the confirmation_token: “YsFg8CFBwNIm5kof7xC9”. Copy the token and go to the following in your browser:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://localhost:3000/users/confirmation?confirmation_token=YsFg8CFBwNIm5kof7xC9
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://localhost:3000/users/confirmation?confirmation_token=YsFg8CFBwNIm5kof7xC9
 </code></pre></div></div>
 
 <p>Remember to replace your token with the one in that URL. You could alternatively make it so your app can send mail, or just turn off :confirmable in your Users model. This was a quick little solution that I found and wanted to share.</p>

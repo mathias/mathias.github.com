@@ -69,15 +69,15 @@
 
 <h1 id="doctests"><a href="http://elixir-lang.org/getting-started/mix-otp/docs-tests-and-with.html#doctests">doctests</a></h1>
 
-<p>Built in to Elixir itself, doctests are a simple way to couple examples of useage where your function definition lives, in the source. They define an example call from an <code class="highlighter-rouge">iex</code> prompt, and show what the return should be. When you set up a simple test file in the suite to run doctests, it will automatically check that the examples match the actual function call response. All it takes is a test file such as:</p>
+<p>Built in to Elixir itself, doctests are a simple way to couple examples of useage where your function definition lives, in the source. They define an example call from an <code class="language-plaintext highlighter-rouge">iex</code> prompt, and show what the return should be. When you set up a simple test file in the suite to run doctests, it will automatically check that the examples match the actual function call response. All it takes is a test file such as:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>defmodule Alohomora.ResourceTest do
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>defmodule Alohomora.ResourceTest do
   use ExUnit.Case, async: true
   doctest Alohomora.Resource
 end
 </code></pre></div></div>
 
-<p>And to test functions with doctests in your <code class="highlighter-rouge">Alohomora.Resource</code> namespace. Best of all, there’s nothing extra to add – these tests will run when you run <code class="highlighter-rouge">mix test</code>.</p>
+<p>And to test functions with doctests in your <code class="language-plaintext highlighter-rouge">Alohomora.Resource</code> namespace. Best of all, there’s nothing extra to add – these tests will run when you run <code class="language-plaintext highlighter-rouge">mix test</code>.</p>
 
 <h1 id="dialyxir"><a href="https://github.com/jeremyjh/dialyxir">dialyxir</a></h1>
 
@@ -89,30 +89,30 @@ end
 
 <p>Style guides help a team to write consistent code, more than they specify architecture patterns or idiomatic solutions. If you want to start applying a style guide to your Elixir code, look no further than dogma. As indicated on its README, “It’s highly configurable so you can adjust it to fit your style guide, but comes with a sane set of defaults so for most people it should just work out-of-the-box.” I’d recommend starting with its default style guide and seeing what it yells about.</p>
 
-<p>The kinds of things that dogma will tell you about are lines too long, trailing whitespace, and so on. You’ve probably seen similar output if you use a tool like <code class="highlighter-rouge">rubocop</code> in Ruby.</p>
+<p>The kinds of things that dogma will tell you about are lines too long, trailing whitespace, and so on. You’ve probably seen similar output if you use a tool like <code class="language-plaintext highlighter-rouge">rubocop</code> in Ruby.</p>
 
 <p>Credo has some overlap with dogma, but it does far more. This tool is more concerned with code smells. Some examples are checking function complexity, negated conditionals, and idiomatic ways to format your pipe operators and one-line functions. You can read up on the <a href="https://github.com/rrrene/elixir-style-guide">credo docs</a> to understand everything it checks for.</p>
 
-<p>Ultimately, you may feel like you only need one or the other. For myself, I use credo with <code class="highlighter-rouge">mix credo --strict</code>.</p>
+<p>Ultimately, you may feel like you only need one or the other. For myself, I use credo with <code class="language-plaintext highlighter-rouge">mix credo --strict</code>.</p>
 
 <h1 id="excoveralls"><a href="https://github.com/parroty/excoveralls">ExCoveralls</a></h1>
 
 <p>Code coverage in your tests is an important metric to keep track of. While striving for 100% code coverage isn’t always worth it, it is good to know whether you’re exercising the code you think you are, and ensuring that all edge cases and error cases that you coded for have been checked with a test.</p>
 
-<p>Installing ExCoveralls in your project will allow you to print out your code coverage for each module to the shell, as HTML, or to post the code coverage to Coveralls.io. ExCoveralls also supports being run from a few different CI tools including CircleCI, Semaphore, and Travis. If you don’t need all this, you could look into <a href="https://github.com/mrinalwadhwa/excov">ExCov</a> or simply run <code class="highlighter-rouge">mix test --cover</code> – although I find this built-in mix task’s output to be the least useful.</p>
+<p>Installing ExCoveralls in your project will allow you to print out your code coverage for each module to the shell, as HTML, or to post the code coverage to Coveralls.io. ExCoveralls also supports being run from a few different CI tools including CircleCI, Semaphore, and Travis. If you don’t need all this, you could look into <a href="https://github.com/mrinalwadhwa/excov">ExCov</a> or simply run <code class="language-plaintext highlighter-rouge">mix test --cover</code> – although I find this built-in mix task’s output to be the least useful.</p>
 
 <h1 id="the-erlang-observer-gui">The Erlang observer GUI</h1>
 
 <p>This one is built in, simply launch it from your `iex terminal:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iex&gt; :observer.start
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iex&gt; :observer.start
 </code></pre></div></div>
 
 <p>And it will launch a GUI tool. The GUI has charts of memory and processing done, as well as a graph of application supervisor trees. Honestly, there’s a lot more in this tool than I’ve had time to explore and learn about.</p>
 
-<h1 id="mix-profilefprof"><code class="highlighter-rouge">mix profile.fprof</code></h1>
+<h1 id="mix-profilefprof"><code class="language-plaintext highlighter-rouge">mix profile.fprof</code></h1>
 
-<p>This is another built-in tool that you can use. Profiling might not be the first tool you need when developing, but when you want to understand and trace what your code is doing, the <code class="highlighter-rouge">fprof</code> tool’s output can be incredibly handy. Make sure you run this with <code class="highlighter-rouge">MIX_ENV=prod</code> when you use this. It is also possible to <a href="https://selfamusementpark.com/profiling-a-slow-elixir-test">wrap fprof to profile slow test cases</a>, which I have found useful in the past. There’s other libraries that you can install for profiling and tracing Elixir, but so far, <code class="highlighter-rouge">mix profile.fprof</code> has worked well enough for me.</p>
+<p>This is another built-in tool that you can use. Profiling might not be the first tool you need when developing, but when you want to understand and trace what your code is doing, the <code class="language-plaintext highlighter-rouge">fprof</code> tool’s output can be incredibly handy. Make sure you run this with <code class="language-plaintext highlighter-rouge">MIX_ENV=prod</code> when you use this. It is also possible to <a href="https://selfamusementpark.com/profiling-a-slow-elixir-test">wrap fprof to profile slow test cases</a>, which I have found useful in the past. There’s other libraries that you can install for profiling and tracing Elixir, but so far, <code class="language-plaintext highlighter-rouge">mix profile.fprof</code> has worked well enough for me.</p>
 
 <h1 id="final-thoughts">Final Thoughts</h1>
 

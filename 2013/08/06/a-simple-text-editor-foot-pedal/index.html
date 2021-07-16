@@ -111,17 +111,17 @@
 
 <p>There are, of course, a few gotchas that I ran into:</p>
 
-<p>The <code class="highlighter-rouge">KEY_ESC</code> constant that is referenced by the <a href="http://arduino.cc/en/Reference/KeyboardModifiers">Arduino documentation</a> didn’t work. Similarly, sending the hex value and character code didn’t work. I couldn’t find anything online that suggested that the Mac has some different ASCII character for the Escape key, so I had to find another way to leave insert mode.</p>
+<p>The <code class="language-plaintext highlighter-rouge">KEY_ESC</code> constant that is referenced by the <a href="http://arduino.cc/en/Reference/KeyboardModifiers">Arduino documentation</a> didn’t work. Similarly, sending the hex value and character code didn’t work. I couldn’t find anything online that suggested that the Mac has some different ASCII character for the Escape key, so I had to find another way to leave insert mode.</p>
 
-<p>With the Arduino’s Keyboard class, we can build up a key combo by calling <code class="highlighter-rouge">Keyboard.press</code> for each character in the combo, and then finally calling <code class="highlighter-rouge">Keyboard.releaseAll</code> when we’re ready to send the key combo to the computer. Since vim also has <code class="highlighter-rouge">Ctrl-[</code> as a way of leaving insert mode, I created that key combo on lines 34-36.</p>
+<p>With the Arduino’s Keyboard class, we can build up a key combo by calling <code class="language-plaintext highlighter-rouge">Keyboard.press</code> for each character in the combo, and then finally calling <code class="language-plaintext highlighter-rouge">Keyboard.releaseAll</code> when we’re ready to send the key combo to the computer. Since vim also has <code class="language-plaintext highlighter-rouge">Ctrl-[</code> as a way of leaving insert mode, I created that key combo on lines 34-36.</p>
 
-<p>Of course, this code could be made to be even more robust by guarding against, say, inserting an <code class="highlighter-rouge">i</code> character when you are already in insert mode. Most likely, you’d send Ctrl-[ (and move building the key combo to a function we can reuse) and then send vim the command <code class="highlighter-rouge">:startinsert</code>.  I’ll leave implementing the more robust solution as an exercise for the reader.</p>
+<p>Of course, this code could be made to be even more robust by guarding against, say, inserting an <code class="language-plaintext highlighter-rouge">i</code> character when you are already in insert mode. Most likely, you’d send Ctrl-[ (and move building the key combo to a function we can reuse) and then send vim the command <code class="language-plaintext highlighter-rouge">:startinsert</code>.  I’ll leave implementing the more robust solution as an exercise for the reader.</p>
 
 <h2 id="final-thoughts">Final thoughts</h2>
 
 <p>Does it work? I used it while writing this blog post, but I must admit, I have a strong natural reflex to hit ESC to leave insert as soon as I finish typing a word or sentence. However, when consciously trying, it is quite natural to use the foot pedal to enter/leave insert mode. One downside I found was that the Ctrl-[ combo seems to back up the cursor one character, which can be annoying.</p>
 
-<p>For my personal use, I am thinking about mapping the key it sends to <code class="highlighter-rouge">Left-Alt</code> so that I can use the footpedal while in emacs’ Org Mode and not have to move my left hand down to hit Alt with my ring finger every time I want to adjust a heading or start a new heading.</p>
+<p>For my personal use, I am thinking about mapping the key it sends to <code class="language-plaintext highlighter-rouge">Left-Alt</code> so that I can use the footpedal while in emacs’ Org Mode and not have to move my left hand down to hit Alt with my ring finger every time I want to adjust a heading or start a new heading.</p>
 
 <p>Overall, this pedal is much cheaper than the high-end pedals mentioned above. The total cost came to around $37, because I had some of the parts on hand. Further, you can upload new code to the Teensy on all operating systems, a big win over the Windows-only pedals above.</p>
 

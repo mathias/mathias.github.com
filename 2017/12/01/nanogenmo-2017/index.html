@@ -67,7 +67,7 @@
 
 <p>In particular, there’s not enough variety in the types of stories that the script can generate. and I would’ve liked to have it decide for some travelers to write small “sub-stories.” These would follow templates like “something goes wrong,” or “eating at a restaurant,” and have it go into detail there, procedurally-generating more details as it went. I also wanted to write some code that generated stories for the flight crews, the ground crew at the airport, and the employees of businesses.</p>
 
-<p>The code itself is not particularly spectacular. I chose Ruby due to my experience with it. I was able to identify a nice abstraction for inheritance – <code class="highlighter-rouge">DomesticPassenger</code> and <code class="highlighter-rouge">InternationalPassenger</code> are subclasses of <code class="highlighter-rouge">Passenger</code>, because they all share some common attributes like <code class="highlighter-rouge">name</code>.</p>
+<p>The code itself is not particularly spectacular. I chose Ruby due to my experience with it. I was able to identify a nice abstraction for inheritance – <code class="language-plaintext highlighter-rouge">DomesticPassenger</code> and <code class="language-plaintext highlighter-rouge">InternationalPassenger</code> are subclasses of <code class="language-plaintext highlighter-rouge">Passenger</code>, because they all share some common attributes like <code class="language-plaintext highlighter-rouge">name</code>.</p>
 
 <p>There’s no testing to speak of, and I’d like to dig in a bit more about how procedural generation is unit tested. My guess is largely around ensuring it works without raising an exception, regardless of output, and also checking with the random seed set for particular behavior.</p>
 

@@ -69,42 +69,42 @@
 
 <h2 id="updating-dependencies">Updating dependencies</h2>
 
-<p>It has been some time since we worked on <a href="https://github.com/mathias/autodjinn">autodjinn</a>. Libraries move fast in the Clojure ecosystem, and we want to make sure that we’re developing against the most recent versions of each dependency. Before we begin making changes, let’s update everything. If you have already read my <a href="/blog/2014/09/15/clojure-code-quality-tools/">Clojure Code Quality Tools</a> post, you’ll be familiar with the <code class="highlighter-rouge">lein ancient</code> plugin.</p>
+<p>It has been some time since we worked on <a href="https://github.com/mathias/autodjinn">autodjinn</a>. Libraries move fast in the Clojure ecosystem, and we want to make sure that we’re developing against the most recent versions of each dependency. Before we begin making changes, let’s update everything. If you have already read my <a href="/blog/2014/09/15/clojure-code-quality-tools/">Clojure Code Quality Tools</a> post, you’ll be familiar with the <code class="language-plaintext highlighter-rouge">lein ancient</code> plugin.</p>
 
-<p>Below is output when I run <code class="highlighter-rouge">lein ancient</code> on the last post’s finished git tag, <code class="highlighter-rouge">v0.1.1</code>. To go back to that state, you can run <code class="highlighter-rouge">git checkout v0.1.1</code> on the <a href="https://github.com/mathias/autodjinn">autodjinn repo</a>.</p>
+<p>Below is output when I run <code class="language-plaintext highlighter-rouge">lein ancient</code> on the last post’s finished git tag, <code class="language-plaintext highlighter-rouge">v0.1.1</code>. To go back to that state, you can run <code class="language-plaintext highlighter-rouge">git checkout v0.1.1</code> on the <a href="https://github.com/mathias/autodjinn">autodjinn repo</a>.</p>
 
 <script src="https://gist.github.com/mathias/c349dc7cb110edb56235.js"></script>
 
-<p>It looks like our <a href="https://github.com/james-henderson/nomad">nomad</a> dependency is out of date. Update the version number in <code class="highlighter-rouge">project.clj</code> to <code class="highlighter-rouge">0.7.0</code> and run <code class="highlighter-rouge">lein ancient</code> again to verify that it worked.</p>
+<p>It looks like our <a href="https://github.com/james-henderson/nomad">nomad</a> dependency is out of date. Update the version number in <code class="language-plaintext highlighter-rouge">project.clj</code> to <code class="language-plaintext highlighter-rouge">0.7.0</code> and run <code class="language-plaintext highlighter-rouge">lein ancient</code> again to verify that it worked.</p>
 
-<p>If you take a look at <code class="highlighter-rouge">project.clj</code> yourself, you may notice that our project is still on Clojure <code class="highlighter-rouge">1.5.1</code>. <code class="highlighter-rouge">lein ancient</code> doesn’t look at the version of Clojure that we’re specifying; it assumes you have a good reason for picking the Clojure version you specify. In our case, we’d like to be on the latest stable Clojure, version <code class="highlighter-rouge">1.6.0</code>. Update the version of Clojure in <code class="highlighter-rouge">project.clj</code> and then run your REPL. There should be no issues with using the functionality in the app that we created in previous posts. If there is, carefully read the error messages and try to find a solution before moving on.</p>
+<p>If you take a look at <code class="language-plaintext highlighter-rouge">project.clj</code> yourself, you may notice that our project is still on Clojure <code class="language-plaintext highlighter-rouge">1.5.1</code>. <code class="language-plaintext highlighter-rouge">lein ancient</code> doesn’t look at the version of Clojure that we’re specifying; it assumes you have a good reason for picking the Clojure version you specify. In our case, we’d like to be on the latest stable Clojure, version <code class="language-plaintext highlighter-rouge">1.6.0</code>. Update the version of Clojure in <code class="language-plaintext highlighter-rouge">project.clj</code> and then run your REPL. There should be no issues with using the functionality in the app that we created in previous posts. If there is, carefully read the error messages and try to find a solution before moving on.</p>
 
-<p>To save on the hassle of upgrading, I have created a tag for the project after upgrading Clojure and nomad. To go to that tag in your local copy of the repo, run <code class="highlighter-rouge">git checkout v0.1.2</code>.</p>
+<p>To save on the hassle of upgrading, I have created a tag for the project after upgrading Clojure and nomad. To go to that tag in your local copy of the repo, run <code class="language-plaintext highlighter-rouge">git checkout v0.1.2</code>.</p>
 
 <h2 id="datomic-query-refresher">Datomic query refresher</h2>
 
-<p>If you remember back to the <a href="/2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/">first post</a>, we wrapped up by querying for entity IDs and then using Datomic’s built-in <code class="highlighter-rouge">entity</code> and <code class="highlighter-rouge">touch</code> functions to instantiate each message with all of its attributes. We had to do this because the query itself only returned a set of entity IDs:</p>
+<p>If you remember back to the <a href="/2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/">first post</a>, we wrapped up by querying for entity IDs and then using Datomic’s built-in <code class="language-plaintext highlighter-rouge">entity</code> and <code class="language-plaintext highlighter-rouge">touch</code> functions to instantiate each message with all of its attributes. We had to do this because the query itself only returned a set of entity IDs:</p>
 
 <script src="https://gist.github.com/mathias/ab5a827ca860c89e0043.js"></script>
 
 <p>Note that the Datomic query is made up of several parts:</p>
 
 <ul>
-  <li>The <code class="highlighter-rouge">:find</code> clause says what will be returned. In this case, it is the <code class="highlighter-rouge">?eid</code> variable for each record we matched in the rest of the query.</li>
-  <li>The <code class="highlighter-rouge">:where</code> clause gives a condition to match. In this case, we want all <code class="highlighter-rouge">?eid</code> where the entity has a <code class="highlighter-rouge">:mail/uid</code> fact, but we don’t care about the <code class="highlighter-rouge">:mail/uid</code> fact’s value, so we give it a wildcard with the underscore (<code class="highlighter-rouge">_</code>).</li>
+  <li>The <code class="language-plaintext highlighter-rouge">:find</code> clause says what will be returned. In this case, it is the <code class="language-plaintext highlighter-rouge">?eid</code> variable for each record we matched in the rest of the query.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">:where</code> clause gives a condition to match. In this case, we want all <code class="language-plaintext highlighter-rouge">?eid</code> where the entity has a <code class="language-plaintext highlighter-rouge">:mail/uid</code> fact, but we don’t care about the <code class="language-plaintext highlighter-rouge">:mail/uid</code> fact’s value, so we give it a wildcard with the underscore (<code class="language-plaintext highlighter-rouge">_</code>).</li>
 </ul>
 
-<p>We could pass in the <code class="highlighter-rouge">:mail/uid</code> we care about, and only get one message’s entity-ID back.</p>
+<p>We could pass in the <code class="language-plaintext highlighter-rouge">:mail/uid</code> we care about, and only get one message’s entity-ID back.</p>
 
 <script src="https://gist.github.com/mathias/4990c69f1e4c4a7dc7e9.js"></script>
 
-<p>Notice how the <code class="highlighter-rouge">?uid</code> variable gets passed in with the <code class="highlighter-rouge">:in</code> clause, as the third argument to <code class="highlighter-rouge">d/q</code>?</p>
+<p>Notice how the <code class="language-plaintext highlighter-rouge">?uid</code> variable gets passed in with the <code class="language-plaintext highlighter-rouge">:in</code> clause, as the third argument to <code class="language-plaintext highlighter-rouge">d/q</code>?</p>
 
 <p>Or we could change the query to match on other attributes:</p>
 
 <script src="https://gist.github.com/mathias/3685937809a50e36c424.js"></script>
 
-<p>In all these cases, we’d still get the entity IDs back because the <code class="highlighter-rouge">:find</code> clause tells Datomic to return <code class="highlighter-rouge">?eid</code>. Typically, we pass around entity IDs and lazy-load any facts (attributes) that we need off that entity.</p>
+<p>In all these cases, we’d still get the entity IDs back because the <code class="language-plaintext highlighter-rouge">:find</code> clause tells Datomic to return <code class="language-plaintext highlighter-rouge">?eid</code>. Typically, we pass around entity IDs and lazy-load any facts (attributes) that we need off that entity.</p>
 
 <p>But, we could just as easily return other attributes from an entity as part of a query. Let’s ask for the recipients of all the emails in our system:</p>
 
@@ -114,11 +114,11 @@
 
 <p>One last thing. Take a look at the return of that query above. Remember that the results returned by a Datomic query are a <a href="http://clojure.github.io/clojure/clojure.core-api.html#clojure.core/set">set</a>. In Clojure, sets are a collection of unique values. So we’re seeing the unique list of addresses that are in the To: field in our data. What we’re not seeing is duplicate recipient addresses. To be able to count the number of times an email address received a message, we’ll need a list with non-unique members.</p>
 
-<p>Datomic creates a unique set for the values returned by a query. This is generally a great thing, since it gets around some of the issues that one can run into with JOINing in SQL. But in this case, it is not ideal for what we want to accomplish. We could try to get around the uniqueness constraint on output by returning vectors of the entity ID and the <code class="highlighter-rouge">?to</code> address, and then mapping across the result to pull out the second item:</p>
+<p>Datomic creates a unique set for the values returned by a query. This is generally a great thing, since it gets around some of the issues that one can run into with JOINing in SQL. But in this case, it is not ideal for what we want to accomplish. We could try to get around the uniqueness constraint on output by returning vectors of the entity ID and the <code class="language-plaintext highlighter-rouge">?to</code> address, and then mapping across the result to pull out the second item:</p>
 
 <script src="https://gist.github.com/mathias/d6401a036d032caccde3.js"></script>
 
-<p>There’s a simpler way that we can use in the Datomic query. By keeping it inside Datomic, we can later combine this approach with more-complex queries. We can tell the Datomic query to look at other attributes when considering what the unique key is by passing the query a <code class="highlighter-rouge">:with</code> clause. By changing our query slightly to include a <code class="highlighter-rouge">:with</code> clause, we end up with the full list of recipients in our datastore:</p>
+<p>There’s a simpler way that we can use in the Datomic query. By keeping it inside Datomic, we can later combine this approach with more-complex queries. We can tell the Datomic query to look at other attributes when considering what the unique key is by passing the query a <code class="language-plaintext highlighter-rouge">:with</code> clause. By changing our query slightly to include a <code class="language-plaintext highlighter-rouge">:with</code> clause, we end up with the full list of recipients in our datastore:</p>
 
 <script src="https://gist.github.com/mathias/f36ae56bef0e1b6cdfa9.js"></script>
 
@@ -130,45 +130,45 @@
 
 <p>We start by building up the query in our REPL. Let’s start with a simpler query, to count how many emails have been sent <em>to</em> each email address in our data store. Note that this isn’t sufficient to answer the question above, since we won’t know who those emails came <em>from</em>; they could have been sent by us or by someone else, or they could have been sent to us. Later, we’ll make it work with from-to pairs that allow us to know things like who is sending email to us.</p>
 
-<p>A simple way to do this would be to wrap our previous query in the <a href="http://clojure.github.io/clojure/clojure.core-api.html#clojure.core/frequencies">frequencies</a> function that Clojure.core provides. <code class="highlighter-rouge">frequencies</code> returns a map of items with their count from a Clojure collection.</p>
+<p>A simple way to do this would be to wrap our previous query in the <a href="http://clojure.github.io/clojure/clojure.core-api.html#clojure.core/frequencies">frequencies</a> function that Clojure.core provides. <code class="language-plaintext highlighter-rouge">frequencies</code> returns a map of items with their count from a Clojure collection.</p>
 
 <script src="https://gist.github.com/mathias/af050f75d1c610d6d422.js"></script>
 
-<p>However, we want to perform the same sort of thing in Datomic itself. To do that, we’re going to need to know about aggregate functions. Aggregate functions operate over the intermediate results of a Datomic query. Datomic provides functions like <code class="highlighter-rouge">max</code>, <code class="highlighter-rouge">min</code>, <code class="highlighter-rouge">sum</code>, <code class="highlighter-rouge">count</code>, <code class="highlighter-rouge">rand</code> (for getting a random value out of the query results), and more. With aggregates, we need to be sure to use a <code class="highlighter-rouge">:with</code> clause to ensure we aggregate over all our values.</p>
+<p>However, we want to perform the same sort of thing in Datomic itself. To do that, we’re going to need to know about aggregate functions. Aggregate functions operate over the intermediate results of a Datomic query. Datomic provides functions like <code class="language-plaintext highlighter-rouge">max</code>, <code class="language-plaintext highlighter-rouge">min</code>, <code class="language-plaintext highlighter-rouge">sum</code>, <code class="language-plaintext highlighter-rouge">count</code>, <code class="language-plaintext highlighter-rouge">rand</code> (for getting a random value out of the query results), and more. With aggregates, we need to be sure to use a <code class="language-plaintext highlighter-rouge">:with</code> clause to ensure we aggregate over all our values.</p>
 
-<p>Looking at that short list of aggregate functions I’ve named, we can see that we probably want to use the <code class="highlighter-rouge">count</code> function to count the occurance of each email address in a to field in our data. To see how aggregates work, I’ve come up with a simpler example (the only new thing to know is that Datomic’s Datalog implementation can query across Clojure collections as easily as it can against a database value, so I’ve given a simple vector-of-vectors here to describe data in the form</p>
+<p>Looking at that short list of aggregate functions I’ve named, we can see that we probably want to use the <code class="language-plaintext highlighter-rouge">count</code> function to count the occurance of each email address in a to field in our data. To see how aggregates work, I’ve come up with a simpler example (the only new thing to know is that Datomic’s Datalog implementation can query across Clojure collections as easily as it can against a database value, so I’ve given a simple vector-of-vectors here to describe data in the form</p>
 
-<p><code class="highlighter-rouge">[database-id person-name]</code></p>
+<p><code class="language-plaintext highlighter-rouge">[database-id person-name]</code></p>
 
-<p>When the query looks at records in the data, our <code class="highlighter-rouge">:where</code> clause gives each position in the vector an id and a name based on position in the vector.)</p>
+<p>When the query looks at records in the data, our <code class="language-plaintext highlighter-rouge">:where</code> clause gives each position in the vector an id and a name based on position in the vector.)</p>
 
 <script src="https://gist.github.com/mathias/6b8da156388ed1cd9290.js"></script>
 
-<p>Let’s review what happened there. Before the <code class="highlighter-rouge">count</code> aggregate function was applied, our results looked like this:</p>
+<p>Let’s review what happened there. Before the <code class="language-plaintext highlighter-rouge">count</code> aggregate function was applied, our results looked like this:</p>
 
-<p><code class="highlighter-rouge">[["Jon"] ["Jon"] ["Bob"] ["Chris"]]</code></p>
+<p><code class="language-plaintext highlighter-rouge">[["Jon"] ["Jon"] ["Bob"] ["Chris"]]</code></p>
 
-<p>So the <code class="highlighter-rouge">count</code> function just counts across the values of the variable it is passed (in our case, <code class="highlighter-rouge">?name</code>), and by pairing it with the original <code class="highlighter-rouge">?name</code> value, we get each name and the number of times it appears in our dataset.</p>
+<p>So the <code class="language-plaintext highlighter-rouge">count</code> function just counts across the values of the variable it is passed (in our case, <code class="language-plaintext highlighter-rouge">?name</code>), and by pairing it with the original <code class="language-plaintext highlighter-rouge">?name</code> value, we get each name and the number of times it appears in our dataset.</p>
 
-<p>It makes sense that we can do the same thing with our recipient email addresses from the previous query. Combining our previous queries with the <code class="highlighter-rouge">count</code> aggregate function, we get:</p>
+<p>It makes sense that we can do the same thing with our recipient email addresses from the previous query. Combining our previous queries with the <code class="language-plaintext highlighter-rouge">count</code> aggregate function, we get:</p>
 
 <script src="https://gist.github.com/mathias/8b346f1019d588bea534.js"></script>
 
-<p>That looks like the same kind of data we were getting with the use of the <code class="highlighter-rouge">frequencies</code> function before! So now we know how to use a Datomic aggregate function to count results in our queries.</p>
+<p>That looks like the same kind of data we were getting with the use of the <code class="language-plaintext highlighter-rouge">frequencies</code> function before! So now we know how to use a Datomic aggregate function to count results in our queries.</p>
 
 <p>What’s next? Well, what we really want is to get results that are of the form</p>
 
-<p><code class="highlighter-rouge">[from-address to-address]</code></p>
+<p><code class="language-plaintext highlighter-rouge">[from-address to-address]</code></p>
 
 <p>and count those tuples. That way, we can differentiate between email sent to us versus email we’ve sent to others, etc. And eventually, we’d like to save those queries off as functions that we can call to compute the counts from other places in our project.</p>
 
-<p>We can’t pass a tuple like <code class="highlighter-rouge">[from-address to-address]</code> to the <code class="highlighter-rouge">count</code> aggregate function in one query. The way around this is to write two queries. The inner query will return the tuples, and the outer query will return the tuple and a count of the tuple in the output data. Since the queries run on the peer, we don’t really have to worry about whether it is one query or two, just that it returns the correct data at the end.</p>
+<p>We can’t pass a tuple like <code class="language-plaintext highlighter-rouge">[from-address to-address]</code> to the <code class="language-plaintext highlighter-rouge">count</code> aggregate function in one query. The way around this is to write two queries. The inner query will return the tuples, and the outer query will return the tuple and a count of the tuple in the output data. Since the queries run on the peer, we don’t really have to worry about whether it is one query or two, just that it returns the correct data at the end.</p>
 
-<p>So what would the inner query look like? Remember that the outer query will still need a field to pass to the <code class="highlighter-rouge">:with</code> clause, so we’ll probably want to pass through the entity ID.</p>
+<p>So what would the inner query look like? Remember that the outer query will still need a field to pass to the <code class="language-plaintext highlighter-rouge">:with</code> clause, so we’ll probably want to pass through the entity ID.</p>
 
 <script src="https://gist.github.com/mathias/61e60a563ffc29f06af8.js"></script>
 
-<p>Those tuples will be used by our outer query. However, we also need a combined value for the count to operate on. For that, we can throw in a function call in the <code class="highlighter-rouge">:where</code> clause and give it a binding at the end for Datomic to use for that new value. In this case, I’ll combine the <code class="highlighter-rouge">?from</code> and <code class="highlighter-rouge">?to</code> values into a PersistentVector that the <code class="highlighter-rouge">count</code> aggregate function can use. The combined query ends up looking like this:</p>
+<p>Those tuples will be used by our outer query. However, we also need a combined value for the count to operate on. For that, we can throw in a function call in the <code class="language-plaintext highlighter-rouge">:where</code> clause and give it a binding at the end for Datomic to use for that new value. In this case, I’ll combine the <code class="language-plaintext highlighter-rouge">?from</code> and <code class="language-plaintext highlighter-rouge">?to</code> values into a PersistentVector that the <code class="language-plaintext highlighter-rouge">count</code> aggregate function can use. The combined query ends up looking like this:</p>
 
 <script src="https://gist.github.com/mathias/d26c7175670b8c29e7c2.js"></script>
 
@@ -186,11 +186,11 @@
 
 <p>By taking advantage of multiple arities, we can default to not having to pass a database value into the function. But in the cases where we do need to ensure a particular database version is used, we can do that. This is a very powerful idiom that I’ve learned since I began to use Datomic, and I suggest you structure all your query functions similarly.</p>
 
-<p>Now, let’s take that function that only queries for <code class="highlighter-rouge">:mail/to</code> addresses and make it more generic, with specific wrapper functions for each case where we’d want to use it:</p>
+<p>Now, let’s take that function that only queries for <code class="language-plaintext highlighter-rouge">:mail/to</code> addresses and make it more generic, with specific wrapper functions for each case where we’d want to use it:</p>
 
 <script src="https://gist.github.com/mathias/67647105799f7f2ff1cf.js"></script>
 
-<p>Note that we had to change the inner query to take the attr we want to query on as a variable; this is the proper way to pass a piece of data into a query we want to run. The <code class="highlighter-rouge">$</code> that comes first in the <code class="highlighter-rouge">:in</code> clause tells Datomic to use the second <code class="highlighter-rouge">d/q</code> argument as our dataset (the db value we pass in), and the <code class="highlighter-rouge">?attr</code> tells it to bind the third <code class="highlighter-rouge">d/q</code> argument as the variable <code class="highlighter-rouge">?attr</code>.</p>
+<p>Note that we had to change the inner query to take the attr we want to query on as a variable; this is the proper way to pass a piece of data into a query we want to run. The <code class="language-plaintext highlighter-rouge">$</code> that comes first in the <code class="language-plaintext highlighter-rouge">:in</code> clause tells Datomic to use the second <code class="language-plaintext highlighter-rouge">d/q</code> argument as our dataset (the db value we pass in), and the <code class="language-plaintext highlighter-rouge">?attr</code> tells it to bind the third <code class="language-plaintext highlighter-rouge">d/q</code> argument as the variable <code class="language-plaintext highlighter-rouge">?attr</code>.</p>
 
 <p>While the three variations on functions are similar, we keep the code DRY. (DRY is an acronym for Don’t Repeat Yourself.) In the long run, less code should mean less bugs and the ability to fix problems in one place.</p>
 
@@ -208,35 +208,35 @@
 
 <p>For all three query functions we wrote, each result is of the form:</p>
 
-<p><code class="highlighter-rouge">[from-address to-address count]</code></p>
+<p><code class="language-plaintext highlighter-rouge">[from-address to-address count]</code></p>
 
-<p>Let’s add to the Datomic schema in our <code class="highlighter-rouge">core.clj</code> file to create a new <code class="highlighter-rouge">:sent-count</code> entity type with these three attributes. Note that sent counts don’t really have a unique identifier of their own; it is the combination of <code class="highlighter-rouge">from</code> -&gt; <code class="highlighter-rouge">to</code> addresses that uniquely identifies them. However, we will leave the <code class="highlighter-rouge">from</code> and <code class="highlighter-rouge">to</code> addresses as separate fields so it is easy to use them in queries.</p>
+<p>Let’s add to the Datomic schema in our <code class="language-plaintext highlighter-rouge">core.clj</code> file to create a new <code class="language-plaintext highlighter-rouge">:sent-count</code> entity type with these three attributes. Note that sent counts don’t really have a unique identifier of their own; it is the combination of <code class="language-plaintext highlighter-rouge">from</code> -&gt; <code class="language-plaintext highlighter-rouge">to</code> addresses that uniquely identifies them. However, we will leave the <code class="language-plaintext highlighter-rouge">from</code> and <code class="language-plaintext highlighter-rouge">to</code> addresses as separate fields so it is easy to use them in queries.</p>
 
-<p>Add the following maps to the <code class="highlighter-rouge">schema-txn</code> vector:</p>
+<p>Add the following maps to the <code class="language-plaintext highlighter-rouge">schema-txn</code> vector:</p>
 
 <script src="https://gist.github.com/mathias/661dadfdb2e639209452.js"></script>
 
-<p>You’ll have to call the <code class="highlighter-rouge">update-schema</code> function in your REPL to run the schema transaction.</p>
+<p>You’ll have to call the <code class="language-plaintext highlighter-rouge">update-schema</code> function in your REPL to run the schema transaction.</p>
 
-<p>Something that’s worth calling out is that we’re using a Datomic schema <code class="highlighter-rouge">valueType</code> that we haven’t seen yet in this project: <code class="highlighter-rouge">db.type/ref</code>. In most cases, you’d want to use the <code class="highlighter-rouge">ref</code> type to associate with other entities in Datomic. But we can also use it to associate with a given list of facts. Here, we give the <code class="highlighter-rouge">ref</code> type an enum of the possible values that <code class="highlighter-rouge">:sent-count/type</code> can have: <code class="highlighter-rouge">to</code>, <code class="highlighter-rouge">cc</code>, and <code class="highlighter-rouge">bcc</code>. By adding this <code class="highlighter-rouge">type</code> field to our new entities, we can either choose to look at sent counts for only one type of address, or we can sum up all the counts for a given from-to pair and get the total counts for the system.</p>
+<p>Something that’s worth calling out is that we’re using a Datomic schema <code class="language-plaintext highlighter-rouge">valueType</code> that we haven’t seen yet in this project: <code class="language-plaintext highlighter-rouge">db.type/ref</code>. In most cases, you’d want to use the <code class="language-plaintext highlighter-rouge">ref</code> type to associate with other entities in Datomic. But we can also use it to associate with a given list of facts. Here, we give the <code class="language-plaintext highlighter-rouge">ref</code> type an enum of the possible values that <code class="language-plaintext highlighter-rouge">:sent-count/type</code> can have: <code class="language-plaintext highlighter-rouge">to</code>, <code class="language-plaintext highlighter-rouge">cc</code>, and <code class="language-plaintext highlighter-rouge">bcc</code>. By adding this <code class="language-plaintext highlighter-rouge">type</code> field to our new entities, we can either choose to look at sent counts for only one type of address, or we can sum up all the counts for a given from-to pair and get the total counts for the system.</p>
 
-<p>Our next job is to add some functions to create the initial sent counts data, as well as to query for it. To keep things clean, I created a <code class="highlighter-rouge">sent-counts</code> namespace for these functions to live in. I’ve provided it below with minimal explanation, since it should look very familiar to what we’ve already done.</p>
+<p>Our next job is to add some functions to create the initial sent counts data, as well as to query for it. To keep things clean, I created a <code class="language-plaintext highlighter-rouge">sent-counts</code> namespace for these functions to live in. I’ve provided it below with minimal explanation, since it should look very familiar to what we’ve already done.</p>
 
 <p><a href="https://github.com/mathias/autodjinn/blob/29cc08d1ead6043287ecb82136d3ee519668100f/src/autodjinn/sent_counts.clj">/src/autodjinn/sent_counts.clj</a></p>
 
-<p>After adding in the <code class="highlighter-rouge">sent_counts.clj</code> file, running:</p>
+<p>After adding in the <code class="language-plaintext highlighter-rouge">sent_counts.clj</code> file, running:</p>
 
-<p><code class="highlighter-rouge">(sent-counts/create-sent-counts)</code></p>
+<p><code class="language-plaintext highlighter-rouge">(sent-counts/create-sent-counts)</code></p>
 
 <p>will populate your datastore with the sent counts computed with functions we created earlier.</p>
 
-<p>Note: The sent counts don’t have any sort of unique key on them, so if you run <code class="highlighter-rouge">create-sent-counts</code> multiple times, you’ll get duplicate results. We’ll handle that another time when we need to update our data.</p>
+<p>Note: The sent counts don’t have any sort of unique key on them, so if you run <code class="language-plaintext highlighter-rouge">create-sent-counts</code> multiple times, you’ll get duplicate results. We’ll handle that another time when we need to update our data.</p>
 
 <h2 id="wrapping-up">Wrapping up</h2>
 
-<p>We’ve covered a lot of material on querying Datomic. In particular, we used aggregate functions to get the counts and sums of records in our data store. Because we don’t want to run the queries all the time, we created a new entity type to store our sent counts and saved our data into it. With query functions like those found in the <code class="highlighter-rouge">sent-counts</code> namespace, we can start to ask our data questions like “In the dataset, what address was sent the most email?”</p>
+<p>We’ve covered a lot of material on querying Datomic. In particular, we used aggregate functions to get the counts and sums of records in our data store. Because we don’t want to run the queries all the time, we created a new entity type to store our sent counts and saved our data into it. With query functions like those found in the <code class="language-plaintext highlighter-rouge">sent-counts</code> namespace, we can start to ask our data questions like “In the dataset, what address was sent the most email?”</p>
 
-<p>If you want to compare what you’ve done with my version, you can run <code class="highlighter-rouge">git diff v0.1.3</code> on the <a href="https://github.com/mathias/autodjinn">autodjinn repo</a>.</p>
+<p>If you want to compare what you’ve done with my version, you can run <code class="language-plaintext highlighter-rouge">git diff v0.1.3</code> on the <a href="https://github.com/mathias/autodjinn">autodjinn repo</a>.</p>
 
 <p>Please let me know what you think of these posts by sending me an email at <a href="mailto:contact@mattgauger.com">contact@mattgauger.com</a>. I’d love to hear from you!</p>
 

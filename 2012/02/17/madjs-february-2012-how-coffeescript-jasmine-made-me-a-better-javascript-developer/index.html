@@ -207,7 +207,7 @@
   <li>Compiled CoffeeScript Example:</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(function() {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(function() {
   console.log "hello world!";
 }).call(this);
 </code></pre></div></div>
@@ -225,13 +225,13 @@
   <li>Loop over every item in a list, in CoffeeScript:</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for item in list
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for item in list
   process item
 </code></pre></div></div>
 
 <h3 id="intention-gets-obscured-by-managing-the-loop-in-js">Intention gets obscured by managing the loop, in JS:</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for (var i = 0, l = list.length; i &lt; l; i++) {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for (var i = 0, l = list.length; i &lt; l; i++) {
   var item = list[i];
   process(item);
 }
@@ -271,7 +271,7 @@
 
 <h3 id="the-example-on-the-jasmine-site">The example on the Jasmine site:</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>describe("Jasmine", function() {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>describe("Jasmine", function() {
   it("makes testing awesome!", function() {
     expect(yourCode).toBeLotsBetter();
   });
@@ -283,7 +283,7 @@
   <li>A better example:</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>describe ('addition', function() {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>describe ('addition', function() {
   it('adds two numbers', function() {
     expect(1 + 2).toEqual(3);
   });
@@ -332,16 +332,16 @@
 <p>Matchers:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">.toBe()</code></li>
-  <li><code class="highlighter-rouge">.toBeNull()</code></li>
-  <li><code class="highlighter-rouge">.toBeTruthy()</code></li>
-  <li><code class="highlighter-rouge">.toBeDefined()</code></li>
-  <li><code class="highlighter-rouge">.toBeUndefined()</code></li>
+  <li><code class="language-plaintext highlighter-rouge">.toBe()</code></li>
+  <li><code class="language-plaintext highlighter-rouge">.toBeNull()</code></li>
+  <li><code class="language-plaintext highlighter-rouge">.toBeTruthy()</code></li>
+  <li><code class="language-plaintext highlighter-rouge">.toBeDefined()</code></li>
+  <li><code class="language-plaintext highlighter-rouge">.toBeUndefined()</code></li>
 </ul>
 
 <h3 id="setup-and-teardown">Setup and teardown:</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>beforeEach()
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>beforeEach()
 afterEach()
 </code></pre></div></div>
 
