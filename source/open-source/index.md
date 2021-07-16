@@ -8,13 +8,23 @@ I've contributed to and built a number of open source projects. I am [mathias](h
 
 ## My Projects
 
+* [mathias/lore](https://github.com/mathias/lore): A narrative generator library in Fennel. Procedurally generated text engine.
+* [mathias/dotfiles](https://github.com/mathias/dotfiles): My dotfiles collection. Reasonable defaults that I prefer.
+
+### Creative Works
+
+* [NaNoGenMo 2017: Destinations](https://github.com/mathias/destinations): A (procedurally-generated) novel about all the people passing through LAX on a given day.
+* [NaNoGenMo 2018: The Journal of Alexandria Alexander](https://github.com/mathias/nanogenmo-2018-2): See the [Issue explaining it](https://github.com/NaNoGenMo/2018/issues/101)
+* [NaNoGenMo 2019: Walden with word substitution, a Nano-Nanogenmo](https://github.com/mathias/nanogenmo-2019/tree/master/nngm-2019): See the [Issue explaining it](https://github.com/NaNoGenMo/2019/issues/124)
+
+### Deprecated / No Longer Maintained
+
 * [gnar](https://github.com/mathias/gnar): A small Hacker News-like social link sharing site on [Hoplon](http://hoplon.io), ClojureScript, Castra, Clojure, and [HoneySQL](https://github.com/jkk/honeysql). Built in around 8 hours to nearly feature-complete status thanks to the power of Hoplon!
 * [hearst](https://github.com/mathias/hearst): Currently a URL normalizer library for some of my other Clojure projects; my goal is to make this a NLP tool like Python's [newspaper](https://github.com/codelucas/newspaper) for ingesting articles into [remembrance](https://github.com/mathias/remembrance).
 * [falcor](https://github.com/mathias/falcor): Metaprogrammed factory-factory in Ruby. Mostly useful as a quick way to create fixtured JSON services.
 * [loudspkr](https://github.com/mathias/loudspkr): A dashboard for Bendyworks written on top of [Dashing](https://github.com/Shopify/dashing).
 * [hum](https://github.com/mathias/hum): A Web Audio API wrapper for ClojureScript.
 * [ecstatic](https://github.com/mathias/ecstatic): a static site generator with modern Ruby tooling.
-* [mathias/dotfiles](https://github.com/mathias/dotfiles): My dotfiles collection. Reasonable defaults that I prefer.
 * [mathias/chording](https://github.com/mathias/chording): My chording keyboard project. Firmware and plans.
 * [riffraffle](https://github.com/mathias/riffraffle) A simple Rails-based Ember app for running conference raffles. Extracted from [snow_mobile_raffle](https://github.com/mathias/snow_mobile_raffle)
 * [sms_my_bus](https://github.com/mathias/sms_my_bus): a Ruby gem to interface with Madison's SMS My Bus API.
