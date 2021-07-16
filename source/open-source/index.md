@@ -44,7 +44,7 @@ In order of going further back in time:
 * [atreus-firmware](https://github.com/technomancy/atreus-firmware)
 * [clojure-mail](https://github.com/owainlewis/clojure-mail)
 * [emacs-live](https://github.com/overtone/emacs-live)
-* [rm-hull/ monet](https://github.com/rm-hull/monet)
+* [rm-hull/monet](https://github.com/rm-hull/monet)
 * [rylnd's pair script](https://github.com/rylnd/dotfiles)
 * [styleguide_rails](https://github.com/begriffs/styleguide_rails)
 * [Sapling Events conference websites](https://github.com/SaplingEvents)
