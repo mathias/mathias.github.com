@@ -67,13 +67,13 @@
 
 <p>From the local server:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>ssh -R 2048:localhost:22 username@example.com
-</code></pre></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh -R 2048:localhost:22 username@example.com
+</code></pre></div></div>
 
 <p>From the server out in the Internet (aka example.com in this example)</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>ssh -p 2048 other_username@localhost
-</code></pre></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh -p 2048 other_username@localhost
+</code></pre></div></div>
 
 <p>Note that the ‘localhost’ in the second example refers to your local server, not the one out in the internet. So <code class="highlighter-rouge">other_username</code> should be the username on your local server (not the remote server.) Confused yet? Good.</p>
 
@@ -81,10 +81,10 @@
 
 <p>Fix that by starting up a tmux session on the local server first, then detaching it.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>tmux new -s ssh-tunnel
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tmux new -s ssh-tunnel
 ssh -R 2048:localhost:22 username@example.com
 &lt;leader-d&gt;
-</code></pre></div>
+</code></pre></div></div>
 
 <p>Now the tmux session will happily keep that SSH shell open on the local server and you can reverse tunnel back over it.</p>
 
@@ -92,21 +92,21 @@ ssh -R 2048:localhost:22 username@example.com
 
 <p>With Mosh, we add another layer to the puzzle, so that my final setup looked like this:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>matts_laptop$ mosh matt@someserver.local
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>matts_laptop$ mosh matt@someserver.local
 matt@someserver.local$ tmux new -s ssh-tunnel
 &lt;tmux session starts&gt;
 matt@someserver.local$ ssh -R 2048:localhost:22 username@example.com
 &lt;leader-d&gt;
-</code></pre></div>
+</code></pre></div></div>
 
 <p>Pop open another window in my local tmux session (are you beginning to see a pattern?) and then connect with mosh up to my Linode:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>matts_laptop$ mosh me@mattgauger.com
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>matts_laptop$ mosh me@mattgauger.com
 me@mattgauger.com$ tmux new -s server-monitor
 &lt;tmux session starts&gt;
 me@mattgauger.com$ ssh -p 2048 matt@localhost # Note: this is the matt@someserver.local account!
 matt@someserver.local$ &lt;monitor the process I'm concerned with&gt;
-</code></pre></div>
+</code></pre></div></div>
 
 <p>Now I’ve got this mostly-persistent (thanks to mosh and tmux) session that I can detach from if I really need to, but I’ll still be able to connect back up to my Linode and check on the server on my LAN from RailsConf.</p>
 
@@ -130,7 +130,7 @@ matt@someserver.local$ &lt;monitor the process I'm concerned with&gt;
 
     <footer>
       <span>
-        &copy; <time datetime="2018">2018</time> Matt Gauger.
+        &copy; <time datetime="2021">2021</time> Matt Gauger.
       </span>
     </footer>
   </body>

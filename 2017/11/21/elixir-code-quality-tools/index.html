@@ -71,11 +71,11 @@
 
 <p>Built in to Elixir itself, doctests are a simple way to couple examples of useage where your function definition lives, in the source. They define an example call from an <code class="highlighter-rouge">iex</code> prompt, and show what the return should be. When you set up a simple test file in the suite to run doctests, it will automatically check that the examples match the actual function call response. All it takes is a test file such as:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>defmodule Alohomora.ResourceTest do
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>defmodule Alohomora.ResourceTest do
   use ExUnit.Case, async: true
   doctest Alohomora.Resource
 end
-</code></pre></div>
+</code></pre></div></div>
 
 <p>And to test functions with doctests in your <code class="highlighter-rouge">Alohomora.Resource</code> namespace. Best of all, there’s nothing extra to add – these tests will run when you run <code class="highlighter-rouge">mix test</code>.</p>
 
@@ -105,8 +105,8 @@ end
 
 <p>This one is built in, simply launch it from your `iex terminal:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>iex&gt; :observer.start
-</code></pre></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iex&gt; :observer.start
+</code></pre></div></div>
 
 <p>And it will launch a GUI tool. The GUI has charts of memory and processing done, as well as a graph of application supervisor trees. Honestly, there’s a lot more in this tool than I’ve had time to explore and learn about.</p>
 
@@ -142,7 +142,7 @@ end
 
     <footer>
       <span>
-        &copy; <time datetime="2018">2018</time> Matt Gauger.
+        &copy; <time datetime="2021">2021</time> Matt Gauger.
       </span>
     </footer>
   </body>

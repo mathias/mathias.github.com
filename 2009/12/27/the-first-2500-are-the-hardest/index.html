@@ -75,15 +75,15 @@
 
 <p>I had my laptop, and a vague problem of the nav buttons at the top right of the blog being fully rounded in Google Chrome on my macmini. But Firefox showed the nav buttons the way I wanted, with only the two lower corners rounded and a nice squarish block right up to the top brown border line. Luckily, I also had my awesome girlfriend with me. The offending piece of CSS looked like this:</p>
 
-<figure class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">border-radius</span><span class="o">:</span> <span class="nt">5px</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">border-radius</span><span class="o">:</span> <span class="err">5</span><span class="nt">px</span><span class="o">;</span>
 
-<span class="nt">border-bottom-right-radius</span><span class="o">:</span> <span class="nt">5px</span><span class="o">;</span>
-<span class="nt">-moz-border-radius-bottomright</span><span class="o">:</span> <span class="nt">5px</span><span class="o">;</span>
-<span class="nt">-webkit-border-bottom-right-radius</span><span class="o">:</span> <span class="nt">5px</span><span class="o">;</span>
+<span class="nt">border-bottom-right-radius</span><span class="o">:</span> <span class="err">5</span><span class="nt">px</span><span class="o">;</span>
+<span class="nt">-moz-border-radius-bottomright</span><span class="o">:</span> <span class="err">5</span><span class="nt">px</span><span class="o">;</span>
+<span class="nt">-webkit-border-bottom-right-radius</span><span class="o">:</span> <span class="err">5</span><span class="nt">px</span><span class="o">;</span>
 
-<span class="nt">border-bottom-left-radius</span><span class="o">:</span> <span class="nt">5px</span><span class="o">;</span>
-<span class="nt">-moz-border-radius-bottomleft</span><span class="o">:</span> <span class="nt">5px</span><span class="o">;</span>
-<span class="nt">-webkit-border-bottom-left-radius</span><span class="o">:</span> <span class="nt">5px</span><span class="o">;</span></code></pre></figure>
+<span class="nt">border-bottom-left-radius</span><span class="o">:</span> <span class="err">5</span><span class="nt">px</span><span class="o">;</span>
+<span class="nt">-moz-border-radius-bottomleft</span><span class="o">:</span> <span class="err">5</span><span class="nt">px</span><span class="o">;</span>
+<span class="nt">-webkit-border-bottom-left-radius</span><span class="o">:</span> <span class="err">5</span><span class="nt">px</span><span class="o">;</span></code></pre></figure>
 
 <p>She pointed out that I was using the generic CSS method of rounding the corners, <strong>border-radius</strong>, but also using the Mozilla (Firefox) and Webkit (Safari) specific methods as well for the lower corners. So, I commented out that bit about the <strong>border-radius</strong> and waited, as we were barreling down the highway at 60 MPH in the backseat of a van, and for some reason the Department of Transportation hasn’t started installing free wireless access points on the highway. Which limits my ability to update my blog from the road. Luckily, I don’t find myself in the backseats of vans on the highway very often. (City buses are a different story.) So I uploaded the changes when I got home and tested it. <strong>Success!</strong></p>
 
@@ -107,7 +107,7 @@
 
     <footer>
       <span>
-        &copy; <time datetime="2018">2018</time> Matt Gauger.
+        &copy; <time datetime="2021">2021</time> Matt Gauger.
       </span>
     </footer>
   </body>

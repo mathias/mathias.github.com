@@ -95,8 +95,8 @@
 
 <p>To implement it myself, I needed to be able to plot points on a display. So I turned to Hackety-Hack, which comes with Shoes for drawing graphics. The Shoes DSL for drawing shapes is rather simple, which means we can take the pseudocode above and turn it into a working demo rather easily:</p>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="no">Shoes</span><span class="p">.</span><span class="nf">app</span> <span class="k">do</span>
-  <span class="n">epsilon</span> <span class="o">=</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">16</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">Shoes</span><span class="p">.</span><span class="nf">app</span> <span class="k">do</span>
+  <span class="n">epsilon</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="mi">16</span>
   <span class="n">offset</span> <span class="o">=</span> <span class="mi">250</span>
   <span class="n">x</span> <span class="o">=</span> <span class="mi">20</span>
   <span class="n">y</span> <span class="o">=</span> <span class="mi">20</span>
@@ -116,7 +116,7 @@
   <span class="n">oval</span><span class="p">({</span><span class="ss">top: </span><span class="mi">250</span><span class="p">,</span> <span class="ss">left: </span><span class="mi">320</span><span class="p">,</span> <span class="ss">radius: </span><span class="mi">25</span><span class="p">,</span> <span class="ss">center: </span><span class="kp">true</span><span class="p">})</span>
 <span class="k">end</span>
 
-</code></pre></div>
+</code></pre></div></div>
 
 <p>Epsilon is 1/16, as indicated by some quick googling – basically a small power of two. I have to use the offset to get the center of the circle closer to the center of the Shoes window – without the offset, the circle will only be a quarter-circle in the upper left corner.</p>
 
@@ -124,9 +124,9 @@
 
 <p>If we want to compare the roundness of our “circle” to a real circle drawn by Shoes, we can add this line in before the closing <code class="highlighter-rouge">end</code>:</p>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code>  <span class="n">fill</span> <span class="n">blue</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">fill</span> <span class="n">blue</span>
   <span class="n">oval</span><span class="p">({</span><span class="ss">top: </span><span class="mi">250</span><span class="p">,</span> <span class="ss">left: </span><span class="mi">320</span><span class="p">,</span> <span class="ss">radius: </span><span class="mi">25</span><span class="p">,</span> <span class="ss">center: </span><span class="kp">true</span><span class="p">})</span>
-</code></pre></div>
+</code></pre></div></div>
 
 <p>Although their radiuses are going to be slightly different.</p>
 
@@ -153,7 +153,7 @@
 
     <footer>
       <span>
-        &copy; <time datetime="2018">2018</time> Matt Gauger.
+        &copy; <time datetime="2021">2021</time> Matt Gauger.
       </span>
     </footer>
   </body>

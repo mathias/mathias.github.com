@@ -5,9 +5,9 @@
     <description></description>
     <link>http://blog.mattgauger.com/</link>
     <atom:link href="http://blog.mattgauger.com/atom.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 03 Jan 2018 09:09:22 -0600</pubDate>
-    <lastBuildDate>Wed, 03 Jan 2018 09:09:22 -0600</lastBuildDate>
-    <generator>Jekyll v3.6.2</generator>
+    <pubDate>Fri, 16 Jul 2021 13:26:40 -0500</pubDate>
+    <lastBuildDate>Fri, 16 Jul 2021 13:26:40 -0500</lastBuildDate>
+    <generator>Jekyll v3.8.7</generator>
     
       <item>
         <title>More Elixir Code Quality Tools</title>
@@ -23,7 +23,7 @@
 
 &lt;p&gt;In Clojure, we used &lt;code class=&quot;highlighter-rouge&quot;&gt;lein deps :tree&lt;/code&gt; to see a tree of all dependencies in Clojure. In Elixir, we can use the&lt;code class=&quot;highlighter-rouge&quot;&gt; mix app.tree&lt;/code&gt; task to see a tree of all the dependencies in our current application. For example:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mix app.tree
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mix app.tree
 annotatex
 ├── elixir
 ├── logger
@@ -31,14 +31,14 @@ annotatex
 ├── runtime_tools
 ├── guardian
 ... output truncated ...
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h1 id=&quot;see-outdated-dependencies-with-mix&quot;&gt;See outdated dependencies with &lt;code class=&quot;highlighter-rouge&quot;&gt;mix&lt;/code&gt;&lt;/h1&gt;
 
 &lt;p&gt;Outdated dependencies don’t always make themselves known. While following mailing lists for CVEs is important, I’d rather have a tool notify me  of new versions of a dependency. In Ruby, we can use &lt;code class=&quot;highlighter-rouge&quot;&gt;gem outdated&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;bundler outdated&lt;/code&gt; and even install tools like &lt;a href=&quot;https://github.com/rubysec/bundler-audit&quot;&gt;bundler-audit&lt;/a&gt;. With Elixir, we can use this task in &lt;code class=&quot;highlighter-rouge&quot;&gt;mix&lt;/code&gt;. It outputs a table with color-coding, which I cannot fully reproduce here, so you’ll have to try it for yourself.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mix hex.outdated
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mix hex.outdated
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h1 id=&quot;alias-mix-tasks&quot;&gt;Alias mix tasks&lt;/h1&gt;
 
@@ -94,11 +94,11 @@ annotatex
 
 &lt;p&gt;Built in to Elixir itself, doctests are a simple way to couple examples of useage where your function definition lives, in the source. They define an example call from an &lt;code class=&quot;highlighter-rouge&quot;&gt;iex&lt;/code&gt; prompt, and show what the return should be. When you set up a simple test file in the suite to run doctests, it will automatically check that the examples match the actual function call response. All it takes is a test file such as:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;defmodule Alohomora.ResourceTest do
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;defmodule Alohomora.ResourceTest do
   use ExUnit.Case, async: true
   doctest Alohomora.Resource
 end
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;And to test functions with doctests in your &lt;code class=&quot;highlighter-rouge&quot;&gt;Alohomora.Resource&lt;/code&gt; namespace. Best of all, there’s nothing extra to add – these tests will run when you run &lt;code class=&quot;highlighter-rouge&quot;&gt;mix test&lt;/code&gt;.&lt;/p&gt;
 
@@ -128,8 +128,8 @@ end
 
 &lt;p&gt;This one is built in, simply launch it from your `iex terminal:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;iex&amp;gt; :observer.start
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;iex&amp;gt; :observer.start
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;And it will launch a GUI tool. The GUI has charts of memory and processing done, as well as a graph of application supervisor trees. Honestly, there’s a lot more in this tool than I’ve had time to explore and learn about.&lt;/p&gt;
 
