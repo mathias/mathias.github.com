@@ -3,10 +3,10 @@
   <channel>
     <title>Matt Gauger</title>
     <description></description>
-    <link>http://blog.mattgauger.comhttp://blog.mattgauger.com/</link>
-    <atom:link href="http://blog.mattgauger.comhttp://blog.mattgauger.com/atom.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 26 Sep 2021 14:30:05 -0500</pubDate>
-    <lastBuildDate>Sun, 26 Sep 2021 14:30:05 -0500</lastBuildDate>
+    <link>http://blog.mattgauger.com/</link>
+    <atom:link href="http://blog.mattgauger.com/atom.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 26 Sep 2021 14:33:00 -0500</pubDate>
+    <lastBuildDate>Sun, 26 Sep 2021 14:33:00 -0500</lastBuildDate>
     <generator>Jekyll v3.9.1</generator>
     
       <item>
@@ -49,8 +49,8 @@ annotatex
 &lt;p&gt;Thanks again to Andrew Summers for these suggestions. I hope that you find them useful. Have more that I’ve missed? &lt;a href=&quot;mailto:contact@mattgauger.com&quot;&gt;Get in touch&lt;/a&gt;, I’d love to hear from you.&lt;/p&gt;
 </description>
         <pubDate>Fri, 29 Dec 2017 00:00:00 -0600</pubDate>
-        <link>http://blog.mattgauger.comhttp://blog.mattgauger.com/2017/12/29/more-elixir-code-quality-tools/</link>
-        <guid isPermaLink="true">http://blog.mattgauger.comhttp://blog.mattgauger.com/2017/12/29/more-elixir-code-quality-tools/</guid>
+        <link>http://blog.mattgauger.com/2017/12/29/more-elixir-code-quality-tools/</link>
+        <guid isPermaLink="true">http://blog.mattgauger.com/2017/12/29/more-elixir-code-quality-tools/</guid>
         
         
       </item>
@@ -74,8 +74,8 @@ annotatex
 &lt;p&gt;You can read my finished novel, &lt;a href=&quot;https://github.com/mathias/destinations/blob/master/departures.md&quot;&gt;Departures and Arrivals&lt;/a&gt; on GitHub.&lt;/p&gt;
 </description>
         <pubDate>Fri, 01 Dec 2017 00:00:00 -0600</pubDate>
-        <link>http://blog.mattgauger.comhttp://blog.mattgauger.com/2017/12/01/nanogenmo-2017/</link>
-        <guid isPermaLink="true">http://blog.mattgauger.comhttp://blog.mattgauger.com/2017/12/01/nanogenmo-2017/</guid>
+        <link>http://blog.mattgauger.com/2017/12/01/nanogenmo-2017/</link>
+        <guid isPermaLink="true">http://blog.mattgauger.com/2017/12/01/nanogenmo-2017/</guid>
         
         
       </item>
@@ -148,8 +148,8 @@ end
 &lt;p&gt;I’ve written up a &lt;a href=&quot;/2017/12/29/more-elixir-code-quality-tools/&quot;&gt;new blog post&lt;/a&gt; that covers tools submitted by reader Andrew Summers.&lt;/p&gt;
 </description>
         <pubDate>Tue, 21 Nov 2017 00:00:00 -0600</pubDate>
-        <link>http://blog.mattgauger.comhttp://blog.mattgauger.com/2017/11/21/elixir-code-quality-tools/</link>
-        <guid isPermaLink="true">http://blog.mattgauger.comhttp://blog.mattgauger.com/2017/11/21/elixir-code-quality-tools/</guid>
+        <link>http://blog.mattgauger.com/2017/11/21/elixir-code-quality-tools/</link>
+        <guid isPermaLink="true">http://blog.mattgauger.com/2017/11/21/elixir-code-quality-tools/</guid>
         
         
       </item>
@@ -167,8 +167,8 @@ end
 &lt;p&gt;&lt;a href=&quot;/images/old-theme-archives.png&quot;&gt;&lt;img src=&quot;/images/old-theme-archives.png&quot; alt=&quot;Old theme archives&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Tue, 24 Oct 2017 10:48:00 -0500</pubDate>
-        <link>http://blog.mattgauger.comhttp://blog.mattgauger.com/2017/10/24/a-new-look/</link>
-        <guid isPermaLink="true">http://blog.mattgauger.comhttp://blog.mattgauger.com/2017/10/24/a-new-look/</guid>
+        <link>http://blog.mattgauger.com/2017/10/24/a-new-look/</link>
+        <guid isPermaLink="true">http://blog.mattgauger.com/2017/10/24/a-new-look/</guid>
         
         
       </item>
@@ -286,8 +286,8 @@ end
 &lt;p&gt;If you find these topics interesting and would like to discuss them, I invite you to join me over on the new &lt;a href=&quot;https://intaug.org&quot;&gt;Intelligence Augmentation BBS&lt;/a&gt;.&lt;/p&gt;
 </description>
         <pubDate>Mon, 10 Apr 2017 10:48:00 -0500</pubDate>
-        <link>http://blog.mattgauger.comhttp://blog.mattgauger.com/2017/04/10/why-build-intelligence-augmentation-tools/</link>
-        <guid isPermaLink="true">http://blog.mattgauger.comhttp://blog.mattgauger.com/2017/04/10/why-build-intelligence-augmentation-tools/</guid>
+        <link>http://blog.mattgauger.com/2017/04/10/why-build-intelligence-augmentation-tools/</link>
+        <guid isPermaLink="true">http://blog.mattgauger.com/2017/04/10/why-build-intelligence-augmentation-tools/</guid>
         
         
       </item>
@@ -337,8 +337,8 @@ end
 &lt;p&gt;Overall, this process works for me. And that might be the most important point.&lt;/p&gt;
 </description>
         <pubDate>Mon, 27 Mar 2017 17:53:00 -0500</pubDate>
-        <link>http://blog.mattgauger.comhttp://blog.mattgauger.com/2017/03/27/my-current-setup-habits-tracking/</link>
-        <guid isPermaLink="true">http://blog.mattgauger.comhttp://blog.mattgauger.com/2017/03/27/my-current-setup-habits-tracking/</guid>
+        <link>http://blog.mattgauger.com/2017/03/27/my-current-setup-habits-tracking/</link>
+        <guid isPermaLink="true">http://blog.mattgauger.com/2017/03/27/my-current-setup-habits-tracking/</guid>
         
         
       </item>
@@ -409,8 +409,8 @@ end
 &lt;/ol&gt;
 </description>
         <pubDate>Sun, 12 Mar 2017 00:00:00 -0600</pubDate>
-        <link>http://blog.mattgauger.comhttp://blog.mattgauger.com/2017/03/12/mining-for-computation-on-the-beach/</link>
-        <guid isPermaLink="true">http://blog.mattgauger.comhttp://blog.mattgauger.com/2017/03/12/mining-for-computation-on-the-beach/</guid>
+        <link>http://blog.mattgauger.com/2017/03/12/mining-for-computation-on-the-beach/</link>
+        <guid isPermaLink="true">http://blog.mattgauger.com/2017/03/12/mining-for-computation-on-the-beach/</guid>
         
         
       </item>
@@ -599,8 +599,8 @@ end
 &lt;p&gt;Please let me know what you think of these posts by sending me an email at &lt;a href=&quot;mailto:contact@mattgauger.com&quot;&gt;contact@mattgauger.com&lt;/a&gt;. I’d love to hear from you!&lt;/p&gt;
 </description>
         <pubDate>Thu, 23 Oct 2014 18:18:00 -0500</pubDate>
-        <link>http://blog.mattgauger.comhttp://blog.mattgauger.com/2014/10/23/clojure-data-science-sent-counts-and-aggregates/</link>
-        <guid isPermaLink="true">http://blog.mattgauger.comhttp://blog.mattgauger.com/2014/10/23/clojure-data-science-sent-counts-and-aggregates/</guid>
+        <link>http://blog.mattgauger.com/2014/10/23/clojure-data-science-sent-counts-and-aggregates/</link>
+        <guid isPermaLink="true">http://blog.mattgauger.com/2014/10/23/clojure-data-science-sent-counts-and-aggregates/</guid>
         
         
       </item>
@@ -761,8 +761,8 @@ end
 
 </description>
         <pubDate>Mon, 15 Sep 2014 13:39:00 -0500</pubDate>
-        <link>http://blog.mattgauger.comhttp://blog.mattgauger.com/2014/09/15/clojure-code-quality-tools/</link>
-        <guid isPermaLink="true">http://blog.mattgauger.comhttp://blog.mattgauger.com/2014/09/15/clojure-code-quality-tools/</guid>
+        <link>http://blog.mattgauger.com/2014/09/15/clojure-code-quality-tools/</link>
+        <guid isPermaLink="true">http://blog.mattgauger.com/2014/09/15/clojure-code-quality-tools/</guid>
         
         
       </item>
@@ -813,8 +813,8 @@ end
 
 </description>
         <pubDate>Tue, 19 Aug 2014 21:38:00 -0500</pubDate>
-        <link>http://blog.mattgauger.comhttp://blog.mattgauger.com/2014/08/19/atreus-my-custom-keyboard/</link>
-        <guid isPermaLink="true">http://blog.mattgauger.comhttp://blog.mattgauger.com/2014/08/19/atreus-my-custom-keyboard/</guid>
+        <link>http://blog.mattgauger.com/2014/08/19/atreus-my-custom-keyboard/</link>
+        <guid isPermaLink="true">http://blog.mattgauger.com/2014/08/19/atreus-my-custom-keyboard/</guid>
         
         
       </item>
