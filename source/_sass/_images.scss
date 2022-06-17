@@ -1,0 +1,12 @@
+
+img.thumb {
+  max-width: null;
+  float: left;
+  margin: 0.5rem 0.5rem 0.5rem 0;
+}
+
+.clearfix:after {
+  content: "";
+  clear: both;
+  display: table;
+}
