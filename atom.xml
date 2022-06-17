@@ -5,8 +5,8 @@
     <description></description>
     <link>https://blog.mattgauger.com/</link>
     <atom:link href="https://blog.mattgauger.com/atom.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 17 Jun 2022 13:19:11 -0500</pubDate>
-    <lastBuildDate>Fri, 17 Jun 2022 13:19:11 -0500</lastBuildDate>
+    <pubDate>Fri, 17 Jun 2022 16:19:29 -0500</pubDate>
+    <lastBuildDate>Fri, 17 Jun 2022 16:19:29 -0500</lastBuildDate>
     <generator>Jekyll v3.9.2</generator>
     
       <item>
@@ -29,17 +29,17 @@
 
 &lt;p&gt;At this point, I’ll turn it over to showing the few photos I have from building the keyboard.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;/images/2022-06-17-kyria/02-construction-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/02-construction.jpg&quot; alt=&quot;The kit arrives&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/images/2022-06-17-kyria/02-construction-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/02-construction.jpg&quot; alt=&quot;The Kyria kit in a cardboard box&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;/images/2022-06-17-kyria/03-construction-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/03-construction.jpg&quot; alt=&quot;Assembly of the Kyria kit&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;
-&lt;a href=&quot;/images/2022-06-17-kyria/04-construction-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/04-construction.jpg&quot; alt=&quot;Assembly of the Kyria kit&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;
+&lt;p&gt;&lt;a href=&quot;/images/2022-06-17-kyria/03-construction-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/03-construction.jpg&quot; alt=&quot;A close up of assembling the Kyria circuit board&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;/images/2022-06-17-kyria/04-construction-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/04-construction.jpg&quot; alt=&quot;A close up of assembling the Kyria circuit board&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;
 &lt;a href=&quot;/images/2022-06-17-kyria/05-elitec-micro-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/05-elitec-micro.jpg&quot; alt=&quot;Flashing the Elite C microcontroller&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;/images/2022-06-17-kyria/06-mcus-soldered-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/06-mcus-soldered.jpg&quot; alt=&quot;MCUs soldered&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;
-&lt;a href=&quot;/images/2022-06-17-kyria/07-mcus-soldered-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/07-mcus-soldered.jpg&quot; alt=&quot;MCUs soldered&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/images/2022-06-17-kyria/06-mcus-soldered-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/06-mcus-soldered.jpg&quot; alt=&quot;Microcontrollers soldered to Kyria circuit board halves&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;/images/2022-06-17-kyria/07-mcus-soldered-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/07-mcus-soldered.jpg&quot; alt=&quot;Microcontrollers soldered to Kyria circuit board halves&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;/images/2022-06-17-kyria/08-assembly-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/08-assembly.jpg&quot; alt=&quot;Assembly&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;
-&lt;a href=&quot;/images/2022-06-17-kyria/09-assembly-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/09-assembly.jpg&quot; alt=&quot;Assembly&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/images/2022-06-17-kyria/08-assembly-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/08-assembly.jpg&quot; alt=&quot;Assembling Kyria case and circuit board half&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;/images/2022-06-17-kyria/09-assembly-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/09-assembly.jpg&quot; alt=&quot;Key switches being fitted to the Kyria keyboard with a screw driver behind it&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;
 
@@ -51,17 +51,16 @@
 
 &lt;p&gt;My Kyria has gone through many different sets of key caps, and I find I still prefer the DSA profile over any others. (I do have a set of KAT Space Cadet key caps that I’ll have to build into something, eventually, because I think owning a Space Cadet style keyboard would be really fun and a nice nod towards my Lisp interests.)&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;/images/2022-06-17-kyria/12-keycaps-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/12-keycaps-1.jpg&quot; alt=&quot;Key caps&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;
-&lt;a href=&quot;/images/2022-06-17-kyria/11-keycaps-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/11-keycaps-2.jpg&quot; alt=&quot;Key caps&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;
-&lt;a href=&quot;/images/2022-06-17-kyria/16-keycaps-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/16-keycaps.jpg&quot; alt=&quot;Key caps&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;
-&lt;a href=&quot;/images/2022-06-17-kyria/14-keycaps-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/14-keycaps.jpg&quot; alt=&quot;Key caps&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;
-&lt;a href=&quot;/images/2022-06-17-kyria/15-keycaps-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/15-keycaps.jpg&quot; alt=&quot;Key caps&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/images/2022-06-17-kyria/12-keycaps-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/12-keycaps-1.jpg&quot; alt=&quot;The original keycaps: a set of DSA Granite keys in grey colors&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;/images/2022-06-17-kyria/11-keycaps-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/11-keycaps-2.jpg&quot; alt=&quot;Kyria on a table while fitting the &amp;quot;Buzz Lightyear&amp;quot; themed key cap set&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;/images/2022-06-17-kyria/14-keycaps-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/14-keycaps.jpg&quot; alt=&quot;A set of dished key caps from Massdrop that I tried and removed&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;/images/2022-06-17-kyria/15-keycaps-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/15-keycaps.jpg&quot; alt=&quot;The &amp;quot;Space Cadet&amp;quot; key caps on the Kyria in grey and blue. Some of the key caps have the Greek/math and logic symbols like the original Lisp Machine keyboards.&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;
 
 &lt;p&gt;While I’m not using the Kyria as a daily driver for work, it feels great to type on and I have been enjoying working through &lt;a href=&quot;https://www.keybr.com&quot;&gt;keybr.com&lt;/a&gt; exercises to learn Colemak-DH. If I were to make any changes, I think I could get away without the extra pinky row. And occasionally I will curse the wires connected everything when they get in the way. This makes me look towards something like a wireless Corne or Ferris/Sweep keyboard, but that will have to be a project for another blog post.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;/images/2022-06-17-kyria/16-keycaps-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/16-keycaps.jpg&quot; alt=&quot;Half of my split keyboard, today&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/images/2022-06-17-kyria/16-keycaps-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/16-keycaps.jpg&quot; alt=&quot;Half of my split keyboard, today, with the white, green, purple, and red key cap set&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;
 </description>
         <pubDate>Fri, 17 Jun 2022 07:54:00 -0500</pubDate>
