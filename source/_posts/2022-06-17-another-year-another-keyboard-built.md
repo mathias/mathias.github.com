@@ -22,7 +22,6 @@ The kit was easy to assemble, and I'd recommend it if you have some soldering sk
 
 At this point, I'll turn it over to showing the few photos I have from building the keyboard.
 
-[![Desk with too many keyboards on it](/images/2022-06-17-kyria/thumbs/01-desk.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/01-desk-resized.jpg)
 [![The kit arrives](/images/2022-06-17-kyria/thumbs/02-construction.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/02-construction-resized.jpg)
 
 [![Assembly of the Kyria kit](/images/2022-06-17-kyria/thumbs/03-construction.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/03-construction-resized.jpg)
