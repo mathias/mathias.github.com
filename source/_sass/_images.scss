@@ -1,8 +1,14 @@
 
 img.thumb {
-  max-width: null;
+  max-width: unset;
   float: left;
   margin: 0.5rem 0.5rem 0.5rem 0;
+
+  @media (max-width: 600px) {
+    float: none;
+    align: center;
+    margin: 0.5rem auto 0.5rem auto;
+  }
 }
 
 .clearfix:after {
