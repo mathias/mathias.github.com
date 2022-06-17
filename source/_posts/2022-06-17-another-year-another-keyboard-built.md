@@ -22,17 +22,17 @@ The kit was easy to assemble, and I'd recommend it if you have some soldering sk
 
 At this point, I'll turn it over to showing the few photos I have from building the keyboard.
 
-[![The kit arrives](/images/2022-06-17-kyria/thumbs/02-construction.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/02-construction-resized.jpg)
+[![The Kyria kit in a cardboard box](/images/2022-06-17-kyria/thumbs/02-construction.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/02-construction-resized.jpg)
 
-[![Assembly of the Kyria kit](/images/2022-06-17-kyria/thumbs/03-construction.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/03-construction-resized.jpg)
-[![Assembly of the Kyria kit](/images/2022-06-17-kyria/thumbs/04-construction.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/04-construction-resized.jpg)
+[![A close up of assembling the Kyria circuit board](/images/2022-06-17-kyria/thumbs/03-construction.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/03-construction-resized.jpg)
+[![A close up of assembling the Kyria circuit board](/images/2022-06-17-kyria/thumbs/04-construction.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/04-construction-resized.jpg)
 [![Flashing the Elite C microcontroller](/images/2022-06-17-kyria/thumbs/05-elitec-micro.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/05-elitec-micro-resized.jpg)
 
-[![MCUs soldered](/images/2022-06-17-kyria/thumbs/06-mcus-soldered.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/06-mcus-soldered-resized.jpg)
-[![MCUs soldered](/images/2022-06-17-kyria/thumbs/07-mcus-soldered.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/07-mcus-soldered-resized.jpg)
+[![Microcontrollers soldered to Kyria circuit board halves](/images/2022-06-17-kyria/thumbs/06-mcus-soldered.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/06-mcus-soldered-resized.jpg)
+[![Microcontrollers soldered to Kyria circuit board halves](/images/2022-06-17-kyria/thumbs/07-mcus-soldered.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/07-mcus-soldered-resized.jpg)
 
-[![Assembly](/images/2022-06-17-kyria/thumbs/08-assembly.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/08-assembly-resized.jpg)
-[![Assembly](/images/2022-06-17-kyria/thumbs/09-assembly.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/09-assembly-resized.jpg)
+[![Assembling Kyria case and circuit board half](/images/2022-06-17-kyria/thumbs/08-assembly.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/08-assembly-resized.jpg)
+[![Key switches being fitted to the Kyria keyboard with a screw driver behind it](/images/2022-06-17-kyria/thumbs/09-assembly.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/09-assembly-resized.jpg)
 
 <div class="clearfix"></div>
 
@@ -44,15 +44,14 @@ I'm using a few qmk features like [mod tap](https://github.com/qmk/qmk_firmware/
 
 My Kyria has gone through many different sets of key caps, and I find I still prefer the DSA profile over any others. (I do have a set of KAT Space Cadet key caps that I'll have to build into something, eventually, because I think owning a Space Cadet style keyboard would be really fun and a nice nod towards my Lisp interests.)
 
-[![Key caps](/images/2022-06-17-kyria/thumbs/12-keycaps-1.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/12-keycaps-resized.jpg)
-[![Key caps](/images/2022-06-17-kyria/thumbs/11-keycaps-2.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/11-keycaps-resized.jpg)
-[![Key caps](/images/2022-06-17-kyria/thumbs/16-keycaps.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/16-keycaps-resized.jpg)
-[![Key caps](/images/2022-06-17-kyria/thumbs/14-keycaps.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/14-keycaps-resized.jpg)
-[![Key caps](/images/2022-06-17-kyria/thumbs/15-keycaps.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/15-keycaps-resized.jpg)
+[![The original keycaps: a set of DSA Granite keys in grey colors](/images/2022-06-17-kyria/thumbs/12-keycaps-1.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/12-keycaps-resized.jpg)
+[![Kyria on a table while fitting the "Buzz Lightyear" themed key cap set](/images/2022-06-17-kyria/thumbs/11-keycaps-2.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/11-keycaps-resized.jpg)
+[![A set of dished key caps from Massdrop that I tried and removed](/images/2022-06-17-kyria/thumbs/14-keycaps.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/14-keycaps-resized.jpg)
+[![The "Space Cadet" key caps on the Kyria in grey and blue. Some of the key caps have the Greek/math and logic symbols like the original Lisp Machine keyboards.](/images/2022-06-17-kyria/thumbs/15-keycaps.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/15-keycaps-resized.jpg)
 
 <div class="clearfix"></div>
 
 While I'm not using the Kyria as a daily driver for work, it feels great to type on and I have been enjoying working through [keybr.com](https://www.keybr.com) exercises to learn Colemak-DH. If I were to make any changes, I think I could get away without the extra pinky row. And occasionally I will curse the wires connected everything when they get in the way. This makes me look towards something like a wireless Corne or Ferris/Sweep keyboard, but that will have to be a project for another blog post.
 
-[![Half of my split keyboard, today](/images/2022-06-17-kyria/thumbs/16-keycaps.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/16-keycaps-resized.jpg)
+[![Half of my split keyboard, today, with the white, green, purple, and red key cap set](/images/2022-06-17-kyria/thumbs/16-keycaps.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/16-keycaps-resized.jpg)
 <div class="clearfix"></div>
