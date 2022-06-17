@@ -5,9 +5,72 @@
     <description></description>
     <link>https://blog.mattgauger.com/</link>
     <atom:link href="https://blog.mattgauger.com/atom.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 15 Jun 2022 18:44:36 -0500</pubDate>
-    <lastBuildDate>Wed, 15 Jun 2022 18:44:36 -0500</lastBuildDate>
+    <pubDate>Fri, 17 Jun 2022 13:12:54 -0500</pubDate>
+    <lastBuildDate>Fri, 17 Jun 2022 13:12:54 -0500</lastBuildDate>
     <generator>Jekyll v3.9.2</generator>
+    
+      <item>
+        <title>Another year, another keyboard built</title>
+        <description>&lt;p&gt;In 2021, I decided it was time to build another keyboard. While I am happy with my daily driver keyboard, I’m always interested in trying out new options. Occasionally, I will find myself interested in learning and practicing a new keyboard layout and spend some hours towards getting to a low WPM speed.&lt;/p&gt;
+
+&lt;p&gt;I’ve been a happy user of the Atreus keyboard for years. The &lt;a href=&quot;/2014/08/19/atreus-my-custom-keyboard/&quot;&gt;original keyboard that I built in 2014&lt;/a&gt; came from a time period where the Atreus didn’t have a PCB yet, so it was hand wired, and I ordered the case from a company that could laser cut it from wood. The heart of that keyboard is a Teensy microcontroller, which was a good option at that time. The firmware is a custom one that &lt;a href=&quot;https://technomancy.us/&quot;&gt;technomancy&lt;/a&gt; wrote. (@technomancy also designed the original Atreus and all credit for it goes to him, I merely built it.)&lt;/p&gt;
+
+&lt;p&gt;Between 2014 and last year, I’d also acquired the &lt;a href=&quot;https://shop.keyboard.io/products/keyboardio-atreus&quot;&gt;Keyboardio version of the Atreus&lt;/a&gt;, and it is a great keyboard! It became a sturdy, unique little keyboard with Keyboardio’s design tweaks, and the Keyboardio configuration tool made remapping much easier.&lt;/p&gt;
+
+&lt;p&gt;Since then, the DIY keyboard community has made a lot of progress. One can design a keyboard entirely with software and have the circuit boards printed by online companies. For open source boards, you can often print your own circuit boards for a reasonable price. The microcontrollers are much better than what we had in the Arduino and Teensy days, although most modern MCUs used are similar. Most importantly, I think, the &lt;a href=&quot;https://qmk.fm/&quot;&gt;qmk firmware&lt;/a&gt; has made programming and remapping keyboards from source code much easier and faster.&lt;/p&gt;
+
+&lt;p&gt;I’d always had an interest in the ergonomic benefits of a split keyboard, and the Atreus had convinced me that I was more interested in columnar layouts (where each column of keys is staggered to fit finger length, instead of staggered left-to-right in neat rows) than ortholinear keyboards (where the keys are in a strict grid, such as on the &lt;a href=&quot;https://olkb.com/collections/planck&quot;&gt;Planck keyboard&lt;/a&gt; that I own.)&lt;/p&gt;
+
+&lt;p&gt;After doing some research, particularly on the &lt;a href=&quot;https://compare.splitkb.com/&quot;&gt;SplitKB comparison tool&lt;/a&gt;, I decided to build a SplitKB Kyria. The Kyria can be built with 34 to 50 keys, depending on whether you want two columns for the pinky finger, whether you want rotary encoders, and whether you want 2U thumb keys or 2 individual keys for the innermost thumb keys.&lt;/p&gt;
+
+&lt;p&gt;I ordered a kit from SplitKB and despite shipping from Europe during the pandemic, it arrived quickly. If you’re reading this after around June 2022, then you may not have been aware, but global shortages of chips made for low stock of products like keyboard kits, and depending on country, imported packages sometimes sat in customs quarantine for a month or more.&lt;/p&gt;
+
+&lt;p&gt;The kit was easy to assemble, and I’d recommend it if you have some soldering skills. The surface mount LEDs are perhaps the hardest part to solder, but you could build it without. In retrospect, I could do without the RGB under-lighting, but that’s just me.&lt;/p&gt;
+
+&lt;p&gt;At this point, I’ll turn it over to showing the few photos I have from building the keyboard.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/2022-06-17-kyria/01-desk-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/01-desk.jpg&quot; alt=&quot;Desk with too many keyboards on it&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;/images/2022-06-17-kyria/02-construction-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/02-construction.jpg&quot; alt=&quot;The kit arrives&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/2022-06-17-kyria/03-construction-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/03-construction.jpg&quot; alt=&quot;Assembly of the Kyria kit&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;/images/2022-06-17-kyria/04-construction-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/04-construction.jpg&quot; alt=&quot;Assembly of the Kyria kit&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;/images/2022-06-17-kyria/05-elitec-micro-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/05-elitec-micro.jpg&quot; alt=&quot;Flashing the Elite C microcontroller&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/2022-06-17-kyria/06-mcus-soldered-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/06-mcus-soldered.jpg&quot; alt=&quot;MCUs soldered&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;/images/2022-06-17-kyria/07-mcus-soldered-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/07-mcus-soldered.jpg&quot; alt=&quot;MCUs soldered&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/2022-06-17-kyria/08-assembly-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/08-assembly.jpg&quot; alt=&quot;Assembly&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;/images/2022-06-17-kyria/09-assembly-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/09-assembly.jpg&quot; alt=&quot;Assembly&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;
+
+&lt;p&gt;I chose the &lt;a href=&quot;https://colemakmods.github.io/mod-dh/&quot;&gt;Colemak-DH key layout&lt;/a&gt; over my previous &lt;a href=&quot;https://github.com/mathias/atreus-firmware/blob/capewell-modified/capewell-modified.json&quot;&gt;“Capewell modified” layout&lt;/a&gt; that I use on the Atreus, because Colemak-DH is far more common on other ergonomic layouts I could find, and there’s some small edge in statistical optimization to it. You can find my &lt;a href=&quot;https://github.com/mathias/kyria-layout/blob/main/mathias/keymap.c&quot;&gt;whole keymap with some ASCII art&lt;/a&gt; on my GitHub repo for my Kyria layout.&lt;/p&gt;
+
+&lt;p&gt;I have two rotary encoders on my build, with one side functioning as a volume knob and the other side functioning as a scroll wheel. Pressing down (clicking) the left rotary knobs activates the mode that allows me to change between QWERTY and Colemak-DH, and to adjust the RGB under-lighting. All these features are well-supported by qmk and work great.&lt;/p&gt;
+
+&lt;p&gt;I’m using a few qmk features like &lt;a href=&quot;https://github.com/qmk/qmk_firmware/blob/master/docs/mod_tap.md&quot;&gt;mod tap&lt;/a&gt; on the modifier keys so that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ctrl&lt;/code&gt; can function as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Esc&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Alt&lt;/code&gt; can function as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Enter&lt;/code&gt;. Due to this, I think I could be productive with even fewer keys, likely by removing the outer column and saving my pinky fingers the stretch. Those columns are only &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Tab&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Left Shift&lt;/code&gt;, and another &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ctrl/Esc&lt;/code&gt; key on the left hand side, while the right does have a useful &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;'&quot;&lt;/code&gt; quote key that would need to move elsewhere. (The other two keys on the right, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Backspace&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Alt/Enter&lt;/code&gt;, are better handled by my thumb keys that do the same thing.) Additionally, I would remove the upper 1U thumb keys that expose &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;]&lt;/code&gt;, and the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Nav&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Fkeys&lt;/code&gt; layers. I don’t use those keys, so I could have built the thumb keys as 2U keys.&lt;/p&gt;
+
+&lt;p&gt;My Kyria has gone through many different sets of key caps, and I find I still prefer the DSA profile over any others. (I do have a set of KAT Space Cadet key caps that I’ll have to build into something, eventually, because I think owning a Space Cadet style keyboard would be really fun and a nice nod towards my Lisp interests.)&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/2022-06-17-kyria/12-keycaps-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/12-keycaps-1.jpg&quot; alt=&quot;Key caps&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;/images/2022-06-17-kyria/11-keycaps-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/11-keycaps-2.jpg&quot; alt=&quot;Key caps&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;/images/2022-06-17-kyria/16-keycaps-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/16-keycaps.jpg&quot; alt=&quot;Key caps&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;/images/2022-06-17-kyria/14-keycaps-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/14-keycaps.jpg&quot; alt=&quot;Key caps&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;/images/2022-06-17-kyria/15-keycaps-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/15-keycaps.jpg&quot; alt=&quot;Key caps&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;
+
+&lt;p&gt;While I’m not using the Kyria as a daily driver for work, it feels great to type on and I have been enjoying working through &lt;a href=&quot;https://www.keybr.com&quot;&gt;keybr.com&lt;/a&gt; exercises to learn Colemak-DH. If I were to make any changes, I think I could get away without the extra pinky row. And occasionally I will curse the wires connected everything when they get in the way. This makes me look towards something like a wireless Corne or Ferris/Sweep keyboard, but that will have to be a project for another blog post.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/2022-06-17-kyria/16-keycaps-resized.jpg&quot;&gt;&lt;img src=&quot;/images/2022-06-17-kyria/thumbs/16-keycaps.jpg&quot; alt=&quot;Half of my split keyboard, today&quot; class=&quot;thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;
+</description>
+        <pubDate>Fri, 17 Jun 2022 07:54:00 -0500</pubDate>
+        <link>https://blog.mattgauger.com/2022/06/17/another-year-another-keyboard-built/</link>
+        <guid isPermaLink="true">https://blog.mattgauger.com/2022/06/17/another-year-another-keyboard-built/</guid>
+        
+        
+      </item>
     
       <item>
         <title>More Elixir Code Quality Tools</title>
@@ -763,58 +826,6 @@ end
         <pubDate>Mon, 15 Sep 2014 13:39:00 -0500</pubDate>
         <link>https://blog.mattgauger.com/2014/09/15/clojure-code-quality-tools/</link>
         <guid isPermaLink="true">https://blog.mattgauger.com/2014/09/15/clojure-code-quality-tools/</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Atreus: My Custom Keyboard</title>
-        <description>&lt;p&gt;Last year I wrote about about building &lt;a href=&quot;/blog/2013/08/03/building-a-chording-keyboard-lessons-learned-and-progress-so-far/&quot;&gt;chording keyboards&lt;/a&gt; and &lt;a href=&quot;/blog/2013/08/06/a-simple-text-editor-foot-pedal/&quot;&gt;USB foot pedals&lt;/a&gt;. At the time, using the &lt;a href=&quot;http://www.pjrc.com/teensy/&quot;&gt;Teensy micro controller&lt;/a&gt; as a USB HID device was possible, but it still required a lot of research. There was no good central resource for knowledge about building keyboards. Since then, the &lt;a href=&quot;http://deskthority.net/wiki/ErgoDox&quot;&gt;Ergo Dox&lt;/a&gt; keyboard was released as open source and got quite popular. This seems to have opened the door for many to get into building keyboards.&lt;/p&gt;
-
-&lt;p&gt;My friend &lt;a href=&quot;http://coglib.com/~icordasc&quot;&gt;Ian&lt;/a&gt; ordered an Ergo Dox on the Massdrop crowdfunding campaign, after I suggested that I’d teach him to solder and we’d assemble it together. Finding time to get together and build it took almost a year, but we’ve started meeting up weekly to assemble the Ergo Dox. Building his keyboard has been a lot of fun, and inspired me to work on my own keyboard projects again.&lt;/p&gt;
-
-&lt;p&gt;Almost exactly a month ago, I started working on building my own keyboard. I wanted to build a keyboard from scratch that could replace my daily-driver keyboard, a PFU Happy Hacking Lite, so it had to be smaller than most &lt;a href=&quot;http://deskthority.net/wiki/Tenkeyless&quot;&gt;tenkeyless&lt;/a&gt; keyboards. The Ergo Dox’s columnar layout was always intriguing, but I wasn’t sure that I needed all those keys. (Normal keyboards stagger the keys of each row, which is a holdover from preventing mechanical typewriters from jamming. Columnar layouts assign a column of keys to each finger.)&lt;/p&gt;
-
-&lt;p&gt;Through &lt;a href=&quot;http://geekhack.org&quot;&gt;Geekhack&lt;/a&gt;, I found the &lt;a href=&quot;https://github.com/technomancy/atreus&quot;&gt;Atreus&lt;/a&gt;, a keyboard designed by &lt;a href=&quot;http://technomancy.us/&quot;&gt;Phil Hagelberg&lt;/a&gt; (better known as &lt;a href=&quot;https://github.com/technomancy&quot;&gt;technomancy&lt;/a&gt; online.) The Atreus is open source (&lt;a href=&quot;https://github.com/technomancy/atreus&quot;&gt;hardware&lt;/a&gt;, &lt;a href=&quot;https://github.com/technomancy/atreus-firmware&quot;&gt;firmware&lt;/a&gt;), and has gone through several revisions at this point. My keyboard is done now, and I wanted to share it.&lt;/p&gt;
-
-&lt;p&gt;&lt;a data-flickr-embed=&quot;true&quot; href=&quot;https://www.flickr.com/photos/mattgauger/14785511628&quot; title=&quot;IMG_3220&quot;&gt;&lt;img src=&quot;https://farm6.staticflickr.com/5592/14785511628_8eea0e6a61_c.jpg&quot; width=&quot;800&quot; height=&quot;600&quot; alt=&quot;IMG_3220&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://technomancy.us/173&quot;&gt;The original Atreus&lt;/a&gt; was constructed out of layers of laser-cut acrylic. Since then, some folks on the &lt;a href=&quot;http://geekhack.org/index.php?topic=54759.0&quot;&gt;Geekhack thread&lt;/a&gt; have redesigned the laser-cut design to be cut out of a sheet of birch plywood on &lt;a href=&quot;https://ponoko.com&quot;&gt;Ponoko&lt;/a&gt;. Ponoko is a great: you upload a file and choose materials and size. The Ponoko website keeps you updated on your project’s status as they check your design, pick materials, and so on. Later, your laser-cut project arrives in the mail. I highly recommend Ponoko’s service if you need laser cutting and can’t get it done at a local makerspace.&lt;/p&gt;
-
-&lt;p&gt;&lt;a data-flickr-embed=&quot;true&quot; href=&quot;https://www.flickr.com/photos/mattgauger/14785346149&quot; title=&quot;IMG_3156&quot;&gt;&lt;img src=&quot;https://farm6.staticflickr.com/5565/14785346149_53f639dc31_c.jpg&quot; width=&quot;800&quot; height=&quot;600&quot; alt=&quot;IMG_3156&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;I finished the birch ply with semi-gloss marine polyurethane. The polyurethane should give it a durable finish, and added a nice amber tint to the wood. The downside is that more than a week after the final coat went on, the poly is still out gassing some headache-inducing fumes.&lt;/p&gt;
-
-&lt;p&gt;After applying the finish, I hot-glued the switches in and soldered it together. There’s no PCB with this design, just point-to-point with wires and components to a central Teensy. I used &lt;a href=&quot;http://deskthority.net/wiki/Cherry_MX_Clear&quot;&gt;Cherry MX Clear&lt;/a&gt; switches for the majority of the keys because they seem the closest to my Happy Hacking’s Topre switches to me. The modifiers are &lt;a href=&quot;http://deskthority.net/wiki/Cherry_MX_Black&quot;&gt;Cherry MX Blacks&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Assembling the Atreus with point-to-point soldering wasn’t too bad, but I’ve had a lot of experience soldering. I’ve no doubt that the construction will be durable and reliable, but a PCB might make it easier to assemble for beginners. There’s some talk on Geekhack about using the &lt;a href=&quot;http://deskthority.net/workshop-f7/onehand-20-keyboard-t6617.html&quot;&gt;One Hand PCB&lt;/a&gt; as a circuit board for a Atreus-like keyboard.&lt;/p&gt;
-
-&lt;p&gt;The rest of my images from the build on Flickr in &lt;a href=&quot;https://www.flickr.com/photos/mattgauger/sets/72157646763805951/&quot;&gt;this album&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;After hours of soldering, the moment of truth came: I plugged in the Teensy, uploaded the firmware, and typed some keys. It worked! I felt relieved that the keyboard worked on the first try. Because I had checked for continuity and shorts throughout the soldering process, I can be confident that my Atreus won’t have any issues with ghosting or glitches. The finished keyboard feels really solid; maybe more so than some plastic keyboards I’ve typed on before.&lt;/p&gt;
-
-&lt;p&gt;Because the Atreus uses a columnar layout, I’m not planning to use it with a QWERTY layout. So, I decided to learn Dvorak. I’ve been practicing on the home row on &lt;a href=&quot;http://dvorak.nl&quot;&gt;dvorak.nl&lt;/a&gt;, which is a great website for learning Dvorak in your browser. The neat thing about that typing tutor is that you don’t have to commit to changing any key layouts at the OS-level. I’ve got the default QWERTY layout on my Atreus now, but will be switching to a hardware-native Dvorak layout soon.&lt;/p&gt;
-
-&lt;p&gt;Since the Atreus uses a Teensy as its brain, it can be reconfigured easily by uploading a new firmware. Keyboard layouts for the Atreus start as a JSON file, and then an emacs function can be invoked to compile and upload the firmware to the board. The same JSON file can also be used to generate an HTML table of the layout with Org Mode in emacs. More information can be found on the &lt;a href=&quot;https://github.com/technomancy/atreus-firmware&quot;&gt;firmware project repo&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;what-next&quot;&gt;What next?&lt;/h2&gt;
-
-&lt;p&gt;I haven’t worked on my chording keyboard in a long time.  I’m happy to see that things like the &lt;a href=&quot;https://github.com/tmk/tmk_keyboard&quot;&gt;tmk firmware&lt;/a&gt; will now make that project much easier. With my new knowledge and the many open source projects now available, I’m going to restart work on &lt;a href=&quot;/blog/2013/08/03/building-a-chording-keyboard-lessons-learned-and-progress-so-far/&quot;&gt;that project&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Further, I’ve been playing with Matt Adereth’s &lt;a href=&quot;https://github.com/adereth/dactyl&quot;&gt;dactyl&lt;/a&gt; to design chording keyboard layouts. Dactyl allows me to write Clojure code and output it in a format that OpenSCAD can generate a 3D model with. OpenSCAD can export the files to the formats that 3D printers use. 3D printing has a lot of promise for iteratively prototyping unique ergonomic peripherals, and I intend to try out several ideas for one-hand / chording keyboards.&lt;/p&gt;
-
-&lt;p&gt;If you’re interested in building your own keyboard, I would recommend the Ergo Dox. Especially if you can get the kit that Massdrop produced, because the circuit boards are well-made. Otherwise, spend some time on the Geekhack &amp;amp; Deskthority forums, read some wiki pages, and test some keyboards. And if you’re interested in building the Atreus, join the &lt;a href=&quot;http://geekhack.org/index.php?topic=54759.0&quot;&gt;discussion&lt;/a&gt;! Everyone in that thread has been very helpful.  This project wouldn’t have been possible without their answers and advice.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Interested in commenting or contacting me? Send an email to &lt;a href=&quot;mailto:contact@mattgauger.com&quot;&gt;contact@mattgauger.com&lt;/a&gt;. Thanks!&lt;/p&gt;
-
-&lt;script async=&quot;&quot; src=&quot;//embedr.flickr.com/assets/client-code.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-
-</description>
-        <pubDate>Tue, 19 Aug 2014 21:38:00 -0500</pubDate>
-        <link>https://blog.mattgauger.com/2014/08/19/atreus-my-custom-keyboard/</link>
-        <guid isPermaLink="true">https://blog.mattgauger.com/2014/08/19/atreus-my-custom-keyboard/</guid>
         
         
       </item>
