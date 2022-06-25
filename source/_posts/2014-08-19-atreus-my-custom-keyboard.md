@@ -14,11 +14,14 @@ Almost exactly a month ago, I started working on building my own keyboard. I wan
 
 Through [Geekhack](http://geekhack.org), I found the [Atreus](https://github.com/technomancy/atreus), a keyboard designed by [Phil Hagelberg](http://technomancy.us/) (better known as [technomancy](https://github.com/technomancy) online.) The Atreus is open source ([hardware](https://github.com/technomancy/atreus), [firmware](https://github.com/technomancy/atreus-firmware)), and has gone through several revisions at this point. My keyboard is done now, and I wanted to share it.
 
-<a data-flickr-embed="true"  href="https://www.flickr.com/photos/mattgauger/14785511628" title="IMG_3220"><img src="https://farm6.staticflickr.com/5592/14785511628_8eea0e6a61_c.jpg" width="800" height="600" alt="IMG_3220"></a>
+
+[![The completed Atreus keyboard](/images/2014-08-19-atreus/img_3220_14785511628_o-thumb.jpg){:class="thumb" loading="lazy"}](/images/2014-08-19-atreus/img_3220_14785511628_o-resized.jpg)
+<div class="clearfix"></div>
 
 [The original Atreus](http://technomancy.us/173) was constructed out of layers of laser-cut acrylic. Since then, some folks on the [Geekhack thread](http://geekhack.org/index.php?topic=54759.0) have redesigned the laser-cut design to be cut out of a sheet of birch plywood on [Ponoko](https://ponoko.com). Ponoko is a great: you upload a file and choose materials and size. The Ponoko website keeps you updated on your project's status as they check your design, pick materials, and so on. Later, your laser-cut project arrives in the mail. I highly recommend Ponoko's service if you need laser cutting and can't get it done at a local makerspace.
 
-<a data-flickr-embed="true"  href="https://www.flickr.com/photos/mattgauger/14785346149" title="IMG_3156"><img src="https://farm6.staticflickr.com/5565/14785346149_53f639dc31_c.jpg" width="800" height="600" alt="IMG_3156"></a>
+[![Sheet of plywood with the Atreus pieces laser cut into it](/images/2014-08-19-atreus/img_3156_14785346149_o-thumb.jpg){:class="thumb" loading="lazy"}](/images/2014-08-19-atreus/img_3156_14785346149_o-resized.jpg)
+<div class="clearfix"></div>
 
 I finished the birch ply with semi-gloss marine polyurethane. The polyurethane should give it a durable finish, and added a nice amber tint to the wood. The downside is that more than a week after the final coat went on, the poly is still out gassing some headache-inducing fumes.
 
@@ -26,7 +29,22 @@ After applying the finish, I hot-glued the switches in and soldered it together.
 
 Assembling the Atreus with point-to-point soldering wasn't too bad, but I've had a lot of experience soldering. I've no doubt that the construction will be durable and reliable, but a PCB might make it easier to assemble for beginners. There's some talk on Geekhack about using the [One Hand PCB](http://deskthority.net/workshop-f7/onehand-20-keyboard-t6617.html) as a circuit board for a Atreus-like keyboard.
 
-The rest of my images from the build on Flickr in [this album](https://www.flickr.com/photos/mattgauger/sets/72157646763805951/).
+The rest of my images from the build appear below:
+
+[![Assembling the case](/images/2014-08-19-atreus/img_3162_14769295254_o-thumb.jpg){:class="thumb" loading="lazy"}](/images/2014-08-19-atreus/img_3162_14769295254_o-resized.jpg)
+[![Fitting the key switches to the Atreus](/images/2014-08-19-atreus/img_3204_14785346299_o-thumb.jpg){:class="thumb" loading="lazy"}](/images/2014-08-19-atreus/img_3204_14785346299_o-resized.jpg)
+[![Fitting the key switches to the Atreus 2](/images/2014-08-19-atreus/img_3206_14785441468_o-thumb.jpg){:class="thumb" loading="lazy"}](/images/2014-08-19-atreus/img_3206_14785441468_o-resized.jpg)
+<div class="clearfix"></div>
+[![Gluing the switches to the plate with hot glue](/images/2014-08-19-atreus/img_3207_14972030495_o-thumb.jpg){:class="thumb" loading="lazy"}](/images/2014-08-19-atreus/img_3207_14972030495_o-resized.jpg)
+[![Soldering the diodes to the switches](/images/2014-08-19-atreus/img_3208_14785358190_o-thumb.jpg){:class="thumb" loading="lazy"}](/images/2014-08-19-atreus/img_3208_14785358190_o-resized.jpg)
+[![Preparing the wires for columns by removing the insulation](/images/2014-08-19-atreus/img_3209_14949067746_o-thumb.jpg){:class="thumb" loading="lazy"}](/images/2014-08-19-atreus/img_3209_14949067746_o-resized.jpg)
+<div class="clearfix"></div>
+[![Soldering the column wires to the keyboard](/images/2014-08-19-atreus/img_3210_14785358580_o-thumb.jpg){:class="thumb" loading="lazy"}](/images/2014-08-19-atreus/img_3210_14785358580_o-resized.jpg)
+[![Soldering the column wires to the keyboard 2](/images/2014-08-19-atreus/img_3211_14785510338_o-thumb.jpg){:class="thumb" loading="lazy"}](/images/2014-08-19-atreus/img_3211_14785510338_o-resized.jpg)
+[![Connecting two halves of the keyboard with wires](/images/2014-08-19-atreus/img_3213_14785564777_o-thumb.jpg){:class="thumb" loading="lazy"}](/images/2014-08-19-atreus/img_3213_14785564777_o-resized.jpg)
+<div class="clearfix"></div>
+[![The Teensy wired into the keyboard with wires running to columns and rows](/images/2014-08-19-atreus/img_3218_14949137106_o-thumb.jpg){:class="thumb" loading="lazy"}](/images/2014-08-19-atreus/img_3218_14949137106_o-resized.jpg)
+<div class="clearfix"></div>
 
 After hours of soldering, the moment of truth came: I plugged in the Teensy, uploaded the firmware, and typed some keys. It worked! I felt relieved that the keyboard worked on the first try. Because I had checked for continuity and shorts throughout the soldering process, I can be confident that my Atreus won't have any issues with ghosting or glitches. The finished keyboard feels really solid; maybe more so than some plastic keyboards I've typed on before.
 
