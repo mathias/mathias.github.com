@@ -63,5 +63,3 @@ If you're interested in building your own keyboard, I would recommend the Ergo D
 ---
 
 Interested in commenting or contacting me? Send an email to [contact@mattgauger.com](mailto:contact@mattgauger.com). Thanks!
-
-<script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
