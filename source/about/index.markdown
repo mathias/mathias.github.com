@@ -6,7 +6,7 @@ date: 2012-03-16 21:06
 
 I am a software developer. My interests include functional programming, intelligent agents, and ubiquitous + wearable computing. On the practical side, I prefer to use Clojure & ClojureScript. I've spent a lot of time working with Ruby, JavaScript, and the standard assortment of developer tools: vim, emacs, git, and the rest.
 
-I work for [Heroku](http://www.heroku.com/home).
+I work for [GitHub](https://www.github.com). I previously worked at [Heroku](https://www.heroku.com).
 
 A list of the open source I've built or contributed to is on my [Open Source](/open-source) page. My work can be found at [github.com/mathias](https://github.com/mathias).
 
