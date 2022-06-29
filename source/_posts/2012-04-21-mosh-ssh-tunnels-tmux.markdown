@@ -7,7 +7,7 @@ redirect_from:
 ---
 
 ---
-*Update from 2022: This post continues to be a popular post on search results, but it is quite old (10 years at this point! Longer if you're seeing this in the future.) So I recommend you consult the [mosh.org](https://mosh.org/) site for documentation and usage.*
+*Update from June 2022: This post continues to be a popular post on search results, but it is quite old (10 years at this point! Longer if you're seeing this in the future.) So I recommend you consult the [mosh.org](https://mosh.org/) site for documentation and usage.*
 
 ---
 
