@@ -8,7 +8,7 @@ redirect_from:
 
 Chording keyboards have been a computing peripheral for a long time. They've been in use at least since Douglas Engelbart gave what is known as [The Mother of all Demos](http://www.youtube.com/watch?v=yJDv-zdhzMY) in 1968. Rather than try to sum up the history and potential of the device here, I recommend you read the excellent essay [Engelbart's Violin](http://www.loper-os.org/?p=861) by Stanislav Datskovskiy on loper-os.org
 
-![Engelbart's chording keyboard in use](/images/engelkey.jpg)
+![Engelbart's chording keyboard in use](/images/2013-08-03-chording/engelkey.jpg)
 
 <cite>Image via [http://research.microsoft.com/en-us/um/people/bibuxton/buxtoncollection/detail.aspx?id=7](http://research.microsoft.com/en-us/um/people/bibuxton/buxtoncollection/detail.aspx?id=7)</cite>
 
@@ -53,7 +53,7 @@ For a long time, I have dreamed of a way of being able to record programming lan
 
 And still, those alternative layouts doesn't get me to the point where I can type out an entire block of code at once. For example, I might want to map a key to output something I frequently type, such as a Javascript anonymous function. Knowing which editor I'm in, I could have the keyboard leave the cursor in the function body, ready to be filled in:
 
-```
+```javascript
 function() {
   _
 }
@@ -69,7 +69,7 @@ To understand chording keyboards best, it is worth noting that while regular key
 
 After reviewing possible hardware to use to build a chording keyboard, I stumbled upon the Razer Nostromo (and its earlier incarnations from Belkin.) These gaming pads are popular with PC gamers because it puts the WASD keys under your left hand and frees your right hand up for the mouse.
 
-![Razer Nostromo](/images/razer_nostromo.jpg)
+![Razer Nostromo](/images/2013-08-03-chording/razer_nostromo.jpg)
 
 Other features the Nostromo had over other devices were supporting [N-key rollover][1] &mdash; basically, the ability for the keyboard to know that multiple keys are being pressed at once, and send all of those keys to the computer &mdash; as well as a little 4-way directional pad, and blue lights (always a plus!)
 
@@ -118,13 +118,25 @@ For the `concert_cam`, it was easy enough to have a big arcade-style button send
 
 Here's the `concert_cam` button pedestal with Teensy and Raspberry Pi getting wired in:
 
-<a data-flickr-embed="true"  href="https://www.flickr.com/photos/mattgauger/9427820477/" title="IMG_1817"><img src="https://farm8.staticflickr.com/7395/9427820477_44686f75e2_c.jpg" width="600" height="800" alt="IMG_1817"></a>
+[![Concert Cam's button tower with a large arcade button on top of a metal frame](/images/2013-08-03-chording/img_1817_9427820477_o-thumb.jpg){:class="thumb" loading="lazy"}](/images/2013-08-03-chording/img_1817_9427820477_o-resized.jpg)
+
+<div class="clearfix"></div>
+
+And some pictures of the Concert Cam in action:
+
+[![A laptop running a terminal and a keyboard next to it](/images/2013-08-03-chording/img_1818_9430588400_o-thumb.jpg){:class="thumb" loading="lazy"}](/images/2013-08-03-chording/img_1818_9430588400_o-resized.jpg)
+[![The digital SLR camera for Concert Cam aimed out an open window, with a band playing music on stage in the distance](/images/2013-08-03-chording/img_1822_9430587484_o-thumb.jpg){:class="thumb" loading="lazy"}](/images/2013-08-03-chording/img_1822_9430587484_o-resized.jpg)
+
+<div class="clearfix"></div>
 
 Confident by my success with using the Teensy in the `concert_cam`, I decided to put a Teensy in my Nostromo, replacing the normal USB board inside it and translating keyboard chords into key press events at the hardware level.
 
 The first step is to open up the Nostromo. This is pretty easy; just unscrew all the visible screws, and find & unscrew the other screws underneath the rubber feet of the gamepad. The Nostromo comes apart into three pieces, and looks like this inside:
 
-<a data-flickr-embed="true"  href="https://www.flickr.com/photos/mattgauger/9427844525/" title="iPhoto"><img src="https://farm4.staticflickr.com/3784/9427844525_3560e6cef4_b.jpg" width="581" height="733" alt="iPhoto"></a>
+[![The Razor Nostromo being taken apart](/images/2013-08-03-chording/img_1856_9430600644_o-thumb.jpg){:class="thumb" loading="lazy"}](/images/2013-08-03-chording/img_1856_9430600644_o-resized.jpg)
+[![A close up of the circuit board on the Nostromo and the bottom of its scroll wheel](/images/2013-08-03-chording/img_1869_9427998671_o-thumb.jpg){:class="thumb" loading="lazy"}](/images/2013-08-03-chording/img_1869_9427998671_o-resized.jpg)
+
+<div class="clearfix"></div>
 
 The first problem encountered is those little grey ribbons - they're ZIF surface mount stuff, and everything else inside is surface mount here, too. For an electronics hobbyist, surface mount components can represent a big source of frustration. For me, I just didn't want to deal with them. I can't really solder to the cables with any precision and the spacing of the connectors was so small that there was no hope of attaching wires there. Further, the circuit boards had traces running inside but didn't really have any pins that I could solder to. A real bummer.
 
@@ -146,7 +158,9 @@ Since I only have about 15 keys and maybe another 4 or 5 input/outputs that I ne
 
 While waiting for the key switches to arrive, I began work on the one non-surface-mount component in the Nostromo that I could solder to: the scroll wheel. On the scroll wheel's PCB, there is a mechanical encoder, a button (the click when you press down on a mouse scroll wheel) and an LED.
 
-<a data-flickr-embed="true"  href="https://www.flickr.com/photos/mattgauger/9430775972/" title="skitched-20130803-121011"><img src="https://farm8.staticflickr.com/7453/9430775972_1075a250b2_b.jpg" width="768" height="1024" alt="skitched-20130803-121011"></a>
+[![A close up of the scroll wheel with labels around the circuit pads for "switch," "encoder," and "LED."](/images/2013-08-03-chording/skitched-20130803-121011_9430775972_o-thumb.jpg){:class="thumb" loading="lazy"}](/images/2013-08-03-chording/skitched-20130803-121011_9430775972_o-resized.jpg)
+
+<div class="clearfix"></div>
 
 Here's a quick link for reading up on how mechanical encoders work in mice, and particularly, how to interface one with an Arduino: [Mouse Scroll Wheel Sensor and Arduino](http://forum.arduino.cc/index.php/topic,15336.0.html). There's also some source code in that thread that will probably prove useful later. Note in the picture that the middle leg of the encoder is ground, and the two ends correspond to the signals sent when you rotate it &mdash; you'll have to figure out whether the scroll direction matches their location yourself by experimenting.
 
@@ -156,7 +170,37 @@ I'll be implementing a variation on the sliding buffer for key events, so I will
 
 Since I was trying to understand the mechanical encoder and could only really connect alligator clips to one pin at a time, I wrote up a quick Arduino script to detect only one direction of scrolling. Here's that code:
 
-<script src="https://gist.github.com/mathias/6147169.js"></script>
+```cpp
+/*
+ * scroll wheel
+ */
+
+int previousVal = 0;
+int val = 0;
+int ledPin = 11;
+int scrollWheelPin = 10;
+
+int velocity = 10;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(scrollWheelPin, INPUT_PULLUP);
+  pinMode(ledPin, OUTPUT);
+  delay(1000);
+  Serial.println("All set");
+}
+
+void loop() {
+  val = digitalRead(scrollWheelPin);
+  if (val != previousVal) {
+    Serial.println(val);
+    digitalWrite(ledPin, val);
+    Mouse.scroll(-1 * velocity);
+    delay(300);
+    previousVal = val;
+  }
+}
+```
 In my repo on Github: [scroll\_wheel.ino](https://github.com/mathias/chording/blob/master/teensy/scroll_wheel/scroll_wheel.ino)
 
 Note that this does not implement a sliding buffer or direction detection.
@@ -169,13 +213,11 @@ I'm going to be getting the key switches in the next week and beginning the hard
 
 On the software end, I'd like to write a script (probably in Ruby) that takes a standardized keyboard mapping file and converts it into a C++ header file that the Arduino can utilize for its chord mappings. That way, I don't have to maintain the header file manually or know what C++ constants map to what, I will simply edit my simple key mappings file and regenerate the code.
 
-The [twiddler\_keymap.txt](https://github.com/mathias/chording/blob/master/twiddler_keymap.txt) file in the repo represents the current plan for my keymap. It is based on the [Tabspace layout]() mentioned above in the <a href="#background-section">Background</a> section. I haven't found any reason to not use the Tabspace layout, as it seems sensible and leaves plenty of room in the unmapped chords for me to implement key combos, programming language idioms, and text editor movement.
+The [twiddler\_keymap.txt](https://github.com/mathias/chording/blob/master/twiddler_keymap.txt) file in the repo represents the current plan for my keymap. It is based on the Tabspace layout mentioned above in the <a href="#background-section">Background</a> section. I haven't found any reason to not use the Tabspace layout, as it seems sensible and leaves plenty of room in the unmapped chords for me to implement key combos, programming language idioms, and text editor movement.
 
 One last decision I need to make is whether to replace the Nostromo's thumb directional pad. The current thumbpad uses membrane switches similar to the keys, and is all surface mount with very little access to its signals. One thought is to replace the 4-way pad with a Playstation-controller style [joystick](https://www.sparkfun.com/products/9032) from Sparkfun.
 
-<a href="https://www.sparkfun.com/products/9032">
-![Sparkfun thumb joystick](/images/sparkfun_joystick.jpg)
-</a>
+[![Sparkfun thumb joystick](/images/2013-08-03-chording/sparkfun_joystick.jpg)](https://www.sparkfun.com/products/9032)
 
 With this joystick, I'd be able to implement either mouse movements or arrow key movements, and could probably toggle which it behaves like with the small button located above the directional pad. However, securely mounting the joystick into the Nostromo case so that it is durable might prove an issue. I've put off making this decision until I have successfully hacked the mechanical switches in.
 
@@ -200,5 +242,3 @@ Such a project may take a decade or more to realize, though, and so is not under
 If you have any questions, comments, or your own chording keyboard project, I'd love to hear about it [in an email](mailto:contact@mattgauger.com).
 
 [1]: http://en.wikipedia.org/wiki/Rollover_(key)#n-key_rollover
-
-<script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
