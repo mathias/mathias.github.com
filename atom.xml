@@ -5,9 +5,35 @@
     <description></description>
     <link>https://blog.mattgauger.com/</link>
     <atom:link href="https://blog.mattgauger.com/atom.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 03 Jul 2022 16:10:00 -0500</pubDate>
-    <lastBuildDate>Sun, 03 Jul 2022 16:10:00 -0500</lastBuildDate>
+    <pubDate>Sun, 03 Jul 2022 17:18:35 -0500</pubDate>
+    <lastBuildDate>Sun, 03 Jul 2022 17:18:35 -0500</lastBuildDate>
     <generator>Jekyll v3.9.2</generator>
+    
+      <item>
+        <title>A bit of cleanup for smaller, faster pages</title>
+        <description>&lt;p&gt;I’ve now completed a pass at removing the Flickr images from this blog (many of which no longer rendered) and made a few other changes. There were several posts that used embedded Gists as a way to get syntax highlighting and a download link for each file. In the spirit of using less bandwidth, consuming less energy, and working better on mobile devices and everywhere else, I removed the inline script tags in favor of preprocessing syntax highlighting with &lt;a href=&quot;https://github.com/rouge-ruby/rouge&quot;&gt;Rouge&lt;/a&gt;. It turns out that the syntax hightlighting was already built into the version of Jekyll that I was using for this blog, I just hadn’t used it everywhere.&lt;/p&gt;
+
+&lt;p&gt;In addition to moving the images off Flickr, I pre-processed them with a small script and imagemagick so that the blog posts display smaller thumbnails, intended to be faster to load on mobile. The images lazy load, if the browser supports it, without any external JS, by using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;loading=&quot;lazy&quot;&lt;/code&gt; attr in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;img&lt;/code&gt; tag. Each image links to a larger version, but the larger images have also been resized to a vertical height of 1080 pixels and compressed slightly to make them faster to load. Each replaced Flickr image also does not have to load a JS script tag from Flickr to render, which adds to the page size savings.&lt;/p&gt;
+
+&lt;p&gt;In the case of the removed Gists, that added up to over 100 script tags removed from at least 7 blog posts. Since each script tag must be separately requested and run by the browser on every page load of one of those pages, this realizes a savings in bandwidth and clientside processing time.&lt;/p&gt;
+
+&lt;p&gt;I didn’t measure the page sizes or load times before making these changes, but afterwards, I am measuring these sizes locally in Firefox with all assets (including scrolling to load all lazy-loaded images):&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;| Page                                                         | Size   | Requests    | Notes                       |
+|--------------------------------------------------------------+--------+-------------+-----------------------------|
+| / (homepage)                                                 | 21 KB  | 4 requests  |                             |
+| /2022/07/03/a-bit-of-cleanup-for-smaller-faster-pages/       | 16 KB  | 4 requests  |                             |
+| /2022/06/17/another-year-another-keyboard-built/             | 258 KB | 17 requests | has many images             |
+| /2014/10/23/clojure-data-science-sent-counts-and-aggregates/ | 65 KB  | 4 requests  | had many gists              |
+| 2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/  | 108 KB | 4 requests  | largest page of text/markup |
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Sun, 03 Jul 2022 16:41:00 -0500</pubDate>
+        <link>https://blog.mattgauger.com/2022/07/03/a-bit-of-cleanup-for-smaller-faster-pages/</link>
+        <guid isPermaLink="true">https://blog.mattgauger.com/2022/07/03/a-bit-of-cleanup-for-smaller-faster-pages/</guid>
+        
+        
+      </item>
     
       <item>
         <title>Another year, another keyboard built</title>
@@ -155,10 +181,10 @@ annotatex
 
 &lt;p&gt;Built in to Elixir itself, doctests are a simple way to couple examples of useage where your function definition lives, in the source. They define an example call from an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;iex&lt;/code&gt; prompt, and show what the return should be. When you set up a simple test file in the suite to run doctests, it will automatically check that the examples match the actual function call response. All it takes is a test file such as:&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;defmodule Alohomora.ResourceTest do
-  use ExUnit.Case, async: true
-  doctest Alohomora.Resource
-end
+&lt;div class=&quot;language-elixir highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;defmodule&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Alohomora&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;ResourceTest&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;kn&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ExUnit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Case&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;async:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;doctest&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Alohomora&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Resource&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;And to test functions with doctests in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Alohomora.Resource&lt;/code&gt; namespace. Best of all, there’s nothing extra to add – these tests will run when you run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mix test&lt;/code&gt;.&lt;/p&gt;
@@ -793,269 +819,6 @@ end
         <pubDate>Thu, 23 Oct 2014 18:18:00 -0500</pubDate>
         <link>https://blog.mattgauger.com/2014/10/23/clojure-data-science-sent-counts-and-aggregates/</link>
         <guid isPermaLink="true">https://blog.mattgauger.com/2014/10/23/clojure-data-science-sent-counts-and-aggregates/</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Clojure Code Quality Tools</title>
-        <description>&lt;p&gt;I work with many programming languages on a daily basis. As a polyglot programmer, I’ve come to appreciate tools that help me follow best practices. For JavaScript, there’s the excellent &lt;a href=&quot;http://jshint.com/&quot;&gt;jshint&lt;/a&gt;. When I need to verify some XML, there’s &lt;a href=&quot;http://xmlsoft.org/xmllint.html&quot;&gt;xmllint&lt;/a&gt;. In a Ruby on Rails project, I can count on the &lt;a href=&quot;http://rubygems.org/gems/rails_best_practices&quot;&gt;rails_best_practices&lt;/a&gt; gem. For Ruby smells, I reach for &lt;a href=&quot;https://github.com/bbatsov/rubocop&quot;&gt;rubocop&lt;/a&gt;. There’s tools like &lt;a href=&quot;https://github.com/colszowka/simplecov&quot;&gt;SimpleCov&lt;/a&gt; to measure test coverage on my Ruby projects. &lt;a href=&quot;https://github.com/square/cane&quot;&gt;cane&lt;/a&gt; helps me to ensure line length, method complexity, and more in my Ruby code. &lt;a href=&quot;https://github.com/scrooloose/syntastic&quot;&gt;Syntastic&lt;/a&gt; helps bring real syntax checking to vim for many languages. Every day, more open source tools are introduced that help me to improve the quality of the software that I write.&lt;/p&gt;
-
-&lt;p&gt;It follows that when I write Clojure code, I want nice tooling to help me manage code quality, namespace management, and out-of-date dependencies. What tools do I use on a day-to-day basis for this? In this post, I’ll show 5 tools that I use in my workflow every day on Clojure projects, and also provide some other tools for further exploration. Most of these tools exist as plugins to the excellent &lt;a href=&quot;http://leiningen.org/&quot;&gt;Leiningen&lt;/a&gt; tool for Clojure.&lt;/p&gt;
-
-&lt;h2 id=&quot;lein-deps-tree&quot;&gt;lein deps :tree&lt;/h2&gt;
-
-&lt;p&gt;In the past, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lein deps&lt;/code&gt; was a command that downloaded the correct versions of your project’s dependencies. Running &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lein deps&lt;/code&gt; is no longer necessary, as each lein command now checks for dependencies before executing. But &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deps&lt;/code&gt; provides an interesting variant for our uses: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lein deps :tree&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;:tree&lt;/code&gt; keyword at the end instructs lein to print out your project’s dependencies as a tree. This itself is a good visualization, but not what we’re looking for. The tree command will first print out any dependencies-of-dependencies which have conflicts with other dependencies. For example, here’s what &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lein deps :tree&lt;/code&gt; says for one of my projects:&lt;/p&gt;
-
-&lt;div class=&quot;language-clojure highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lein&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;deps&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;:tree&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Possibly&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;confusing&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dependencies&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;found&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;liberator&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0.11.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;org.clojure/data.json&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0.2.1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;overrides&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;org.clojure/clojurescript&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0.0-2080&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;org.clojure/data.json&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0.2.3&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Consider&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;using&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;these&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exclusions&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;org.clojure/clojurescript&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0.0-2080&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;:exclusions&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;org.clojure/data.json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]])&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;snip&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lots&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;As you can see, the tool suggests dependencies that request conflicting versions, and how we can modify our &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;project.clj&lt;/code&gt; file to resolve those conflicting versions by excluding one or the other. This isn’t always very useful, but when you run into issues because two different Clojure libraries require two wildly different &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;joda-time&lt;/code&gt; versions (a situation I have run into before), it will be good to know what dependencies are causing that issue and how you might go about resolving it.&lt;/p&gt;
-
-&lt;p&gt;Note that this functionality disappeared in Leiningen 2.4.3 but is back in 2.5.0, so make sure you run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lein upgrade&lt;/code&gt;!&lt;/p&gt;
-
-&lt;h2 id=&quot;lein-ancient&quot;&gt;&lt;a href=&quot;https://github.com/xsc/lein-ancient&quot;&gt;lein-ancient&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;This plugin to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lein&lt;/code&gt; exists simply to check your project for outdated dependencies. Without &lt;a href=&quot;https://github.com/xsc/lein-ancient&quot;&gt;lein-ancient&lt;/a&gt;, I’d be unable to keep up with some of the faster-moving libraries in the Java and Clojure world.&lt;/p&gt;
-
-&lt;p&gt;After adding ancient to your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.lein/profiles.clj&lt;/code&gt;, running the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lein ancient&lt;/code&gt; command yields output on the same project as before:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;lein ancient
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;com.cemerick/url &lt;span class=&quot;s2&quot;&gt;&quot;0.1.1&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; is available but we use &lt;span class=&quot;s2&quot;&gt;&quot;0.1.0&quot;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;midje &lt;span class=&quot;s2&quot;&gt;&quot;1.6.3&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; is available but we use &lt;span class=&quot;s2&quot;&gt;&quot;1.6.0&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Whoops! Looks like I haven’t been keeping up to date with my dependencies. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lein ancient&lt;/code&gt; makes checking for new dependency versions easy. Further, thanks to the ubiquity of &lt;a href=&quot;http://semver.org/&quot;&gt;semantic versioning&lt;/a&gt; in Clojure projects, it is usually quite safe to bump the minor versions (0.0.x) of dependencies.&lt;/p&gt;
-
-&lt;p&gt;You can also use lein-ancient to find outdated lein plugins in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.lein/profiles.clj&lt;/code&gt; file. Just run it with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;profiles&lt;/code&gt; argument:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;lein ancient profiles
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;slamhound &lt;span class=&quot;s2&quot;&gt;&quot;1.5.5&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; is available but we use &lt;span class=&quot;s2&quot;&gt;&quot;1.5.0&quot;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;lein-exec &lt;span class=&quot;s2&quot;&gt;&quot;0.3.4&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; is available but we use &lt;span class=&quot;s2&quot;&gt;&quot;0.3.3&quot;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;lein-try &lt;span class=&quot;s2&quot;&gt;&quot;0.4.3&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; is available but we use &lt;span class=&quot;s2&quot;&gt;&quot;0.4.1&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;lein-kibit&quot;&gt;&lt;a href=&quot;https://github.com/jonase/kibit&quot;&gt;lein kibit&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;As we gain experience and confidence in a programming language, we begin to talk about whether we’re writing &lt;em&gt;idiomatic&lt;/em&gt; code. I’d argue that idiomatic code is code that accomplishes a goal with proper use of language features, in a way that other developers familiar with that language would understand. A simpler way to say it might be: idiomatic code uses the community-accepted best practices of how to do something.&lt;/p&gt;
-
-&lt;p&gt;Clojure’s design seeks to solve some problems found in older Lisps, as well as add in niceties like complementary predicate functions. A good example of these convenient complementary functions are &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;if&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;if-not&lt;/code&gt;. Clojure also contains several cases of simplification for common usage. For example, when you don’t need an else clause on an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;if&lt;/code&gt;, you can use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;when&lt;/code&gt; macro.&lt;/p&gt;
-
-&lt;p&gt;Wouldn’t it be great if there was someone who was well-versed in Clojure idioms pairing with you and offering suggestions? That’s exactly what &lt;a href=&quot;https://github.com/jonase/kibit&quot;&gt;kibit&lt;/a&gt; does.&lt;/p&gt;
-
-&lt;p&gt;Running against a project I’d set up to contain some smells, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lein kibit&lt;/code&gt; found:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;At /Users/mathiasx/dev/sample-clj-project/src/sample_clj_project/core.clj:11:
-Consider using:
-  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;vec s&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-instead of:
-  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;into &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; s&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-
-At /Users/mathiasx/dev/sample-clj-project/src/sample_clj_project/core.clj:14:
-Consider using:
-  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;zero? z&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-instead of:
-  &lt;span class=&quot;o&quot;&gt;(=&lt;/span&gt; 0 z&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-
-At /Users/mathiasx/dev/sample-clj-project/src/sample_clj_project/core.clj:15:
-Consider using:
-  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;clojure.string/join &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ID&quot;&lt;/span&gt; z]&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-instead of:
-  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;apply str &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ID&quot;&lt;/span&gt; z]&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;These kinds of small improvements are all over our Clojure projects. They’re not show-stopper bugs, but they’re small places for improvement.&lt;/p&gt;
-
-&lt;p&gt;Kibit’s suggestions are almost always logically equivalent to the original code. Still, I always do some smoke-testing to ensure the code still works after using Kibit’s suggestion, and it generally does. Problems I frequently fix with Kibit are replacing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;if&lt;/code&gt; statements with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;when&lt;/code&gt; macro, as well as places where the code checks for empty seqs, or that I can simplify nil checks.&lt;/p&gt;
-
-&lt;p&gt;You can point lein kibit at a specific namespace by appending the path, like this: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lein kibit src/foo/bar.clj&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Kibit catches many cases where there is a more-idiomatic way to express what you are trying to do. I recommend running it often. In fact, it’s possible to use &lt;a href=&quot;https://github.com/jonase/kibit#usage-from-inside-emacs&quot;&gt;kibit in your emacs buffers&lt;/a&gt; if you want it to be that much more convenient and real-time.&lt;/p&gt;
-
-&lt;h2 id=&quot;eastwood&quot;&gt;&lt;a href=&quot;https://github.com/jonase/eastwood&quot;&gt;Eastwood&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;For linting Clojure code, there’s Eastwood. It is similar in functionality to Kibit, bit will catch different issues than Kibit. Built on two interesting Clojure projects: &lt;a href=&quot;https://github.com/clojure/tools.analyzer&quot;&gt;tools.analyzer&lt;/a&gt; and &lt;a href=&quot;https://github.com/clojure/tools.analyzer.jvm&quot;&gt;tools.analyzer.jvm&lt;/a&gt;, Eastwood does a powerful examination of your code inside the JVM. It is worth highlighting that since Eastwood loads your code to analyze it, it might trigger any side effects that happen when your code loads: writing files, modifying databases, etc. Note that it only loads the code; it does not execute it.&lt;/p&gt;
-
-&lt;p&gt;After adding &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eastwood&lt;/code&gt; to your lein &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;profiles.clj&lt;/code&gt;, simply run: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lein eastwood&lt;/code&gt; and you will see output like:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;lein eastwood
-&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; Eastwood 0.1.4 Clojure 1.6.0 JVM 1.7.0_55
-&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; Linting sample-clj-project.core &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;:linter :redefd-vars,
- :msg
- &lt;span class=&quot;s2&quot;&gt;&quot;Var qux def'd 2 times at line:col locations: sample_clj_project/core.clj:18:6 sample_clj_project/core.clj:19:6&quot;&lt;/span&gt;,
- :file &lt;span class=&quot;s2&quot;&gt;&quot;sample_clj_project/core.clj&quot;&lt;/span&gt;,
- :line 19,
- :column 6&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;:linter :misplaced-docstrings,
- :msg &lt;span class=&quot;s2&quot;&gt;&quot;Possibly misplaced docstring, my-function&quot;&lt;/span&gt;,
- :file &lt;span class=&quot;s2&quot;&gt;&quot;sample_clj_project/core.clj&quot;&lt;/span&gt;,
- :line 21,
- :column 7&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;:linter :unused-ret-vals,
- :msg
- &lt;span class=&quot;s2&quot;&gt;&quot;Constant value is discarded inside my-function: &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Do the thing, with the stuff.  Fast.&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;,
- :file &lt;span class=&quot;s2&quot;&gt;&quot;sample_clj_project/core.clj&quot;&lt;/span&gt;,
- :line 21,
- :column 1&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;:linter :unlimited-use,
- :msg &lt;span class=&quot;s2&quot;&gt;&quot;Unlimited use of ([cemerick.url]) in sample-clj-project.core&quot;&lt;/span&gt;,
- :file &lt;span class=&quot;s2&quot;&gt;&quot;sample_clj_project/core.clj&quot;&lt;/span&gt;,
- :line 3,
- :column 10&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;That’s a lot of problems for a simple file! Notice how one mistake got caught for two reasons: A misplaced docstring (placed after the arguments vector) becomes just a string in the function body that will be thrown away.&lt;/p&gt;
-
-&lt;p&gt;Another nice catch that Eastwood provides is detecting the redefinition of the var &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;qux&lt;/code&gt; in the file.&lt;/p&gt;
-
-&lt;p&gt;But Eastwood covers a lot more cases than just vars being def’d more than once. See the &lt;a href=&quot;https://github.com/jonase/eastwood#whats-there&quot;&gt;full list&lt;/a&gt; to find out what else it does. There’s a few linters that are disabled by default, but they might make sense to enable for your project.&lt;/p&gt;
-
-&lt;p&gt;Frequently running lint tools can help prevent subtle problems that come from code that looks correct but contains some small error. Eastwood is less concerned with style than tools like JSHint are, but we have other tools that cover stylistic concerns.&lt;/p&gt;
-
-&lt;h2 id=&quot;lein-bikeshed&quot;&gt;&lt;a href=&quot;https://github.com/dakrone/lein-bikeshed&quot;&gt;lein bikeshed&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;This is a relative newcomer to my own tool set. &lt;a href=&quot;https://github.com/dakrone/lein-bikeshed&quot;&gt;lein bikeshed&lt;/a&gt; has features related to the low-hanging fruit in our Clojure code: lines longer than 80 characters, blank lines at ends of files, and more. It will also tell you what percentage of functions have docstrings. Like other tools mentioned here, it is a lein plugin that you add to your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;profiles.clj&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;A run of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lein bikeshed&lt;/code&gt; on its own source (which purposefully includes some code designed to fail) looks like this:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;lein bikeshed
-
-Checking &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;lines longer than 80 characters.
-Badly formatted files:
-/Users/mathiasx/dev/lein-bikeshed/test/bikeshed/core_test.clj:10:
-&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;def this-thing-is-over-eighty-characters-long &lt;span class=&quot;s2&quot;&gt;&quot;yep, it certainly is over eighty characters long&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-
-Checking &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;lines with trailing whitespace.
-Badly formatted files:
-/Users/mathiasx/dev/lein-bikeshed/test/bikeshed/core_test.clj:5:&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;deftest a-test
-/Users/mathiasx/dev/lein-bikeshed/test/bikeshed/core_test.clj:6:
-&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;testing &lt;span class=&quot;s2&quot;&gt;&quot;FIXME, I fail, and I have trailing whitespace!&quot;&lt;/span&gt;
-
-Checking &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;files ending &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;blank lines.
-Badly formatted files:
-/Users/mathiasx/dev/lein-bikeshed/test/bikeshed/core_test.clj
-
-Checking &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;redefined var roots &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;directories.
-with-redefs found &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;directory:
-/Users/mathiasx/dev/lein-bikeshed/src/bikeshed/core.clj:17:  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;with-redefs &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+ -]
-/Users/mathiasx/dev/lein-bikeshed/src/bikeshed/core.clj:100:                 &lt;span class=&quot;s2&quot;&gt;&quot;xargs egrep -H -n '(&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;(with-redefs)'&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-
-Checking whether you keep up with your docstrings.
-10/13 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;76.92%] functions have docstrings.
-Use &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; to list functions without docstrings
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Bikeshed might give a lot of output for your existing projects, but the warnings are worth investigating and addressing. You can always silence the long-lines warning if it doesn’t matter to you with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-m&lt;/code&gt; command line argument.&lt;/p&gt;
-
-&lt;h2 id=&quot;tying-it-all-together-with-a-lein-alias&quot;&gt;Tying it all together with a Lein alias&lt;/h2&gt;
-
-&lt;p&gt;Wouldn’t it be great to run all these tools frequently, so that you can check for as many problems as possible? Well, you can, with a lein alias. (The lein wiki documents aliases in the &lt;a href=&quot;https://github.com/technomancy/leiningen/blob/stable/sample.project.clj#L195-L211&quot;&gt;lein sample.project.clj&lt;/a&gt;.)&lt;/p&gt;
-
-&lt;p&gt;In &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.lein/profiles.clj&lt;/code&gt;, inside your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;:user&lt;/code&gt; map, add the line:&lt;/p&gt;
-
-&lt;div class=&quot;language-clojure highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;:aliases&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;omni&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;do&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;clean&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-                       &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;with-profile&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;production&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;deps&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;:tree&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-                       &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ancient&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-                       &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;kibit&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-                       &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;bikeshed&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Now, when you want to run all these tools at once on a project, you simply invoke &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lein omni&lt;/code&gt;. I use this alias on all my Clojure(Script) projects. I have grown accustomed to seeing the kinds of output that a clean Clojure project will have.&lt;/p&gt;
-
-&lt;p&gt;It’s worth noting that I don’t run Eastwood unless it is necessary for the project. When it is necessary, I override the alias in the project’s &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;project.clj&lt;/code&gt; to run Eastwood as well.&lt;/p&gt;
-
-&lt;p&gt;This command can take some time to complete, but with an alias we’re only spinning up lein once.&lt;/p&gt;
-
-&lt;h2 id=&quot;and-a-bash-alias&quot;&gt;And a bash alias&lt;/h2&gt;
-
-&lt;p&gt;The output of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lein omni&lt;/code&gt; can be long, which can either result in a lot of scrolling or neglecting to run the command due to the inconvenience. To help manage the length of the output, I’ve created a bash alias that runs the plugins and pipes them to less.&lt;/p&gt;
-
-&lt;p&gt;My personal bash alias also runs midje at the end. You can choose whether to run the tests for your own alias. That’s just my personal preference.&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;alias &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;lk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'echo &quot;Displaying in less pager...&quot; &amp;amp;&amp;amp; lein do deps :tree, ancient, ancient :plugins, kibit, bikeshed | less'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Note that just like running the lein alias above, this may take a bit of time. Since we’re piping it to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;less&lt;/code&gt;, it might take awhile before &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;less&lt;/code&gt; receives output. While it is still running, output will periodically show up at the bottom of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;less&lt;/code&gt; buffer. You can use both Emac’s and vim’s movement commands in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;less&lt;/code&gt; to advance the buffer. I find &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;less&lt;/code&gt; to be more manageable for scrolling through output than switching to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tmux&lt;/code&gt;’s history scrolling mode.&lt;/p&gt;
-
-&lt;h2 id=&quot;managing-your-namespaces-lein-slamhound&quot;&gt;Managing your namespaces: &lt;a href=&quot;https://github.com/technomancy/slamhound&quot;&gt;lein slamhound&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;Namespace management often becomes an issue on nontrivial Clojure projects. Actively developing a project means managing the functions we pull in from other namespaces and from libraries. These require statements can often get out of date. Often, they’re either missing namespaces that are needed, or containing requirements for old functions that are no longer used in the current code.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/technomancy/slamhound&quot;&gt;slamhound&lt;/a&gt; is a tool that can help to manage dependencies in your namespaces. It knows how to require and import Clojure and Java dependencies, and can remove stale requires that are no longer necessary. Slamhound can often fix missing requires for functions that it can resolve.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Note: slamhound rewrites the namespace macros in your project’s .clj files!&lt;/strong&gt; I recommend only running it on code that’s committed to git (or whatever you use as a VCS) so that you can review and  rollback any changes it makes.&lt;/p&gt;
-
-&lt;p&gt;The most basic way to use slamhound is to add it to your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.lein/profiles.clj&lt;/code&gt; as a dependency. Then add this alias:&lt;/p&gt;
-
-&lt;div class=&quot;language-clojure highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;:aliases&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;slamhound&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;run&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;-m&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;slam.hound&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Now you can use slamhound on a project by running &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lein slamhound&lt;/code&gt; in the project’s directory. There’s also REPL and Emacs support, which you can learn more about in the &lt;a href=&quot;https://github.com/technomancy/slamhound#repl-usage&quot;&gt;slamhound README&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;measuring-test-coverage-with-cloverage&quot;&gt;Measuring test coverage with &lt;a href=&quot;https://github.com/lshift/cloverage&quot;&gt;cloverage&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;It is often claimed that less unit testing is necessary in Clojure because Clojure is functional and makes use of immutable data structures. And it is true that with functional programming, most tests are simple: given some input, the output should be a certain value.&lt;/p&gt;
-
-&lt;p&gt;Some would even argue that Clojure functions should be well-factored enough into simple functions that the behavior of the function is apparent and requires no tests. Still others maintain that developing in the REPL is as good as writing unit tests, since functions are constantly evaluated and integrated with this style of development.&lt;/p&gt;
-
-&lt;p&gt;That said, there’s still mutable Java code to interop with, there’s still the necessary evil of functions with side effects, and we might want to check the &lt;em&gt;structure&lt;/em&gt; of the data we’re producing in our functions rather than the value of it. For all those reasons and to check that I don’t introduce regressions, I tend to write unit tests in Clojure.&lt;/p&gt;
-
-&lt;p&gt;This blog post isn’t a platform to argue for or against testing Clojure. But when you do test, you may wonder how to tell how much test coverage your test suite has. How do we know at a glance what percentage of our namespaces is being tested? And how do we find lines that are never being exercised in our tests? After all, we can’t improve what we don’t measure.&lt;/p&gt;
-
-&lt;p&gt;That’s where &lt;a href=&quot;https://github.com/lshift/cloverage&quot;&gt;cloverage&lt;/a&gt; comes in. Cloverage is another lein plugin, so it gets added to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.lein/profiles.clj&lt;/code&gt; like the others. Then run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lein cloverage&lt;/code&gt; in your project; it will run the test suite and generate a coverage report.&lt;/p&gt;
-
-&lt;p&gt;The coverage report appears in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;target/coverage&lt;/code&gt; as HTML files, broken down by namespace.&lt;/p&gt;
-
-&lt;p&gt;You can still use Cloverage even if you don’t use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;clojure.test&lt;/code&gt;. I use &lt;a href=&quot;https://github.com/marick/Midje&quot;&gt;midje&lt;/a&gt; in most of my tests. To use Cloverage in those situations, wrap your tests in a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deftest&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Since &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deftest&lt;/code&gt; has a hyphenated Clojure keyword as its identifier, and Midje facts have a string as an identifier, I’ve come to use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deftest&lt;/code&gt; to group related tests together. Usually this means naming the group of tests after the function I’m testing. Then I name Midje facts after the situation that the fact exercises. This makes sense to me because it fits well with the hierarchy of rspec unit tests in Ruby.&lt;/p&gt;
-
-&lt;p&gt;Here’s an example of using this approach:&lt;/p&gt;
-
-&lt;div class=&quot;language-clojure highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;deftest&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;normalize-url-tests&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;facts&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;removes invalid query params&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;fact&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;normalize-url&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://example.com?q=&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://example.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;fact&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;normalize-url&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://example.com?=foo&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://example.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;facts&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;removes utm params&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;fact&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;normalize-url&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://example.com?utm_source=foo&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://example.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;fact&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;normalize-url&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://example.com?utm_content=bar&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://example.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;fact&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;normalize-url&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://example.com?utm_medium=baz&amp;amp;q=foo&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://example.com?q=foo&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Cloverage also outputs a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;coverage.txt&lt;/code&gt; file that might be useful for use with services like &lt;a href=&quot;http://coveralls.io&quot;&gt;Coveralls&lt;/a&gt;. I haven’t used this, so I can’t comment on its usefulness.&lt;/p&gt;
-
-&lt;p&gt;If you’re using &lt;a href=&quot;https://github.com/slagyr/speclj&quot;&gt;speclj&lt;/a&gt; for your tests, you might run into some issues getting Cloverage to play nice. I don’t use speclj often, so when I couldn’t get it to work with Cloverage, I didn’t pursue the issue.&lt;/p&gt;
-
-&lt;h2 id=&quot;final-thoughts&quot;&gt;Final Thoughts&lt;/h2&gt;
-
-&lt;p&gt;In this post, I covered 5 tools to add to your workflow all the time, and some others that might be useful in certain cases. I’m sure there’s more tools out there that are useful that I don’t know about, and I’d love to hear about them.&lt;/p&gt;
-
-&lt;p&gt;I’m also thinking about writing some posts about other development tools that I use, particularly how I use &lt;a href=&quot;https://github.com/marick/midje&quot;&gt;midje&lt;/a&gt; to test, and how you can benchmark code with &lt;a href=&quot;https://github.com/davidsantiago/perforate&quot;&gt;perforate&lt;/a&gt;. If you’re interested in those topics, get in touch and let me know.&lt;/p&gt;
-
-&lt;p&gt;Have fun and enjoy your cleaner codebase with these tools in your tool belt!&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Interested in commenting or contacting me? Send an email to &lt;a href=&quot;mailto:contact@mattgauger.com&quot;&gt;contact@mattgauger.com&lt;/a&gt;. Thanks!&lt;/p&gt;
-
-</description>
-        <pubDate>Mon, 15 Sep 2014 13:39:00 -0500</pubDate>
-        <link>https://blog.mattgauger.com/2014/09/15/clojure-code-quality-tools/</link>
-        <guid isPermaLink="true">https://blog.mattgauger.com/2014/09/15/clojure-code-quality-tools/</guid>
         
         
       </item>

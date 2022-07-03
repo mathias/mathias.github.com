@@ -60,10 +60,10 @@
 
 <p>Built in to Elixir itself, doctests are a simple way to couple examples of useage where your function definition lives, in the source. They define an example call from an <code class="language-plaintext highlighter-rouge">iex</code> prompt, and show what the return should be. When you set up a simple test file in the suite to run doctests, it will automatically check that the examples match the actual function call response. All it takes is a test file such as:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>defmodule Alohomora.ResourceTest do
-  use ExUnit.Case, async: true
-  doctest Alohomora.Resource
-end
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">Alohomora</span><span class="o">.</span><span class="no">ResourceTest</span> <span class="k">do</span>
+  <span class="kn">use</span> <span class="no">ExUnit</span><span class="o">.</span><span class="no">Case</span><span class="p">,</span> <span class="ss">async:</span> <span class="no">true</span>
+  <span class="n">doctest</span> <span class="no">Alohomora</span><span class="o">.</span><span class="no">Resource</span>
+<span class="k">end</span>
 </code></pre></div></div>
 
 <p>And to test functions with doctests in your <code class="language-plaintext highlighter-rouge">Alohomora.Resource</code> namespace. Best of all, there’s nothing extra to add – these tests will run when you run <code class="language-plaintext highlighter-rouge">mix test</code>.</p>
