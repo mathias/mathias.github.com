@@ -15,7 +15,7 @@ This post will have less examples than the last, but you can refer to each proje
 
 Built in to Elixir itself, doctests are a simple way to couple examples of useage where your function definition lives, in the source. They define an example call from an `iex` prompt, and show what the return should be. When you set up a simple test file in the suite to run doctests, it will automatically check that the examples match the actual function call response. All it takes is a test file such as:
 
-```
+```elixir
 defmodule Alohomora.ResourceTest do
   use ExUnit.Case, async: true
   doctest Alohomora.Resource
