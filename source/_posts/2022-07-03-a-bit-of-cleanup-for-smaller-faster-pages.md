@@ -12,7 +12,9 @@ The images were preprocessed with [this script](https://github.com/mathias/mathi
 
 In the case of the removed Gists, that added up to over 100 script tags removed from at least 7 blog posts. Since each script tag must be separately requested and run by the browser on every page load of one of those pages, this realizes a savings in bandwidth and clientside processing time.
 
-I didn't measure the page sizes or load times before making these changes, but afterwards, I am measuring these sizes locally in Firefox with all assets (including scrolling to load all lazy-loaded images):
+As of September 2021, this page also does not have any Google Analytics embedded in it. This means I get a bit less info from Google Analytics. (But in all honesty, I was not tracking it very closely there.) But more importantly, it is one less script to run and network request for the tracking JS to make, and it is better for readers' privacy.
+
+I didn't measure the page sizes or load times before making these changes, but afterwards, I have measured these pages locally in Firefox with all assets (including scrolling to load all lazy-loaded images):
 
 ```
 | Page                                                         | Size   | Requests    | Notes                       |
