@@ -5,8 +5,8 @@
     <description></description>
     <link>https://blog.mattgauger.com/</link>
     <atom:link href="https://blog.mattgauger.com/atom.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 03 Jul 2022 17:18:35 -0500</pubDate>
-    <lastBuildDate>Sun, 03 Jul 2022 17:18:35 -0500</lastBuildDate>
+    <pubDate>Sun, 03 Jul 2022 17:22:44 -0500</pubDate>
+    <lastBuildDate>Sun, 03 Jul 2022 17:22:44 -0500</lastBuildDate>
     <generator>Jekyll v3.9.2</generator>
     
       <item>
@@ -14,6 +14,8 @@
         <description>&lt;p&gt;I’ve now completed a pass at removing the Flickr images from this blog (many of which no longer rendered) and made a few other changes. There were several posts that used embedded Gists as a way to get syntax highlighting and a download link for each file. In the spirit of using less bandwidth, consuming less energy, and working better on mobile devices and everywhere else, I removed the inline script tags in favor of preprocessing syntax highlighting with &lt;a href=&quot;https://github.com/rouge-ruby/rouge&quot;&gt;Rouge&lt;/a&gt;. It turns out that the syntax hightlighting was already built into the version of Jekyll that I was using for this blog, I just hadn’t used it everywhere.&lt;/p&gt;
 
 &lt;p&gt;In addition to moving the images off Flickr, I pre-processed them with a small script and imagemagick so that the blog posts display smaller thumbnails, intended to be faster to load on mobile. The images lazy load, if the browser supports it, without any external JS, by using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;loading=&quot;lazy&quot;&lt;/code&gt; attr in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;img&lt;/code&gt; tag. Each image links to a larger version, but the larger images have also been resized to a vertical height of 1080 pixels and compressed slightly to make them faster to load. Each replaced Flickr image also does not have to load a JS script tag from Flickr to render, which adds to the page size savings.&lt;/p&gt;
+
+&lt;p&gt;The images were preprocessed with &lt;a href=&quot;https://github.com/mathias/mathias.github.com/blob/b6320db86eabb5dc0ac1a0dad220a065616eecc9/bin/prepare-image-directory.sh&quot;&gt;this script&lt;/a&gt;. Note: it is destructive to the originals in the directory where it is run.&lt;/p&gt;
 
 &lt;p&gt;In the case of the removed Gists, that added up to over 100 script tags removed from at least 7 blog posts. Since each script tag must be separately requested and run by the browser on every page load of one of those pages, this realizes a savings in bandwidth and clientside processing time.&lt;/p&gt;
 
