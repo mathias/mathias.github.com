@@ -21,5 +21,5 @@ I didn't measure the page sizes or load times before making these changes, but a
 | /2022/07/03/a-bit-of-cleanup-for-smaller-faster-pages/       | 16 KB  | 4 requests  |                             |
 | /2022/06/17/another-year-another-keyboard-built/             | 258 KB | 17 requests | has many images             |
 | /2014/10/23/clojure-data-science-sent-counts-and-aggregates/ | 65 KB  | 4 requests  | had many gists              |
-| 2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/  | 108 KB | 4 requests  | largest page of text/markup |
+| /2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/  | 108 KB | 4 requests  | largest page of text/markup |
 ```
