@@ -16,9 +16,63 @@ So here's how I'd build up a dashboard, in several iterations:
 
 ## Static data in the browser:
 
-First, we get some data into the HTML using Hoplon cells:
+First, we get some data into the HTML using Hoplon cells, in `index.html`:
 
-<script src="https://gist.github.com/mathias/9670739.js"></script>
+```html
+<script type="text/hoplon">
+  (page "index.html"
+    (:refer-clojure :exclude [nth])
+    (:require
+      [tailrecursion.hoplon.reload :refer [reload-all]]))
+
+  (def articles {:total 422
+                 :ingested 419
+                 :fetched 0
+                 :errored 0
+                 :read 315})
+
+  (reload-all 25)
+</script>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gleam</title>
+
+    <link href="app.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+      <h1>gleam</h1>
+    </header>
+    <section>
+      <h2>Articles</h2>
+      <ul>
+        <li>
+          <label>Total:</label><text> ~{(get articles :total)}</text>
+        </li>
+        <li>
+          <label>Ingested:</label><text> ~{(get articles :ingested)}</text>
+        </li>
+        <li>
+          <label>Fetched:</label><text> ~{(get articles :fetched)}</text>
+        </li>
+        <li>
+          <label>Errored:</label><text> ~{(get articles :errored)}</text>
+        </li>
+        <li>
+          <label>Read:</label><text> ~{(get articles :read)}</text>
+        </li>
+      </ul>
+    </section>
+    <footer>
+    </footer>
+  </body>
+</html>
+```
 
 You'll want to `git reset --hard 69b070` to get to this point.
 
@@ -26,8 +80,24 @@ You'll want to `git reset --hard 69b070` to get to this point.
 
 In `src/cljs/gleam/rpc.cljs`:
 
-<script src="https://gist.github.com/mathias/9635157.js"></script>
+```clojure
+(ns gleam.rpc
+  (:require-macros
+    [tailrecursion.javelin :refer [defc defc= cell=]])
+  (:require
+    [clojure.set           :as cs]
+    [clojure.string        :as s]
+    [tailrecursion.javelin :as j :refer [cell]]
+    [tailrecursion.castra  :as c :refer [mkremote]]))
 
+(set! cljs.core/*print-fn* #(.log js/console %))
+
+(def articles {:total 422
+               :ingested 419
+               :fetched 0
+               :errored 0
+               :read 315})
+```
 And take out the `(def articles…)` from `index.html.hl`. After boot recompiles everything, you should still see the data in the page.
 
 To get to this point, you can run `git reset --hard d63f299`.
@@ -36,15 +106,64 @@ To get to this point, you can run `git reset --hard d63f299`.
 
 Change `src/cljs/gleam/rpc.cljs` again, this time to make a remote call for data:
 
-<script src="https://gist.github.com/mathias/9671172.js"></script>
+```clojure
+(ns gleam.rpc
+  (:require-macros
+    [tailrecursion.javelin :refer [defc defc= cell=]])
+  (:require [clojure.set           :as cs]
+            [clojure.string        :as s]
+            [tailrecursion.javelin :as j :refer [cell]]
+            [tailrecursion.castra  :as c :refer [mkremote]]))
+
+(set! cljs.core/*print-fn* #(.log js/console %))
+
+(defc state {:articles {}})
+(defc error nil)
+(defc loading [])
+
+(defc= articles (get state :articles))
+
+(def get-state
+  (mkremote 'gleam.api.gleam/get-state state error loading))
+
+(defn init []
+  (get-state)
+  ;; Check every second for new data
+  (js/setInterval get-state 1000))
+```
 
 On the backend, we need something like this in `src/castra/gleam/api/gleam.clj`:
 
-<script src="https://gist.github.com/mathias/9671200.js"></script>
+```clojure
+(ns gleam.api.gleam
+  (:refer-clojure :exclude [defn])
+  (:require [tailrecursion.castra :refer [defn ex error *session*]]))
 
-The Hoplon HTML file changes in the script tag at the top to use the new ClojureScript remote call and start up the polling:
+(def articles {:total 422
+               :ingested 419
+               :fetched 0
+               :errored 0
+               :read 315})
 
-<script src="https://gist.github.com/mathias/9671220.js"></script>
+(defn get-state []
+  {:articles articles})
+```
+
+The Hoplon HTML file changes in the script tag at the top of `index.html` to use the new ClojureScript remote call and start up the polling:
+
+```clojure
+<script type="text/hoplon">
+  (page "index.html"
+    (:refer-clojure :exclude [nth])
+    (:require
+      [gleam.rpc :as gleam]
+      [tailrecursion.hoplon.reload :refer [reload-all]]))
+
+  (defc= articles gleam/articles)
+
+  (gleam/init)
+</script>
+```
 
 To get to this point in the example repo, you can do `git reset --hard 0bad1e5`.
 
@@ -54,7 +173,25 @@ The last step that I will show is to verify that we are in fact getting regular 
 
 Change your Castra Clojure file to look like this:
 
-<script src="https://gist.github.com/mathias/9671661.js"></script>
+```clojure
+(ns gleam.api.gleam
+  (:refer-clojure :exclude [defn])
+  (:require [tailrecursion.castra :refer [defn ex error *session*]]))
+
+(defn articles []
+  (let [ingested (rand-int 300)
+        fetched (rand-int 300)
+        errored (rand-int 300)
+        read (rand-int 300)]
+    {:total (+ ingested fetched errored read)
+     :ingested ingested
+     :fetched fetched
+     :errored errored
+     :read read}))
+
+(defn get-state []
+  {:articles (articles)})
+```
 
 To get to this point, you can do a `git reset --hard f19325`
 

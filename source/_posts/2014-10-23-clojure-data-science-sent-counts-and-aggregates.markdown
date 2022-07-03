@@ -22,7 +22,10 @@ It has been some time since we worked on [autodjinn](https://github.com/mathias/
 
 Below is output when I run `lein ancient` on the last post's finished git tag, `v0.1.1`. To go back to that state, you can run `git checkout v0.1.1` on the [autodjinn repo](https://github.com/mathias/autodjinn).
 
-<script src="https://gist.github.com/mathias/c349dc7cb110edb56235.js"></script>
+```shell
+$ lein ancient
+[jarohen/nomad "0.7.0"] is available but we use "0.6.3"
+```
 
 It looks like our [nomad](https://github.com/james-henderson/nomad) dependency is out of date. Update the version number in `project.clj` to `0.7.0` and run `lein ancient` again to verify that it worked.
 
@@ -34,7 +37,12 @@ To save on the hassle of upgrading, I have created a tag for the project after u
 
 If you remember back to the [first post]({% post_url 2014-03-30-clojure-data-science-ingesting-your-gmail-inbox %}), we wrapped up by querying for entity IDs and then using Datomic's built-in `entity` and `touch` functions to instantiate each message with all of its attributes. We had to do this because the query itself only returned a set of entity IDs:
 
-<script src="https://gist.github.com/mathias/ab5a827ca860c89e0043.js"></script>
+```clojure
+autodjinn.core> (d/q '[:find ?eid
+                       :where [?eid :mail/uid _]]
+                     (new-db-val))
+;=> #{[17592186045419] [17592186045421] [17592186045423] [17592186045425]}
+```
 
 Note that the Datomic query is made up of several parts:
 
@@ -43,19 +51,36 @@ Note that the Datomic query is made up of several parts:
 
 We could pass in the `:mail/uid` we care about, and only get one message's entity-ID back.
 
-<script src="https://gist.github.com/mathias/4990c69f1e4c4a7dc7e9.js"></script>
+```clojure
+autodjinn.core> (d/q '[:find ?eid
+                       :in $ ?uid
+                       :where [?eid :mail/uid ?uid]]
+                     (new-db-val)
+                     "f672479d-ff67-4cce-b67c-6e40962cf7d7@xtinp2mta101.xt.local")
+;=> #{[17592186045425]}
+```
 
 Notice how the `?uid` variable gets passed in with the `:in` clause, as the third argument to `d/q`?
 
 Or we could change the query to match on other attributes:
 
-<script src="https://gist.github.com/mathias/3685937809a50e36c424.js"></script>
+```clojure
+autodjinn.core>  (d/q '[:find ?eid
+                        :where [?eid :mail/to _]]
+                      (new-db-val))
+;=> #{[17592186045419] [17592186045421] [17592186045423] [17592186045425]}
+```
 
 In all these cases, we'd still get the entity IDs back because the `:find` clause tells Datomic to return `?eid`. Typically, we pass around entity IDs and lazy-load any facts (attributes) that we need off that entity.
 
 But, we could just as easily return other attributes from an entity as part of a query. Let's ask for the recipients of all the emails in our system:
 
-<script src="https://gist.github.com/mathias/be2baf0af0b652966240.js"></script>
+```clojure
+autodjinn.core>  (d/q '[:find ?to
+                        :where [?eid :mail/to ?to]]
+                      (new-db-val))
+;=> #{["matt@example.com"] ["notifications@example.com"]}
+```
 
 While it is less common to return only the value of an entity's attribute, being able to do so will allow us to build more functionality on top of our email abstraction later.
 
@@ -63,11 +88,27 @@ One last thing. Take a look at the return of that query above. Remember that the
 
 Datomic creates a unique set for the values returned by a query. This is generally a great thing, since it gets around some of the issues that one can run into with JOINing in SQL. But in this case, it is not ideal for what we want to accomplish. We could try to get around the uniqueness constraint on output by returning vectors of the entity ID and the `?to` address, and then mapping across the result to pull out the second item:
 
-<script src="https://gist.github.com/mathias/d6401a036d032caccde3.js"></script>
+```clojure
+autodjinn.core>  (d/q '[:find ?eid ?to
+                        :where [?eid :mail/to ?to]]
+                      (new-db-val))
+;=> #{[17592186045423 "notifications@example.com"] [17592186045421 "notifications@example.com"] [17592186045421 "matt@example.com"] [17592186045419 "notifications@example.com"] [17592186045425 "notifications@example.com"]}
+
+autodjinn.core>  (map second (d/q '[:find ?eid ?to
+                                    :where [?eid :mail/to ?to]]
+                                  (new-db-val)))
+;=> ("notifications@example.com" "notifications@example.com" "matt@example.com" "notifications@example.com" "notifications@example.com")
+```
 
 There's a simpler way that we can use in the Datomic query. By keeping it inside Datomic, we can later combine this approach with more-complex queries. We can tell the Datomic query to look at other attributes when considering what the unique key is by passing the query a `:with` clause. By changing our query slightly to include a `:with` clause, we end up with the full list of recipients in our datastore:
 
-<script src="https://gist.github.com/mathias/f36ae56bef0e1b6cdfa9.js"></script>
+```clojure
+autodjinn.core>  (d/q '[:find ?to
+                        :with ?eid
+                        :where [?eid :mail/to ?to]]
+                      (new-db-val))
+;=> [["notifications@example.com"] ["notifications@example.com"] ["notifications@example.com"] ["matt@example.com"] ["notifications@example.com"]]
+```
 
 At this point, it might be a good idea to review Datomic's [querying](http://docs.datomic.com/query.html) guide. We'll be using some of the advanced querying features found in the later sections of that guide, most notably aggregate functions.
 
@@ -79,7 +120,13 @@ We start by building up the query in our REPL. Let's start with a simpler query,
 
 A simple way to do this would be to wrap our previous query in the [frequencies](http://clojure.github.io/clojure/clojure.core-api.html#clojure.core/frequencies) function that Clojure.core provides. `frequencies` returns a map of items with their count from a Clojure collection.
 
-<script src="https://gist.github.com/mathias/af050f75d1c610d6d422.js"></script>
+```clojure
+autodjinn.core> (frequencies (d/q '[:find ?to
+                                    :with ?eid
+                                    :where [?eid :mail/to ?to]]
+                                  (new-db-val)))
+;=> {["notifications@example.com"] 4, ["matt@example.com"] 1}
+```
 
 However, we want to perform the same sort of thing in Datomic itself. To do that, we're going to need to know about aggregate functions. Aggregate functions operate over the intermediate results of a Datomic query. Datomic provides functions like `max`, `min`, `sum`, `count`, `rand` (for getting a random value out of the query results), and more. With aggregates, we need to be sure to use a `:with` clause to ensure we aggregate over all our values.
 
@@ -89,7 +136,16 @@ Looking at that short list of aggregate functions I've named, we can see that we
 
 When the query looks at records in the data, our `:where` clause gives each position in the vector an id and a name based on position in the vector.)
 
-<script src="https://gist.github.com/mathias/6b8da156388ed1cd9290.js"></script>
+```clojure
+autodjinn.core> (d/q '[:find ?name (count ?name)
+                       :with ?id
+                       :where [?id ?name]]
+                     [[1 "Jon"]
+                      [2 "Bob"]
+                      [3 "Jon"]
+                      [4 "Chris"]])
+;=> [["Bob" 1] ["Chris" 1] ["Jon" 2]]
+```
 
 Let's review what happened there. Before the `count` aggregate function was applied, our results looked like this:
 
@@ -99,7 +155,13 @@ So the `count` function just counts across the values of the variable it is pass
 
 It makes sense that we can do the same thing with our recipient email addresses from the previous query. Combining our previous queries with the `count` aggregate function, we get:
 
-<script src="https://gist.github.com/mathias/8b346f1019d588bea534.js"></script>
+```clojure
+autodjinn.core> (d/q '[:find ?to (count ?to)
+                       :with ?eid
+                       :where [?eid :mail/to ?to]]
+                     (new-db-val))
+[["matt@example.com" 1] ["notifications@example.com" 4]]
+```
 
 That looks like the same kind of data we were getting with the use of the `frequencies` function before! So now we know how to use a Datomic aggregate function to count results in our queries.
 
@@ -113,11 +175,29 @@ We can't pass a tuple like `[from-address to-address]` to the `count` aggregate 
 
 So what would the inner query look like? Remember that the outer query will still need a field to pass to the `:with` clause, so we'll probably want to pass through the entity ID.
 
-<script src="https://gist.github.com/mathias/61e60a563ffc29f06af8.js"></script>
+```clojure
+autodjinn.core> (d/q '[:find ?from ?to
+                       :with ?eid
+                       :where [?eid :mail/from ?from]
+                              [?eid :mail/to ?to]]
+                     (new-db-val))
+;=> [["amy@example.com" "notifications@example.com"] ["hi@example.com" "notifications@example.com"] ["amy@example.com" "matt@example.com"] ["amy@example.com" "notifications@example.com"] ["hi@example.com" "notifications@example.com"]]
+```
 
 Those tuples will be used by our outer query. However, we also need a combined value for the count to operate on. For that, we can throw in a function call in the `:where` clause and give it a binding at the end for Datomic to use for that new value. In this case, I'll combine the `?from` and `?to` values into a PersistentVector that the `count` aggregate function can use. The combined query ends up looking like this:
 
-<script src="https://gist.github.com/mathias/d26c7175670b8c29e7c2.js"></script>
+```clojure
+autodjinn.core> (let [db (new-db-val)]
+                  (d/q '[:find ?from ?to (count ?combined)
+                         :with ?eid
+                         :where [?eid ?from ?to]
+                                [(vector ?from ?to) ?combined]]
+                       (d/q '[:find ?eid ?from ?to
+                              :where [?eid :mail/from ?from]
+                                     [?eid :mail/to ?to]]
+                            db)))
+;=> [["amy@example.com" "matt@example.com" 1] ["amy@example.com" "notifications@example.com" 2] ["hi@example.com" "notifications@example.com" 2]]
+```
 
 And the output is as we expect.
 
@@ -129,13 +209,51 @@ In general, when I write query functions for Datomic, I use multiple arities to 
 
 Such a query function typically looks like this:
 
-<script src="https://gist.github.com/mathias/f61fb370a3a2120daf6f.js"></script>
+```clojure
+(defn count-from-to-pairs
+  ([] (count-from-to-pairs (new-db-val)))
+  ([db]
+     (d/q '[:find ?from ?to (count ?combined)
+            :with ?eid
+            :where [?eid ?from ?to]
+                   [(vector ?from ?to) ?combined]]
+          (d/q '[:find ?eid ?from ?to
+                 :where [?eid :mail/from ?from]
+                        [?eid :mail/to ?to]]
+               db)))
+```
 
 By taking advantage of multiple arities, we can default to not having to pass a database value into the function. But in the cases where we do need to ensure a particular database version is used, we can do that. This is a very powerful idiom that I've learned since I began to use Datomic, and I suggest you structure all your query functions similarly.
 
 Now, let's take that function that only queries for `:mail/to` addresses and make it more generic, with specific wrapper functions for each case where we'd want to use it:
 
-<script src="https://gist.github.com/mathias/67647105799f7f2ff1cf.js"></script>
+```clojure
+(defn count-address-pairs-q
+  ([attr] (count-address-pairs-q (new-db-val) attr))
+  ([db attr]
+     (d/q '[:find ?from ?to (count ?combined)
+            :with ?eid
+            :where [?eid ?from ?to]
+                   [(vector ?from ?to) ?combined]]
+          (d/q '[:find ?eid ?from ?to
+                 :in $ ?attr
+                 :where [?eid :mail/from ?from]
+                        [?eid ?attr ?to]]
+               db
+               attr))))
+
+(defn count-from-to-pairs
+  ([] (count-from-to-pairs (new-db-val)))
+  ([db] (count-address-pairs-q db :mail/to)))
+
+(defn count-from-cc-pairs
+  ([] (count-from-cc-pairs (new-db-val)))
+  ([db] (count-address-pairs-q db :mail/cc)))
+
+(defn count-from-bcc-pairs
+  ([] (count-from-bcc-pairs (new-db-val)))
+  ([db] (count-address-pairs-q db :mail/bcc)))
+```
 
 Note that we had to change the inner query to take the attr we want to query on as a variable; this is the proper way to pass a piece of data into a query we want to run. The `$` that comes first in the `:in` clause tells Datomic to use the second `d/q` argument as our dataset (the db value we pass in), and the `?attr` tells it to bind the third `d/q` argument as the variable `?attr`.
 
@@ -161,7 +279,35 @@ Let's add to the Datomic schema in our `core.clj` file to create a new `:sent-co
 
 Add the following maps to the `schema-txn` vector:
 
-<script src="https://gist.github.com/mathias/661dadfdb2e639209452.js"></script>
+```clojure
+   ;; sent-counts:
+   {:db/id #db/id[:db.part/db]
+    :db/ident :sent-count/from
+    :db/valueType :db.type/string
+    :db/cardinality :db.cardinality/one
+    :db.install/_attribute :db.part/db}
+   {:db/id #db/id[:db.part/db]
+    :db/ident :sent-count/to
+    :db/valueType :db.type/string
+    :db/cardinality :db.cardinality/one
+    :db.install/_attribute :db.part/db}
+   {:db/id #db/id[:db.part/db]
+    :db/ident :sent-count/count
+    :db/valueType :db.type/long
+    :db/cardinality :db.cardinality/one
+    :db.install/_attribute :db.part/db}
+     {:db/id #db/id[:db.part/db]
+    :db/ident :sent-count/address-type
+    :db/valueType :db.type/ref
+    :db/cardinality :db.cardinality/one
+    :db.install/_attribute :db.part/db}
+   {:db/id #db/id[:db.part/user]
+    :db/ident :sent-count.address-type/to}
+   {:db/id #db/id[:db.part/user]
+    :db/ident :sent-count.address-type/cc}
+   {:db/id #db/id[:db.part/user]
+    :db/ident :sent-count.address-type/bcc}
+```
 
 You'll have to call the `update-schema` function in your REPL to run the schema transaction.
 

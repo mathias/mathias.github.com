@@ -16,7 +16,17 @@ In the past, `lein deps` was a command that downloaded the correct versions of y
 
 The `:tree` keyword at the end instructs lein to print out your project's dependencies as a tree. This itself is a good visualization, but not what we're looking for. The tree command will first print out any dependencies-of-dependencies which have conflicts with other dependencies. For example, here's what `lein deps :tree` says for one of my projects:
 
-<script src="https://gist.github.com/mathias/8eca3548f751bec6ea55.js"></script>
+```clojure
+$ lein deps :tree
+(Possibly confusing dependencies found:)
+([liberator "0.11.0"] -> [org.clojure/data.json "0.2.1"])
+( overrides)
+([org.clojure/clojurescript "0.0-2080"] -> [org.clojure/data.json "0.2.3"])
+( Consider using these exclusions:)
+([org.clojure/clojurescript "0.0-2080" :exclusions [org.clojure/data.json]])
+
+[snip lots of output]
+```
 
 As you can see, the tool suggests dependencies that request conflicting versions, and how we can modify our `project.clj` file to resolve those conflicting versions by excluding one or the other. This isn't always very useful, but when you run into issues because two different Clojure libraries require two wildly different `joda-time` versions (a situation I have run into before), it will be good to know what dependencies are causing that issue and how you might go about resolving it.
 
@@ -28,13 +38,22 @@ This plugin to `lein` exists simply to check your project for outdated dependenc
 
 After adding ancient to your `~/.lein/profiles.clj`, running the `lein ancient` command yields output on the same project as before:
 
-<script src="https://gist.github.com/mathias/bac5e554f971d7aa462f.js"></script>
+```shell
+$ lein ancient
+[com.cemerick/url "0.1.1"] is available but we use "0.1.0"
+[midje "1.6.3"] is available but we use "1.6.0"
+```
 
 Whoops! Looks like I haven't been keeping up to date with my dependencies. `lein ancient` makes checking for new dependency versions easy. Further, thanks to the ubiquity of [semantic versioning](http://semver.org/) in Clojure projects, it is usually quite safe to bump the minor versions (0.0.x) of dependencies.
 
 You can also use lein-ancient to find outdated lein plugins in your `~/.lein/profiles.clj` file. Just run it with the `profiles` argument:
 
-<script src="https://gist.github.com/mathias/02b999542ea837b87e30.js"></script>
+```shell
+$ lein ancient profiles
+[slamhound "1.5.5"] is available but we use "1.5.0"
+[lein-exec "0.3.4"] is available but we use "0.3.3"
+[lein-try "0.4.3"] is available but we use "0.4.1"
+```
 
 ## [lein kibit](https://github.com/jonase/kibit)
 
@@ -46,7 +65,25 @@ Wouldn't it be great if there was someone who was well-versed in Clojure idioms 
 
 Running against a project I'd set up to contain some smells, `lein kibit` found:
 
-<script src="https://gist.github.com/mathias/fc0d446aeb90f44a6731.js"></script>
+```shell
+At /Users/mathiasx/dev/sample-clj-project/src/sample_clj_project/core.clj:11:
+Consider using:
+  (vec s)
+instead of:
+  (into [] s)
+
+At /Users/mathiasx/dev/sample-clj-project/src/sample_clj_project/core.clj:14:
+Consider using:
+  (zero? z)
+instead of:
+  (= 0 z)
+
+At /Users/mathiasx/dev/sample-clj-project/src/sample_clj_project/core.clj:15:
+Consider using:
+  (clojure.string/join ["ID" z])
+instead of:
+  (apply str ["ID" z])
+```
 
 These kinds of small improvements are all over our Clojure projects. They're not show-stopper bugs, but they're small places for improvement.
 
@@ -62,7 +99,36 @@ For linting Clojure code, there's Eastwood. It is similar in functionality to Ki
 
 After adding `eastwood` to your lein `profiles.clj`, simply run: `lein eastwood` and you will see output like:
 
-<script src="https://gist.github.com/mathias/b93cea02293eac933bee.js"></script>
+```shell
+$ lein eastwood
+== Eastwood 0.1.4 Clojure 1.6.0 JVM 1.7.0_55
+== Linting sample-clj-project.core ==
+{:linter :redefd-vars,
+ :msg
+ "Var qux def'd 2 times at line:col locations: sample_clj_project/core.clj:18:6 sample_clj_project/core.clj:19:6",
+ :file "sample_clj_project/core.clj",
+ :line 19,
+ :column 6}
+
+{:linter :misplaced-docstrings,
+ :msg "Possibly misplaced docstring, my-function",
+ :file "sample_clj_project/core.clj",
+ :line 21,
+ :column 7}
+
+{:linter :unused-ret-vals,
+ :msg
+ "Constant value is discarded inside my-function: \"Do the thing, with the stuff.  Fast.\"",
+ :file "sample_clj_project/core.clj",
+ :line 21,
+ :column 1}
+
+{:linter :unlimited-use,
+ :msg "Unlimited use of ([cemerick.url]) in sample-clj-project.core",
+ :file "sample_clj_project/core.clj",
+ :line 3,
+ :column 10}
+```
 
 That's a lot of problems for a simple file! Notice how one mistake got caught for two reasons: A misplaced docstring (placed after the arguments vector) becomes just a string in the function body that will be thrown away.
 
@@ -78,7 +144,33 @@ This is a relative newcomer to my own tool set. [lein bikeshed](https://github.c
 
 A run of `lein bikeshed` on its own source (which purposefully includes some code designed to fail) looks like this:
 
-<script src="https://gist.github.com/mathias/271e06ebce8fe6428b83.js"></script>
+```shell
+$ lein bikeshed
+
+Checking for lines longer than 80 characters.
+Badly formatted files:
+/Users/mathiasx/dev/lein-bikeshed/test/bikeshed/core_test.clj:10:
+(def this-thing-is-over-eighty-characters-long "yep, it certainly is over eighty characters long")
+
+Checking for lines with trailing whitespace.
+Badly formatted files:
+/Users/mathiasx/dev/lein-bikeshed/test/bikeshed/core_test.clj:5:(deftest a-test
+/Users/mathiasx/dev/lein-bikeshed/test/bikeshed/core_test.clj:6:
+(testing "FIXME, I fail, and I have trailing whitespace!"
+
+Checking for files ending in blank lines.
+Badly formatted files:
+/Users/mathiasx/dev/lein-bikeshed/test/bikeshed/core_test.clj
+
+Checking for redefined var roots in source directories.
+with-redefs found in source directory:
+/Users/mathiasx/dev/lein-bikeshed/src/bikeshed/core.clj:17:  (with-redefs [+ -]
+/Users/mathiasx/dev/lein-bikeshed/src/bikeshed/core.clj:100:                 "xargs egrep -H -n '(\\(with-redefs)'")
+
+Checking whether you keep up with your docstrings.
+10/13 [76.92%] functions have docstrings.
+Use -v to list functions without docstrings
+```
 
 Bikeshed might give a lot of output for your existing projects, but the warnings are worth investigating and addressing. You can always silence the long-lines warning if it doesn't matter to you with the `-m` command line argument.
 
@@ -89,7 +181,13 @@ Wouldn't it be great to run all these tools frequently, so that you can check fo
 
 In `~/.lein/profiles.clj`, inside your `:user` map, add the line:
 
-<script src="https://gist.github.com/mathias/eef9f3f3e9e0ba40cb78.js"></script>
+```clojure
+:aliases {"omni" ["do" ["clean"]
+                       ["with-profile" "production" "deps" ":tree"]
+                       ["ancient"]
+                       ["kibit"]
+                       ["bikeshed"]]}
+```
 
 Now, when you want to run all these tools at once on a project, you simply invoke `lein omni`. I use this alias on all my Clojure(Script) projects. I have grown accustomed to seeing the kinds of output that a clean Clojure project will have.
 
@@ -103,7 +201,9 @@ The output of `lein omni` can be long, which can either result in a lot of scrol
 
 My personal bash alias also runs midje at the end. You can choose whether to run the tests for your own alias. That's just my personal preference.
 
-<script src="https://gist.github.com/mathias/8b6a0040fcd7e4ae890f.js"></script>
+```shell
+alias lk='echo "Displaying in less pager..." && lein do deps :tree, ancient, ancient :plugins, kibit, bikeshed | less'
+```
 
 Note that just like running the lein alias above, this may take a bit of time. Since we're piping it to `less`, it might take awhile before `less` receives output. While it is still running, output will periodically show up at the bottom of the `less` buffer. You can use both Emac's and vim's movement commands in `less` to advance the buffer. I find `less` to be more manageable for scrolling through output than switching to `tmux`'s history scrolling mode.
 
@@ -117,7 +217,9 @@ Namespace management often becomes an issue on nontrivial Clojure projects. Acti
 
 The most basic way to use slamhound is to add it to your `~/.lein/profiles.clj` as a dependency. Then add this alias:
 
-<script src="https://gist.github.com/mathias/f3799e60c63b0aebf17e.js"></script>
+```clojure
+:aliases {"slamhound" ["run" "-m" "slam.hound"]}
+```
 
 Now you can use slamhound on a project by running `lein slamhound` in the project's directory. There's also REPL and Emacs support, which you can learn more about in the [slamhound README](https://github.com/technomancy/slamhound#repl-usage).
 
@@ -142,7 +244,16 @@ Since `deftest` has a hyphenated Clojure keyword as its identifier, and Midje fa
 
 Here's an example of using this approach:
 
-<script src="https://gist.github.com/mathias/94e1a4d7b8bce7c02e23.js"></script>
+```clojure
+(deftest normalize-url-tests
+  (facts "removes invalid query params"
+    (fact (normalize-url "http://example.com?q=") => "http://example.com")
+    (fact (normalize-url "http://example.com?=foo") => "http://example.com"))
+  (facts "removes utm params"
+    (fact (normalize-url "http://example.com?utm_source=foo") => "http://example.com")
+    (fact (normalize-url "http://example.com?utm_content=bar") => "http://example.com")
+    (fact (normalize-url "http://example.com?utm_medium=baz&q=foo") => "http://example.com?q=foo")))
+```
 
 
 Cloverage also outputs a `coverage.txt` file that might be useful for use with services like [Coveralls](http://coveralls.io). I haven't used this, so I can't comment on its usefulness.
