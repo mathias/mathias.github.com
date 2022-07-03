@@ -60,23 +60,12 @@
   <p>ITEM 149 (Minsky): CIRCLE ALGORITHM Here is an elegant way to draw almost circles on a point-plotting display:</p>
 </blockquote>
 
-<blockquote>
-  <blockquote>
-    <p>   NEW X = OLD X - epsilon * OLD Y</p>
-  </blockquote>
-</blockquote>
-
-<blockquote>
-  <blockquote>
-    <p>   NEW Y = OLD Y + epsilon * NEW(!) X</p>
-  </blockquote>
-</blockquote>
+<figure class="highlight"><pre><code class="language-plaintext" data-lang="plaintext">NEW X = OLD X - epsilon * OLD Y
+NEW Y = OLD Y + epsilon * NEW(!) X</code></pre></figure>
 
 <blockquote>
   <p>This makes a very round ellipse centered at the origin with its size determined by the initial point. epsilon determines the angular velocity of the circulating point, and slightly affects the eccentricity. If epsilon is a power of 2, then we don’t even need multiplication, let alone square roots, sines, and cosines! The “circle” will be perfectly stable because the points soon become periodic.</p>
-</blockquote>
 
-<blockquote>
   <p>The circle algorithm was invented by mistake when I tried to save one register in a display hack! Ben Gurley had an amazing display hack using only about six or seven instructions, and it was a great wonder. But it was basically line-oriented. It occurred to me that it would be exciting to have curves, and I was trying to get a curve display hack with minimal instructions.</p>
 </blockquote>
 
@@ -104,7 +93,6 @@
   <span class="n">fill</span> <span class="n">blue</span>
   <span class="n">oval</span><span class="p">({</span><span class="ss">top: </span><span class="mi">250</span><span class="p">,</span> <span class="ss">left: </span><span class="mi">320</span><span class="p">,</span> <span class="ss">radius: </span><span class="mi">25</span><span class="p">,</span> <span class="ss">center: </span><span class="kp">true</span><span class="p">})</span>
 <span class="k">end</span>
-
 </code></pre></div></div>
 
 <p>Epsilon is 1/16, as indicated by some quick googling – basically a small power of two. I have to use the offset to get the center of the circle closer to the center of the Shoes window – without the offset, the circle will only be a quarter-circle in the upper left corner.</p>
@@ -119,10 +107,7 @@
 
 <p>Although their radiuses are going to be slightly different.</p>
 
-<p>Here’s what we end up with. Minsky’s Circle Algorithm on the left in red, a real circle on the right in blue:</p>
-
-<p><img src="http://www.mattgauger.com/img//Shoes-20130727-151954.jpg" alt="Hackety Hack" /></p>
-
+<p>Here’s what we end up with. Minsky’s Circle Algorithm on the left in red, a real circle on the right in blue: <em>Note from June 2022: the image previously linked here has been lost to bit rot and time.</em></p>
 
 
 </div>

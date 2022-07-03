@@ -58,7 +58,16 @@
 
 <p>The <code class="language-plaintext highlighter-rouge">:tree</code> keyword at the end instructs lein to print out your project’s dependencies as a tree. This itself is a good visualization, but not what we’re looking for. The tree command will first print out any dependencies-of-dependencies which have conflicts with other dependencies. For example, here’s what <code class="language-plaintext highlighter-rouge">lein deps :tree</code> says for one of my projects:</p>
 
-<script src="https://gist.github.com/mathias/8eca3548f751bec6ea55.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">$</span><span class="w"> </span><span class="n">lein</span><span class="w"> </span><span class="n">deps</span><span class="w"> </span><span class="no">:tree</span><span class="w">
+</span><span class="p">(</span><span class="nf">Possibly</span><span class="w"> </span><span class="n">confusing</span><span class="w"> </span><span class="n">dependencies</span><span class="w"> </span><span class="n">found</span><span class="err">:</span><span class="p">)</span><span class="w">
+</span><span class="p">([</span><span class="n">liberator</span><span class="w"> </span><span class="s">"0.11.0"</span><span class="p">]</span><span class="w"> </span><span class="nb">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">org.clojure/data.json</span><span class="w"> </span><span class="s">"0.2.1"</span><span class="p">])</span><span class="w">
+</span><span class="p">(</span><span class="w"> </span><span class="nf">overrides</span><span class="p">)</span><span class="w">
+</span><span class="p">([</span><span class="n">org.clojure/clojurescript</span><span class="w"> </span><span class="s">"0.0-2080"</span><span class="p">]</span><span class="w"> </span><span class="nb">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">org.clojure/data.json</span><span class="w"> </span><span class="s">"0.2.3"</span><span class="p">])</span><span class="w">
+</span><span class="p">(</span><span class="w"> </span><span class="nf">Consider</span><span class="w"> </span><span class="n">using</span><span class="w"> </span><span class="n">these</span><span class="w"> </span><span class="n">exclusions</span><span class="err">:</span><span class="p">)</span><span class="w">
+</span><span class="p">([</span><span class="n">org.clojure/clojurescript</span><span class="w"> </span><span class="s">"0.0-2080"</span><span class="w"> </span><span class="no">:exclusions</span><span class="w"> </span><span class="p">[</span><span class="n">org.clojure/data.json</span><span class="p">]])</span><span class="w">
+
+</span><span class="p">[</span><span class="n">snip</span><span class="w"> </span><span class="n">lots</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">output</span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
 
 <p>As you can see, the tool suggests dependencies that request conflicting versions, and how we can modify our <code class="language-plaintext highlighter-rouge">project.clj</code> file to resolve those conflicting versions by excluding one or the other. This isn’t always very useful, but when you run into issues because two different Clojure libraries require two wildly different <code class="language-plaintext highlighter-rouge">joda-time</code> versions (a situation I have run into before), it will be good to know what dependencies are causing that issue and how you might go about resolving it.</p>
 
@@ -70,13 +79,20 @@
 
 <p>After adding ancient to your <code class="language-plaintext highlighter-rouge">~/.lein/profiles.clj</code>, running the <code class="language-plaintext highlighter-rouge">lein ancient</code> command yields output on the same project as before:</p>
 
-<script src="https://gist.github.com/mathias/bac5e554f971d7aa462f.js"></script>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>lein ancient
+<span class="o">[</span>com.cemerick/url <span class="s2">"0.1.1"</span><span class="o">]</span> is available but we use <span class="s2">"0.1.0"</span>
+<span class="o">[</span>midje <span class="s2">"1.6.3"</span><span class="o">]</span> is available but we use <span class="s2">"1.6.0"</span>
+</code></pre></div></div>
 
 <p>Whoops! Looks like I haven’t been keeping up to date with my dependencies. <code class="language-plaintext highlighter-rouge">lein ancient</code> makes checking for new dependency versions easy. Further, thanks to the ubiquity of <a href="http://semver.org/">semantic versioning</a> in Clojure projects, it is usually quite safe to bump the minor versions (0.0.x) of dependencies.</p>
 
 <p>You can also use lein-ancient to find outdated lein plugins in your <code class="language-plaintext highlighter-rouge">~/.lein/profiles.clj</code> file. Just run it with the <code class="language-plaintext highlighter-rouge">profiles</code> argument:</p>
 
-<script src="https://gist.github.com/mathias/02b999542ea837b87e30.js"></script>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>lein ancient profiles
+<span class="o">[</span>slamhound <span class="s2">"1.5.5"</span><span class="o">]</span> is available but we use <span class="s2">"1.5.0"</span>
+<span class="o">[</span>lein-exec <span class="s2">"0.3.4"</span><span class="o">]</span> is available but we use <span class="s2">"0.3.3"</span>
+<span class="o">[</span>lein-try <span class="s2">"0.4.3"</span><span class="o">]</span> is available but we use <span class="s2">"0.4.1"</span>
+</code></pre></div></div>
 
 <h2 id="lein-kibit"><a href="https://github.com/jonase/kibit">lein kibit</a></h2>
 
@@ -88,7 +104,24 @@
 
 <p>Running against a project I’d set up to contain some smells, <code class="language-plaintext highlighter-rouge">lein kibit</code> found:</p>
 
-<script src="https://gist.github.com/mathias/fc0d446aeb90f44a6731.js"></script>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>At /Users/mathiasx/dev/sample-clj-project/src/sample_clj_project/core.clj:11:
+Consider using:
+  <span class="o">(</span>vec s<span class="o">)</span>
+instead of:
+  <span class="o">(</span>into <span class="o">[]</span> s<span class="o">)</span>
+
+At /Users/mathiasx/dev/sample-clj-project/src/sample_clj_project/core.clj:14:
+Consider using:
+  <span class="o">(</span>zero? z<span class="o">)</span>
+instead of:
+  <span class="o">(=</span> 0 z<span class="o">)</span>
+
+At /Users/mathiasx/dev/sample-clj-project/src/sample_clj_project/core.clj:15:
+Consider using:
+  <span class="o">(</span>clojure.string/join <span class="o">[</span><span class="s2">"ID"</span> z]<span class="o">)</span>
+instead of:
+  <span class="o">(</span>apply str <span class="o">[</span><span class="s2">"ID"</span> z]<span class="o">)</span>
+</code></pre></div></div>
 
 <p>These kinds of small improvements are all over our Clojure projects. They’re not show-stopper bugs, but they’re small places for improvement.</p>
 
@@ -104,7 +137,35 @@
 
 <p>After adding <code class="language-plaintext highlighter-rouge">eastwood</code> to your lein <code class="language-plaintext highlighter-rouge">profiles.clj</code>, simply run: <code class="language-plaintext highlighter-rouge">lein eastwood</code> and you will see output like:</p>
 
-<script src="https://gist.github.com/mathias/b93cea02293eac933bee.js"></script>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>lein eastwood
+<span class="o">==</span> Eastwood 0.1.4 Clojure 1.6.0 JVM 1.7.0_55
+<span class="o">==</span> Linting sample-clj-project.core <span class="o">==</span>
+<span class="o">{</span>:linter :redefd-vars,
+ :msg
+ <span class="s2">"Var qux def'd 2 times at line:col locations: sample_clj_project/core.clj:18:6 sample_clj_project/core.clj:19:6"</span>,
+ :file <span class="s2">"sample_clj_project/core.clj"</span>,
+ :line 19,
+ :column 6<span class="o">}</span>
+
+<span class="o">{</span>:linter :misplaced-docstrings,
+ :msg <span class="s2">"Possibly misplaced docstring, my-function"</span>,
+ :file <span class="s2">"sample_clj_project/core.clj"</span>,
+ :line 21,
+ :column 7<span class="o">}</span>
+
+<span class="o">{</span>:linter :unused-ret-vals,
+ :msg
+ <span class="s2">"Constant value is discarded inside my-function: </span><span class="se">\"</span><span class="s2">Do the thing, with the stuff.  Fast.</span><span class="se">\"</span><span class="s2">"</span>,
+ :file <span class="s2">"sample_clj_project/core.clj"</span>,
+ :line 21,
+ :column 1<span class="o">}</span>
+
+<span class="o">{</span>:linter :unlimited-use,
+ :msg <span class="s2">"Unlimited use of ([cemerick.url]) in sample-clj-project.core"</span>,
+ :file <span class="s2">"sample_clj_project/core.clj"</span>,
+ :line 3,
+ :column 10<span class="o">}</span>
+</code></pre></div></div>
 
 <p>That’s a lot of problems for a simple file! Notice how one mistake got caught for two reasons: A misplaced docstring (placed after the arguments vector) becomes just a string in the function body that will be thrown away.</p>
 
@@ -120,7 +181,32 @@
 
 <p>A run of <code class="language-plaintext highlighter-rouge">lein bikeshed</code> on its own source (which purposefully includes some code designed to fail) looks like this:</p>
 
-<script src="https://gist.github.com/mathias/271e06ebce8fe6428b83.js"></script>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>lein bikeshed
+
+Checking <span class="k">for </span>lines longer than 80 characters.
+Badly formatted files:
+/Users/mathiasx/dev/lein-bikeshed/test/bikeshed/core_test.clj:10:
+<span class="o">(</span>def this-thing-is-over-eighty-characters-long <span class="s2">"yep, it certainly is over eighty characters long"</span><span class="o">)</span>
+
+Checking <span class="k">for </span>lines with trailing whitespace.
+Badly formatted files:
+/Users/mathiasx/dev/lein-bikeshed/test/bikeshed/core_test.clj:5:<span class="o">(</span>deftest a-test
+/Users/mathiasx/dev/lein-bikeshed/test/bikeshed/core_test.clj:6:
+<span class="o">(</span>testing <span class="s2">"FIXME, I fail, and I have trailing whitespace!"</span>
+
+Checking <span class="k">for </span>files ending <span class="k">in </span>blank lines.
+Badly formatted files:
+/Users/mathiasx/dev/lein-bikeshed/test/bikeshed/core_test.clj
+
+Checking <span class="k">for </span>redefined var roots <span class="k">in </span><span class="nb">source </span>directories.
+with-redefs found <span class="k">in </span><span class="nb">source </span>directory:
+/Users/mathiasx/dev/lein-bikeshed/src/bikeshed/core.clj:17:  <span class="o">(</span>with-redefs <span class="o">[</span>+ -]
+/Users/mathiasx/dev/lein-bikeshed/src/bikeshed/core.clj:100:                 <span class="s2">"xargs egrep -H -n '(</span><span class="se">\\</span><span class="s2">(with-redefs)'"</span><span class="o">)</span>
+
+Checking whether you keep up with your docstrings.
+10/13 <span class="o">[</span>76.92%] functions have docstrings.
+Use <span class="nt">-v</span> to list functions without docstrings
+</code></pre></div></div>
 
 <p>Bikeshed might give a lot of output for your existing projects, but the warnings are worth investigating and addressing. You can always silence the long-lines warning if it doesn’t matter to you with the <code class="language-plaintext highlighter-rouge">-m</code> command line argument.</p>
 
@@ -130,7 +216,12 @@
 
 <p>In <code class="language-plaintext highlighter-rouge">~/.lein/profiles.clj</code>, inside your <code class="language-plaintext highlighter-rouge">:user</code> map, add the line:</p>
 
-<script src="https://gist.github.com/mathias/eef9f3f3e9e0ba40cb78.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">:aliases</span><span class="w"> </span><span class="p">{</span><span class="s">"omni"</span><span class="w"> </span><span class="p">[</span><span class="s">"do"</span><span class="w"> </span><span class="p">[</span><span class="s">"clean"</span><span class="p">]</span><span class="w">
+                       </span><span class="p">[</span><span class="s">"with-profile"</span><span class="w"> </span><span class="s">"production"</span><span class="w"> </span><span class="s">"deps"</span><span class="w"> </span><span class="s">":tree"</span><span class="p">]</span><span class="w">
+                       </span><span class="p">[</span><span class="s">"ancient"</span><span class="p">]</span><span class="w">
+                       </span><span class="p">[</span><span class="s">"kibit"</span><span class="p">]</span><span class="w">
+                       </span><span class="p">[</span><span class="s">"bikeshed"</span><span class="p">]]}</span><span class="w">
+</span></code></pre></div></div>
 
 <p>Now, when you want to run all these tools at once on a project, you simply invoke <code class="language-plaintext highlighter-rouge">lein omni</code>. I use this alias on all my Clojure(Script) projects. I have grown accustomed to seeing the kinds of output that a clean Clojure project will have.</p>
 
@@ -144,7 +235,8 @@
 
 <p>My personal bash alias also runs midje at the end. You can choose whether to run the tests for your own alias. That’s just my personal preference.</p>
 
-<script src="https://gist.github.com/mathias/8b6a0040fcd7e4ae890f.js"></script>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">alias </span><span class="nv">lk</span><span class="o">=</span><span class="s1">'echo "Displaying in less pager..." &amp;&amp; lein do deps :tree, ancient, ancient :plugins, kibit, bikeshed | less'</span>
+</code></pre></div></div>
 
 <p>Note that just like running the lein alias above, this may take a bit of time. Since we’re piping it to <code class="language-plaintext highlighter-rouge">less</code>, it might take awhile before <code class="language-plaintext highlighter-rouge">less</code> receives output. While it is still running, output will periodically show up at the bottom of the <code class="language-plaintext highlighter-rouge">less</code> buffer. You can use both Emac’s and vim’s movement commands in <code class="language-plaintext highlighter-rouge">less</code> to advance the buffer. I find <code class="language-plaintext highlighter-rouge">less</code> to be more manageable for scrolling through output than switching to <code class="language-plaintext highlighter-rouge">tmux</code>’s history scrolling mode.</p>
 
@@ -158,7 +250,8 @@
 
 <p>The most basic way to use slamhound is to add it to your <code class="language-plaintext highlighter-rouge">~/.lein/profiles.clj</code> as a dependency. Then add this alias:</p>
 
-<script src="https://gist.github.com/mathias/f3799e60c63b0aebf17e.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">:aliases</span><span class="w"> </span><span class="p">{</span><span class="s">"slamhound"</span><span class="w"> </span><span class="p">[</span><span class="s">"run"</span><span class="w"> </span><span class="s">"-m"</span><span class="w"> </span><span class="s">"slam.hound"</span><span class="p">]}</span><span class="w">
+</span></code></pre></div></div>
 
 <p>Now you can use slamhound on a project by running <code class="language-plaintext highlighter-rouge">lein slamhound</code> in the project’s directory. There’s also REPL and Emacs support, which you can learn more about in the <a href="https://github.com/technomancy/slamhound#repl-usage">slamhound README</a>.</p>
 
@@ -182,7 +275,15 @@
 
 <p>Here’s an example of using this approach:</p>
 
-<script src="https://gist.github.com/mathias/94e1a4d7b8bce7c02e23.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nf">deftest</span><span class="w"> </span><span class="n">normalize-url-tests</span><span class="w">
+  </span><span class="p">(</span><span class="nf">facts</span><span class="w"> </span><span class="s">"removes invalid query params"</span><span class="w">
+    </span><span class="p">(</span><span class="nf">fact</span><span class="w"> </span><span class="p">(</span><span class="nf">normalize-url</span><span class="w"> </span><span class="s">"http://example.com?q="</span><span class="p">)</span><span class="w"> </span><span class="n">=&gt;</span><span class="w"> </span><span class="s">"http://example.com"</span><span class="p">)</span><span class="w">
+    </span><span class="p">(</span><span class="nf">fact</span><span class="w"> </span><span class="p">(</span><span class="nf">normalize-url</span><span class="w"> </span><span class="s">"http://example.com?=foo"</span><span class="p">)</span><span class="w"> </span><span class="n">=&gt;</span><span class="w"> </span><span class="s">"http://example.com"</span><span class="p">))</span><span class="w">
+  </span><span class="p">(</span><span class="nf">facts</span><span class="w"> </span><span class="s">"removes utm params"</span><span class="w">
+    </span><span class="p">(</span><span class="nf">fact</span><span class="w"> </span><span class="p">(</span><span class="nf">normalize-url</span><span class="w"> </span><span class="s">"http://example.com?utm_source=foo"</span><span class="p">)</span><span class="w"> </span><span class="n">=&gt;</span><span class="w"> </span><span class="s">"http://example.com"</span><span class="p">)</span><span class="w">
+    </span><span class="p">(</span><span class="nf">fact</span><span class="w"> </span><span class="p">(</span><span class="nf">normalize-url</span><span class="w"> </span><span class="s">"http://example.com?utm_content=bar"</span><span class="p">)</span><span class="w"> </span><span class="n">=&gt;</span><span class="w"> </span><span class="s">"http://example.com"</span><span class="p">)</span><span class="w">
+    </span><span class="p">(</span><span class="nf">fact</span><span class="w"> </span><span class="p">(</span><span class="nf">normalize-url</span><span class="w"> </span><span class="s">"http://example.com?utm_medium=baz&amp;q=foo"</span><span class="p">)</span><span class="w"> </span><span class="n">=&gt;</span><span class="w"> </span><span class="s">"http://example.com?q=foo"</span><span class="p">)))</span><span class="w">
+</span></code></pre></div></div>
 
 <p>Cloverage also outputs a <code class="language-plaintext highlighter-rouge">coverage.txt</code> file that might be useful for use with services like <a href="http://coveralls.io">Coveralls</a>. I haven’t used this, so I can’t comment on its usefulness.</p>
 

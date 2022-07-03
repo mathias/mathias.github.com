@@ -58,9 +58,62 @@
 
 <h2 id="static-data-in-the-browser">Static data in the browser:</h2>
 
-<p>First, we get some data into the HTML using Hoplon cells:</p>
+<p>First, we get some data into the HTML using Hoplon cells, in <code class="language-plaintext highlighter-rouge">index.html</code>:</p>
 
-<script src="https://gist.github.com/mathias/9670739.js"></script>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/hoplon"</span><span class="nt">&gt;</span>
+  <span class="p">(</span><span class="nx">page</span> <span class="dl">"</span><span class="s2">index.html</span><span class="dl">"</span>
+    <span class="p">(:</span><span class="nx">refer</span><span class="o">-</span><span class="nx">clojure</span> <span class="p">:</span><span class="nx">exclude</span> <span class="p">[</span><span class="nx">nth</span><span class="p">])</span>
+    <span class="p">(:</span><span class="nx">require</span>
+      <span class="p">[</span><span class="nx">tailrecursion</span><span class="p">.</span><span class="nx">hoplon</span><span class="p">.</span><span class="nx">reload</span> <span class="p">:</span><span class="nx">refer</span> <span class="p">[</span><span class="nx">reload</span><span class="o">-</span><span class="nx">all</span><span class="p">]]))</span>
+
+  <span class="p">(</span><span class="nx">def</span> <span class="nx">articles</span> <span class="p">{:</span><span class="nx">total</span> <span class="mi">422</span>
+                 <span class="p">:</span><span class="nx">ingested</span> <span class="mi">419</span>
+                 <span class="p">:</span><span class="nx">fetched</span> <span class="mi">0</span>
+                 <span class="p">:</span><span class="nx">errored</span> <span class="mi">0</span>
+                 <span class="p">:</span><span class="nx">read</span> <span class="mi">315</span><span class="p">})</span>
+
+  <span class="p">(</span><span class="nx">reload</span><span class="o">-</span><span class="nx">all</span> <span class="mi">25</span><span class="p">)</span>
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>gleam<span class="nt">&lt;/title&gt;</span>
+
+    <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"app.css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;header&gt;</span>
+      <span class="nt">&lt;h1&gt;</span>gleam<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;/header&gt;</span>
+    <span class="nt">&lt;section&gt;</span>
+      <span class="nt">&lt;h2&gt;</span>Articles<span class="nt">&lt;/h2&gt;</span>
+      <span class="nt">&lt;ul&gt;</span>
+        <span class="nt">&lt;li&gt;</span>
+          <span class="nt">&lt;label&gt;</span>Total:<span class="nt">&lt;/label&gt;&lt;text&gt;</span> ~{(get articles :total)}<span class="nt">&lt;/text&gt;</span>
+        <span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;</span>
+          <span class="nt">&lt;label&gt;</span>Ingested:<span class="nt">&lt;/label&gt;&lt;text&gt;</span> ~{(get articles :ingested)}<span class="nt">&lt;/text&gt;</span>
+        <span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;</span>
+          <span class="nt">&lt;label&gt;</span>Fetched:<span class="nt">&lt;/label&gt;&lt;text&gt;</span> ~{(get articles :fetched)}<span class="nt">&lt;/text&gt;</span>
+        <span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;</span>
+          <span class="nt">&lt;label&gt;</span>Errored:<span class="nt">&lt;/label&gt;&lt;text&gt;</span> ~{(get articles :errored)}<span class="nt">&lt;/text&gt;</span>
+        <span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;</span>
+          <span class="nt">&lt;label&gt;</span>Read:<span class="nt">&lt;/label&gt;&lt;text&gt;</span> ~{(get articles :read)}<span class="nt">&lt;/text&gt;</span>
+        <span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;/section&gt;</span>
+    <span class="nt">&lt;footer&gt;</span>
+    <span class="nt">&lt;/footer&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
 
 <p>You’ll want to <code class="language-plaintext highlighter-rouge">git reset --hard 69b070</code> to get to this point.</p>
 
@@ -68,8 +121,23 @@
 
 <p>In <code class="language-plaintext highlighter-rouge">src/cljs/gleam/rpc.cljs</code>:</p>
 
-<script src="https://gist.github.com/mathias/9635157.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nf">ns</span><span class="w"> </span><span class="n">gleam.rpc</span><span class="w">
+  </span><span class="p">(</span><span class="no">:require-macros</span><span class="w">
+    </span><span class="p">[</span><span class="n">tailrecursion.javelin</span><span class="w"> </span><span class="no">:refer</span><span class="w"> </span><span class="p">[</span><span class="n">defc</span><span class="w"> </span><span class="n">defc=</span><span class="w"> </span><span class="n">cell=</span><span class="p">]])</span><span class="w">
+  </span><span class="p">(</span><span class="no">:require</span><span class="w">
+    </span><span class="p">[</span><span class="n">clojure.set</span><span class="w">           </span><span class="no">:as</span><span class="w"> </span><span class="n">cs</span><span class="p">]</span><span class="w">
+    </span><span class="p">[</span><span class="n">clojure.string</span><span class="w">        </span><span class="no">:as</span><span class="w"> </span><span class="n">s</span><span class="p">]</span><span class="w">
+    </span><span class="p">[</span><span class="n">tailrecursion.javelin</span><span class="w"> </span><span class="no">:as</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="no">:refer</span><span class="w"> </span><span class="p">[</span><span class="n">cell</span><span class="p">]]</span><span class="w">
+    </span><span class="p">[</span><span class="n">tailrecursion.castra</span><span class="w">  </span><span class="no">:as</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="no">:refer</span><span class="w"> </span><span class="p">[</span><span class="n">mkremote</span><span class="p">]]))</span><span class="w">
 
+</span><span class="p">(</span><span class="nf">set!</span><span class="w"> </span><span class="n">cljs.core/*print-fn*</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nf">.log</span><span class="w"> </span><span class="n">js/console</span><span class="w"> </span><span class="n">%</span><span class="p">))</span><span class="w">
+
+</span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">articles</span><span class="w"> </span><span class="p">{</span><span class="no">:total</span><span class="w"> </span><span class="mi">422</span><span class="w">
+               </span><span class="no">:ingested</span><span class="w"> </span><span class="mi">419</span><span class="w">
+               </span><span class="no">:fetched</span><span class="w"> </span><span class="mi">0</span><span class="w">
+               </span><span class="no">:errored</span><span class="w"> </span><span class="mi">0</span><span class="w">
+               </span><span class="no">:read</span><span class="w"> </span><span class="mi">315</span><span class="p">})</span><span class="w">
+</span></code></pre></div></div>
 <p>And take out the <code class="language-plaintext highlighter-rouge">(def articles…)</code> from <code class="language-plaintext highlighter-rouge">index.html.hl</code>. After boot recompiles everything, you should still see the data in the page.</p>
 
 <p>To get to this point, you can run <code class="language-plaintext highlighter-rouge">git reset --hard d63f299</code>.</p>
@@ -78,15 +146,61 @@
 
 <p>Change <code class="language-plaintext highlighter-rouge">src/cljs/gleam/rpc.cljs</code> again, this time to make a remote call for data:</p>
 
-<script src="https://gist.github.com/mathias/9671172.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nf">ns</span><span class="w"> </span><span class="n">gleam.rpc</span><span class="w">
+  </span><span class="p">(</span><span class="no">:require-macros</span><span class="w">
+    </span><span class="p">[</span><span class="n">tailrecursion.javelin</span><span class="w"> </span><span class="no">:refer</span><span class="w"> </span><span class="p">[</span><span class="n">defc</span><span class="w"> </span><span class="n">defc=</span><span class="w"> </span><span class="n">cell=</span><span class="p">]])</span><span class="w">
+  </span><span class="p">(</span><span class="no">:require</span><span class="w"> </span><span class="p">[</span><span class="n">clojure.set</span><span class="w">           </span><span class="no">:as</span><span class="w"> </span><span class="n">cs</span><span class="p">]</span><span class="w">
+            </span><span class="p">[</span><span class="n">clojure.string</span><span class="w">        </span><span class="no">:as</span><span class="w"> </span><span class="n">s</span><span class="p">]</span><span class="w">
+            </span><span class="p">[</span><span class="n">tailrecursion.javelin</span><span class="w"> </span><span class="no">:as</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="no">:refer</span><span class="w"> </span><span class="p">[</span><span class="n">cell</span><span class="p">]]</span><span class="w">
+            </span><span class="p">[</span><span class="n">tailrecursion.castra</span><span class="w">  </span><span class="no">:as</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="no">:refer</span><span class="w"> </span><span class="p">[</span><span class="n">mkremote</span><span class="p">]]))</span><span class="w">
+
+</span><span class="p">(</span><span class="nf">set!</span><span class="w"> </span><span class="n">cljs.core/*print-fn*</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nf">.log</span><span class="w"> </span><span class="n">js/console</span><span class="w"> </span><span class="n">%</span><span class="p">))</span><span class="w">
+
+</span><span class="p">(</span><span class="nf">defc</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="p">{</span><span class="no">:articles</span><span class="w"> </span><span class="p">{}})</span><span class="w">
+</span><span class="p">(</span><span class="nf">defc</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="n">nil</span><span class="p">)</span><span class="w">
+</span><span class="p">(</span><span class="nf">defc</span><span class="w"> </span><span class="n">loading</span><span class="w"> </span><span class="p">[])</span><span class="w">
+
+</span><span class="p">(</span><span class="nf">defc=</span><span class="w"> </span><span class="n">articles</span><span class="w"> </span><span class="p">(</span><span class="nb">get</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="no">:articles</span><span class="p">))</span><span class="w">
+
+</span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">get-state</span><span class="w">
+  </span><span class="p">(</span><span class="nf">mkremote</span><span class="w"> </span><span class="ss">'gleam.api.gleam/get-state</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="n">loading</span><span class="p">))</span><span class="w">
+
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">init</span><span class="w"> </span><span class="p">[]</span><span class="w">
+  </span><span class="p">(</span><span class="nf">get-state</span><span class="p">)</span><span class="w">
+  </span><span class="c1">;; Check every second for new data</span><span class="w">
+  </span><span class="p">(</span><span class="nf">js/setInterval</span><span class="w"> </span><span class="n">get-state</span><span class="w"> </span><span class="mi">1000</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
 
 <p>On the backend, we need something like this in <code class="language-plaintext highlighter-rouge">src/castra/gleam/api/gleam.clj</code>:</p>
 
-<script src="https://gist.github.com/mathias/9671200.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nf">ns</span><span class="w"> </span><span class="n">gleam.api.gleam</span><span class="w">
+  </span><span class="p">(</span><span class="no">:refer-clojure</span><span class="w"> </span><span class="no">:exclude</span><span class="w"> </span><span class="p">[</span><span class="k">defn</span><span class="p">])</span><span class="w">
+  </span><span class="p">(</span><span class="no">:require</span><span class="w"> </span><span class="p">[</span><span class="n">tailrecursion.castra</span><span class="w"> </span><span class="no">:refer</span><span class="w"> </span><span class="p">[</span><span class="k">defn</span><span class="w"> </span><span class="n">ex</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="n">*session*</span><span class="p">]]))</span><span class="w">
 
-<p>The Hoplon HTML file changes in the script tag at the top to use the new ClojureScript remote call and start up the polling:</p>
+</span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">articles</span><span class="w"> </span><span class="p">{</span><span class="no">:total</span><span class="w"> </span><span class="mi">422</span><span class="w">
+               </span><span class="no">:ingested</span><span class="w"> </span><span class="mi">419</span><span class="w">
+               </span><span class="no">:fetched</span><span class="w"> </span><span class="mi">0</span><span class="w">
+               </span><span class="no">:errored</span><span class="w"> </span><span class="mi">0</span><span class="w">
+               </span><span class="no">:read</span><span class="w"> </span><span class="mi">315</span><span class="p">})</span><span class="w">
 
-<script src="https://gist.github.com/mathias/9671220.js"></script>
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">get-state</span><span class="w"> </span><span class="p">[]</span><span class="w">
+  </span><span class="p">{</span><span class="no">:articles</span><span class="w"> </span><span class="n">articles</span><span class="p">})</span><span class="w">
+</span></code></pre></div></div>
+
+<p>The Hoplon HTML file changes in the script tag at the top of <code class="language-plaintext highlighter-rouge">index.html</code> to use the new ClojureScript remote call and start up the polling:</p>
+
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">&lt;script</span><span class="w"> </span><span class="n">type=</span><span class="s">"text/hoplon"</span><span class="nb">&gt;</span><span class="w">
+  </span><span class="p">(</span><span class="nf">page</span><span class="w"> </span><span class="s">"index.html"</span><span class="w">
+    </span><span class="p">(</span><span class="no">:refer-clojure</span><span class="w"> </span><span class="no">:exclude</span><span class="w"> </span><span class="p">[</span><span class="nb">nth</span><span class="p">])</span><span class="w">
+    </span><span class="p">(</span><span class="no">:require</span><span class="w">
+      </span><span class="p">[</span><span class="n">gleam.rpc</span><span class="w"> </span><span class="no">:as</span><span class="w"> </span><span class="n">gleam</span><span class="p">]</span><span class="w">
+      </span><span class="p">[</span><span class="n">tailrecursion.hoplon.reload</span><span class="w"> </span><span class="no">:refer</span><span class="w"> </span><span class="p">[</span><span class="n">reload-all</span><span class="p">]]))</span><span class="w">
+
+  </span><span class="p">(</span><span class="nf">defc=</span><span class="w"> </span><span class="n">articles</span><span class="w"> </span><span class="n">gleam/articles</span><span class="p">)</span><span class="w">
+
+  </span><span class="p">(</span><span class="nf">gleam/init</span><span class="p">)</span><span class="w">
+</span><span class="n">&lt;/script&gt;</span><span class="w">
+</span></code></pre></div></div>
 
 <p>To get to this point in the example repo, you can do <code class="language-plaintext highlighter-rouge">git reset --hard 0bad1e5</code>.</p>
 
@@ -96,7 +210,24 @@
 
 <p>Change your Castra Clojure file to look like this:</p>
 
-<script src="https://gist.github.com/mathias/9671661.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nf">ns</span><span class="w"> </span><span class="n">gleam.api.gleam</span><span class="w">
+  </span><span class="p">(</span><span class="no">:refer-clojure</span><span class="w"> </span><span class="no">:exclude</span><span class="w"> </span><span class="p">[</span><span class="k">defn</span><span class="p">])</span><span class="w">
+  </span><span class="p">(</span><span class="no">:require</span><span class="w"> </span><span class="p">[</span><span class="n">tailrecursion.castra</span><span class="w"> </span><span class="no">:refer</span><span class="w"> </span><span class="p">[</span><span class="k">defn</span><span class="w"> </span><span class="n">ex</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="n">*session*</span><span class="p">]]))</span><span class="w">
+
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">articles</span><span class="w"> </span><span class="p">[]</span><span class="w">
+  </span><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">[</span><span class="n">ingested</span><span class="w"> </span><span class="p">(</span><span class="nb">rand-int</span><span class="w"> </span><span class="mi">300</span><span class="p">)</span><span class="w">
+        </span><span class="n">fetched</span><span class="w"> </span><span class="p">(</span><span class="nb">rand-int</span><span class="w"> </span><span class="mi">300</span><span class="p">)</span><span class="w">
+        </span><span class="n">errored</span><span class="w"> </span><span class="p">(</span><span class="nb">rand-int</span><span class="w"> </span><span class="mi">300</span><span class="p">)</span><span class="w">
+        </span><span class="nb">read</span><span class="w"> </span><span class="p">(</span><span class="nb">rand-int</span><span class="w"> </span><span class="mi">300</span><span class="p">)]</span><span class="w">
+    </span><span class="p">{</span><span class="no">:total</span><span class="w"> </span><span class="p">(</span><span class="nb">+</span><span class="w"> </span><span class="n">ingested</span><span class="w"> </span><span class="n">fetched</span><span class="w"> </span><span class="n">errored</span><span class="w"> </span><span class="nb">read</span><span class="p">)</span><span class="w">
+     </span><span class="no">:ingested</span><span class="w"> </span><span class="n">ingested</span><span class="w">
+     </span><span class="no">:fetched</span><span class="w"> </span><span class="n">fetched</span><span class="w">
+     </span><span class="no">:errored</span><span class="w"> </span><span class="n">errored</span><span class="w">
+     </span><span class="no">:read</span><span class="w"> </span><span class="nb">read</span><span class="p">}))</span><span class="w">
+
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">get-state</span><span class="w"> </span><span class="p">[]</span><span class="w">
+  </span><span class="p">{</span><span class="no">:articles</span><span class="w"> </span><span class="p">(</span><span class="nf">articles</span><span class="p">)})</span><span class="w">
+</span></code></pre></div></div>
 
 <p>To get to this point, you can do a <code class="language-plaintext highlighter-rouge">git reset --hard f19325</code></p>
 

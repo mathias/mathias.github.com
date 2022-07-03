@@ -73,13 +73,23 @@
 
 <p>Create the project and enter it:</p>
 
-<script src="https://gist.github.com/mathias/9861772.js"></script>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lein new autodjinn
+
+<span class="nb">cd </span>autodjinn
+</code></pre></div></div>
 
 <p>To import our Gmail data, we will use a Clojure library called <a href="https://github.com/owainlewis/clojure-mail">clojure-mail</a>. Clojure-mail is still under active development and is likely to change. For this blog post, we’ll be using version <code class="language-plaintext highlighter-rouge">0.1.6</code> to ensure compatibility between the code in this post and the library.</p>
 
 <p>Edit <code class="language-plaintext highlighter-rouge">project.clj</code> to contain your information and add the <code class="language-plaintext highlighter-rouge">[clojure-mail "0.1.6"]</code> dependency:</p>
 
-<script src="https://gist.github.com/mathias/9861804.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nf">defproject</span><span class="w"> </span><span class="n">autodjinn</span><span class="w"> </span><span class="s">"0.1.0-SNAPSHOT"</span><span class="w">
+  </span><span class="no">:description</span><span class="w"> </span><span class="s">"An email analysis tool"</span><span class="w">
+  </span><span class="no">:url</span><span class="w"> </span><span class="s">"CHANGEME"</span><span class="w">
+  </span><span class="no">:license</span><span class="w"> </span><span class="p">{</span><span class="no">:name</span><span class="w"> </span><span class="s">"Eclipse Public License"</span><span class="w">
+            </span><span class="no">:url</span><span class="w"> </span><span class="s">"http://www.eclipse.org/legal/epl-v10.html"</span><span class="p">}</span><span class="w">
+  </span><span class="no">:dependencies</span><span class="w"> </span><span class="p">[[</span><span class="n">org.clojure/clojure</span><span class="w"> </span><span class="s">"1.5.1"</span><span class="p">]</span><span class="w">
+                 </span><span class="p">[</span><span class="n">clojure-mail</span><span class="w"> </span><span class="s">"0.1.6"</span><span class="p">]])</span><span class="w">
+</span></code></pre></div></div>
 
 <p>We’ll start by working in <code class="language-plaintext highlighter-rouge">src/autodjinn/core.clj</code> and later move the functionality out into a script for our email import task. Open up the file in your favorite editor and launch a REPL.</p>
 
@@ -97,39 +107,68 @@
 
 <p>Back in our <code class="language-plaintext highlighter-rouge">core.clj</code> add the require statements for <code class="language-plaintext highlighter-rouge">clojure-mail</code> and <code class="language-plaintext highlighter-rouge">nomad</code> to your ns macro like this:</p>
 
-<script src="https://gist.github.com/mathias/9863912.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nf">ns</span><span class="w"> </span><span class="n">autodjinn.core</span><span class="w">
+  </span><span class="p">(</span><span class="nf">require</span><span class="w"> </span><span class="p">[</span><span class="n">clojure-mail.core</span><span class="w"> </span><span class="no">:refer</span><span class="w"> </span><span class="n">all</span><span class="p">]</span><span class="w">
+           </span><span class="p">[</span><span class="n">clojure-mail.message</span><span class="w"> </span><span class="no">:as</span><span class="w"> </span><span class="n">message</span><span class="p">]</span><span class="w">
+           </span><span class="p">[</span><span class="n">nomad</span><span class="w"> </span><span class="no">:refer</span><span class="w"> </span><span class="p">[</span><span class="n">defconfig</span><span class="p">]]]))</span><span class="w">
+</span></code></pre></div></div>
 
 <p>Then create a new file in <code class="language-plaintext highlighter-rouge">resources/config/autodjinn-config.edn</code>. It should look like this, with your email address and password filled in:</p>
 
-<script src="https://gist.github.com/mathias/9864315.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="no">:gmail-username</span><span class="w"> </span><span class="s">"you@gmail.com"</span><span class="w">
+ </span><span class="no">:gmail-password</span><span class="w"> </span><span class="s">"yourpassword"</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
 
 <p>Now open up your <code class="language-plaintext highlighter-rouge">.gitignore</code> file and add the following line to it:</p>
 
-<script src="https://gist.github.com/mathias/9866473.js"></script>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resources/config/<span class="k">*</span><span class="nt">-config</span>.edn
+</code></pre></div></div>
 
 <p>Following <a href="https://github.com/james-henderson/nomad#hello-world">nomad’s README</a>, we need to load our config file and pull out our <code class="language-plaintext highlighter-rouge">gmail-username</code> and <code class="language-plaintext highlighter-rouge">gmail-password</code> keys. We add to the following to <code class="language-plaintext highlighter-rouge">core.clj</code> after the <code class="language-plaintext highlighter-rouge">ns</code> macro:</p>
 
-<script src="https://gist.github.com/mathias/8c0849fc0e137f1bd611.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">;; in autodjinn/core.clj:</span><span class="w">
+</span><span class="p">(</span><span class="nf">defconfig</span><span class="w"> </span><span class="n">autodjinn-config</span><span class="w"> </span><span class="p">(</span><span class="nf">io/resource</span><span class="w"> </span><span class="s">"config/autodjinn-config.edn"</span><span class="p">))</span><span class="w">
+
+</span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">gmail-username</span><span class="w"> </span><span class="p">(</span><span class="nb">get</span><span class="w"> </span><span class="p">(</span><span class="nf">autodjinn-config</span><span class="p">)</span><span class="w"> </span><span class="no">:gmail-username</span><span class="p">))</span><span class="w">
+</span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">gmail-password</span><span class="w"> </span><span class="p">(</span><span class="nb">get</span><span class="w"> </span><span class="p">(</span><span class="nf">autodjinn-config</span><span class="p">)</span><span class="w"> </span><span class="no">:gmail-password</span><span class="p">))</span><span class="w">
+
+</span><span class="c1">;; Note that we must call autodjinn-config as a function</span><span class="w">
+</span><span class="c1">;; to use it as a map!</span><span class="w">
+</span></code></pre></div></div>
 
 <p>Using the <code class="language-plaintext highlighter-rouge">get</code> function here is a safe lookup for maps that returns <code class="language-plaintext highlighter-rouge">nil</code> if nothing is found for the key. Back in our REPL, we can see this in action with some quick experimentation:</p>
 
-<script src="https://gist.github.com/mathias/9864411.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user=&gt;</span><span class="w"> </span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">mymap</span><span class="w"> </span><span class="p">{</span><span class="no">:a</span><span class="w"> </span><span class="s">"b"</span><span class="p">})</span><span class="w">
+</span><span class="c1">;=&gt; #'user/mymap</span><span class="w">
+</span><span class="n">user=&gt;</span><span class="w"> </span><span class="p">(</span><span class="nb">get</span><span class="w"> </span><span class="n">mymap</span><span class="w"> </span><span class="no">:a</span><span class="p">)</span><span class="w">
+</span><span class="c1">;=&gt; "b"</span><span class="w">
+</span><span class="n">user=&gt;</span><span class="w"> </span><span class="p">(</span><span class="nb">get</span><span class="w"> </span><span class="n">mymap</span><span class="w"> </span><span class="no">:c</span><span class="p">)</span><span class="w">
+</span><span class="c1">;=&gt; nil</span><span class="w">
+</span></code></pre></div></div>
 
 <p>We could also use the shorter <code class="language-plaintext highlighter-rouge">(:keyname mymap)</code> syntax here, since symbols are an invocable function that looks up a key in a map. But the <code class="language-plaintext highlighter-rouge">get</code> function reads better than <code class="language-plaintext highlighter-rouge">(:gmail-username (autodjinn-config))</code> in my opinion.</p>
 
 <p>In your REPL, you should now be able to get the values for <code class="language-plaintext highlighter-rouge">gmail-username</code> and <code class="language-plaintext highlighter-rouge">gmail-password</code>:</p>
 
-<script src="https://gist.github.com/mathias/9864585.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user&gt;</span><span class="w"> </span><span class="n">autodjinn.core/gmail-username</span><span class="w">
+</span><span class="c1">;=&gt; "myname@gmail.com"</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="n">autodjinn.core/gmail-password</span><span class="w">
+</span><span class="c1">;=&gt; "mypassword"</span><span class="w">
+</span></code></pre></div></div>
 
 <p>Note that since I’m in the <code class="language-plaintext highlighter-rouge">user</code> namespace here, I had to qualify the vars with their <code class="language-plaintext highlighter-rouge">autodjinn.core</code> namespace. If this is confusing, you might want to read up on <a href="http://clojure-doc.org/articles/language/namespaces.html">namespaces in Clojure</a> before moving on. (See also: the ‘Namespaces’ section in <a href="http://aphyr.com/posts/311-clojure-from-the-ground-up-logistics">Clojure from the ground up: logistics</a>.)</p>
 
 <p><code class="language-plaintext highlighter-rouge">clojure-mail</code> requires us to open a connection to Gmail with the <code class="language-plaintext highlighter-rouge">gen-store</code> function (<a href="https://github.com/owainlewis/clojure-mail/blob/c3aad67b42aad96405d4c329ca48e29b7960d412/src/clojure_mail/core.clj#L80-L83">src</a>). We then pass that connection around to various functions to interact with our inbox. Define a var called <code class="language-plaintext highlighter-rouge">my-store</code> in your <code class="language-plaintext highlighter-rouge">core.clj</code> that does this with our email address and password:</p>
 
-<script src="https://gist.github.com/mathias/9865909.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">;; in core.clj after defining gmail-username and gmail-password:</span><span class="w">
+</span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">my-store</span><span class="w"> </span><span class="p">(</span><span class="nf">gen-store</span><span class="w"> </span><span class="n">gmail-username</span><span class="w"> </span><span class="n">gmail-password</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
 
 <p>Make sure the <code class="language-plaintext highlighter-rouge">(def my-store…</code> above has been run in your REPL and then take a look at our open connection:</p>
 
-<script src="https://gist.github.com/mathias/9865937.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user&gt;</span><span class="w"> </span><span class="n">autodjinn.core/my-store</span><span class="w">
+</span><span class="c1">;=&gt; #&lt;IMAPSSLStore imaps://myname%gmail.com@imap.gmail.com&gt;</span><span class="w">
+</span></code></pre></div></div>
 
 <p>The type of <code class="language-plaintext highlighter-rouge">my-store</code> should be an <code class="language-plaintext highlighter-rouge">IMAPSSLStore</code> as above. If it didn’t work, you’ll see a string error message when you try to define <code class="language-plaintext highlighter-rouge">my-store</code>.</p>
 
@@ -137,7 +176,11 @@
 
 <p>Now we’ll use our REPL to build up a function that will eventually import all of our email. To start, we can use the <code class="language-plaintext highlighter-rouge">inbox</code> function (<a href="https://github.com/owainlewis/clojure-mail/blob/c3aad67b42aad96405d4c329ca48e29b7960d412/src/clojure_mail/core.clj#L198-L201">src</a>) from <code class="language-plaintext highlighter-rouge">clojure-mail</code> to get a seq of messages in our inbox. Note that since it is a seq and inboxes can be very large, we limit it with the <code class="language-plaintext highlighter-rouge">take</code> function.</p>
 
-<script src="https://gist.github.com/mathias/9866030.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">use</span><span class="w"> </span><span class="ss">'clojure-mail.core</span><span class="p">)</span><span class="w">
+</span><span class="c1">;=&gt; nil</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nb">take</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="p">(</span><span class="nf">inbox</span><span class="w"> </span><span class="n">autodjinn.core/my-store</span><span class="p">))</span><span class="w">
+</span><span class="c1">;=&gt; (#&lt;IMAPMessage com.sun.mail.imap.IMAPMessage@676ef6f3&gt; #&lt;IMAPMessage com.sun.mail.imap.IMAPMessage@26170092&gt; #&lt;IMAPMessage com.sun.mail.imap.IMAPMessage@302684c7&gt; #&lt;IMAPMessage com.sun.mail.imap.IMAPMessage@30d73d83&gt;)</span><span class="w">
+</span></code></pre></div></div>
 
 <p>If everything is working, you should see a list of of the <code class="language-plaintext highlighter-rouge">IMAPMessage</code>s returned by the last line in your REPL.</p>
 
@@ -145,17 +188,52 @@
 
 <p>You’ll have to be careful running this next line — on a large inbox it’ll print out the subject of everything in your inbox! If you have a lot of messages, consider wrapping the call to <code class="language-plaintext highlighter-rouge">inbox</code> in a <code class="language-plaintext highlighter-rouge">take</code> as above.</p>
 
-<script src="https://gist.github.com/mathias/9866059.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">require</span><span class="w"> </span><span class="o">'</span><span class="p">[</span><span class="n">clojure-mail.message</span><span class="w"> </span><span class="no">:as</span><span class="w"> </span><span class="n">message</span><span class="p">])</span><span class="w">
+</span><span class="c1">;=&gt; nil</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nb">doseq</span><span class="w"> </span><span class="p">[</span><span class="n">msg</span><span class="w"> </span><span class="p">(</span><span class="nf">inbox</span><span class="w"> </span><span class="n">autodjinn.core/my-store</span><span class="p">)]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">println</span><span class="w"> </span><span class="p">(</span><span class="nf">message/subject</span><span class="w"> </span><span class="n">msg</span><span class="p">)))</span><span class="w">
+</span><span class="n">Subject</span><span class="w"> </span><span class="mi">3</span><span class="w">
+</span><span class="n">Testing!</span><span class="w">
+</span><span class="n">Subject</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="n">Subject</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="c1">;=&gt; nil</span><span class="w">
 
-<p>Those are the subject lines of the 4 messages in the inbox of my test account, so I know that this is working. Save our <code class="language-plaintext highlighter-rouge">doseq</code> line into a function called <code class="language-plaintext highlighter-rouge">ingest-inbox</code>; we’ll come back to it later:</p>
+</span><span class="c1">;; With a limit on the number of subjects to print:</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nb">doseq</span><span class="w"> </span><span class="p">[</span><span class="n">msg</span><span class="w"> </span><span class="p">(</span><span class="nb">take</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">(</span><span class="nf">inbox</span><span class="w"> </span><span class="n">autodjinn.core/my-store</span><span class="p">))]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">println</span><span class="w"> </span><span class="p">(</span><span class="nf">message/subject</span><span class="w"> </span><span class="n">msg</span><span class="p">)))</span><span class="w">
+</span><span class="n">Subject</span><span class="w"> </span><span class="mi">3</span><span class="w">
+</span><span class="n">Testing!</span><span class="w">
+</span><span class="n">nil</span><span class="w">
+</span></code></pre></div></div>
 
-<script src="https://gist.github.com/mathias/9866289.js"></script>
+<p>Those are the subject lines of the 4 messages in the inbox of my test account, so I know that this is working. Save our <code class="language-plaintext highlighter-rouge">doseq</code> line into a function called <code class="language-plaintext highlighter-rouge">ingest-inbox</code>; we’ll come back to it later. In <code class="language-plaintext highlighter-rouge">core.clj</code>:</p>
+
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">ingest-inbox</span><span class="w"> </span><span class="p">[]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">doseq</span><span class="w"> </span><span class="p">[</span><span class="n">msg</span><span class="w"> </span><span class="p">(</span><span class="nf">inbox</span><span class="w"> </span><span class="n">autodjinn.core/my-store</span><span class="p">)]</span><span class="w">
+    </span><span class="p">(</span><span class="nb">println</span><span class="w"> </span><span class="p">(</span><span class="nf">message/subject</span><span class="w"> </span><span class="n">msg</span><span class="p">))))</span><span class="w">
+</span></code></pre></div></div>
 
 <h2 id="examining-messages">Examining messages</h2>
 
 <p>Before we move on, let’s take a look at an individual message and what we can get out of it from the <code class="language-plaintext highlighter-rouge">message</code> namespace.</p>
 
-<script src="https://gist.github.com/mathias/9866195.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nb">first</span><span class="w"> </span><span class="p">(</span><span class="nf">inbox</span><span class="w"> </span><span class="n">autodjinn.core/my-store</span><span class="p">))</span><span class="w">
+</span><span class="c1">;=&gt; #&lt;IMAPMessage com.sun.mail.imap.IMAPMessage@71999260&gt;</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">my-msg</span><span class="w"> </span><span class="p">(</span><span class="nb">first</span><span class="w"> </span><span class="p">(</span><span class="nf">inbox</span><span class="w"> </span><span class="n">autodjinn.core/my-store</span><span class="p">)))</span><span class="w">
+</span><span class="c1">;=&gt; #'user/my-msg</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">message/subject</span><span class="w"> </span><span class="n">my-msg</span><span class="p">)</span><span class="w">
+</span><span class="c1">;=&gt; "Subject 3"</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">message/id</span><span class="w"> </span><span class="n">my-msg</span><span class="p">)</span><span class="w">
+</span><span class="c1">;=&gt; "&lt;CAJiAYR90LbbN6k8tVXuhQc8f6bZoK647ycdc7mxF5mVEaoLKHw@mail.gmail.com&gt;"</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">message/from</span><span class="w"> </span><span class="n">my-msg</span><span class="p">)</span><span class="w">
+</span><span class="c1">;=&gt; "Matt Gauger &lt;contact@mattgauger.com&gt;"</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">message/to</span><span class="w"> </span><span class="n">my-msg</span><span class="p">)</span><span class="w">
+</span><span class="c1">;=&gt; ("contact@mattgauger.com")</span><span class="w">
+</span><span class="c1">;; note that this is a seq!</span><span class="w">
+
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">message/message-body</span><span class="w"> </span><span class="n">my-msg</span><span class="p">)</span><span class="w">
+</span><span class="c1">;=&gt; ({:content-type "TEXT/PLAIN; charset=ISO-8859-1", :body "Body\r\n"} {:content-type "TEXT/HTML; charset=ISO-8859-1", :body "&lt;div dir=\"ltr\"&gt;Body&lt;/div&gt;\r\n"})</span><span class="w">
+</span></code></pre></div></div>
 
 <p>From this, we can see a few things:</p>
 
@@ -171,29 +249,53 @@
 
 <p>The <code class="language-plaintext highlighter-rouge">clojure.string</code> namespace provides a <code class="language-plaintext highlighter-rouge">replace</code> function which does simple replacement on a string. We can use it like this:</p>
 
-<script src="https://gist.github.com/mathias/9866344.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">my-id</span><span class="w"> </span><span class="p">(</span><span class="nf">message/id</span><span class="w"> </span><span class="n">my-msg</span><span class="p">))</span><span class="w">
+</span><span class="c1">;=&gt; #'user/my-id</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="n">my-id</span><span class="w">
+</span><span class="c1">;=&gt; "&lt;CAJiAYR90LbbN6k8tVXuhQc8f6bZoK647ycdc7mxF5mVEaoLKHw@mail.gmail.com&gt;"</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">clojure.string/replace</span><span class="w"> </span><span class="n">my-id</span><span class="w"> </span><span class="s">"&gt;"</span><span class="w"> </span><span class="s">""</span><span class="p">)</span><span class="w">
+</span><span class="c1">;=&gt; "&lt;CAJiAYR90LbbN6k8tVXuhQc8f6bZoK647ycdc7mxF5mVEaoLKHw@mail.gmail.com"</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">clojure.string/replace</span><span class="w"> </span><span class="n">my-id</span><span class="w"> </span><span class="s">"&lt;"</span><span class="w"> </span><span class="s">""</span><span class="p">)</span><span class="w">
+</span><span class="c1">;=&gt; "CAJiAYR90LbbN6k8tVXuhQc8f6bZoK647ycdc7mxF5mVEaoLKHw@mail.gmail.com&gt;"</span><span class="w">
+</span></code></pre></div></div>
 
 <p>That worked for replacing the angle brackets for the original string. But remember that data structures are immutable in Clojure, including strings. Replacing the first angle bracket didn’t change the original string when we tried to replace the other angle bracket. We need something that allows us to build up an intermediate value and pass it to the next function. For that, we will use the <a href="http://clojure.github.io/clojure/clojure.core-api.html#clojure.core/-%3e">thread-first</a> macro: <code class="language-plaintext highlighter-rouge">-&gt;</code>. It is easiest if I show the macro in use with some comments showing what the intermediate values would be at each step:</p>
 
-<script src="https://gist.github.com/mathias/9866380.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">-&gt;</span><span class="w"> </span><span class="n">my-id</span><span class="w"> </span><span class="c1">;; "&lt;CAJiAYR90LbbN6k8tVXuhQc8f6bZoK647ycdc7mxF5mVEaoLKHw@mail.gmail.com&gt;"</span><span class="w">
+    </span><span class="p">(</span><span class="nf">clojure.string/replace</span><span class="w"> </span><span class="s">"&gt;"</span><span class="w"> </span><span class="s">""</span><span class="p">)</span><span class="w">  </span><span class="c1">;; "&lt;CAJiAYR90LbbN6k8tVXuhQc8f6bZoK647ycdc7mxF5mVEaoLKHw@mail.gmail.com"</span><span class="w">
+    </span><span class="p">(</span><span class="nf">clojure.string/replace</span><span class="w"> </span><span class="s">"&lt;"</span><span class="w"> </span><span class="s">""</span><span class="p">))</span><span class="w"> </span><span class="c1">;; "CAJiAYR90LbbN6k8tVXuhQc8f6bZoK647ycdc7mxF5mVEaoLKHw@mail.gmail.com"</span><span class="w">
+</span><span class="c1">;=&gt; "CAJiAYR90LbbN6k8tVXuhQc8f6bZoK647ycdc7mxF5mVEaoLKHw@mail.gmail.com"</span><span class="w">
+</span></code></pre></div></div>
 
 <p>It is called the <strong>thread-first</strong> macro because it threads through the first argument to each function. In this case, <code class="language-plaintext highlighter-rouge">clojure.string/replace</code>’s first argument is the string to replace on. So the each successively returned value gets passed to the next function above.</p>
 
-<p>Now that we’ve figured out how to clean up that ID, we will create a function to clean up any ID we pass it:</p>
+<p>Now that we’ve figured out how to clean up that ID, we will create a function to clean up any ID we pass it. In <code class="language-plaintext highlighter-rouge">core.clj</code>:</p>
 
-<script src="https://gist.github.com/mathias/9866436.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">remove-angle-brackets</span><span class="w"> </span><span class="p">[</span><span class="n">string</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">-&gt;</span><span class="w"> </span><span class="n">string</span><span class="w">
+      </span><span class="p">(</span><span class="nf">clojure.string/replace</span><span class="w"> </span><span class="s">"&gt;"</span><span class="w"> </span><span class="s">""</span><span class="p">)</span><span class="w">
+      </span><span class="p">(</span><span class="nf">clojure.string/replace</span><span class="w"> </span><span class="s">"&lt;"</span><span class="w"> </span><span class="s">""</span><span class="p">)))</span><span class="w">
+</span></code></pre></div></div>
 
 <h2 id="extracting-the-message-bodies">Extracting the message bodies</h2>
 
 <p>Recall the <code class="language-plaintext highlighter-rouge">message/message-body</code> call above:</p>
 
-<script src="https://gist.github.com/mathias/9866777.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">message/message-body</span><span class="w"> </span><span class="n">my-msg</span><span class="p">)</span><span class="w">
+</span><span class="c1">;=&gt; ({:content-type "TEXT/PLAIN; charset=ISO-8859-1", :body "Body\r\n"} {:content-type "TEXT/HTML; charset=ISO-8859-1", :body "&lt;div dir=\"ltr\"&gt;Body&lt;/div&gt;\r\n"})</span><span class="w">
+</span></code></pre></div></div>
 
 <p>Ideally, we want to write a function that can get the <code class="language-plaintext highlighter-rouge">text/plain</code> body out of this value, and another function that can get the <code class="language-plaintext highlighter-rouge">text/html</code> body out. Notice that the <code class="language-plaintext highlighter-rouge">:content-type</code> values aren’t quite so simple as just selecting the item in the list where the string <code class="language-plaintext highlighter-rouge">text/plain</code> appears. We will need our function to ignore the additional information in the <code class="language-plaintext highlighter-rouge">:content-type</code> value, which includes things like string encodings.</p>
 
 <p>Let’s look at just the first map in the list returned by <code class="language-plaintext highlighter-rouge">message/message-body</code>:</p>
 
-<script src="https://gist.github.com/mathias/9866861.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">my-bodies</span><span class="w"> </span><span class="p">(</span><span class="nf">message/message-body</span><span class="w"> </span><span class="n">my-msg</span><span class="p">))</span><span class="w">
+</span><span class="c1">;=&gt;#'user/my-bodies</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nb">first</span><span class="w"> </span><span class="n">my-bodies</span><span class="p">)</span><span class="w">
+</span><span class="c1">;=&gt; {:content-type "TEXT/PLAIN; charset=ISO-8859-1", :body "Body\r\n"}</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="no">:content-type</span><span class="w"> </span><span class="p">(</span><span class="nb">first</span><span class="w"> </span><span class="n">my-bodies</span><span class="p">))</span><span class="w">
+</span><span class="c1">;=&gt; "TEXT/PLAIN; charset=ISO-8859-1"</span><span class="w">
+</span></code></pre></div></div>
 
 <p>If we build a predicate function that can detect when the <code class="language-plaintext highlighter-rouge">:content-type</code> key is the type we want, we can use it in a <code class="language-plaintext highlighter-rouge">filter</code> function to choose the correct type of body in our functions.</p>
 
@@ -201,19 +303,61 @@
 
 <p>Then, an easy to to get at the part of the content-type we want would be to split on the semicolon and take the first element returned:</p>
 
-<script src="https://gist.github.com/mathias/9867049.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="no">:content-type</span><span class="w"> </span><span class="p">(</span><span class="nb">first</span><span class="w"> </span><span class="n">my-bodies</span><span class="p">))</span><span class="w">
+</span><span class="c1">;=&gt; "TEXT/PLAIN; charset=ISO-8859-1"</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">clojure.string/split</span><span class="w"> </span><span class="p">(</span><span class="no">:content-type</span><span class="w"> </span><span class="p">(</span><span class="nb">first</span><span class="w"> </span><span class="n">my-bodies</span><span class="p">))</span><span class="w"> </span><span class="o">#</span><span class="s">"[;]"</span><span class="p">)</span><span class="w">
+</span><span class="c1">;=&gt; ["TEXT/PLAIN" " charset=ISO-8859-1"]</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nb">first</span><span class="w"> </span><span class="p">(</span><span class="nf">clojure.string/split</span><span class="w"> </span><span class="p">(</span><span class="no">:content-type</span><span class="w"> </span><span class="p">(</span><span class="nb">first</span><span class="w"> </span><span class="n">my-bodies</span><span class="p">))</span><span class="w"> </span><span class="o">#</span><span class="s">"[;]"</span><span class="p">))</span><span class="w">
+</span><span class="c1">;=&gt; "TEXT/PLAIN"</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">clojure.string/lower-case</span><span class="w"> </span><span class="p">(</span><span class="nb">first</span><span class="w"> </span><span class="p">(</span><span class="nf">clojure.string/split</span><span class="w"> </span><span class="p">(</span><span class="no">:content-type</span><span class="w"> </span><span class="p">(</span><span class="nb">first</span><span class="w"> </span><span class="n">my-bodies</span><span class="p">))</span><span class="w"> </span><span class="o">#</span><span class="s">"[;]"</span><span class="p">)))</span><span class="w">
+</span><span class="c1">;=&gt; "text/plain"</span><span class="w">
 
-<p>This leads us to a function to first clean up the content-type string, and then our predicate function to detect if it is the one we want:</p>
+</span><span class="c1">;; of course, we can use the thread-first macro again</span><span class="w">
+</span><span class="c1">;; to stop building up nested calls</span><span class="w">
 
-<script src="https://gist.github.com/mathias/9867072.js"></script>
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nb">-&gt;</span><span class="w"> </span><span class="n">my-bodies</span><span class="w">
+          </span><span class="p">(</span><span class="nb">first</span><span class="p">)</span><span class="w">
+          </span><span class="p">(</span><span class="no">:content-type</span><span class="p">)</span><span class="w">
+          </span><span class="p">(</span><span class="nf">clojure.string/split</span><span class="w"> </span><span class="o">#</span><span class="s">"[;]"</span><span class="p">)</span><span class="w">
+          </span><span class="p">(</span><span class="nb">first</span><span class="p">)</span><span class="w">
+          </span><span class="p">(</span><span class="nf">clojure.string/lower-case</span><span class="p">))</span><span class="w">
+</span><span class="c1">;=&gt; "text/plain"</span><span class="w">
+</span></code></pre></div></div>
+
+<p>This leads us to a function to first clean up the content-type string, and then our predicate function to detect if it is the one we want. In <code class="language-plaintext highlighter-rouge">core.clj</code>:</p>
+
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">simple-content-type</span><span class="w"> </span><span class="p">[</span><span class="n">full-content-type</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">-&gt;</span><span class="w"> </span><span class="n">full-content-type</span><span class="w">
+      </span><span class="p">(</span><span class="nf">clojure.string/split</span><span class="w"> </span><span class="o">#</span><span class="s">"[;]"</span><span class="p">)</span><span class="w">
+      </span><span class="p">(</span><span class="nb">first</span><span class="p">)</span><span class="w">
+      </span><span class="p">(</span><span class="nf">clojure.string/lower-case</span><span class="p">)))</span><span class="w">
+
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">is-content-type?</span><span class="w"> </span><span class="p">[</span><span class="n">body</span><span class="w"> </span><span class="n">requested-type</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">=</span><span class="w"> </span><span class="p">(</span><span class="nf">simple-content-type</span><span class="w"> </span><span class="p">(</span><span class="no">:content-type</span><span class="w"> </span><span class="n">body</span><span class="p">))</span><span class="w">
+     </span><span class="n">requested-type</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
 
 <p>To finish off our work on the message bodies, we want to filter the list returned by <code class="language-plaintext highlighter-rouge">message/message-body</code>:</p>
 
-<script src="https://gist.github.com/mathias/9867356.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nb">filter</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nf">is-content-type?</span><span class="w"> </span><span class="n">%1</span><span class="w"> </span><span class="s">"text/plain"</span><span class="p">)</span><span class="w"> </span><span class="n">my-bodies</span><span class="p">)</span><span class="w">
+</span><span class="c1">;=&gt; ({:content-type "TEXT/PLAIN; charset=ISO-8859-1", :body "Body\r\n"})</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nb">first</span><span class="w"> </span><span class="p">(</span><span class="nb">filter</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nf">is-content-type?</span><span class="w"> </span><span class="n">%1</span><span class="w"> </span><span class="s">"text/plain"</span><span class="p">)</span><span class="w"> </span><span class="n">my-bodies</span><span class="p">))</span><span class="w">
+</span><span class="c1">;=&gt; {:content-type "TEXT/PLAIN; charset=ISO-8859-1", :body "Body\r\n"}</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="no">:body</span><span class="w"> </span><span class="p">(</span><span class="nb">first</span><span class="w"> </span><span class="p">(</span><span class="nb">filter</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nf">is-content-type?</span><span class="w"> </span><span class="n">%1</span><span class="w"> </span><span class="s">"text/plain"</span><span class="p">)</span><span class="w"> </span><span class="n">my-bodies</span><span class="p">)))</span><span class="w">
+</span><span class="c1">;=&gt; "Body\r\n"</span><span class="w">
+</span></code></pre></div></div>
 
-<p>And turn it into a function that works for any message bodies list:</p>
+<p>And turn it into a function that works for any message bodies list. In <code class="language-plaintext highlighter-rouge">core.clj</code>:</p>
 
-<script src="https://gist.github.com/mathias/9867382.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">find-body-of-type</span><span class="w"> </span><span class="p">[</span><span class="n">bodies</span><span class="w"> </span><span class="n">type</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="no">:body</span><span class="w"> </span><span class="p">(</span><span class="nb">first</span><span class="w"> </span><span class="p">(</span><span class="nb">filter</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nf">is-content-type?</span><span class="w"> </span><span class="n">%1</span><span class="w"> </span><span class="n">type</span><span class="p">)</span><span class="w"> </span><span class="n">bodies</span><span class="p">))))</span><span class="w">
+
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">get-text-body</span><span class="w"> </span><span class="p">[</span><span class="n">msg</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nf">find-body-of-type</span><span class="w"> </span><span class="p">(</span><span class="nf">message/message-body</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w"> </span><span class="s">"text/plain"</span><span class="p">))</span><span class="w">
+
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">get-html-body</span><span class="w"> </span><span class="p">[</span><span class="n">msg</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nf">find-body-of-type</span><span class="w"> </span><span class="p">(</span><span class="nf">message/message-body</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w"> </span><span class="s">"text/html"</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
 
 <p>Note that we’ve also used this function to create two convenience functions, one for extracting plaintext bodies and one for extracting HTML bodies. By keeping functions simple and small, we can build up useful functions for our project rather than try to plan it all out ahead of time.</p>
 
@@ -225,23 +369,82 @@
 
 <p>In the REPL, we can try some of the Java interop on our <code class="language-plaintext highlighter-rouge">my-msg</code>:</p>
 
-<script src="https://gist.github.com/mathias/9876540.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user&gt;</span><span class="w"> </span><span class="n">my-msg</span><span class="w">
+</span><span class="c1">;=&gt; #&lt;IMAPMessage com.sun.mail.imap.IMAPMessage@eeb0450&gt;</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">.getSentDate</span><span class="w"> </span><span class="n">my-msg</span><span class="p">)</span><span class="w">
+</span><span class="c1">;=&gt; #inst "2014-03-28T16:35:22.000-00:00"</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">.getReceivedDate</span><span class="w"> </span><span class="n">my-msg</span><span class="p">)</span><span class="w">
+</span><span class="c1">;=&gt; #inst "2014-03-28T16:35:42.000-00:00"</span><span class="w">
+</span></code></pre></div></div>
 
-<p>The datetimes for each message are automatically turned into Clojure instants for us, which is convenient. If we dig into how the <code class="language-plaintext highlighter-rouge">clojure-mail.message/to</code> function [<a href="https://github.com/owainlewis/clojure-mail/blob/c3aad67b42aad96405d4c329ca48e29b7960d412/src/clojure_mail/message.clj#L16-L20">src</a>] works, we see that it is using the <code class="language-plaintext highlighter-rouge">.getRecipients</code> method. <code class="language-plaintext highlighter-rouge">.getRecipients</code> takes the message and a constant of a <code class="language-plaintext highlighter-rouge">RecipientType</code>. For our purposes, we want the <code class="language-plaintext highlighter-rouge">javax.mail.Message$RecipientType/CC</code> and <code class="language-plaintext highlighter-rouge">javax.mail.Message$RecipientType/BCC</code> recipients:</p>
+<p>The datetimes for each message are automatically converted from Java <code class="language-plaintext highlighter-rouge">Date</code>s into Clojure instants (timestamps) for us, which is convenient. If we dig into how the <code class="language-plaintext highlighter-rouge">clojure-mail.message/to</code> function [<a href="https://github.com/owainlewis/clojure-mail/blob/c3aad67b42aad96405d4c329ca48e29b7960d412/src/clojure_mail/message.clj#L16-L20">src</a>] works, we see that it is using the <code class="language-plaintext highlighter-rouge">.getRecipients</code> method. <code class="language-plaintext highlighter-rouge">.getRecipients</code> takes the message and a constant of a <code class="language-plaintext highlighter-rouge">RecipientType</code>. For our purposes, we want the <code class="language-plaintext highlighter-rouge">javax.mail.Message$RecipientType/CC</code> and <code class="language-plaintext highlighter-rouge">javax.mail.Message$RecipientType/BCC</code> recipients:</p>
 
-<script src="https://gist.github.com/mathias/9876632.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">.getRecipients</span><span class="w"> </span><span class="n">my-msg</span><span class="w"> </span><span class="n">javax.mail.Message$RecipientType/CC</span><span class="p">)</span><span class="w">
+</span><span class="c1">;=&gt; #&lt;InternetAddress[] [Ljavax.mail.internet.InternetAddress;@f9d085d&gt;</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">.getRecipients</span><span class="w"> </span><span class="n">my-msg</span><span class="w"> </span><span class="n">javax.mail.Message$RecipientType/BCC</span><span class="p">)</span><span class="w">
+</span><span class="c1">;=&gt; nil</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="nb">str</span><span class="w"> </span><span class="p">(</span><span class="nf">.getRecipients</span><span class="w"> </span><span class="n">my-msg</span><span class="w"> </span><span class="n">javax.mail.Message$RecipientType/CC</span><span class="p">))</span><span class="w">
+</span><span class="c1">;=&gt; ("matt@bendyworks.com")</span><span class="w">
+</span></code></pre></div></div>
 
 <p>The last line maps the <code class="language-plaintext highlighter-rouge">str</code> function across each element returned, so that we get the string representation of the email addresses. That way, our database can just store the strings.</p>
 
 <p>As before, now that we know how to use these methods in the REPL, we write functions in <code class="language-plaintext highlighter-rouge">core.clj</code> to take advantage of our newfound knowledge:</p>
 
-<script src="https://gist.github.com/mathias/9876737.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">get-sent-date</span><span class="w">
+  </span><span class="s">"Returns an instant for the date sent"</span><span class="w">
+  </span><span class="p">[</span><span class="n">msg</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nf">.getSentDate</span><span class="w"> </span><span class="n">msg</span><span class="p">))</span><span class="w">
+
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">get-received-date</span><span class="w">
+  </span><span class="s">"Returns an instant for the date sent"</span><span class="w">
+  </span><span class="p">[</span><span class="n">msg</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nf">.getReceivedDate</span><span class="w"> </span><span class="n">msg</span><span class="p">))</span><span class="w">
+
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">cc-list</span><span class="w">
+  </span><span class="s">"Returns a sequence of CC-ed recipients"</span><span class="w">
+  </span><span class="p">[</span><span class="n">msg</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="nb">str</span><span class="w">
+    </span><span class="p">(</span><span class="nf">.getRecipients</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="n">javax.mail.Message$RecipientType/CC</span><span class="p">)))</span><span class="w">
+
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">bcc-list</span><span class="w">
+  </span><span class="s">"Returns a sequence of BCC-ed recipients"</span><span class="w">
+  </span><span class="p">[</span><span class="n">msg</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="nb">str</span><span class="w">
+    </span><span class="p">(</span><span class="nf">.getRecipients</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="n">javax.mail.Message$RecipientType/BCC</span><span class="p">)))</span><span class="w">
+</span></code></pre></div></div>
 
 <p>In the REPL, it should now be possible to get a nice map representation of all the fields on the message we care about:</p>
 
-<script src="https://gist.github.com/mathias/9876884.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user&gt;</span><span class="w"> </span><span class="n">my-msg</span><span class="w">
+</span><span class="c1">;=&gt; #&lt;IMAPMessage com.sun.mail.imap.IMAPMessage@eeb0450&gt;</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">{</span><span class="no">:mail/uid</span><span class="w"> </span><span class="p">(</span><span class="nf">remove-angle-brackets</span><span class="w"> </span><span class="p">(</span><span class="nf">message/id</span><span class="w"> </span><span class="n">my-msg</span><span class="p">))</span><span class="w">
+ </span><span class="no">:mail/from</span><span class="w"> </span><span class="p">(</span><span class="nf">message/from</span><span class="w"> </span><span class="n">my-msg</span><span class="p">)</span><span class="w">
+ </span><span class="no">:mail/to</span><span class="w"> </span><span class="p">(</span><span class="nf">message/to</span><span class="w"> </span><span class="n">my-msg</span><span class="p">)</span><span class="w">
+ </span><span class="no">:mail/cc</span><span class="w"> </span><span class="p">(</span><span class="nf">cc-list</span><span class="w"> </span><span class="n">my-msg</span><span class="p">)</span><span class="w">
+ </span><span class="no">:mail/bcc</span><span class="w"> </span><span class="p">(</span><span class="nf">bcc-list</span><span class="w"> </span><span class="n">my-msg</span><span class="p">)</span><span class="w">
+ </span><span class="no">:mail/subject</span><span class="w"> </span><span class="p">(</span><span class="nf">message/subject</span><span class="w"> </span><span class="n">my-msg</span><span class="p">)</span><span class="w">
+ </span><span class="no">:mail/date-sent</span><span class="w"> </span><span class="p">(</span><span class="nf">get-sent-date</span><span class="w"> </span><span class="n">my-msg</span><span class="p">)</span><span class="w">
+ </span><span class="no">:mail/date-received</span><span class="w"> </span><span class="p">(</span><span class="nf">get-received-date</span><span class="w"> </span><span class="n">my-msg</span><span class="p">)</span><span class="w">
+ </span><span class="no">:mail/text-body</span><span class="w"> </span><span class="p">(</span><span class="nf">get-text-body</span><span class="w"> </span><span class="n">my-msg</span><span class="p">)</span><span class="w">
+ </span><span class="no">:mail/html-body</span><span class="w"> </span><span class="p">(</span><span class="nf">get-html-body</span><span class="w"> </span><span class="n">my-msg</span><span class="p">)}</span><span class="w">
+</span><span class="c1">;=&gt; {:mail/cc ("matt@bendyworks.com"), :mail/from "Matt Gauger &lt;contact@mattgauger.com&gt;", :mail/date-sent #inst "2014-03-28T16:35:22.000-00:00", :mail/uid "CAJiAYR90LbbN6k8tVXuhQc8f6bZoK647ycdc7mxF5mVEaoLKHw@mail.gmail.com", :mail/to ("contact@mattgauger.com"), :mail/html-body "&lt;div dir=\"ltr\"&gt;Body&lt;/div&gt;\r\n", :mail/subject "With Matt@Bendyworks in CC", :mail/date-received #inst "2014-03-28T16:35:42.000-00:00", :mail/bcc (), :mail/text-body "Body\r\n"}</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">clojure.pprint/pprint</span><span class="w"> </span><span class="n">*1</span><span class="p">)</span><span class="w">
+</span><span class="p">{</span><span class="no">:mail/cc</span><span class="w"> </span><span class="p">(</span><span class="s">"matt@bendyworks.com"</span><span class="p">)</span><span class="n">,</span><span class="w">
+ </span><span class="no">:mail/from</span><span class="w"> </span><span class="s">"Matt Gauger &lt;contact@mattgauger.com&gt;"</span><span class="n">,</span><span class="w">
+ </span><span class="no">:mail/date-sent</span><span class="w"> </span><span class="o">#</span><span class="n">inst</span><span class="w"> </span><span class="s">"2014-03-28T16:35:22.000-00:00"</span><span class="n">,</span><span class="w">
+ </span><span class="no">:mail/uid</span><span class="w">
+ </span><span class="s">"CAJiAYR90LbbN6k8tVXuhQc8f6bZoK647ycdc7mxF5mVEaoLKHw@mail.gmail.com"</span><span class="n">,</span><span class="w">
+ </span><span class="no">:mail/to</span><span class="w"> </span><span class="p">(</span><span class="s">"contact@mattgauger.com"</span><span class="p">)</span><span class="n">,</span><span class="w">
+ </span><span class="no">:mail/html-body</span><span class="w"> </span><span class="s">"&lt;div dir=\"ltr\"&gt;Body&lt;/div&gt;\r\n"</span><span class="n">,</span><span class="w">
+ </span><span class="no">:mail/subject</span><span class="w"> </span><span class="s">"Testing 3"</span><span class="n">,</span><span class="w">
+ </span><span class="no">:mail/date-received</span><span class="w"> </span><span class="o">#</span><span class="n">inst</span><span class="w"> </span><span class="s">"2014-03-28T16:35:42.000-00:00"</span><span class="n">,</span><span class="w">
+ </span><span class="no">:mail/bcc</span><span class="w"> </span><span class="p">()</span><span class="n">,</span><span class="w">
+ </span><span class="no">:mail/text-body</span><span class="w"> </span><span class="s">"Body\r\n"</span><span class="p">}</span><span class="w">
+</span><span class="c1">;=&gt; nil</span><span class="w">
+</span></code></pre></div></div>
 
-<p>Congrats on making it this far. We’ve used quite a few neat little features of Clojure and the libraries we’re building this project with to get here.</p>
+<p>Congratulations on making it this far. We’ve used quite a few neat little features of Clojure and the libraries we’re building this project with to get here.</p>
 
 <p>The last step we’ll go through in this post is to get these messages into a database.</p>
 
@@ -266,15 +469,29 @@
 
 <p>The first thing we need is the URI where the Datomic database lives. When we start up the Datomic transactor, you will see a DB URI that looks something like <code class="language-plaintext highlighter-rouge">datomic:sql://DBNAMEHERE?jdbc:postgresql://localhost:5432/datomic?user=datomic&amp;password=datomic</code> in the output. Grab that URI and add it to our <code class="language-plaintext highlighter-rouge">resources/config/autodjinn-config.edn</code>:</p>
 
-<script src="https://gist.github.com/mathias/9877346.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="no">:gmail-username</span><span class="w"> </span><span class="s">"you@gmail.com"</span><span class="w">
+ </span><span class="no">:gmail-password</span><span class="w"> </span><span class="s">"yourpassword"</span><span class="w">
+ </span><span class="no">:db-uri</span><span class="w"> </span><span class="s">"datomic:sql://DBNAMEHERE?jdbc:postgresql://localhost:5432/datomic?user=datomic&amp;password=datomic"</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
 
 <p>Back at the top of <code class="language-plaintext highlighter-rouge">core.clj</code>, save that value to a var as we did with <code class="language-plaintext highlighter-rouge">gmail-username</code> and <code class="language-plaintext highlighter-rouge">gmail-password</code>:</p>
 
-<script src="https://gist.github.com/mathias/9877374.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">db-uri</span><span class="w"> </span><span class="p">(</span><span class="nb">get</span><span class="w"> </span><span class="p">(</span><span class="nf">mail-config</span><span class="p">)</span><span class="w"> </span><span class="no">:db-uri</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
 
 <p>And then in the REPL:</p>
 
-<script src="https://gist.github.com/mathias/9879199.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">require</span><span class="w"> </span><span class="o">'</span><span class="p">[</span><span class="n">datomic.api</span><span class="w"> </span><span class="no">:as</span><span class="w"> </span><span class="n">d</span><span class="p">])</span><span class="w">
+</span><span class="c1">;=&gt; nil</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">d/create-database</span><span class="w"> </span><span class="n">db-uri</span><span class="p">)</span><span class="w">
+</span><span class="c1">;=&gt; true</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">d/create-database</span><span class="w"> </span><span class="n">db-uri</span><span class="p">)</span><span class="w">
+</span><span class="c1">;=&gt; false</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">db-connection</span><span class="w"> </span><span class="p">(</span><span class="nf">d/connect</span><span class="w"> </span><span class="n">db-uri</span><span class="p">))</span><span class="w">
+</span><span class="c1">;=&gt; #'user/db-connection</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">d/db</span><span class="w"> </span><span class="n">db-connection</span><span class="p">)</span><span class="w">
+</span><span class="c1">;=&gt; datomic.db.Db@8472447a</span><span class="w">
+</span></code></pre></div></div>
 
 <p>Note that according to the <a href="http://docs.datomic.com/clojure/index.html#datomic.api/create-database">datomic clojure docs for the create-database function</a>, it returns true if the database was created, and false if it already exists. So running <code class="language-plaintext highlighter-rouge">create-database</code> every time we run our script is safe, since it won’t destroy data.</p>
 
@@ -284,33 +501,134 @@
 
 <p>In our <code class="language-plaintext highlighter-rouge">core.clj</code>, we can add the code we need to create the database, get our connection, and the convenience <code class="language-plaintext highlighter-rouge">new-db-val</code> function:</p>
 
-<script src="https://gist.github.com/mathias/9879246.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">;; Always try to create the database</span><span class="w">
+</span><span class="p">(</span><span class="nf">d/create-database</span><span class="w"> </span><span class="n">db-uri</span><span class="p">)</span><span class="w">
+
+</span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">db-connection</span><span class="w"> </span><span class="p">(</span><span class="nf">d/connect</span><span class="w"> </span><span class="n">db-uri</span><span class="p">))</span><span class="w">
+
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">new-db-val</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="p">(</span><span class="nf">d/db</span><span class="w"> </span><span class="n">db-connection</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
 
 <p>Next, we need to tell Datomic about the schema of our data. Schemas are just data that you run as a transaction on the database. Reading up on the <a href="http://docs.datomic.com/schema.html">Schema</a> page of the Datomic docs might be helpful to understand what’s going on here. The short version is that we define each attribute of an email and set up its properties. The collection of all attributes together will constitute a <code class="language-plaintext highlighter-rouge">mail</code> entity, so we namespace all the attributes under the <code class="language-plaintext highlighter-rouge">:mail/</code> namespace.</p>
 
-<script src="https://gist.github.com/mathias/9879323.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">schema-txn</span><span class="w">
+  </span><span class="p">[{</span><span class="no">:db/id</span><span class="w"> </span><span class="o">#</span><span class="n">db/id</span><span class="p">[</span><span class="no">:db.part/db</span><span class="p">]</span><span class="w">
+    </span><span class="no">:db/ident</span><span class="w"> </span><span class="no">:mail/uid</span><span class="w">
+    </span><span class="no">:db/valueType</span><span class="w"> </span><span class="no">:db.type/string</span><span class="w">
+    </span><span class="no">:db/cardinality</span><span class="w"> </span><span class="no">:db.cardinality/one</span><span class="w">
+    </span><span class="no">:db/unique</span><span class="w"> </span><span class="no">:db.unique/identity</span><span class="w">
+    </span><span class="no">:db/index</span><span class="w"> </span><span class="n">true</span><span class="w">
+    </span><span class="no">:db.install/_attribute</span><span class="w"> </span><span class="no">:db.part/db</span><span class="p">}</span><span class="w">
+   </span><span class="p">{</span><span class="no">:db/id</span><span class="w"> </span><span class="o">#</span><span class="n">db/id</span><span class="p">[</span><span class="no">:db.part/db</span><span class="p">]</span><span class="w">
+    </span><span class="no">:db/ident</span><span class="w"> </span><span class="no">:mail/to</span><span class="w">
+    </span><span class="no">:db/valueType</span><span class="w"> </span><span class="no">:db.type/string</span><span class="w">
+    </span><span class="no">:db/cardinality</span><span class="w"> </span><span class="no">:db.cardinality/many</span><span class="w">
+    </span><span class="no">:db/fulltext</span><span class="w"> </span><span class="n">true</span><span class="w">
+    </span><span class="no">:db/index</span><span class="w"> </span><span class="n">true</span><span class="w">
+    </span><span class="no">:db.install/_attribute</span><span class="w"> </span><span class="no">:db.part/db</span><span class="p">}</span><span class="w">
+   </span><span class="p">{</span><span class="no">:db/id</span><span class="w"> </span><span class="o">#</span><span class="n">db/id</span><span class="p">[</span><span class="no">:db.part/db</span><span class="p">]</span><span class="w">
+    </span><span class="no">:db/ident</span><span class="w"> </span><span class="no">:mail/cc</span><span class="w">
+    </span><span class="no">:db/valueType</span><span class="w"> </span><span class="no">:db.type/string</span><span class="w">
+    </span><span class="no">:db/cardinality</span><span class="w"> </span><span class="no">:db.cardinality/many</span><span class="w">
+    </span><span class="no">:db/fulltext</span><span class="w"> </span><span class="n">true</span><span class="w">
+    </span><span class="no">:db/index</span><span class="w"> </span><span class="n">true</span><span class="w">
+    </span><span class="no">:db.install/_attribute</span><span class="w"> </span><span class="no">:db.part/db</span><span class="p">}</span><span class="w">
+   </span><span class="p">{</span><span class="no">:db/id</span><span class="w"> </span><span class="o">#</span><span class="n">db/id</span><span class="p">[</span><span class="no">:db.part/db</span><span class="p">]</span><span class="w">
+    </span><span class="no">:db/ident</span><span class="w"> </span><span class="no">:mail/bcc</span><span class="w">
+    </span><span class="no">:db/valueType</span><span class="w"> </span><span class="no">:db.type/string</span><span class="w">
+    </span><span class="no">:db/cardinality</span><span class="w"> </span><span class="no">:db.cardinality/many</span><span class="w">
+    </span><span class="no">:db/fulltext</span><span class="w"> </span><span class="n">true</span><span class="w">
+    </span><span class="no">:db/index</span><span class="w"> </span><span class="n">true</span><span class="w">
+    </span><span class="no">:db.install/_attribute</span><span class="w"> </span><span class="no">:db.part/db</span><span class="p">}</span><span class="w">
+   </span><span class="p">{</span><span class="no">:db/id</span><span class="w"> </span><span class="o">#</span><span class="n">db/id</span><span class="p">[</span><span class="no">:db.part/db</span><span class="p">]</span><span class="w">
+    </span><span class="no">:db/ident</span><span class="w"> </span><span class="no">:mail/from</span><span class="w">
+    </span><span class="no">:db/valueType</span><span class="w"> </span><span class="no">:db.type/string</span><span class="w">
+    </span><span class="no">:db/cardinality</span><span class="w"> </span><span class="no">:db.cardinality/one</span><span class="w">
+    </span><span class="no">:db/fulltext</span><span class="w"> </span><span class="n">true</span><span class="w">
+    </span><span class="no">:db/index</span><span class="w"> </span><span class="n">true</span><span class="w">
+    </span><span class="no">:db.install/_attribute</span><span class="w"> </span><span class="no">:db.part/db</span><span class="p">}</span><span class="w">
+   </span><span class="p">{</span><span class="no">:db/id</span><span class="w"> </span><span class="o">#</span><span class="n">db/id</span><span class="p">[</span><span class="no">:db.part/db</span><span class="p">]</span><span class="w">
+    </span><span class="no">:db/ident</span><span class="w"> </span><span class="no">:mail/subject</span><span class="w">
+    </span><span class="no">:db/valueType</span><span class="w"> </span><span class="no">:db.type/string</span><span class="w">
+    </span><span class="no">:db/cardinality</span><span class="w"> </span><span class="no">:db.cardinality/one</span><span class="w">
+    </span><span class="no">:db/fulltext</span><span class="w"> </span><span class="n">true</span><span class="w">
+    </span><span class="no">:db/index</span><span class="w"> </span><span class="n">true</span><span class="w">
+    </span><span class="no">:db.install/_attribute</span><span class="w"> </span><span class="no">:db.part/db</span><span class="p">}</span><span class="w">
+   </span><span class="p">{</span><span class="no">:db/id</span><span class="w"> </span><span class="o">#</span><span class="n">db/id</span><span class="p">[</span><span class="no">:db.part/db</span><span class="p">]</span><span class="w">
+    </span><span class="no">:db/ident</span><span class="w"> </span><span class="no">:mail/date-sent</span><span class="w">
+    </span><span class="no">:db/valueType</span><span class="w"> </span><span class="no">:db.type/instant</span><span class="w">
+    </span><span class="no">:db/cardinality</span><span class="w"> </span><span class="no">:db.cardinality/one</span><span class="w">
+    </span><span class="no">:db.install/_attribute</span><span class="w"> </span><span class="no">:db.part/db</span><span class="p">}</span><span class="w">
+   </span><span class="p">{</span><span class="no">:db/id</span><span class="w"> </span><span class="o">#</span><span class="n">db/id</span><span class="p">[</span><span class="no">:db.part/db</span><span class="p">]</span><span class="w">
+    </span><span class="no">:db/ident</span><span class="w"> </span><span class="no">:mail/date-received</span><span class="w">
+    </span><span class="no">:db/valueType</span><span class="w"> </span><span class="no">:db.type/instant</span><span class="w">
+    </span><span class="no">:db/cardinality</span><span class="w"> </span><span class="no">:db.cardinality/one</span><span class="w">
+    </span><span class="no">:db.install/_attribute</span><span class="w"> </span><span class="no">:db.part/db</span><span class="p">}</span><span class="w">
+   </span><span class="p">{</span><span class="no">:db/id</span><span class="w"> </span><span class="o">#</span><span class="n">db/id</span><span class="p">[</span><span class="no">:db.part/db</span><span class="p">]</span><span class="w">
+    </span><span class="no">:db/ident</span><span class="w"> </span><span class="no">:mail/text-body</span><span class="w">
+    </span><span class="no">:db/valueType</span><span class="w"> </span><span class="no">:db.type/string</span><span class="w">
+    </span><span class="no">:db/fulltext</span><span class="w"> </span><span class="n">true</span><span class="w">
+    </span><span class="no">:db/index</span><span class="w"> </span><span class="n">true</span><span class="w">
+    </span><span class="no">:db/cardinality</span><span class="w"> </span><span class="no">:db.cardinality/one</span><span class="w">
+    </span><span class="no">:db.install/_attribute</span><span class="w"> </span><span class="no">:db.part/db</span><span class="p">}</span><span class="w">
+   </span><span class="p">{</span><span class="no">:db/id</span><span class="w"> </span><span class="o">#</span><span class="n">db/id</span><span class="p">[</span><span class="no">:db.part/db</span><span class="p">]</span><span class="w">
+    </span><span class="no">:db/ident</span><span class="w"> </span><span class="no">:mail/html-body</span><span class="w">
+    </span><span class="no">:db/valueType</span><span class="w"> </span><span class="no">:db.type/string</span><span class="w">
+    </span><span class="no">:db/cardinality</span><span class="w"> </span><span class="no">:db.cardinality/one</span><span class="w">
+    </span><span class="no">:db.install/_attribute</span><span class="w"> </span><span class="no">:db.part/db</span><span class="p">}])</span><span class="w">
+</span></code></pre></div></div>
 
 <p>We add that var def to our <code class="language-plaintext highlighter-rouge">core.clj</code> because it is, after all, just data. We may choose later to move it to its own <code class="language-plaintext highlighter-rouge">edn</code> file, but for now, it can live in our source code. Next, we want to apply this schema to our database with a transaction. That looks like this:</p>
 
-<script src="https://gist.github.com/mathias/9879355.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user&gt;</span><span class="w"> </span><span class="n">schema-txn</span><span class="w">
+</span><span class="c1">;=&gt; [{:db/cardinality :db.cardinality/one, …}]</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">d/transact</span><span class="w"> </span><span class="n">db-connection</span><span class="w"> </span><span class="n">schema-txn</span><span class="p">)</span><span class="w">
+</span><span class="c1">;=&gt; #&lt;promise$settable_future$reify__4427@5ede7c85: {:db-before datomic.db.Db@8472447a, :db-after datomic.db.Db@f8962e84, :tx-data [#Datum{:e 13194139534322 :a 50 :v #inst "2014-03-30T20:37:53.113-00:00" :tx 13194139534322 :added true} #Datum{:e 77 :a 41 :v 36 :tx 13194139534322 :added true} #Datum{:e 77 :a 44 :v true :tx 13194139534322 :added true} #Datum{:e 77 :a 51 :v true :tx 13194139534322 :added true} #Datum{:e 77 :a 40 :v 23 :tx 13194139534322 :added true} #Datum{:e 77 :a 10 :v :mail/bcc :tx 13194139534322 :added true} #Datum{:e 0 :a 13 :v 77 :tx 13194139534322 :added true}], :tempids {-9223367638809264705 64, -9223367638809264706 73, -9223367638809264707 77, -9223367638809264708 65, -9223367638809264709 66, -9223367638809264710 67, -9223367638809264711 68, -9223367638809264712 69, -9223367638809264713 70, -9223367638809264704 63}}&gt;</span><span class="w">
+</span></code></pre></div></div>
 
 <p>Now we put that transaction in a convenience function in <code class="language-plaintext highlighter-rouge">core.clj</code> that we’ll run every time we run this file. The function will ensure that our database is ‘converged’ to this schema. Running a transaction will create a new database value. But it will not blow away any data that we had in the database by running this transaction many times. It will simply try to update the existing attributes, and nothing in the attributes themselves need change. It is far more work to retract (delete) data in Datomic than it is to add or update it. This leads to much more safety around working with data without worrying that we will destroy data, and it encourages a REPL-based exploration of the data and its history.</p>
 
-<script src="https://gist.github.com/mathias/9879424.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">update-schema</span><span class="w"> </span><span class="p">[]</span><span class="w">
+  </span><span class="p">(</span><span class="nf">d/transact</span><span class="w"> </span><span class="n">db-connection</span><span class="w"> </span><span class="n">schema-txn</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
 
 <p>Now that our <code class="language-plaintext highlighter-rouge">mail</code> entities are defined in Datomic, we can try a query to find all the entity-IDs where any <code class="language-plaintext highlighter-rouge">:mail/uid</code> value is present. Read up on the <a href="http://docs.datomic.com/query.html">Query</a> page of the Datomic docs to dig into querying deeper. You might also be interested in the excellent <a href="http://www.learndatalogtoday.org/">Learn Datalog Today</a> website to learn more about querying Datomic with Datalog.</p>
 
-<script src="https://gist.github.com/mathias/9879491.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">d/q</span><span class="w"> </span><span class="o">'</span><span class="p">[</span><span class="no">:find</span><span class="w"> </span><span class="n">?eid</span><span class="w"> </span><span class="no">:where</span><span class="w"> </span><span class="p">[</span><span class="n">?eid</span><span class="w"> </span><span class="no">:mail/uid</span><span class="w"> </span><span class="n">_</span><span class="p">]]</span><span class="w"> </span><span class="p">(</span><span class="nf">new-db-val</span><span class="p">))</span><span class="w">
+</span><span class="c1">;=&gt; #{}</span><span class="w">
+</span></code></pre></div></div>
 
 <p>Since we have no <code class="language-plaintext highlighter-rouge">mail</code> entities in our database, Datomic returns an empty set. So now we reach the end of task: We can ingest some emails and save them in our database! Return to the <code class="language-plaintext highlighter-rouge">ingest-inbox</code> function that we left before. Here’s what the updated version will look like:</p>
 
-<script src="https://gist.github.com/mathias/9879494.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">ingest-inbox</span><span class="w"> </span><span class="p">[]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">doseq</span><span class="w"> </span><span class="p">[</span><span class="n">msg</span><span class="w"> </span><span class="p">(</span><span class="nf">inbox</span><span class="w"> </span><span class="n">my-store</span><span class="p">)]</span><span class="w">
+    </span><span class="p">(</span><span class="nb">println</span><span class="w"> </span><span class="p">(</span><span class="nf">message/subject</span><span class="w"> </span><span class="n">msg</span><span class="p">))</span><span class="w">
+    </span><span class="o">@</span><span class="p">(</span><span class="nf">d/transact</span><span class="w"> </span><span class="n">db-connection</span><span class="w"> </span><span class="p">[{</span><span class="no">:db/id</span><span class="w"> </span><span class="p">(</span><span class="nf">d/tempid</span><span class="w"> </span><span class="s">"db.part/user"</span><span class="p">)</span><span class="w">
+                                 </span><span class="no">:mail/uid</span><span class="w"> </span><span class="p">(</span><span class="nf">remove-angle-brackets</span><span class="w"> </span><span class="p">(</span><span class="nf">message/id</span><span class="w"> </span><span class="n">msg</span><span class="p">))</span><span class="w">
+                                 </span><span class="no">:mail/from</span><span class="w"> </span><span class="p">(</span><span class="nf">message/from</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w">
+                                 </span><span class="no">:mail/to</span><span class="w"> </span><span class="p">(</span><span class="nf">message/to</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w">
+                                 </span><span class="no">:mail/cc</span><span class="w"> </span><span class="p">(</span><span class="nf">cc-list</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w">
+                                 </span><span class="no">:mail/bcc</span><span class="w"> </span><span class="p">(</span><span class="nf">bcc-list</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w">
+                                 </span><span class="no">:mail/subject</span><span class="w"> </span><span class="p">(</span><span class="nf">message/subject</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w">
+                                 </span><span class="no">:mail/date-sent</span><span class="w"> </span><span class="p">(</span><span class="nf">get-sent-date</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w">
+                                 </span><span class="no">:mail/date-received</span><span class="w"> </span><span class="p">(</span><span class="nf">get-received-date</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w">
+                                 </span><span class="no">:mail/text-body</span><span class="w"> </span><span class="p">(</span><span class="nf">get-text-body</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w">
+                                 </span><span class="no">:mail/html-body</span><span class="w"> </span><span class="p">(</span><span class="nf">get-html-body</span><span class="w"> </span><span class="n">msg</span><span class="p">)}])))</span><span class="w">
+</span></code></pre></div></div>
 
 <p>We use the <code class="language-plaintext highlighter-rouge">@</code>-sign before the <code class="language-plaintext highlighter-rouge">(d/transact…)</code> call because Datomic normally returns a promise of the completed transaction. However, we want to force Datomic to complete each transaction before moving on by deref-ing it with the <code class="language-plaintext highlighter-rouge">@</code>-sign. Per the Clojure docs: “Calls to deref/@ prior to delivery will block.”</p>
 
 <p>If you run this function in your REPL, you should see it start to ingest your email from Gmail!</p>
 
-<script src="https://gist.github.com/mathias/9879552.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">autodjinn.core/ingest-inbox</span><span class="p">)</span><span class="w">
+</span><span class="n">Subject</span><span class="w"> </span><span class="mi">3</span><span class="w">
+</span><span class="n">Testing!</span><span class="w">
+</span><span class="n">Subject</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="n">Subject</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="c1">;=&gt; nil</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">d/q</span><span class="w"> </span><span class="o">'</span><span class="p">[</span><span class="no">:find</span><span class="w"> </span><span class="n">?eid</span><span class="w"> </span><span class="no">:where</span><span class="w"> </span><span class="p">[</span><span class="n">?eid</span><span class="w"> </span><span class="no">:mail/uid</span><span class="w"> </span><span class="n">_</span><span class="p">]]</span><span class="w"> </span><span class="p">(</span><span class="nf">new-db-val</span><span class="p">))</span><span class="w">
+</span><span class="c1">;=&gt; #{[17592186045419] [17592186045421] [17592186045423] [17592186045425]}</span><span class="w">
+</span></code></pre></div></div>
 
 <p>Note that this could a take a <strong>long time</strong> if you’ve chosen to import a really large Gmail inbox! You might want to stop the import at some point; in most REPLs <code class="language-plaintext highlighter-rouge">Ctrl-c</code> will stop the running function.</p>
 
@@ -318,7 +636,15 @@
 
 <p>What does one of those database entities look like when we run it through Datomic’s <a href="http://docs.datomic.com/clojure/index.html#datomic.api/entity">entity</a> and <a href="http://docs.datomic.com/clojure/index.html#datomic.api/touch">touch</a> functions to instantiate all its attributes?</p>
 
-<script src="https://gist.github.com/mathias/9879636.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">my-mail</span><span class="w"> </span><span class="p">(</span><span class="nb">ffirst</span><span class="w"> </span><span class="p">(</span><span class="nf">d/q</span><span class="w"> </span><span class="o">'</span><span class="p">[</span><span class="no">:find</span><span class="w"> </span><span class="n">?eid</span><span class="w"> </span><span class="no">:where</span><span class="w"> </span><span class="p">[</span><span class="n">?eid</span><span class="w"> </span><span class="no">:mail/uid</span><span class="w"> </span><span class="n">_</span><span class="p">]]</span><span class="w"> </span><span class="p">(</span><span class="nf">new-db-val</span><span class="p">))))</span><span class="w">
+</span><span class="c1">;=&gt; #'user/my-mail</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="n">my-mail</span><span class="w">
+</span><span class="c1">;=&gt; 17592186045419</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">d/entity</span><span class="w"> </span><span class="p">(</span><span class="nf">new-db-val</span><span class="p">)</span><span class="w"> </span><span class="n">my-mail</span><span class="p">)</span><span class="w">
+</span><span class="c1">;=&gt; {:db/id 17592186045419}</span><span class="w">
+</span><span class="n">user&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">d/touch</span><span class="w"> </span><span class="p">(</span><span class="nf">d/entity</span><span class="w"> </span><span class="p">(</span><span class="nf">new-db-val</span><span class="p">)</span><span class="w"> </span><span class="n">my-mail</span><span class="p">))</span><span class="w">
+</span><span class="c1">;=&gt; {:mail/cc #{"matt@bendyworks.com"}, :mail/from "Matt Gauger &lt;contact@mattgauger.com&gt;", :mail/date-sent #inst "2014-03-28T16:35:22.000-00:00", :mail/uid "CAJiAYR90LbbN6k8tVXuhQc8f6bZoK647ycdc7mxF5mVEaoLKHw@mail.gmail.com", :mail/to #{"contact@mattgauger.com"}, :mail/html-body "&lt;div dir=\"ltr\"&gt;Body&lt;/div&gt;\r\n", :mail/subject "With Matt@Bendyworks in CC", :mail/date-received #inst "2014-03-28T16:35:42.000-00:00", :mail/text-body "Body\r\n", :db/id 17592186045419}</span><span class="w">
+</span></code></pre></div></div>
 
 <h2 id="wrapping-up">Wrapping up</h2>
 

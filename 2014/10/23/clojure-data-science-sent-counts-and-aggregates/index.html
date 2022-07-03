@@ -62,7 +62,9 @@
 
 <p>Below is output when I run <code class="language-plaintext highlighter-rouge">lein ancient</code> on the last post’s finished git tag, <code class="language-plaintext highlighter-rouge">v0.1.1</code>. To go back to that state, you can run <code class="language-plaintext highlighter-rouge">git checkout v0.1.1</code> on the <a href="https://github.com/mathias/autodjinn">autodjinn repo</a>.</p>
 
-<script src="https://gist.github.com/mathias/c349dc7cb110edb56235.js"></script>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>lein ancient
+<span class="o">[</span>jarohen/nomad <span class="s2">"0.7.0"</span><span class="o">]</span> is available but we use <span class="s2">"0.6.3"</span>
+</code></pre></div></div>
 
 <p>It looks like our <a href="https://github.com/james-henderson/nomad">nomad</a> dependency is out of date. Update the version number in <code class="language-plaintext highlighter-rouge">project.clj</code> to <code class="language-plaintext highlighter-rouge">0.7.0</code> and run <code class="language-plaintext highlighter-rouge">lein ancient</code> again to verify that it worked.</p>
 
@@ -74,7 +76,11 @@
 
 <p>If you remember back to the <a href="/2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/">first post</a>, we wrapped up by querying for entity IDs and then using Datomic’s built-in <code class="language-plaintext highlighter-rouge">entity</code> and <code class="language-plaintext highlighter-rouge">touch</code> functions to instantiate each message with all of its attributes. We had to do this because the query itself only returned a set of entity IDs:</p>
 
-<script src="https://gist.github.com/mathias/ab5a827ca860c89e0043.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">autodjinn.core&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">d/q</span><span class="w"> </span><span class="o">'</span><span class="p">[</span><span class="no">:find</span><span class="w"> </span><span class="n">?eid</span><span class="w">
+                       </span><span class="no">:where</span><span class="w"> </span><span class="p">[</span><span class="n">?eid</span><span class="w"> </span><span class="no">:mail/uid</span><span class="w"> </span><span class="n">_</span><span class="p">]]</span><span class="w">
+                     </span><span class="p">(</span><span class="nf">new-db-val</span><span class="p">))</span><span class="w">
+</span><span class="c1">;=&gt; #{[17592186045419] [17592186045421] [17592186045423] [17592186045425]}</span><span class="w">
+</span></code></pre></div></div>
 
 <p>Note that the Datomic query is made up of several parts:</p>
 
@@ -85,19 +91,33 @@
 
 <p>We could pass in the <code class="language-plaintext highlighter-rouge">:mail/uid</code> we care about, and only get one message’s entity-ID back.</p>
 
-<script src="https://gist.github.com/mathias/4990c69f1e4c4a7dc7e9.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">autodjinn.core&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">d/q</span><span class="w"> </span><span class="o">'</span><span class="p">[</span><span class="no">:find</span><span class="w"> </span><span class="n">?eid</span><span class="w">
+                       </span><span class="no">:in</span><span class="w"> </span><span class="n">$</span><span class="w"> </span><span class="n">?uid</span><span class="w">
+                       </span><span class="no">:where</span><span class="w"> </span><span class="p">[</span><span class="n">?eid</span><span class="w"> </span><span class="no">:mail/uid</span><span class="w"> </span><span class="n">?uid</span><span class="p">]]</span><span class="w">
+                     </span><span class="p">(</span><span class="nf">new-db-val</span><span class="p">)</span><span class="w">
+                     </span><span class="s">"f672479d-ff67-4cce-b67c-6e40962cf7d7@xtinp2mta101.xt.local"</span><span class="p">)</span><span class="w">
+</span><span class="c1">;=&gt; #{[17592186045425]}</span><span class="w">
+</span></code></pre></div></div>
 
 <p>Notice how the <code class="language-plaintext highlighter-rouge">?uid</code> variable gets passed in with the <code class="language-plaintext highlighter-rouge">:in</code> clause, as the third argument to <code class="language-plaintext highlighter-rouge">d/q</code>?</p>
 
 <p>Or we could change the query to match on other attributes:</p>
 
-<script src="https://gist.github.com/mathias/3685937809a50e36c424.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">autodjinn.core&gt;</span><span class="w">  </span><span class="p">(</span><span class="nf">d/q</span><span class="w"> </span><span class="o">'</span><span class="p">[</span><span class="no">:find</span><span class="w"> </span><span class="n">?eid</span><span class="w">
+                        </span><span class="no">:where</span><span class="w"> </span><span class="p">[</span><span class="n">?eid</span><span class="w"> </span><span class="no">:mail/to</span><span class="w"> </span><span class="n">_</span><span class="p">]]</span><span class="w">
+                      </span><span class="p">(</span><span class="nf">new-db-val</span><span class="p">))</span><span class="w">
+</span><span class="c1">;=&gt; #{[17592186045419] [17592186045421] [17592186045423] [17592186045425]}</span><span class="w">
+</span></code></pre></div></div>
 
 <p>In all these cases, we’d still get the entity IDs back because the <code class="language-plaintext highlighter-rouge">:find</code> clause tells Datomic to return <code class="language-plaintext highlighter-rouge">?eid</code>. Typically, we pass around entity IDs and lazy-load any facts (attributes) that we need off that entity.</p>
 
 <p>But, we could just as easily return other attributes from an entity as part of a query. Let’s ask for the recipients of all the emails in our system:</p>
 
-<script src="https://gist.github.com/mathias/be2baf0af0b652966240.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">autodjinn.core&gt;</span><span class="w">  </span><span class="p">(</span><span class="nf">d/q</span><span class="w"> </span><span class="o">'</span><span class="p">[</span><span class="no">:find</span><span class="w"> </span><span class="n">?to</span><span class="w">
+                        </span><span class="no">:where</span><span class="w"> </span><span class="p">[</span><span class="n">?eid</span><span class="w"> </span><span class="no">:mail/to</span><span class="w"> </span><span class="n">?to</span><span class="p">]]</span><span class="w">
+                      </span><span class="p">(</span><span class="nf">new-db-val</span><span class="p">))</span><span class="w">
+</span><span class="c1">;=&gt; #{["matt@example.com"] ["notifications@example.com"]}</span><span class="w">
+</span></code></pre></div></div>
 
 <p>While it is less common to return only the value of an entity’s attribute, being able to do so will allow us to build more functionality on top of our email abstraction later.</p>
 
@@ -105,11 +125,25 @@
 
 <p>Datomic creates a unique set for the values returned by a query. This is generally a great thing, since it gets around some of the issues that one can run into with JOINing in SQL. But in this case, it is not ideal for what we want to accomplish. We could try to get around the uniqueness constraint on output by returning vectors of the entity ID and the <code class="language-plaintext highlighter-rouge">?to</code> address, and then mapping across the result to pull out the second item:</p>
 
-<script src="https://gist.github.com/mathias/d6401a036d032caccde3.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">autodjinn.core&gt;</span><span class="w">  </span><span class="p">(</span><span class="nf">d/q</span><span class="w"> </span><span class="o">'</span><span class="p">[</span><span class="no">:find</span><span class="w"> </span><span class="n">?eid</span><span class="w"> </span><span class="n">?to</span><span class="w">
+                        </span><span class="no">:where</span><span class="w"> </span><span class="p">[</span><span class="n">?eid</span><span class="w"> </span><span class="no">:mail/to</span><span class="w"> </span><span class="n">?to</span><span class="p">]]</span><span class="w">
+                      </span><span class="p">(</span><span class="nf">new-db-val</span><span class="p">))</span><span class="w">
+</span><span class="c1">;=&gt; #{[17592186045423 "notifications@example.com"] [17592186045421 "notifications@example.com"] [17592186045421 "matt@example.com"] [17592186045419 "notifications@example.com"] [17592186045425 "notifications@example.com"]}</span><span class="w">
+
+</span><span class="n">autodjinn.core&gt;</span><span class="w">  </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="nb">second</span><span class="w"> </span><span class="p">(</span><span class="nf">d/q</span><span class="w"> </span><span class="o">'</span><span class="p">[</span><span class="no">:find</span><span class="w"> </span><span class="n">?eid</span><span class="w"> </span><span class="n">?to</span><span class="w">
+                                    </span><span class="no">:where</span><span class="w"> </span><span class="p">[</span><span class="n">?eid</span><span class="w"> </span><span class="no">:mail/to</span><span class="w"> </span><span class="n">?to</span><span class="p">]]</span><span class="w">
+                                  </span><span class="p">(</span><span class="nf">new-db-val</span><span class="p">)))</span><span class="w">
+</span><span class="c1">;=&gt; ("notifications@example.com" "notifications@example.com" "matt@example.com" "notifications@example.com" "notifications@example.com")</span><span class="w">
+</span></code></pre></div></div>
 
 <p>There’s a simpler way that we can use in the Datomic query. By keeping it inside Datomic, we can later combine this approach with more-complex queries. We can tell the Datomic query to look at other attributes when considering what the unique key is by passing the query a <code class="language-plaintext highlighter-rouge">:with</code> clause. By changing our query slightly to include a <code class="language-plaintext highlighter-rouge">:with</code> clause, we end up with the full list of recipients in our datastore:</p>
 
-<script src="https://gist.github.com/mathias/f36ae56bef0e1b6cdfa9.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">autodjinn.core&gt;</span><span class="w">  </span><span class="p">(</span><span class="nf">d/q</span><span class="w"> </span><span class="o">'</span><span class="p">[</span><span class="no">:find</span><span class="w"> </span><span class="n">?to</span><span class="w">
+                        </span><span class="no">:with</span><span class="w"> </span><span class="n">?eid</span><span class="w">
+                        </span><span class="no">:where</span><span class="w"> </span><span class="p">[</span><span class="n">?eid</span><span class="w"> </span><span class="no">:mail/to</span><span class="w"> </span><span class="n">?to</span><span class="p">]]</span><span class="w">
+                      </span><span class="p">(</span><span class="nf">new-db-val</span><span class="p">))</span><span class="w">
+</span><span class="c1">;=&gt; [["notifications@example.com"] ["notifications@example.com"] ["notifications@example.com"] ["matt@example.com"] ["notifications@example.com"]]</span><span class="w">
+</span></code></pre></div></div>
 
 <p>At this point, it might be a good idea to review Datomic’s <a href="http://docs.datomic.com/query.html">querying</a> guide. We’ll be using some of the advanced querying features found in the later sections of that guide, most notably aggregate functions.</p>
 
@@ -121,7 +155,12 @@
 
 <p>A simple way to do this would be to wrap our previous query in the <a href="http://clojure.github.io/clojure/clojure.core-api.html#clojure.core/frequencies">frequencies</a> function that Clojure.core provides. <code class="language-plaintext highlighter-rouge">frequencies</code> returns a map of items with their count from a Clojure collection.</p>
 
-<script src="https://gist.github.com/mathias/af050f75d1c610d6d422.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">autodjinn.core&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">frequencies</span><span class="w"> </span><span class="p">(</span><span class="nf">d/q</span><span class="w"> </span><span class="o">'</span><span class="p">[</span><span class="no">:find</span><span class="w"> </span><span class="n">?to</span><span class="w">
+                                    </span><span class="no">:with</span><span class="w"> </span><span class="n">?eid</span><span class="w">
+                                    </span><span class="no">:where</span><span class="w"> </span><span class="p">[</span><span class="n">?eid</span><span class="w"> </span><span class="no">:mail/to</span><span class="w"> </span><span class="n">?to</span><span class="p">]]</span><span class="w">
+                                  </span><span class="p">(</span><span class="nf">new-db-val</span><span class="p">)))</span><span class="w">
+</span><span class="c1">;=&gt; {["notifications@example.com"] 4, ["matt@example.com"] 1}</span><span class="w">
+</span></code></pre></div></div>
 
 <p>However, we want to perform the same sort of thing in Datomic itself. To do that, we’re going to need to know about aggregate functions. Aggregate functions operate over the intermediate results of a Datomic query. Datomic provides functions like <code class="language-plaintext highlighter-rouge">max</code>, <code class="language-plaintext highlighter-rouge">min</code>, <code class="language-plaintext highlighter-rouge">sum</code>, <code class="language-plaintext highlighter-rouge">count</code>, <code class="language-plaintext highlighter-rouge">rand</code> (for getting a random value out of the query results), and more. With aggregates, we need to be sure to use a <code class="language-plaintext highlighter-rouge">:with</code> clause to ensure we aggregate over all our values.</p>
 
@@ -131,7 +170,15 @@
 
 <p>When the query looks at records in the data, our <code class="language-plaintext highlighter-rouge">:where</code> clause gives each position in the vector an id and a name based on position in the vector.)</p>
 
-<script src="https://gist.github.com/mathias/6b8da156388ed1cd9290.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">autodjinn.core&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">d/q</span><span class="w"> </span><span class="o">'</span><span class="p">[</span><span class="no">:find</span><span class="w"> </span><span class="n">?name</span><span class="w"> </span><span class="p">(</span><span class="nb">count</span><span class="w"> </span><span class="n">?name</span><span class="p">)</span><span class="w">
+                       </span><span class="no">:with</span><span class="w"> </span><span class="n">?id</span><span class="w">
+                       </span><span class="no">:where</span><span class="w"> </span><span class="p">[</span><span class="n">?id</span><span class="w"> </span><span class="n">?name</span><span class="p">]]</span><span class="w">
+                     </span><span class="p">[[</span><span class="mi">1</span><span class="w"> </span><span class="s">"Jon"</span><span class="p">]</span><span class="w">
+                      </span><span class="p">[</span><span class="mi">2</span><span class="w"> </span><span class="s">"Bob"</span><span class="p">]</span><span class="w">
+                      </span><span class="p">[</span><span class="mi">3</span><span class="w"> </span><span class="s">"Jon"</span><span class="p">]</span><span class="w">
+                      </span><span class="p">[</span><span class="mi">4</span><span class="w"> </span><span class="s">"Chris"</span><span class="p">]])</span><span class="w">
+</span><span class="c1">;=&gt; [["Bob" 1] ["Chris" 1] ["Jon" 2]]</span><span class="w">
+</span></code></pre></div></div>
 
 <p>Let’s review what happened there. Before the <code class="language-plaintext highlighter-rouge">count</code> aggregate function was applied, our results looked like this:</p>
 
@@ -141,7 +188,12 @@
 
 <p>It makes sense that we can do the same thing with our recipient email addresses from the previous query. Combining our previous queries with the <code class="language-plaintext highlighter-rouge">count</code> aggregate function, we get:</p>
 
-<script src="https://gist.github.com/mathias/8b346f1019d588bea534.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">autodjinn.core&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">d/q</span><span class="w"> </span><span class="o">'</span><span class="p">[</span><span class="no">:find</span><span class="w"> </span><span class="n">?to</span><span class="w"> </span><span class="p">(</span><span class="nb">count</span><span class="w"> </span><span class="n">?to</span><span class="p">)</span><span class="w">
+                       </span><span class="no">:with</span><span class="w"> </span><span class="n">?eid</span><span class="w">
+                       </span><span class="no">:where</span><span class="w"> </span><span class="p">[</span><span class="n">?eid</span><span class="w"> </span><span class="no">:mail/to</span><span class="w"> </span><span class="n">?to</span><span class="p">]]</span><span class="w">
+                     </span><span class="p">(</span><span class="nf">new-db-val</span><span class="p">))</span><span class="w">
+</span><span class="p">[[</span><span class="s">"matt@example.com"</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="s">"notifications@example.com"</span><span class="w"> </span><span class="mi">4</span><span class="p">]]</span><span class="w">
+</span></code></pre></div></div>
 
 <p>That looks like the same kind of data we were getting with the use of the <code class="language-plaintext highlighter-rouge">frequencies</code> function before! So now we know how to use a Datomic aggregate function to count results in our queries.</p>
 
@@ -155,11 +207,27 @@
 
 <p>So what would the inner query look like? Remember that the outer query will still need a field to pass to the <code class="language-plaintext highlighter-rouge">:with</code> clause, so we’ll probably want to pass through the entity ID.</p>
 
-<script src="https://gist.github.com/mathias/61e60a563ffc29f06af8.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">autodjinn.core&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">d/q</span><span class="w"> </span><span class="o">'</span><span class="p">[</span><span class="no">:find</span><span class="w"> </span><span class="n">?from</span><span class="w"> </span><span class="n">?to</span><span class="w">
+                       </span><span class="no">:with</span><span class="w"> </span><span class="n">?eid</span><span class="w">
+                       </span><span class="no">:where</span><span class="w"> </span><span class="p">[</span><span class="n">?eid</span><span class="w"> </span><span class="no">:mail/from</span><span class="w"> </span><span class="n">?from</span><span class="p">]</span><span class="w">
+                              </span><span class="p">[</span><span class="n">?eid</span><span class="w"> </span><span class="no">:mail/to</span><span class="w"> </span><span class="n">?to</span><span class="p">]]</span><span class="w">
+                     </span><span class="p">(</span><span class="nf">new-db-val</span><span class="p">))</span><span class="w">
+</span><span class="c1">;=&gt; [["amy@example.com" "notifications@example.com"] ["hi@example.com" "notifications@example.com"] ["amy@example.com" "matt@example.com"] ["amy@example.com" "notifications@example.com"] ["hi@example.com" "notifications@example.com"]]</span><span class="w">
+</span></code></pre></div></div>
 
 <p>Those tuples will be used by our outer query. However, we also need a combined value for the count to operate on. For that, we can throw in a function call in the <code class="language-plaintext highlighter-rouge">:where</code> clause and give it a binding at the end for Datomic to use for that new value. In this case, I’ll combine the <code class="language-plaintext highlighter-rouge">?from</code> and <code class="language-plaintext highlighter-rouge">?to</code> values into a PersistentVector that the <code class="language-plaintext highlighter-rouge">count</code> aggregate function can use. The combined query ends up looking like this:</p>
 
-<script src="https://gist.github.com/mathias/d26c7175670b8c29e7c2.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">autodjinn.core&gt;</span><span class="w"> </span><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">[</span><span class="n">db</span><span class="w"> </span><span class="p">(</span><span class="nf">new-db-val</span><span class="p">)]</span><span class="w">
+                  </span><span class="p">(</span><span class="nf">d/q</span><span class="w"> </span><span class="o">'</span><span class="p">[</span><span class="no">:find</span><span class="w"> </span><span class="n">?from</span><span class="w"> </span><span class="n">?to</span><span class="w"> </span><span class="p">(</span><span class="nb">count</span><span class="w"> </span><span class="n">?combined</span><span class="p">)</span><span class="w">
+                         </span><span class="no">:with</span><span class="w"> </span><span class="n">?eid</span><span class="w">
+                         </span><span class="no">:where</span><span class="w"> </span><span class="p">[</span><span class="n">?eid</span><span class="w"> </span><span class="n">?from</span><span class="w"> </span><span class="n">?to</span><span class="p">]</span><span class="w">
+                                </span><span class="p">[(</span><span class="nb">vector</span><span class="w"> </span><span class="n">?from</span><span class="w"> </span><span class="n">?to</span><span class="p">)</span><span class="w"> </span><span class="n">?combined</span><span class="p">]]</span><span class="w">
+                       </span><span class="p">(</span><span class="nf">d/q</span><span class="w"> </span><span class="o">'</span><span class="p">[</span><span class="no">:find</span><span class="w"> </span><span class="n">?eid</span><span class="w"> </span><span class="n">?from</span><span class="w"> </span><span class="n">?to</span><span class="w">
+                              </span><span class="no">:where</span><span class="w"> </span><span class="p">[</span><span class="n">?eid</span><span class="w"> </span><span class="no">:mail/from</span><span class="w"> </span><span class="n">?from</span><span class="p">]</span><span class="w">
+                                     </span><span class="p">[</span><span class="n">?eid</span><span class="w"> </span><span class="no">:mail/to</span><span class="w"> </span><span class="n">?to</span><span class="p">]]</span><span class="w">
+                            </span><span class="n">db</span><span class="p">)))</span><span class="w">
+</span><span class="c1">;=&gt; [["amy@example.com" "matt@example.com" 1] ["amy@example.com" "notifications@example.com" 2] ["hi@example.com" "notifications@example.com" 2]]</span><span class="w">
+</span></code></pre></div></div>
 
 <p>And the output is as we expect.</p>
 
@@ -171,13 +239,49 @@
 
 <p>Such a query function typically looks like this:</p>
 
-<script src="https://gist.github.com/mathias/f61fb370a3a2120daf6f.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">count-from-to-pairs</span><span class="w">
+  </span><span class="p">([]</span><span class="w"> </span><span class="p">(</span><span class="nf">count-from-to-pairs</span><span class="w"> </span><span class="p">(</span><span class="nf">new-db-val</span><span class="p">)))</span><span class="w">
+  </span><span class="p">([</span><span class="n">db</span><span class="p">]</span><span class="w">
+     </span><span class="p">(</span><span class="nf">d/q</span><span class="w"> </span><span class="o">'</span><span class="p">[</span><span class="no">:find</span><span class="w"> </span><span class="n">?from</span><span class="w"> </span><span class="n">?to</span><span class="w"> </span><span class="p">(</span><span class="nb">count</span><span class="w"> </span><span class="n">?combined</span><span class="p">)</span><span class="w">
+            </span><span class="no">:with</span><span class="w"> </span><span class="n">?eid</span><span class="w">
+            </span><span class="no">:where</span><span class="w"> </span><span class="p">[</span><span class="n">?eid</span><span class="w"> </span><span class="n">?from</span><span class="w"> </span><span class="n">?to</span><span class="p">]</span><span class="w">
+                   </span><span class="p">[(</span><span class="nb">vector</span><span class="w"> </span><span class="n">?from</span><span class="w"> </span><span class="n">?to</span><span class="p">)</span><span class="w"> </span><span class="n">?combined</span><span class="p">]]</span><span class="w">
+          </span><span class="p">(</span><span class="nf">d/q</span><span class="w"> </span><span class="o">'</span><span class="p">[</span><span class="no">:find</span><span class="w"> </span><span class="n">?eid</span><span class="w"> </span><span class="n">?from</span><span class="w"> </span><span class="n">?to</span><span class="w">
+                 </span><span class="no">:where</span><span class="w"> </span><span class="p">[</span><span class="n">?eid</span><span class="w"> </span><span class="no">:mail/from</span><span class="w"> </span><span class="n">?from</span><span class="p">]</span><span class="w">
+                        </span><span class="p">[</span><span class="n">?eid</span><span class="w"> </span><span class="no">:mail/to</span><span class="w"> </span><span class="n">?to</span><span class="p">]]</span><span class="w">
+               </span><span class="n">db</span><span class="p">)))</span><span class="w">
+</span></code></pre></div></div>
 
 <p>By taking advantage of multiple arities, we can default to not having to pass a database value into the function. But in the cases where we do need to ensure a particular database version is used, we can do that. This is a very powerful idiom that I’ve learned since I began to use Datomic, and I suggest you structure all your query functions similarly.</p>
 
 <p>Now, let’s take that function that only queries for <code class="language-plaintext highlighter-rouge">:mail/to</code> addresses and make it more generic, with specific wrapper functions for each case where we’d want to use it:</p>
 
-<script src="https://gist.github.com/mathias/67647105799f7f2ff1cf.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">count-address-pairs-q</span><span class="w">
+  </span><span class="p">([</span><span class="n">attr</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nf">count-address-pairs-q</span><span class="w"> </span><span class="p">(</span><span class="nf">new-db-val</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">))</span><span class="w">
+  </span><span class="p">([</span><span class="n">db</span><span class="w"> </span><span class="n">attr</span><span class="p">]</span><span class="w">
+     </span><span class="p">(</span><span class="nf">d/q</span><span class="w"> </span><span class="o">'</span><span class="p">[</span><span class="no">:find</span><span class="w"> </span><span class="n">?from</span><span class="w"> </span><span class="n">?to</span><span class="w"> </span><span class="p">(</span><span class="nb">count</span><span class="w"> </span><span class="n">?combined</span><span class="p">)</span><span class="w">
+            </span><span class="no">:with</span><span class="w"> </span><span class="n">?eid</span><span class="w">
+            </span><span class="no">:where</span><span class="w"> </span><span class="p">[</span><span class="n">?eid</span><span class="w"> </span><span class="n">?from</span><span class="w"> </span><span class="n">?to</span><span class="p">]</span><span class="w">
+                   </span><span class="p">[(</span><span class="nb">vector</span><span class="w"> </span><span class="n">?from</span><span class="w"> </span><span class="n">?to</span><span class="p">)</span><span class="w"> </span><span class="n">?combined</span><span class="p">]]</span><span class="w">
+          </span><span class="p">(</span><span class="nf">d/q</span><span class="w"> </span><span class="o">'</span><span class="p">[</span><span class="no">:find</span><span class="w"> </span><span class="n">?eid</span><span class="w"> </span><span class="n">?from</span><span class="w"> </span><span class="n">?to</span><span class="w">
+                 </span><span class="no">:in</span><span class="w"> </span><span class="n">$</span><span class="w"> </span><span class="n">?attr</span><span class="w">
+                 </span><span class="no">:where</span><span class="w"> </span><span class="p">[</span><span class="n">?eid</span><span class="w"> </span><span class="no">:mail/from</span><span class="w"> </span><span class="n">?from</span><span class="p">]</span><span class="w">
+                        </span><span class="p">[</span><span class="n">?eid</span><span class="w"> </span><span class="n">?attr</span><span class="w"> </span><span class="n">?to</span><span class="p">]]</span><span class="w">
+               </span><span class="n">db</span><span class="w">
+               </span><span class="n">attr</span><span class="p">))))</span><span class="w">
+
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">count-from-to-pairs</span><span class="w">
+  </span><span class="p">([]</span><span class="w"> </span><span class="p">(</span><span class="nf">count-from-to-pairs</span><span class="w"> </span><span class="p">(</span><span class="nf">new-db-val</span><span class="p">)))</span><span class="w">
+  </span><span class="p">([</span><span class="n">db</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nf">count-address-pairs-q</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="no">:mail/to</span><span class="p">)))</span><span class="w">
+
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">count-from-cc-pairs</span><span class="w">
+  </span><span class="p">([]</span><span class="w"> </span><span class="p">(</span><span class="nf">count-from-cc-pairs</span><span class="w"> </span><span class="p">(</span><span class="nf">new-db-val</span><span class="p">)))</span><span class="w">
+  </span><span class="p">([</span><span class="n">db</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nf">count-address-pairs-q</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="no">:mail/cc</span><span class="p">)))</span><span class="w">
+
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">count-from-bcc-pairs</span><span class="w">
+  </span><span class="p">([]</span><span class="w"> </span><span class="p">(</span><span class="nf">count-from-bcc-pairs</span><span class="w"> </span><span class="p">(</span><span class="nf">new-db-val</span><span class="p">)))</span><span class="w">
+  </span><span class="p">([</span><span class="n">db</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nf">count-address-pairs-q</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="no">:mail/bcc</span><span class="p">)))</span><span class="w">
+</span></code></pre></div></div>
 
 <p>Note that we had to change the inner query to take the attr we want to query on as a variable; this is the proper way to pass a piece of data into a query we want to run. The <code class="language-plaintext highlighter-rouge">$</code> that comes first in the <code class="language-plaintext highlighter-rouge">:in</code> clause tells Datomic to use the second <code class="language-plaintext highlighter-rouge">d/q</code> argument as our dataset (the db value we pass in), and the <code class="language-plaintext highlighter-rouge">?attr</code> tells it to bind the third <code class="language-plaintext highlighter-rouge">d/q</code> argument as the variable <code class="language-plaintext highlighter-rouge">?attr</code>.</p>
 
@@ -203,7 +307,34 @@
 
 <p>Add the following maps to the <code class="language-plaintext highlighter-rouge">schema-txn</code> vector:</p>
 
-<script src="https://gist.github.com/mathias/661dadfdb2e639209452.js"></script>
+<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">   </span><span class="c1">;; sent-counts:</span><span class="w">
+   </span><span class="p">{</span><span class="no">:db/id</span><span class="w"> </span><span class="o">#</span><span class="n">db/id</span><span class="p">[</span><span class="no">:db.part/db</span><span class="p">]</span><span class="w">
+    </span><span class="no">:db/ident</span><span class="w"> </span><span class="no">:sent-count/from</span><span class="w">
+    </span><span class="no">:db/valueType</span><span class="w"> </span><span class="no">:db.type/string</span><span class="w">
+    </span><span class="no">:db/cardinality</span><span class="w"> </span><span class="no">:db.cardinality/one</span><span class="w">
+    </span><span class="no">:db.install/_attribute</span><span class="w"> </span><span class="no">:db.part/db</span><span class="p">}</span><span class="w">
+   </span><span class="p">{</span><span class="no">:db/id</span><span class="w"> </span><span class="o">#</span><span class="n">db/id</span><span class="p">[</span><span class="no">:db.part/db</span><span class="p">]</span><span class="w">
+    </span><span class="no">:db/ident</span><span class="w"> </span><span class="no">:sent-count/to</span><span class="w">
+    </span><span class="no">:db/valueType</span><span class="w"> </span><span class="no">:db.type/string</span><span class="w">
+    </span><span class="no">:db/cardinality</span><span class="w"> </span><span class="no">:db.cardinality/one</span><span class="w">
+    </span><span class="no">:db.install/_attribute</span><span class="w"> </span><span class="no">:db.part/db</span><span class="p">}</span><span class="w">
+   </span><span class="p">{</span><span class="no">:db/id</span><span class="w"> </span><span class="o">#</span><span class="n">db/id</span><span class="p">[</span><span class="no">:db.part/db</span><span class="p">]</span><span class="w">
+    </span><span class="no">:db/ident</span><span class="w"> </span><span class="no">:sent-count/count</span><span class="w">
+    </span><span class="no">:db/valueType</span><span class="w"> </span><span class="no">:db.type/long</span><span class="w">
+    </span><span class="no">:db/cardinality</span><span class="w"> </span><span class="no">:db.cardinality/one</span><span class="w">
+    </span><span class="no">:db.install/_attribute</span><span class="w"> </span><span class="no">:db.part/db</span><span class="p">}</span><span class="w">
+     </span><span class="p">{</span><span class="no">:db/id</span><span class="w"> </span><span class="o">#</span><span class="n">db/id</span><span class="p">[</span><span class="no">:db.part/db</span><span class="p">]</span><span class="w">
+    </span><span class="no">:db/ident</span><span class="w"> </span><span class="no">:sent-count/address-type</span><span class="w">
+    </span><span class="no">:db/valueType</span><span class="w"> </span><span class="no">:db.type/ref</span><span class="w">
+    </span><span class="no">:db/cardinality</span><span class="w"> </span><span class="no">:db.cardinality/one</span><span class="w">
+    </span><span class="no">:db.install/_attribute</span><span class="w"> </span><span class="no">:db.part/db</span><span class="p">}</span><span class="w">
+   </span><span class="p">{</span><span class="no">:db/id</span><span class="w"> </span><span class="o">#</span><span class="n">db/id</span><span class="p">[</span><span class="no">:db.part/user</span><span class="p">]</span><span class="w">
+    </span><span class="no">:db/ident</span><span class="w"> </span><span class="no">:sent-count.address-type/to</span><span class="p">}</span><span class="w">
+   </span><span class="p">{</span><span class="no">:db/id</span><span class="w"> </span><span class="o">#</span><span class="n">db/id</span><span class="p">[</span><span class="no">:db.part/user</span><span class="p">]</span><span class="w">
+    </span><span class="no">:db/ident</span><span class="w"> </span><span class="no">:sent-count.address-type/cc</span><span class="p">}</span><span class="w">
+   </span><span class="p">{</span><span class="no">:db/id</span><span class="w"> </span><span class="o">#</span><span class="n">db/id</span><span class="p">[</span><span class="no">:db.part/user</span><span class="p">]</span><span class="w">
+    </span><span class="no">:db/ident</span><span class="w"> </span><span class="no">:sent-count.address-type/bcc</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
 
 <p>You’ll have to call the <code class="language-plaintext highlighter-rouge">update-schema</code> function in your REPL to run the schema transaction.</p>
 
