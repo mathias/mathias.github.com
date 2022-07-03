@@ -8,6 +8,8 @@ I've now completed a pass at removing the Flickr images from this blog (many of 
 
 In addition to moving the images off Flickr, I pre-processed them with a small script and imagemagick so that the blog posts display smaller thumbnails, intended to be faster to load on mobile. The images lazy load, if the browser supports it, without any external JS, by using the `loading="lazy"` attr in the `img` tag. Each image links to a larger version, but the larger images have also been resized to a vertical height of 1080 pixels and compressed slightly to make them faster to load. Each replaced Flickr image also does not have to load a JS script tag from Flickr to render, which adds to the page size savings.
 
+The images were preprocessed with [this script](https://github.com/mathias/mathias.github.com/blob/b6320db86eabb5dc0ac1a0dad220a065616eecc9/bin/prepare-image-directory.sh). Note: it is destructive to the originals in the directory where it is run.
+
 In the case of the removed Gists, that added up to over 100 script tags removed from at least 7 blog posts. Since each script tag must be separately requested and run by the browser on every page load of one of those pages, this realizes a savings in bandwidth and clientside processing time.
 
 I didn't measure the page sizes or load times before making these changes, but afterwards, I am measuring these sizes locally in Firefox with all assets (including scrolling to load all lazy-loaded images):
