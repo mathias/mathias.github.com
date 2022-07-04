@@ -5,8 +5,8 @@
     <description></description>
     <link>https://blog.mattgauger.com/</link>
     <atom:link href="https://blog.mattgauger.com/atom.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 03 Jul 2022 17:27:23 -0500</pubDate>
-    <lastBuildDate>Sun, 03 Jul 2022 17:27:23 -0500</lastBuildDate>
+    <pubDate>Sun, 03 Jul 2022 19:18:58 -0500</pubDate>
+    <lastBuildDate>Sun, 03 Jul 2022 19:18:58 -0500</lastBuildDate>
     <generator>Jekyll v3.9.2</generator>
     
       <item>
@@ -29,7 +29,7 @@
 | /2022/07/03/a-bit-of-cleanup-for-smaller-faster-pages/       | 16 KB  | 4 requests  |                             |
 | /2022/06/17/another-year-another-keyboard-built/             | 258 KB | 17 requests | has many images             |
 | /2014/10/23/clojure-data-science-sent-counts-and-aggregates/ | 65 KB  | 4 requests  | had many gists              |
-| /2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/  | 108 KB | 4 requests  | largest page of text/markup |
+| /2014/03/30/clojure-data-science-ingesting-your-gmail-inbox/ | 108 KB | 4 requests  | largest page of text/markup |
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Sun, 03 Jul 2022 16:41:00 -0500</pubDate>
