@@ -28,3 +28,6 @@ whitelist:
   - jekyll-redirect-from
 redirect_from:
   json: false
+exclude:
+  - README.md
+  - LICENSE.md
