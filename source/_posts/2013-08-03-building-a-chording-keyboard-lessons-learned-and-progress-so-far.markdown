@@ -8,7 +8,7 @@ redirect_from:
 
 Chording keyboards have been a computing peripheral for a long time. They've been in use at least since Douglas Engelbart gave what is known as [The Mother of all Demos](http://www.youtube.com/watch?v=yJDv-zdhzMY) in 1968. Rather than try to sum up the history and potential of the device here, I recommend you read the excellent essay [Engelbart's Violin](http://www.loper-os.org/?p=861) by Stanislav Datskovskiy on loper-os.org
 
-![Engelbart's chording keyboard in use](/images/2013-08-03-chording/engelkey.jpg)
+![Engelbart's chording keyboard in use](/images/2013-08-03-chording/engelkey.jpg){:class="center-thumb" loading="lazy"}
 
 <cite>Image via [http://research.microsoft.com/en-us/um/people/bibuxton/buxtoncollection/detail.aspx?id=7](http://research.microsoft.com/en-us/um/people/bibuxton/buxtoncollection/detail.aspx?id=7)</cite>
 
@@ -69,7 +69,7 @@ To understand chording keyboards best, it is worth noting that while regular key
 
 After reviewing possible hardware to use to build a chording keyboard, I stumbled upon the Razer Nostromo (and its earlier incarnations from Belkin.) These gaming pads are popular with PC gamers because it puts the WASD keys under your left hand and frees your right hand up for the mouse.
 
-![Razer Nostromo](/images/2013-08-03-chording/razer_nostromo.jpg)
+![Razer Nostromo](/images/2013-08-03-chording/razer_nostromo.jpg){:class="center-thumb" loading="lazy"}
 
 Other features the Nostromo had over other devices were supporting [N-key rollover][1] &mdash; basically, the ability for the keyboard to know that multiple keys are being pressed at once, and send all of those keys to the computer &mdash; as well as a little 4-way directional pad, and blue lights (always a plus!)
 
@@ -118,7 +118,7 @@ For the `concert_cam`, it was easy enough to have a big arcade-style button send
 
 Here's the `concert_cam` button pedestal with Teensy and Raspberry Pi getting wired in:
 
-[![Concert Cam's button tower with a large arcade button on top of a metal frame](/images/2013-08-03-chording/img_1817_9427820477_o-thumb.jpg){:class="thumb" loading="lazy"}](/images/2013-08-03-chording/img_1817_9427820477_o-resized.jpg)
+[![Concert Cam's button tower with a large arcade button on top of a metal frame](/images/2013-08-03-chording/img_1817_9427820477_o-thumb.jpg){:class="center-thumb" loading="lazy"}](/images/2013-08-03-chording/img_1817_9427820477_o-resized.jpg)
 
 <div class="clearfix"></div>
 
@@ -158,7 +158,7 @@ Since I only have about 15 keys and maybe another 4 or 5 input/outputs that I ne
 
 While waiting for the key switches to arrive, I began work on the one non-surface-mount component in the Nostromo that I could solder to: the scroll wheel. On the scroll wheel's PCB, there is a mechanical encoder, a button (the click when you press down on a mouse scroll wheel) and an LED.
 
-[![A close up of the scroll wheel with labels around the circuit pads for "switch," "encoder," and "LED."](/images/2013-08-03-chording/skitched-20130803-121011_9430775972_o-thumb.jpg){:class="thumb" loading="lazy"}](/images/2013-08-03-chording/skitched-20130803-121011_9430775972_o-resized.jpg)
+[![A close up of the scroll wheel with labels around the circuit pads for "switch," "encoder," and "LED."](/images/2013-08-03-chording/skitched-20130803-121011_9430775972_o-thumb.jpg){:class="center-thumb" loading="lazy"}](/images/2013-08-03-chording/skitched-20130803-121011_9430775972_o-resized.jpg)
 
 <div class="clearfix"></div>
 
@@ -217,7 +217,7 @@ The [twiddler\_keymap.txt](https://github.com/mathias/chording/blob/master/twidd
 
 One last decision I need to make is whether to replace the Nostromo's thumb directional pad. The current thumbpad uses membrane switches similar to the keys, and is all surface mount with very little access to its signals. One thought is to replace the 4-way pad with a Playstation-controller style [joystick](https://www.sparkfun.com/products/9032) from Sparkfun.
 
-[![Sparkfun thumb joystick](/images/2013-08-03-chording/sparkfun_joystick.jpg)](https://www.sparkfun.com/products/9032)
+[![Sparkfun thumb joystick](/images/2013-08-03-chording/sparkfun_joystick.jpg){:class="center-thumb" loading="lazy"}](https://www.sparkfun.com/products/9032)
 
 With this joystick, I'd be able to implement either mouse movements or arrow key movements, and could probably toggle which it behaves like with the small button located above the directional pad. However, securely mounting the joystick into the Nostromo case so that it is durable might prove an issue. I've put off making this decision until I have successfully hacked the mechanical switches in.
 

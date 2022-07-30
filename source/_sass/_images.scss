@@ -11,6 +11,13 @@ img.thumb {
   }
 }
 
+img.center-thumb {
+    max-width: unset;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .clearfix:after {
   content: "";
   clear: both;

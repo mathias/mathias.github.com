@@ -53,5 +53,5 @@ My Kyria has gone through many different sets of key caps, and I find I still pr
 
 While I'm not using the Kyria as a daily driver for work, it feels great to type on and I have been enjoying working through [keybr.com](https://www.keybr.com) exercises to learn Colemak-DH. If I were to make any changes, I think I could get away without the extra pinky row. And occasionally I will curse the wires connected everything when they get in the way. This makes me look towards something like a wireless Corne or Ferris/Sweep keyboard, but that will have to be a project for another blog post.
 
-[![Half of my split keyboard, today, with the white, green, purple, and red key cap set](/images/2022-06-17-kyria/thumbs/16-keycaps.jpg){:class="thumb" loading="lazy"}](/images/2022-06-17-kyria/16-keycaps-resized.jpg)
+[![Half of my split keyboard, today, with the white, green, purple, and red key cap set](/images/2022-06-17-kyria/thumbs/16-keycaps.jpg){:class="center-thumb" loading="lazy"}](/images/2022-06-17-kyria/16-keycaps-resized.jpg)
 <div class="clearfix"></div>

@@ -20,8 +20,7 @@ There are quite a few commercial products you can buy. They come with their own 
 
 My first idea for a foot pedal was to use DIY guitar pedal hardware. Such guitar pedals have nice, sturdy aluminum project boxes, robust foot switches, and look pretty good. But the ergonomics of such a pedal worried me: while a guitarist momentarily stomps on guitar pedals to turn them on or off while standing, a programmer would likely be tapping and/or holding a foot pedal for long periods of time, most likely from a seated position.
 
-<img src="/images/2013-08-06-foot-pedal/guitar_pedal_true_bypass_looper.jpg" alt="A guitar true bypass looper pedal with several stomp switches" style="display: block; margin: 0 auto;" loading="lazy" />
-
+![A guitar true bypass looper pedal with several stomp switches](/images/2013-08-06-foot-pedal/guitar_pedal_true_bypass_looper.jpg){:class="center-thumb" :loading="lazy"}
 
 Such a pedal would look something like the above, but with a USB cable coming out of it.  If you wish to use guitar pedal hardware, I suggest checking out [Mammoth Electronics](http://www.mammothelectronics.com/). (I receive no compensation for mentioning them; I have been a happy customer for several years.) For a two-to-three switch foot pedal, I suggest the 1590BB enclosures, and Mammoth can drill them in several ways for you.
 
@@ -31,25 +30,21 @@ The sustain pedal is designed to plug into a digital piano, so it has a 1/4" aud
 
 The wiring is simple: The Teensy (and most Arduinos) can do input pullup resistors for us. I mocked up the circuit with a little breadboard (ignore the weird angle of the Teensy here; it was required to get the pins into this small breadboard.) I downloaded some example button code to the Teensy and verified that it was working.
 
-[![A Teensy microcontroller on a breadboard being wired to a 1/4" audio jack](/images/2013-08-06-foot-pedal/img_1897_9454682228_o-thumb.jpg){:class="thumb" loading="lazy"}](/images/2013-08-06-foot-pedal/img_1897_9454682228_o-resized.jpg)
-<div class="clearfix"></div>
+[![A Teensy microcontroller on a breadboard being wired to a 1/4" audio jack](/images/2013-08-06-foot-pedal/img_1897_9454682228_o-thumb.jpg){:class="center-thumb" loading="lazy"}](/images/2013-08-06-foot-pedal/img_1897_9454682228_o-resized.jpg)
 
 To assemble, we simply solder a digital IO pin to one side of the 1/4" jack, and the other wire gets soldered to ground pin. My button is going to be connected on pin 9.
 
 I had a small project box, much bigger than the Teensy really needed, but suitable for the job. I used my Dremel to cut a round hole for the 1/4" jack, and a rectangular slightly bigger than the mini-USB cable plug for our USB cable.
 
-[![A project box with a 1/4" hole drilled in one end, on a workbench.](/images/2013-08-06-foot-pedal/img_1898_9451903305_o-thumb.jpg){:class="thumb" loading="lazy"}](/images/2013-08-06-foot-pedal/img_1898_9451903305_o-resized.jpg)
-<div class="clearfix"></div>
+[![A project box with a 1/4" hole drilled in one end, on a workbench.](/images/2013-08-06-foot-pedal/img_1898_9451903305_o-thumb.jpg){:class="center-thumb" loading="lazy"}](/images/2013-08-06-foot-pedal/img_1898_9451903305_o-resized.jpg)
 
 Test fitting the Teensy in the project box:
 
-[![Fitting the Teensy into the project box, on a workbench. The Teensy is now soldered to a 1/4" audio jack fitted to the project box.](/images/2013-08-06-foot-pedal/img_1900_9451906889_o-thumb.jpg){:class="thumb" loading="lazy"}](/images/2013-08-06-foot-pedal/img_1900_9451906889_o-resized.jpg)
-<div class="clearfix"></div>
+[![Fitting the Teensy into the project box, on a workbench. The Teensy is now soldered to a 1/4" audio jack fitted to the project box.](/images/2013-08-06-foot-pedal/img_1900_9451906889_o-thumb.jpg){:class="center-thumb" loading="lazy"}](/images/2013-08-06-foot-pedal/img_1900_9451906889_o-resized.jpg)
 
 Lastly, I used some velcro inside to attach the Teensy to the project box. All done with assembly!
 
-[![The enclosed project box plugged into a laptop, with the foot pedal's cable plugged into the project box.](/images/2013-08-06-foot-pedal/img_1902_9451907469_o-thumb.jpg){:class="thumb" loading="lazy"}](/images/2013-08-06-foot-pedal/img_1902_9451907469_o-resized.jpg)
-<div class="clearfix"></div>
+[![The enclosed project box plugged into a laptop, with the foot pedal's cable plugged into the project box.](/images/2013-08-06-foot-pedal/img_1902_9451907469_o-thumb.jpg){:class="center-thumb" loading="lazy"}](/images/2013-08-06-foot-pedal/img_1902_9451907469_o-resized.jpg)
 
 The next step is to program the Teensy to send the key events we want. In this case, my coworker [Josh](https://twitter.com/losingkeys) suggested a vim clutch that enters insert mode when you press down on the pedal, and leaves insert mode when you release it. Since the Teensy's Button class detects both button press and button release events, we can write code to do that.
 
@@ -118,8 +113,7 @@ Overall, this pedal is much cheaper than the high-end pedals mentioned above. Th
 
 However, this pedal only has one foot switch. You could easily add more M-Audio sustain pedals to the design, and keep adding 1/4" jacks to a project box. The Teensy has plenty more IO lines to use! Or you could go for it all in one enclosure with the guitar pedal hardware.
 
-[![Finished project of a foot pedal connected to a project box by a cord, and an USB cord coming out of the project box](/images/2013-08-06-foot-pedal/img_1903_9451908041_o-thumb.jpg){:class="thumb" loading="lazy"}](/images/2013-08-06-foot-pedal/img_1903_9451908041_o-resized.jpg)
-<div class="clearfix"></div>
+[![Finished project of a foot pedal connected to a project box by a cord, and an USB cord coming out of the project box](/images/2013-08-06-foot-pedal/img_1903_9451908041_o-thumb.jpg){:class="center-thumb" loading="lazy"}](/images/2013-08-06-foot-pedal/img_1903_9451908041_o-resized.jpg)
 
 ---
 

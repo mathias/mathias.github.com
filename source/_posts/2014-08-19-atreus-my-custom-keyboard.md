@@ -15,13 +15,11 @@ Almost exactly a month ago, I started working on building my own keyboard. I wan
 Through [Geekhack](http://geekhack.org), I found the [Atreus](https://github.com/technomancy/atreus), a keyboard designed by [Phil Hagelberg](http://technomancy.us/) (better known as [technomancy](https://github.com/technomancy) online.) The Atreus is open source ([hardware](https://github.com/technomancy/atreus), [firmware](https://github.com/technomancy/atreus-firmware)), and has gone through several revisions at this point. My keyboard is done now, and I wanted to share it.
 
 
-[![The completed Atreus keyboard](/images/2014-08-19-atreus/img_3220_14785511628_o-thumb.jpg){:class="thumb" loading="lazy"}](/images/2014-08-19-atreus/img_3220_14785511628_o-resized.jpg)
-<div class="clearfix"></div>
+[![The completed Atreus keyboard](/images/2014-08-19-atreus/img_3220_14785511628_o-thumb.jpg){:class="center-thumb" loading="lazy"}](/images/2014-08-19-atreus/img_3220_14785511628_o-resized.jpg)
 
 [The original Atreus](http://technomancy.us/173) was constructed out of layers of laser-cut acrylic. Since then, some folks on the [Geekhack thread](http://geekhack.org/index.php?topic=54759.0) have redesigned the laser-cut design to be cut out of a sheet of birch plywood on [Ponoko](https://ponoko.com). Ponoko is a great: you upload a file and choose materials and size. The Ponoko website keeps you updated on your project's status as they check your design, pick materials, and so on. Later, your laser-cut project arrives in the mail. I highly recommend Ponoko's service if you need laser cutting and can't get it done at a local makerspace.
 
-[![Sheet of plywood with the Atreus pieces laser cut into it](/images/2014-08-19-atreus/img_3156_14785346149_o-thumb.jpg){:class="thumb" loading="lazy"}](/images/2014-08-19-atreus/img_3156_14785346149_o-resized.jpg)
-<div class="clearfix"></div>
+[![Sheet of plywood with the Atreus pieces laser cut into it](/images/2014-08-19-atreus/img_3156_14785346149_o-thumb.jpg){:class="center-thumb" loading="lazy"}](/images/2014-08-19-atreus/img_3156_14785346149_o-resized.jpg)
 
 I finished the birch ply with semi-gloss marine polyurethane. The polyurethane should give it a durable finish, and added a nice amber tint to the wood. The downside is that more than a week after the final coat went on, the poly is still out gassing some headache-inducing fumes.
 
