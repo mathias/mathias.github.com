@@ -3,14 +3,11 @@
 # Must be in the directory to prepare
 
 # simplify file extensions
-for i in *.jpeg; do
-  mv -v "$i" "${i%.jpeg}.jpg"
+for ext in "JPEG JPG jpeg"; do
+  for i in *.$ext; do
+    mv -v "$i" "${i%.$ext}.jpg"
+  done
 done
-
-for i in *.JPG; do
-  mv -v "$i" "${i%.JPG}.jpg"
-done
-
 
 for i in *.jpg; do
   printf "$i\n"
