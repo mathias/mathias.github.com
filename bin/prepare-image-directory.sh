@@ -2,10 +2,14 @@
 
 # Must be in the directory to prepare
 
-# simplify file extensions
-for ext in "JPEG JPG jpeg"; do
-  for i in *.$ext; do
-    mv -v "$i" "${i%.$ext}.jpg"
+# fix up file extensions
+declare -a Extensions=(".JPEG" ".JPG" ".jpeg" )
+
+for ext in ${Extensions[@]}; do
+  echo "Moving $ext files"
+  for i in *$ext; do
+    new=$(echo $i | sed -e "s/\\$ext/.jpg/")
+    mv -v "$i" "$new"
   done
 done
 
