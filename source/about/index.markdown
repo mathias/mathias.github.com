@@ -16,4 +16,4 @@ You can see what books I'm reading over at [my Goodreads](https://www.goodreads.
 
 ### Blog comments
 
-I've chosen not to include commenting on my blog. If you'd like to get in touch, feel free to contact me at [contact@mattgauger.com](mailto:contact@mattgauger.com) (I no longer use Twitter, which is how I previously asked people to contact me.)
+I've chosen not to include commenting on my blog. If you'd like to get in touch, feel free to contact me at [matt.gauger@gmail.com](mailto:matt.gauger@gmail.com) . Or, reach out on the fediverse to <a rel="me" href="https://mastodon.xyz/@mathiasx">@mathiasx@mastodon.xyz</a>.
