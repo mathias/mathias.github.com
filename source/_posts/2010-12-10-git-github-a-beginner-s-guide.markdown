@@ -24,7 +24,7 @@ The user then creates an account on Github, since they don't have one and it's r
 
 The user is now in their own copy of Heard. Github has forked the open source project, a task which once took Herculean strength and immense popularity to pull off in the dark days of [Sourceforge](http://sourceforge.net/)! The user realizes this forked project is their very own kingdom to do with as they please. And the user, motivated by their hunger for pretty graphs and encouraged by the fact that Github is hosting their fork for free, is ready to jump into coding. (All open source projects get free hosting on Github, and open source does not count against your paid account's number of repositories.)
 
-The first step Github gives after setting up your account is to install git. We'll leave it up the to the reader to track down and install the latest version of git (at the time of this writing, v1.7.3.3) from [http://git-scm.com/](http://git-scm.com/) for their particular operating system.Once our daring, brave fictional hero gets git compiled and installed, Github instructs them to generate an SSH key and enter it into their [Account Settings](https://github.com/account) on Github.
+The first step Github gives after setting up your account is to install git. We'll leave it up the to the reader to track down and install the latest version of git (at the time of this writing, v1.7.3.3) from [http://git-scm.com/](http://git-scm.com/) for their particular operating system.Once our daring, brave fictional hero gets git compiled and installed, Github instructs them to generate an SSH key and enter it into their [Account Settings](https://github.com/account) on Github.
 
 **Sidenote: What are SSH keys and why do I need them?**
 
@@ -237,7 +237,7 @@ Thanks for reading! Please leave comments on places where this could be improved
 
 **Slides from my talk:**
 
-**[Matt Gauger - Git & Github web414 December 2010](http://www.slideshare.net/mathiasx/matt-gauger-git-github-web414-december-2010 "Matt Gauger - Git & Github web414 December 2010")** <object height="355" width="425"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=gitgithubweb414december9th2010-101210120907-phpapp02&amp;stripped_title=matt-gauger-git-github-web414-december-2010&amp;userName=mathiasx"> <param name="allowFullScreen" value="true"> <param name="allowScriptAccess" value="always"><embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=gitgithubweb414december9th2010-101210120907-phpapp02&amp;stripped_title=matt-gauger-git-github-web414-december-2010&amp;userName=mathiasx" type="application/x-shockwave-flash" height="355" width="425"></object>
+**[Matt Gauger - Git & Github web414 December 2010](http://www.slideshare.net/mathiasx/matt-gauger-git-github-web414-december-2010 "Matt Gauger - Git & Github web414 December 2010")**
 
 View more presentations from [mathiasx](http://www.slideshare.net/mathiasx).
 
@@ -245,7 +245,7 @@ View more presentations from [mathiasx](http://www.slideshare.net/mathiasx).
 
 *   Github has great documentation online at [help.github.com](http://help.github.com/). I highly suggest you start there.
 *   Github will point you in the direction of the [gitref.org](http://gitref.org/) page for a quick overview of Git.
-*   Scott Chacon released his book, [Pro Git](http://progit.org/book/), online for free. It is also available from Apress on Amazon: [Pro Git](http://www.amazon.com/gp/product/1430218339)![](http://www.assoc-amazon.com/e/ir?t=httpmattgauco-20&l=as2&o=1&a=1430218339). (~~Full disclosure: Amazon Associates link.~~ [Author's note as of 2015-12-19: I don't have Amazon Affiliates/Associates links on my blog anymore and haven't for awhile.])
+*   Scott Chacon released his book, [Pro Git](http://progit.org/book/), online for free. It is also available from Apress on Amazon: [Pro Git](http://www.amazon.com/gp/product/1430218339).
 *   The [Pro Git blog](http://progit.org/blog.html) is a good place to continue to pick up Git tricks and tips as you learn.
 *   It hasn't been updated in a long time, but the [git ready](http://www.gitready.com/) blog has taught me many tricks that I use with git.
 
