@@ -22,4 +22,4 @@ Of course, I'm not pulling in any of the comments, like this comment on
 [my old wordpress.com blog](bytecodex.wordpress.com) from [Giles
 Bowkett](gilesbowkett.blogspot.com) way back in 2007:
 
-![](http://files.droplr.com/files/787975/CFjD.Screen%20shot%202010-09-28%20at%2019%3A29%3A52.png)
+(Ed note 2023: Image is lost to the sands of time.)
