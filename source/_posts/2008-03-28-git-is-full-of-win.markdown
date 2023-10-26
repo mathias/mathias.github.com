@@ -11,8 +11,7 @@ redirect_from:
 on March 23, 2008.)
 
 The blogosphere seems to be blowing up with regards to the SCM suite
-[git](http://git.or.cz/ "http://git.or.cz/"). At least, the blogosphere
-I frequent.
+[git](https://git-scm.com). At least, the blogosphere I frequent.
 
 git is an open source project started by Linus Torvalds and currently
 maintained by Junio Hamano, intended to replace the proprietary
@@ -44,7 +43,7 @@ to represent this style of passing around changes has nothing to do with
 version control, but gives a good idea if you think of ‘messages’ as the
 changes:
 
-![adhoc.jpg](http://bytecodex.files.wordpress.com/2008/03/adhoc.jpg?w=269&h=184)
+![adhoc.jpg](/images/2008-03-28/adhoc.jpg)
 
 Because all the cool developers hack on laptops now.
 
