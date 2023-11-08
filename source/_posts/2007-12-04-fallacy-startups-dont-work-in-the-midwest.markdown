@@ -78,8 +78,8 @@ developer, graphic designer, systems administrator, management, and
 tester. No need for giant developer teams or marketing department.
 You'll hire a lawyer and accountant as needed, but otherwise you're
 set. It's also possible to outsource all your support in [4-Hour
-Workweek](http://www.amazon.com/4-Hour-Workweek-Escape-Live-Anywhere/dp/0307353133/)fashion,
-or otherwise, a FAQ on your site probably does an even better job.
+Workweek](http://www.amazon.com/4-Hour-Workweek-Escape-Live-Anywhere/dp/0307353133/)
+fashion, or otherwise, a FAQ on your site probably does an even better job.
 
 **Our cost of living is lower.** If you're familiar with Paul
 Graham's essay on [The Future of Web
