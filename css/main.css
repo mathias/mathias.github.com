@@ -12,9 +12,6 @@ body {
   padding: 0;
 }
 
-body {
-  -webkit-text-size-adjust: 100%;
-}
 @font-face {
   font-display: swap;
   font-style: normal;
