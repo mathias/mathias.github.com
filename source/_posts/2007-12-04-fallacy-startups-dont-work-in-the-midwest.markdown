@@ -6,7 +6,7 @@ redirect_from:
   - /blog/2007/12/07/fallacy-startups-dont-work-in-the-midwest/
 ---
 
-(This post is part of my blog archiving project. This post appeared on
+(This post is part of [blog archiving project](/about#old-posts). This post appeared on
 [bytecodex.wordpress.com](http://bytecodex.wordpress.com/2007/12/04/fallacy-startups-dont-work-in-the-midwest/)
 on December 04, 2007.)
 

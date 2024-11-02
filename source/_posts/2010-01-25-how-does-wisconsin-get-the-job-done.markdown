@@ -8,7 +8,7 @@ redirect_from:
   - /2010/01/25/how-does-wisconsin-get-the-job-done-/
 ---
 
-(This post is part of my blog archiving project. This post appeared on [blog.mattgauger.com](http://blog.mattgauger.com/2010/01/25/how-does-wisconsin/) on January 25, 2010.)
+(This post is part of my [blog archiving project](/about#old-posts). This post appeared on [blog.mattgauger.com](http://blog.mattgauger.com/2010/01/25/how-does-wisconsin/) on January 25, 2010.)
 
 The title is the question I asked myself after reading through the latest interview at [UsesThis.com](http://usesthis.com/). I'd thought about using the Creative Commons-licensed stylesheets of Usesthis.com (aka TheSetup) for a nicer [About Me](http://blog.mattgauger.com/about) page than I currently had on this blog. After tweaking the template a little, I realized I could use Jekyll and apply this template to any content I wanted.
 

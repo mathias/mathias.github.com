@@ -6,7 +6,7 @@ redirect_from:
   - /blog/2009/12/27/passion-absurdity-and-creativity/
 ---
 
-(This post is part of my blog archiving project. This post appeared on [blog.mattgauger.com](http://blog.mattgauger.com/2009/12/27/passion-and-creativity/) on December 27, 2009.)
+(This post is part of my [blog archiving project](/about#old-posts). This post appeared on [blog.mattgauger.com](http://blog.mattgauger.com/2009/12/27/passion-and-creativity/) on December 27, 2009.)
 
 Lately I've been reminiscing about __whytheluckystiff_. He disappeared from the internet earlier this year, taking all of his code, writings, and other creations with him. There's more info on the [Wikipedia article](http://en.wikipedia.org/wiki/Why_the_lucky_stiff) and there are [several](http://ejohn.org/blog/eulogy-to-_why/) [eulogies](http://ism.creativepony.com/post/169621989/the-physics-of-a-lucky-stiff) to __why_. His writings have been [mirrored online](http://viewsourcecode.org/why/), luckily, and his code put back on [http://whymirror.github.com/](http://whymirror.github.com/).
 

@@ -6,7 +6,7 @@ redirect_from:
   - /blog/2009/12/27/the-first-2500-are-the-hardest/
 ---
 
-(This post is part of my blog archiving project. This post appeared on [blog.mattgauger.com](http://blog.mattgauger.com/2009/12/27/the-first-2500-are-the-hardest/) on December 27, 2009.)
+(This post is part of my [blog archiving project](/about#old-posts). This post appeared on [blog.mattgauger.com](http://blog.mattgauger.com/2009/12/27/the-first-2500-are-the-hardest/) on December 27, 2009.)
 
 Seth Godin is a prolific blogger. He’s also a successful author. When he hit his [3000th post](http://sethgodin.typepad.com/seths_blog/2009/02/luckiest-guy.html), I remember him writing
 

@@ -6,7 +6,7 @@ redirect_from:
   - /blog/2008/06/03/update-2-status-of-this-blog/
 ---
 
-(This post is part of my blog archiving project. This post appeared on [bytecodex.wordpress.com](http://bytecodex.wordpress.com/2008/06/03/update-2-status-of-this-blog/) on June 3rd, 2008.)
+(This post is part of my [blog archiving project](/about#old-posts). This post appeared on [bytecodex.wordpress.com](http://bytecodex.wordpress.com/2008/06/03/update-2-status-of-this-blog/) on June 3rd, 2008.)
 
 I’ve been away for awhile, and I’ve now moved into Milwaukee (well, technically Shorewood, to keep the urbanites happy; it’s not quite far enough downtown for them). I should have a new ISP in a week here, but until then, I’m writing posts in coffee shops. Which is to say, I’m enjoying a lot of coffee, and that’s not an entirely bad way to spend time.
 

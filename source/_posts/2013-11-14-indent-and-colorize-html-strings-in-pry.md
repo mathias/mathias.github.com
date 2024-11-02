@@ -8,7 +8,7 @@ redirect_from:
 
 ---
 
-*(This post is part of my blog archiving project. This post appeared on [Coderwall](https://coderwall.com/p/hlbana) on November 14, 2013.)*
+*(This post is part of my [blog archiving project](/about#old-posts). This post appeared on [Coderwall](https://coderwall.com/p/hlbana) on November 14, 2013.)*
 
 ---
 

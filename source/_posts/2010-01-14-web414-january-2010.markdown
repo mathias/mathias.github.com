@@ -6,7 +6,7 @@ redirect_from:
   - /blog/2010/01/14/web414-january-2010/
 ---
 
-(This post is part of my blog archiving project. This post appeared on [blog.mattgauger.com](http://blog.mattgauger.com/2010/01/14/web414-january-2010/) on January 14, 2010.)
+(This post is part of my [blog archiving project](/about#old-posts). This post appeared on [blog.mattgauger.com](http://blog.mattgauger.com/2010/01/14/web414-january-2010/) on January 14, 2010.)
 
 [Web414](http://web414.com/) is a monthly technology meetup here in Milwaukee, which is responsible for[BarCampMilwaukee](http://barcampmilwaukee.org/), [MKE Devhouse](http://milwaukeedevhouse.org/), Milwaukee’s coworking meetups, photowalks, and many of our other events in Milwaukee.
 

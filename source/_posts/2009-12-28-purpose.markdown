@@ -6,7 +6,7 @@ redirect_from:
   - /blog/2009/12/28/purpose/
 ---
 
-(This post is part of my blog archiving project. This post appeared on [http://blog.mattgauger.com/2009/12/28/purpose/](http://blog.mattgauger.com/2009/12/28/purpose/) on December 28, 2009.)
+(This post is part of my [blog archiving project](/about#old-posts). This post appeared on [http://blog.mattgauger.com/2009/12/28/purpose/](http://blog.mattgauger.com/2009/12/28/purpose/) on December 28, 2009.)
 
 Every blog has to have a purpose. For awhile, I had a blog hosted on Wordpress.com, [The Byte Codex](http://bytecodex.wordpress.com/). I had told myself that it was my coding blog, and that all insights I gained in coding would end up there. Also, I’d blog about tech events I attended.
 

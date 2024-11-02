@@ -6,7 +6,7 @@ redirect_from:
   - /blog/2008/08/01/barcamp-madison-2-a-recap/
 ---
 
-(This post is part of my blog archiving project. This post appeared on [bytecodex.wordpress.com](http://bytecodex.wordpress.com/2008/08/01/barcamp-madison-2-a-recap/) on August 1st, 2008.)
+(This post is part of my [blog archiving project](/about#old-posts). This post appeared on [bytecodex.wordpress.com](http://bytecodex.wordpress.com/2008/08/01/barcamp-madison-2-a-recap/) on August 1st, 2008.)
 
 Had a blog post that I was writing _at_ BarCampMadison2 as the weekend progressed, and forgot to put it under source control. Now it’s gone!
 

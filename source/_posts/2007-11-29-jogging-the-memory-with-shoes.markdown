@@ -6,7 +6,7 @@ redirect_from:
   - /blog/2007/11/29/jogging-the-memory-with-shoes/
 ---
 
-(This post is part of my blog archiving project. This post appeared on
+(This post is part of my [blog archiving project](/about#old-posts). This post appeared on
 [http://bytecodex.wordpress.com/][] on November 29, 2007.)
 
 Today, I wanted to share my latest little one-night coding project. But

@@ -6,7 +6,7 @@ redirect_from:
   - /blog/2010/01/05/feedback-loops-and-emergent-behavior/
 ---
 
-(This post is part of my blog archiving project. This post appeared on [blog.mattgauger.com](http://blog.mattgauger.com/2010/01/05/emergent-behavior/) on January 5, 2010.)
+(This post is part of my [blog archiving project](/about#old-posts). This post appeared on [blog.mattgauger.com](http://blog.mattgauger.com/2010/01/05/emergent-behavior/) on January 5, 2010.)
 
 This post started out as a review of two books. My friend [Zac Witte](http://www.youtube.com/watch?v=vO_O4AD1MhI) introduced me to the work of Jeff Hawkins, previously of Palm and now working at a company called [Numenta](http://numenta.com/), which is working on a method of creating artificial intelligence. Hawkins wrote a book called [On Intelligence](http://www.amazon.com/gp/product/0805078533) in 2005 detailing his research into artificial intelligence up to that point. Zac recommended the book while we were hacking on code at a coffee shop here in Milwaukee.
 

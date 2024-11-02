@@ -6,11 +6,9 @@ redirect_from:
   - /blog/2013/05/23/warning-nokogiri-was-built-against-libxml-version-x-dot-x-x/
 ---
 
----
 
-*(This post is part of my blog archiving project. This post appeared on [Coderwall](https://coderwall.com/p/kia38w) on May 23, 2013.)*
+(This post is part of my [blog archiving project](/about#old-posts). This post appeared on [Coderwall](https://coderwall.com/p/kia38w) on May 23, 2013.)
 
----
 
 When you run tests or rake, if you see:
 

@@ -6,11 +6,7 @@ redirect_from:
   - /blog/2013/04/24/reset-a-lost-password-on-an-ubuntu-vm/
 ---
 
----
-
-*(This post is part of my blog archiving project. This post appeared on [Coderwall](https://coderwall.com/p/vibura) on April 24, 2013.)*
-
----
+(This post is part of my [blog archiving project](/about#old-posts). This post appeared on [Coderwall](https://coderwall.com/p/vibura) on April 24, 2013.)
 
 You may be like me and keep a couple virtual machines around on your laptop for development, testing, and gaming. I had an Ubuntu VM in VMWare that I'd lost the password to, and I wanted to reset it so that I could get back to coding.
 

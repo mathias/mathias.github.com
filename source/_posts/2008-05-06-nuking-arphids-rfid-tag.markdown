@@ -8,6 +8,6 @@ redirect_from:
   - /2008/05/06/nuking-arphids-rfid-tag-/
 ---
 
-(This post is part of my blog archiving project. This post appeared on [mathiasx.baywords.com](http://mathiasx.baywords.com/2008/05/06/nuking-arphids-rfid-tag/) on May 6th, 2008.)
+(This post is part of my [blog archiving project](/about#old-posts). This post appeared on [mathiasx.baywords.com](http://mathiasx.baywords.com/2008/05/06/nuking-arphids-rfid-tag/) on May 6th, 2008.)
 
 <object height="385" width="480"><param name="movie" value="http://www.youtube.com/v/GZPRjFxc504?fs=1&amp;hl=en_US"> <param name="allowFullScreen" value="true"> <param name="allowscriptaccess" value="always"><embed src="http://www.youtube.com/v/GZPRjFxc504?fs=1&amp;hl=en_US" type="application/x-shockwave-flash" height="385" width="480"></object>

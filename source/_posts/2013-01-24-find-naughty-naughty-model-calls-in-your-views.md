@@ -6,11 +6,7 @@ redirect_from:
   - /blog/2013/01/24/find-naughty-naughty-model-calls-in-your-views/
 ---
 
----
-
-*(This post is part of my blog archiving project. This post appeared on [Coderwall](https://coderwall.com/p/33siha) on January 24, 2013.)*
-
----
+(This post is part of my [blog archiving project](/about#old-posts). This post appeared on [Coderwall](https://coderwall.com/p/33siha) on January 24, 2013.)
 
 I found this really helpful in a project where almost all the views were requesting things from the database rather than letting the controller handle it.
 

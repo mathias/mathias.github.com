@@ -6,7 +6,7 @@ redirect_from:
   - /blog/2008/03/28/git-is-full-of-win/
 ---
 
-(This post is part of my blog archiving project. This post appeared on
+(This post is part of my [blog archiving project](/about#old-posts). This post appeared on
 [bytecodex.wordpress.com](http://bytecodex.wordpress.com/2008/03/23/git-is-full-of-win/)
 on March 23, 2008.)
 

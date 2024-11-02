@@ -7,11 +7,11 @@ redirect_from:
   - /blog/2009/12/26/shiny-captain/
 ---
 
-(This post is part of my blog archiving project. This post appeared on [blog.mattgauger.com](http://blog.mattgauger.com/2009/12/26/shiny-captain/) on December 29\. 2009.)
+(This post is part of my [blog archiving project](/about#old-posts). This post appeared on [blog.mattgauger.com](http://blog.mattgauger.com/2009/12/26/shiny-captain/) on December 29, 2009.)
 
 Today I decided I wanted to start blogging again. I thought about my options on my hosting, and didn’t particularly feel like running a full-blown blog engine like Wordpress or Drupal. I knew I wanted a nice custom theme but I didn’t want to waste time trying to wrap my head around another theming engine.
 
-In the very far past, I had a blog run on a friend’s server that was generated as static html files (and an RSS feed) by a perl script. It’s still available on [archive.org](http://web.archive.org/web/*/http://tranzor.net/~xiphias). There are several Ruby-based projects that do the same thing. I chose [Jekyll](http://github.com/mojombo/jekyll/), which is what [Github Pages](http://pages.github.com/) runs on. I grabbed the gem off the Github gem server and set up the basic directory structure. The whole setup is extremely simple:
+In the very far past, I had a blog run on a friend’s server that was generated as static html files (and an RSS feed) by a perl script. It’s still available on [archive.org](http://web.archive.org/web/*/http://tranzor.net/~xiphias). There are several Ruby-based projects that do the same thing. I chose [Jekyll](http://github.com/mojombo/jekyll/), which is what [Github Pages](http://pages.github.com/) runs on. I grabbed the gem off the Github gem server and set up the basic directory structure. The whole setup is extremely simple:
 
 ```
 .

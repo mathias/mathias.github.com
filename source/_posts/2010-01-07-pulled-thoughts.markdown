@@ -6,7 +6,7 @@ redirect_from:
   - /blog/2010/01/07/pulled-thoughts/
 ---
 
-(This post is part of my blog archiving project. This post appeared on [blog.mattgauger.com](http://blog.mattgauger.com/2010/01/07/pulled-thoughts/#) on January 7, 2010.)
+(This post is part of my [blog archiving project](/about#old-posts). This post appeared on [blog.mattgauger.com](http://blog.mattgauger.com/2010/01/07/pulled-thoughts/#) on January 7, 2010.)
 
 Below are several bits and pieces of my [previous blog post](http://blog.mattgauger.com/2010/01/05/emergent-behavior/) which didn’t ultimately get included. I thought that there were some neat thoughts in here, so I included them, without rewriting to add context. Enjoy.
 

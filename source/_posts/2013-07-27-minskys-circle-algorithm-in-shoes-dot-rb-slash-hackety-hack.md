@@ -6,11 +6,7 @@ redirect_from:
   - /blog/2013/07/27/minskys-circle-algorithm-in-shoes-dot-rb-slash-hackety-hack/
 ---
 
----
-
-*(This post is part of my blog archiving project. This post appeared on [Coderwall](https://coderwall.com/p/fukypa) on July 27, 2013.)*
-
----
+(This post is part of my [blog archiving project](/about#old-posts). This post appeared on [Coderwall](https://coderwall.com/p/fukypa) on July 27, 2013.)
 
 I wanted to try to implement Minsky's Circle Algorithm from the famous [HAKMEM](http://en.wikipedia.org/wiki/HAKMEM). As noted in lots of other places online ([1](http://brainwagon.org/2010/08/09/drawing-circles-ala-marvin-minsky/), [2](https://news.ycombinator.com/item?id=3111501), [3](http://cabezal.com/misc/minsky-circles.html)), the algorithm doesn't plot a true circle, but rather a very round ellipse. Here's the text from the HAKMEM entry:
 

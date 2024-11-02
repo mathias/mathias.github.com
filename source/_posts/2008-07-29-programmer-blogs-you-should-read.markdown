@@ -6,7 +6,7 @@ redirect_from:
   - /blog/2008/07/29/programmer-blogs-you-should-read/
 ---
 
-(This post is part of my blog archiving project. This post appeared on [bytecodex.wordpress.com](http://bytecodex.wordpress.com/2008/07/29/programmer-blogs-you-should-read/) on July 29, 2008\. I wanted to note that despite being so short, this blog post was both the most read blog post on my Wordpress blog, as far as I know. Most of the blogs listed here are now defunct.)
+(This post is part of my [blog archiving project](/about#old-posts). This post appeared on [bytecodex.wordpress.com](http://bytecodex.wordpress.com/2008/07/29/programmer-blogs-you-should-read/) on July 29, 2008. I wanted to note that despite being so short, this blog post was both the most read blog post on my Wordpress blog, as far as I know. Most of the blogs listed here are now defunct.)
 
 This is a short list, as I am under the impression that most programmers are already reading [Joel on Software](http://joelonsoftware.com/), [Coding Horror](http://www.codinghorror.com/blog/), [Paul Graham’s essays](http://paulgraham.com/articles.html), etc. Here’s a few bloggers whose writing you might have missed:
 

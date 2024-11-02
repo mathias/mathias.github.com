@@ -22,9 +22,10 @@ I have removed Google ads, analytics/tracking, and other external JS libraries f
 
 I've chosen not to include commenting on my blog. If you'd like to get in touch, feel free to contact me at [matt.gauger@gmail.com](mailto:matt.gauger@gmail.com) . Or, reach out on the fediverse to <a rel="me" href="https://mastodon.xyz/@mathiasx">@mathiasx@mastodon.xyz</a>.
 
+<a id="old-posts">
 ### On old blog posts
 
-In the past, I spent time porting all my blog posts from other platforms and blogs to here. They get cleaned up and I try to do my best to ensure they have images, although may be broken due to time and website attrition. I archive them purely to have a single place for all of them, not to represent that my current understanding and opinions match with what I wrote in the past. I had to grow in skill as a writer, and I experimented with a lot of different kinds of content. So reader beware when you go back to read anything older than a few years.
+In the past, I spent time porting all my blog posts from other platforms and blogs to here. It is neat to have 17 years (as of this update) of posts in one place. The old blog posts get cleaned up and I try to do my best to ensure they have working images. Links may be broken due to time and website attrition. I archive them purely to have a single place for all of them, not to represent that my current understanding and opinions match with what I wrote in the past. I had to grow in skill as a writer, and I experimented with a lot of different kinds of content. So reader beware when you go back to read anything older than a few years.
 
 ### License
 

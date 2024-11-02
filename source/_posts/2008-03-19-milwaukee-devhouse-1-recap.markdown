@@ -6,7 +6,7 @@ redirect_from:
   - /blog/2008/03/19/milwaukee-devhouse-1-recap/
 ---
 
-(This post is part of my blog archiving project. This post appeared on
+(This post is part of my [blog archiving project](/about#old-posts). This post appeared on
 [bytecodex.wordpress.com](http://bytecodex.wordpress.com/2008/03/19/milwaukee-devhouse1-recap/)
 on March 19, 2008.)
 
