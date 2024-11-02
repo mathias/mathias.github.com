@@ -4,7 +4,7 @@ title: "About"
 date: 2012-03-16 21:06
 ---
 
-I am a software developer. My interests include functional programming, intelligent agents, and ubiquitous + wearable computing. On the practical side, I prefer to use Clojure & ClojureScript. I've spent a lot of time working with Ruby, JavaScript, and the standard assortment of developer tools: vim, emacs, git, and the rest.
+I am a programmer and maker. My interests include functional programming, permacomputing, and sustainable technologies. I've spent a lot of time working with Ruby, JavaScript, and the standard assortment of developer tools: vim, emacs, git, and the rest. I have shipped code in Elixir, Rust, and Clojure, and would do it again.
 
 I work for [GitHub](https://www.github.com). I previously worked at [Heroku](https://www.heroku.com).
 
@@ -21,6 +21,10 @@ I have removed Google ads, analytics/tracking, and other external JS libraries f
 ### Blog comments
 
 I've chosen not to include commenting on my blog. If you'd like to get in touch, feel free to contact me at [matt.gauger@gmail.com](mailto:matt.gauger@gmail.com) . Or, reach out on the fediverse to <a rel="me" href="https://mastodon.xyz/@mathiasx">@mathiasx@mastodon.xyz</a>.
+
+### On old blog posts
+
+In the past, I spent time porting all my blog posts from other platforms and blogs to here. They get cleaned up and I try to do my best to ensure they have images, although may be broken due to time and website attrition. I archive them purely to have a single place for all of them, not to represent that my current understanding and opinions match with what I wrote in the past. I had to grow in skill as a writer, and I experimented with a lot of different kinds of content. So reader beware when you go back to read anything older than a few years.
 
 ### License
 
