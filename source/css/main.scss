@@ -1,14 +1,9 @@
----
----
-@charset "utf-8";
-
-// Import partials from `sass_dir` (defaults to `_sass`)
-@import 'variables';
-@import 'base';
-@import 'code';
-@import 'post';
-@import 'syntax';
-@import 'layout';
-@import 'pagination';
-@import 'catalogue';
-@import 'images';
+@use 'variables';
+@use 'base';
+@use 'code';
+@use 'post';
+@use 'syntax';
+@use 'layout';
+@use 'pagination';
+@use 'catalogue';
+@use 'images';
