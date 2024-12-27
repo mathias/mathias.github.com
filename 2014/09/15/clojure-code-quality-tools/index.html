@@ -1,65 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="The blog of Matt Gauger, a programmer, maker, cyclist, reader, and boatbuilder. Lisp machines and chording keybords in the present, not the past.">
-
-  <title>
-    
-      Clojure Code Quality Tools &middot; Matt Gauger
-    
-  </title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
-
-  <!-- Feeds -->
-  <link rel='alternate' type='application/atom+xml' href='/atom.xml'>
-</head>
-
-
-  <body>
-    <nav class="nav">
-      <div class="nav-container">
-        <a href="https://blog.mattgauger.com">
-          <h2 class="nav-title">Matt Gauger</h2>
-        </a>
-        <ul>
-          <li><a href="/about">About</a></li>
-          <li><a href="/archives">Blog Archives</a></li>
-          <li><a href="/open-source">Open Source</a></li>
-        </ul>
-    </div>
-  </nav>
-
-    <main>
-      <div class="post">
-  <div class="post-info">
-    <span>Written by</span> Matt Gauger
-
-    
-      <br>
-      <span>on&nbsp;</span><time datetime="2014-09-15 13:39:00 -0500">September 15, 2014</time>
-    
-  </div>
-
-  <h1 class="post-title">Clojure Code Quality Tools</h1>
-  <div class="post-line"></div>
-
-  <p>I work with many programming languages on a daily basis. As a polyglot programmer, I’ve come to appreciate tools that help me follow best practices. For JavaScript, there’s the excellent <a href="http://jshint.com/">jshint</a>. When I need to verify some XML, there’s <a href="http://xmlsoft.org/xmllint.html">xmllint</a>. In a Ruby on Rails project, I can count on the <a href="http://rubygems.org/gems/rails_best_practices">rails_best_practices</a> gem. For Ruby smells, I reach for <a href="https://github.com/bbatsov/rubocop">rubocop</a>. There’s tools like <a href="https://github.com/colszowka/simplecov">SimpleCov</a> to measure test coverage on my Ruby projects. <a href="https://github.com/square/cane">cane</a> helps me to ensure line length, method complexity, and more in my Ruby code. <a href="https://github.com/scrooloose/syntastic">Syntastic</a> helps bring real syntax checking to vim for many languages. Every day, more open source tools are introduced that help me to improve the quality of the software that I write.</p>
-
-<p>It follows that when I write Clojure code, I want nice tooling to help me manage code quality, namespace management, and out-of-date dependencies. What tools do I use on a day-to-day basis for this? In this post, I’ll show 5 tools that I use in my workflow every day on Clojure projects, and also provide some other tools for further exploration. Most of these tools exist as plugins to the excellent <a href="http://leiningen.org/">Leiningen</a> tool for Clojure.</p>
-
-<h2 id="lein-deps-tree">lein deps :tree</h2>
-
-<p>In the past, <code class="language-plaintext highlighter-rouge">lein deps</code> was a command that downloaded the correct versions of your project’s dependencies. Running <code class="language-plaintext highlighter-rouge">lein deps</code> is no longer necessary, as each lein command now checks for dependencies before executing. But <code class="language-plaintext highlighter-rouge">deps</code> provides an interesting variant for our uses: <code class="language-plaintext highlighter-rouge">lein deps :tree</code>.</p>
-
-<p>The <code class="language-plaintext highlighter-rouge">:tree</code> keyword at the end instructs lein to print out your project’s dependencies as a tree. This itself is a good visualization, but not what we’re looking for. The tree command will first print out any dependencies-of-dependencies which have conflicts with other dependencies. For example, here’s what <code class="language-plaintext highlighter-rouge">lein deps :tree</code> says for one of my projects:</p>
-
-<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">$</span><span class="w"> </span><span class="n">lein</span><span class="w"> </span><span class="n">deps</span><span class="w"> </span><span class="no">:tree</span><span class="w">
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <meta name="description" content="The blog of Matt Gauger, a programmer, maker, cyclist, reader, and boatbuilder. Lisp machines and chording keybords in the present, not the past."> <title> Clojure Code Quality Tools &middot; Matt Gauger </title> <link rel="stylesheet" href="/css/main.css"> <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700"> <link rel='alternate' type='application/atom+xml' href='/atom.xml'> </head> <body> <nav class="nav"> <div class="nav-container"> <a href="https://blog.mattgauger.com"> <h2 class="nav-title">Matt Gauger</h2> </a> <ul> <li><a href="/about">About</a></li> <li><a href="/archives">Blog Archives</a></li> <li><a href="/open-source">Open Source</a></li> </ul> </div> </nav> <main> <div class="post"> <div class="post-info"> <span>Written by</span> Matt Gauger <br> <span>on&nbsp;</span><time datetime="2014-09-15 13:39:00 -0500">September 15, 2014</time> </div> <h1 class="post-title">Clojure Code Quality Tools</h1> <div class="post-line"></div> <p>I work with many programming languages on a daily basis. As a polyglot programmer, I’ve come to appreciate tools that help me follow best practices. For JavaScript, there’s the excellent <a href="http://jshint.com/">jshint</a>. When I need to verify some XML, there’s <a href="http://xmlsoft.org/xmllint.html">xmllint</a>. In a Ruby on Rails project, I can count on the <a href="http://rubygems.org/gems/rails_best_practices">rails_best_practices</a> gem. For Ruby smells, I reach for <a href="https://github.com/bbatsov/rubocop">rubocop</a>. There’s tools like <a href="https://github.com/colszowka/simplecov">SimpleCov</a> to measure test coverage on my Ruby projects. <a href="https://github.com/square/cane">cane</a> helps me to ensure line length, method complexity, and more in my Ruby code. <a href="https://github.com/scrooloose/syntastic">Syntastic</a> helps bring real syntax checking to vim for many languages. Every day, more open source tools are introduced that help me to improve the quality of the software that I write.</p> <p>It follows that when I write Clojure code, I want nice tooling to help me manage code quality, namespace management, and out-of-date dependencies. What tools do I use on a day-to-day basis for this? In this post, I’ll show 5 tools that I use in my workflow every day on Clojure projects, and also provide some other tools for further exploration. Most of these tools exist as plugins to the excellent <a href="http://leiningen.org/">Leiningen</a> tool for Clojure.</p> <h2 id="lein-deps-tree">lein deps :tree</h2> <p>In the past, <code class="language-plaintext highlighter-rouge">lein deps</code> was a command that downloaded the correct versions of your project’s dependencies. Running <code class="language-plaintext highlighter-rouge">lein deps</code> is no longer necessary, as each lein command now checks for dependencies before executing. But <code class="language-plaintext highlighter-rouge">deps</code> provides an interesting variant for our uses: <code class="language-plaintext highlighter-rouge">lein deps :tree</code>.</p> <p>The <code class="language-plaintext highlighter-rouge">:tree</code> keyword at the end instructs lein to print out your project’s dependencies as a tree. This itself is a good visualization, but not what we’re looking for. The tree command will first print out any dependencies-of-dependencies which have conflicts with other dependencies. For example, here’s what <code class="language-plaintext highlighter-rouge">lein deps :tree</code> says for one of my projects:</p> <div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">$</span><span class="w"> </span><span class="n">lein</span><span class="w"> </span><span class="n">deps</span><span class="w"> </span><span class="no">:tree</span><span class="w">
 </span><span class="p">(</span><span class="nf">Possibly</span><span class="w"> </span><span class="n">confusing</span><span class="w"> </span><span class="n">dependencies</span><span class="w"> </span><span class="n">found</span><span class="err">:</span><span class="p">)</span><span class="w">
 </span><span class="p">([</span><span class="n">liberator</span><span class="w"> </span><span class="s">"0.11.0"</span><span class="p">]</span><span class="w"> </span><span class="nb">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">org.clojure/data.json</span><span class="w"> </span><span class="s">"0.2.1"</span><span class="p">])</span><span class="w">
 </span><span class="p">(</span><span class="w"> </span><span class="nf">overrides</span><span class="p">)</span><span class="w">
@@ -68,44 +7,14 @@
 </span><span class="p">([</span><span class="n">org.clojure/clojurescript</span><span class="w"> </span><span class="s">"0.0-2080"</span><span class="w"> </span><span class="no">:exclusions</span><span class="w"> </span><span class="p">[</span><span class="n">org.clojure/data.json</span><span class="p">]])</span><span class="w">
 
 </span><span class="p">[</span><span class="n">snip</span><span class="w"> </span><span class="n">lots</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">output</span><span class="p">]</span><span class="w">
-</span></code></pre></div></div>
-
-<p>As you can see, the tool suggests dependencies that request conflicting versions, and how we can modify our <code class="language-plaintext highlighter-rouge">project.clj</code> file to resolve those conflicting versions by excluding one or the other. This isn’t always very useful, but when you run into issues because two different Clojure libraries require two wildly different <code class="language-plaintext highlighter-rouge">joda-time</code> versions (a situation I have run into before), it will be good to know what dependencies are causing that issue and how you might go about resolving it.</p>
-
-<p>Note that this functionality disappeared in Leiningen 2.4.3 but is back in 2.5.0, so make sure you run <code class="language-plaintext highlighter-rouge">lein upgrade</code>!</p>
-
-<h2 id="lein-ancient"><a href="https://github.com/xsc/lein-ancient">lein-ancient</a></h2>
-
-<p>This plugin to <code class="language-plaintext highlighter-rouge">lein</code> exists simply to check your project for outdated dependencies. Without <a href="https://github.com/xsc/lein-ancient">lein-ancient</a>, I’d be unable to keep up with some of the faster-moving libraries in the Java and Clojure world.</p>
-
-<p>After adding ancient to your <code class="language-plaintext highlighter-rouge">~/.lein/profiles.clj</code>, running the <code class="language-plaintext highlighter-rouge">lein ancient</code> command yields output on the same project as before:</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>lein ancient
+</span></code></pre></div></div> <p>As you can see, the tool suggests dependencies that request conflicting versions, and how we can modify our <code class="language-plaintext highlighter-rouge">project.clj</code> file to resolve those conflicting versions by excluding one or the other. This isn’t always very useful, but when you run into issues because two different Clojure libraries require two wildly different <code class="language-plaintext highlighter-rouge">joda-time</code> versions (a situation I have run into before), it will be good to know what dependencies are causing that issue and how you might go about resolving it.</p> <p>Note that this functionality disappeared in Leiningen 2.4.3 but is back in 2.5.0, so make sure you run <code class="language-plaintext highlighter-rouge">lein upgrade</code>!</p> <h2 id="lein-ancient"><a href="https://github.com/xsc/lein-ancient">lein-ancient</a></h2> <p>This plugin to <code class="language-plaintext highlighter-rouge">lein</code> exists simply to check your project for outdated dependencies. Without <a href="https://github.com/xsc/lein-ancient">lein-ancient</a>, I’d be unable to keep up with some of the faster-moving libraries in the Java and Clojure world.</p> <p>After adding ancient to your <code class="language-plaintext highlighter-rouge">~/.lein/profiles.clj</code>, running the <code class="language-plaintext highlighter-rouge">lein ancient</code> command yields output on the same project as before:</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>lein ancient
 <span class="o">[</span>com.cemerick/url <span class="s2">"0.1.1"</span><span class="o">]</span> is available but we use <span class="s2">"0.1.0"</span>
 <span class="o">[</span>midje <span class="s2">"1.6.3"</span><span class="o">]</span> is available but we use <span class="s2">"1.6.0"</span>
-</code></pre></div></div>
-
-<p>Whoops! Looks like I haven’t been keeping up to date with my dependencies. <code class="language-plaintext highlighter-rouge">lein ancient</code> makes checking for new dependency versions easy. Further, thanks to the ubiquity of <a href="http://semver.org/">semantic versioning</a> in Clojure projects, it is usually quite safe to bump the minor versions (0.0.x) of dependencies.</p>
-
-<p>You can also use lein-ancient to find outdated lein plugins in your <code class="language-plaintext highlighter-rouge">~/.lein/profiles.clj</code> file. Just run it with the <code class="language-plaintext highlighter-rouge">profiles</code> argument:</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>lein ancient profiles
+</code></pre></div></div> <p>Whoops! Looks like I haven’t been keeping up to date with my dependencies. <code class="language-plaintext highlighter-rouge">lein ancient</code> makes checking for new dependency versions easy. Further, thanks to the ubiquity of <a href="http://semver.org/">semantic versioning</a> in Clojure projects, it is usually quite safe to bump the minor versions (0.0.x) of dependencies.</p> <p>You can also use lein-ancient to find outdated lein plugins in your <code class="language-plaintext highlighter-rouge">~/.lein/profiles.clj</code> file. Just run it with the <code class="language-plaintext highlighter-rouge">profiles</code> argument:</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>lein ancient profiles
 <span class="o">[</span>slamhound <span class="s2">"1.5.5"</span><span class="o">]</span> is available but we use <span class="s2">"1.5.0"</span>
 <span class="o">[</span>lein-exec <span class="s2">"0.3.4"</span><span class="o">]</span> is available but we use <span class="s2">"0.3.3"</span>
 <span class="o">[</span>lein-try <span class="s2">"0.4.3"</span><span class="o">]</span> is available but we use <span class="s2">"0.4.1"</span>
-</code></pre></div></div>
-
-<h2 id="lein-kibit"><a href="https://github.com/jonase/kibit">lein kibit</a></h2>
-
-<p>As we gain experience and confidence in a programming language, we begin to talk about whether we’re writing <em>idiomatic</em> code. I’d argue that idiomatic code is code that accomplishes a goal with proper use of language features, in a way that other developers familiar with that language would understand. A simpler way to say it might be: idiomatic code uses the community-accepted best practices of how to do something.</p>
-
-<p>Clojure’s design seeks to solve some problems found in older Lisps, as well as add in niceties like complementary predicate functions. A good example of these convenient complementary functions are <code class="language-plaintext highlighter-rouge">if</code> and <code class="language-plaintext highlighter-rouge">if-not</code>. Clojure also contains several cases of simplification for common usage. For example, when you don’t need an else clause on an <code class="language-plaintext highlighter-rouge">if</code>, you can use the <code class="language-plaintext highlighter-rouge">when</code> macro.</p>
-
-<p>Wouldn’t it be great if there was someone who was well-versed in Clojure idioms pairing with you and offering suggestions? That’s exactly what <a href="https://github.com/jonase/kibit">kibit</a> does.</p>
-
-<p>Running against a project I’d set up to contain some smells, <code class="language-plaintext highlighter-rouge">lein kibit</code> found:</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>At /Users/mathiasx/dev/sample-clj-project/src/sample_clj_project/core.clj:11:
+</code></pre></div></div> <h2 id="lein-kibit"><a href="https://github.com/jonase/kibit">lein kibit</a></h2> <p>As we gain experience and confidence in a programming language, we begin to talk about whether we’re writing <em>idiomatic</em> code. I’d argue that idiomatic code is code that accomplishes a goal with proper use of language features, in a way that other developers familiar with that language would understand. A simpler way to say it might be: idiomatic code uses the community-accepted best practices of how to do something.</p> <p>Clojure’s design seeks to solve some problems found in older Lisps, as well as add in niceties like complementary predicate functions. A good example of these convenient complementary functions are <code class="language-plaintext highlighter-rouge">if</code> and <code class="language-plaintext highlighter-rouge">if-not</code>. Clojure also contains several cases of simplification for common usage. For example, when you don’t need an else clause on an <code class="language-plaintext highlighter-rouge">if</code>, you can use the <code class="language-plaintext highlighter-rouge">when</code> macro.</p> <p>Wouldn’t it be great if there was someone who was well-versed in Clojure idioms pairing with you and offering suggestions? That’s exactly what <a href="https://github.com/jonase/kibit">kibit</a> does.</p> <p>Running against a project I’d set up to contain some smells, <code class="language-plaintext highlighter-rouge">lein kibit</code> found:</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>At /Users/mathiasx/dev/sample-clj-project/src/sample_clj_project/core.clj:11:
 Consider using:
   <span class="o">(</span>vec s<span class="o">)</span>
 instead of:
@@ -122,23 +31,7 @@ Consider using:
   <span class="o">(</span>clojure.string/join <span class="o">[</span><span class="s2">"ID"</span> z]<span class="o">)</span>
 instead of:
   <span class="o">(</span>apply str <span class="o">[</span><span class="s2">"ID"</span> z]<span class="o">)</span>
-</code></pre></div></div>
-
-<p>These kinds of small improvements are all over our Clojure projects. They’re not show-stopper bugs, but they’re small places for improvement.</p>
-
-<p>Kibit’s suggestions are almost always logically equivalent to the original code. Still, I always do some smoke-testing to ensure the code still works after using Kibit’s suggestion, and it generally does. Problems I frequently fix with Kibit are replacing <code class="language-plaintext highlighter-rouge">if</code> statements with the <code class="language-plaintext highlighter-rouge">when</code> macro, as well as places where the code checks for empty seqs, or that I can simplify nil checks.</p>
-
-<p>You can point lein kibit at a specific namespace by appending the path, like this: <code class="language-plaintext highlighter-rouge">lein kibit src/foo/bar.clj</code></p>
-
-<p>Kibit catches many cases where there is a more-idiomatic way to express what you are trying to do. I recommend running it often. In fact, it’s possible to use <a href="https://github.com/jonase/kibit#usage-from-inside-emacs">kibit in your emacs buffers</a> if you want it to be that much more convenient and real-time.</p>
-
-<h2 id="eastwood"><a href="https://github.com/jonase/eastwood">Eastwood</a></h2>
-
-<p>For linting Clojure code, there’s Eastwood. It is similar in functionality to Kibit, bit will catch different issues than Kibit. Built on two interesting Clojure projects: <a href="https://github.com/clojure/tools.analyzer">tools.analyzer</a> and <a href="https://github.com/clojure/tools.analyzer.jvm">tools.analyzer.jvm</a>, Eastwood does a powerful examination of your code inside the JVM. It is worth highlighting that since Eastwood loads your code to analyze it, it might trigger any side effects that happen when your code loads: writing files, modifying databases, etc. Note that it only loads the code; it does not execute it.</p>
-
-<p>After adding <code class="language-plaintext highlighter-rouge">eastwood</code> to your lein <code class="language-plaintext highlighter-rouge">profiles.clj</code>, simply run: <code class="language-plaintext highlighter-rouge">lein eastwood</code> and you will see output like:</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>lein eastwood
+</code></pre></div></div> <p>These kinds of small improvements are all over our Clojure projects. They’re not show-stopper bugs, but they’re small places for improvement.</p> <p>Kibit’s suggestions are almost always logically equivalent to the original code. Still, I always do some smoke-testing to ensure the code still works after using Kibit’s suggestion, and it generally does. Problems I frequently fix with Kibit are replacing <code class="language-plaintext highlighter-rouge">if</code> statements with the <code class="language-plaintext highlighter-rouge">when</code> macro, as well as places where the code checks for empty seqs, or that I can simplify nil checks.</p> <p>You can point lein kibit at a specific namespace by appending the path, like this: <code class="language-plaintext highlighter-rouge">lein kibit src/foo/bar.clj</code></p> <p>Kibit catches many cases where there is a more-idiomatic way to express what you are trying to do. I recommend running it often. In fact, it’s possible to use <a href="https://github.com/jonase/kibit#usage-from-inside-emacs">kibit in your emacs buffers</a> if you want it to be that much more convenient and real-time.</p> <h2 id="eastwood"><a href="https://github.com/jonase/eastwood">Eastwood</a></h2> <p>For linting Clojure code, there’s Eastwood. It is similar in functionality to Kibit, bit will catch different issues than Kibit. Built on two interesting Clojure projects: <a href="https://github.com/clojure/tools.analyzer">tools.analyzer</a> and <a href="https://github.com/clojure/tools.analyzer.jvm">tools.analyzer.jvm</a>, Eastwood does a powerful examination of your code inside the JVM. It is worth highlighting that since Eastwood loads your code to analyze it, it might trigger any side effects that happen when your code loads: writing files, modifying databases, etc. Note that it only loads the code; it does not execute it.</p> <p>After adding <code class="language-plaintext highlighter-rouge">eastwood</code> to your lein <code class="language-plaintext highlighter-rouge">profiles.clj</code>, simply run: <code class="language-plaintext highlighter-rouge">lein eastwood</code> and you will see output like:</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>lein eastwood
 <span class="o">==</span> Eastwood 0.1.4 Clojure 1.6.0 JVM 1.7.0_55
 <span class="o">==</span> Linting sample-clj-project.core <span class="o">==</span>
 <span class="o">{</span>:linter :redefd-vars,
@@ -166,23 +59,7 @@ instead of:
  :file <span class="s2">"sample_clj_project/core.clj"</span>,
  :line 3,
  :column 10<span class="o">}</span>
-</code></pre></div></div>
-
-<p>That’s a lot of problems for a simple file! Notice how one mistake got caught for two reasons: A misplaced docstring (placed after the arguments vector) becomes just a string in the function body that will be thrown away.</p>
-
-<p>Another nice catch that Eastwood provides is detecting the redefinition of the var <code class="language-plaintext highlighter-rouge">qux</code> in the file.</p>
-
-<p>But Eastwood covers a lot more cases than just vars being def’d more than once. See the <a href="https://github.com/jonase/eastwood#whats-there">full list</a> to find out what else it does. There’s a few linters that are disabled by default, but they might make sense to enable for your project.</p>
-
-<p>Frequently running lint tools can help prevent subtle problems that come from code that looks correct but contains some small error. Eastwood is less concerned with style than tools like JSHint are, but we have other tools that cover stylistic concerns.</p>
-
-<h2 id="lein-bikeshed"><a href="https://github.com/dakrone/lein-bikeshed">lein bikeshed</a></h2>
-
-<p>This is a relative newcomer to my own tool set. <a href="https://github.com/dakrone/lein-bikeshed">lein bikeshed</a> has features related to the low-hanging fruit in our Clojure code: lines longer than 80 characters, blank lines at ends of files, and more. It will also tell you what percentage of functions have docstrings. Like other tools mentioned here, it is a lein plugin that you add to your <code class="language-plaintext highlighter-rouge">profiles.clj</code>.</p>
-
-<p>A run of <code class="language-plaintext highlighter-rouge">lein bikeshed</code> on its own source (which purposefully includes some code designed to fail) looks like this:</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>lein bikeshed
+</code></pre></div></div> <p>That’s a lot of problems for a simple file! Notice how one mistake got caught for two reasons: A misplaced docstring (placed after the arguments vector) becomes just a string in the function body that will be thrown away.</p> <p>Another nice catch that Eastwood provides is detecting the redefinition of the var <code class="language-plaintext highlighter-rouge">qux</code> in the file.</p> <p>But Eastwood covers a lot more cases than just vars being def’d more than once. See the <a href="https://github.com/jonase/eastwood#whats-there">full list</a> to find out what else it does. There’s a few linters that are disabled by default, but they might make sense to enable for your project.</p> <p>Frequently running lint tools can help prevent subtle problems that come from code that looks correct but contains some small error. Eastwood is less concerned with style than tools like JSHint are, but we have other tools that cover stylistic concerns.</p> <h2 id="lein-bikeshed"><a href="https://github.com/dakrone/lein-bikeshed">lein bikeshed</a></h2> <p>This is a relative newcomer to my own tool set. <a href="https://github.com/dakrone/lein-bikeshed">lein bikeshed</a> has features related to the low-hanging fruit in our Clojure code: lines longer than 80 characters, blank lines at ends of files, and more. It will also tell you what percentage of functions have docstrings. Like other tools mentioned here, it is a lein plugin that you add to your <code class="language-plaintext highlighter-rouge">profiles.clj</code>.</p> <p>A run of <code class="language-plaintext highlighter-rouge">lein bikeshed</code> on its own source (which purposefully includes some code designed to fail) looks like this:</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>lein bikeshed
 
 Checking <span class="k">for </span>lines longer than 80 characters.
 Badly formatted files:
@@ -207,76 +84,14 @@ with-redefs found <span class="k">in </span><span class="nb">source </span>direc
 Checking whether you keep up with your docstrings.
 10/13 <span class="o">[</span>76.92%] functions have docstrings.
 Use <span class="nt">-v</span> to list functions without docstrings
-</code></pre></div></div>
-
-<p>Bikeshed might give a lot of output for your existing projects, but the warnings are worth investigating and addressing. You can always silence the long-lines warning if it doesn’t matter to you with the <code class="language-plaintext highlighter-rouge">-m</code> command line argument.</p>
-
-<h2 id="tying-it-all-together-with-a-lein-alias">Tying it all together with a Lein alias</h2>
-
-<p>Wouldn’t it be great to run all these tools frequently, so that you can check for as many problems as possible? Well, you can, with a lein alias. (The lein wiki documents aliases in the <a href="https://github.com/technomancy/leiningen/blob/stable/sample.project.clj#L195-L211">lein sample.project.clj</a>.)</p>
-
-<p>In <code class="language-plaintext highlighter-rouge">~/.lein/profiles.clj</code>, inside your <code class="language-plaintext highlighter-rouge">:user</code> map, add the line:</p>
-
-<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">:aliases</span><span class="w"> </span><span class="p">{</span><span class="s">"omni"</span><span class="w"> </span><span class="p">[</span><span class="s">"do"</span><span class="w"> </span><span class="p">[</span><span class="s">"clean"</span><span class="p">]</span><span class="w">
+</code></pre></div></div> <p>Bikeshed might give a lot of output for your existing projects, but the warnings are worth investigating and addressing. You can always silence the long-lines warning if it doesn’t matter to you with the <code class="language-plaintext highlighter-rouge">-m</code> command line argument.</p> <h2 id="tying-it-all-together-with-a-lein-alias">Tying it all together with a Lein alias</h2> <p>Wouldn’t it be great to run all these tools frequently, so that you can check for as many problems as possible? Well, you can, with a lein alias. (The lein wiki documents aliases in the <a href="https://github.com/technomancy/leiningen/blob/stable/sample.project.clj#L195-L211">lein sample.project.clj</a>.)</p> <p>In <code class="language-plaintext highlighter-rouge">~/.lein/profiles.clj</code>, inside your <code class="language-plaintext highlighter-rouge">:user</code> map, add the line:</p> <div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">:aliases</span><span class="w"> </span><span class="p">{</span><span class="s">"omni"</span><span class="w"> </span><span class="p">[</span><span class="s">"do"</span><span class="w"> </span><span class="p">[</span><span class="s">"clean"</span><span class="p">]</span><span class="w">
                        </span><span class="p">[</span><span class="s">"with-profile"</span><span class="w"> </span><span class="s">"production"</span><span class="w"> </span><span class="s">"deps"</span><span class="w"> </span><span class="s">":tree"</span><span class="p">]</span><span class="w">
                        </span><span class="p">[</span><span class="s">"ancient"</span><span class="p">]</span><span class="w">
                        </span><span class="p">[</span><span class="s">"kibit"</span><span class="p">]</span><span class="w">
                        </span><span class="p">[</span><span class="s">"bikeshed"</span><span class="p">]]}</span><span class="w">
-</span></code></pre></div></div>
-
-<p>Now, when you want to run all these tools at once on a project, you simply invoke <code class="language-plaintext highlighter-rouge">lein omni</code>. I use this alias on all my Clojure(Script) projects. I have grown accustomed to seeing the kinds of output that a clean Clojure project will have.</p>
-
-<p>It’s worth noting that I don’t run Eastwood unless it is necessary for the project. When it is necessary, I override the alias in the project’s <code class="language-plaintext highlighter-rouge">project.clj</code> to run Eastwood as well.</p>
-
-<p>This command can take some time to complete, but with an alias we’re only spinning up lein once.</p>
-
-<h2 id="and-a-bash-alias">And a bash alias</h2>
-
-<p>The output of <code class="language-plaintext highlighter-rouge">lein omni</code> can be long, which can either result in a lot of scrolling or neglecting to run the command due to the inconvenience. To help manage the length of the output, I’ve created a bash alias that runs the plugins and pipes them to less.</p>
-
-<p>My personal bash alias also runs midje at the end. You can choose whether to run the tests for your own alias. That’s just my personal preference.</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">alias </span><span class="nv">lk</span><span class="o">=</span><span class="s1">'echo "Displaying in less pager..." &amp;&amp; lein do deps :tree, ancient, ancient :plugins, kibit, bikeshed | less'</span>
-</code></pre></div></div>
-
-<p>Note that just like running the lein alias above, this may take a bit of time. Since we’re piping it to <code class="language-plaintext highlighter-rouge">less</code>, it might take awhile before <code class="language-plaintext highlighter-rouge">less</code> receives output. While it is still running, output will periodically show up at the bottom of the <code class="language-plaintext highlighter-rouge">less</code> buffer. You can use both Emac’s and vim’s movement commands in <code class="language-plaintext highlighter-rouge">less</code> to advance the buffer. I find <code class="language-plaintext highlighter-rouge">less</code> to be more manageable for scrolling through output than switching to <code class="language-plaintext highlighter-rouge">tmux</code>’s history scrolling mode.</p>
-
-<h2 id="managing-your-namespaces-lein-slamhound">Managing your namespaces: <a href="https://github.com/technomancy/slamhound">lein slamhound</a></h2>
-
-<p>Namespace management often becomes an issue on nontrivial Clojure projects. Actively developing a project means managing the functions we pull in from other namespaces and from libraries. These require statements can often get out of date. Often, they’re either missing namespaces that are needed, or containing requirements for old functions that are no longer used in the current code.</p>
-
-<p><a href="https://github.com/technomancy/slamhound">slamhound</a> is a tool that can help to manage dependencies in your namespaces. It knows how to require and import Clojure and Java dependencies, and can remove stale requires that are no longer necessary. Slamhound can often fix missing requires for functions that it can resolve.</p>
-
-<p><strong>Note: slamhound rewrites the namespace macros in your project’s .clj files!</strong> I recommend only running it on code that’s committed to git (or whatever you use as a VCS) so that you can review and  rollback any changes it makes.</p>
-
-<p>The most basic way to use slamhound is to add it to your <code class="language-plaintext highlighter-rouge">~/.lein/profiles.clj</code> as a dependency. Then add this alias:</p>
-
-<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">:aliases</span><span class="w"> </span><span class="p">{</span><span class="s">"slamhound"</span><span class="w"> </span><span class="p">[</span><span class="s">"run"</span><span class="w"> </span><span class="s">"-m"</span><span class="w"> </span><span class="s">"slam.hound"</span><span class="p">]}</span><span class="w">
-</span></code></pre></div></div>
-
-<p>Now you can use slamhound on a project by running <code class="language-plaintext highlighter-rouge">lein slamhound</code> in the project’s directory. There’s also REPL and Emacs support, which you can learn more about in the <a href="https://github.com/technomancy/slamhound#repl-usage">slamhound README</a>.</p>
-
-<h2 id="measuring-test-coverage-with-cloverage">Measuring test coverage with <a href="https://github.com/lshift/cloverage">cloverage</a></h2>
-
-<p>It is often claimed that less unit testing is necessary in Clojure because Clojure is functional and makes use of immutable data structures. And it is true that with functional programming, most tests are simple: given some input, the output should be a certain value.</p>
-
-<p>Some would even argue that Clojure functions should be well-factored enough into simple functions that the behavior of the function is apparent and requires no tests. Still others maintain that developing in the REPL is as good as writing unit tests, since functions are constantly evaluated and integrated with this style of development.</p>
-
-<p>That said, there’s still mutable Java code to interop with, there’s still the necessary evil of functions with side effects, and we might want to check the <em>structure</em> of the data we’re producing in our functions rather than the value of it. For all those reasons and to check that I don’t introduce regressions, I tend to write unit tests in Clojure.</p>
-
-<p>This blog post isn’t a platform to argue for or against testing Clojure. But when you do test, you may wonder how to tell how much test coverage your test suite has. How do we know at a glance what percentage of our namespaces is being tested? And how do we find lines that are never being exercised in our tests? After all, we can’t improve what we don’t measure.</p>
-
-<p>That’s where <a href="https://github.com/lshift/cloverage">cloverage</a> comes in. Cloverage is another lein plugin, so it gets added to <code class="language-plaintext highlighter-rouge">~/.lein/profiles.clj</code> like the others. Then run <code class="language-plaintext highlighter-rouge">lein cloverage</code> in your project; it will run the test suite and generate a coverage report.</p>
-
-<p>The coverage report appears in <code class="language-plaintext highlighter-rouge">target/coverage</code> as HTML files, broken down by namespace.</p>
-
-<p>You can still use Cloverage even if you don’t use <code class="language-plaintext highlighter-rouge">clojure.test</code>. I use <a href="https://github.com/marick/Midje">midje</a> in most of my tests. To use Cloverage in those situations, wrap your tests in a <code class="language-plaintext highlighter-rouge">deftest</code>.</p>
-
-<p>Since <code class="language-plaintext highlighter-rouge">deftest</code> has a hyphenated Clojure keyword as its identifier, and Midje facts have a string as an identifier, I’ve come to use the <code class="language-plaintext highlighter-rouge">deftest</code> to group related tests together. Usually this means naming the group of tests after the function I’m testing. Then I name Midje facts after the situation that the fact exercises. This makes sense to me because it fits well with the hierarchy of rspec unit tests in Ruby.</p>
-
-<p>Here’s an example of using this approach:</p>
-
-<div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nf">deftest</span><span class="w"> </span><span class="n">normalize-url-tests</span><span class="w">
+</span></code></pre></div></div> <p>Now, when you want to run all these tools at once on a project, you simply invoke <code class="language-plaintext highlighter-rouge">lein omni</code>. I use this alias on all my Clojure(Script) projects. I have grown accustomed to seeing the kinds of output that a clean Clojure project will have.</p> <p>It’s worth noting that I don’t run Eastwood unless it is necessary for the project. When it is necessary, I override the alias in the project’s <code class="language-plaintext highlighter-rouge">project.clj</code> to run Eastwood as well.</p> <p>This command can take some time to complete, but with an alias we’re only spinning up lein once.</p> <h2 id="and-a-bash-alias">And a bash alias</h2> <p>The output of <code class="language-plaintext highlighter-rouge">lein omni</code> can be long, which can either result in a lot of scrolling or neglecting to run the command due to the inconvenience. To help manage the length of the output, I’ve created a bash alias that runs the plugins and pipes them to less.</p> <p>My personal bash alias also runs midje at the end. You can choose whether to run the tests for your own alias. That’s just my personal preference.</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">alias </span><span class="nv">lk</span><span class="o">=</span><span class="s1">'echo "Displaying in less pager..." &amp;&amp; lein do deps :tree, ancient, ancient :plugins, kibit, bikeshed | less'</span>
+</code></pre></div></div> <p>Note that just like running the lein alias above, this may take a bit of time. Since we’re piping it to <code class="language-plaintext highlighter-rouge">less</code>, it might take awhile before <code class="language-plaintext highlighter-rouge">less</code> receives output. While it is still running, output will periodically show up at the bottom of the <code class="language-plaintext highlighter-rouge">less</code> buffer. You can use both Emac’s and vim’s movement commands in <code class="language-plaintext highlighter-rouge">less</code> to advance the buffer. I find <code class="language-plaintext highlighter-rouge">less</code> to be more manageable for scrolling through output than switching to <code class="language-plaintext highlighter-rouge">tmux</code>’s history scrolling mode.</p> <h2 id="managing-your-namespaces-lein-slamhound">Managing your namespaces: <a href="https://github.com/technomancy/slamhound">lein slamhound</a></h2> <p>Namespace management often becomes an issue on nontrivial Clojure projects. Actively developing a project means managing the functions we pull in from other namespaces and from libraries. These require statements can often get out of date. Often, they’re either missing namespaces that are needed, or containing requirements for old functions that are no longer used in the current code.</p> <p><a href="https://github.com/technomancy/slamhound">slamhound</a> is a tool that can help to manage dependencies in your namespaces. It knows how to require and import Clojure and Java dependencies, and can remove stale requires that are no longer necessary. Slamhound can often fix missing requires for functions that it can resolve.</p> <p><strong>Note: slamhound rewrites the namespace macros in your project’s .clj files!</strong> I recommend only running it on code that’s committed to git (or whatever you use as a VCS) so that you can review and rollback any changes it makes.</p> <p>The most basic way to use slamhound is to add it to your <code class="language-plaintext highlighter-rouge">~/.lein/profiles.clj</code> as a dependency. Then add this alias:</p> <div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">:aliases</span><span class="w"> </span><span class="p">{</span><span class="s">"slamhound"</span><span class="w"> </span><span class="p">[</span><span class="s">"run"</span><span class="w"> </span><span class="s">"-m"</span><span class="w"> </span><span class="s">"slam.hound"</span><span class="p">]}</span><span class="w">
+</span></code></pre></div></div> <p>Now you can use slamhound on a project by running <code class="language-plaintext highlighter-rouge">lein slamhound</code> in the project’s directory. There’s also REPL and Emacs support, which you can learn more about in the <a href="https://github.com/technomancy/slamhound#repl-usage">slamhound README</a>.</p> <h2 id="measuring-test-coverage-with-cloverage">Measuring test coverage with <a href="https://github.com/lshift/cloverage">cloverage</a></h2> <p>It is often claimed that less unit testing is necessary in Clojure because Clojure is functional and makes use of immutable data structures. And it is true that with functional programming, most tests are simple: given some input, the output should be a certain value.</p> <p>Some would even argue that Clojure functions should be well-factored enough into simple functions that the behavior of the function is apparent and requires no tests. Still others maintain that developing in the REPL is as good as writing unit tests, since functions are constantly evaluated and integrated with this style of development.</p> <p>That said, there’s still mutable Java code to interop with, there’s still the necessary evil of functions with side effects, and we might want to check the <em>structure</em> of the data we’re producing in our functions rather than the value of it. For all those reasons and to check that I don’t introduce regressions, I tend to write unit tests in Clojure.</p> <p>This blog post isn’t a platform to argue for or against testing Clojure. But when you do test, you may wonder how to tell how much test coverage your test suite has. How do we know at a glance what percentage of our namespaces is being tested? And how do we find lines that are never being exercised in our tests? After all, we can’t improve what we don’t measure.</p> <p>That’s where <a href="https://github.com/lshift/cloverage">cloverage</a> comes in. Cloverage is another lein plugin, so it gets added to <code class="language-plaintext highlighter-rouge">~/.lein/profiles.clj</code> like the others. Then run <code class="language-plaintext highlighter-rouge">lein cloverage</code> in your project; it will run the test suite and generate a coverage report.</p> <p>The coverage report appears in <code class="language-plaintext highlighter-rouge">target/coverage</code> as HTML files, broken down by namespace.</p> <p>You can still use Cloverage even if you don’t use <code class="language-plaintext highlighter-rouge">clojure.test</code>. I use <a href="https://github.com/marick/Midje">midje</a> in most of my tests. To use Cloverage in those situations, wrap your tests in a <code class="language-plaintext highlighter-rouge">deftest</code>.</p> <p>Since <code class="language-plaintext highlighter-rouge">deftest</code> has a hyphenated Clojure keyword as its identifier, and Midje facts have a string as an identifier, I’ve come to use the <code class="language-plaintext highlighter-rouge">deftest</code> to group related tests together. Usually this means naming the group of tests after the function I’m testing. Then I name Midje facts after the situation that the fact exercises. This makes sense to me because it fits well with the hierarchy of rspec unit tests in Ruby.</p> <p>Here’s an example of using this approach:</p> <div class="language-clojure highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nf">deftest</span><span class="w"> </span><span class="n">normalize-url-tests</span><span class="w">
   </span><span class="p">(</span><span class="nf">facts</span><span class="w"> </span><span class="s">"removes invalid query params"</span><span class="w">
     </span><span class="p">(</span><span class="nf">fact</span><span class="w"> </span><span class="p">(</span><span class="nf">normalize-url</span><span class="w"> </span><span class="s">"http://example.com?q="</span><span class="p">)</span><span class="w"> </span><span class="n">=&gt;</span><span class="w"> </span><span class="s">"http://example.com"</span><span class="p">)</span><span class="w">
     </span><span class="p">(</span><span class="nf">fact</span><span class="w"> </span><span class="p">(</span><span class="nf">normalize-url</span><span class="w"> </span><span class="s">"http://example.com?=foo"</span><span class="p">)</span><span class="w"> </span><span class="n">=&gt;</span><span class="w"> </span><span class="s">"http://example.com"</span><span class="p">))</span><span class="w">
@@ -284,46 +99,4 @@ Use <span class="nt">-v</span> to list functions without docstrings
     </span><span class="p">(</span><span class="nf">fact</span><span class="w"> </span><span class="p">(</span><span class="nf">normalize-url</span><span class="w"> </span><span class="s">"http://example.com?utm_source=foo"</span><span class="p">)</span><span class="w"> </span><span class="n">=&gt;</span><span class="w"> </span><span class="s">"http://example.com"</span><span class="p">)</span><span class="w">
     </span><span class="p">(</span><span class="nf">fact</span><span class="w"> </span><span class="p">(</span><span class="nf">normalize-url</span><span class="w"> </span><span class="s">"http://example.com?utm_content=bar"</span><span class="p">)</span><span class="w"> </span><span class="n">=&gt;</span><span class="w"> </span><span class="s">"http://example.com"</span><span class="p">)</span><span class="w">
     </span><span class="p">(</span><span class="nf">fact</span><span class="w"> </span><span class="p">(</span><span class="nf">normalize-url</span><span class="w"> </span><span class="s">"http://example.com?utm_medium=baz&amp;q=foo"</span><span class="p">)</span><span class="w"> </span><span class="n">=&gt;</span><span class="w"> </span><span class="s">"http://example.com?q=foo"</span><span class="p">)))</span><span class="w">
-</span></code></pre></div></div>
-
-<p>Cloverage also outputs a <code class="language-plaintext highlighter-rouge">coverage.txt</code> file that might be useful for use with services like <a href="http://coveralls.io">Coveralls</a>. I haven’t used this, so I can’t comment on its usefulness.</p>
-
-<p>If you’re using <a href="https://github.com/slagyr/speclj">speclj</a> for your tests, you might run into some issues getting Cloverage to play nice. I don’t use speclj often, so when I couldn’t get it to work with Cloverage, I didn’t pursue the issue.</p>
-
-<h2 id="final-thoughts">Final Thoughts</h2>
-
-<p>In this post, I covered 5 tools to add to your workflow all the time, and some others that might be useful in certain cases. I’m sure there’s more tools out there that are useful that I don’t know about, and I’d love to hear about them.</p>
-
-<p>I’m also thinking about writing some posts about other development tools that I use, particularly how I use <a href="https://github.com/marick/midje">midje</a> to test, and how you can benchmark code with <a href="https://github.com/davidsantiago/perforate">perforate</a>. If you’re interested in those topics, get in touch and let me know.</p>
-
-<p>Have fun and enjoy your cleaner codebase with these tools in your tool belt!</p>
-
-<hr />
-
-<p>Interested in commenting or contacting me? Send an email to <a href="mailto:contact@mattgauger.com">contact@mattgauger.com</a>. Thanks!</p>
-
-
-
-</div>
-
-<div class="pagination">
-
-  <a href="/2014/10/23/clojure-data-science-sent-counts-and-aggregates/" class="left arrow">&#8592;</a>
-
-
-  <a href="/2014/08/19/atreus-my-custom-keyboard/" class="right arrow">&#8594;</a>
-
-
-  <a href="#" class="top">Top</a>
-</div>
-
-    </main>
-
-    <footer>
-      <span>
-        &copy; <time datetime="2024">2024</time> Matt Gauger.
-      </span>
-      <a rel="me" href="https://mastodon.xyz/@mathiasx">@mathiasx@mastodon.xyz</a>
-    </footer>
-  </body>
-</html>
+</span></code></pre></div></div> <p>Cloverage also outputs a <code class="language-plaintext highlighter-rouge">coverage.txt</code> file that might be useful for use with services like <a href="http://coveralls.io">Coveralls</a>. I haven’t used this, so I can’t comment on its usefulness.</p> <p>If you’re using <a href="https://github.com/slagyr/speclj">speclj</a> for your tests, you might run into some issues getting Cloverage to play nice. I don’t use speclj often, so when I couldn’t get it to work with Cloverage, I didn’t pursue the issue.</p> <h2 id="final-thoughts">Final Thoughts</h2> <p>In this post, I covered 5 tools to add to your workflow all the time, and some others that might be useful in certain cases. I’m sure there’s more tools out there that are useful that I don’t know about, and I’d love to hear about them.</p> <p>I’m also thinking about writing some posts about other development tools that I use, particularly how I use <a href="https://github.com/marick/midje">midje</a> to test, and how you can benchmark code with <a href="https://github.com/davidsantiago/perforate">perforate</a>. If you’re interested in those topics, get in touch and let me know.</p> <p>Have fun and enjoy your cleaner codebase with these tools in your tool belt!</p> <hr/> <p>Interested in commenting or contacting me? Send an email to <a href="mailto:contact@mattgauger.com">contact@mattgauger.com</a>. Thanks!</p> </div> <div class="pagination"> <a href="/2014/10/23/clojure-data-science-sent-counts-and-aggregates/" class="left arrow">&#8592;</a> <a href="/2014/08/19/atreus-my-custom-keyboard/" class="right arrow">&#8594;</a> <a href="#" class="top">Top</a> </div> </main> <footer> <span> &copy; <time datetime="2024">2024</time> Matt Gauger. </span> <a rel="me" href="https://mastodon.xyz/@mathiasx">@mathiasx@mastodon.xyz</a> </footer> </body> </html>

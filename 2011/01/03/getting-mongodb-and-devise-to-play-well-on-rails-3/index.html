@@ -1,64 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="The blog of Matt Gauger, a programmer, maker, cyclist, reader, and boatbuilder. Lisp machines and chording keybords in the present, not the past.">
-
-  <title>
-    
-      Getting MongoDB and Devise to play well on Rails 3 &middot; Matt Gauger
-    
-  </title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
-
-  <!-- Feeds -->
-  <link rel='alternate' type='application/atom+xml' href='/atom.xml'>
-</head>
-
-
-  <body>
-    <nav class="nav">
-      <div class="nav-container">
-        <a href="https://blog.mattgauger.com">
-          <h2 class="nav-title">Matt Gauger</h2>
-        </a>
-        <ul>
-          <li><a href="/about">About</a></li>
-          <li><a href="/archives">Blog Archives</a></li>
-          <li><a href="/open-source">Open Source</a></li>
-        </ul>
-    </div>
-  </nav>
-
-    <main>
-      <div class="post">
-  <div class="post-info">
-    <span>Written by</span> Matt Gauger
-
-    
-      <br>
-      <span>on&nbsp;</span><time datetime="2011-01-03 00:00:00 -0600">January 03, 2011</time>
-    
-  </div>
-
-  <h1 class="post-title">Getting MongoDB and Devise to play well on Rails 3</h1>
-  <div class="post-line"></div>
-
-  <p>While there’s a <a href="http://www.mongodb.org/display/DOCS/Rails+3+-+Getting+Started">good guide</a> on the MongoDB site about getting mongo_mapper to work in Rails 3, I ran into some additional issues getting the popular <a href="https://github.com/plataformatec/devise">devise</a> authentication engine for Rails to work with Mongo. This documents how to create a Rails app from scratch that uses both MongoDB and Devise. So if you don’t want to reinvent the wheel on authentication (read: Users, login, logout, etc) and want to run your app on MongoDB, this should be useful.</p>
-
-<p>First of all, you’ll need Rails 3. I’m on Rails 3.0.3. I created a new gemset for this app, just to keep things clean. Run the rails new command with the <code class="language-plaintext highlighter-rouge">--skip-active-record</code> switch.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ rails new awesome_app --skip-active-record
-</code></pre></div></div>
-
-<p>Open up the Gemfile of the new app. It’s going to be pretty empty to start. This is what I ended up with, after reading the Mongo guide mentioned at the beginning of the post:</p>
-
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="nb">require</span> <span class="s1">'rubygems'</span>
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <meta name="description" content="The blog of Matt Gauger, a programmer, maker, cyclist, reader, and boatbuilder. Lisp machines and chording keybords in the present, not the past."> <title> Getting MongoDB and Devise to play well on Rails 3 &middot; Matt Gauger </title> <link rel="stylesheet" href="/css/main.css"> <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700"> <link rel='alternate' type='application/atom+xml' href='/atom.xml'> </head> <body> <nav class="nav"> <div class="nav-container"> <a href="https://blog.mattgauger.com"> <h2 class="nav-title">Matt Gauger</h2> </a> <ul> <li><a href="/about">About</a></li> <li><a href="/archives">Blog Archives</a></li> <li><a href="/open-source">Open Source</a></li> </ul> </div> </nav> <main> <div class="post"> <div class="post-info"> <span>Written by</span> Matt Gauger <br> <span>on&nbsp;</span><time datetime="2011-01-03 00:00:00 -0600">January 03, 2011</time> </div> <h1 class="post-title">Getting MongoDB and Devise to play well on Rails 3</h1> <div class="post-line"></div> <p>While there’s a <a href="http://www.mongodb.org/display/DOCS/Rails+3+-+Getting+Started">good guide</a> on the MongoDB site about getting mongo_mapper to work in Rails 3, I ran into some additional issues getting the popular <a href="https://github.com/plataformatec/devise">devise</a> authentication engine for Rails to work with Mongo. This documents how to create a Rails app from scratch that uses both MongoDB and Devise. So if you don’t want to reinvent the wheel on authentication (read: Users, login, logout, etc) and want to run your app on MongoDB, this should be useful.</p> <p>First of all, you’ll need Rails 3. I’m on Rails 3.0.3. I created a new gemset for this app, just to keep things clean. Run the rails new command with the <code class="language-plaintext highlighter-rouge">--skip-active-record</code> switch.</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ rails new awesome_app --skip-active-record
+</code></pre></div></div> <p>Open up the Gemfile of the new app. It’s going to be pretty empty to start. This is what I ended up with, after reading the Mongo guide mentioned at the beginning of the post:</p> <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="nb">require</span> <span class="s1">'rubygems'</span>
 <span class="nb">require</span> <span class="s1">'mongo'</span>
 
 <span class="n">source</span> <span class="ss">:rubygems</span>
@@ -71,53 +12,23 @@
 
 <span class="n">group</span> <span class="ss">:test</span><span class="p">,</span> <span class="ss">:development</span> <span class="k">do</span>
   <span class="p">[</span><span class="n">whatever</span> <span class="n">testing</span> <span class="n">gems</span> <span class="n">you</span> <span class="n">want</span> <span class="k">in</span> <span class="n">here</span><span class="p">]</span>
-<span class="k">end</span></code></pre></figure>
-
-<p>You’ll notice the devise-mongo_mapper gem in there. That’s the secret sauce that lets us use mongo_mapper as the ORM for Devise. As I haven’t really played with the mongoid gem (and therefore don’t have any experience with it) I didn’t try to get mongoid to work.</p>
-
-<p>Go ahead and run a bundle install:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ bundle install
-</code></pre></div></div>
-
-<p>Then run this to install devise files into the Rails app:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ rails generate devise:install
-</code></pre></div></div>
-
-<p>There’s two initializer files we’ll need. We add the one for mongo, which I put in config/initializers/mongo.rb:</p>
-
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">MongoMapper</span><span class="p">.</span><span class="nf">connection</span> <span class="o">=</span> <span class="no">Mongo</span><span class="o">::</span><span class="no">Connection</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'localhost'</span><span class="p">,</span> <span class="mi">27017</span><span class="p">)</span>
+<span class="k">end</span></code></pre></figure> <p>You’ll notice the devise-mongo_mapper gem in there. That’s the secret sauce that lets us use mongo_mapper as the ORM for Devise. As I haven’t really played with the mongoid gem (and therefore don’t have any experience with it) I didn’t try to get mongoid to work.</p> <p>Go ahead and run a bundle install:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ bundle install
+</code></pre></div></div> <p>Then run this to install devise files into the Rails app:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ rails generate devise:install
+</code></pre></div></div> <p>There’s two initializer files we’ll need. We add the one for mongo, which I put in config/initializers/mongo.rb:</p> <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">MongoMapper</span><span class="p">.</span><span class="nf">connection</span> <span class="o">=</span> <span class="no">Mongo</span><span class="o">::</span><span class="no">Connection</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'localhost'</span><span class="p">,</span> <span class="mi">27017</span><span class="p">)</span>
 <span class="no">MongoMapper</span><span class="p">.</span><span class="nf">database</span> <span class="o">=</span> <span class="s2">"awesome-app-</span><span class="si">#{</span><span class="no">Rails</span><span class="p">.</span><span class="nf">env</span><span class="si">}</span><span class="s2">"</span>
 
 <span class="k">if</span> <span class="k">defined?</span><span class="p">(</span><span class="no">PhusionPassenger</span><span class="p">)</span>
    <span class="no">PhusionPassenger</span><span class="p">.</span><span class="nf">on_event</span><span class="p">(</span><span class="ss">:starting_worker_process</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">forked</span><span class="o">|</span>
      <span class="no">MongoMapper</span><span class="p">.</span><span class="nf">connection</span><span class="p">.</span><span class="nf">connect_to_master</span> <span class="k">if</span> <span class="n">forked</span>
    <span class="k">end</span>
-<span class="k">end</span></code></pre></figure>
-
-<p>And one for devise, which you’ll find created for you in config/initializers/devise.rb. Change the ORM Configuration settings to this:</p>
-
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># ==&gt;; ORM configuration</span>
+<span class="k">end</span></code></pre></figure> <p>And one for devise, which you’ll find created for you in config/initializers/devise.rb. Change the ORM Configuration settings to this:</p> <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># ==&gt;; ORM configuration</span>
 <span class="c1"># Load and configure the ORM. Supports :active_record (default) and</span>
 <span class="c1"># :mongoid (bson_ext recommended) by default. Other ORMs may be</span>
 <span class="c1"># available as additional gems.</span>
-  <span class="nb">require</span> <span class="s1">'devise/orm/mongo_mapper'</span></code></pre></figure>
-
-<p>Be sure to add this line to config/application.rb and edit in the appropriate address. This will keep Devise from complaining later:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>config.action_mailer.default_url_options = { :host =&gt; "yourdomain.com" }
-</code></pre></div></div>
-
-<p>The last step is to create an User model and tell Devise and mongo_mapper to do their thing. Tell Devise to make a Users model and then install the Devise Views to our app so that we can modify them later, if we wish:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ rails generate devise users
+  <span class="nb">require</span> <span class="s1">'devise/orm/mongo_mapper'</span></code></pre></figure> <p>Be sure to add this line to config/application.rb and edit in the appropriate address. This will keep Devise from complaining later:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>config.action_mailer.default_url_options = { :host =&gt; "yourdomain.com" }
+</code></pre></div></div> <p>The last step is to create an User model and tell Devise and mongo_mapper to do their thing. Tell Devise to make a Users model and then install the Devise Views to our app so that we can modify them later, if we wish:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ rails generate devise users
 $ rails generate devise:views
-</code></pre></div></div>
-
-<p>In app/models/user.rb:</p>
-
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">User</span>
+</code></pre></div></div> <p>In app/models/user.rb:</p> <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">User</span>
   <span class="kp">include</span> <span class="no">MongoMapper</span><span class="o">::</span><span class="no">Document</span>
   <span class="n">plugin</span> <span class="no">MongoMapper</span><span class="o">::</span><span class="no">Devise</span>
 
@@ -127,13 +38,7 @@ $ rails generate devise:views
 
   <span class="n">attr_accessible</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:password</span><span class="p">,</span> <span class="ss">:password_confirmation</span>
 
-<span class="k">end</span></code></pre></figure>
-
-<p>You can, of course, choose which of those Devise options to enable for your user model. Refer to the <a href="http://rubydoc.info/github/plataformatec/devise/master/Devise/Models">devise documentation</a> for more information.</p>
-
-<p>In app/controllers/application_controller.rb:</p>
-
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&lt;</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">Base</span>
+<span class="k">end</span></code></pre></figure> <p>You can, of course, choose which of those Devise options to enable for your user model. Refer to the <a href="http://rubydoc.info/github/plataformatec/devise/master/Devise/Models">devise documentation</a> for more information.</p> <p>In app/controllers/application_controller.rb:</p> <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&lt;</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">Base</span>
   <span class="n">protect_from_forgery</span>
 
   <span class="n">filter_parameter_logging</span> <span class="ss">:password</span><span class="p">,</span> <span class="ss">:password_confirmation</span>
@@ -141,21 +46,9 @@ $ rails generate devise:views
   <span class="k">def</span> <span class="nf">after_sign_out_path_for</span><span class="p">(</span><span class="n">resource_or_scope</span><span class="p">)</span>
     <span class="n">new_user_session_path</span>
   <span class="k">end</span>
-<span class="k">end</span></code></pre></figure>
-
-<p>In config/routes.rb add these lines:</p>
-
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">devise_for</span> <span class="ss">:users</span><span class="p">,</span> <span class="ss">:admin</span>
-<span class="n">resource</span> <span class="ss">:user</span></code></pre></figure>
-
-<p>At this point, you should probably check your app by running a quick <code class="language-plaintext highlighter-rouge">rails server</code> and seeing it if spits out any errors to your terminal. If it’s all good, then you are probably thinking you’ll want to actually use this authentication system now. Let’s add a very basic “Home” controller:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ rails generate controller Home index token
-</code></pre></div></div>
-
-<p>In app/controllers/home_controller.rb, add the following before_filter line to the beginning of the class so that it looks like this:</p>
-
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">HomeController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+<span class="k">end</span></code></pre></figure> <p>In config/routes.rb add these lines:</p> <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">devise_for</span> <span class="ss">:users</span><span class="p">,</span> <span class="ss">:admin</span>
+<span class="n">resource</span> <span class="ss">:user</span></code></pre></figure> <p>At this point, you should probably check your app by running a quick <code class="language-plaintext highlighter-rouge">rails server</code> and seeing it if spits out any errors to your terminal. If it’s all good, then you are probably thinking you’ll want to actually use this authentication system now. Let’s add a very basic “Home” controller:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ rails generate controller Home index token
+</code></pre></div></div> <p>In app/controllers/home_controller.rb, add the following before_filter line to the beginning of the class so that it looks like this:</p> <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">HomeController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="n">before_filter</span> <span class="ss">:authenticate_user!</span><span class="p">,</span> <span class="ss">:only</span> <span class="o">=&gt;</span> <span class="ss">:token</span>
 
   <span class="k">def</span> <span class="nf">index</span>
@@ -164,11 +57,7 @@ $ rails generate devise:views
   <span class="k">def</span> <span class="nf">token</span>
   <span class="k">end</span>
 
-<span class="k">end</span></code></pre></figure>
-
-<p>In app/views/home/index.haml (I’m using HAML, but I’ve also included an ERb example after this:</p>
-
-<figure class="highlight"><pre><code class="language-haml" data-lang="haml"><span class="p">-</span> <span class="k">if</span> <span class="n">user_signed_in?</span>
+<span class="k">end</span></code></pre></figure> <p>In app/views/home/index.haml (I’m using HAML, but I’ve also included an ERb example after this:</p> <figure class="highlight"><pre><code class="language-haml" data-lang="haml"><span class="p">-</span> <span class="k">if</span> <span class="n">user_signed_in?</span>
   <span class="nt">%ul</span>
     <span class="nt">%li</span><span class="p">=</span> <span class="n">current_user</span><span class="p">.</span><span class="nf">email</span>
     <span class="nt">%li</span><span class="p">=</span> <span class="n">link_to</span> <span class="s1">'My info'</span><span class="p">,</span> <span class="n">edit_user_path</span>
@@ -176,9 +65,7 @@ $ rails generate devise:views
 <span class="p">-</span> <span class="k">else</span>
   <span class="nt">%ul</span>
     <span class="nt">%li</span><span class="p">=</span> <span class="n">link_to</span> <span class="s1">'Sign in'</span><span class="p">,</span> <span class="n">new_user_session_path</span>
-    <span class="nt">%li</span><span class="p">=</span> <span class="n">link_to</span> <span class="s1">'Sign up'</span><span class="p">,</span> <span class="n">new_user_path</span></code></pre></figure>
-
-<figure class="highlight"><pre><code class="language-erb" data-lang="erb"># ERb version of app/views/home/index.html.erb:
+    <span class="nt">%li</span><span class="p">=</span> <span class="n">link_to</span> <span class="s1">'Sign up'</span><span class="p">,</span> <span class="n">new_user_path</span></code></pre></figure> <figure class="highlight"><pre><code class="language-erb" data-lang="erb"># ERb version of app/views/home/index.html.erb:
 <span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">user_signed_in?</span> <span class="cp">-%&gt;</span>
   <span class="nt">&lt;ul&gt;</span>
     <span class="nt">&lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">current_user</span><span class="p">.</span><span class="nf">email</span> <span class="cp">%&gt;</span><span class="nt">&lt;/li&gt;</span>
@@ -189,56 +76,11 @@ $ rails generate devise:views
   <span class="nt">&lt;/code&gt;&lt;ul&gt;&lt;code&gt;</span>
     <span class="nt">&lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">'Sign in'</span><span class="p">,</span> <span class="n">new_user_session_path</span> <span class="cp">%&gt;</span><span class="nt">&lt;/li&gt;</span>
     <span class="nt">&lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">'Sign up'</span><span class="p">,</span> <span class="n">new_user_path</span> <span class="cp">%&gt;</span><span class="nt">&lt;/li&gt;</span>
-<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">-%&gt;</span></code></pre></figure>
-
-<p>This will enable very basic login / logouts using the Devise views that we installed earlier. If you run rails server again, you’ll be able to create an account. But, if your system isn’t set up to send mail (like mine) then you may get an error, or simply won’t get a confirmation code, so you won’t be able to login with that user. Here’s a quick solution. Drop into the mongo shell:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mongo
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">-%&gt;</span></code></pre></figure> <p>This will enable very basic login / logouts using the Devise views that we installed earlier. If you run rails server again, you’ll be able to create an account. But, if your system isn’t set up to send mail (like mine) then you may get an error, or simply won’t get a confirmation code, so you won’t be able to login with that user. Here’s a quick solution. Drop into the mongo shell:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mongo
 MongoDB shell version: 1.6.4
-</code></pre></div></div>
-
-<p>Use your database, which you set above in config/initializers/mongo.rb. In this case, it’s awesome-app-development:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; use awesome-app-development
+</code></pre></div></div> <p>Use your database, which you set above in config/initializers/mongo.rb. In this case, it’s awesome-app-development:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; use awesome-app-development
 switched to db awesome-app-development
-</code></pre></div></div>
-
-<p>Find all the entries in the Users document:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; db.users.find();
+</code></pre></div></div> <p>Find all the entries in the Users document:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; db.users.find();
 { "_id" : ObjectId("4d216ae217cacc289c000005"), "email" : "matt.gauger@gmail.com", "encrypted_password" : "$2aasdf", "password_salt" : "$2aasdf", "authentication_token" : null, "remember_token" : null, "remember_created_at" : null, "reset_password_token" : null, "confirmation_token" : "YsFg8CFBwNIm5kof7xC9", "confirmed_at" : null, "confirmation_sent_at" : "Mon Jan 03 2011 00:21:22 GMT-0600 (CST)", "failed_attempts" : 0, "unlock_token" : null, "locked_at" : null, "sign_in_count" : 0, "current_sign_in_at" : null, "last_sign_in_at" : null, "current_sign_in_ip" : null, "last_sign_in_ip" : null }
-</code></pre></div></div>
-
-<p>The bit we need is the confirmation_token: “YsFg8CFBwNIm5kof7xC9”. Copy the token and go to the following in your browser:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://localhost:3000/users/confirmation?confirmation_token=YsFg8CFBwNIm5kof7xC9
-</code></pre></div></div>
-
-<p>Remember to replace your token with the one in that URL. You could alternatively make it so your app can send mail, or just turn off :confirmable in your Users model. This was a quick little solution that I found and wanted to share.</p>
-
-<p>Hopefully this gets you going with Mongo and Devise quickly and without any snags. There’s a lot more to Devise, so I’d recommend you start looking at some of the <a href="https://github.com/plataformatec/devise/wiki/Example-Applications">Example applications</a> and the <a href="https://github.com/plataformatec/devise/wiki">documentation</a>.</p>
-
-
-</div>
-
-<div class="pagination">
-
-  <a href="/2012/01/21/invalid-gemspec-in-rvm-gems-ruby-1-9-2-p180-gemset-specifications-actionmailer-3-2-0-gemspec-illformed-requirement-3-2-0/" class="left arrow">&#8592;</a>
-
-
-  <a href="/2010/12/31/what-s-new-and-great-in-rails-3-milwaukee-ruby-users-group-december-2010/" class="right arrow">&#8594;</a>
-
-
-  <a href="#" class="top">Top</a>
-</div>
-
-    </main>
-
-    <footer>
-      <span>
-        &copy; <time datetime="2024">2024</time> Matt Gauger.
-      </span>
-      <a rel="me" href="https://mastodon.xyz/@mathiasx">@mathiasx@mastodon.xyz</a>
-    </footer>
-  </body>
-</html>
+</code></pre></div></div> <p>The bit we need is the confirmation_token: “YsFg8CFBwNIm5kof7xC9”. Copy the token and go to the following in your browser:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://localhost:3000/users/confirmation?confirmation_token=YsFg8CFBwNIm5kof7xC9
+</code></pre></div></div> <p>Remember to replace your token with the one in that URL. You could alternatively make it so your app can send mail, or just turn off :confirmable in your Users model. This was a quick little solution that I found and wanted to share.</p> <p>Hopefully this gets you going with Mongo and Devise quickly and without any snags. There’s a lot more to Devise, so I’d recommend you start looking at some of the <a href="https://github.com/plataformatec/devise/wiki/Example-Applications">Example applications</a> and the <a href="https://github.com/plataformatec/devise/wiki">documentation</a>.</p> </div> <div class="pagination"> <a href="/2012/01/21/invalid-gemspec-in-rvm-gems-ruby-1-9-2-p180-gemset-specifications-actionmailer-3-2-0-gemspec-illformed-requirement-3-2-0/" class="left arrow">&#8592;</a> <a href="/2010/12/31/what-s-new-and-great-in-rails-3-milwaukee-ruby-users-group-december-2010/" class="right arrow">&#8594;</a> <a href="#" class="top">Top</a> </div> </main> <footer> <span> &copy; <time datetime="2024">2024</time> Matt Gauger. </span> <a rel="me" href="https://mastodon.xyz/@mathiasx">@mathiasx@mastodon.xyz</a> </footer> </body> </html>

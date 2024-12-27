@@ -1,61 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="The blog of Matt Gauger, a programmer, maker, cyclist, reader, and boatbuilder. Lisp machines and chording keybords in the present, not the past.">
-
-  <title>
-    
-      Shiny, Captain! &middot; Matt Gauger
-    
-  </title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
-
-  <!-- Feeds -->
-  <link rel='alternate' type='application/atom+xml' href='/atom.xml'>
-</head>
-
-
-  <body>
-    <nav class="nav">
-      <div class="nav-container">
-        <a href="https://blog.mattgauger.com">
-          <h2 class="nav-title">Matt Gauger</h2>
-        </a>
-        <ul>
-          <li><a href="/about">About</a></li>
-          <li><a href="/archives">Blog Archives</a></li>
-          <li><a href="/open-source">Open Source</a></li>
-        </ul>
-    </div>
-  </nav>
-
-    <main>
-      <div class="post">
-  <div class="post-info">
-    <span>Written by</span> Matt Gauger
-
-    
-      <br>
-      <span>on&nbsp;</span><time datetime="2009-12-26 00:00:00 -0600">December 26, 2009</time>
-    
-  </div>
-
-  <h1 class="post-title">Shiny, Captain!</h1>
-  <div class="post-line"></div>
-
-  <p>(This post is part of my <a href="/about#old-posts">blog archiving project</a>. This post appeared on <a href="http://blog.mattgauger.com/2009/12/26/shiny-captain/">blog.mattgauger.com</a> on December 29, 2009.)</p>
-
-<p>Today I decided I wanted to start blogging again. I thought about my options on my hosting, and didn’t particularly feel like running a full-blown blog engine like Wordpress or Drupal. I knew I wanted a nice custom theme but I didn’t want to waste time trying to wrap my head around another theming engine.</p>
-
-<p>In the very far past, I had a blog run on a friend’s server that was generated as static html files (and an RSS feed) by a perl script. It’s still available on <a href="http://web.archive.org/web/*/http://tranzor.net/~xiphias">archive.org</a>. There are several Ruby-based projects that do the same thing. I chose <a href="http://github.com/mojombo/jekyll/">Jekyll</a>, which is what <a href="http://pages.github.com/">Github Pages</a> runs on. I grabbed the gem off the Github gem server and set up the basic directory structure. The whole setup is extremely simple:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <meta name="description" content="The blog of Matt Gauger, a programmer, maker, cyclist, reader, and boatbuilder. Lisp machines and chording keybords in the present, not the past."> <title> Shiny, Captain! &middot; Matt Gauger </title> <link rel="stylesheet" href="/css/main.css"> <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700"> <link rel='alternate' type='application/atom+xml' href='/atom.xml'> </head> <body> <nav class="nav"> <div class="nav-container"> <a href="https://blog.mattgauger.com"> <h2 class="nav-title">Matt Gauger</h2> </a> <ul> <li><a href="/about">About</a></li> <li><a href="/archives">Blog Archives</a></li> <li><a href="/open-source">Open Source</a></li> </ul> </div> </nav> <main> <div class="post"> <div class="post-info"> <span>Written by</span> Matt Gauger <br> <span>on&nbsp;</span><time datetime="2009-12-26 00:00:00 -0600">December 26, 2009</time> </div> <h1 class="post-title">Shiny, Captain!</h1> <div class="post-line"></div> <p>(This post is part of my <a href="/about#old-posts">blog archiving project</a>. This post appeared on <a href="http://blog.mattgauger.com/2009/12/26/shiny-captain/">blog.mattgauger.com</a> on December 29, 2009.)</p> <p>Today I decided I wanted to start blogging again. I thought about my options on my hosting, and didn’t particularly feel like running a full-blown blog engine like Wordpress or Drupal. I knew I wanted a nice custom theme but I didn’t want to waste time trying to wrap my head around another theming engine.</p> <p>In the very far past, I had a blog run on a friend’s server that was generated as static html files (and an RSS feed) by a perl script. It’s still available on <a href="http://web.archive.org/web/*/http://tranzor.net/~xiphias">archive.org</a>. There are several Ruby-based projects that do the same thing. I chose <a href="http://github.com/mojombo/jekyll/">Jekyll</a>, which is what <a href="http://pages.github.com/">Github Pages</a> runs on. I grabbed the gem off the Github gem server and set up the basic directory structure. The whole setup is extremely simple:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
 |-- _config.yml
 |-- _layouts
 |   |-- default.html
@@ -64,27 +7,7 @@
 |   `-- 2009-12-26-shiny-captain.md
 |-- _site
 `-- index.html
-</code></pre></div></div>
-
-<p>After creating those files, I was off and running with creating a theme from scratch. I’ve had my eye on HTML5 for awhile, and recently read an <a href="http://www.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">article on Smashing Mag</a> that inspired me. I used their method of defining the HTML5 tags as blocks in CSS to allow me to write HTML5 now and render it in today’s browsers.</p>
-
-<p>After a few hours, while my girlfriend watched Law &amp; Order SVU on Netflix next to me, I coded up the theme for this blog. I stole the template for the <a href="http://blog.mattgauger.com/atom.xml">Atom feed</a> from <a href="http://github.com/mbleigh/mbleigh.github.com/blob/master/atom.xml">mbleigh</a>. There’s still plenty of room for tweaks and improvements I want to make. But I’m trying not to be a perfectionist, and instead follow the maxim of <em>release early, release often</em>.</p>
-
-<p>Below is the “Hello World” post I whipped up initially to help with theming:</p>
-
-<hr />
-
-<p>This is the first post!</p>
-
-<blockquote>
-  <p>this is a block quote!</p>
-</blockquote>
-
-<p>This isn’t a block quote!</p>
-
-<p>This is some Ruby:</p>
-
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="p">(</span><span class="no">Hpricot</span><span class="p">(</span><span class="nb">open</span> <span class="n">url</span><span class="p">)</span><span class="o">/</span><span class="ss">:enclosure</span><span class="p">).</span><span class="nf">map</span> <span class="p">{</span><span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="p">.</span><span class="nf">attributes</span><span class="p">[</span><span class="s2">"url"</span><span class="p">]}.</span><span class="nf">uniq</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">vid</span><span class="o">|</span>
+</code></pre></div></div> <p>After creating those files, I was off and running with creating a theme from scratch. I’ve had my eye on HTML5 for awhile, and recently read an <a href="http://www.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">article on Smashing Mag</a> that inspired me. I used their method of defining the HTML5 tags as blocks in CSS to allow me to write HTML5 now and render it in today’s browsers.</p> <p>After a few hours, while my girlfriend watched Law &amp; Order SVU on Netflix next to me, I coded up the theme for this blog. I stole the template for the <a href="http://blog.mattgauger.com/atom.xml">Atom feed</a> from <a href="http://github.com/mbleigh/mbleigh.github.com/blob/master/atom.xml">mbleigh</a>. There’s still plenty of room for tweaks and improvements I want to make. But I’m trying not to be a perfectionist, and instead follow the maxim of <em>release early, release often</em>.</p> <p>Below is the “Hello World” post I whipped up initially to help with theming:</p> <hr/> <p>This is the first post!</p> <blockquote> <p>this is a block quote!</p> </blockquote> <p>This isn’t a block quote!</p> <p>This is some Ruby:</p> <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="p">(</span><span class="no">Hpricot</span><span class="p">(</span><span class="nb">open</span> <span class="n">url</span><span class="p">)</span><span class="o">/</span><span class="ss">:enclosure</span><span class="p">).</span><span class="nf">map</span> <span class="p">{</span><span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span><span class="p">.</span><span class="nf">attributes</span><span class="p">[</span><span class="s2">"url"</span><span class="p">]}.</span><span class="nf">uniq</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">vid</span><span class="o">|</span>
   <span class="c1"># File.exist?(vid.split("/").last) ? next : `curl #{vid}`</span>
   <span class="n">filename</span> <span class="o">=</span> <span class="n">vid</span><span class="p">.</span><span class="nf">gsub</span><span class="p">(</span><span class="sr">/http:.+\//</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span>
   <span class="n">filename</span><span class="p">.</span><span class="nf">gsub!</span><span class="p">(</span><span class="sr">/-/</span><span class="p">,</span> <span class="s2">"_"</span><span class="p">)</span>
@@ -92,30 +15,4 @@
 
   <span class="nb">puts</span> <span class="s2">"Downloading </span><span class="si">#{</span><span class="n">vid</span><span class="si">}</span><span class="s2">"</span>
   <span class="nb">puts</span> <span class="n">filename</span>
-  <span class="sb">`curl -L </span><span class="si">#{</span><span class="n">vid</span><span class="si">}</span><span class="sb"> &gt; </span><span class="si">#{</span><span class="n">filename</span><span class="si">}</span><span class="sb">`</span></code></pre></figure>
-
-
-
-</div>
-
-<div class="pagination">
-
-  <a href="/2009/12/27/passion-absurdity-and-creativity/" class="left arrow">&#8592;</a>
-
-
-  <a href="/2008/08/01/barcamp-madison-2-a-recap/" class="right arrow">&#8594;</a>
-
-
-  <a href="#" class="top">Top</a>
-</div>
-
-    </main>
-
-    <footer>
-      <span>
-        &copy; <time datetime="2024">2024</time> Matt Gauger.
-      </span>
-      <a rel="me" href="https://mastodon.xyz/@mathiasx">@mathiasx@mastodon.xyz</a>
-    </footer>
-  </body>
-</html>
+  <span class="sb">`curl -L </span><span class="si">#{</span><span class="n">vid</span><span class="si">}</span><span class="sb"> &gt; </span><span class="si">#{</span><span class="n">filename</span><span class="si">}</span><span class="sb">`</span></code></pre></figure> </div> <div class="pagination"> <a href="/2009/12/27/passion-absurdity-and-creativity/" class="left arrow">&#8592;</a> <a href="/2008/08/01/barcamp-madison-2-a-recap/" class="right arrow">&#8594;</a> <a href="#" class="top">Top</a> </div> </main> <footer> <span> &copy; <time datetime="2024">2024</time> Matt Gauger. </span> <a rel="me" href="https://mastodon.xyz/@mathiasx">@mathiasx@mastodon.xyz</a> </footer> </body> </html>

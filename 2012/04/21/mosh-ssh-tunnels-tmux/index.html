@@ -1,133 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="The blog of Matt Gauger, a programmer, maker, cyclist, reader, and boatbuilder. Lisp machines and chording keybords in the present, not the past.">
-
-  <title>
-    
-      Mosh, SSH Tunnels, and Tmux &middot; Matt Gauger
-    
-  </title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
-
-  <!-- Feeds -->
-  <link rel='alternate' type='application/atom+xml' href='/atom.xml'>
-</head>
-
-
-  <body>
-    <nav class="nav">
-      <div class="nav-container">
-        <a href="https://blog.mattgauger.com">
-          <h2 class="nav-title">Matt Gauger</h2>
-        </a>
-        <ul>
-          <li><a href="/about">About</a></li>
-          <li><a href="/archives">Blog Archives</a></li>
-          <li><a href="/open-source">Open Source</a></li>
-        </ul>
-    </div>
-  </nav>
-
-    <main>
-      <div class="post">
-  <div class="post-info">
-    <span>Written by</span> Matt Gauger
-
-    
-      <br>
-      <span>on&nbsp;</span><time datetime="2012-04-21 21:14:00 -0500">April 21, 2012</time>
-    
-  </div>
-
-  <h1 class="post-title">Mosh, SSH Tunnels, and Tmux</h1>
-  <div class="post-line"></div>
-
-  <hr />
-<p><em>Update from June 2022: This post continues to be a popular post on search results, but it is quite old (10 years at this point! Longer if you’re seeing this in the future.) So I recommend you consult the <a href="https://mosh.org/">mosh.org</a> site for documentation and usage.</em></p>
-
-<hr />
-
-<p>I’m currently preparing for RailsConf. One of the things I wanted to do before I left was figure out a way to monitor a process on a Linux server running on my LAN. The process frequently crashes and needs some prodding to restart.</p>
-
-<p>One solution might be to set up DynDNS and configure the router to point from some random port to the SSH port on the Linux machine running on the LAN. That idea didn’t strike my fancy, as it just isn’t terribly secure to open up a port to the entire world, and it seems that DynDNS costs money to use since 2008. I’m sure there are free alternatives, but I couldn’t be bothered to find them, much less configure them.</p>
-
-<p>A much better solution would be an SSH tunnel up to my Linode, and a reverse tunnel back down to the Linux server on my LAN. If you haven’t used reverse SSH tunneling before, it is really neat. Here’s an example:</p>
-
-<p>From the local server:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh -R 2048:localhost:22 username@example.com
-</code></pre></div></div>
-
-<p>From the server out in the Internet (aka example.com in this example)</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh -p 2048 other_username@localhost
-</code></pre></div></div>
-
-<p>Note that the ‘localhost’ in the second example refers to your local server, not the one out in the internet. So <code class="language-plaintext highlighter-rouge">other_username</code> should be the username on your local server (not the remote server.) Confused yet? Good.</p>
-
-<p>Now, this setup will get you pretty far: You’re now able to run commands on the local server from the Linode out in the cloud. But you may notice a problem fairly quickly: if you kill that SSH shell on the local server, the connection up to the server on the internet dies, and so does the reverse tunnel that was inside that.</p>
-
-<p>Fix that by starting up a tmux session on the local server first, then detaching it.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tmux new -s ssh-tunnel
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <meta name="description" content="The blog of Matt Gauger, a programmer, maker, cyclist, reader, and boatbuilder. Lisp machines and chording keybords in the present, not the past."> <title> Mosh, SSH Tunnels, and Tmux &middot; Matt Gauger </title> <link rel="stylesheet" href="/css/main.css"> <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700"> <link rel='alternate' type='application/atom+xml' href='/atom.xml'> </head> <body> <nav class="nav"> <div class="nav-container"> <a href="https://blog.mattgauger.com"> <h2 class="nav-title">Matt Gauger</h2> </a> <ul> <li><a href="/about">About</a></li> <li><a href="/archives">Blog Archives</a></li> <li><a href="/open-source">Open Source</a></li> </ul> </div> </nav> <main> <div class="post"> <div class="post-info"> <span>Written by</span> Matt Gauger <br> <span>on&nbsp;</span><time datetime="2012-04-21 21:14:00 -0500">April 21, 2012</time> </div> <h1 class="post-title">Mosh, SSH Tunnels, and Tmux</h1> <div class="post-line"></div> <hr/> <p><em>Update from June 2022: This post continues to be a popular post on search results, but it is quite old (10 years at this point! Longer if you’re seeing this in the future.) So I recommend you consult the <a href="https://mosh.org/">mosh.org</a> site for documentation and usage.</em></p> <hr/> <p>I’m currently preparing for RailsConf. One of the things I wanted to do before I left was figure out a way to monitor a process on a Linux server running on my LAN. The process frequently crashes and needs some prodding to restart.</p> <p>One solution might be to set up DynDNS and configure the router to point from some random port to the SSH port on the Linux machine running on the LAN. That idea didn’t strike my fancy, as it just isn’t terribly secure to open up a port to the entire world, and it seems that DynDNS costs money to use since 2008. I’m sure there are free alternatives, but I couldn’t be bothered to find them, much less configure them.</p> <p>A much better solution would be an SSH tunnel up to my Linode, and a reverse tunnel back down to the Linux server on my LAN. If you haven’t used reverse SSH tunneling before, it is really neat. Here’s an example:</p> <p>From the local server:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh -R 2048:localhost:22 username@example.com
+</code></pre></div></div> <p>From the server out in the Internet (aka example.com in this example)</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh -p 2048 other_username@localhost
+</code></pre></div></div> <p>Note that the ‘localhost’ in the second example refers to your local server, not the one out in the internet. So <code class="language-plaintext highlighter-rouge">other_username</code> should be the username on your local server (not the remote server.) Confused yet? Good.</p> <p>Now, this setup will get you pretty far: You’re now able to run commands on the local server from the Linode out in the cloud. But you may notice a problem fairly quickly: if you kill that SSH shell on the local server, the connection up to the server on the internet dies, and so does the reverse tunnel that was inside that.</p> <p>Fix that by starting up a tmux session on the local server first, then detaching it.</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tmux new -s ssh-tunnel
 ssh -R 2048:localhost:22 username@example.com
 &lt;leader-d&gt;
-</code></pre></div></div>
-
-<p>Now the tmux session will happily keep that SSH shell open on the local server and you can reverse tunnel back over it.</p>
-
-<p>My solution involves <a href="http://mosh.mit.edu">Mosh</a>, which I’ve been using quite a bit since it exploded on Hacker News and other news sites. Simply put, Mosh is like SSH, but it uses UDP packets to make itself more reliable. “More reliable without TCP?” you say? Well, Mosh is doing a little more work to buffer the connection to the other machine (including instant response to typing when there’d otherwise be lag) and maintains that connection: even if you change IPs, hop on a train, etc. It’s pretty amazing, and so far I’ve been loving it. Click through to the Mosh site to read up more on it. It really is awesome.</p>
-
-<p>With Mosh, we add another layer to the puzzle, so that my final setup looked like this:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>matts_laptop$ mosh matt@someserver.local
+</code></pre></div></div> <p>Now the tmux session will happily keep that SSH shell open on the local server and you can reverse tunnel back over it.</p> <p>My solution involves <a href="http://mosh.mit.edu">Mosh</a>, which I’ve been using quite a bit since it exploded on Hacker News and other news sites. Simply put, Mosh is like SSH, but it uses UDP packets to make itself more reliable. “More reliable without TCP?” you say? Well, Mosh is doing a little more work to buffer the connection to the other machine (including instant response to typing when there’d otherwise be lag) and maintains that connection: even if you change IPs, hop on a train, etc. It’s pretty amazing, and so far I’ve been loving it. Click through to the Mosh site to read up more on it. It really is awesome.</p> <p>With Mosh, we add another layer to the puzzle, so that my final setup looked like this:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>matts_laptop$ mosh matt@someserver.local
 matt@someserver.local$ tmux new -s ssh-tunnel
 &lt;tmux session starts&gt;
 matt@someserver.local$ ssh -R 2048:localhost:22 username@example.com
 &lt;leader-d&gt;
-</code></pre></div></div>
-
-<p>Pop open another window in my local tmux session (are you beginning to see a pattern?) and then connect with mosh up to my Linode:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>matts_laptop$ mosh me@mattgauger.com
+</code></pre></div></div> <p>Pop open another window in my local tmux session (are you beginning to see a pattern?) and then connect with mosh up to my Linode:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>matts_laptop$ mosh me@mattgauger.com
 me@mattgauger.com$ tmux new -s server-monitor
 &lt;tmux session starts&gt;
 me@mattgauger.com$ ssh -p 2048 matt@localhost # Note: this is the matt@someserver.local account!
 matt@someserver.local$ &lt;monitor the process I'm concerned with&gt;
-</code></pre></div></div>
-
-<p>Now I’ve got this mostly-persistent (thanks to mosh and tmux) session that I can detach from if I really need to, but I’ll still be able to connect back up to my Linode and check on the server on my LAN from RailsConf.</p>
-
-<p>Pretty cool, huh?</p>
-
-
-</div>
-
-<div class="pagination">
-
-  <a href="/2012/07/13/run-rake-just-run-rake/" class="left arrow">&#8592;</a>
-
-
-  <a href="/2012/04/13/announcing-a-new-virtual-book-club-the-diamond-age/" class="right arrow">&#8594;</a>
-
-
-  <a href="#" class="top">Top</a>
-</div>
-
-    </main>
-
-    <footer>
-      <span>
-        &copy; <time datetime="2024">2024</time> Matt Gauger.
-      </span>
-      <a rel="me" href="https://mastodon.xyz/@mathiasx">@mathiasx@mastodon.xyz</a>
-    </footer>
-  </body>
-</html>
+</code></pre></div></div> <p>Now I’ve got this mostly-persistent (thanks to mosh and tmux) session that I can detach from if I really need to, but I’ll still be able to connect back up to my Linode and check on the server on my LAN from RailsConf.</p> <p>Pretty cool, huh?</p> </div> <div class="pagination"> <a href="/2012/07/13/run-rake-just-run-rake/" class="left arrow">&#8592;</a> <a href="/2012/04/13/announcing-a-new-virtual-book-club-the-diamond-age/" class="right arrow">&#8594;</a> <a href="#" class="top">Top</a> </div> </main> <footer> <span> &copy; <time datetime="2024">2024</time> Matt Gauger. </span> <a rel="me" href="https://mastodon.xyz/@mathiasx">@mathiasx@mastodon.xyz</a> </footer> </body> </html>

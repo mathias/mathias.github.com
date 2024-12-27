@@ -1,71 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="The blog of Matt Gauger, a programmer, maker, cyclist, reader, and boatbuilder. Lisp machines and chording keybords in the present, not the past.">
-
-  <title>
-    
-      Indent and colorize HTML strings in pry &middot; Matt Gauger
-    
-  </title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
-
-  <!-- Feeds -->
-  <link rel='alternate' type='application/atom+xml' href='/atom.xml'>
-</head>
-
-
-  <body>
-    <nav class="nav">
-      <div class="nav-container">
-        <a href="https://blog.mattgauger.com">
-          <h2 class="nav-title">Matt Gauger</h2>
-        </a>
-        <ul>
-          <li><a href="/about">About</a></li>
-          <li><a href="/archives">Blog Archives</a></li>
-          <li><a href="/open-source">Open Source</a></li>
-        </ul>
-    </div>
-  </nav>
-
-    <main>
-      <div class="post">
-  <div class="post-info">
-    <span>Written by</span> Matt Gauger
-
-    
-      <br>
-      <span>on&nbsp;</span><time datetime="2013-11-14 11:32:00 -0600">November 14, 2013</time>
-    
-  </div>
-
-  <h1 class="post-title">Indent and colorize HTML strings in pry</h1>
-  <div class="post-line"></div>
-
-  <hr />
-
-<p><em>(This post is part of my <a href="/about#old-posts">blog archiving project</a>. This post appeared on <a href="https://coderwall.com/p/hlbana">Coderwall</a> on November 14, 2013.)</em></p>
-
-<hr />
-
-<p>An issue I run into frequently while testing with tools like <a href="https://github.com/jnicklas/capybara">capybara</a> by dropping into <a href="http://pryrepl.org/">pry</a> is that the last response for a page is a single string, containing the HTML that was rendered. But those string have lost indentation and generally make it really hard to see the content of the page, or whatever you care about.</p>
-
-<p>For example, a simple login page might look like:</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pry »  page.body
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <meta name="description" content="The blog of Matt Gauger, a programmer, maker, cyclist, reader, and boatbuilder. Lisp machines and chording keybords in the present, not the past."> <title> Indent and colorize HTML strings in pry &middot; Matt Gauger </title> <link rel="stylesheet" href="/css/main.css"> <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700"> <link rel='alternate' type='application/atom+xml' href='/atom.xml'> </head> <body> <nav class="nav"> <div class="nav-container"> <a href="https://blog.mattgauger.com"> <h2 class="nav-title">Matt Gauger</h2> </a> <ul> <li><a href="/about">About</a></li> <li><a href="/archives">Blog Archives</a></li> <li><a href="/open-source">Open Source</a></li> </ul> </div> </nav> <main> <div class="post"> <div class="post-info"> <span>Written by</span> Matt Gauger <br> <span>on&nbsp;</span><time datetime="2013-11-14 11:32:00 -0600">November 14, 2013</time> </div> <h1 class="post-title">Indent and colorize HTML strings in pry</h1> <div class="post-line"></div> <hr/> <p><em>(This post is part of my <a href="/about#old-posts">blog archiving project</a>. This post appeared on <a href="https://coderwall.com/p/hlbana">Coderwall</a> on November 14, 2013.)</em></p> <hr/> <p>An issue I run into frequently while testing with tools like <a href="https://github.com/jnicklas/capybara">capybara</a> by dropping into <a href="http://pryrepl.org/">pry</a> is that the last response for a page is a single string, containing the HTML that was rendered. But those string have lost indentation and generally make it really hard to see the content of the page, or whatever you care about.</p> <p>For example, a simple login page might look like:</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pry »  page.body
 <span class="o">=&gt;</span> <span class="s2">"&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;Mysite&lt;/title&gt;&lt;link data-turbolinks-track=</span><span class="se">\"</span><span class="s2">true</span><span class="se">\"</span><span class="s2"> href=</span><span class="se">\"</span><span class="s2">/assets/application.css</span><span class="se">\"</span><span class="s2"> media=</span><span class="se">\"</span><span class="s2">all</span><span class="se">\"</span><span class="s2"> rel=</span><span class="se">\"</span><span class="s2">stylesheet</span><span class="se">\"</span><span class="s2"> /&gt;&lt;script data-turbolinks-track=</span><span class="se">\"</span><span class="s2">true</span><span class="se">\"</span><span class="s2"> src=</span><span class="se">\"</span><span class="s2">/assets/application.js</span><span class="se">\"</span><span class="s2">&gt;&lt;/script&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=</span><span class="se">\"</span><span class="s2">content</span><span class="se">\"</span><span class="s2">&gt;&lt;h1&gt;&lt;a href=</span><span class="se">\"</span><span class="s2">/</span><span class="se">\"</span><span class="s2">&gt;Mysite&lt;/a&gt;&lt;/h1&gt;&lt;nav class=</span><span class="se">\"</span><span class="s2">primary</span><span class="se">\"</span><span class="s2">&gt;&lt;ul class=</span><span class="se">\"</span><span class="s2">main</span><span class="se">\"</span><span class="s2">&gt;&lt;li class=</span><span class="se">\"</span><span class="s2">main</span><span class="se">\"</span><span class="s2">&gt;&lt;a href=</span><span class="se">\"</span><span class="s2">/users/sign_in</span><span class="se">\"</span><span class="s2">&gt;Log In/Sign Up&lt;/a&gt;&lt;/li&gt;&lt;li class=</span><span class="se">\"</span><span class="s2">main</span><span class="se">\"</span><span class="s2">&gt;&lt;a class=</span><span class="se">\"</span><span class="s2">text</span><span class="se">\"</span><span class="s2"> href=</span><span class="se">\"</span><span class="s2">#</span><span class="se">\"</span><span class="s2">&gt;About&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/nav&gt;&lt;/div&gt;&lt;div class=</span><span class="se">\"</span><span class="s2">content</span><span class="se">\"</span><span class="s2">&gt;&lt;h2&gt;Log In&lt;/h2&gt;&lt;div class=</span><span class="se">\"</span><span class="s2">full_page_form</span><span class="se">\"</span><span class="s2">&gt;&lt;form accept-charset=</span><span class="se">\"</span><span class="s2">UTF-8</span><span class="se">\"</span><span class="s2"> action=</span><span class="se">\"</span><span class="s2">/users/sign_in</span><span class="se">\"</span><span class="s2"> class=</span><span class="se">\"</span><span class="s2">half</span><span class="se">\"</span><span class="s2"> id=</span><span class="se">\"</span><span class="s2">new_user</span><span class="se">\"</span><span class="s2"> method=</span><span class="se">\"</span><span class="s2">post</span><span class="se">\"</span><span class="s2">&gt;&lt;div style=</span><span class="se">\"</span><span class="s2">margin:0;padding:0;display:inline</span><span class="se">\"</span><span class="s2">&gt;&lt;input name=</span><span class="se">\"</span><span class="s2">utf8</span><span class="se">\"</span><span class="s2"> type=</span><span class="se">\"</span><span class="s2">hidden</span><span class="se">\"</span><span class="s2"> value=</span><span class="se">\"</span><span class="s2">&amp;#x2713;</span><span class="se">\"</span><span class="s2"> /&gt;&lt;/div&gt;&lt;fieldset&gt;&lt;div class=</span><span class="se">\"</span><span class="s2">form-field email </span><span class="se">\"</span><span class="s2">&gt;&lt;label for=</span><span class="se">\"</span><span class="s2">user_email</span><span class="se">\"</span><span class="s2">&gt;Email&lt;/label&gt;&lt;input autofocus=</span><span class="se">\"</span><span class="s2">autofocus</span><span class="se">\"</span><span class="s2"> id=</span><span class="se">\"</span><span class="s2">user_email</span><span class="se">\"</span><span class="s2"> name=</span><span class="se">\"</span><span class="s2">user[email]</span><span class="se">\"</span><span class="s2"> type=</span><span class="se">\"</span><span class="s2">email</span><span class="se">\"</span><span class="s2"> value=</span><span class="se">\"\"</span><span class="s2"> /&gt;&lt;/div&gt;&lt;div class=</span><span class="se">\"</span><span class="s2">form-field password </span><span class="se">\"</span><span class="s2">&gt;&lt;label for=</span><span class="se">\"</span><span class="s2">user_password</span><span class="se">\"</span><span class="s2">&gt;Password&lt;/label&gt;&lt;input id=</span><span class="se">\"</span><span class="s2">user_password</span><span class="se">\"</span><span class="s2"> name=</span><span class="se">\"</span><span class="s2">user[password]</span><span class="se">\"</span><span class="s2"> type=</span><span class="se">\"</span><span class="s2">password</span><span class="se">\"</span><span class="s2"> /&gt;&lt;/div&gt;&lt;div class=</span><span class="se">\"</span><span class="s2">form-field remember_me </span><span class="se">\"</span><span class="s2">&gt;&lt;input name=</span><span class="se">\"</span><span class="s2">user[remember_me]</span><span class="se">\"</span><span class="s2"> type=</span><span class="se">\"</span><span class="s2">hidden</span><span class="se">\"</span><span class="s2"> value=</span><span class="se">\"</span><span class="s2">0</span><span class="se">\"</span><span class="s2"> /&gt;&lt;input id=</span><span class="se">\"</span><span class="s2">user_remember_me</span><span class="se">\"</span><span class="s2"> name=</span><span class="se">\"</span><span class="s2">user[remember_me]</span><span class="se">\"</span><span class="s2"> type=</span><span class="se">\"</span><span class="s2">checkbox</span><span class="se">\"</span><span class="s2"> value=</span><span class="se">\"</span><span class="s2">1</span><span class="se">\"</span><span class="s2"> /&gt;&lt;label class=</span><span class="se">\"</span><span class="s2">inline</span><span class="se">\"</span><span class="s2"> for=</span><span class="se">\"</span><span class="s2">user_remember_me</span><span class="se">\"</span><span class="s2">&gt;Remember me&lt;/label&gt;&lt;/div&gt;&lt;div class=</span><span class="se">\"</span><span class="s2">form-field submit</span><span class="se">\"</span><span class="s2">&gt;&lt;button class=</span><span class="se">\"</span><span class="s2">secondary</span><span class="se">\"</span><span class="s2"> name=</span><span class="se">\"</span><span class="s2">button</span><span class="se">\"</span><span class="s2"> type=</span><span class="se">\"</span><span class="s2">submit</span><span class="se">\"</span><span class="s2">&gt;Log In&lt;/button&gt;&lt;/div&gt;&lt;p class=</span><span class="se">\"</span><span class="s2">forgot-password</span><span class="se">\"</span><span class="s2">&gt;&lt;a href=</span><span class="se">\"</span><span class="s2">/users/password/new</span><span class="se">\"</span><span class="s2">&gt;Forgot your Password?&lt;/a&gt;&lt;/p&gt;&lt;/fieldset&gt;&lt;/form&gt;&lt;div class=</span><span class="se">\"</span><span class="s2">second-half</span><span class="se">\"</span><span class="s2">&gt;&lt;h3&gt;Coming soon!&lt;/h3&gt;&lt;p&gt;Soon, you'll be able to log in with Facebook...&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=</span><span class="se">\"</span><span class="s2">call-to-action-button</span><span class="se">\"</span><span class="s2">&gt;&lt;a href=</span><span class="se">\"</span><span class="s2">/sign_up</span><span class="se">\"</span><span class="s2">&gt;New to Mysite? Sign up for an account to get goin&amp;#39;!&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;footer&gt;&lt;div class=</span><span class="se">\"</span><span class="s2">content</span><span class="se">\"</span><span class="s2">&gt;&lt;/footer&gt;&lt;/body&gt;&lt;/html&gt;"</span>
-</code></pre></div></div>
-
-<p>Wouldn’t it be great if Pry could re-indent and colorize that string of HTML for you? Well, I put together a quick little Pry command that does. Throw this into your <code class="language-plaintext highlighter-rouge">~/.pryrc</code>:</p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">Pry</span><span class="o">::</span><span class="no">Commands</span><span class="p">.</span><span class="nf">create_command</span> <span class="s2">"html5tidy"</span> <span class="k">do</span>
+</code></pre></div></div> <p>Wouldn’t it be great if Pry could re-indent and colorize that string of HTML for you? Well, I put together a quick little Pry command that does. Throw this into your <code class="language-plaintext highlighter-rouge">~/.pryrc</code>:</p> <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">Pry</span><span class="o">::</span><span class="no">Commands</span><span class="p">.</span><span class="nf">create_command</span> <span class="s2">"html5tidy"</span> <span class="k">do</span>
   <span class="n">description</span> <span class="s2">"Print indented, colorized HTML from the input: html5tidy [ARGS]"</span>
 
   <span class="n">command_options</span> <span class="ss">requires_gem: </span><span class="p">[</span><span class="s1">'nokogiri'</span><span class="p">]</span>
@@ -78,13 +13,7 @@
     <span class="n">output</span><span class="p">.</span><span class="nf">puts</span> <span class="n">colorized_text</span>
   <span class="k">end</span>
 <span class="k">end</span>
-</code></pre></div></div>
-
-<p>Originally, I had tried to use the html5 fork of the <code class="language-plaintext highlighter-rouge">tidy</code> command: <a href="https://github.com/w3c/tidy-html5">https://github.com/w3c/tidy-html5</a> but that tool <em>changes</em> the HTML as it parses it, and spits out a bunch of warnings. So instead, I have this pry command use <code class="language-plaintext highlighter-rouge">nokogiri</code> when it is available. The command should warn you if you try to use it without <code class="language-plaintext highlighter-rouge">nokogiri</code> available. What is output should be very close to the original rendered HTML, just cleaned up and re-indented.</p>
-
-<p>So what does it look like in action?</p>
-
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pry »  html5tidy page.body
+</code></pre></div></div> <p>Originally, I had tried to use the html5 fork of the <code class="language-plaintext highlighter-rouge">tidy</code> command: <a href="https://github.com/w3c/tidy-html5">https://github.com/w3c/tidy-html5</a> but that tool <em>changes</em> the HTML as it parses it, and spits out a bunch of warnings. So instead, I have this pry command use <code class="language-plaintext highlighter-rouge">nokogiri</code> when it is available. The command should warn you if you try to use it without <code class="language-plaintext highlighter-rouge">nokogiri</code> available. What is output should be very close to the original rendered HTML, just cleaned up and re-indented.</p> <p>So what does it look like in action?</p> <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pry »  html5tidy page.body
 <span class="cp">&lt;?xml version="1.0"?&gt;</span>
 <span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
@@ -152,33 +81,4 @@
     <span class="nt">&lt;/footer&gt;</span>
   <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre></div></div>
-
-<p>(imagine that pry has colorized this output, too, through the excellent CodeRay tool.)</p>
-
-<p>I’d love to hear from you if you find this useful! Or even if you don’t find it useful, but have some suggestions to improve it. Thanks!</p>
-
-
-</div>
-
-<div class="pagination">
-
-  <a href="/2013/12/16/in-the-year-2100/" class="left arrow">&#8592;</a>
-
-
-  <a href="/2013/11/11/apprentice-talk-video-and-notes/" class="right arrow">&#8594;</a>
-
-
-  <a href="#" class="top">Top</a>
-</div>
-
-    </main>
-
-    <footer>
-      <span>
-        &copy; <time datetime="2024">2024</time> Matt Gauger.
-      </span>
-      <a rel="me" href="https://mastodon.xyz/@mathiasx">@mathiasx@mastodon.xyz</a>
-    </footer>
-  </body>
-</html>
+</code></pre></div></div> <p>(imagine that pry has colorized this output, too, through the excellent CodeRay tool.)</p> <p>I’d love to hear from you if you find this useful! Or even if you don’t find it useful, but have some suggestions to improve it. Thanks!</p> </div> <div class="pagination"> <a href="/2013/12/16/in-the-year-2100/" class="left arrow">&#8592;</a> <a href="/2013/11/11/apprentice-talk-video-and-notes/" class="right arrow">&#8594;</a> <a href="#" class="top">Top</a> </div> </main> <footer> <span> &copy; <time datetime="2024">2024</time> Matt Gauger. </span> <a rel="me" href="https://mastodon.xyz/@mathiasx">@mathiasx@mastodon.xyz</a> </footer> </body> </html>
