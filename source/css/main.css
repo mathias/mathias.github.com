@@ -15,7 +15,7 @@ body {
 @font-face {
   font-display: swap;
   font-style: normal;
-  font-family: "Libre Baskerville", "Times New Roman", Times, serif;
+  font-family: 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif;
   font-size: 14px;
   @media (min-width: 600px) {
     body {
@@ -70,7 +70,7 @@ td {
 
 pre,
 code {
-  font-family: Menlo, Monaco, monospace;
+  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
 }
 
 code {
@@ -117,7 +117,7 @@ pre code {
 }
 .post-info {
   color: #aaa;
-  font-family: Palatino, "Palatino LT STD", "Palatino Linotype", "Book Antiqua", "Georgia", serif;
+  font-family: 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif;
   letter-spacing: 0.5px;
   text-align: center;
 }
@@ -126,7 +126,7 @@ pre code {
 }
 .post-title {
   color: #353535;
-  font-family: "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
   font-size: 2rem;
   margin: 1rem 0;
   text-align: center;
@@ -396,7 +396,7 @@ footer,
 }
 .nav a {
   color: #555;
-  font-family: "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
 }
 
 @media (min-width: 600px) {
@@ -410,7 +410,7 @@ footer,
   }
 }
 footer {
-  font-family: Palatino, "Palatino LT STD", "Palatino Linotype", "Book Antiqua", "Georgia", serif;
+  font-family: 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif;
   padding: 2rem 0;
   text-align: center;
 }
@@ -421,7 +421,7 @@ footer span {
 
 .pagination {
   border-top: 0.5px solid #e5e5e5;
-  font-family: Palatino, "Palatino LT STD", "Palatino Linotype", "Book Antiqua", "Georgia", serif;
+  font-family: 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif;
   padding-top: 2rem;
   position: relative;
   text-align: center;
@@ -435,7 +435,7 @@ footer span {
   -moz-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
   color: #555;
-  font-family: "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
   font-size: 1.1rem;
   opacity: 0.6;
 }
@@ -474,13 +474,13 @@ footer span {
 }
 .catalogue-time {
   color: #aaa;
-  font-family: Palatino, "Palatino LT STD", "Palatino Linotype", "Book Antiqua", "Georgia", serif;
+  font-family: 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif;
   letter-spacing: 0.5px;
 }
 .catalogue-title {
   color: #353535;
   display: block;
-  font-family: "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
   font-size: 2rem;
   font-weight: 700;
   margin: 0.5rem 0;
