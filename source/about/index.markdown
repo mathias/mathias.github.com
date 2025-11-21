@@ -6,13 +6,15 @@ date: 2012-03-16 21:06
 
 I am a programmer and maker. My interests include functional programming, permacomputing, and sustainable technologies. I've spent a lot of time working with Ruby, JavaScript, and the standard assortment of developer tools: vim, emacs, git, and the rest. I have shipped code in Elixir, Rust, and Clojure, and would do it again.
 
-I work for [GitHub](https://www.github.com). I previously worked at [Heroku](https://www.heroku.com).
+I previously worked at [GitHub](https://www.github.com) and [Heroku](https://www.heroku.com).
 
 A list of the open source I've built or contributed to is on my [Open Source](/open-source) page. My work can be found at [github.com/mathias](https://github.com/mathias).
 
 Slides from my presentations are on the [Presentations](/presentations) page.
 
-You can see what books I'm reading over at [my Goodreads](https://www.goodreads.com/mathiasx).
+You can see what books I'm reading over at [my Bookwyrm account](https://bookrastinating.com/user/mathiasx) (I previously used Goodreads, and here is [my Goodreads account](https://www.goodreads.com/mathiasx). I have since switched to an instance of the Fediverse-enabled [Bookwyrm](https://github.com/bookwyrm-social/bookwyrm) service.)
+
+I run my own Fediverse social media server, where I am [@mathias@rhizospherelabs.com](https://rhizospherelabs.com/@mathias).
 
 ### Analytics, Tracking, and Affiliate Links
 
@@ -25,7 +27,7 @@ I've chosen not to include commenting on my blog. If you'd like to get in touch,
 <a id="old-posts">
 ### On old blog posts
 
-In the past, I spent time porting all my blog posts from other platforms and blogs to here. It is neat to have 17 years (as of this update) of posts in one place. The old blog posts get cleaned up and I try to do my best to ensure they have working images. Links may be broken due to time and website attrition. I archive them purely to have a single place for all of them, not to represent that my current understanding and opinions match with what I wrote in the past. I had to grow in skill as a writer, and I experimented with a lot of different kinds of content. So reader beware when you go back to read anything older than a few years.
+In the past, I spent time porting all my blog posts from other platforms and blogs to here. It is neat to have 17 years (as of this update) of posts in one place. The old blog posts get cleaned up and I try to do my best to ensure they have working images. Links may be broken due to time and website attrition. I archive them purely to have a single place for all of them, not to represent that my current understanding and opinions match with what I wrote in the past. I had to grow in skill as a writer, and I experimented with a lot of different kinds of content. So "reader beware" when you go back to read anything older than a few years.
 
 ### License
 
