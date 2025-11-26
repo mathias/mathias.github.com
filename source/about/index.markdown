@@ -22,7 +22,7 @@ I have removed Google ads, analytics/tracking, and other external JS libraries f
 
 ### Blog comments
 
-I've chosen not to include commenting on my blog. If you'd like to get in touch, feel free to contact me at [matt.gauger@gmail.com](mailto:matt.gauger@gmail.com) . Or, reach out on the fediverse to <a rel="me" href="https://mastodon.xyz/@mathiasx">@mathiasx@mastodon.xyz</a>.
+I've chosen not to include commenting on my blog. If you'd like to get in touch, feel free to contact me at [matt.gauger@gmail.com](mailto:matt.gauger@gmail.com) . Or, reach out on the fediverse at [@mathias@rhizospherelabs.com](https://rhizospherelabs.com/@mathias).
 
 <a id="old-posts">
 ### On old blog posts
