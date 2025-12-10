@@ -6,13 +6,13 @@
 </description>
     <link>https://blog.mattgauger.com/</link>
     <atom:link href="https://blog.mattgauger.com/atom.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 09 Dec 2025 18:46:31 -0600</pubDate>
-    <lastBuildDate>Tue, 09 Dec 2025 18:46:31 -0600</lastBuildDate>
+    <pubDate>Tue, 09 Dec 2025 18:48:49 -0600</pubDate>
+    <lastBuildDate>Tue, 09 Dec 2025 18:48:49 -0600</lastBuildDate>
     <generator>Jekyll v4.3.4</generator>
     
       <item>
         <title>My most useful tools of 2025</title>
-        <description>&lt;p&gt;Besides updating the &lt;a href=&quot;https://blog.mattgauger.com/about/&quot;&gt;About page&lt;/a&gt;, I wanted to start writing again about the various tools and solutions I’m using more frequently. Lately, the tools are more in the physical realm than in software. (But I will note here, that 2025 is finally the year that I switched to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;neovim&lt;/code&gt; for myself instead of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vim&lt;/code&gt;. I occasionally return to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;emacs&lt;/code&gt;, but it’s likely I’ll just start using org-mode and other functionality directly in my expanding neovim setup.)&lt;/p&gt;
+        <description>&lt;p&gt;Besides updating the &lt;a href=&quot;https://blog.mattgauger.com/about/&quot;&gt;About page&lt;/a&gt;, I wanted to start writing again about the various tools and solutions I’m using more frequently. Lately, the tools are more in the physical realm than in software. (But I will note here, that 2025 is finally the year that I switched to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;neovim&lt;/code&gt; for myself instead of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vim&lt;/code&gt;. More on this at the end of the list.)&lt;/p&gt;
 
 &lt;h2 id=&quot;slice-10512-pen-cutter&quot;&gt;Slice 10512 Pen Cutter&lt;/h2&gt;
 
