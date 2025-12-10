@@ -3,7 +3,7 @@ layout: post
 title: My most useful tools of 2025
 date: 2025-12-09 18:44 -0600
 ---
-Besides updating the [About page](https://blog.mattgauger.com/about/), I wanted to start writing again about the various tools and solutions I'm using more frequently. Lately, the tools are more in the physical realm than in software. (But I will note here, that 2025 is finally the year that I switched to `neovim` for myself instead of `vim`. I occasionally return to `emacs`, but it's likely I'll just start using org-mode and other functionality directly in my expanding neovim setup.)
+Besides updating the [About page](https://blog.mattgauger.com/about/), I wanted to start writing again about the various tools and solutions I'm using more frequently. Lately, the tools are more in the physical realm than in software. (But I will note here, that 2025 is finally the year that I switched to `neovim` for myself instead of `vim`. More on this at the end of the list.)
 
 ## Slice 10512 Pen Cutter
 
