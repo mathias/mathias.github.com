@@ -6,9 +6,62 @@
 </description>
     <link>https://blog.mattgauger.com/</link>
     <atom:link href="https://blog.mattgauger.com/atom.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 26 Nov 2025 12:56:52 -0600</pubDate>
-    <lastBuildDate>Wed, 26 Nov 2025 12:56:52 -0600</lastBuildDate>
+    <pubDate>Tue, 09 Dec 2025 18:46:31 -0600</pubDate>
+    <lastBuildDate>Tue, 09 Dec 2025 18:46:31 -0600</lastBuildDate>
     <generator>Jekyll v4.3.4</generator>
+    
+      <item>
+        <title>My most useful tools of 2025</title>
+        <description>&lt;p&gt;Besides updating the &lt;a href=&quot;https://blog.mattgauger.com/about/&quot;&gt;About page&lt;/a&gt;, I wanted to start writing again about the various tools and solutions I’m using more frequently. Lately, the tools are more in the physical realm than in software. (But I will note here, that 2025 is finally the year that I switched to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;neovim&lt;/code&gt; for myself instead of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vim&lt;/code&gt;. I occasionally return to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;emacs&lt;/code&gt;, but it’s likely I’ll just start using org-mode and other functionality directly in my expanding neovim setup.)&lt;/p&gt;
+
+&lt;h2 id=&quot;slice-10512-pen-cutter&quot;&gt;Slice 10512 Pen Cutter&lt;/h2&gt;
+
+&lt;p&gt;I’ve tried carrying EDC pocket knives for opening boxes, and I’ve tried stocking cheap scissors in drawers all over the house. In the end, the best way to open boxes turns out to be these ceramic-bladed box openers from Slice. The blades aren’t sharp enough to cut a finger, but they will open tape, including that tricky tape that has threads in it. When you let go, the blade retracts, and can’t poke you when you reach into a pocket or a drawer. It sounds basic, but given how much I get shipped to me for convenience, this has been one of my top tools for the last few years.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2025-12-09/slice-10512-512.png&quot; alt=&quot;A Slice 10512 Pen Cutter with the blade extended&quot; class=&quot;center-thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;magnetic-parts-bowls&quot;&gt;Magnetic parts bowls&lt;/h2&gt;
+
+&lt;p&gt;I try to fix things myself when I can. If you DIY stuff, you’ve probably run into this problem: screws like to roll off surfaces and disappear. I got tired of this, and since most screws are made from ferrous metal, these little magnetic parts bowls solve the problem for me. I’ve got a few upstairs near where I practice guitar and where my home office desk is, and a few more downstairs on my work bench. Conveniently, the magnet in the base will also make the bowl stick to anything iron or steel, too, so I tend to be able to “plunk” down a bowl on something like a desk frame or my work bench vise, and know that all the screws for a project will stay in there. (Provided they’re ferrous.) Compared to random jars or recycled plastic dishes full of screws, this feels like a big upgrade for me, and so that is why this item is second on my list for 2025. There’s lots of variations of these available online or at your local stores – I recommend trying to find them in the local hardware store.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2025-12-09/mag-parts-bowl-512.jpg&quot; alt=&quot;A stack of parts bowls with some bolts in the top bowl&quot; class=&quot;center-thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;wowstick-electric-screwdriver&quot;&gt;Wowstick electric screwdriver&lt;/h2&gt;
+
+&lt;p&gt;Even with several complete small screwdriver sets and an electric drill that can fit screwdriver bits, I wanted something small that I could keep in my office and use for screwdriver tasks. I imagined it could help with taking apart keyboards or computers, and maybe occasionally for DIY projects around the house. About a year ago, I’d read several reviews of these Wowstick electric screwdrivers online and decided to buy one. I’m not sure exactly what model mine is, but it is larger than a pen and much smaller than most full-sized (analog) screwdriver handles that I have. It came with a large number of screw bit tips, which are unfortunately a smaller hex head size than the typical screwdriver tips. But along with my ifixit magnetic screwdriver set, I’ve got just about any type of screw covered. The Wowstick screw driver charges with Type-C USB, and due to the planetary gear box, it seems fine to just use it like an analog screwdriver by turning the whole screwdriver body, to get stubborn screws unstuck. It also helps me to not over-torque screws on things like small custom keyboards and prevents stripping out heads on tiny laptop screws.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2025-12-09/wowstick-512.jpg&quot; alt=&quot;A pen-sized electric screwdriver with several tubes of screwdriver tips, a work mat, and a carrying case&quot; class=&quot;center-thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;field-notes-notebooks&quot;&gt;Field Notes notebooks&lt;/h2&gt;
+
+&lt;p&gt;I’ve collected notebooks for a long time, but most of the journal-sized notebooks are too large to carry around all the time. The typical Field Notes softcover notebook fits in a jeans pocket with a pen. Because I can always have one with me, these have become handy for me to use for all sorts of quick notes, daily TODO lists, for drawing out diagrams and jotting down measurements as I’m working on something. There’s all kinds of special editions of these, but I generally tend to use either basic dot grid notebooks or their TODO list variant. I can recommend these highly for the cost over other little pocket notebooks – they’re just durable enough that after using them daily for a full notebook’s worth, the covers and spines are just broken in, but they don’t start falling apart like cheaper notebooks or spiral-bound pocket notebooks.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2025-12-09/field-notes-512.jpg&quot; alt=&quot;A Field Notes notebook with a sleeve indicating it is the Dot-graph paper version&quot; class=&quot;center-thumb&quot; loading=&quot;lazy&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;neovim&quot;&gt;Neovim&lt;/h2&gt;
+
+&lt;p&gt;The only software on this list, and the only free thing. Neovim is a modern &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vim&lt;/code&gt;. I’ve been primarily a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vim&lt;/code&gt; user for the last 10 years (with side quests into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;emacs&lt;/code&gt; for Clojure, Lisp/Scheme and then to use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;org-mode&lt;/code&gt;). I made the switch to &lt;a href=&quot;https://neovim.io/&quot;&gt;Neovim&lt;/a&gt; recently because I’d seen how powerful &lt;a href=&quot;https://microsoft.github.io/language-server-protocol/&quot;&gt;Language Server Protocol&lt;/a&gt; (LSP) was for Rust development in VS Code, but I wanted it in my usual &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vim&lt;/code&gt; editor. LSP will show you problems beyond simple syntax errors, right in your editor buffer, including compile and type errors, incorrect function names, and names of functions that are correct but aren’t imported to the current scope. I’m running a very minimal setup that still gets me LSP support for most things out of the box, and it has been great. I can highly recommend the switch if you’re already familiar with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vim&lt;/code&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;That’s a wrap on 2025. Happy new year, everyone.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 09 Dec 2025 18:44:00 -0600</pubDate>
+        <link>https://blog.mattgauger.com/2025/12/09/my-most-useful-tools-of-2025/</link>
+        <guid isPermaLink="true">https://blog.mattgauger.com/2025/12/09/my-most-useful-tools-of-2025/</guid>
+        
+        
+      </item>
     
       <item>
         <title>My Ship of Theseus laptop: the 51nb X210</title>
@@ -551,78 +604,6 @@ annotatex
         <pubDate>Mon, 27 Mar 2017 17:53:00 -0500</pubDate>
         <link>https://blog.mattgauger.com/2017/03/27/my-current-setup-habits-tracking/</link>
         <guid isPermaLink="true">https://blog.mattgauger.com/2017/03/27/my-current-setup-habits-tracking/</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Mining for computation on the beach</title>
-        <description>&lt;p&gt;The introduction to &lt;a href=&quot;https://www.goodreads.com/book/show/1639039.Writing_GNU_Emacs_Extensions&quot;&gt;Writing GNU Emacs Extensions&lt;/a&gt; introduces Emacs by talking about plumbers. “Plumbers?” you might think. The thing it wants us to think about is whether plumbers make their own tools.&lt;/p&gt;
-
-&lt;p&gt;Plumbers buy pipes and fittings in standardized sizes. They depend on the &lt;a href=&quot;https://en.wikipedia.org/wiki/International_Building_Code&quot;&gt;International Building Code&lt;/a&gt; and local building codes to tell them what is safe and necessary. They use tools made for the tasks they’ll likely need to do. As the book says, “a plumber doesn’t tinker with his wrench.”&lt;/p&gt;
-
-&lt;p&gt;I imagine that there are plumbers do build their own little jigs to hold pipes together, or to trace a pattern before cutting a hole. These solutions come from experience from past work and knowing the current problem. The book might fall a little flat here – plumbers can solve problems by making things. But what about their standard tools?&lt;/p&gt;
-
-&lt;p&gt;Again, from the book, “the plumber would tinker with their tools, if they knew how.”&lt;/p&gt;
-
-&lt;p&gt;Are most plumbers like the programmer that uses Emacs? Likely not. Because, the book says, Emacs is a tool that programmers can use to build tools. Emacs is a kind of &lt;a href=&quot;https://en.wikipedia.org/wiki/Ouroboros&quot;&gt;ouroboros&lt;/a&gt;: software that builds software, software that can change itself.&lt;/p&gt;
-
-&lt;p&gt;A better example of makers making tools is the machinist in their machine shop. Machinists make jigs and holders all the time. And they must, or they’d never be able to clamp an odd-shaped piece to work on it. But the abilities of machinist goes beyond jigs and holders.&lt;/p&gt;
-
-&lt;p&gt;The tools in a machine shop are sufficient to create more tools. With a lathe and a vertical mill, one could create the hard parts of any of the machine tools in the shop. Granted, most machinists would not consider creating another vertical mill from scratch. The labor involved would suggest that one should buy one from a manufacturer. A manufacturer builds tools at scale. Such tools come at a reasonable cost relative to the labor to create a mill yourself. But the ability of a machinist to recreate everything from scratch is there, if need be.&lt;/p&gt;
-
-&lt;p&gt;Software is much cheaper to build. The ease of modifying Emacs causes people to build all sorts of tools with it. Those tools go beyond editing of source files. There’s IRC clients, web browsers, and more. There’s even a system called &lt;a href=&quot;https://www.emacswiki.org/emacs/TrampMode&quot;&gt;TRAMP&lt;/a&gt; that allows you to edit a file over FTP, SFTP, NTFS, and more. TRAMP makes them all appear to be a local buffer in Emacs.&lt;/p&gt;
-
-&lt;p&gt;If the machinist wanted to recreate their machine shop from scratch, what kind of reference would they need for that?&lt;/p&gt;
-
-&lt;p&gt;There exists a shelf full of books that sets out to create a machine shop from scratch – the &lt;a href=&quot;http://gingerybookstore.com/&quot;&gt;Gingery books series ‘Build Your Own Metal Working Shop From Scrap’&lt;/a&gt;. These colorful books haunt the book cases of Makerspaces and home shops. The first book starts with sand on the beach and charcoal made from trees inland. With this start, you can cast aluminum and zinc parts. Take some scrap with some common parts and the second book will teach you how to make a metal lathe. This continues for seven books, until you have built your own home machine shop from scrap and sand on the beach. With these books, you are able to build more tools and replace anything worn out or broken.&lt;/p&gt;
-
-&lt;p&gt;Having these books on your shelf might be interesting if you like to make physical things. Owning them might be part of your expanded understanding of how the world works.&lt;/p&gt;
-
-&lt;p&gt;And of course, these books might be a good idea to have on your shelf for any zombie apocalypse that might befall us.  (Whether you’ll need a machine shop in the apocalypse is a worthwhile question. Antibiotics and growing food might be more important. As an aside, what other references would we want on our shelf to recreate civilization?)&lt;/p&gt;
-
-&lt;p&gt;For computation, there are several books that set out to teach from the level of “sand on the beach.” What might that look like?&lt;/p&gt;
-
-&lt;p&gt;Start with relays, simple electromagnetic switches. A relay can only be on or off. The binary state means that we can represent numbers by counting in binary. We can treat on or off like true and false. With enough switches, we can create logic gates for all the types of logic operations. Then, we can combine these gates into more complex mechanisms like adders or a full 8-bit CPU. Lastly, we can begin to understand how the instruction set works in a CPU to create software. That’s the approach in &lt;a href=&quot;https://www.goodreads.com/book/show/13020367-code&quot;&gt;Code: The Hidden Language of Computer Hardware and Software&lt;/a&gt;. I recommend this book highly. The difficulty curve of each chapter is just right to keep you engaged through the whole book. I only wish I’d read it a decade earlier!&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://nand2tetris.org/&quot;&gt;Nand2Tetris&lt;/a&gt; is a free book and online course. This approach uses hardware emulation rather than relays as a building block. The book starts with basic gates and works up to a “general-purpose computer system.” Or rather, something we can build a Tetris clone on. Following along in the hardware emulation software is a good way to grok the details. Hardware emulation avoids most of the frustrations of my undergraduate digital logic course. Namely, having to build a test harness to ensure the quad NAND gates weren’t faulty.&lt;/p&gt;
-
-&lt;p&gt;Computer science is about the theory of computation. If you’d like to learn about that, then &lt;a href=&quot;https://www.goodreads.com/book/show/15842786-understanding-computation&quot;&gt;Understanding Computation&lt;/a&gt; by Tom Stuart is next on the list. This book uses Ruby, which makes it more approachable than more academic books. This book helps to fill in some of the gaps in my understanding from a career in mostly-web programming.&lt;/p&gt;
-
-&lt;p&gt;That covers the hardware and the computational theory that goes into programming. But what about programming itself? What if we wanted to start with the basics of programming? To answer this, we’d want books that teach us to how go from assembly to something higher-level. We’d want to know how what issues one might face when stepping up a level from machine code.&lt;/p&gt;
-
-&lt;p&gt;I’m afraid I don’t have much to suggest beyond the classics on programming here. Stick with favorites like &lt;a href=&quot;https://www.goodreads.com/book/show/515601.The_C_Programming_Language&quot;&gt;The C Programming Language&lt;/a&gt; by Kernighan and Ritchie, and you can’t go wrong.&lt;/p&gt;
-
-&lt;p&gt;If you want an alternative world view on solving problems, read &lt;a href=&quot;https://www.goodreads.com/book/show/23165738-programming-a-problem-oriented-language&quot;&gt;Programming A Problem Oriented Language: Forth - how the internals work&lt;/a&gt; by Charles H. Moore and wrap your head around Forth.&lt;/p&gt;
-
-&lt;p&gt;Another book in this vein might be &lt;a href=&quot;http://www.buildyourownlisp.com/&quot;&gt;Build Your Own Lisp&lt;/a&gt; if you’ve never completed such a feat. Or look to &lt;a href=&quot;https://github.com/kanaka/mal&quot;&gt;mal&lt;/a&gt; and its wealth of implementations to understand how to build a Lisp. Implementing lambda calculus interpreters and Lisp-like languages is a good pastime, and one that I’d like to practice more.&lt;/p&gt;
-
-&lt;p&gt;At the level of operating systems, we find more valuable resources. &lt;a href=&quot;https://www.goodreads.com/book/show/337375.Lions_Commentary_on_UNIX&quot;&gt;Lions’ Commentary on UNIX&lt;/a&gt; provides the UNIX source code with commentary. Suppressed by AT&amp;amp;T long ago for revealing their trade secrets, it’s now easy to get a copy of on Amazon.&lt;/p&gt;
-
-&lt;p&gt;Imagine starting from scratch and creating an operating system. And, creating a language to go with that operating system. That’s the path taken in &lt;a href=&quot;https://www.goodreads.com/book/show/116985.Project_Oberon&quot;&gt;Project Oberon&lt;/a&gt; by Niklaus Wirth. This book will help you to think about different facets of a problem and how to solve it from all sides. You might want to abandon what you take for granted in computing. It’s an alternative-computing rabbit hole that will make you wonder why current computing is so mundane. (This, along with learning about Lisp machines, might make you interested in reinventing the wheel. Fair warning.)&lt;/p&gt;
-
-&lt;p&gt;At this point, we’re diverging from covering the basics and into realms that I enjoy thinking about. If you’ve come this far and you really must push your understanding past traditional Turing machines, then I have one book to recommend to you. It’s much more expensive than when I bought it, and is only available used. &lt;a href=&quot;https://www.goodreads.com/book/show/6033620-the-architecture-of-symbolic-computers&quot;&gt;The Architecture of Symbolic Computers&lt;/a&gt; by Kogge is a tome on symbolic and logical computing. If you’ve taken the rabbit hole of Oberon and have made time to learn about Lisp machines, this book is a real treat. Symbolic and logic computing are part of a complete understanding of computation.&lt;/p&gt;
-
-&lt;p&gt;Stepping back from our tangent, you might ask, “What does this all have to do with Emacs?” Well, I’d put &lt;a href=&quot;https://www.goodreads.com/book/show/1639039.Writing_GNU_Emacs_Extensions&quot;&gt;Writing GNU Emacs Extensions&lt;/a&gt; on the list, as the book about building tools. It won’t cover the other tools you’ll likely need in computing: how to build a compiler, how to write Makefiles, and so on. But if you want to build tools, it is good to have a deep understanding of a tool for building tools. Emacs is a good platform to tinker, and it can be that workshop from which your other tools emerge. Learning Emacs, and how to build things in Emacs, has been rewarding to me and my time invested.&lt;/p&gt;
-
-&lt;p&gt;Even now, hackers are rebuilding Emacs in Rust with a project called &lt;a href=&quot;https://github.com/Wilfred/remacs&quot;&gt;remacs&lt;/a&gt;. The ouroboros Emacs is helping to rebuild itself in a new language.&lt;/p&gt;
-
-&lt;p&gt;You need to know your tools, and know where they came from, to know them well. This list is a good start on a deep knowledge of computing. Books help us to understand what came before, and to think about where we can go.&lt;/p&gt;
-
-&lt;p&gt;I’ve set up an &lt;a href=&quot;https://www.goodreads.com/review/list/2450080-mathiasx?shelf=apocalyptic-computing&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apocalyptic-computing&lt;/code&gt; bookshelf on Goodreads&lt;/a&gt; to track these books. The name suggests that this is the list of books I’d bring with me to rebuild society, should we need it. With a list like this can we go “mining for computation on the beach” and hope to know enough to start from scratch.&lt;/p&gt;
-
-&lt;p&gt;What books would be on your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apocalyptic-computing&lt;/code&gt; shelf? &lt;a href=&quot;mailto:contact@mattgauger.com&quot;&gt;Let me know&lt;/a&gt;, or set up your own Goodreads shelf and send it to me!&lt;/p&gt;
-
-&lt;h2 id=&quot;notes&quot;&gt;Notes&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;If you want to learn Emacs itself before you dive into Writing GNU Extensions, then I recommend &lt;a href=&quot;https://www.masteringemacs.org/&quot;&gt;Mastering Emacs&lt;/a&gt; and the &lt;a href=&quot;http://cestlaz.github.io/stories/emacs/&quot;&gt;Using Emacs&lt;/a&gt; video series.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://orgmode.org/&quot;&gt;Org mode&lt;/a&gt; is perhaps the most important tool I’ve learned in Emacs, and now powers large parts of my life.&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Sun, 12 Mar 2017 00:00:00 -0600</pubDate>
-        <link>https://blog.mattgauger.com/2017/03/12/mining-for-computation-on-the-beach/</link>
-        <guid isPermaLink="true">https://blog.mattgauger.com/2017/03/12/mining-for-computation-on-the-beach/</guid>
         
         
       </item>
