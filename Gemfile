@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '3.4.7'
+ruby file: ".ruby-version"
 
 gem 'jekyll', '~> 4.3.2'
 gem 'base64'
